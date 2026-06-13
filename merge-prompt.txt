@@ -1,0 +1,67 @@
+You are merging an external "Universal Agent Kit" (in ./universal-agent-kit/) into THIS
+repository. My existing setup is the source of truth; the kit is an ADDITIVE library, not a
+drop-in replacement. Your job is to integrate the useful parts without breaking my project.
+
+INPUTS
+- Kit: ./universal-agent-kit/
+    CLAUDE.md                      project-rules template
+    .claude/commands/*             slash-command skills (/spec, /spec-tech, /spec-dev,
+                                   /spec-check, /spec-all, /research, /quick, /fix, /git,
+                                   /verify, /ui-clarify, /review, /caveman*)
+    .claude/agents/*               role briefs (rd-lead, solution-researcher, implementer,
+                                   doc-writer)
+    .claude/settings.json          default agent + permission template
+    docs/SPEC_LIFECYCLE.md         the ticket methodology
+    docs/CODE_QUALITY.md           anti-slop conventions
+    docs/AGENT_MEMORY.md           persistent memory discipline (four entry types)
+    docs/RESEARCH_INDEX.md         research order + the queryable code index
+    docs/VALIDATION.md             the validation ladder
+    memory/                        memory index template + one sample entry per type
+    README.md                      import guide + manifest
+- Mine: my existing CLAUDE.md, .claude/, settings, conventions, and codebase.
+
+HARD SAFETY RULES (non-negotiable)
+1. Do NOT modify anything until I approve the plan (Step 2). Plan first, write second.
+2. Do NOT overwrite or delete any of my existing files. On any name collision, keep mine and
+   surface the conflict - never silently replace.
+3. Do NOT touch ./universal-agent-kit/ itself (it is the read-only source).
+4. Create a new git branch before any write. Do NOT commit, push, or rebase.
+5. Back up any of my files you are about to change into ./_kit-merge-backup/ first.
+6. Do NOT loosen my permissions/settings. Propose additions for my review only.
+7. Keep my conventions, naming, language, and architecture rules authoritative. Where the kit
+   conflicts with mine, mine wins; mention the conflict so I can decide.
+
+STEP 1 - INVENTORY (read-only)
+- List what the kit offers vs what I already have: commands, agents, CLAUDE.md rules, docs,
+  the memory system.
+- Classify each kit item as: NEW (no equivalent of mine), DUPLICATE (I already have one), or
+  CONFLICT (mine exists and differs in intent).
+- Grep the kit for <PLACEHOLDER> tokens; for each, propose a concrete value derived from THIS
+  repo (build/test/lint/run commands, source root, architecture, plan dir, logger, id scheme).
+  Mark any you cannot resolve.
+- If I have no persistent-memory setup yet, note whether my runtime supports one and how the
+  kit's memory/ templates would map onto it.
+
+STEP 2 - PLAN (stop and wait for my approval)
+Present a concrete merge plan, then STOP:
+- NEW items -> which files you'll copy in, to which paths.
+- DUPLICATE/CONFLICT items -> for each, recommend one: skip, or import under a suffixed name
+  (e.g. /spec-kit, agent "rd-lead-kit") so nothing of mine is shadowed. Show a short diff of
+  mine vs the kit's so I can choose.
+- CLAUDE.md -> show the exact rule blocks you propose to append/merge into MY CLAUDE.md (with
+  placeholders filled). Never replace my CLAUDE.md wholesale.
+- docs/ and memory/ -> which files you'll copy and where, and which CLAUDE.md line references
+  each.
+- settings.json -> show only the permission lines you'd suggest adding, as a proposal. Do not
+  apply.
+- The resolved placeholder table, plus any unresolved ones you need me to answer.
+Wait for my "go" (or my edits) before writing anything.
+
+STEP 3 - APPLY (only after I approve)
+- On the new branch, back up touched files, then apply exactly the approved plan.
+- Fill all approved placeholders. Leave unresolved ones as TODO and list them.
+- Do not commit. End with: the file tree of what changed, the backup location, the unresolved
+  TODOs, and how to try one new command safely.
+
+Start with Step 1 now. Ask me questions only if something in Step 2 is genuinely undecidable
+from the repo.

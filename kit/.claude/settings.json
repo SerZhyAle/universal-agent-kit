@@ -1,0 +1,24 @@
+{
+  "//": "Universal Agent Kit defaults. Review and tighten `allow` before adopting. `agent` names the default subagent from .claude/agents/.",
+  "agent": "rd-lead",
+  "permissions": {
+    "allow": [
+      "Read(**)",
+      "Glob(**)",
+      "Grep(**)",
+      "Edit(**)",
+      "Write(**)",
+      "Bash(git *)"
+    ],
+    "//allow-examples": [
+      "Add your build/test/run commands so the agent does not prompt, e.g.:",
+      "Bash(npm run *)",
+      "Bash(pnpm *)",
+      "Bash(make *)",
+      "Bash(./gradlew *)",
+      "Bash(cargo *)",
+      "Bash(go *)"
+    ],
+    "defaultMode": "acceptEdits"
+  }
+}

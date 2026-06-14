@@ -95,7 +95,9 @@ The invariant: such a tag exists **iff** the ticket is currently `BlockNeedUserT
 insert them as the last code edits before the final build (so one build validates code +
 tags), and the audit deletes them when the ticket leaves that status. Permanent logs never
 embed a ticket id. The payoff: during a manual run you grep the log for `<ID>:` and *see*
-which paths actually executed.
+which paths actually executed. It complements automated tests, it does not replace them — reach
+for it only where a test cannot observe which path a manual or on-device run took. Keep each tag a
+single greppable line so removal stays mechanical and safe.
 
 ## The skills, end to end
 

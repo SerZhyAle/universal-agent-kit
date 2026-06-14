@@ -76,7 +76,7 @@ verified it. See `docs/RESEARCH_INDEX.md`.
 5. Back up any file over ~500 lines to `<SCRATCH_DIR>/` before a large edit.
 6. Naming: follow the codebase's existing convention consistently.
 7. Resolve lint/compiler warnings in files you touch.
-8. Read existing comments/KDoc/docstrings in the area before editing; treat them as intent.
+8. Read existing comments and API docs in the area before editing; treat them as intent.
 9. Comment discipline: English; explain **why**, not what; only for non-obvious logic,
    handled edge cases, workarounds, or invariants the code cannot express. Remove stale
    comments.

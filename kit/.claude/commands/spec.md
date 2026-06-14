@@ -46,7 +46,9 @@ capability.
 **If ALL pass → PRIMITIVE path** (skip steps 3–7):
 1. Allocate the id, write a minimal spec (`## Problem`, `## Approach` — one bullet per file,
    `## Done criteria` — one observable check per file). Set `Status: In Progress`.
-2. Implement directly.
+2. Implement directly, then run the narrowest meaningful check from `docs/VALIDATION.md` (a
+   compile / type-check or a targeted test). A primitive still proves itself — do not set
+   `Implemented` over a red or unrun check.
 3. If acceptance includes manual testing, insert the verification tags (see §6 of
    `CLAUDE.md`) and set `Status: BlockNeedUserTest`. Otherwise `Status: Implemented`.
 4. Report: `<ID> — Primitive. Implemented directly. Status: <status>.`

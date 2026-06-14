@@ -133,5 +133,6 @@ If information is only useful for the task in front of you, it is not a memory.
 - No runtime memory feature? Keep `memory/` in the repo and add a line to `CLAUDE.md`: "At the
   start of a session, read `memory/MEMORY.md` and open any entry that looks relevant." That is
   the whole mechanism.
-- Per-agent memory: if you run several role-specific agents, give each its own `memory/<agent>/`
-  so a researcher's notes do not crowd an implementer's index.
+- Per-agent memory (optional): the default is one shared `memory/` — usually right, since it is
+  the project's single brain. Only if several writing agents start crowding each other, give each
+  its own `memory/<agent>/` and point each role brief at that path; otherwise keep the shared index.

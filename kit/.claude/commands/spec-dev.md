@@ -105,6 +105,8 @@ Stop immediately and report — never guess, never attempt speculative recovery 
   overwrite. A step is `[x]` only when every predicate returned PASS in the current run.
 - Never run a final build/test of your own outside the Done-criteria check; never `git
   commit`/`push`/`rebase`; never skip planned steps or batch multiple steps' status updates.
+- Committing is `/git`'s job, not this skill's. Steps are sized to be independently committable,
+  so you (or `/git`) can commit per step or per phase once the work is in.
 - Edit scope: never refactor surrounding code, add comments, or touch unrelated imports.
   A warranted comment is English, explains *why*, covers only non-obvious logic.
 - Anti-slop applies while implementing (`docs/CODE_QUALITY.md`).

@@ -66,5 +66,6 @@ route to `/fix` or `/spec-fix`.
 - **Read-only on specs/plans/status.** Never flip a ticket status from here.
 - **No commits.** `git status`/`git diff` may be inspected; committing is the user's call.
 - **Outputs land only in `<SCRATCH_DIR>/`.** Never write to the repo root.
-- **Never read a huge log fully into context** — filter, quote line numbers.
+- **Never read a huge log fully into context** — tail or grep it (e.g. `tail -n 200` /
+  `Get-Content -Tail 200`, or filter by level) and quote line numbers.
 - **Re-resolve UI elements before each interaction** — never hardcode coordinates.

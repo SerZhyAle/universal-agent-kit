@@ -37,6 +37,10 @@ STEP 1 - INVENTORY (read-only)
   the memory system.
 - Classify each kit item as: NEW (no equivalent of mine), DUPLICATE (I already have one), or
   CONFLICT (mine exists and differs in intent).
+- Detect which agent tool THIS repo targets (Claude Code, Cursor, Cline, Windsurf, Aider, Codex).
+  Only Claude Code loads .claude/commands/* and .claude/agents/* natively. For any other tool,
+  plan to TRANSLATE each command/agent into that tool's rules format (mapping in
+  universal-agent-kit/README.md) - do not copy .claude/ verbatim, the files would be dead.
 - Grep the kit for <PLACEHOLDER> tokens; for each, propose a concrete value derived from THIS
   repo. The full set: <PROJECT_NAME>, <CHAT_LANGUAGE>, <INDEX_DOC>, <SRC_ROOT>, <ARCH_LAYERS>,
   <BUILD_CMD>, <TEST_CMD>, <LINT_CMD>, <RUN_CMD>, <LOGGER>, <PLAN_DIR>, <SCRATCH_DIR>, <MAX_LOC>,

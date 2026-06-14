@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru" data-lang="ru" data-theme="dark">
+<html lang="en" data-lang="en" data-theme="dark">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -114,7 +114,10 @@
   footer{max-width:var(--maxw); margin:0 auto; padding:26px 20px 60px; border-top:1px solid var(--line); color:var(--muted); font-size:14px}
   footer .cta{display:flex; gap:10px; flex-wrap:wrap; margin:14px 0}
 
-  pre:focus-visible, summary:focus-visible{outline:2px solid var(--acc); outline-offset:2px}
+  pre:focus-visible, summary:focus-visible,
+  button:focus-visible, a:focus-visible{outline:2px solid var(--acc); outline-offset:2px}
+  .seg button:focus-visible{outline-offset:-2px}
+  @media(max-width:480px){ header.top .btn.primary{display:none} }
   @media (pointer:coarse){ .btn, .seg button{min-height:44px; min-width:44px} }
 
   .adopt-prompt{margin:16px 0 22px}
@@ -139,8 +142,8 @@
   <div class="wrap">
     <span class="brand">Universal&nbsp;Agent&nbsp;Kit<span class="dot">.</span></span>
     <span class="seg" role="group" aria-label="Language" id="langGroup">
-      <button id="lng-ru" type="button" onclick="setLang('ru')" aria-pressed="true" aria-label="Русский">RU</button>
-      <button id="lng-en" type="button" onclick="setLang('en')" aria-pressed="false" aria-label="English">EN</button>
+      <button id="lng-ru" type="button" onclick="setLang('ru')" aria-pressed="false" aria-label="Русский">RU</button>
+      <button id="lng-en" type="button" onclick="setLang('en')" aria-pressed="true" aria-label="English">EN</button>
     </span>
     <button class="btn" id="themeBtn" type="button" onclick="toggleTheme()" title="Theme" aria-label="Theme" aria-pressed="false">◐</button>
     <a class="btn primary" href="universal-agent-kit.zip" download>
@@ -170,9 +173,8 @@
       <a class="btn" href="https://github.com/SerZhyAle/universal-agent-kit" target="_blank" rel="noopener">
         <span data-l="ru">Открыть на GitHub</span><span data-l="en">Browse on GitHub</span>
       </a>
-      <a class="btn" href="#adopt">
-        <span data-l="ru">Как внедрить</span><span data-l="en">How to adopt</span>
-      </a>
+      <a class="btn" href="#adopt" data-l="ru">Как внедрить</a>
+      <a class="btn" href="#adopt-en" data-l="en">How to adopt</a>
     </div>
   </section>
 

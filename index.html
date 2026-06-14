@@ -392,9 +392,16 @@ reference  указатель во внешнюю систему и зачем  
               </div>
               <pre>This is a fresh or mostly empty repository. First run your codebase-init
 command (/init in Claude Code, or the equivalent in your tool) so you have a
-rules file and a basic map of the project. Then read the Universal Agent Kit
-page at https://serzhyale.github.io/universal-agent-kit/ in full and set this
-project up on its method, from scratch:
+rules file and a basic map of the project. Then download
+https://github.com/SerZhyAle/universal-agent-kit/raw/main/universal-agent-kit.zip
+into a temp or scratch directory and unpack it locally; it extracts to a
+`universal-agent-kit/` folder beside a `merge-prompt.txt`. Use those extracted
+files as the source of truth: read `universal-agent-kit/README.md` first, then
+use `universal-agent-kit/CLAUDE.md`, `universal-agent-kit/.claude/`,
+`universal-agent-kit/docs/`, `universal-agent-kit/memory/`, and
+`merge-prompt.txt`. Do not use the article page as the primary source. If you
+cannot download files in this environment, stop and ask me to place the
+archive in the workspace. Set this project up on the method from those files:
 
 1. Write the rules file my tool reads (CLAUDE.md / AGENTS.md / a Cursor rule /
    GEMINI.md - whatever applies) adopting the kit's structure: communication,
@@ -413,18 +420,23 @@ Show me the plan first; create nothing until I approve.</pre>
           </div>
 
           <h3 id="old-ru">B · Существующий проект — быстрый путь</h3>
-          <p><span class="adopt-step">За минуту.</span> Попроси агента прямо в чате прочитать этот сайт и импортировать самое полезное:</p>
+          <p><span class="adopt-step">За минуту.</span> Попроси агента прямо в чате скачать архив kit-а, распаковать его локально и импортировать самое полезное:</p>
           <div class="adopt-prompt">
             <details>
               <summary>Промпт для существующего проекта (на английском)</summary>
               <div class="prompt-actions">
                 <button class="btn" type="button" onclick="copyPrompt(this)" aria-label="Скопировать промпт">⧉ Скопировать</button>
               </div>
-              <pre>Read the Universal Agent Kit page at
-https://serzhyale.github.io/universal-agent-kit/ in full. It describes a portable method
-for AI-assisted development: an always-loaded rules file, slash-command skills, role
-subagents, a spec lifecycle (strategy vs tactics, verifiable phases), persistent file-based
-memory, a fixed research order, a validation ladder, and anti-slop conventions.
+              <pre>Download
+https://github.com/SerZhyAle/universal-agent-kit/raw/main/universal-agent-kit.zip
+into a temp or scratch directory and unpack it locally; it extracts to a
+`universal-agent-kit/` folder beside a `merge-prompt.txt`. Use those extracted
+files as the source of truth: read `universal-agent-kit/README.md` first, then
+use `universal-agent-kit/CLAUDE.md`, `universal-agent-kit/.claude/`,
+`universal-agent-kit/docs/`, `universal-agent-kit/memory/`, and
+`merge-prompt.txt`. Do not use the article page as the primary source. If you
+cannot download files in this environment, stop and ask me to place the
+archive in the workspace.
 
 Then study THIS repository and import what fits it:
 
@@ -440,7 +452,7 @@ Then study THIS repository and import what fits it:
 Do not change anything yet. Show me the plan first; on any conflict, my existing files win.</pre>
             </details>
           </div>
-          <p class="muted">Быстро, но агент читает статью, а не файлы, — возможен дрейф. Канонический воспроизводимый способ — путь C.</p>
+          <p class="muted">Быстро и сразу по файлам, но менее воспроизводимо, чем путь C: здесь нет явного merge-процесса с инвентарём и остановкой перед записью.</p>
 
           <h3>C · Существующий проект — канонический путь</h3>
           <p>Скачай kit, отдай агенту папку вместе с <code>merge-prompt.txt</code> и скажи: «Влей Universal Agent Kit в этот репозиторий». Промпт заставляет агента сначала сделать <strong>инвентарь</strong> (что у тебя уже есть, что новое, где конфликт), показать <strong>план слияния</strong> и остановиться — твоё всегда главнее, ничего не перезаписывается молча. Ты подтверждаешь — он применяет и заполняет <code>&lt;PLACEHOLDER&gt;</code> из твоего репозитория.</p>
@@ -662,9 +674,16 @@ doc       script         type change  logic           config/resources  user-vis
               </div>
               <pre>This is a fresh or mostly empty repository. First run your codebase-init
 command (/init in Claude Code, or the equivalent in your tool) so you have a
-rules file and a basic map of the project. Then read the Universal Agent Kit
-page at https://serzhyale.github.io/universal-agent-kit/ in full and set this
-project up on its method, from scratch:
+rules file and a basic map of the project. Then download
+https://github.com/SerZhyAle/universal-agent-kit/raw/main/universal-agent-kit.zip
+into a temp or scratch directory and unpack it locally; it extracts to a
+`universal-agent-kit/` folder beside a `merge-prompt.txt`. Use those extracted
+files as the source of truth: read `universal-agent-kit/README.md` first, then
+use `universal-agent-kit/CLAUDE.md`, `universal-agent-kit/.claude/`,
+`universal-agent-kit/docs/`, `universal-agent-kit/memory/`, and
+`merge-prompt.txt`. Do not use the article page as the primary source. If you
+cannot download files in this environment, stop and ask me to place the
+archive in the workspace. Set this project up on the method from those files:
 
 1. Write the rules file my tool reads (CLAUDE.md / AGENTS.md / a Cursor rule /
    GEMINI.md - whatever applies) adopting the kit's structure: communication,
@@ -683,18 +702,23 @@ Show me the plan first; create nothing until I approve.</pre>
           </div>
 
           <h3 id="old-en">B · An existing project — the quick path</h3>
-          <p><span class="adopt-step">In a minute.</span> Ask your agent, right in the chat, to read this page and import the most useful parts:</p>
+          <p><span class="adopt-step">In a minute.</span> Ask your agent, right in the chat, to download the kit archive, unpack it locally, and import the most useful parts:</p>
           <div class="adopt-prompt">
             <details>
               <summary>Prompt for an existing project (English)</summary>
               <div class="prompt-actions">
                 <button class="btn" type="button" onclick="copyPrompt(this)" aria-label="Copy prompt">⧉ Copy</button>
               </div>
-              <pre>Read the Universal Agent Kit page at
-https://serzhyale.github.io/universal-agent-kit/ in full. It describes a portable method
-for AI-assisted development: an always-loaded rules file, slash-command skills, role
-subagents, a spec lifecycle (strategy vs tactics, verifiable phases), persistent file-based
-memory, a fixed research order, a validation ladder, and anti-slop conventions.
+              <pre>Download
+https://github.com/SerZhyAle/universal-agent-kit/raw/main/universal-agent-kit.zip
+into a temp or scratch directory and unpack it locally; it extracts to a
+`universal-agent-kit/` folder beside a `merge-prompt.txt`. Use those extracted
+files as the source of truth: read `universal-agent-kit/README.md` first, then
+use `universal-agent-kit/CLAUDE.md`, `universal-agent-kit/.claude/`,
+`universal-agent-kit/docs/`, `universal-agent-kit/memory/`, and
+`merge-prompt.txt`. Do not use the article page as the primary source. If you
+cannot download files in this environment, stop and ask me to place the
+archive in the workspace.
 
 Then study THIS repository and import what fits it:
 
@@ -710,7 +734,7 @@ Then study THIS repository and import what fits it:
 Do not change anything yet. Show me the plan first; on any conflict, my existing files win.</pre>
             </details>
           </div>
-          <p class="muted">Quick, but the agent reads the article, not the files — expect some drift. The canonical, reproducible route is path C.</p>
+          <p class="muted">Quick and file-based, but less reproducible than path C: no explicit inventory/merge step with a stop before writing.</p>
 
           <h3>C · An existing project — the canonical path</h3>
           <p>Download the kit, hand your agent the folder together with <code>merge-prompt.txt</code>, and say "Merge the Universal Agent Kit into this repo". The prompt forces the agent to first take an <strong>inventory</strong> (what you already have, what's new, where it conflicts), present a <strong>merge plan</strong>, and stop — yours always wins, nothing is overwritten silently. You approve; it applies and fills <code>&lt;PLACEHOLDER&gt;</code> tokens from your repo.</p>
@@ -932,9 +956,16 @@ reference  вказівник у зовнішню систему та навіщ
               </div>
               <pre>This is a fresh or mostly empty repository. First run your codebase-init
 command (/init in Claude Code, or the equivalent in your tool) so you have a
-rules file and a basic map of the project. Then read the Universal Agent Kit
-page at https://serzhyale.github.io/universal-agent-kit/ in full and set this
-project up on its method, from scratch:
+rules file and a basic map of the project. Then download
+https://github.com/SerZhyAle/universal-agent-kit/raw/main/universal-agent-kit.zip
+into a temp or scratch directory and unpack it locally; it extracts to a
+`universal-agent-kit/` folder beside a `merge-prompt.txt`. Use those extracted
+files as the source of truth: read `universal-agent-kit/README.md` first, then
+use `universal-agent-kit/CLAUDE.md`, `universal-agent-kit/.claude/`,
+`universal-agent-kit/docs/`, `universal-agent-kit/memory/`, and
+`merge-prompt.txt`. Do not use the article page as the primary source. If you
+cannot download files in this environment, stop and ask me to place the
+archive in the workspace. Set this project up on the method from those files:
 
 1. Write the rules file my tool reads (CLAUDE.md / AGENTS.md / a Cursor rule /
    GEMINI.md - whatever applies) adopting the kit's structure: communication,
@@ -953,18 +984,23 @@ Show me the plan first; create nothing until I approve.</pre>
           </div>
 
           <h3 id="old-uk">B · Наявний проєкт — швидкий шлях</h3>
-          <p><span class="adopt-step">За хвилину.</span> Попроси агента прямо в чаті прочитати цей сайт і імпортувати найкорисніше:</p>
+          <p><span class="adopt-step">За хвилину.</span> Попроси агента прямо в чаті завантажити архів kit-а, розпакувати його локально й імпортувати найкорисніше:</p>
           <div class="adopt-prompt">
             <details>
               <summary>Промпт для наявного проєкту (англійською)</summary>
               <div class="prompt-actions">
                 <button class="btn" type="button" onclick="copyPrompt(this)" aria-label="Скопіювати промпт">⧉ Копіювати</button>
               </div>
-              <pre>Read the Universal Agent Kit page at
-https://serzhyale.github.io/universal-agent-kit/ in full. It describes a portable method
-for AI-assisted development: an always-loaded rules file, slash-command skills, role
-subagents, a spec lifecycle (strategy vs tactics, verifiable phases), persistent file-based
-memory, a fixed research order, a validation ladder, and anti-slop conventions.
+              <pre>Download
+https://github.com/SerZhyAle/universal-agent-kit/raw/main/universal-agent-kit.zip
+into a temp or scratch directory and unpack it locally; it extracts to a
+`universal-agent-kit/` folder beside a `merge-prompt.txt`. Use those extracted
+files as the source of truth: read `universal-agent-kit/README.md` first, then
+use `universal-agent-kit/CLAUDE.md`, `universal-agent-kit/.claude/`,
+`universal-agent-kit/docs/`, `universal-agent-kit/memory/`, and
+`merge-prompt.txt`. Do not use the article page as the primary source. If you
+cannot download files in this environment, stop and ask me to place the
+archive in the workspace.
 
 Then study THIS repository and import what fits it:
 
@@ -980,7 +1016,7 @@ Then study THIS repository and import what fits it:
 Do not change anything yet. Show me the plan first; on any conflict, my existing files win.</pre>
             </details>
           </div>
-          <p class="muted">Швидко, але агент читає статтю, а не файли, — можливий дрейф. Канонічний відтворюваний спосіб — шлях C.</p>
+          <p class="muted">Швидко й одразу по файлах, але менш відтворювано, ніж шлях C: тут немає явного merge-процесу з інвентарем і зупинкою перед записом.</p>
 
           <h3>C · Наявний проєкт — канонічний шлях</h3>
           <p>Завантаж kit, віддай агенту теку разом з <code>merge-prompt.txt</code> і скажи: «Влий Universal Agent Kit у цей репозиторій». Промпт змушує агента спершу зробити <strong>інвентар</strong> (що в тебе вже є, що нове, де конфлікт), показати <strong>план злиття</strong> й зупинитися — твоє завжди головніше, нічого не перезаписується мовчки. Ти підтверджуєш — він застосовує й заповнює <code>&lt;PLACEHOLDER&gt;</code> з твого репозиторію.</p>

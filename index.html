@@ -80,11 +80,8 @@
   .hero p.lead{font-size:17px; color:var(--muted); margin:0 0 20px}
   .hero .cta{display:flex; gap:10px; flex-wrap:wrap}
 
-  /* ---------- section toolbar ---------- */
-  .sectools{display:flex; align-items:center; gap:10px; margin:26px 0 14px; flex-wrap:wrap}
-
   /* ---------- collapsible sections grid (the table of contents) ---------- */
-  .sections{display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:14px; align-items:start}
+  .sections{display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:14px; align-items:start; margin-top:24px}
   @media(max-width:760px){ .sections{grid-template-columns:1fr} }
 
   .sec{
@@ -214,16 +211,17 @@
       <a class="btn" href="#adopt" data-l="ru">Как внедрить</a>
       <a class="btn" href="#adopt-en" data-l="en">How to adopt</a>
       <a class="btn" href="#adopt-uk" data-l="uk">Як впровадити</a>
+      <button class="btn" type="button" onclick="setAll(true)">
+        <span data-l="ru">Развернуть всё</span><span data-l="en">Expand all</span><span data-l="uk">Розгорнути все</span>
+      </button>
+      <button class="btn" type="button" onclick="setAll(false)">
+        <span data-l="ru">Свернуть всё</span><span data-l="en">Collapse all</span><span data-l="uk">Згорнути все</span>
+      </button>
     </div>
   </section>
 
   <!-- ===================== RU ARTICLE ===================== -->
   <article data-l="ru">
-
-    <div class="sectools">
-      <button class="btn" type="button" onclick="setAll(true)">Развернуть всё</button>
-      <button class="btn" type="button" onclick="setAll(false)">Свернуть всё</button>
-    </div>
 
     <div class="sections">
 
@@ -448,11 +446,6 @@ Do not change anything yet. Show me the plan first; on any conflict, my existing
   <!-- ===================== EN ARTICLE ===================== -->
   <article data-l="en">
 
-    <div class="sectools">
-      <button class="btn" type="button" onclick="setAll(true)">Expand all</button>
-      <button class="btn" type="button" onclick="setAll(false)">Collapse all</button>
-    </div>
-
     <div class="sections">
 
       <details class="sec">
@@ -675,11 +668,6 @@ Do not change anything yet. Show me the plan first; on any conflict, my existing
 
   <!-- ===================== UK ARTICLE ===================== -->
   <article data-l="uk">
-
-    <div class="sectools">
-      <button class="btn" type="button" onclick="setAll(true)">Розгорнути все</button>
-      <button class="btn" type="button" onclick="setAll(false)">Згорнути все</button>
-    </div>
 
     <div class="sections">
 

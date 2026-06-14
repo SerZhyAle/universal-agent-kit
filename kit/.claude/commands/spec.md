@@ -83,6 +83,10 @@ ask whether to proceed.
 
 ## Status lifecycle
 
+The gate table — which status each skill requires and produces, and where the pipeline pauses — is
+defined once in `docs/SPEC_LIFECYCLE.md`. This skill's row: requires none (allocates an id),
+produces `Approved`, auto-chains to `/spec-tech`. The flow:
+
 `Draft -> Approved -> Tactical -> In Progress -> Implemented -> Verified` (or `Partial` /
 `Broken` from an audit). Block states, set explicitly:
 - `BlockByOtherTask` — depends on another ticket (record it in §10).

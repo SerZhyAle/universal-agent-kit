@@ -105,11 +105,42 @@ which paths actually executed.
 /spec-tech     turn it into a phased, verifiable plan       Approved -> Tactical
 /spec-dev      execute one step at a time, check each       Tactical -> Implemented / BlockNeedUserTest
 /spec-check    audit the build against the spec             -> Verified / Partial / Broken
+/spec-fix      apply the audit's action items, re-audit     Partial / Broken -> (re-check)
 /verify        run it and observe, when behaviour matters   (read-only on status)
 ```
 
 `/quick` and `/fix` sit *below* this pipeline for changes too small to deserve it. `/ui-clarify`
 sits *before* it whenever a user-facing decision is unresolved.
+
+## Status gates (the one rule)
+
+Every skill reads and writes the same ticket status, so the gates live here once. Each skill
+**requires** an entry status, **produces** an exit status, and **auto-chains** to the next skill
+unless a stop condition fires. This table is the single source of truth — a skill restates only
+its own row, and `VALIDATION.md` and the skill files defer to it rather than redefining the flow.
+
+| Skill | Requires | Produces | Auto-chains to | Stops instead when |
+| --- | --- | --- | --- | --- |
+| `/research` | any | no status change | the caller | — |
+| `/spec` | none (allocates an id) | `Approved` (or `In Progress` for a primitive) | `/spec-tech` | a required research item is still Open |
+| `/spec-tech` | `Approved` or later | `Tactical` | `/spec-dev` | an unchecked pre-implementation blocker remains |
+| `/spec-dev` | `Tactical` / `In Progress` | `Implemented` or `BlockNeedUserTest` | `/spec-check` | ambiguity, a failed check, or a `Block*` condition |
+| `/spec-check` | `Implemented` or later | `Verified` / `Partial` / `Broken` | `/spec-fix` (only if `Partial`/`Broken`) | — |
+| `/spec-fix` | `Partial` / `Broken` | re-runs `/spec-check` | `/spec-check` | a fix needs a decision the audit cannot supply |
+| `/verify` | any | no status change | — | — |
+
+Two rules bind the whole table:
+
+- **Auto-chain by default; stop only at a real decision.** The pipeline flows on its own and
+  pauses only at the encoded conditions above — an open required question, an unchecked blocker,
+  an ambiguity. It does **not** wait for a sign-off at every stage; that would be bureaucracy, not
+  safety. `/spec` records its own `Approved` flip and continues. To review between stages, run the
+  skills individually or pass `--dry-run`.
+- **`Verified` means nothing is left open.** A ticket reaches `Verified` only when every check is
+  PASS or EXEMPT — zero FAIL, zero WARN, and **no open MANUAL item**. An unresolved manual /
+  on-target signal keeps the ticket at `BlockNeedUserTest` (or `Partial`) until a human closes it
+  and a re-audit turns it green. Status comes from reality, so an open manual check can never sit
+  beneath a `Verified`.
 
 ## Adapting it
 

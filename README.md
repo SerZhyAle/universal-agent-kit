@@ -3,13 +3,13 @@
 **[→ Read the article / Читать статью](https://serzhyale.github.io/universal-agent-kit/)** ·
 **[⤓ Download the kit](https://github.com/SerZhyAle/universal-agent-kit/raw/main/universal-agent-kit.zip)**
 
-A portable, stack-agnostic method for AI-assisted development — rules, skills (slash commands),
-roles, a spec lifecycle, and persistent memory. Distilled from a real project, stripped of its
-language and stack, so it drops into **any** codebase.
+A portable method for AI-assisted development — rules, skills (slash commands), roles, a spec
+lifecycle, and persistent memory. Distilled from a real project and stripped of its language and
+stack, so it carries over to most **git-backed repos with a promptable agent**.
 
-Переносимый, не привязанный к стеку метод разработки с ИИ-агентами — правила, навыки
-(slash-команды), роли, жизненный цикл спецификаций и постоянная память. Выжимка из реального
-проекта, очищенная от языка и стека, — кладётся в **любой** репозиторий.
+Переносимый метод разработки с ИИ-агентами — правила, навыки (slash-команды), роли, жизненный
+цикл спецификаций и постоянная память. Выжимка из реального проекта, очищенная от языка и стека,
+— ложится в большинство **git-репозиториев с управляемым промптами агентом**.
 
 ---
 
@@ -43,8 +43,9 @@ kit/                        the kit source, browsable here
 3. Fill the `<PLACEHOLDER>` tokens for your stack (build/test/run commands, source root,
    architecture, plan dir, logger).
 
-Works natively with **Claude Code**; for **Cursor / Cline / Windsurf / Codex / Aider** the slash
-commands are plain prompts and the role briefs are system prompts — the method is tool-independent.
+Works natively with **Claude Code**; for **Cursor / Cline / Windsurf / Codex / Aider** it is an
+adaptation, not a drop-in — the slash commands become saved prompts and the role briefs become
+system prompts (`kit/README.md` maps each tool's file). The `docs/` method is largely tool-independent.
 
 ### License
 
@@ -83,8 +84,9 @@ kit/                        исходник kit, можно листать пр
 3. Заполни `<PLACEHOLDER>` под свой стек (команды сборки/тестов/запуска, корень исходников,
    архитектуру, папку планов, логгер).
 
-Нативно работает с **Claude Code**; для **Cursor / Cline / Windsurf / Codex / Aider** slash-команды
-— это обычные промпты, а роли — системные промпты. Метод не зависит от инструмента.
+Нативно работает с **Claude Code**; для **Cursor / Cline / Windsurf / Codex / Aider** это
+адаптация, не drop-in — slash-команды становятся сохранёнными промптами, а роли — системными
+промптами (`kit/README.md` указывает файл под каждый инструмент). Метод в `docs/` почти не зависит от инструмента.
 
 ### Лицензия
 

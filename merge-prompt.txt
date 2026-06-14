@@ -6,8 +6,8 @@ INPUTS
 - Kit: ./universal-agent-kit/
     CLAUDE.md                      project-rules template
     .claude/commands/*             slash-command skills (/spec, /spec-tech, /spec-dev,
-                                   /spec-check, /spec-all, /research, /quick, /fix, /git,
-                                   /verify, /ui-clarify, /review, /caveman*)
+                                   /spec-check, /spec-fix, /spec-all, /research, /quick, /fix,
+                                   /git, /verify, /ui-clarify, /review, /caveman*)
     .claude/agents/*               role briefs (rd-lead, solution-researcher, implementer,
                                    doc-writer)
     .claude/settings.json          default agent + permission template
@@ -26,7 +26,8 @@ HARD SAFETY RULES (non-negotiable)
    surface the conflict - never silently replace.
 3. Do NOT touch ./universal-agent-kit/ itself (it is the read-only source).
 4. Create a new git branch before any write. Do NOT commit, push, or rebase.
-5. Back up any of my files you are about to change into ./_kit-merge-backup/ first.
+5. Back up any of my files you are about to change into a git-ignored scratch directory first
+   (e.g. ./tmp/kit-merge-backup/) - never the repo root.
 6. Do NOT loosen my permissions/settings. Propose additions for my review only.
 7. Keep my conventions, naming, language, and architecture rules authoritative. Where the kit
    conflicts with mine, mine wins; mention the conflict so I can decide.
@@ -37,8 +38,9 @@ STEP 1 - INVENTORY (read-only)
 - Classify each kit item as: NEW (no equivalent of mine), DUPLICATE (I already have one), or
   CONFLICT (mine exists and differs in intent).
 - Grep the kit for <PLACEHOLDER> tokens; for each, propose a concrete value derived from THIS
-  repo (build/test/lint/run commands, source root, architecture, plan dir, logger, id scheme).
-  Mark any you cannot resolve.
+  repo. The full set: <PROJECT_NAME>, <CHAT_LANGUAGE>, <INDEX_DOC>, <SRC_ROOT>, <ARCH_LAYERS>,
+  <BUILD_CMD>, <TEST_CMD>, <LINT_CMD>, <RUN_CMD>, <LOGGER>, <PLAN_DIR>, <SCRATCH_DIR>, <MAX_LOC>,
+  <READONLY_ZONES>, <ID>. Mark any you cannot resolve.
 - If I have no persistent-memory setup yet, note whether my runtime supports one and how the
   kit's memory/ templates would map onto it.
 

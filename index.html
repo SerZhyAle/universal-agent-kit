@@ -3,8 +3,29 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Universal Agent Kit — как устроена разработка с ИИ-агентами</title>
-<meta name="description" content="A portable method for AI-assisted development: rules, skills, roles, a spec lifecycle, and persistent memory. Distilled from a real project, stripped of its stack. Кит и статья на русском и английском.">
+<title>Universal Agent Kit — how AI-assisted development is wired</title>
+<meta name="description" content="A portable method for AI-assisted development: rules, skills, roles, a spec lifecycle, and persistent memory. Distilled from a real project, stripped of its stack. Article and kit in English and Russian.">
+<link rel="canonical" href="https://serzhyale.github.io/universal-agent-kit/">
+<meta name="theme-color" content="#0f1115">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Universal Agent Kit">
+<meta property="og:url" content="https://serzhyale.github.io/universal-agent-kit/">
+<meta property="og:title" content="Universal Agent Kit — how AI-assisted development is wired">
+<meta property="og:description" content="A portable method for AI-assisted development: rules, skills, role agents, a spec lifecycle, and persistent memory. English + Russian.">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Universal Agent Kit">
+<meta name="twitter:description" content="A portable method for AI-assisted development — rules, skills, roles, spec lifecycle, memory. English + Russian.">
+<script>
+/* Resolve language + theme before first paint to avoid a flash of the wrong state. */
+(function(){
+  var l, t;
+  try{ l = localStorage.getItem('uak-lang'); t = localStorage.getItem('uak-theme'); }catch(e){}
+  if(!l){ l = (navigator.language||'en').toLowerCase().indexOf('ru')===0 ? 'ru' : 'en'; }
+  if(!t){ t = (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) ? 'light' : 'dark'; }
+  var d = document.documentElement;
+  d.setAttribute('data-lang', l); d.setAttribute('lang', l); d.setAttribute('data-theme', t);
+})();
+</script>
 <style>
   :root{
     --maxw: 760px;
@@ -41,13 +62,13 @@
   .brand .dot{color:var(--acc2)}
   .btn{
     border:1px solid var(--line); background:var(--bg2); color:var(--fg);
-    padding:6px 12px; border-radius:8px; font-size:13px; cursor:pointer; line-height:1;
-    display:inline-flex; align-items:center; gap:6px;
+    padding:8px 13px; border-radius:8px; font-size:13px; cursor:pointer; line-height:1.1;
+    display:inline-flex; align-items:center; justify-content:center; gap:6px; min-height:38px;
   }
   .btn:hover{border-color:var(--acc); text-decoration:none}
   .btn.primary{background:linear-gradient(180deg,var(--acc),var(--acc2)); border:none; color:#fff; font-weight:600}
   .seg{display:inline-flex; border:1px solid var(--line); border-radius:8px; overflow:hidden}
-  .seg button{border:none; background:var(--bg2); color:var(--muted); padding:6px 10px; cursor:pointer; font-size:13px}
+  .seg button{border:none; background:var(--bg2); color:var(--muted); padding:8px 12px; cursor:pointer; font-size:13px; min-height:38px; display:inline-flex; align-items:center}
   .seg button[aria-pressed="true"]{background:var(--acc); color:#fff}
 
   main{max-width:var(--maxw); margin:0 auto; padding:0 20px 80px}
@@ -93,6 +114,19 @@
   footer{max-width:var(--maxw); margin:0 auto; padding:26px 20px 60px; border-top:1px solid var(--line); color:var(--muted); font-size:14px}
   footer .cta{display:flex; gap:10px; flex-wrap:wrap; margin:14px 0}
 
+  pre:focus-visible, summary:focus-visible{outline:2px solid var(--acc); outline-offset:2px}
+  @media (pointer:coarse){ .btn, .seg button{min-height:44px} }
+
+  .adopt-prompt{margin:16px 0 22px}
+  .adopt-prompt details{background:var(--bg2); border:1px solid var(--line); border-radius:12px; padding:4px 14px 14px}
+  .adopt-prompt summary{cursor:pointer; font-weight:600; color:var(--acc); list-style:none; display:flex; align-items:center; gap:8px; min-height:44px; padding:4px 2px}
+  .adopt-prompt summary::-webkit-details-marker{display:none}
+  .adopt-prompt summary::before{content:"▸"; color:var(--acc2)}
+  .adopt-prompt details[open] summary::before{content:"▾"}
+  .adopt-prompt .prompt-actions{display:flex; justify-content:flex-end; margin:2px 0 8px}
+  .adopt-prompt pre{margin:0; max-height:none}
+  .adopt-step{font-weight:700; color:var(--acc)}
+
   /* language switching: hide the inactive article */
   html[data-lang="ru"] [data-l="en"]{display:none}
   html[data-lang="en"] [data-l="ru"]{display:none}
@@ -102,11 +136,11 @@
 <header class="top">
   <div class="wrap">
     <span class="brand">Universal&nbsp;Agent&nbsp;Kit<span class="dot">.</span></span>
-    <span class="seg" role="group" aria-label="language">
-      <button id="lng-ru" onclick="setLang('ru')" aria-pressed="true">RU</button>
-      <button id="lng-en" onclick="setLang('en')" aria-pressed="false">EN</button>
+    <span class="seg" role="group" aria-label="Language" id="langGroup">
+      <button id="lng-ru" type="button" onclick="setLang('ru')" aria-pressed="true">RU</button>
+      <button id="lng-en" type="button" onclick="setLang('en')" aria-pressed="false">EN</button>
     </span>
-    <button class="btn" id="themeBtn" onclick="toggleTheme()" title="Theme">◐</button>
+    <button class="btn" id="themeBtn" type="button" onclick="toggleTheme()" title="Theme" aria-label="Theme" aria-pressed="false">◐</button>
     <a class="btn primary" href="universal-agent-kit.zip" download>
       <span data-l="ru">Скачать kit</span><span data-l="en">Download kit</span>
     </a>
@@ -124,8 +158,8 @@
       <span data-l="en">How AI-assisted development is wired</span>
     </h1>
     <p class="lead">
-      <span data-l="ru">Переносимый набор правил, навыков, ролей, спек-процесса и памяти для ИИ-ассистента. Выжимка из реального проекта, очищенная от языка и стека. Берёшь — и кладёшь в любой репозиторий.</span>
-      <span data-l="en">A portable set of rules, skills, roles, a spec lifecycle, and memory for an AI assistant. Distilled from a real project, stripped of language and stack. Take it, drop it into any repo.</span>
+      <span data-l="ru">Переносимый набор правил, навыков, ролей, спек-процесса и памяти для ИИ-ассистента. Выжимка из реального проекта, очищенная от языка и стека. Берёшь — и кладёшь почти в любой git-репозиторий.</span>
+      <span data-l="en">A portable set of rules, skills, roles, a spec lifecycle, and memory for an AI assistant. Distilled from a real project, stripped of language and stack. Take it, drop it into most git-backed repos.</span>
     </p>
     <div class="cta">
       <a class="btn primary" href="universal-agent-kit.zip" download>
@@ -146,7 +180,7 @@
     <h2><span class="n">00</span>Зачем это всё</h2>
     <p>ИИ-ассистент быстрый, но дрейфует. Он угадывает пути к файлам, придумывает API, который изменился две версии назад, пишет правдоподобный мусор, который компилируется и тихо гниёт, забывает всё между сессиями и либо спрашивает разрешения на каждый чих, либо молча делает не то.</p>
     <p>Лечится это не инструментом, а <strong>методом</strong> — маленькой операционной системой поверх ассистента: свод правил, роли, жизненный цикл спецификаций и память. Она заставляет его <em>сначала исследовать, потом делать</em>, отделять «что» от «как», планировать проверяемыми шагами, оставаться кратким и честным и накапливать знания между сессиями.</p>
-    <p>Эта страница показывает, как всё собрано — на примере одного реального проекта, но всё унифицировано и не привязано ни к языку, ни к задачам проекта. Внизу можно скачать kit и положить в свой кодовый репозиторий на любом стеке.</p>
+    <p>Эта страница показывает, как всё собрано — на примере одного реального проекта, но всё унифицировано и не привязано ни к языку, ни к задачам проекта. Внизу можно скачать kit и положить в свой git-репозиторий почти на любом стеке.</p>
     <div class="note">
       <div class="tag">Откуда это</div>
       <p style="margin:.4em 0 0">Метод вырос из зрелого Android-проекта: правила, навыки, роли, спек-каталог и память агентов реально гоняются каждый день. Из kit'а убрано всё про Kotlin, Gradle, PowerShell и локаль — остался переносимый скелет.</p>
@@ -237,11 +271,39 @@ reference  указатель во внешнюю систему и зачем  
     <p>Каждый можно механически просканировать в диффе. Сделай проверку частью «готово», а не «когда-нибудь». Если в стеке есть линтер — закодируй паттерны как правила, чтобы гейт был автоматическим.</p>
 
     <h2 id="adopt"><span class="n">10</span>Как внедрить</h2>
+    <p><span class="adopt-step">−1 · Самый быстрый путь.</span> Попроси агента прямо в чате своего проекта прочитать этот сайт и импортировать отсюда самое полезное — вот этим промптом:</p>
+    <div class="adopt-prompt">
+      <details open>
+        <summary>Промпт для агента (на английском)</summary>
+        <div class="prompt-actions">
+          <button class="btn" type="button" onclick="copyPrompt(this)" aria-label="Скопировать промпт">⧉ Скопировать</button>
+        </div>
+        <pre>Read the Universal Agent Kit page at
+https://serzhyale.github.io/universal-agent-kit/ in full. It describes a portable method
+for AI-assisted development: an always-loaded rules file, slash-command skills, role
+subagents, a spec lifecycle (strategy vs tactics, verifiable phases), persistent file-based
+memory, a fixed research order, a validation ladder, and anti-slop conventions.
+
+Then study THIS repository and import what fits it:
+
+1. Draft a CLAUDE.md (or my tool's equivalent rules file) that adopts the method, with every
+   placeholder filled from this repo: project name, chat language, source root, architecture
+   layers, build / test / lint / run commands, logger, plan directory, scratch directory,
+   file-size budget, read-only zones, and ticket-id scheme.
+2. Recommend which skills (/research, /spec, /spec-tech, /spec-dev, /spec-check, /spec-fix,
+   /quick, /fix, /verify, /git, /review) and which role agents are worth adding here, and say
+   why for each.
+3. Tell me whether my runtime supports persistent agent memory and, if so, how to wire it up.
+
+Do not change anything yet. Show me the plan first; on any conflict, my existing files win.</pre>
+      </details>
+    </div>
+    <p class="muted" style="margin-top:2px">Дальше — основательный путь: полное слияние через файл-промпт.</p>
     <p>Скачай kit, отдай агенту папку вместе с <code>merge-prompt.txt</code> и скажи: «Влей Universal Agent Kit в этот репозиторий». Промпт заставляет агента сначала сделать <strong>инвентарь</strong> (что у тебя уже есть, что новое, где конфликт), показать <strong>план слияния</strong> и остановиться — твоё всегда главнее, ничего не перезаписывается молча. Ты подтверждаешь — он применяет и заполняет <code>&lt;PLACEHOLDER&gt;</code> из твоего репозитория.</p>
     <ul>
       <li><strong>Claude Code:</strong> <code>.claude/commands/*</code> сразу становятся <code>/spec</code>, <code>/research</code> и т.д.; <code>.claude/agents/*</code> — выбираемыми субагентами.</li>
-      <li><strong>Cursor / Cline / Windsurf / Codex / Aider:</strong> slash-команды — это просто промпты. Агент читает <code>.claude/commands/&lt;name&gt;.md</code> и следует ему; роли вставляются как системные промпты.</li>
-      <li>Методология в <code>docs/</code> вообще инструмент-независима.</li>
+      <li><strong>Cursor / Cline / Windsurf / Codex / Aider</strong> (адаптация, не drop-in): slash-команды становятся сохранёнными промптами — агент читает <code>.claude/commands/&lt;name&gt;.md</code> и следует ему; роли вставляются как системные промпты. Конкретные пути для каждого инструмента — в <code>README</code> kit'а.</li>
+      <li>Методология в <code>docs/</code> от инструмента почти не зависит.</li>
     </ul>
 
     <h2><span class="n">11</span>Происхождение и лицензия</h2>
@@ -256,7 +318,7 @@ reference  указатель во внешнюю систему и зачем  
     <h2><span class="n">00</span>Why any of this</h2>
     <p>An AI assistant is fast, but it drifts. It guesses file paths, invents an API that changed two versions ago, writes plausible slop that compiles and quietly rots, forgets everything between sessions, and either asks permission for every keystroke or silently does the wrong thing.</p>
     <p>The cure is not a tool — it is a <strong>method</strong>: a small operating system on top of the assistant. A rulebook, roles, a spec lifecycle, and memory. It makes the assistant <em>research before it acts</em>, split <em>what</em> from <em>how</em>, plan in verifiable steps, stay terse and honest, and accumulate knowledge across sessions.</p>
-    <p>This page shows how it is wired — using one real project as the example, but kept unified and tied to neither a language nor that project's goals. At the bottom you can download the kit and drop it into your own codebase on any stack.</p>
+    <p>This page shows how it is wired — using one real project as the example, but kept unified and tied to neither a language nor that project's goals. At the bottom you can download the kit and drop it into most git-backed codebases, whatever the stack.</p>
     <div class="note">
       <div class="tag">Where it comes from</div>
       <p style="margin:.4em 0 0">The method grew out of a mature Android project: rules, skills, roles, a spec catalog, and agent memory are run every day. Everything Kotlin-, Gradle-, PowerShell-, and locale-specific was stripped out of the kit — the portable skeleton remains.</p>
@@ -347,11 +409,39 @@ doc       script         type change  logic           config/resources  user-vis
     <p>Each is mechanically scannable in a diff. Make the check part of "done", not part of "someday". If your stack has a linter, encode the patterns as rules so the gate is automatic.</p>
 
     <h2 id="adopt-en"><span class="n">10</span>How to adopt</h2>
+    <p><span class="adopt-step">−1 · The fastest path.</span> Ask your agent, right in your project's chat, to read this page and import the most useful parts — with this prompt:</p>
+    <div class="adopt-prompt">
+      <details open>
+        <summary>Prompt for the agent (English)</summary>
+        <div class="prompt-actions">
+          <button class="btn" type="button" onclick="copyPrompt(this)" aria-label="Copy prompt">⧉ Copy</button>
+        </div>
+        <pre>Read the Universal Agent Kit page at
+https://serzhyale.github.io/universal-agent-kit/ in full. It describes a portable method
+for AI-assisted development: an always-loaded rules file, slash-command skills, role
+subagents, a spec lifecycle (strategy vs tactics, verifiable phases), persistent file-based
+memory, a fixed research order, a validation ladder, and anti-slop conventions.
+
+Then study THIS repository and import what fits it:
+
+1. Draft a CLAUDE.md (or my tool's equivalent rules file) that adopts the method, with every
+   placeholder filled from this repo: project name, chat language, source root, architecture
+   layers, build / test / lint / run commands, logger, plan directory, scratch directory,
+   file-size budget, read-only zones, and ticket-id scheme.
+2. Recommend which skills (/research, /spec, /spec-tech, /spec-dev, /spec-check, /spec-fix,
+   /quick, /fix, /verify, /git, /review) and which role agents are worth adding here, and say
+   why for each.
+3. Tell me whether my runtime supports persistent agent memory and, if so, how to wire it up.
+
+Do not change anything yet. Show me the plan first; on any conflict, my existing files win.</pre>
+      </details>
+    </div>
+    <p class="muted" style="margin-top:2px">Then the thorough path: a full merge driven by the prompt file.</p>
     <p>Download the kit, hand your agent the folder together with <code>merge-prompt.txt</code>, and say "Merge the Universal Agent Kit into this repo". The prompt forces the agent to first take an <strong>inventory</strong> (what you already have, what's new, where it conflicts), present a <strong>merge plan</strong>, and stop — yours always wins, nothing is overwritten silently. You approve; it applies and fills <code>&lt;PLACEHOLDER&gt;</code> tokens from your repo.</p>
     <ul>
       <li><strong>Claude Code:</strong> <code>.claude/commands/*</code> immediately become <code>/spec</code>, <code>/research</code>, etc.; <code>.claude/agents/*</code> become selectable subagents.</li>
-      <li><strong>Cursor / Cline / Windsurf / Codex / Aider:</strong> the slash commands are just prompts. The agent reads <code>.claude/commands/&lt;name&gt;.md</code> and follows it; roles paste in as system prompts.</li>
-      <li>The methodology in <code>docs/</code> is tool-independent.</li>
+      <li><strong>Cursor / Cline / Windsurf / Codex / Aider</strong> (adaptation, not drop-in): the slash commands become saved prompts — the agent reads <code>.claude/commands/&lt;name&gt;.md</code> and follows it; roles paste in as system prompts. The kit's <code>README</code> maps the concrete file path for each tool.</li>
+      <li>The methodology in <code>docs/</code> is largely tool-independent.</li>
     </ul>
 
     <h2><span class="n">11</span>Provenance &amp; license</h2>
@@ -381,25 +471,68 @@ doc       script         type change  logic           config/resources  user-vis
 </footer>
 
 <script>
-  function setLang(l){
-    document.documentElement.setAttribute('data-lang', l);
-    document.documentElement.setAttribute('lang', l);
-    document.getElementById('lng-ru').setAttribute('aria-pressed', l==='ru');
-    document.getElementById('lng-en').setAttribute('aria-pressed', l==='en');
-    try{ localStorage.setItem('uak-lang', l); }catch(e){}
+  var I18N = {
+    ru:{
+      title:'Universal Agent Kit — как устроена разработка с ИИ-агентами',
+      desc:'Переносимый метод разработки с ИИ-агентами: правила, навыки, роли, жизненный цикл спеки и постоянная память. Выжимка из реального проекта, очищенная от стека. Статья и kit на русском и английском.',
+      langGroup:'Язык', theme:'Тема', toLight:'Включить светлую тему', toDark:'Включить тёмную тему', copied:'Скопировано'
+    },
+    en:{
+      title:'Universal Agent Kit — how AI-assisted development is wired',
+      desc:'A portable method for AI-assisted development: rules, skills, roles, a spec lifecycle, and persistent memory. Distilled from a real project, stripped of its stack. Article and kit in English and Russian.',
+      langGroup:'Language', theme:'Theme', toLight:'Switch to light theme', toDark:'Switch to dark theme', copied:'Copied'
+    }
+  };
+  function metaSet(sel, val){ var m = document.querySelector(sel); if(m) m.setAttribute('content', val); }
+  function applyThemeLabel(){
+    var d = document.documentElement, l = d.getAttribute('data-lang')||'en', m = I18N[l]||I18N.en;
+    var dark = d.getAttribute('data-theme') !== 'light';
+    var b = document.getElementById('themeBtn');
+    if(b){ b.setAttribute('aria-label', dark ? m.toLight : m.toDark); b.setAttribute('title', m.theme); b.setAttribute('aria-pressed', String(!dark)); }
+    metaSet('meta[name="theme-color"]', dark ? '#0f1115' : '#f7f8fa');
   }
+  function applyLang(l){
+    var d = document.documentElement, m = I18N[l]||I18N.en;
+    d.setAttribute('data-lang', l); d.setAttribute('lang', l);
+    document.title = m.title;
+    metaSet('meta[name="description"]', m.desc);
+    metaSet('meta[property="og:title"]', m.title);
+    metaSet('meta[property="og:description"]', m.desc);
+    var ru = document.getElementById('lng-ru'), en = document.getElementById('lng-en');
+    if(ru) ru.setAttribute('aria-pressed', String(l==='ru'));
+    if(en) en.setAttribute('aria-pressed', String(l==='en'));
+    var g = document.getElementById('langGroup'); if(g) g.setAttribute('aria-label', m.langGroup);
+    applyThemeLabel();
+  }
+  function setLang(l){ applyLang(l); try{ localStorage.setItem('uak-lang', l); }catch(e){} }
   function toggleTheme(){
-    var t = document.documentElement.getAttribute('data-theme')==='dark' ? 'light' : 'dark';
-    document.documentElement.setAttribute('data-theme', t);
+    var d = document.documentElement, t = d.getAttribute('data-theme')==='dark' ? 'light' : 'dark';
+    d.setAttribute('data-theme', t);
     try{ localStorage.setItem('uak-theme', t); }catch(e){}
+    applyThemeLabel();
+  }
+  function copyPrompt(btn){
+    var box = btn.closest('.adopt-prompt'); if(!box) return;
+    var pre = box.querySelector('pre'); var txt = pre ? pre.innerText : '';
+    var l = document.documentElement.getAttribute('data-lang')||'en', m = I18N[l]||I18N.en;
+    function done(){
+      if(btn.dataset.orig === undefined) btn.dataset.orig = btn.innerHTML;
+      btn.innerHTML = '✓ ' + m.copied; btn.setAttribute('disabled','');
+      setTimeout(function(){ btn.innerHTML = btn.dataset.orig; btn.removeAttribute('disabled'); }, 1600);
+    }
+    function fallback(){
+      try{ var ta=document.createElement('textarea'); ta.value=txt; ta.style.position='fixed'; ta.style.left='-9999px';
+        document.body.appendChild(ta); ta.focus(); ta.select(); document.execCommand('copy'); document.body.removeChild(ta); }catch(e){}
+    }
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(txt).then(done, function(){ fallback(); done(); });
+    } else { fallback(); done(); }
   }
   (function init(){
-    var l = null, t = null;
-    try{ l = localStorage.getItem('uak-lang'); t = localStorage.getItem('uak-theme'); }catch(e){}
-    if(!l){ l = (navigator.language||'en').toLowerCase().indexOf('ru')===0 ? 'ru' : 'en'; }
-    setLang(l);
-    if(!t){ t = (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) ? 'light' : 'dark'; }
-    document.documentElement.setAttribute('data-theme', t);
+    var l = document.documentElement.getAttribute('data-lang')||'en';
+    applyLang(l);
+    var pres = document.querySelectorAll('pre');
+    for(var i=0;i<pres.length;i++){ pres[i].setAttribute('tabindex','0'); }
   })();
 </script>
 </body>

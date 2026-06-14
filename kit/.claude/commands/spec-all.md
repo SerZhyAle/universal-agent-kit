@@ -4,8 +4,9 @@ Orchestrate the whole spec pipeline end to end: research → strategic spec → 
 execution → audit. Use it when you have a feature-sized idea and want one command to drive it
 through every stage with the right gates, instead of invoking each skill by hand.
 
-This skill does not re-implement the others — it *calls* them in order and stops at the human
-gates. The work happens in `/research`, `/spec`, `/spec-tech`, `/spec-dev`, `/spec-check`.
+This skill does not re-implement the others — it *calls* them in order, pausing only at the real
+decision points in the gate table of `docs/SPEC_LIFECYCLE.md`. The work happens in `/research`,
+`/spec`, `/spec-tech`, `/spec-dev`, `/spec-check`, `/spec-fix`.
 
 ## Usage
 
@@ -28,33 +29,36 @@ State which path you chose and why in one line, then proceed.
 
 ## The pipeline (COMPLEX path)
 
-Each arrow is a gate. Stop at a **[human]** gate and wait; pass a **[auto]** gate yourself when
-its check is green.
+The stages auto-chain — each invokes the next — and the run pauses only at a real decision, per
+the gate table in `docs/SPEC_LIFECYCLE.md`. This is momentum by default, not a sign-off at every
+stage.
 
-1. **`/research`** — gather evidence on the current state: the files, symbols, constraints, and
-   external references involved. Persist the findings. `[auto]` once the landscape is clear.
-2. **`/ui-clarify`** — only if the change is user-facing and any placement/wording/fallback
-   decision is unresolved. `[human]` — unresolved UI ambiguity blocks the build.
-3. **`/spec`** — write the strategic *what/why* (no file paths, no signatures). `[human]`
-   gate: the spec moves `Draft → Approved` only on your sign-off. A disagreement here costs a
-   sentence, not an implementation.
-4. **`/spec-tech`** — turn the approved spec into a phased, verifiable plan, each step ending in
-   a static check, ordered so no phase consumes what a later phase produces. `[human]` gate:
-   review the phase graph before execution (`Approved → Tactical`).
-5. **`/spec-dev`** — execute one step at a time, running each step's check before marking it
-   done, hard-stopping on the first ambiguity or failure. `[auto]` per step; drives
-   `Tactical → In Progress → Implemented` (or `BlockNeedUserTest` if manual testing is part of
-   acceptance).
-6. **`/spec-check`** — audit the build against the spec; set the final status from reality:
-   `Verified`, or `Partial` / `Broken` with the failing items listed. `[auto]`.
+1. **`/research`** — gather evidence: the files, symbols, constraints, and external references
+   involved. Persist the findings. Chains on once the landscape is clear.
+2. **`/ui-clarify`** — only if the change is user-facing and a placement/wording/fallback decision
+   is unresolved. This one *is* a stop: unresolved UI ambiguity blocks the build.
+3. **`/spec`** — write the strategic *what/why* (no file paths, no signatures), record the
+   `Approved` flip, and chain to `/spec-tech`. Stops only if a required research item is still
+   Open. (Want to eyeball the spec first? Run `/spec` alone and read it before continuing.)
+4. **`/spec-tech`** — turn the spec into a phased, verifiable plan, each step ending in a static
+   check, ordered so no phase consumes what a later phase produces. Chains to `/spec-dev` unless an
+   unchecked pre-implementation blocker remains.
+5. **`/spec-dev`** — execute one step at a time, running each step's check before marking it done,
+   hard-stopping on the first ambiguity or failure. Drives `Tactical → In Progress → Implemented`
+   (or `BlockNeedUserTest` when manual testing is part of acceptance).
+6. **`/spec-check`** — audit the build against reality and set the final status: `Verified`, or
+   `Partial` / `Broken` (auto-chaining to `/spec-fix`), or `BlockNeedUserTest` when a manual signal
+   is still open.
 
-If acceptance includes a hands-on check, status lands at `BlockNeedUserTest` after step 5;
-run `/verify` (or your device/manual test) and then `/spec-check` to reach `Verified`.
+If acceptance includes a hands-on check, status lands at `BlockNeedUserTest` after step 5; run
+`/verify` (or your manual test), then `/spec-check` to reach `Verified`.
 
 ## Rules
 
-- **Honor the gates.** Do not silently auto-approve the strategic spec or the phase graph —
-  those are the two human checkpoints that make the pipeline worth running.
+- **Auto-chain, stop at real decisions.** The default is momentum: flow stage to stage, pausing
+  only at the encoded stop conditions (an unresolved UI decision, an open required question, an
+  unchecked blocker, an ambiguity). Don't manufacture extra sign-off gates, and don't skip a real
+  one. To review between stages, run the skills individually or pass `--dry-run`.
 - **Resume from reality.** Given an `<ID>`, read its current status and re-enter the pipeline at
   the right stage — never restart from research if the plan is already approved.
 - **Stay cheap when the task is small.** The size gate above exists so a small change does not

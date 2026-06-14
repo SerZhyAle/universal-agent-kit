@@ -1,9 +1,10 @@
 # Universal Agent Kit
 
-A portable, stack-agnostic set of **rules, skills (slash commands), and agents** for an
-AI coding assistant (Claude Code and compatible agent runtimes). Distilled from a real,
-mature Android project, then stripped of everything project-specific so it drops into
-**any** codebase — web, backend, mobile, CLI, library, infra.
+A portable set of **rules, skills (slash commands), and agents** for an AI coding assistant.
+Built for **Claude Code**, and adaptable to other promptable agents (see the mapping below).
+Distilled from a real, mature Android project, then stripped of everything project-specific so it
+carries over to most **git-backed software repos** — web, backend, mobile, CLI, library, infra —
+regardless of language.
 
 The value here is not the tooling — it is the **working method**: research before you act,
 split *what/why* from *how*, plan in verifiable phases, keep autonomy high and bureaucracy
@@ -24,6 +25,7 @@ universal-agent-kit/
       spec-tech.md          <- tactical plan: phased, verifiable how
       spec-dev.md           <- execute the plan step by step
       spec-check.md         <- audit implementation vs spec
+      spec-fix.md           <- apply the audit's action items, re-audit
       spec-all.md           <- run the whole pipeline end to end
       research.md           <- research-first pass before any change
       quick.md              <- fast path for trivial edits
@@ -51,8 +53,9 @@ universal-agent-kit/
     examples/               <- one sample entry per memory type
 ```
 
-Every file is plain Markdown. Nothing here runs a script, calls an API, or assumes a
-language/framework. Where the source project hard-wired a tool, this kit describes the
+Almost every file is plain Markdown; the one exception is `.claude/settings.json` (a small JSON
+permission template for Claude Code). Nothing here runs on its own, calls an API, or hard-codes a
+language or framework. Where the source project wired in a specific tool, the kit states the
 *intent* and lets your agent pick the equivalent in your stack.
 
 ---
@@ -79,33 +82,50 @@ Hand this whole folder to your coding agent and say something like:
 6. Optionally copy `memory/` — the index template and one sample entry per type — if your
    runtime supports persistent agent memory.
 
-### For other agents (Cursor, Cline, Windsurf, Codex, Aider, ..)
+### For other agents (adaptation, not drop-in)
 
-The slash commands are just prompts. Your agent reads `.claude/commands/<name>.md` and
-follows it. Map them to whatever your tool calls "commands", "rules", "modes", or
-"prompts". The agents are role briefs — paste them as system prompts or custom modes.
-The methodology in `docs/` is tool-independent.
+Only Claude Code reads `.claude/` and `/slash` commands natively. Elsewhere the kit is an
+*adaptation*: the rules become your tool's rules file, each skill becomes a saved prompt you paste
+or trigger, and the agents become custom modes / system prompts. The `docs/` methodology is
+tool-independent as-is. Concrete homes (conventions evolve — check your tool's current docs):
+
+| Tool | `CLAUDE.md` → | Skills (`.claude/commands/*`) → | Agents (`.claude/agents/*`) → |
+| --- | --- | --- | --- |
+| OpenAI Codex / Codex CLI | `AGENTS.md` | prompts pasted per task | system-prompt preambles |
+| Cursor | `.cursor/rules/*.mdc` | saved prompts / Cursor commands | custom modes |
+| Cline | `.clinerules` (file or dir) | prompt snippets | mode presets |
+| Windsurf | `.windsurf/rules/` (or `.windsurfrules`) | saved prompts | Cascade presets |
+| Aider | `CONVENTIONS.md` (loaded via `--read`) | prompt files / aliases | single agent — fold into rules |
+
+The mental model carries even where the file layout does not: one always-loaded rules file, a set
+of named procedures you invoke, and a few role briefs.
 
 ---
 
 ## Fill these placeholders
 
-`CLAUDE.md` and several skills use `<PLACEHOLDER>` tokens. The important ones:
+`CLAUDE.md`, the skills, and the agents use `<PLACEHOLDER>` tokens. This is the complete set of
+config placeholders to fill once for your repo:
 
-- `<PROJECT_NAME>` — your project.
-- `<CHAT_LANGUAGE>` — what language the assistant talks to you in. Code, docs, logs, and
-  commits stay **English** regardless (recommended).
-- `<BUILD_CMD>` / `<TEST_CMD>` / `<LINT_CMD>` / `<RUN_CMD>` — how your project builds,
-  tests, lints, runs.
+- `<PROJECT_NAME>` — your project's name.
+- `<CHAT_LANGUAGE>` — the language the assistant talks to you in. Code, docs, logs, and commits
+  stay **English** regardless (recommended).
+- `<INDEX_DOC>` — the repo map/overview the agent reads first (e.g. `README.md`, `ARCHITECTURE.md`).
 - `<SRC_ROOT>` — main source directory.
-- `<ARCH_LAYERS>` — your architecture rule, e.g. `UI -> ViewModel -> UseCase -> Repo`,
-  `route -> handler -> service -> store`, or "n/a".
+- `<ARCH_LAYERS>` — your architecture/dependency rule, e.g. `UI -> ViewModel -> UseCase -> Repo`,
+  `route -> handler -> service -> store`, or `n/a`.
+- `<BUILD_CMD>` / `<TEST_CMD>` / `<LINT_CMD>` / `<RUN_CMD>` — how your project builds, tests,
+  lints, runs.
+- `<LOGGER>` — your logging facade (or `n/a`).
 - `<PLAN_DIR>` — where spec/plan files live (default `PLAN/`).
-- `<SCRATCH_DIR>` — throwaway artifacts (default `temp/`).
-- `<LOGGER>` — your logging facade, if you have one.
+- `<SCRATCH_DIR>` — throwaway artifacts and backups, git-ignored (default `tmp/`).
+- `<MAX_LOC>` — the file-size budget past which you extract a helper (e.g. `~500`).
+- `<READONLY_ZONES>` — paths the agent must never modify (vendored/generated code), or `none`.
+- `<ID>` — the ticket id scheme (e.g. `T0042`, `JIRA-123`, a date-slug).
 
-A good first move: ask your agent to grep the kit for `<` + `>` tokens and propose values
-from the actual repo.
+Template tokens like `<slug>`, `<NN>`, `<TODO>`, `<symbol>`, and `<path>` are *not* config — they
+are filled per ticket as you use the skills. A good first move: ask your agent to grep the kit for
+`<` + `>` tokens and propose values from the actual repo.
 
 ---
 
@@ -122,7 +142,7 @@ from the actual repo.
 4. **Execute one step at a time** (`/spec-dev`). Run each step's check before marking it
    done. Hard-stop on ambiguity instead of guessing.
 5. **Audit against reality** (`/spec-check`). Status comes from the repo, not from a
-   filename or a hope.
+   filename or a hope; `/spec-fix` closes the mechanical findings, then re-audits.
 6. **Stay cheap when the task is small.** `/quick` for trivial edits, `/fix` for a narrow
    bug, `/spec` only when design decisions exist.
 7. **Keep autonomy high.** Don't ask permission for reads, searches, builds. Flag real
@@ -138,10 +158,12 @@ See `docs/SPEC_LIFECYCLE.md` for the full status flow.
 
 ## A note on permissions
 
-`.claude/settings.json` grants the agent broad edit/read/write plus `git` and generic
-build commands so it can work without constant prompts — same trade the source project
-made. **Review it before adopting.** Tighten `allow` to your comfort level; the kit works
-fine with stricter permissions, you will just get more confirmation prompts.
+`.claude/settings.json` (Claude Code only) grants read/glob/grep plus edit/write and `git`, with
+`defaultMode: acceptEdits`, so the agent can work without constant prompts. It does **not**
+pre-approve your build/test/run commands — those are listed as commented examples; add the ones
+you trust (e.g. `Bash(npm run *)`) for your stack. **Review it before adopting** and tighten
+`allow` to your comfort level; the kit works fine under stricter permissions, you will just get
+more confirmation prompts.
 
 ---
 

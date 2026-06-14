@@ -37,6 +37,7 @@ verified it. See `docs/RESEARCH_INDEX.md`.
 - `/spec-tech` — break an approved spec into a phased, verifiable plan.
 - `/spec-dev` — execute a tactical plan step by step.
 - `/spec-check` — audit implementation against the spec; set status.
+- `/spec-fix` — apply the audit's mechanical action items, then re-audit.
 - `/spec-all` — run the whole pipeline end to end (research → spec → plan → execute → audit).
 - `/ui-clarify` — resolve user-facing ambiguity before building.
 - `/verify` — run the app and observe; PASS/FAIL with evidence.

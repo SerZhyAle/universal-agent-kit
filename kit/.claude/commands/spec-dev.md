@@ -56,12 +56,14 @@ are ticked — if any unchecked, abort with the blocker text.
     public API changed, narrowest meaningful check.
 
 After all planned steps in a phase:
-- **Final-phase verification tags (before the build).** If this is the last in-scope phase
+- **Final-phase verification tags (before the phase check).** If this is the last in-scope phase
   and acceptance includes manual testing, insert the verification tags now — one at each
   changed-flow entry across all phases (see `CLAUDE.md` §6). Tags are the last code edits,
-  inserted **before** the compile below so one build validates code + tags.
-- **Phase done criteria:** run each checkbox. Build required → run `<BUILD_CMD>`; exit 0 →
-  tick, non-zero → append the output tail and hard stop ("Build FAILED").
+  inserted **before** the phase check below so one run validates code + tags.
+- **Phase done criteria:** run each checkbox. For the phase's verification rung, run the
+  narrowest meaningful check the phase names (per `docs/VALIDATION.md`) — a compile / type-check,
+  a targeted test, or `<BUILD_CMD>` only when the phase touches packaging, resources, or wiring.
+  Exit 0 → tick; non-zero → append the output tail and hard stop.
 - All ticked → flip the phase to ✅ Done, update the INDEX row + counter. Any unticked →
   leave 🚧, update the step counter only, hard stop.
 
@@ -85,7 +87,7 @@ Stop immediately and report — never guess, never attempt speculative recovery 
 2. **Verification FAIL** after an edit — step left `[~]`.
 3. **Read-only zone touch.**
 4. **File-size budget violation.**
-5. **Build FAIL** after the auto-run — stop with the error excerpt.
+5. **Phase check FAIL** — the phase's narrowest-check command returned non-zero. Stop with the error excerpt.
 6. **Schema/migration change** the step does not fully specify (version + migration name).
 7. **Dependency-injection / module-graph change** beyond what the prompt scopes.
 8. **Missing symbol** the prompt names but does not also create.

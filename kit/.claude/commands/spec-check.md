@@ -57,10 +57,16 @@ not from a filename or a hope. Auto-detects strategic vs tactical scope.
 | Phase status consistency | INDEX row status == phase header status |
 | Verification-tag invariant | if status is `BlockNeedUserTest`: grep for `<ID>:` tags — PASS iff ≥ 1 hit. For any other status: PASS iff zero hits — surviving tags are stale (WARN; step 6 deletes them) |
 
-**4 — Score.**
-- `Verified` — every check is PASS / MANUAL / EXEMPT. Zero WARN and FAIL.
+**4 — Score.** (Gates are defined once in `docs/SPEC_LIFECYCLE.md`; this is that rule applied.)
+- `Verified` — every check is PASS or EXEMPT. Zero FAIL, zero WARN, and **no open MANUAL item**.
+- `BlockNeedUserTest` — zero FAIL and zero WARN, but ≥ 1 open MANUAL / on-target item. The build
+  is sound; a human signal is still outstanding. Do **not** call this Verified and do **not**
+  remove verification tags — re-run `/spec-check` once the human closes the item.
 - `Partial` — zero FAIL, ≥ 1 WARN. Collapses to `Broken` under `--strict`.
 - `Broken` — ≥ 1 FAIL.
+
+A MANUAL check can never sit beneath a `Verified`: status comes from reality, and an unclosed
+manual signal is reality saying "not proven yet".
 
 **5 — Write the `## Last Audit` block** at the bottom of the strategic spec (overwrite).
 Keep it under ~40 lines: PASS counts + FAIL/WARN action items only. The action items are
@@ -76,8 +82,9 @@ mode → update INDEX + audited phase rows only; do not touch the strategic stat
 a tag). Update the user-facing feature docs only on a `Verified` flip for a genuinely
 user-visible change.
 
-**8 — Auto-chain to `/spec-fix`** if the verdict is `Partial` or `Broken`. On `Verified`,
-no further action.
+**8 — Auto-chain to `/spec-fix`** if the verdict is `Partial` or `Broken`. On `Verified`, no
+further action. On `BlockNeedUserTest` (sound build, open manual item), stop and await the human
+signal — do not chain, do not remove tags.
 
 **Chat output:** `<ID>: <score>. PASS/WARN/FAIL: N/N/N. Tags removed: N. Top issues: [list].`
 
@@ -88,7 +95,7 @@ no further action.
 
 **Date:** <YYYY-MM-DD>
 **Mode:** full | strategic | tactical | phase-<NN>
-**Outcome:** Verified | Partial | Broken
+**Outcome:** Verified | BlockNeedUserTest | Partial | Broken
 **Counts:** PASS N · WARN N · FAIL N · MANUAL N · EXEMPT N
 
 ### Action items
@@ -98,7 +105,8 @@ no further action.
 ### Manual / on-target
 - [ ] <signal from §11 that needs a human or a real run>
 
-<If Verified: drop "Action items", keep "Manual / on-target" only.>
+<Verified requires every Manual item checked [x] or absent. An open [ ] item forbids Verified —
+the outcome is BlockNeedUserTest until a human closes it. If Verified: drop "Action items".>
 ```
 
 ## Constraints

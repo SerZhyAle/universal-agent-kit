@@ -4,8 +4,9 @@ Break an approved strategic spec into **sequenced, verifiable phases**. Creates
 `<PLAN_DIR>/<ID>_<slug>/INDEX.md` + phase files. Language: English, imperative, no rationale
 prose (the *why* lives in the strategic spec).
 
-Requires the strategic spec at `Status: Approved` or later. If `Draft`, auto-promote to
-`Approved` first and note it in chat. A `Block*` status is a hard abort — resolve first.
+Requires the strategic spec at `Status: Approved` or later (gate table: `docs/SPEC_LIFECYCLE.md`).
+If `Draft`, auto-promote to `Approved` first and note it in chat. A `Block*` status is a hard
+abort — resolve first.
 
 ## Usage
 
@@ -210,7 +211,9 @@ unchecked.>
 
 ## Phase done criteria
 - [ ] Every `Step NN.*` is `[x] done`.
-- [ ] Project builds — run `<BUILD_CMD>`.
+- [ ] Narrowest meaningful check for this phase passes — pick the lowest sufficient rung from
+      `docs/VALIDATION.md` (a compile / type-check, a targeted test, or `<BUILD_CMD>` only when
+      this phase touches packaging, resources, or wiring). Name the actual command here.
 - [ ] Grep for `TODO(phase-<NN>)` returns zero hits.
 - [ ] Changelog entry added for every file in "Files touched".
 

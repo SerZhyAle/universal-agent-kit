@@ -97,7 +97,7 @@
   .grid{display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:16px 0}
   @media(max-width:620px){.grid{grid-template-columns:1fr}}
   .card{background:var(--bg2); border:1px solid var(--line); border-radius:12px; padding:14px 16px}
-  .card h4{margin:0 0 4px; font-size:15px}
+  .card h3{margin:0 0 4px; font-size:15px}
   .card p{margin:4px 0 0; font-size:14px; color:var(--muted)}
   .card .num{font-size:12px; font-weight:700; color:var(--acc); letter-spacing:.1em}
 
@@ -115,7 +115,7 @@
   footer .cta{display:flex; gap:10px; flex-wrap:wrap; margin:14px 0}
 
   pre:focus-visible, summary:focus-visible{outline:2px solid var(--acc); outline-offset:2px}
-  @media (pointer:coarse){ .btn, .seg button{min-height:44px} }
+  @media (pointer:coarse){ .btn, .seg button{min-height:44px; min-width:44px} }
 
   .adopt-prompt{margin:16px 0 22px}
   .adopt-prompt details{background:var(--bg2); border:1px solid var(--line); border-radius:12px; padding:4px 14px 14px}
@@ -126,6 +126,8 @@
   .adopt-prompt .prompt-actions{display:flex; justify-content:flex-end; margin:2px 0 8px}
   .adopt-prompt pre{margin:0; max-height:none}
   .adopt-step{font-weight:700; color:var(--acc)}
+  .adopt-prompt + p{margin-top:2px}
+  .note p{margin:.4em 0 0}
 
   /* language switching: hide the inactive article */
   html[data-lang="ru"] [data-l="en"]{display:none}
@@ -137,8 +139,8 @@
   <div class="wrap">
     <span class="brand">Universal&nbsp;Agent&nbsp;Kit<span class="dot">.</span></span>
     <span class="seg" role="group" aria-label="Language" id="langGroup">
-      <button id="lng-ru" type="button" onclick="setLang('ru')" aria-pressed="true">RU</button>
-      <button id="lng-en" type="button" onclick="setLang('en')" aria-pressed="false">EN</button>
+      <button id="lng-ru" type="button" onclick="setLang('ru')" aria-pressed="true" aria-label="Русский">RU</button>
+      <button id="lng-en" type="button" onclick="setLang('en')" aria-pressed="false" aria-label="English">EN</button>
     </span>
     <button class="btn" id="themeBtn" type="button" onclick="toggleTheme()" title="Theme" aria-label="Theme" aria-pressed="false">◐</button>
     <a class="btn primary" href="universal-agent-kit.zip" download>
@@ -183,25 +185,25 @@
     <p>Эта страница показывает, как всё собрано — на примере одного реального проекта, но всё унифицировано и не привязано ни к языку, ни к задачам проекта. Внизу можно скачать kit и положить в свой git-репозиторий почти на любом стеке.</p>
     <div class="note">
       <div class="tag">Откуда это</div>
-      <p style="margin:.4em 0 0">Метод вырос из зрелого Android-проекта: правила, навыки, роли, спек-каталог и память агентов реально гоняются каждый день. Из kit'а убрано всё про Kotlin, Gradle, PowerShell и локаль — остался переносимый скелет.</p>
+      <p>Метод вырос из зрелого Android-проекта: правила, навыки, роли, спек-каталог и память агентов реально гоняются каждый день. Из kit'а убрано всё про Kotlin, Gradle, PowerShell и локаль — остался переносимый скелет.</p>
     </div>
 
     <h2><span class="n">01</span>Восемь принципов на один экран</h2>
     <div class="grid">
-      <div class="card"><div class="num">01</div><h4>Сначала исследуй</h4><p>Никогда не угадывай путь или поведение. Прочитай карту, потом код. Сохрани находки, не грепай дважды.</p></div>
-      <div class="card"><div class="num">02</div><h4>Отдели «что» от «как»</h4><p>Стратегия (проблема, цели, ограничения) пишется до тактики (файлы, сигнатуры, порядок). Самая ценная привычка метода.</p></div>
-      <div class="card"><div class="num">03</div><h4>Планируй проверяемо</h4><p>Каждый шаг кончается статической проверкой — «файл есть», «символ объявлен», «команда вернула 0», а не «работает правильно».</p></div>
-      <div class="card"><div class="num">04</div><h4>Дёшево, когда задача мелкая</h4><p>Опечатка — это <code>/quick</code>, узкий баг — <code>/fix</code>. Спека только там, где есть реальные решения.</p></div>
-      <div class="card"><div class="num">05</div><h4>Автономия вместо бюрократии</h4><p>Не спрашивай разрешения читать, искать, собирать, тестировать. Блокеры — в начале, а не после потраченного хода.</p></div>
-      <div class="card"><div class="num">06</div><h4>Чисто с самого начала</h4><p>Не пиши слоп: пустые catch, мусорные комментарии, хардкод вместо токена, мёртвый код. Лови на ревью.</p></div>
-      <div class="card"><div class="num">07</div><h4>Помни между сессиями</h4><p>Файловая память хранит то, что рантайм забывает: предпочтения, причины решений, контекст проекта.</p></div>
-      <div class="card"><div class="num">08</div><h4>Статус — из реальности</h4><p>Статус тикета истинен, потому что так делает код, а не потому что так написано в имени файла или хочется.</p></div>
+      <div class="card"><div class="num">01</div><h3>Сначала исследуй</h3><p>Никогда не угадывай путь или поведение. Прочитай карту, потом код. Сохрани находки, не грепай дважды.</p></div>
+      <div class="card"><div class="num">02</div><h3>Отдели «что» от «как»</h3><p>Стратегия (проблема, цели, ограничения) пишется до тактики (файлы, сигнатуры, порядок). Самая ценная привычка метода.</p></div>
+      <div class="card"><div class="num">03</div><h3>Планируй проверяемо</h3><p>Каждый шаг кончается статической проверкой — «файл есть», «символ объявлен», «команда вернула 0», а не «работает правильно».</p></div>
+      <div class="card"><div class="num">04</div><h3>Дёшево, когда задача мелкая</h3><p>Опечатка — это <code>/quick</code>, узкий баг — <code>/fix</code>. Спека только там, где есть реальные решения.</p></div>
+      <div class="card"><div class="num">05</div><h3>Автономия вместо бюрократии</h3><p>Не спрашивай разрешения читать, искать, собирать, тестировать. Блокеры — в начале, а не после потраченного хода.</p></div>
+      <div class="card"><div class="num">06</div><h3>Чисто с самого начала</h3><p>Не пиши слоп: пустые catch, мусорные комментарии, хардкод вместо токена, мёртвый код. Лови на ревью.</p></div>
+      <div class="card"><div class="num">07</div><h3>Помни между сессиями</h3><p>Файловая память хранит то, что рантайм забывает: предпочтения, причины решений, контекст проекта.</p></div>
+      <div class="card"><div class="num">08</div><h3>Статус — из реальности</h3><p>Статус тикета истинен, потому что так делает код, а не потому что так написано в имени файла или хочется.</p></div>
     </div>
 
     <h2><span class="n">02</span>Конституция: <code>CLAUDE.md</code></h2>
     <p>Один файл, который ассистент загружает в начале каждой сессии и который перекрывает его поведение по умолчанию. Это контракт, на который ссылается всё остальное. Он слоистый: стиль общения, автономия, порядок исследования, маршрутизация навыков, правила спек, структура и сборка, строгие правила, анти-слоп, пост-чейндж дисциплина.</p>
     <p>Главная идея — <strong>всегда загружен и краток</strong>. Это не вики: длинные методички живут в <code>docs/</code>, а конституция лишь ссылается на них одной строкой. Внутри же — таблица маршрутизации: какой slash-навык на какой размер задачи.</p>
-    <div class="note"><div class="tag">Кейс</div><p style="margin:.4em 0 0">В исходном проекте <code>CLAUDE.md</code> — это ~12 разделов, включая матрицу флейворов и ритуалы PowerShell. Kit оставляет переносимый каркас и выкидывает проектную машинерию: ты заполняешь <code>&lt;PLACEHOLDER&gt;</code> под свой стек.</p></div>
+    <div class="note"><div class="tag">Кейс</div><p>В исходном проекте <code>CLAUDE.md</code> — это ~12 разделов, включая матрицу флейворов и ритуалы PowerShell. Kit оставляет переносимый каркас и выкидывает проектную машинерию: ты заполняешь <code>&lt;PLACEHOLDER&gt;</code> под свой стек.</p></div>
 
     <h2><span class="n">03</span>Навыки: slash-команды</h2>
     <p>Навык — это переиспользуемый промпт, кодирующий рабочий процесс. Пишешь <code>/spec</code> — ассистент идёт по записанной процедуре, а не импровизирует заново. Хорошая практика записана один раз, а не выводится каждый раз с нуля.</p>
@@ -211,6 +213,7 @@
 /spec-tech  фазовый проверяемый план                Approved → Tactical
 /spec-dev   выполнять по шагу, проверять каждый      Tactical → Implemented
 /spec-check аудит против спеки                       → Verified / Partial / Broken
+/spec-fix   механический ремонт после аудита         Partial / Broken → переаудит
 /spec-all   прогнать весь пайплайн целиком           idea → verified</pre>
     <p>Под пайплайном — дешёвые пути: <code>/quick</code> (опечатка), <code>/fix</code> (узкий баг). Перед всем пользовательским — <code>/ui-clarify</code>. Для краткости — <code>/caveman</code>. Плюс <code>/git</code>, <code>/verify</code>, <code>/review</code>.</p>
 
@@ -236,7 +239,7 @@
 плюс явные блок-статусы: BlockNeedUserTest, BlockQuestions, BlockExternal, …</pre>
     <p>Перед фазами — <strong>гейт сложности</strong>: мелкая детерминированная правка (≤3 файлов, без новых публичных типов, без миграций и DI) идёт как примитив в три секции и реализуется напрямую; всё остальное — полный пайплайн. Так церемония пропорциональна работе.</p>
     <p>Граф фаз проектируется тремя проходами: <strong>инвентарь покрытия</strong> (каждая цель ложится в фазу или помечается вне-объёма), <strong>топология «производит/потребляет»</strong> (ни одна фаза не потребляет то, что произведёт более поздняя), <strong>фильтр реальной работы</strong> (шаг меняет код, а не текст плана). Каждый шаг кончается <em>статической</em> проверкой.</p>
-    <div class="note"><div class="tag">Тег верификации</div><p style="margin:.4em 0 0">Когда тикет ждёт ручной проверки, в точку входа каждого изменённого потока вставляется временная лог-строка <code>LOG("ID: что доказывает этот путь")</code>. Инвариант: такой тег существует <em>тогда и только тогда</em>, когда тикет в статусе ожидания теста. Во время ручного прогона ты грепаешь лог по <code>ID:</code> и <em>видишь</em>, какие пути реально выполнились. Аудит удаляет теги на переходе в Verified; в постоянных логах id тикета не живёт.</p></div>
+    <div class="note"><div class="tag">Тег верификации</div><p>Когда тикет ждёт ручной проверки, в точку входа каждого изменённого потока вставляется временная лог-строка <code>LOG("ID: что доказывает этот путь")</code>. Инвариант: такой тег существует <em>тогда и только тогда</em>, когда тикет в статусе ожидания теста. Во время ручного прогона ты грепаешь лог по <code>ID:</code> и <em>видишь</em>, какие пути реально выполнились. Аудит удаляет теги на переходе в Verified; в постоянных логах id тикета не живёт.</p></div>
 
     <h2><span class="n">06</span>Постоянная память агента</h2>
     <p>Рантайм забывает всё между сессиями. Код, спеки и git остаются — а вот <em>как ты любишь работать</em>, <em>почему прошлое решение было таким</em> и <em>какие правки ты уже давал</em> — нет. Переучивать это каждую сессию — главный скрытый налог.</p>
@@ -298,7 +301,7 @@ Then study THIS repository and import what fits it:
 Do not change anything yet. Show me the plan first; on any conflict, my existing files win.</pre>
       </details>
     </div>
-    <p class="muted" style="margin-top:2px">Дальше — основательный путь: полное слияние через файл-промпт.</p>
+    <p class="muted">Это быстрый путь: агент читает статью, а не сами файлы, поэтому возможен дрейф. Канонический воспроизводимый способ — ниже: скачать kit и слить через файл-промпт.</p>
     <p>Скачай kit, отдай агенту папку вместе с <code>merge-prompt.txt</code> и скажи: «Влей Universal Agent Kit в этот репозиторий». Промпт заставляет агента сначала сделать <strong>инвентарь</strong> (что у тебя уже есть, что новое, где конфликт), показать <strong>план слияния</strong> и остановиться — твоё всегда главнее, ничего не перезаписывается молча. Ты подтверждаешь — он применяет и заполняет <code>&lt;PLACEHOLDER&gt;</code> из твоего репозитория.</p>
     <ul>
       <li><strong>Claude Code:</strong> <code>.claude/commands/*</code> сразу становятся <code>/spec</code>, <code>/research</code> и т.д.; <code>.claude/agents/*</code> — выбираемыми субагентами.</li>
@@ -321,25 +324,25 @@ Do not change anything yet. Show me the plan first; on any conflict, my existing
     <p>This page shows how it is wired — using one real project as the example, but kept unified and tied to neither a language nor that project's goals. At the bottom you can download the kit and drop it into most git-backed codebases, whatever the stack.</p>
     <div class="note">
       <div class="tag">Where it comes from</div>
-      <p style="margin:.4em 0 0">The method grew out of a mature Android project: rules, skills, roles, a spec catalog, and agent memory are run every day. Everything Kotlin-, Gradle-, PowerShell-, and locale-specific was stripped out of the kit — the portable skeleton remains.</p>
+      <p>The method grew out of a mature Android project: rules, skills, roles, a spec catalog, and agent memory are run every day. Everything Kotlin-, Gradle-, PowerShell-, and locale-specific was stripped out of the kit — the portable skeleton remains.</p>
     </div>
 
     <h2><span class="n">01</span>Eight principles, one screen</h2>
     <div class="grid">
-      <div class="card"><div class="num">01</div><h4>Research first</h4><p>Never guess a path or behaviour. Read the map, then the code. Persist findings, don't re-grep.</p></div>
-      <div class="card"><div class="num">02</div><h4>Split what from how</h4><p>Strategy (problem, goals, constraints) is written before tactics (files, signatures, order). The single most valuable habit.</p></div>
-      <div class="card"><div class="num">03</div><h4>Plan verifiably</h4><p>Every step ends in a static check — "file exists", "symbol declared", "command exits 0" — never "works correctly".</p></div>
-      <div class="card"><div class="num">04</div><h4>Cheap when small</h4><p>A typo is <code>/quick</code>, a narrow bug is <code>/fix</code>. A spec only where real decisions exist.</p></div>
-      <div class="card"><div class="num">05</div><h4>Autonomy over bureaucracy</h4><p>Don't ask permission to read, search, build, test. Flag real blockers up front, not after burning a turn.</p></div>
-      <div class="card"><div class="num">06</div><h4>Clean from the start</h4><p>No slop: empty catches, trivial comments, hardcoded values, dead weight. Catch it in review.</p></div>
-      <div class="card"><div class="num">07</div><h4>Remember across sessions</h4><p>File-based memory keeps what the runtime forgets: preferences, decision rationale, project context.</p></div>
-      <div class="card"><div class="num">08</div><h4>Status from reality</h4><p>A ticket's status is true because the code makes it true — never inferred from a filename or a hope.</p></div>
+      <div class="card"><div class="num">01</div><h3>Research first</h3><p>Never guess a path or behaviour. Read the map, then the code. Persist findings, don't re-grep.</p></div>
+      <div class="card"><div class="num">02</div><h3>Split what from how</h3><p>Strategy (problem, goals, constraints) is written before tactics (files, signatures, order). The single most valuable habit.</p></div>
+      <div class="card"><div class="num">03</div><h3>Plan verifiably</h3><p>Every step ends in a static check — "file exists", "symbol declared", "command exits 0" — never "works correctly".</p></div>
+      <div class="card"><div class="num">04</div><h3>Cheap when small</h3><p>A typo is <code>/quick</code>, a narrow bug is <code>/fix</code>. A spec only where real decisions exist.</p></div>
+      <div class="card"><div class="num">05</div><h3>Autonomy over bureaucracy</h3><p>Don't ask permission to read, search, build, test. Flag real blockers up front, not after burning a turn.</p></div>
+      <div class="card"><div class="num">06</div><h3>Clean from the start</h3><p>No slop: empty catches, trivial comments, hardcoded values, dead weight. Catch it in review.</p></div>
+      <div class="card"><div class="num">07</div><h3>Remember across sessions</h3><p>File-based memory keeps what the runtime forgets: preferences, decision rationale, project context.</p></div>
+      <div class="card"><div class="num">08</div><h3>Status from reality</h3><p>A ticket's status is true because the code makes it true — never inferred from a filename or a hope.</p></div>
     </div>
 
     <h2><span class="n">02</span>The constitution: <code>CLAUDE.md</code></h2>
     <p>One file the assistant loads at the start of every session, and which overrides its default behaviour. It is the contract everything else references. Layered: communication style, autonomy, research order, skill routing, spec rules, structure and build, strict rules, anti-slop, post-change discipline.</p>
     <p>The core idea is <strong>always-loaded and short</strong>. It is not a wiki: long playbooks live in <code>docs/</code>, and the constitution only references them in a line. Inside it sits the routing table — which slash skill for which size of task.</p>
-    <div class="note"><div class="tag">Case study</div><p style="margin:.4em 0 0">In the source project <code>CLAUDE.md</code> is ~12 sections, including a build-flavor matrix and PowerShell rituals. The kit keeps the transferable skeleton and drops the project machinery: you fill the <code>&lt;PLACEHOLDER&gt;</code> tokens for your stack.</p></div>
+    <div class="note"><div class="tag">Case study</div><p>In the source project <code>CLAUDE.md</code> is ~12 sections, including a build-flavor matrix and PowerShell rituals. The kit keeps the transferable skeleton and drops the project machinery: you fill the <code>&lt;PLACEHOLDER&gt;</code> tokens for your stack.</p></div>
 
     <h2><span class="n">03</span>Skills: slash commands</h2>
     <p>A skill is a reusable prompt that encodes a workflow. Type <code>/spec</code> and the assistant follows a written procedure instead of improvising it again. The good procedure is written down once, not re-derived each time.</p>
@@ -349,6 +352,7 @@ Do not change anything yet. Show me the plan first; on any conflict, my existing
 /spec-tech  a phased, verifiable plan               Approved → Tactical
 /spec-dev   execute one step, check each            Tactical → Implemented
 /spec-check audit the build against the spec        → Verified / Partial / Broken
+/spec-fix   mechanical repair after an audit        Partial / Broken → re-audit
 /spec-all   drive the whole pipeline at once        idea → verified</pre>
     <p>Below the pipeline sit the cheap paths: <code>/quick</code> (typo), <code>/fix</code> (narrow bug). Before anything user-facing, <code>/ui-clarify</code>. For brevity, <code>/caveman</code>. Plus <code>/git</code>, <code>/verify</code>, <code>/review</code>.</p>
 
@@ -374,7 +378,7 @@ Do not change anything yet. Show me the plan first; on any conflict, my existing
 plus explicit block states: BlockNeedUserTest, BlockQuestions, BlockExternal, …</pre>
     <p>Before phases comes a <strong>complexity gate</strong>: a small deterministic change (≤3 files, no new public types, no migration or DI wiring) ships as a three-section primitive and is implemented directly; everything else runs the full pipeline. Ceremony stays proportional to the work.</p>
     <p>The phase graph is designed in three passes: a <strong>coverage inventory</strong> (every goal maps to a phase or is marked out-of-scope), a <strong>produces/consumes topology</strong> (no phase consumes what a later phase produces), and a <strong>real-work filter</strong> (a step changes code, not plan text). Every step ends in a <em>static</em> check.</p>
-    <div class="note"><div class="tag">Verification tag</div><p style="margin:.4em 0 0">When a ticket awaits a manual check, a temporary log line <code>LOG("ID: what this path proves")</code> goes at each changed-flow entry point. The invariant: such a tag exists <em>iff</em> the ticket is in that waiting status. During a hands-on run you grep the log for <code>ID:</code> and <em>see</em> which paths actually executed. The audit deletes the tags on the Verified transition; a ticket id never lives in a permanent log.</p></div>
+    <div class="note"><div class="tag">Verification tag</div><p>When a ticket awaits a manual check, a temporary log line <code>LOG("ID: what this path proves")</code> goes at each changed-flow entry point. The invariant: such a tag exists <em>iff</em> the ticket is in that waiting status. During a hands-on run you grep the log for <code>ID:</code> and <em>see</em> which paths actually executed. The audit deletes the tags on the Verified transition; a ticket id never lives in a permanent log.</p></div>
 
     <h2><span class="n">06</span>Persistent agent memory</h2>
     <p>The runtime forgets everything between sessions. Code, specs, and git persist — but <em>how you like to work</em>, <em>why a past decision went the way it did</em>, and <em>which corrections you already gave</em> do not. Re-teaching that every session is the biggest hidden tax.</p>
@@ -436,7 +440,7 @@ Then study THIS repository and import what fits it:
 Do not change anything yet. Show me the plan first; on any conflict, my existing files win.</pre>
       </details>
     </div>
-    <p class="muted" style="margin-top:2px">Then the thorough path: a full merge driven by the prompt file.</p>
+    <p class="muted">This is the quick path: the agent reads the article, not the files, so expect some drift. The canonical, reproducible route is below — download the kit and merge via the prompt file.</p>
     <p>Download the kit, hand your agent the folder together with <code>merge-prompt.txt</code>, and say "Merge the Universal Agent Kit into this repo". The prompt forces the agent to first take an <strong>inventory</strong> (what you already have, what's new, where it conflicts), present a <strong>merge plan</strong>, and stop — yours always wins, nothing is overwritten silently. You approve; it applies and fills <code>&lt;PLACEHOLDER&gt;</code> tokens from your repo.</p>
     <ul>
       <li><strong>Claude Code:</strong> <code>.claude/commands/*</code> immediately become <code>/spec</code>, <code>/research</code>, etc.; <code>.claude/agents/*</code> become selectable subagents.</li>

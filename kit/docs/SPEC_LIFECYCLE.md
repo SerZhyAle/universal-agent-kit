@@ -122,14 +122,14 @@ its own row, and `VALIDATION.md` and the skill files defer to it rather than red
 | Skill | Requires | Produces | Auto-chains to | Stops instead when |
 | --- | --- | --- | --- | --- |
 | `/research` | any | no status change | the caller | — |
-| `/spec` | none (allocates an id) | `Approved` (or `In Progress` for a primitive) | `/spec-tech` | a required research item is still Open |
+| `/spec` | none (allocates an id) | `Approved`, or `In Progress` for a primitive | `/spec-tech` (primitive: implement directly, then stop) | a required research item is Open |
 | `/spec-tech` | `Approved` or later | `Tactical` | `/spec-dev` | an unchecked pre-implementation blocker remains |
 | `/spec-dev` | `Tactical` / `In Progress` | `Implemented` or `BlockNeedUserTest` | `/spec-check` | ambiguity, a failed check, or a `Block*` condition |
-| `/spec-check` | `Implemented` or later | `Verified` / `Partial` / `Broken` | `/spec-fix` (only if `Partial`/`Broken`) | — |
+| `/spec-check` | `Implemented` or later | `Verified` / `Partial` / `Broken` / `BlockNeedUserTest` | `/spec-fix` (only if `Partial`/`Broken`) | an open manual check holds at `BlockNeedUserTest` |
 | `/spec-fix` | `Partial` / `Broken` | re-runs `/spec-check` | `/spec-check` | a fix needs a decision the audit cannot supply |
 | `/verify` | any | no status change | — | — |
 
-Two rules bind the whole table:
+Three rules bind the whole table:
 
 - **Auto-chain by default; stop only at a real decision.** The pipeline flows on its own and
   pauses only at the encoded conditions above — an open required question, an unchecked blocker,
@@ -141,6 +141,10 @@ Two rules bind the whole table:
   on-target signal keeps the ticket at `BlockNeedUserTest` (or `Partial`) until a human closes it
   and a re-audit turns it green. Status comes from reality, so an open manual check can never sit
   beneath a `Verified`.
+- **Two branches leave the straight line, and the rows above encode them.** A *primitive* `/spec`
+  (the complexity gate) implements without a tactical plan and stops at `Implemented` or
+  `BlockNeedUserTest` — it never enters `/spec-tech`. A sound build with an unresolved manual check
+  produces `BlockNeedUserTest`, not `Verified`. Everything else follows the linear flow.
 
 ## Adapting it
 

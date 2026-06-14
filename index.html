@@ -78,6 +78,8 @@
   .hero h1{font-size:34px; line-height:1.14; margin:0 0 10px; letter-spacing:-.5px}
   .hero p.lead{font-size:17px; color:var(--muted); margin:0 0 20px}
   .hero .cta{display:flex; gap:10px; flex-wrap:wrap}
+  .kicker{font-size:13px; color:var(--muted); font-weight:600; margin:0 0 12px; letter-spacing:.01em}
+  .kicker b{color:var(--acc2); font-weight:700}
 
   /* ---------- collapsible sections grid (the table of contents) ---------- */
   .sections{display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:14px; align-items:start; margin-top:24px}
@@ -110,6 +112,7 @@
   .sec[open] .secteaser{display:none}
 
   .secbody{padding:4px 18px 20px 18px}
+  .secbody h3{scroll-margin-top:72px}
   .sec[open] .secbody{border-top:1px solid var(--line); margin-top:2px; padding-top:14px}
 
   h3{font-size:17px; margin:22px 0 4px}
@@ -188,26 +191,34 @@
 <main>
   <!-- ===================== HERO ===================== -->
   <section class="hero">
+    <div class="kicker">
+      <span data-l="ru"><b>Для любого ИИ-агента:</b> Claude · Codex · Gemini · Cursor · Copilot · любая модель</span>
+      <span data-l="en"><b>For any AI agent:</b> Claude · Codex · Gemini · Cursor · Copilot · any model</span>
+      <span data-l="uk"><b>Для будь-якого ШІ-агента:</b> Claude · Codex · Gemini · Cursor · Copilot · будь-яка модель</span>
+    </div>
     <h1>
       <span data-l="ru">Как устроена разработка с ИИ-агентами</span>
       <span data-l="en">How AI-assisted development is wired</span>
       <span data-l="uk">Як влаштована розробка з ШІ-агентами</span>
     </h1>
     <p class="lead">
-      <span data-l="ru">Переносимый набор правил, навыков, ролей, спек-процесса и памяти для любого ИИ-агента — Claude Code, Cursor, Codex, Gemini/Antigravity, локальные модели. Выжимка из реального проекта, очищенная от языка, стека и вендора. Берёшь — и кладёшь почти в любой git-репозиторий.</span>
-      <span data-l="en">A portable set of rules, skills, roles, a spec lifecycle, and memory for any AI agent — Claude Code, Cursor, Codex, Gemini/Antigravity, local models. Distilled from a real project, stripped of language, stack, and vendor. Take it, drop it into most git-backed repos.</span>
-      <span data-l="uk">Переносний набір правил, навичок, ролей, спек-процесу та пам'яті для будь-якого ШІ-агента — Claude Code, Cursor, Codex, Gemini/Antigravity, локальні моделі. Вичавка з реального проєкту, очищена від мови, стеку та вендора. Береш — і кладеш майже в будь-який git-репозиторій.</span>
+      <span data-l="ru">Переносимый набор правил, навыков, ролей, спек-процесса и памяти для ИИ-агента. Это метод, а не инструмент — он не зависит ни от уровня развития ИИ, ни от конкретных моделей, ни от даты, и не устаревает. Берёшь — и кладёшь почти в любой git-репозиторий.</span>
+      <span data-l="en">A portable set of rules, skills, roles, a spec lifecycle, and memory for an AI agent. It's a method, not a tool — independent of how far AI has advanced, of any specific model, and of the date, and it doesn't go stale. Take it, drop it into most git-backed repos.</span>
+      <span data-l="uk">Переносний набір правил, навичок, ролей, спек-процесу та пам'яті для ШІ-агента. Це метод, а не інструмент — не залежить ні від рівня розвитку ШІ, ні від конкретних моделей, ні від дати, і не старіє. Береш — і кладеш майже в будь-який git-репозиторій.</span>
     </p>
     <div class="cta">
       <a class="btn primary" href="universal-agent-kit.zip" download>
         <span data-l="ru">⤓ Скачать kit (.zip)</span><span data-l="en">⤓ Download kit (.zip)</span><span data-l="uk">⤓ Завантажити kit (.zip)</span>
       </a>
+      <a class="btn" href="#new-ru" data-l="ru">Для нового проекта</a>
+      <a class="btn" href="#new-en" data-l="en">For a new project</a>
+      <a class="btn" href="#new-uk" data-l="uk">Для нового проєкту</a>
+      <a class="btn" href="#old-ru" data-l="ru">Для существующего проекта</a>
+      <a class="btn" href="#old-en" data-l="en">For an existing project</a>
+      <a class="btn" href="#old-uk" data-l="uk">Для наявного проєкту</a>
       <a class="btn" href="https://github.com/SerZhyAle/universal-agent-kit" target="_blank" rel="noopener">
         <span data-l="ru">Открыть на GitHub</span><span data-l="en">Browse on GitHub</span><span data-l="uk">Відкрити на GitHub</span>
       </a>
-      <a class="btn" href="#adopt" data-l="ru">Как внедрить</a>
-      <a class="btn" href="#adopt-en" data-l="en">How to adopt</a>
-      <a class="btn" href="#adopt-uk" data-l="uk">Як впровадити</a>
       <button class="btn" type="button" onclick="setAll(true)">
         <span data-l="ru">Развернуть всё</span><span data-l="en">Expand all</span><span data-l="uk">Розгорнути все</span>
       </button>
@@ -371,7 +382,7 @@ reference  указатель во внешнюю систему и зачем  
         <div class="secbody">
           <p>Метод не привязан ни к инструменту, ни к модели. Ниже три ситуации — выбери свою.</p>
 
-          <h3>A · Новый или почти пустой проект</h3>
+          <h3 id="new-ru">A · Новый или почти пустой проект</h3>
           <p>Сначала дай агенту собрать карту кода его штатной командой — <code>/init</code> в Claude Code (или аналог в твоём инструменте). Потом отдай этот промпт, чтобы он поднял проект сразу по методу:</p>
           <div class="adopt-prompt">
             <details>
@@ -401,7 +412,7 @@ Show me the plan first; create nothing until I approve.</pre>
             </details>
           </div>
 
-          <h3>B · Существующий проект — быстрый путь</h3>
+          <h3 id="old-ru">B · Существующий проект — быстрый путь</h3>
           <p><span class="adopt-step">За минуту.</span> Попроси агента прямо в чате прочитать этот сайт и импортировать самое полезное:</p>
           <div class="adopt-prompt">
             <details>
@@ -641,7 +652,7 @@ doc       script         type change  logic           config/resources  user-vis
         <div class="secbody">
           <p>The method is tied to neither a tool nor a model. Three situations below — pick yours.</p>
 
-          <h3>A · A new or near-empty project</h3>
+          <h3 id="new-en">A · A new or near-empty project</h3>
           <p>First let the agent build a map of the code with its built-in command — <code>/init</code> in Claude Code (or the equivalent in your tool). Then hand it this prompt to stand the project up on the method directly:</p>
           <div class="adopt-prompt">
             <details>
@@ -671,7 +682,7 @@ Show me the plan first; create nothing until I approve.</pre>
             </details>
           </div>
 
-          <h3>B · An existing project — the quick path</h3>
+          <h3 id="old-en">B · An existing project — the quick path</h3>
           <p><span class="adopt-step">In a minute.</span> Ask your agent, right in the chat, to read this page and import the most useful parts:</p>
           <div class="adopt-prompt">
             <details>
@@ -911,7 +922,7 @@ reference  вказівник у зовнішню систему та навіщ
         <div class="secbody">
           <p>Метод не прив'язаний ні до інструмента, ні до моделі. Нижче три ситуації — обери свою.</p>
 
-          <h3>A · Новий або майже порожній проєкт</h3>
+          <h3 id="new-uk">A · Новий або майже порожній проєкт</h3>
           <p>Спершу дай агенту зібрати карту коду його штатною командою — <code>/init</code> у Claude Code (або аналог у твоєму інструменті). Потім віддай цей промпт, щоб він підняв проєкт одразу за методом:</p>
           <div class="adopt-prompt">
             <details>
@@ -941,7 +952,7 @@ Show me the plan first; create nothing until I approve.</pre>
             </details>
           </div>
 
-          <h3>B · Наявний проєкт — швидкий шлях</h3>
+          <h3 id="old-uk">B · Наявний проєкт — швидкий шлях</h3>
           <p><span class="adopt-step">За хвилину.</span> Попроси агента прямо в чаті прочитати цей сайт і імпортувати найкорисніше:</p>
           <div class="adopt-prompt">
             <details>
@@ -1120,7 +1131,8 @@ Do not change anything yet. Show me the plan first; on any conflict, my existing
     var el = document.getElementById(h);
     if(!el) return;
     var sec = el.closest ? el.closest('details.sec') : null;
-    if(sec){ sec.setAttribute('open',''); sec.scrollIntoView({block:'start'}); }
+    if(sec) sec.setAttribute('open','');
+    el.scrollIntoView({block:'start'});
   }
   function copyPrompt(btn){
     var box = btn.closest('.adopt-prompt'); if(!box) return;

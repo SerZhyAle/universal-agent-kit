@@ -194,9 +194,9 @@
       <span data-l="uk">Як влаштована розробка з ШІ-агентами</span>
     </h1>
     <p class="lead">
-      <span data-l="ru">Переносимый набор правил, навыков, ролей, спек-процесса и памяти для ИИ-ассистента. Выжимка из реального проекта, очищенная от языка и стека. Берёшь — и кладёшь почти в любой git-репозиторий.</span>
-      <span data-l="en">A portable set of rules, skills, roles, a spec lifecycle, and memory for an AI assistant. Distilled from a real project, stripped of language and stack. Take it, drop it into most git-backed repos.</span>
-      <span data-l="uk">Переносний набір правил, навичок, ролей, спек-процесу та пам'яті для ШІ-асистента. Вичавка з реального проєкту, очищена від мови та стеку. Береш — і кладеш майже в будь-який git-репозиторій.</span>
+      <span data-l="ru">Переносимый набор правил, навыков, ролей, спек-процесса и памяти для любого ИИ-агента — Claude Code, Cursor, Codex, Gemini/Antigravity, локальные модели. Выжимка из реального проекта, очищенная от языка, стека и вендора. Берёшь — и кладёшь почти в любой git-репозиторий.</span>
+      <span data-l="en">A portable set of rules, skills, roles, a spec lifecycle, and memory for any AI agent — Claude Code, Cursor, Codex, Gemini/Antigravity, local models. Distilled from a real project, stripped of language, stack, and vendor. Take it, drop it into most git-backed repos.</span>
+      <span data-l="uk">Переносний набір правил, навичок, ролей, спек-процесу та пам'яті для будь-якого ШІ-агента — Claude Code, Cursor, Codex, Gemini/Antigravity, локальні моделі. Вичавка з реального проєкту, очищена від мови, стеку та вендора. Береш — і кладеш майже в будь-який git-репозиторій.</span>
     </p>
     <div class="cta">
       <a class="btn primary" href="universal-agent-kit.zip" download>
@@ -227,7 +227,7 @@
         <div class="secbody">
           <p>ИИ-ассистент быстрый, но дрейфует. Он угадывает пути к файлам, придумывает API, который изменился две версии назад, пишет правдоподобный мусор, который компилируется и тихо гниёт, забывает всё между сессиями и либо спрашивает разрешения на каждый чих, либо молча делает не то. По сути — гениальный стажёр с амнезией: печатает быстрее тебя, но к обеду уже не помнит, как тебя зовут.</p>
           <p>Лечится это не инструментом, а <strong>методом</strong> — маленькой операционной системой поверх ассистента: свод правил, роли, жизненный цикл спецификаций и память. Она заставляет его <em>сначала исследовать, потом делать</em>, отделять «что» от «как», планировать проверяемыми шагами, оставаться кратким и честным и накапливать знания между сессиями.</p>
-          <p>Эта страница показывает, как всё собрано — на примере одного реального проекта, но всё унифицировано и не привязано ни к языку, ни к задачам проекта. Внизу можно скачать kit и положить в свой git-репозиторий почти на любом стеке.</p>
+          <p>Эта страница показывает, как всё собрано — на примере одного реального проекта, но всё унифицировано и не привязано ни к языку, ни к задачам проекта — и ни к конкретному инструменту или модели. Внизу можно скачать kit и положить в свой git-репозиторий почти на любом стеке.</p>
 
           <h3>Кому это всё</h3>
           <ul>
@@ -262,10 +262,10 @@
       </details>
 
       <details class="sec">
-        <summary><span class="secnum" aria-hidden="true">02</span><span class="sechead"><h2 class="sectitle">Конституция: <code>CLAUDE.md</code></h2><span class="secteaser">Один всегда-загруженный свод правил поверх ассистента</span></span></summary>
+        <summary><span class="secnum" aria-hidden="true">02</span><span class="sechead"><h2 class="sectitle">Конституция: всегда-загруженный свод правил</h2><span class="secteaser">Один всегда-загруженный свод правил поверх ассистента</span></span></summary>
         <div class="secbody">
           <p>Один файл, который ассистент загружает в начале каждой сессии и который перекрывает его поведение по умолчанию. Это контракт, на который ссылается всё остальное. Он слоистый: стиль общения, автономия, порядок исследования, маршрутизация навыков, правила спек, структура и сборка, строгие правила, анти-слоп, пост-чейндж дисциплина.</p>
-          <p>Главная идея — <strong>всегда загружен и краток</strong>. Это не вики: длинные методички живут в <code>docs/</code>, а конституция лишь ссылается на них одной строкой. Внутри же — таблица маршрутизации: какой slash-навык на какой размер задачи.</p>
+          <p>Главная идея — <strong>всегда загружен и краток</strong>. Это не вики: длинные методички живут в <code>docs/</code>, а конституция лишь ссылается на них одной строкой. Внутри же — таблица маршрутизации: какой slash-навык на какой размер задачи. Имя файла зависит от инструмента — <code>CLAUDE.md</code>, <code>AGENTS.md</code>, правило Cursor, <code>GEMINI.md</code>, — но идея одна.</p>
           <div class="note"><div class="tag">Кейс</div><p>В исходном проекте <code>CLAUDE.md</code> — это ~12 разделов, включая матрицу флейворов и ритуалы PowerShell. Kit оставляет переносимый каркас и выкидывает проектную машинерию: ты заполняешь <code>&lt;PLACEHOLDER&gt;</code> под свой стек.</p></div>
         </div>
       </details>
@@ -367,12 +367,45 @@ reference  указатель во внешнюю систему и зачем  
       </details>
 
       <details class="sec" id="adopt">
-        <summary><span class="secnum" aria-hidden="true">10</span><span class="sechead"><h2 class="sectitle">Как внедрить</h2><span class="secteaser">За минуту промптом или каноническим слиянием kit'а</span></span></summary>
+        <summary><span class="secnum" aria-hidden="true">10</span><span class="sechead"><h2 class="sectitle">Как внедрить</h2><span class="secteaser">Новый или существующий проект, любой инструмент, любая модель</span></span></summary>
         <div class="secbody">
-          <p><span class="adopt-step">−1 · Самый быстрый путь.</span> Попроси агента прямо в чате своего проекта прочитать этот сайт и импортировать отсюда самое полезное — вот этим промптом:</p>
+          <p>Метод не привязан ни к инструменту, ни к модели. Ниже три ситуации — выбери свою.</p>
+
+          <h3>A · Новый или почти пустой проект</h3>
+          <p>Сначала дай агенту собрать карту кода его штатной командой — <code>/init</code> в Claude Code (или аналог в твоём инструменте). Потом отдай этот промпт, чтобы он поднял проект сразу по методу:</p>
           <div class="adopt-prompt">
-            <details open>
-              <summary>Промпт для агента (на английском)</summary>
+            <details>
+              <summary>Промпт для нового проекта (на английском)</summary>
+              <div class="prompt-actions">
+                <button class="btn" type="button" onclick="copyPrompt(this)" aria-label="Скопировать промпт">⧉ Скопировать</button>
+              </div>
+              <pre>This is a fresh or mostly empty repository. First run your codebase-init
+command (/init in Claude Code, or the equivalent in your tool) so you have a
+rules file and a basic map of the project. Then read the Universal Agent Kit
+page at https://serzhyale.github.io/universal-agent-kit/ in full and set this
+project up on its method, from scratch:
+
+1. Write the rules file my tool reads (CLAUDE.md / AGENTS.md / a Cursor rule /
+   GEMINI.md - whatever applies) adopting the kit's structure: communication,
+   research order, skill routing, the spec lifecycle, strict rules, anti-slop,
+   post-change discipline. Fill in what already exists; use sensible defaults
+   otherwise.
+2. Create the skill / command files and the role briefs from the kit that fit a
+   project of this kind.
+3. Set up the plan directory, the scratch directory, and the memory folder with
+   its index.
+4. Pick the build / test / lint / run commands for the stack I name - or propose
+   a stack if none exists yet.
+
+Show me the plan first; create nothing until I approve.</pre>
+            </details>
+          </div>
+
+          <h3>B · Существующий проект — быстрый путь</h3>
+          <p><span class="adopt-step">За минуту.</span> Попроси агента прямо в чате прочитать этот сайт и импортировать самое полезное:</p>
+          <div class="adopt-prompt">
+            <details>
+              <summary>Промпт для существующего проекта (на английском)</summary>
               <div class="prompt-actions">
                 <button class="btn" type="button" onclick="copyPrompt(this)" aria-label="Скопировать промпт">⧉ Скопировать</button>
               </div>
@@ -396,12 +429,26 @@ Then study THIS repository and import what fits it:
 Do not change anything yet. Show me the plan first; on any conflict, my existing files win.</pre>
             </details>
           </div>
-          <p class="muted">Это быстрый путь: агент читает статью, а не сами файлы, поэтому возможен дрейф. Канонический воспроизводимый способ — ниже: скачать kit и слить через файл-промпт.</p>
+          <p class="muted">Быстро, но агент читает статью, а не файлы, — возможен дрейф. Канонический воспроизводимый способ — путь C.</p>
+
+          <h3>C · Существующий проект — канонический путь</h3>
           <p>Скачай kit, отдай агенту папку вместе с <code>merge-prompt.txt</code> и скажи: «Влей Universal Agent Kit в этот репозиторий». Промпт заставляет агента сначала сделать <strong>инвентарь</strong> (что у тебя уже есть, что новое, где конфликт), показать <strong>план слияния</strong> и остановиться — твоё всегда главнее, ничего не перезаписывается молча. Ты подтверждаешь — он применяет и заполняет <code>&lt;PLACEHOLDER&gt;</code> из твоего репозитория.</p>
+
+          <h3>Любой инструмент</h3>
+          <p>Каждый агент читает свой файл правил — суть одна, отличается лишь имя:</p>
           <ul>
-            <li><strong>Claude Code:</strong> <code>.claude/commands/*</code> сразу становятся <code>/spec</code>, <code>/research</code> и т.д.; <code>.claude/agents/*</code> — выбираемыми субагентами.</li>
-            <li><strong>Cursor / Cline / Windsurf / Codex / Aider</strong> (адаптация, не drop-in): slash-команды становятся сохранёнными промптами — агент читает <code>.claude/commands/&lt;name&gt;.md</code> и следует ему; роли вставляются как системные промпты. Конкретные пути для каждого инструмента — в <code>README</code> kit'а.</li>
-            <li>Методология в <code>docs/</code> от инструмента почти не зависит.</li>
+            <li><strong>Claude Code</strong> — <code>CLAUDE.md</code> + <code>.claude/commands/*</code> (готовые <code>/spec</code>, <code>/research</code>…) + <code>.claude/agents/*</code> как субагенты.</li>
+            <li><strong>Cursor</strong> — <code>.cursor/rules</code> (или <code>.cursorrules</code>); команды становятся сохранёнными промптами.</li>
+            <li><strong>Codex, Gemini CLI / Antigravity, Aider, Cline, Windsurf</strong> — <code>AGENTS.md</code> / <code>GEMINI.md</code> / свой аналог; роли вставляются как системные промпты, навыки — как файлы-промпты, на которые ссылаешься.</li>
+            <li>Методология в <code>docs/</code> вообще не зависит от инструмента — это просто Markdown.</li>
+          </ul>
+
+          <h3>Любая модель — от сильной до слабой</h3>
+          <p>Метод не зависит и от мощности модели — меняется не он, а несколько ручек:</p>
+          <ul>
+            <li><strong>Сильная</strong> (фронтир, большой контекст): держит больше в голове. Шаги крупнее, автономии больше; спеки и проверки оставляешь ради корректности, а не чтобы вести за руку.</li>
+            <li><strong>Регулярная</strong>: золотая середина метода — спеки, мелкие проверяемые шаги и порядок исследования окупаются максимально.</li>
+            <li><strong>Слабая, маленькая или локальная</strong>: опираешься на правила сильнее всего — крошечные шаги, проверка после каждого, короткий контекст, меньше автономии. Метод — это то, что вообще делает слабую модель пригодной для работы.</li>
           </ul>
         </div>
       </details>
@@ -450,7 +497,7 @@ Do not change anything yet. Show me the plan first; on any conflict, my existing
         <div class="secbody">
           <p>An AI assistant is fast, but it drifts. It guesses file paths, invents an API that changed two versions ago, writes plausible slop that compiles and quietly rots, forgets everything between sessions, and either asks permission for every keystroke or silently does the wrong thing. Essentially a brilliant intern with amnesia: types faster than you, but by lunch can't recall your name.</p>
           <p>The cure is not a tool — it is a <strong>method</strong>: a small operating system on top of the assistant. A rulebook, roles, a spec lifecycle, and memory. It makes the assistant <em>research before it acts</em>, split <em>what</em> from <em>how</em>, plan in verifiable steps, stay terse and honest, and accumulate knowledge across sessions.</p>
-          <p>This page shows how it is wired — using one real project as the example, but kept unified and tied to neither a language nor that project's goals. At the bottom you can download the kit and drop it into most git-backed codebases, whatever the stack.</p>
+          <p>This page shows how it is wired — using one real project as the example, but kept unified and tied to neither a language nor that project's goals — nor to a specific tool or model. At the bottom you can download the kit and drop it into most git-backed codebases, whatever the stack.</p>
 
           <h3>Who it's for</h3>
           <ul>
@@ -485,10 +532,10 @@ Do not change anything yet. Show me the plan first; on any conflict, my existing
       </details>
 
       <details class="sec">
-        <summary><span class="secnum" aria-hidden="true">02</span><span class="sechead"><h2 class="sectitle">The constitution: <code>CLAUDE.md</code></h2><span class="secteaser">One always-loaded rulebook over the assistant</span></span></summary>
+        <summary><span class="secnum" aria-hidden="true">02</span><span class="sechead"><h2 class="sectitle">The constitution: the always-loaded rulebook</h2><span class="secteaser">One always-loaded rulebook over the assistant</span></span></summary>
         <div class="secbody">
           <p>One file the assistant loads at the start of every session, and which overrides its default behaviour. It is the contract everything else references. Layered: communication style, autonomy, research order, skill routing, spec rules, structure and build, strict rules, anti-slop, post-change discipline.</p>
-          <p>The core idea is <strong>always-loaded and short</strong>. It is not a wiki: long playbooks live in <code>docs/</code>, and the constitution only references them in a line. Inside it sits the routing table — which slash skill for which size of task.</p>
+          <p>The core idea is <strong>always-loaded and short</strong>. It is not a wiki: long playbooks live in <code>docs/</code>, and the constitution only references them in a line. Inside it sits the routing table — which slash skill for which size of task. The filename depends on the tool — <code>CLAUDE.md</code>, <code>AGENTS.md</code>, a Cursor rule, <code>GEMINI.md</code> — but the idea is one.</p>
           <div class="note"><div class="tag">Case study</div><p>In the source project <code>CLAUDE.md</code> is ~12 sections, including a build-flavor matrix and PowerShell rituals. The kit keeps the transferable skeleton and drops the project machinery: you fill the <code>&lt;PLACEHOLDER&gt;</code> tokens for your stack.</p></div>
         </div>
       </details>
@@ -590,12 +637,45 @@ doc       script         type change  logic           config/resources  user-vis
       </details>
 
       <details class="sec" id="adopt-en">
-        <summary><span class="secnum" aria-hidden="true">10</span><span class="sechead"><h2 class="sectitle">How to adopt</h2><span class="secteaser">In a minute by prompt, or by canonical kit merge</span></span></summary>
+        <summary><span class="secnum" aria-hidden="true">10</span><span class="sechead"><h2 class="sectitle">How to adopt</h2><span class="secteaser">New or existing project, any tool, any model</span></span></summary>
         <div class="secbody">
-          <p><span class="adopt-step">−1 · The fastest path.</span> Ask your agent, right in your project's chat, to read this page and import the most useful parts — with this prompt:</p>
+          <p>The method is tied to neither a tool nor a model. Three situations below — pick yours.</p>
+
+          <h3>A · A new or near-empty project</h3>
+          <p>First let the agent build a map of the code with its built-in command — <code>/init</code> in Claude Code (or the equivalent in your tool). Then hand it this prompt to stand the project up on the method directly:</p>
           <div class="adopt-prompt">
-            <details open>
-              <summary>Prompt for the agent (English)</summary>
+            <details>
+              <summary>Prompt for a new project (English)</summary>
+              <div class="prompt-actions">
+                <button class="btn" type="button" onclick="copyPrompt(this)" aria-label="Copy prompt">⧉ Copy</button>
+              </div>
+              <pre>This is a fresh or mostly empty repository. First run your codebase-init
+command (/init in Claude Code, or the equivalent in your tool) so you have a
+rules file and a basic map of the project. Then read the Universal Agent Kit
+page at https://serzhyale.github.io/universal-agent-kit/ in full and set this
+project up on its method, from scratch:
+
+1. Write the rules file my tool reads (CLAUDE.md / AGENTS.md / a Cursor rule /
+   GEMINI.md - whatever applies) adopting the kit's structure: communication,
+   research order, skill routing, the spec lifecycle, strict rules, anti-slop,
+   post-change discipline. Fill in what already exists; use sensible defaults
+   otherwise.
+2. Create the skill / command files and the role briefs from the kit that fit a
+   project of this kind.
+3. Set up the plan directory, the scratch directory, and the memory folder with
+   its index.
+4. Pick the build / test / lint / run commands for the stack I name - or propose
+   a stack if none exists yet.
+
+Show me the plan first; create nothing until I approve.</pre>
+            </details>
+          </div>
+
+          <h3>B · An existing project — the quick path</h3>
+          <p><span class="adopt-step">In a minute.</span> Ask your agent, right in the chat, to read this page and import the most useful parts:</p>
+          <div class="adopt-prompt">
+            <details>
+              <summary>Prompt for an existing project (English)</summary>
               <div class="prompt-actions">
                 <button class="btn" type="button" onclick="copyPrompt(this)" aria-label="Copy prompt">⧉ Copy</button>
               </div>
@@ -619,12 +699,26 @@ Then study THIS repository and import what fits it:
 Do not change anything yet. Show me the plan first; on any conflict, my existing files win.</pre>
             </details>
           </div>
-          <p class="muted">This is the quick path: the agent reads the article, not the files, so expect some drift. The canonical, reproducible route is below — download the kit and merge via the prompt file.</p>
+          <p class="muted">Quick, but the agent reads the article, not the files — expect some drift. The canonical, reproducible route is path C.</p>
+
+          <h3>C · An existing project — the canonical path</h3>
           <p>Download the kit, hand your agent the folder together with <code>merge-prompt.txt</code>, and say "Merge the Universal Agent Kit into this repo". The prompt forces the agent to first take an <strong>inventory</strong> (what you already have, what's new, where it conflicts), present a <strong>merge plan</strong>, and stop — yours always wins, nothing is overwritten silently. You approve; it applies and fills <code>&lt;PLACEHOLDER&gt;</code> tokens from your repo.</p>
+
+          <h3>Any tool</h3>
+          <p>Every agent reads its own rules file — the idea is one, only the name differs:</p>
           <ul>
-            <li><strong>Claude Code:</strong> <code>.claude/commands/*</code> immediately become <code>/spec</code>, <code>/research</code>, etc.; <code>.claude/agents/*</code> become selectable subagents.</li>
-            <li><strong>Cursor / Cline / Windsurf / Codex / Aider</strong> (adaptation, not drop-in): the slash commands become saved prompts — the agent reads <code>.claude/commands/&lt;name&gt;.md</code> and follows it; roles paste in as system prompts. The kit's <code>README</code> maps the concrete file path for each tool.</li>
-            <li>The methodology in <code>docs/</code> is largely tool-independent.</li>
+            <li><strong>Claude Code</strong> — <code>CLAUDE.md</code> + <code>.claude/commands/*</code> (ready-made <code>/spec</code>, <code>/research</code>…) + <code>.claude/agents/*</code> as subagents.</li>
+            <li><strong>Cursor</strong> — <code>.cursor/rules</code> (or <code>.cursorrules</code>); the commands become saved prompts.</li>
+            <li><strong>Codex, Gemini CLI / Antigravity, Aider, Cline, Windsurf</strong> — <code>AGENTS.md</code> / <code>GEMINI.md</code> / their own equivalent; roles paste in as system prompts, skills as prompt files you point at.</li>
+            <li>The methodology in <code>docs/</code> doesn't depend on the tool at all — it's just Markdown.</li>
+          </ul>
+
+          <h3>Any model — from strong to weak</h3>
+          <p>The method doesn't depend on the model's power either — what changes is a few knobs, not the method:</p>
+          <ul>
+            <li><strong>Strong</strong> (frontier, large context): holds more in its head. Bigger steps, more autonomy; you keep specs and checks for correctness, not to hold its hand.</li>
+            <li><strong>Regular</strong>: the method's sweet spot — specs, small verifiable steps, and the research order pay off the most.</li>
+            <li><strong>Weak, small, or local</strong>: you lean on the rules hardest — tiny steps, a check after each, short context, less autonomy. The method is what makes a weak model usable at all.</li>
           </ul>
         </div>
       </details>
@@ -673,7 +767,7 @@ Do not change anything yet. Show me the plan first; on any conflict, my existing
         <div class="secbody">
           <p>ШІ-асистент швидкий, але дрейфує. Він вгадує шляхи до файлів, вигадує API, що змінився дві версії тому, пише правдоподібне сміття, яке компілюється і тихо гниє, забуває все між сесіями і або питає дозволу на кожен чих, або мовчки робить не те. По суті — геніальний стажер з амнезією: друкує швидше за тебе, але до обіду вже не пам'ятає, як тебе звати.</p>
           <p>Лікується це не інструментом, а <strong>методом</strong> — маленькою операційною системою поверх асистента: звід правил, ролі, життєвий цикл специфікацій і пам'ять. Вона змушує його <em>спершу досліджувати, потім робити</em>, відокремлювати «що» від «як», планувати перевірюваними кроками, лишатися стислим і чесним та накопичувати знання між сесіями.</p>
-          <p>Ця сторінка показує, як усе зібрано — на прикладі одного реального проєкту, але все уніфіковано й не прив'язано ні до мови, ні до завдань проєкту. Унизу можна завантажити kit і покласти у свій git-репозиторій майже на будь-якому стеку.</p>
+          <p>Ця сторінка показує, як усе зібрано — на прикладі одного реального проєкту, але все уніфіковано й не прив'язано ні до мови, ні до завдань проєкту — і ні до конкретного інструмента чи моделі. Унизу можна завантажити kit і покласти у свій git-репозиторій майже на будь-якому стеку.</p>
 
           <h3>Кому це все</h3>
           <ul>
@@ -708,10 +802,10 @@ Do not change anything yet. Show me the plan first; on any conflict, my existing
       </details>
 
       <details class="sec">
-        <summary><span class="secnum" aria-hidden="true">02</span><span class="sechead"><h2 class="sectitle">Конституція: <code>CLAUDE.md</code></h2><span class="secteaser">Один завжди-завантажений звід правил поверх асистента</span></span></summary>
+        <summary><span class="secnum" aria-hidden="true">02</span><span class="sechead"><h2 class="sectitle">Конституція: завжди-завантажений звід правил</h2><span class="secteaser">Один завжди-завантажений звід правил поверх асистента</span></span></summary>
         <div class="secbody">
           <p>Один файл, який асистент завантажує на початку кожної сесії і який перекриває його поведінку за замовчуванням. Це контракт, на який посилається все інше. Він шаруватий: стиль спілкування, автономія, порядок дослідження, маршрутизація навичок, правила спек, структура та збірка, суворі правила, анти-слоп, пост-чейндж дисципліна.</p>
-          <p>Головна ідея — <strong>завжди завантажений і стислий</strong>. Це не вікі: довгі методички живуть у <code>docs/</code>, а конституція лише посилається на них одним рядком. Усередині ж — таблиця маршрутизації: яка slash-навичка на який розмір задачі.</p>
+          <p>Головна ідея — <strong>завжди завантажений і стислий</strong>. Це не вікі: довгі методички живуть у <code>docs/</code>, а конституція лише посилається на них одним рядком. Усередині ж — таблиця маршрутизації: яка slash-навичка на який розмір задачі. Ім'я файлу залежить від інструмента — <code>CLAUDE.md</code>, <code>AGENTS.md</code>, правило Cursor, <code>GEMINI.md</code>, — але ідея одна.</p>
           <div class="note"><div class="tag">Кейс</div><p>У вихідному проєкті <code>CLAUDE.md</code> — це ~12 розділів, включно з матрицею флейворів і ритуалами PowerShell. Kit лишає переносний каркас і викидає проєктну машинерію: ти заповнюєш <code>&lt;PLACEHOLDER&gt;</code> під свій стек.</p></div>
         </div>
       </details>
@@ -813,12 +907,45 @@ reference  вказівник у зовнішню систему та навіщ
       </details>
 
       <details class="sec" id="adopt-uk">
-        <summary><span class="secnum" aria-hidden="true">10</span><span class="sechead"><h2 class="sectitle">Як впровадити</h2><span class="secteaser">За хвилину промптом або канонічним злиттям kit'а</span></span></summary>
+        <summary><span class="secnum" aria-hidden="true">10</span><span class="sechead"><h2 class="sectitle">Як впровадити</h2><span class="secteaser">Новий чи наявний проєкт, будь-який інструмент, будь-яка модель</span></span></summary>
         <div class="secbody">
-          <p><span class="adopt-step">−1 · Найшвидший шлях.</span> Попроси агента прямо в чаті свого проєкту прочитати цей сайт і імпортувати звідси найкорисніше — ось цим промптом:</p>
+          <p>Метод не прив'язаний ні до інструмента, ні до моделі. Нижче три ситуації — обери свою.</p>
+
+          <h3>A · Новий або майже порожній проєкт</h3>
+          <p>Спершу дай агенту зібрати карту коду його штатною командою — <code>/init</code> у Claude Code (або аналог у твоєму інструменті). Потім віддай цей промпт, щоб він підняв проєкт одразу за методом:</p>
           <div class="adopt-prompt">
-            <details open>
-              <summary>Промпт для агента (англійською)</summary>
+            <details>
+              <summary>Промпт для нового проєкту (англійською)</summary>
+              <div class="prompt-actions">
+                <button class="btn" type="button" onclick="copyPrompt(this)" aria-label="Скопіювати промпт">⧉ Копіювати</button>
+              </div>
+              <pre>This is a fresh or mostly empty repository. First run your codebase-init
+command (/init in Claude Code, or the equivalent in your tool) so you have a
+rules file and a basic map of the project. Then read the Universal Agent Kit
+page at https://serzhyale.github.io/universal-agent-kit/ in full and set this
+project up on its method, from scratch:
+
+1. Write the rules file my tool reads (CLAUDE.md / AGENTS.md / a Cursor rule /
+   GEMINI.md - whatever applies) adopting the kit's structure: communication,
+   research order, skill routing, the spec lifecycle, strict rules, anti-slop,
+   post-change discipline. Fill in what already exists; use sensible defaults
+   otherwise.
+2. Create the skill / command files and the role briefs from the kit that fit a
+   project of this kind.
+3. Set up the plan directory, the scratch directory, and the memory folder with
+   its index.
+4. Pick the build / test / lint / run commands for the stack I name - or propose
+   a stack if none exists yet.
+
+Show me the plan first; create nothing until I approve.</pre>
+            </details>
+          </div>
+
+          <h3>B · Наявний проєкт — швидкий шлях</h3>
+          <p><span class="adopt-step">За хвилину.</span> Попроси агента прямо в чаті прочитати цей сайт і імпортувати найкорисніше:</p>
+          <div class="adopt-prompt">
+            <details>
+              <summary>Промпт для наявного проєкту (англійською)</summary>
               <div class="prompt-actions">
                 <button class="btn" type="button" onclick="copyPrompt(this)" aria-label="Скопіювати промпт">⧉ Копіювати</button>
               </div>
@@ -842,12 +969,26 @@ Then study THIS repository and import what fits it:
 Do not change anything yet. Show me the plan first; on any conflict, my existing files win.</pre>
             </details>
           </div>
-          <p class="muted">Це швидкий шлях: агент читає статтю, а не самі файли, тож можливий дрейф. Канонічний відтворюваний спосіб — нижче: завантажити kit і злити через файл-промпт.</p>
+          <p class="muted">Швидко, але агент читає статтю, а не файли, — можливий дрейф. Канонічний відтворюваний спосіб — шлях C.</p>
+
+          <h3>C · Наявний проєкт — канонічний шлях</h3>
           <p>Завантаж kit, віддай агенту теку разом з <code>merge-prompt.txt</code> і скажи: «Влий Universal Agent Kit у цей репозиторій». Промпт змушує агента спершу зробити <strong>інвентар</strong> (що в тебе вже є, що нове, де конфлікт), показати <strong>план злиття</strong> й зупинитися — твоє завжди головніше, нічого не перезаписується мовчки. Ти підтверджуєш — він застосовує й заповнює <code>&lt;PLACEHOLDER&gt;</code> з твого репозиторію.</p>
+
+          <h3>Будь-який інструмент</h3>
+          <p>Кожен агент читає свій файл правил — суть одна, відрізняється лише ім'я:</p>
           <ul>
-            <li><strong>Claude Code:</strong> <code>.claude/commands/*</code> одразу стають <code>/spec</code>, <code>/research</code> тощо; <code>.claude/agents/*</code> — обираними субагентами.</li>
-            <li><strong>Cursor / Cline / Windsurf / Codex / Aider</strong> (адаптація, не drop-in): slash-команди стають збереженими промптами — агент читає <code>.claude/commands/&lt;name&gt;.md</code> і слідує йому; ролі вставляються як системні промпти. Конкретні шляхи для кожного інструмента — у <code>README</code> kit'а.</li>
-            <li>Методологія в <code>docs/</code> від інструмента майже не залежить.</li>
+            <li><strong>Claude Code</strong> — <code>CLAUDE.md</code> + <code>.claude/commands/*</code> (готові <code>/spec</code>, <code>/research</code>…) + <code>.claude/agents/*</code> як субагенти.</li>
+            <li><strong>Cursor</strong> — <code>.cursor/rules</code> (або <code>.cursorrules</code>); команди стають збереженими промптами.</li>
+            <li><strong>Codex, Gemini CLI / Antigravity, Aider, Cline, Windsurf</strong> — <code>AGENTS.md</code> / <code>GEMINI.md</code> / свій аналог; ролі вставляються як системні промпти, навички — як файли-промпти, на які посилаєшся.</li>
+            <li>Методологія в <code>docs/</code> взагалі не залежить від інструмента — це просто Markdown.</li>
+          </ul>
+
+          <h3>Будь-яка модель — від сильної до слабкої</h3>
+          <p>Метод не залежить і від потужності моделі — змінюється не він, а кілька ручок:</p>
+          <ul>
+            <li><strong>Сильна</strong> (фронтир, великий контекст): тримає більше в голові. Кроки більші, автономії більше; спеки та перевірки лишаєш заради коректності, а не щоб вести за руку.</li>
+            <li><strong>Регулярна</strong>: золота середина методу — спеки, дрібні перевірювані кроки й порядок дослідження окупаються максимально.</li>
+            <li><strong>Слабка, маленька чи локальна</strong>: спираєшся на правила найсильніше — крихітні кроки, перевірка після кожного, короткий контекст, менше автономії. Метод — це те, що взагалі робить слабку модель придатною для роботи.</li>
           </ul>
         </div>
       </details>

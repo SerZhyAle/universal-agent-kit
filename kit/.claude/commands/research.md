@@ -22,22 +22,22 @@ grepping the same things five times mid-implementation.
 
 ## Process
 
-**Step 1 — Anchor the topic.**
+**Step 1 - Anchor the topic.**
 - Use the user's explicit target when given.
 - A token shaped like a ticket id (e.g. `^[A-Z]\d{4}$`) → ticket-bound run: findings will
   be persisted (Step 5). The rest of the text is the topic.
 - Infer the affected area/module from the request and the currently open file.
 
-**Step 2 — Build a dossier first** (before broad reading). Write a Markdown scratch file to
+**Step 2 - Build a dossier first** (before broad reading). Write a Markdown scratch file to
 `<SCRATCH_DIR>/research_<topic-slug>.md` collecting, from a *quick* sweep:
 - the most relevant docs to read first;
 - the files/symbols that match the topic (one grep/code-index pass, not exhaustive);
 - existing specs/plans touching the area;
 - a short list of suggested next reads.
 
-This is scratch — it is allowed to be rough. Its job is to stop repeated global greps.
+This is scratch - it is allowed to be rough. Its job is to stop repeated global greps.
 
-**Step 3 — Follow the routing stack in order** (unless the dossier shows a tighter first
+**Step 3 - Follow the routing stack in order** (unless the dossier shows a tighter first
 read):
 1. Repo map / index doc.
 2. Architecture doc.
@@ -45,14 +45,14 @@ read):
 4. Dependency / stack doc.
 5. Your code index or `<PLAN_DIR>/` for prior decisions.
 
-**Step 4 — Drill into implementation files.**
+**Step 4 - Drill into implementation files.**
 - The smallest set of follow-up reads that answers the question.
 - Use the dossier to avoid re-grepping.
 - Keep cross-surface questions grounded in the dossier sections.
 
-**Step 5 — Persist findings (ticket-bound runs only).**
-- Write curated findings — conclusions, chosen option, rejected options *with reasons*,
-  affected areas — to `<PLAN_DIR>/<ID>_<slug>/research/<NN>__<topic-slug>.md`. Create the
+**Step 5 - Persist findings (ticket-bound runs only).**
+- Write curated findings - conclusions, chosen option, rejected options *with reasons*,
+  affected areas - to `<PLAN_DIR>/<ID>_<slug>/research/<NN>__<topic-slug>.md`. Create the
   folder if missing.
 - The scratch dossier stays scratch; the artifact is the durable result a tactical plan
   will consume. Raw grep dumps stay out of it.
@@ -63,4 +63,4 @@ read):
 - Ticket-bound: report the artifact path under `<PLAN_DIR>/`.
 - List the next 3–6 high-value reads.
 - Answer the direct question after the dossier-backed reads.
-- If a section had no matches, say so and continue — absence is a finding.
+- If a section had no matches, say so and continue - absence is a finding.

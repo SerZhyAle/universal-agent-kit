@@ -3,10 +3,10 @@
 A portable set of **rules, skills (slash commands), and agents** for an AI coding assistant.
 Built for **Claude Code**, and adaptable to other promptable agents (see the mapping below).
 Distilled from a real, mature Android project, then stripped of everything project-specific so it
-carries over to most **git-backed software repos** — web, backend, mobile, CLI, library, infra —
+carries over to most **git-backed software repos** - web, backend, mobile, CLI, library, infra -
 regardless of language.
 
-The value here is not the tooling — it is the **working method**: research before you act,
+The value here is not the tooling - it is the **working method**: research before you act,
 split *what/why* from *how*, plan in verifiable phases, keep autonomy high and bureaucracy
 low, and keep the assistant terse and honest.
 
@@ -48,6 +48,8 @@ universal-agent-kit/
     AGENT_MEMORY.md         <- persistent memory that survives across sessions
     RESEARCH_INDEX.md       <- research order + the queryable code index
     VALIDATION.md           <- the validation ladder: "done" means evidence
+    REPLACES.md             <- placeholder replacements reference (EN)
+    REPLACES_RU.md          <- placeholder replacements reference (RU)
   memory/
     MEMORY.md               <- the always-loaded memory index (template)
     examples/               <- one sample entry per memory type
@@ -76,10 +78,10 @@ Hand this whole folder to your coding agent and say something like:
 2. Copy `.claude/agents/*` into your repo's `.claude/agents/`. They become selectable
    subagents.
 3. Merge `CLAUDE.md` into your repo root (or `.claude/CLAUDE.md`). Fill the placeholders.
-4. Optionally merge `.claude/settings.json` (review permissions first — see below).
+4. Optionally merge `.claude/settings.json` (review permissions first - see below).
 5. Copy the `docs/*` files (`SPEC_LIFECYCLE`, `CODE_QUALITY`, `AGENT_MEMORY`, `RESEARCH_INDEX`,
-   `VALIDATION`) wherever your docs live; reference them from `CLAUDE.md`.
-6. Optionally copy `memory/` — the index template and one sample entry per type — if your
+   `VALIDATION`, `REPLACES`, `REPLACES_RU`) wherever your docs live; reference them from `CLAUDE.md`.
+6. Optionally copy `memory/` - the index template and one sample entry per type - if your
    runtime supports persistent agent memory.
 
 ### For other agents (adaptation, not drop-in)
@@ -87,7 +89,7 @@ Hand this whole folder to your coding agent and say something like:
 Only Claude Code reads `.claude/` and `/slash` commands natively. Elsewhere the kit is an
 *adaptation*: the rules become your tool's rules file, each skill becomes a saved prompt you paste
 or trigger, and the agents become custom modes / system prompts. The `docs/` methodology is
-tool-independent as-is. Concrete homes (conventions evolve — check your tool's current docs):
+tool-independent as-is. Concrete homes (conventions evolve - check your tool's current docs):
 
 | Tool | `CLAUDE.md` → | Skills (`.claude/commands/*`) → | Agents (`.claude/agents/*`) → |
 | --- | --- | --- | --- |
@@ -95,7 +97,7 @@ tool-independent as-is. Concrete homes (conventions evolve — check your tool's
 | Cursor | `.cursor/rules/*.mdc` | saved prompts / Cursor commands | custom modes |
 | Cline | `.clinerules` (file or dir) | prompt snippets | mode presets |
 | Windsurf | `.windsurf/rules/` (or `.windsurfrules`) | saved prompts | Cascade presets |
-| Aider | `CONVENTIONS.md` (loaded via `--read`) | prompt files / aliases | single agent — fold into rules |
+| Aider | `CONVENTIONS.md` (loaded via `--read`) | prompt files / aliases | single agent - fold into rules |
 
 The mental model carries even where the file layout does not: one always-loaded rules file, a set
 of named procedures you invoke, and a few role briefs.
@@ -107,23 +109,23 @@ of named procedures you invoke, and a few role briefs.
 `CLAUDE.md`, the skills, and the agents use `<PLACEHOLDER>` tokens. This is the complete set of
 config placeholders to fill once for your repo:
 
-- `<PROJECT_NAME>` — your project's name.
-- `<CHAT_LANGUAGE>` — the language the assistant talks to you in. Code, docs, logs, and commits
+- `<PROJECT_NAME>` - your project's name.
+- `<CHAT_LANGUAGE>` - the language the assistant talks to you in. Code, docs, logs, and commits
   stay **English** regardless (recommended).
-- `<INDEX_DOC>` — the repo map/overview the agent reads first (e.g. `README.md`, `ARCHITECTURE.md`).
-- `<SRC_ROOT>` — main source directory.
-- `<ARCH_LAYERS>` — your architecture/dependency rule, e.g. `UI -> ViewModel -> UseCase -> Repo`,
+- `<INDEX_DOC>` - the repo map/overview the agent reads first (e.g. `README.md`, `ARCHITECTURE.md`).
+- `<SRC_ROOT>` - main source directory.
+- `<ARCH_LAYERS>` - your architecture/dependency rule, e.g. `UI -> ViewModel -> UseCase -> Repo`,
   `route -> handler -> service -> store`, or `n/a`.
-- `<BUILD_CMD>` / `<TEST_CMD>` / `<LINT_CMD>` / `<RUN_CMD>` — how your project builds, tests,
+- `<BUILD_CMD>` / `<TEST_CMD>` / `<LINT_CMD>` / `<RUN_CMD>` - how your project builds, tests,
   lints, runs.
-- `<LOGGER>` — your logging facade (or `n/a`).
-- `<PLAN_DIR>` — where spec/plan files live (default `PLAN/`).
-- `<SCRATCH_DIR>` — throwaway artifacts and backups, git-ignored (default `tmp/`).
-- `<MAX_LOC>` — the file-size budget past which you extract a helper (e.g. `~500`).
-- `<READONLY_ZONES>` — paths the agent must never modify (vendored/generated code), or `none`.
-- `<ID>` — the ticket id scheme (e.g. `T0042`, `JIRA-123`, a date-slug).
+- `<LOGGER>` - your logging facade (or `n/a`).
+- `<PLAN_DIR>` - where spec/plan files live (default `PLAN/`).
+- `<SCRATCH_DIR>` - throwaway artifacts and backups, git-ignored (default `tmp/`).
+- `<MAX_LOC>` - the file-size budget past which you extract a helper (e.g. `~500`).
+- `<READONLY_ZONES>` - paths the agent must never modify (vendored/generated code), or `none`.
+- `<ID>` - the ticket id scheme (e.g. `T0042`, `JIRA-123`, a date-slug).
 
-Template tokens like `<slug>`, `<NN>`, `<TODO>`, `<symbol>`, and `<path>` are *not* config — they
+Template tokens like `<slug>`, `<NN>`, `<TODO>`, `<symbol>`, and `<path>` are *not* config - they
 are filled per ticket as you use the skills. A good first move: ask your agent to grep the kit for
 `<` + `>` tokens and propose values from the actual repo.
 
@@ -137,7 +139,7 @@ are filled per ticket as you use the skills. A good first move: ask your agent t
    `/spec-tech` turns it into a *phased, verifiable plan*. This split is the single most
    valuable idea in the kit.
 3. **Plan in verifiable phases.** Every step ends in a static check (file exists, symbol
-   present, command exits 0) — never "works correctly". Order phases so no phase consumes
+   present, command exits 0) - never "works correctly". Order phases so no phase consumes
    something a later phase produces.
 4. **Execute one step at a time** (`/spec-dev`). Run each step's check before marking it
    done. Hard-stop on ambiguity instead of guessing.
@@ -160,7 +162,7 @@ See `docs/SPEC_LIFECYCLE.md` for the full status flow.
 
 `.claude/settings.json` (Claude Code only) grants read/glob/grep plus edit/write and `git`, with
 `defaultMode: acceptEdits`, so the agent can work without constant prompts. It does **not**
-pre-approve your build/test/run commands — those are listed as commented examples; add the ones
+pre-approve your build/test/run commands - those are listed as commented examples; add the ones
 you trust (e.g. `Bash(npm run *)`) for your stack. **Review it before adopting** and tighten
 `allow` to your comfort level; the kit works fine under stricter permissions, you will just get
 more confirmation prompts.
@@ -171,5 +173,5 @@ more confirmation prompts.
 
 Adapted from the FastMediaSorter Android project's `.claude/` setup. Android-, PowerShell-,
 and Russian-locale-specific machinery was removed; the transferable methodology was kept
-and rewritten to be stack-neutral. No source code or proprietary content is included —
+and rewritten to be stack-neutral. No source code or proprietary content is included -
 only the working method.

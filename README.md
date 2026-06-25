@@ -30,7 +30,7 @@ kit/                        the kit source, browsable here
   .claude/commands/*        slash-command skills (/spec, /spec-tech, /spec-dev, /spec-check,
                             /spec-all, /research, /quick, /fix, /git, /verify, /ui-clarify, ..)
   .claude/agents/*          role briefs (rd-lead, solution-researcher, implementer, doc-writer)
-  docs/                     SPEC_LIFECYCLE · CODE_QUALITY · AGENT_MEMORY · RESEARCH_INDEX · VALIDATION
+  docs/                     SPEC_LIFECYCLE · CODE_QUALITY · AGENT_MEMORY · RESEARCH_INDEX · VALIDATION · REPLACES · REPLACES_RU
   memory/                   memory index template + one sample entry per type
 ```
 
@@ -71,7 +71,7 @@ kit/                        исходник kit, можно листать пр
   .claude/commands/*        навыки-команды (/spec, /spec-tech, /spec-dev, /spec-check,
                             /spec-all, /research, /quick, /fix, /git, /verify, /ui-clarify, ..)
   .claude/agents/*          роль-брифы (rd-lead, solution-researcher, implementer, doc-writer)
-  docs/                     SPEC_LIFECYCLE · CODE_QUALITY · AGENT_MEMORY · RESEARCH_INDEX · VALIDATION
+  docs/                     SPEC_LIFECYCLE · CODE_QUALITY · AGENT_MEMORY · RESEARCH_INDEX · VALIDATION · REPLACES · REPLACES_RU
   memory/                   шаблон индекса памяти + по примеру на каждый тип записи
 ```
 

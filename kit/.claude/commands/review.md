@@ -14,33 +14,33 @@ use `/caveman-review`; this skill is the fuller pass.
 /review [optional: file, diff, PR, or topic]
 ```
 
-- `/review` — review the current diff
-- `/review src/payments/` — scope to a path
-- `/review correctness only` — restrict the dimensions
+- `/review` - review the current diff
+- `/review src/payments/` - scope to a path
+- `/review correctness only` - restrict the dimensions
 
 ## What to check (in order)
 
-1. **Correctness** — logic bugs, off-by-one, wrong conditionals, races, null/None handling,
+1. **Correctness** - logic bugs, off-by-one, wrong conditionals, races, null/None handling,
    error paths, resource leaks, broken invariants.
-2. **Security & data safety** — injection, unvalidated input, secrets in code, unsafe
+2. **Security & data safety** - injection, unvalidated input, secrets in code, unsafe
    deserialization, destructive ops without guards, migration safety.
-3. **Architecture** — dependency direction respected (`<ARCH_LAYERS>`); entry points stay
+3. **Architecture** - dependency direction respected (`<ARCH_LAYERS>`); entry points stay
    thin; logic lives in the right layer; no cross-layer leakage.
-4. **Tests** — does the change have coverage for the new path and its failure modes? Flag
+4. **Tests** - does the change have coverage for the new path and its failure modes? Flag
    missing/weak assertions.
-5. **Anti-slop** (`docs/CODE_QUALITY.md`) — trivial comments, empty/broad catches,
+5. **Anti-slop** (`docs/CODE_QUALITY.md`) - trivial comments, empty/broad catches,
    hardcoded values where a token exists, lifecycle-unsafe async, non-facade logging,
    shipped stubs, dead weight left behind.
-6. **Clarity** — naming, dead code, comment quality (why not what), file-size budget.
+6. **Clarity** - naming, dead code, comment quality (why not what), file-size budget.
 
 ## Process
 
-1. Identify the changed surface. Read the diff and enough surrounding code to judge it —
+1. Identify the changed surface. Read the diff and enough surrounding code to judge it -
    do not review lines in isolation.
 2. Verify claims against the code; never invent a line number or symbol.
 3. For each finding emit: `severity` · `file:line` · the problem · a concrete fix.
    Severities: `bug` > `risk` > `arch` > `test` > `nit` > `q`.
-4. Confirm or refute your own high-severity findings before reporting them — a plausible
+4. Confirm or refute your own high-severity findings before reporting them - a plausible
    bug that does not actually reproduce is noise.
 5. If you find nothing material, say so and name the residual risks (untested path,
    uncovered edge case) rather than padding.

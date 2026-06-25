@@ -43,19 +43,19 @@ passes:
 
 ## Process
 
-**Step 1 — Read context.** The request/spec; the relevant views/handlers/templates/strings;
+**Step 1 - Read context.** The request/spec; the relevant views/handlers/templates/strings;
 the architecture doc if canonical patterns are affected; the copy/tone policy if wording is
 affected.
 
-**Step 2 — Build the ambiguity list.** Separate explicit decisions from implicit
+**Step 2 - Build the ambiguity list.** Separate explicit decisions from implicit
 assumptions. Mark every unresolved item as blocking.
 
-**Step 3 — Ask or propose.** Ask only the questions needed to unblock. Where a choice can be
+**Step 3 - Ask or propose.** Ask only the questions needed to unblock. Where a choice can be
 delegated, present 2–3 concrete options with trade-offs rather than an open question.
 
-**Step 4 — Produce one outcome.**
+**Step 4 - Produce one outcome.**
 
-### Outcome A — BLOCKED
+### Outcome A - BLOCKED
 
 ```markdown
 ## Clarification Status
@@ -72,7 +72,7 @@ Status: BLOCKED
 <1-3 sentences>
 ```
 
-### Outcome B — READY
+### Outcome B - READY
 
 ```markdown
 ## Clarification Status

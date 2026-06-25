@@ -21,30 +21,30 @@ Follows the canonical gate table in `docs/SPEC_LIFECYCLE.md`.
 
 ## Process
 
-**1 — Read the audit.** Open `<PLAN_DIR>/<ID>_<slug>.md`, read the `## Last Audit` block. If it
+**1 - Read the audit.** Open `<PLAN_DIR>/<ID>_<slug>.md`, read the `## Last Audit` block. If it
 is missing or stale (no prior `/spec-check` this cycle), abort and ask to run `/spec-check`.
 
-**2 — Classify each action item.**
-- **Mechanical** — deterministic, fully specified by the item: a missing changelog entry, a
+**2 - Classify each action item.**
+- **Mechanical** - deterministic, fully specified by the item: a missing changelog entry, a
   stale `<ID>:` verification tag to delete, a dead-weight remnant the change should have removed,
   a user-doc keyword the spec mandates but is absent, a renamed/missing symbol the item names
   exactly, a keep-rule for a deleted symbol.
-- **Needs a decision** — anything requiring a design choice, a new name, a schema/DI shape, or
+- **Needs a decision** - anything requiring a design choice, a new name, a schema/DI shape, or
   user input. These are **not** fixed here.
 
-**3 — Apply mechanical fixes**, one per action item, with `/spec-dev`'s edit discipline: scope
+**3 - Apply mechanical fixes**, one per action item, with `/spec-dev`'s edit discipline: scope
 strictly to the item, no surrounding refactor, no invented names, anti-slop applies
 (`docs/CODE_QUALITY.md`). Run each item's check (file exists / symbol present / keyword greps /
 zero forbidden hits) before considering it closed.
 
-**4 — Leave the rest.** List every "needs a decision" item verbatim and stop short of guessing.
+**4 - Leave the rest.** List every "needs a decision" item verbatim and stop short of guessing.
 If an item blocks all progress, set `BlockQuestions` with a one-line note.
 
-**5 — Re-audit.** Auto-chain to `/spec-check <ID>` so the status is recomputed from reality —
+**5 - Re-audit.** Auto-chain to `/spec-check <ID>` so the status is recomputed from reality -
 never set `Verified` from this skill. The re-audit decides the new status and removes any
 verification tags on a flip out of `BlockNeedUserTest`.
 
-**Chat output:** `<ID>: fixed N/M action items. Left for you: [decision items]. -> Running /spec-check…`
+**Chat output:** `<ID>: fixed N/M action items. Left for you: [decision items]. -> Running /spec-check..`
 
 ## Hard stops
 

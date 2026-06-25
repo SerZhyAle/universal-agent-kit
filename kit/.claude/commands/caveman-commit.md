@@ -2,7 +2,7 @@
 
 > **LOCAL DIRECTIVES:**
 > 1. Commit messages in English.
-> 2. `..` (two dots) — never `...`.
+> 2. `..` (two dots) - never `...`.
 > 3. Generate the message only. Do NOT run `git commit`, stage files, or amend history.
 > 4. For breaking changes, security fixes, data migrations, or reverts, include enough
 >    context even if it costs more words.
@@ -15,8 +15,8 @@ Generate a terse Conventional Commit message with minimal noise and exact intent
 /caveman-commit [optional: context]
 ```
 
-- `/caveman-commit` — infer from the current diff if available
-- `/caveman-commit fix retry on network thumbnail` — generate from explicit context
+- `/caveman-commit` - infer from the current diff if available
+- `/caveman-commit fix retry on network thumbnail` - generate from explicit context
 
 ## Process
 

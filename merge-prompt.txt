@@ -16,6 +16,8 @@ INPUTS
     docs/AGENT_MEMORY.md           persistent memory discipline (four entry types)
     docs/RESEARCH_INDEX.md         research order + the queryable code index
     docs/VALIDATION.md             the validation ladder
+    docs/REPLACES.md               placeholder replacements reference (EN)
+    docs/REPLACES_RU.md            placeholder replacements reference (RU)
     memory/                        memory index template + one sample entry per type
     README.md                      import guide + manifest
 - Mine: my existing CLAUDE.md, .claude/, settings, conventions, and codebase.

@@ -1,6 +1,6 @@
 ---
 name: issue-tracker
-description: Pipeline bugs are tracked in the "INGEST" tracker project — check it for ticket context
+description: Pipeline bugs are tracked in the "INGEST" tracker project - check it for ticket context
 type: reference
 ---
 

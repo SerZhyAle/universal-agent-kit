@@ -15,7 +15,7 @@ Git workflow: branching, staging, grouping changes into clean commits, inspectin
 /git [optional question or action]
 ```
 
-- `/git` — full reference
+- `/git` - full reference
 - `/git what should I commit now?`
 - `/git analyze current changes and suggest commit groups`
 - `/git show me the old version of <file>`
@@ -25,8 +25,8 @@ Git workflow: branching, staging, grouping changes into clean commits, inspectin
 On `$ARGUMENTS`:
 - **Empty** → output the reference below.
 - **"Analyze changes"** →
-  1. `git status` — all modified + untracked.
-  2. `git branch --show-current` — confirm the active branch.
+  1. `git status` - all modified + untracked.
+  2. `git branch --show-current` - confirm the active branch.
   3. Group files by feature/concern.
   4. Identify files that should NOT be committed (see exclusion list).
   5. Suggest 2–4 logical commit groups + proposed messages.
@@ -35,15 +35,15 @@ On `$ARGUMENTS`:
 
 ## Branching Model (adapt to your team)
 
-A simple, robust default — replace with your team's flow if you have one:
+A simple, robust default - replace with your team's flow if you have one:
 
-- **`main`** — release-stable. No direct development. Receives merges from work branches
+- **`main`** - release-stable. No direct development. Receives merges from work branches
   and release-only fixes.
-- **work branches** (`feat/<x>`, `fix/<x>`, or sequential `dev-vNNN`) — all development.
-- Before any task: `git branch --show-current` — confirm you are where you expect.
+- **work branches** (`feat/<x>`, `fix/<x>`, or sequential `dev-vNNN`) - all development.
+- Before any task: `git branch --show-current` - confirm you are where you expect.
 - Keep the number of live work branches small.
 
-> Many teams use trunk-based development or GitFlow instead. The kit does not impose one —
+> Many teams use trunk-based development or GitFlow instead. The kit does not impose one -
 > it only insists you know which branch you are on before you commit.
 
 ## Daily flow
@@ -103,7 +103,7 @@ git show <hash>:path/to/file     # file as it was at a commit
 git log --oneline -- path/to/file
 git blame path/to/file
 git diff <hash1>..<hash2> -- path/to/file
-git checkout <hash> -- path/to/file   # restore one file (overwrites working copy — careful)
+git checkout <hash> -- path/to/file   # restore one file (overwrites working copy - careful)
 ```
 
 ## What NOT to commit
@@ -116,8 +116,20 @@ doubt, check `.gitignore` and ask before adding a binary or a config file.
 
 Split unrelated work into logical commits:
 
-- **Feature** — the source change + its spec/plan file.
-- **Docs & changelog** — user docs, dev log, changelog.
-- **Infra** — build config, dependencies, settings.
+- **Feature** - the source change + its spec/plan file.
+- **Docs & changelog** - user docs, dev log, changelog.
+- **Infra** - build config, dependencies, settings.
 
 One concern per commit; one commit message that explains the *why* when it is not obvious.
+
+## Release hygiene (if you ship)
+
+Three invariants survive any branching flow:
+
+- **Pin the version once.** Compute the version identifier a single time and stamp it into
+  every artifact - tag, release notes, build output - so they cannot drift apart. Version
+  skew between the notes and the binary is a classic release-day failure.
+- **Curate the notes.** Derive release notes from a maintained list of user-visible changes,
+  not the raw commit log - commit subjects are unreliable narrators.
+- **Ship one fix without the rest.** Provide a single-ticket release path that cherry-picks
+  only that ticket's commits, so shipping one hotfix never drags along unrelated in-flight work.

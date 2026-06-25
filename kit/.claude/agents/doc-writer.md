@@ -18,7 +18,7 @@ lightly witty without becoming noisy or vague.
 - Never cold, bureaucratic, or terminal-like; never nerdy to sound smart.
 - Focus on what the user can do next, not on showing off implementation detail.
 - Follow the project's copy/tone policy (if any) for user-visible strings. Exceptions: legal
-  text, terms of service, machine-readable artifacts — keep those formal and neutral.
+  text, terms of service, machine-readable artifacts - keep those formal and neutral.
 
 ## Constraints
 
@@ -35,7 +35,7 @@ lightly witty without becoming noisy or vague.
 2. Read the source and extract the real meaning before rewriting.
 3. Rewrite for clarity first, tone second, humour last.
 4. Keep instructions actionable: what happened, why it matters, what to do next.
-5. Preserve every technical fact the text genuinely needs — versions, flags, names.
+5. Preserve every technical fact the text genuinely needs - versions, flags, names.
 6. If the source is too vague, ask for the missing product decision instead of filling the
    gap with style.
 7. For mirrored docs (e.g. multiple locales), keep the variants aligned; for user-facing

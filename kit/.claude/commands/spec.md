@@ -17,8 +17,10 @@ input (empty, or a single content-free token like `?`/`help`) - print a short us
 and stop. Do not ask the user to pick between candidate slugs; choose one deterministically
 and confirm it in the output.
 
-Output file: `<PLAN_DIR>/<ID>_<slug>.md`. Allocate `<ID>` by scanning `<PLAN_DIR>/` for the
-highest existing id and incrementing (e.g. `T0041` → `T0042`). The tactical folder
+Output file: `<PLAN_DIR>/<ID>_<slug>.md`. Allocate `<ID>` with **this repo's id scheme**
+(`docs/SPEC_LIFECYCLE.md` "Adapting it"): a numeric scheme scans `<PLAN_DIR>/` for the highest
+existing id and increments (e.g. `T0041` → `T0042`); an external-tracker (`JIRA-123`) or
+date-slug scheme allocates the id that way instead. The tactical folder
 `<PLAN_DIR>/<ID>_<slug>/` is created later by `/spec-tech`.
 
 ## Process
@@ -56,9 +58,11 @@ capability.
 **If ANY criterion fails → COMPLEX path:** continue.
 
 **3 - Determine tier.** A rough size label for triage: `Quick Win` · `Easy` · `Moderate` ·
-`Strategic` · `Security/Compliance (urgent)`.
+`Strategic` · `Security/Compliance (urgent)`. Tier is a human-facing triage hint only - no skill
+gates on it (`/backlog` selects by `Priority`), so keep it approximate.
 
-**4 - Allocate the id** before any file write (scan `<PLAN_DIR>/`, increment).
+**4 - Allocate the id** before any file write (per the repo's id scheme - scan-and-increment
+for a numeric scheme; otherwise follow that scheme).
 
 **5 - Write the strategic file** using the template below.
 
@@ -74,7 +78,7 @@ slug or the §1/§3.2 text, for example:
 - any tag matched → also **Validation level** and **Owner sign-off**
 
 **6 - Approve.** Flip `Status: Draft → Approved` in the file. (The style gate - lists over
-tables, `..` not `...`, one idea per bullet - is enforced *here*, at approval, not while
+tables, one idea per bullet, no section summaries - is enforced *here*, at approval, not while
 drafting. A Draft may stay rough.)
 
 **7 - Auto-chain to `/spec-tech`.** Immediately invoke `/spec-tech <ID>` unless a §6
@@ -85,19 +89,12 @@ ask whether to proceed.
 
 ## Status lifecycle
 
-The gate table - which status each skill requires and produces, and where the pipeline pauses - is
-defined once in `docs/SPEC_LIFECYCLE.md`. This skill's row: requires none (allocates an id),
-produces `Approved`, auto-chains to `/spec-tech`. The flow:
-
-`Draft -> Approved -> Tactical -> In Progress -> Implemented -> Verified` (or `Partial` /
-`Broken` from an audit). Block states, set explicitly:
-- `BlockByOtherTask` - depends on another ticket (record it in §10).
-- `BlockNeedUserTest` - implementation done, awaiting hands-on verification.
-- `BlockQuestions` - awaiting user clarification.
-- `BlockExternal` - waiting on a library release, hardware, or third party.
-
-Every transition **into** a `Block*` status records a one-line note: what must be tested, or
-what the blocker is and what resolves it.
+The gate table - which status each skill requires and produces, the full flow, and every block
+state - is defined once in `docs/SPEC_LIFECYCLE.md`; this skill does not restate it. This skill's
+row: requires none (allocates an id), produces `Approved` (or `Implemented` / `BlockNeedUserTest`
+for a primitive), auto-chains to `/spec-tech` for a complex spec. When `/spec` records a
+dependency it sets `BlockByOtherTask` in §10; every transition into a `Block*` status carries a
+one-line note - what must be tested, or what the blocker is and what resolves it.
 
 ## Template
 

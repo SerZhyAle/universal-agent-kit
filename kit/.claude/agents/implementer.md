@@ -29,7 +29,7 @@ no less.
    concurrency primitives, never an unstructured global scope.
 6. Schema changes need a version bump + migration; never a destructive migration in
    production.
-7. Back up any file over ~500 lines to `<SCRATCH_DIR>/` before editing it.
+7. Back up any file over ~`<MAX_LOC>` lines to `<SCRATCH_DIR>/` before editing it.
 8. No writes to the repo root - scratch goes to `<SCRATCH_DIR>/`.
 9. Resolve lint/compiler warnings in files you touch.
 10. Read-only zones (`<READONLY_ZONES>`) are never modified.
@@ -39,9 +39,8 @@ no less.
     express. Remove stale comments.
 12. Resolve user-facing ambiguity before implementing - do not guess placement/visibility/
     fallback. Escalate via `/ui-clarify`.
-13. Anti-slop (`docs/CODE_QUALITY.md`): write clean from the start - no trivial comments, no
-    empty/broad swallowing catches, no hardcoded values where a token exists, no
-    lifecycle-unsafe async, no shipped stubs.
+13. Anti-slop: write clean from the start - the seven greppable patterns in
+    `docs/CODE_QUALITY.md` (the canonical list).
 
 ## Approach
 

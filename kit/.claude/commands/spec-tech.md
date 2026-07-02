@@ -142,7 +142,7 @@ unchecked.>
 ## Completion gate
 - [ ] All phases ✅ Done.
 - [ ] User-facing docs updated only if strategic §8 mandates it.
-- [ ] Changelog has an entry per modified file.
+- [ ] Changelog has one entry for this change, listing every modified file.
 - [ ] `/spec-check <ID>` returns Verified.
 
 ## How to track progress
@@ -178,11 +178,11 @@ unchecked.>
 ## Files touched
 | File | New / Modified | Line budget |
 |------|:--------------:|------------:|
-| `<SRC_ROOT>/<path>/<File>` | New | ≤ 250 |
-| `<SRC_ROOT>/<path>/<Existing>` | Modified | ≤ 500 |
+| `<SRC_ROOT>/<path>/<File>` | New | ≤ <MAX_LOC> |
+| `<SRC_ROOT>/<path>/<Existing>` | Modified | ≤ <MAX_LOC> |
 
-> Backup any file over ~500 lines before editing; split anything heading past your file-size
-> budget via a helper/extraction step.
+> Backup any file over ~`<MAX_LOC>` lines before editing; split anything heading past your
+> file-size budget via a helper/extraction step.
 
 ## Steps
 
@@ -215,7 +215,7 @@ unchecked.>
       `docs/VALIDATION.md` (a compile / type-check, a targeted test, or `<BUILD_CMD>` only when
       this phase touches packaging, resources, or wiring). Name the actual command here.
 - [ ] Grep for `TODO(phase-<NN>)` returns zero hits.
-- [ ] Changelog entry added for every file in "Files touched".
+- [ ] Changelog has one entry for this phase's change, listing every file in "Files touched".
 
 ## Handoff notes
 <Invariants this phase established. Final phase → "See INDEX.md Completion gate.">
@@ -229,7 +229,7 @@ unchecked.>
 - One step = one atomic, independently committable unit that does not break the build.
 - Every Verification must be static (file exists / symbol present / value equality) - never
   "works correctly".
-- File > ~500 lines after edit → backup step required. Heading past the size budget →
+- File > ~`<MAX_LOC>` lines after edit → backup step required. Heading past the size budget →
   refuse; split first.
 - The final phase is always the docs-cleanup phase.
 - Do not duplicate strategic content - tactical says *what*, not *why*.

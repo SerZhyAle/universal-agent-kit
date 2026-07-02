@@ -43,8 +43,8 @@ are ticked - if any unchecked, abort with the blocker text.
    exists at the stated path, else abort: "Prompt references `<symbol>` at `<path>`, not found."
 4. **Ambiguity check.** Any unresolved placeholder (`<TODO>`, `<choose ..>`, `???`) → abort,
    request a spec update. If it needs user input, set `BlockQuestions` and stop.
-5. **Pre-edit guards:** read-only zone → abort; file over ~500 lines and not yet backed up →
-   back up to `<SCRATCH_DIR>/` first; projected size past the budget → abort and split;
+5. **Pre-edit guards:** read-only zone → abort; file over ~`<MAX_LOC>` lines and not yet backed
+   up → back up to `<SCRATCH_DIR>/` first; projected size past the budget → abort and split;
    multiple form-factor variants → confirm the step covers the counterpart.
 6. **Flip the step to `[~] in progress`.**
 7. **Apply the edit.** Scope strictly to the prompt: no surrounding refactor, no extra
@@ -73,8 +73,8 @@ After all phases:
   FAIL → abort the status flip, leave `In Progress`, log the failure.
 - **No manual-test gate** → flip strategic `Status:` to `Implemented`, add the date. No tags.
 - **Manual test is part of acceptance** → tags already inserted; flip status to
-  `BlockNeedUserTest` with a note describing what to verify. Add a changelog line per tagged
-  file.
+  `BlockNeedUserTest` with a note describing what to verify. Add one changelog entry for this
+  change, listing every tagged file.
 - User-facing doc updates run **after** the build, never trigger a rebuild.
 - **Auto-chain to `/spec-check`** unless the status went to `BlockNeedUserTest` (then stop
   and await the manual result, or run `/verify` if a target is available).

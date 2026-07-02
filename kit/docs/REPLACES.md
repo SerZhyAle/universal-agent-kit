@@ -10,12 +10,12 @@ These tokens must be replaced once during the initial setup/merge of the kit int
 
 | Placeholder Token | Description | Frontend / Node.js | Backend (Go / Python) | Mobile (Kotlin / Swift) | Systems (Rust / C++) |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| `<PROJECT_NAME>` | Name of your repository/project. | `my-web-app` | `user-service` | `FastMediaSorter` | `game-engine` |
+| `<PROJECT_NAME>` | Name of your repository/project. | `my-web-app` | `user-service` | `photo-gallery` | `game-engine` |
 | `<CHAT_LANGUAGE>` | Language the agent speaks to you. | `English` / `Russian` | `English` | `Russian` | `English` |
 | `<INDEX_DOC>` | Project entry point / map file. | `README.md` | `docs/ARCH.md` | `README.md` | `README.md` |
 | `<PLAN_DIR>` | Folder where spec/plan files live. | `PLAN` | `docs/plans` | `PLAN` | `PLAN` |
-| `<SCRATCH_DIR>` | Git-ignored directory for temp files. | `tmp` | `.scratch` | `build/tmp` | `target/tmp` |
-| `<ID>` | Ticket ID format / pattern. | `TNNNN` (e.g. `T0042`) | `JIRA-NNN` | `FMS-NNN` | `TNNNN` |
+| `<SCRATCH_DIR>` | Git-ignored directory for temp files. | `tmp` | `.scratch` | `.scratch` | `.scratch` |
+| `<ID>` | Ticket ID format / pattern. | `TNNNN` (e.g. `T0042`) | `JIRA-NNN` | `PG-NNN` | `TNNNN` |
 | `<LOGGER>` | Logging call/facade name. | `logger.info` | `logging.info` / `log.Printf` | `Log.d` / `os_log` | `log::info!` |
 | `<SRC_ROOT>` | Main source code directory. | `src` | `src` / `.` (root) | `app/src/main/java` | `src` |
 | `<ARCH_LAYERS>` | Dependency direction rules. | `page -> widget -> api` | `handler -> service -> repo` | `UI -> VM -> Repo` | `mod -> impl -> core` |
@@ -56,7 +56,7 @@ The ticket ID prefix formatting pattern. The kit groups work by tickets (e.g., s
 
 ### `<LOGGER>`
 The project's logging utility. The anti-slop rules forbid raw console logging or prints in production code. Any debug logs must go through this facade.
-* *Example:* `console.log` (for simple JS apps), `logger.debug` (winston/logback), or `Log.d` (Android).
+* *Example:* `logger.debug` (a winston/pino wrapper for JS), `logging.info` (Python), or `Log.d` (Android). Point this at a real facade - a bare `console.log`/`print` is exactly what the anti-slop rule bans.
 
 ### `<SRC_ROOT>`
 The primary source code root where the application logic resides. Keeps the agent focused on actual code directories during searches.
@@ -89,8 +89,10 @@ Comma-separated paths that the agent is strictly prohibited from modifying (e.g.
 These tokens are **not** configuration values. They are dynamic placeholders filled on the fly by you or the agent during daily workflow execution:
 
 * `<slug>` - A short, hyphenated description of the ticket (e.g., `add-login-button`).
-* `<NN>` / `<NNNN>` - A ticket sequence number (e.g., `01` or `0042`).
+* `<NN>` / `<NNNN>` - A short sequence number for a phase or a research artifact (e.g., `01`, `0042`) - not the ticket id itself.
+* `<TS>` - A timestamp slug for scratch filenames (e.g., `20260702_1530`), used by `/verify` and `/research`.
 * `<TODO>` - An action item or unimplemented task.
 * `<symbol>` - A code class, function, struct, or variable name.
 * `<path>` - A file or folder path.
 * `???` - An unresolved decision or check.
+* `$ARGUMENTS` - Claude Code injects whatever you typed after the slash command here. In other tools it is the text after your saved-prompt trigger - substitute your tool's equivalent.

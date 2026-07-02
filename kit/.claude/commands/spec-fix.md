@@ -57,4 +57,4 @@ verification tags on a flip out of `BlockNeedUserTest`.
 
 - Never invent a fix the audit did not name; never set `Verified` (that is `/spec-check`'s job).
 - Idempotent: a second run with the audit already satisfied is a no-op.
-- One changelog line per modified file; the re-audit handles tag removal and the status flip.
+- One changelog entry for this fix, listing every modified file; the re-audit handles tag removal and the status flip.

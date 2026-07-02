@@ -46,10 +46,14 @@ several findings yields **one stub per distinct problem**, not one per mention.
 dir, the issue tracker, or a `PARKED.md` under `<PLAN_DIR>/`. Write the least that makes it
 re-findable:
 - a stable `<ID>`,
+- `**Status:** Draft` and a default `**Priority:**` (e.g. 40) - so the stub is a live,
+  selectable ticket that `/backlog` will pick up and `/spec` can later flesh out, not a
+  status-less note the drain loop can never see,
 - a one-line symptom,
 - where it was found (file/flow, and the task you were on).
 
-No investigation, no root cause, no fix sketch - that is for whoever picks it up later.
+No investigation, no root cause, no fix sketch - that is for whoever picks it up later. The
+`Draft` seed carries just the symptom; the pipeline expands it when the ticket is selected.
 
 **Step 4 - Report and return.** One line: `parked: <id>`. Then **immediately resume the
 original task**. Never switch the active task to chase a parked finding.

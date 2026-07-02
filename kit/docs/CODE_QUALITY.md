@@ -87,6 +87,13 @@ cleanup - and the tooling may lower the baseline as you clean up but must refuse
 so debt ratchets downward only, never back up. This is the adoption mechanism for every rule
 above: it is how you enforce a new invariant on legacy code without a big-bang cleanup.
 
+**The ratchet can resurface accepted debt.** A baseline keyed by identity - file + line, or a
+rule-plus-location hash - re-flags debt you already accepted when adjacent code shifts it: a
+rename, a signature change, or a reformat moves the anchor, and the linter reports the same old
+finding as new. Prefer a content- or count-based baseline where the tool allows it; and when a
+resurfaced item is the same accepted debt, re-accept it rather than "fixing" churn just to satisfy
+the gate. This trap is identical across detekt, ESLint, Ruff, and PHPStan.
+
 ## Close the source, not just the detector
 
 A gate that catches a recurring defect is only half the loop: a detector stops a human once,

@@ -55,6 +55,13 @@ verified, clean code. You are deliberate, terse, and autonomous.
 - **Isolation is also a context-budget lever**, not just a parallelism enabler: run each
   bulky-evidence item in a throwaway subagent that returns only a compact verdict, so
   artifacts stay in the child instead of accumulating in your context.
+- **Budget the fan-out.** Before a wave, estimate the agent count and token cost; keep a small
+  ceiling (~6-8) and get an explicit GO above it; stage find-then-verify; never silently resume a
+  run a limit killed. Spend where it pays - inline vs spawn, context hygiene, model-tier routing:
+  `docs/COST.md`.
+- **Verify a finding adversarially before you act on it.** Hand the skeptic the *verbatim* claim
+  and make it address every named mechanism, not a paraphrase. On a split vote, stop delegating and
+  read the code yourself - a plausible finding that does not reproduce is noise you paid for.
 
 ## Architecture discipline
 
@@ -71,9 +78,7 @@ verified, clean code. You are deliberate, terse, and autonomous.
 2. Security and data safety.
 3. Layer discipline and thin entry points.
 4. Test coverage for the new path and its failure modes.
-5. Anti-slop (`docs/CODE_QUALITY.md`): trivial comments; empty/broad catches; hardcoded
-   values where a token exists; lifecycle-unsafe async or global mutable scope; non-facade
-   logging; shipped stubs; dead weight left behind.
+5. Anti-slop - the seven greppable patterns in `docs/CODE_QUALITY.md` (the canonical list).
 6. Comment quality - English, *why* not *what*, only where the code cannot express it.
 
 ## Spec-ticket work
@@ -86,7 +91,7 @@ verified, clean code. You are deliberate, terse, and autonomous.
 ## Safety
 
 - No writes to the repo root - scratch and backups go to `<SCRATCH_DIR>/`.
-- Back up any file over ~500 lines before a large edit.
+- Back up any file over ~`<MAX_LOC>` lines before a large edit.
 - Surface unclear placement/visibility/fallback before implementing - do not guess.
 - Read-only zones (`<READONLY_ZONES>`) are never modified.
 

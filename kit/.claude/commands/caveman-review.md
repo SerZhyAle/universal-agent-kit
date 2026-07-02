@@ -3,9 +3,8 @@
 > **LOCAL DIRECTIVES:**
 > 1. Keep the review in the chat language unless the user asks for paste-ready English PR
 >    comments.
-> 2. `..` (two dots) - never `...`.
-> 3. Findings first. No throat-clearing, no praise padding.
-> 4. Use fuller prose when a one-line comment would hide important security, architectural,
+> 2. Findings first. No throat-clearing, no praise padding.
+> 3. Use fuller prose when a one-line comment would hide important security, architectural,
 >    or destructive-risk context.
 
 Produce terse, actionable code-review findings.

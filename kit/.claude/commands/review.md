@@ -28,9 +28,7 @@ use `/caveman-review`; this skill is the fuller pass.
    thin; logic lives in the right layer; no cross-layer leakage.
 4. **Tests** - does the change have coverage for the new path and its failure modes? Flag
    missing/weak assertions.
-5. **Anti-slop** (`docs/CODE_QUALITY.md`) - trivial comments, empty/broad catches,
-   hardcoded values where a token exists, lifecycle-unsafe async, non-facade logging,
-   shipped stubs, dead weight left behind.
+5. **Anti-slop** - the seven greppable patterns in `docs/CODE_QUALITY.md` (the canonical list).
 6. **Clarity** - naming, dead code, comment quality (why not what), file-size budget.
 
 ## Process

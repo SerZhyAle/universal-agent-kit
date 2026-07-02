@@ -28,6 +28,9 @@
   needs its own look) - record it as a stub via `/park`, report it in one line, and return
   to the task. Never switch the active task to chase a parked finding; fix trivial
   out-of-scope issues inline; drop cosmetic nitpicks.
+- Argue once, then obey. If an instruction looks wrong, say so once - concise, with the
+  reason - then do what the user decides. Do not relitigate a settled call; do not silently
+  comply when you hold a real objection.
 - Prefer doing the work over describing the work.
 
 ## 3. Research Order (never guess)
@@ -75,7 +78,8 @@ verified it. See `docs/RESEARCH_INDEX.md`.
 - See `docs/SPEC_LIFECYCLE.md` for the full flow.
 - No time/effort estimates in spec files.
 - Spec style: lists over tables (tables only for 3+ columns); one idea per bullet; no
-  pseudographics; no section summaries.
+  decorative pseudographics in prose (the status legend and the lifecycle's own flow diagram
+  are the documented exceptions); no section summaries.
 
 ## 6. Verification tags (optional, powerful)
 - A temporary debug log line `<LOGGER>("<ID>: <what this proves>")` may exist in source
@@ -88,6 +92,9 @@ verified it. See `docs/RESEARCH_INDEX.md`.
 - **Architecture**: `<ARCH_LAYERS>`. Respect the dependency direction strictly.
 - **Build**: `<BUILD_CMD>`. **Test**: `<TEST_CMD>`. **Lint**: `<LINT_CMD>`. **Run**: `<RUN_CMD>`.
 - **Logging**: `<LOGGER>` only (no ad-hoc print/console logging in shipped code).
+- A slow build/test runs in the background - do not block the turn on it. But a single
+  exclusive build resource (one emulator, one device, one lock) serializes: never launch two
+  runs that contend for it.
 
 ## 8. Strict rules
 1. No writes to the repo root. Scratch/backups go to `<SCRATCH_DIR>/`.
@@ -95,7 +102,7 @@ verified it. See `docs/RESEARCH_INDEX.md`.
 3. Keep entry points (controllers/activities/handlers) thin - delegate logic to named
    helper/service classes.
 4. Read-only zones: `<READONLY_ZONES>` - never modify.
-5. Back up any file over ~500 lines to `<SCRATCH_DIR>/` before a large edit.
+5. Back up any file over ~`<MAX_LOC>` lines to `<SCRATCH_DIR>/` before a large edit.
 6. Naming: follow the codebase's existing convention consistently.
 7. Resolve lint/compiler warnings in files you touch.
 8. Read existing comments and API docs in the area before editing; treat them as intent.
@@ -143,3 +150,11 @@ close the source: add the matching DON'T here and reinforce it in the code-gener
 - Do **not** memorize anything derivable from the repo, git history, or this file.
 - Verify a remembered path/symbol against the repo before acting on it.
 - Full discipline: `docs/AGENT_MEMORY.md`.
+
+## 12. Cost & fan-out (if your runtime bills tokens or caps agents)
+- Do the work inline by default; spawn a subagent only for parallelism, evidence isolation, or
+  a fresh context. Offload raw artifacts to `<SCRATCH_DIR>/` and reference them by path.
+- Gate a parallel fan-out: estimate the count and cost, keep a small ceiling (~6-8), get an
+  explicit GO above it, stage find-then-verify, and never silently resume a limit-killed run.
+- Route mechanical leaf skills to a cheap model; keep diagnosis/review/orchestration on a
+  strong one. Full discipline: `docs/COST.md`.

@@ -27,6 +27,8 @@ universal-agent-kit/
       spec-check.md         <- audit implementation vs spec
       spec-fix.md           <- apply the audit's action items, re-audit
       spec-all.md           <- run the whole pipeline end to end
+      park.md               <- capture an out-of-scope finding as a Draft stub, then resume
+      backlog.md            <- drain the backlog unattended, one eligible ticket at a time
       research.md           <- research-first pass before any change
       quick.md              <- fast path for trivial edits
       fix.md                <- narrow bug/behaviour fix, no ceremony
@@ -48,8 +50,9 @@ universal-agent-kit/
     AGENT_MEMORY.md         <- persistent memory that survives across sessions
     RESEARCH_INDEX.md       <- research order + the queryable code index
     VALIDATION.md           <- the validation ladder: "done" means evidence
+    COST.md                 <- agent cost & fan-out discipline, model-tier routing
     REPLACES.md             <- placeholder replacements reference (EN)
-    REPLACES_RU.md          <- placeholder replacements reference (RU)
+    REPLACES_RU.md          <- placeholder replacements reference (RU mirror - optional)
   memory/
     MEMORY.md               <- the always-loaded memory index (template)
     examples/               <- one sample entry per memory type
@@ -80,7 +83,8 @@ Hand this whole folder to your coding agent and say something like:
 3. Merge `CLAUDE.md` into your repo root (or `.claude/CLAUDE.md`). Fill the placeholders.
 4. Optionally merge `.claude/settings.json` (review permissions first - see below).
 5. Copy the `docs/*` files (`SPEC_LIFECYCLE`, `CODE_QUALITY`, `AGENT_MEMORY`, `RESEARCH_INDEX`,
-   `VALIDATION`, `REPLACES`, `REPLACES_RU`) wherever your docs live; reference them from `CLAUDE.md`.
+   `VALIDATION`, `COST`, `REPLACES`) wherever your docs live; reference them from `CLAUDE.md`.
+   `REPLACES_RU.md` is a Russian mirror of `REPLACES.md` - skip it unless your team reads Russian.
 6. Optionally copy `memory/` - the index template and one sample entry per type - if your
    runtime supports persistent agent memory.
 

@@ -10,12 +10,12 @@
 
 | Токен плейсхолдера | Описание | Frontend / Node.js | Backend (Go / Python) | Mobile (Kotlin / Swift) | Systems (Rust / C++) |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| `<PROJECT_NAME>` | Имя вашего репозитория/проекта. | `my-web-app` | `user-service` | `FastMediaSorter` | `game-engine` |
+| `<PROJECT_NAME>` | Имя вашего репозитория/проекта. | `my-web-app` | `user-service` | `photo-gallery` | `game-engine` |
 | `<CHAT_LANGUAGE>` | Язык общения агента с вами. | `Russian` / `English` | `English` | `Russian` | `English` |
 | `<INDEX_DOC>` | Начальный документ / карта проекта. | `README.md` | `docs/ARCH.md` | `README.md` | `README.md` |
 | `<PLAN_DIR>` | Папка со спецификациями и планами. | `PLAN` | `docs/plans` | `PLAN` | `PLAN` |
-| `<SCRATCH_DIR>` | Игнорируемая git папка для темп-файлов.| `tmp` | `.scratch` | `build/tmp` | `target/tmp` |
-| `<ID>` | Формат / паттерн ID тикета. | `TNNNN` (e.g. `T0042`) | `JIRA-NNN` | `FMS-NNN` | `TNNNN` |
+| `<SCRATCH_DIR>` | Игнорируемая git папка для темп-файлов.| `tmp` | `.scratch` | `.scratch` | `.scratch` |
+| `<ID>` | Формат / паттерн ID тикета. | `TNNNN` (e.g. `T0042`) | `JIRA-NNN` | `PG-NNN` | `TNNNN` |
 | `<LOGGER>` | Имя вызова/фасада логгера. | `logger.info` | `logging.info` / `log.Printf` | `Log.d` / `os_log` | `log::info!` |
 | `<SRC_ROOT>` | Главная папка с исходным кодом. | `src` | `src` / `.` (корень) | `app/src/main/java` | `src` |
 | `<ARCH_LAYERS>` | Правила направления зависимостей. | `page -> widget -> api` | `handler -> service -> repo` | `UI -> VM -> Repo` | `mod -> impl -> core` |
@@ -56,7 +56,7 @@
 
 ### `<LOGGER>`
 Инструмент логирования проекта. Правила чистого кода (anti-slop) запрещают использовать `print` или `console.log` в релизном коде. Все отладочные логи должны идти через этот фасад.
-* *Пример:* `console.log` (для простых JS-приложений), `logger.debug` (winston/logback) или `Log.d` (Android).
+* *Пример:* `logger.debug` (обёртка winston/pino для JS), `logging.info` (Python) или `Log.d` (Android). Указывай именно фасад - голый `console.log`/`print` как раз и запрещён правилом anti-slop.
 
 ### `<SRC_ROOT>`
 Папка, где находится логика приложения. Ограничивает область поиска кода для агента, отсекая тесты, сборки и конфиги.
@@ -89,8 +89,10 @@
 Эти токены **не являются** частью конфигурации. Они заполняются динамически вами или агентом в процессе работы над конкретной задачей:
 
 * `<slug>` - Краткое описание тикета на английском через дефис (например, `add-login-button`).
-* `<NN>` / `<NNNN>` - Порядковый номер тикета (например, `01` или `0042`).
+* `<NN>` / `<NNNN>` - Короткий порядковый номер фазы или research-артефакта (например, `01`, `0042`) - не сам ID тикета.
+* `<TS>` - Слаг-таймстамп для имён scratch-файлов (например, `20260702_1530`), используется в `/verify` и `/research`.
 * `<TODO>` - Задача, которую предстоит сделать.
 * `<symbol>` - Имя класса, функции, структуры или переменной.
 * `<path>` - Путь к файлу или папке.
 * `???` - Неопределенное решение или проверка.
+* `$ARGUMENTS` - Claude Code подставляет сюда текст после slash-команды. В других инструментах это текст после триггера сохранённого промпта - замени на эквивалент своего инструмента.

@@ -76,6 +76,21 @@ or test you care about - a passing wrapper masks a failing core. Read the specif
 the operation that matters, or have it emit its own result. A green that lies is worse than no
 check at all.
 
+## Closing a change on a dirty tree
+
+Most real work happens with other changes in flight. Scope the "done" gate to the *change*, not
+the whole tree:
+
+- **Per-change closure runs the diff-scoped gates** - the checks for the files this change touched
+  - so a sibling's unfinished work does not fail your close, and yours does not pass on their
+  green.
+- **CI / release runs the strict full-project gate.** Whole-tree health is proven there, once, not
+  on every per-change close - a close that always rebuilds the world gets slow, then gets skipped.
+- **Attribute a failure before you fix it.** On a multi-writer tree a red check may belong to a
+  sibling's in-flight edit, not yours. Confirm the failure is inside your diff first; the working
+  tree, not git history, is the authority for what is currently done, so re-read the live files
+  rather than chasing a red that was never yours.
+
 ## A lightweight progress journal (optional)
 
 For multi-step work it helps to keep a human-readable journal - one concise entry per step, with

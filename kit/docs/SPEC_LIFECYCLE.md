@@ -141,7 +141,7 @@ its own row, and `VALIDATION.md` and the skill files defer to it rather than red
 | Skill | Requires | Produces | Auto-chains to | Stops instead when |
 | --- | --- | --- | --- | --- |
 | `/research` | any | no status change | the caller | - |
-| `/spec` | none (allocates an id) | `Approved`, or `In Progress` for a primitive | `/spec-tech` (primitive: implement directly, then stop) | a required research item is Open |
+| `/spec` | none (allocates an id) | `Approved` (complex), or `Implemented` / `BlockNeedUserTest` (primitive, implemented in place) | `/spec-tech` (complex only; a primitive stops after implementing) | a required research item is Open |
 | `/spec-tech` | `Approved` or later | `Tactical` | `/spec-dev` | an unchecked pre-implementation blocker remains |
 | `/spec-dev` | `Tactical` / `In Progress` | `Implemented` or `BlockNeedUserTest` | `/spec-check` | ambiguity, a failed check, or a `Block*` condition |
 | `/spec-check` | `Implemented` or later | `Verified` / `Partial` / `Broken` / `BlockNeedUserTest` | `/spec-fix` (only if `Partial`/`Broken`) | an open manual check holds at `BlockNeedUserTest` |
@@ -169,6 +169,22 @@ Three rules bind the whole table:
   (the complexity gate) implements without a tactical plan and stops at `Implemented` or
   `BlockNeedUserTest` - it never enters `/spec-tech`. A sound build with an unresolved manual check
   produces `BlockNeedUserTest`, not `Verified`. Everything else follows the linear flow.
+
+## Draining BlockNeedUserTest
+
+The lifecycle accumulates human-gated tickets by design: every ticket whose headline behaviour
+needs a real run parks at `BlockNeedUserTest` until a human closes it. Left alone they pile up, so
+sweep them in a batch rather than one interruption at a time:
+
+1. Group every ticket currently at `BlockNeedUserTest`.
+2. For each, run the recorded manual check - its verification tags (grep `<ID>:`) say exactly which
+   paths to exercise on the real run.
+3. Re-audit the batch with `/spec-check`: the ones whose manual signal is now closed flip to
+   `Verified` and their tags are removed in the same pass; the rest stay blocked with a note.
+
+Keep it a periodic sweep, not a per-ticket prompt - deferring the human gate to one batch is the
+whole reason the block state exists. A lean `/sweep` command (or a filter over `<PLAN_DIR>/`) is
+enough; no new status model is needed.
 
 ## Adapting it
 

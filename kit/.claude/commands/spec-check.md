@@ -78,9 +78,9 @@ invariant: grep all source for `<ID>:` verification tags and delete every matchi
 (idempotent if none). This is the only source mutation this skill performs. Tactical-only
 mode → update INDEX + audited phase rows only; do not touch the strategic status or tags.
 
-**7 - Finalize.** Changelog line per modified file (the spec, plus any source file that lost
-a tag). Update the user-facing feature docs only on a `Verified` flip for a genuinely
-user-visible change.
+**7 - Finalize.** One changelog entry for this audit's change, listing every modified file
+(the spec, plus any source file that lost a tag). Update the user-facing feature docs only on
+a `Verified` flip for a genuinely user-visible change.
 
 **8 - Auto-chain to `/spec-fix`** if the verdict is `Partial` or `Broken`. On `Verified`, no
 further action. On `BlockNeedUserTest` (sound build, open manual item), stop and await the human
@@ -111,9 +111,9 @@ the outcome is BlockNeedUserTest until a human closes it. If Verified: drop "Act
 
 ## Constraints
 
-- Never mutate spec content beyond `Status:`, a recomputed `Priority`, and the `## Last
-  Audit` block. The one source mutation allowed is deleting `<ID>:` verification tags on a
-  status flip out of `BlockNeedUserTest`.
+- Never mutate spec content beyond `Status:` and the `## Last Audit` block. The one source
+  mutation allowed is deleting `<ID>:` verification tags on a status flip out of
+  `BlockNeedUserTest`.
 - Strategic audit is qualitative (keyword overlap for goal coverage); tactical audit is
   strict (static predicates only).
 - A grep miss is FAIL. A hit-count mismatch (expected 1, found 3) is WARN with all hits

@@ -111,6 +111,15 @@
   .demo-log{margin:0; font-size:12.5px; line-height:1.55}
   .toolbar{display:flex; gap:10px; flex-wrap:wrap; margin:18px 0 2px}
 
+  /* before/after: the same assistant, week one, side by side */
+  .ba{display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--line);
+    border:1px solid var(--line); border-radius:12px; overflow:hidden; margin:16px 0 6px; font-size:13.5px}
+  .ba>div{background:var(--bg2); padding:9px 13px; line-height:1.45}
+  .ba>.h{font-size:11.5px; font-weight:700; text-transform:uppercase; letter-spacing:.1em}
+  .ba>.h.l{color:var(--warn)}
+  .ba>.h.r{color:var(--ok)}
+  .ba>.l:not(.h){color:var(--muted)}
+
   /* ---------- collapsible sections grid (the table of contents) ---------- */
   .sections{display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:14px; align-items:start; margin-top:24px}
   @media(max-width:760px){ .sections{grid-template-columns:1fr} }
@@ -212,6 +221,8 @@
     .sec[open]{box-shadow:none !important}
     .secteaser{display:none !important}
     .card, .note, pre{background:#fff !important; color:#111 !important; border-color:#bbb !important; box-shadow:none !important}
+    .ba{background:#bbb !important; border-color:#bbb !important}
+    .ba>div{background:#fff !important; color:#111 !important}
     pre, pre.diagram{color:#111 !important}
     .muted, .card p, .secteaser{color:#333 !important}
     a{color:#111 !important; text-decoration:underline}
@@ -324,6 +335,16 @@ verdict: BlockNeedUserTest     (PASS 6 / WARN 1 / FAIL 0)
           <p>ИИ-ассистент быстрый, но дрейфует. Он угадывает пути к файлам, придумывает API, который изменился две версии назад, пишет правдоподобный мусор, который компилируется и тихо гниёт, забывает всё между сессиями и либо спрашивает разрешения на каждый чих, либо молча делает не то. По сути - гениальный стажёр с амнезией: печатает быстрее тебя, но к обеду уже не помнит, как тебя зовут.</p>
           <p>Лечится это не инструментом, а <strong>методом</strong> - маленькой операционной системой поверх ассистента: свод правил, роли, жизненный цикл спецификаций и память. Она заставляет его <em>сначала исследовать, потом делать</em>, отделять «что» от «как», планировать проверяемыми шагами, оставаться кратким и честным и накапливать знания между сессиями.</p>
           <p>Эта страница показывает, как всё собрано - на примере одного реального проекта, но всё унифицировано и не привязано ни к языку, ни к задачам проекта - и ни к конкретному инструменту или модели. Внизу можно скачать kit и положить в свой git-репозиторий почти на любом стеке.</p>
+
+          <div class="ba" role="group" aria-label="Первая неделя: голый ассистент и на методе">
+            <div class="h l">Голый ассистент</div><div class="h r">На методе</div>
+            <div class="l">Угадывает пути, выдумывает API, устаревший на две версии</div><div class="r">Называет только проверенные пути, символы и API</div>
+            <div class="l">«Готово» значит «скомпилировалось» - зелёное умеет врать</div><div class="r">Готово = проверка прошла в этом прогоне: ожидал | получил</div>
+            <div class="l">«Что» и «как» спорят в одном сообщении</div><div class="r">Стратегия утверждена до того, как назван первый файл</div>
+            <div class="l">Каждое утро переучивается с нуля</div><div class="r">Правки и предпочтения переживают сессии</div>
+            <div class="l">Статус тикета - надежда в имени файла</div><div class="r">Статус - то, что доказывает код; аудит может его понизить</div>
+            <div class="l">Разрешение на каждый чих - или молча не то</div><div class="r">Автономен в чтении и сборке; блокеры - сразу и явно</div>
+          </div>
 
           <h3>Кому это всё</h3>
           <ul>
@@ -492,6 +513,7 @@ reference  указатель во внешнюю систему и зачем  
         <summary><span class="secnum" aria-hidden="true">10</span><span class="sechead"><span class="sectitle" role="heading" aria-level="2">Как внедрить</span><span class="secteaser">Новый или существующий проект, любой инструмент, любая модель</span></span></summary>
         <div class="secbody">
           <p>Метод не привязан ни к инструменту, ни к модели. Ниже три ситуации - выбери свою.</p>
+          <div class="note"><div class="tag">Минимальный старт</div><p>Не готов к полному набору - возьми три файла: <code>CLAUDE.md</code> (переименуй в <code>AGENTS.md</code>, если твой инструмент читает его), <code>/quick</code> и <code>/fix</code>. Добавь <code>/spec</code> и жизненный цикл, когда впервые попадётся задача с настоящими проектными решениями, а <code>memory/</code> - когда надоест объяснять одно и то же. Это то же правило нижней ступени, применённое к самому kit'у.</p></div>
 
           <h3 id="new-ru">A · Новый или почти пустой проект</h3>
           <p>Сначала дай агенту собрать карту кода его штатной командой - <code>/init</code> в Claude Code (или аналог в твоём инструменте). Потом отдай этот промпт, чтобы он поднял проект сразу по методу:</p>
@@ -573,7 +595,7 @@ Do not change anything yet. Show me the plan first; on any conflict, my existing
           <ul>
             <li><strong>Claude Code</strong> - <code>CLAUDE.md</code> + <code>.claude/commands/*</code> (готовые <code>/spec</code>, <code>/research</code>..) + <code>.claude/agents/*</code> как субагенты.</li>
             <li><strong>Cursor</strong> - <code>.cursor/rules</code> (или <code>.cursorrules</code>); команды становятся сохранёнными промптами.</li>
-            <li><strong>Codex, Gemini CLI / Antigravity, Aider, Cline, Windsurf</strong> - <code>AGENTS.md</code> / <code>GEMINI.md</code> / свой аналог; роли вставляются как системные промпты, навыки - как файлы-промпты, на которые ссылаешься.</li>
+            <li><strong>Codex, Gemini CLI / Antigravity, Aider, Cline, Windsurf</strong> - <code>AGENTS.md</code> (указатель уже лежит в kit'е, правила - в <code>CLAUDE.md</code> рядом) / <code>GEMINI.md</code> / свой аналог; роли вставляются как системные промпты, навыки - как файлы-промпты, на которые ссылаешься.</li>
             <li>Методология в <code>docs/</code> вообще не зависит от инструмента - это просто Markdown.</li>
           </ul>
 
@@ -635,6 +657,16 @@ Do not change anything yet. Show me the plan first; on any conflict, my existing
           <p>An AI assistant is fast, but it drifts. It guesses file paths, invents an API that changed two versions ago, writes plausible slop that compiles and quietly rots, forgets everything between sessions, and either asks permission for every keystroke or silently does the wrong thing. Essentially a brilliant intern with amnesia: types faster than you, but by lunch can't recall your name.</p>
           <p>The cure is not a tool - it is a <strong>method</strong>: a small operating system on top of the assistant. A rulebook, roles, a spec lifecycle, and memory. It makes the assistant <em>research before it acts</em>, split <em>what</em> from <em>how</em>, plan in verifiable steps, stay terse and honest, and accumulate knowledge across sessions.</p>
           <p>This page shows how it is wired - using one real project as the example, but kept unified and tied to neither a language nor that project's goals - nor to a specific tool or model. At the bottom you can download the kit and drop it into most git-backed codebases, whatever the stack.</p>
+
+          <div class="ba" role="group" aria-label="Week one: bare assistant vs on the method">
+            <div class="h l">Bare assistant</div><div class="h r">On the method</div>
+            <div class="l">Guesses paths, invents an API two versions out of date</div><div class="r">States only paths, symbols, and APIs it verified</div>
+            <div class="l">"Done" means "it compiled" - a green that lies</div><div class="r">Done = the check passed in this run: expected | actual</div>
+            <div class="l">What and how argued in the same breath</div><div class="r">Strategy approved before the first file is named</div>
+            <div class="l">Re-taught from scratch every morning</div><div class="r">Corrections and preferences survive sessions</div>
+            <div class="l">Ticket status is a hope in a filename</div><div class="r">Status is what the code proves - an audit can downgrade it</div>
+            <div class="l">Permission for every keystroke - or silently the wrong thing</div><div class="r">Autonomous on reads and builds; blockers up front, explicit</div>
+          </div>
 
           <h3>Who it's for</h3>
           <ul>
@@ -803,6 +835,7 @@ doc       script         type change  logic           config/resources  user-vis
         <summary><span class="secnum" aria-hidden="true">10</span><span class="sechead"><span class="sectitle" role="heading" aria-level="2">How to adopt</span><span class="secteaser">New or existing project, any tool, any model</span></span></summary>
         <div class="secbody">
           <p>The method is tied to neither a tool nor a model. Three situations below - pick yours.</p>
+          <div class="note"><div class="tag">Minimal start</div><p>Not ready for the full set - take three files: <code>CLAUDE.md</code> (rename it to <code>AGENTS.md</code> if that's what your tool reads), <code>/quick</code>, and <code>/fix</code>. Add <code>/spec</code> and the lifecycle the first time a task carries real design decisions, and <code>memory/</code> once re-explaining things starts to hurt. That's the kit's own lowest-rung rule, applied to the kit itself.</p></div>
 
           <h3 id="new-en">A · A new or near-empty project</h3>
           <p>First let the agent build a map of the code with its built-in command - <code>/init</code> in Claude Code (or the equivalent in your tool). Then hand it this prompt to stand the project up on the method directly:</p>
@@ -884,7 +917,7 @@ Do not change anything yet. Show me the plan first; on any conflict, my existing
           <ul>
             <li><strong>Claude Code</strong> - <code>CLAUDE.md</code> + <code>.claude/commands/*</code> (ready-made <code>/spec</code>, <code>/research</code>..) + <code>.claude/agents/*</code> as subagents.</li>
             <li><strong>Cursor</strong> - <code>.cursor/rules</code> (or <code>.cursorrules</code>); the commands become saved prompts.</li>
-            <li><strong>Codex, Gemini CLI / Antigravity, Aider, Cline, Windsurf</strong> - <code>AGENTS.md</code> / <code>GEMINI.md</code> / their own equivalent; roles paste in as system prompts, skills as prompt files you point at.</li>
+            <li><strong>Codex, Gemini CLI / Antigravity, Aider, Cline, Windsurf</strong> - <code>AGENTS.md</code> (a pointer ships in the kit; the rules live in <code>CLAUDE.md</code> next to it) / <code>GEMINI.md</code> / their own equivalent; roles paste in as system prompts, skills as prompt files you point at.</li>
             <li>The methodology in <code>docs/</code> doesn't depend on the tool at all - it's just Markdown.</li>
           </ul>
 
@@ -946,6 +979,16 @@ Do not change anything yet. Show me the plan first; on any conflict, my existing
           <p>ШІ-асистент швидкий, але дрейфує. Він вгадує шляхи до файлів, вигадує API, що змінився дві версії тому, пише правдоподібне сміття, яке компілюється і тихо гниє, забуває все між сесіями і або питає дозволу на кожен чих, або мовчки робить не те. По суті - геніальний стажер з амнезією: друкує швидше за тебе, але до обіду вже не пам'ятає, як тебе звати.</p>
           <p>Лікується це не інструментом, а <strong>методом</strong> - маленькою операційною системою поверх асистента: звід правил, ролі, життєвий цикл специфікацій і пам'ять. Вона змушує його <em>спершу досліджувати, потім робити</em>, відокремлювати «що» від «як», планувати перевірюваними кроками, лишатися стислим і чесним та накопичувати знання між сесіями.</p>
           <p>Ця сторінка показує, як усе зібрано - на прикладі одного реального проєкту, але все уніфіковано й не прив'язано ні до мови, ні до завдань проєкту - і ні до конкретного інструмента чи моделі. Унизу можна завантажити kit і покласти у свій git-репозиторій майже на будь-якому стеку.</p>
+
+          <div class="ba" role="group" aria-label="Перший тиждень: голий асистент і на методі">
+            <div class="h l">Голий асистент</div><div class="h r">На методі</div>
+            <div class="l">Вгадує шляхи, вигадує API, застарілий на дві версії</div><div class="r">Називає лише перевірені шляхи, символи та API</div>
+            <div class="l">«Готово» значить «скомпілювалося» - зелене вміє брехати</div><div class="r">Готово = перевірка пройшла в цьому прогоні: очікував | отримав</div>
+            <div class="l">«Що» і «як» сперечаються в одному повідомленні</div><div class="r">Стратегію затверджено до того, як названо перший файл</div>
+            <div class="l">Щоранку переучується з нуля</div><div class="r">Правки та вподобання переживають сесії</div>
+            <div class="l">Статус тикета - надія в імені файлу</div><div class="r">Статус - те, що доводить код; аудит може його понизити</div>
+            <div class="l">Дозвіл на кожен чих - або мовчки не те</div><div class="r">Автономний у читанні та збірці; блокери - одразу і явно</div>
+          </div>
 
           <h3>Кому це все</h3>
           <ul>
@@ -1114,6 +1157,7 @@ reference  вказівник у зовнішню систему та навіщ
         <summary><span class="secnum" aria-hidden="true">10</span><span class="sechead"><span class="sectitle" role="heading" aria-level="2">Як впровадити</span><span class="secteaser">Новий чи наявний проєкт, будь-який інструмент, будь-яка модель</span></span></summary>
         <div class="secbody">
           <p>Метод не прив'язаний ні до інструмента, ні до моделі. Нижче три ситуації - обери свою.</p>
+          <div class="note"><div class="tag">Мінімальний старт</div><p>Не готовий до повного набору - візьми три файли: <code>CLAUDE.md</code> (перейменуй на <code>AGENTS.md</code>, якщо твій інструмент читає його), <code>/quick</code> і <code>/fix</code>. Додай <code>/spec</code> і життєвий цикл, щойно трапиться задача зі справжніми проєктними рішеннями, а <code>memory/</code> - коли набридне пояснювати те саме. Це те саме правило нижнього щабля, застосоване до самого kit'а.</p></div>
 
           <h3 id="new-uk">A · Новий або майже порожній проєкт</h3>
           <p>Спершу дай агенту зібрати карту коду його штатною командою - <code>/init</code> у Claude Code (або аналог у твоєму інструменті). Потім віддай цей промпт, щоб він підняв проєкт одразу за методом:</p>
@@ -1195,7 +1239,7 @@ Do not change anything yet. Show me the plan first; on any conflict, my existing
           <ul>
             <li><strong>Claude Code</strong> - <code>CLAUDE.md</code> + <code>.claude/commands/*</code> (готові <code>/spec</code>, <code>/research</code>..) + <code>.claude/agents/*</code> як субагенти.</li>
             <li><strong>Cursor</strong> - <code>.cursor/rules</code> (або <code>.cursorrules</code>); команди стають збереженими промптами.</li>
-            <li><strong>Codex, Gemini CLI / Antigravity, Aider, Cline, Windsurf</strong> - <code>AGENTS.md</code> / <code>GEMINI.md</code> / свій аналог; ролі вставляються як системні промпти, навички - як файли-промпти, на які посилаєшся.</li>
+            <li><strong>Codex, Gemini CLI / Antigravity, Aider, Cline, Windsurf</strong> - <code>AGENTS.md</code> (вказівник вже лежить у kit'і, правила - у <code>CLAUDE.md</code> поруч) / <code>GEMINI.md</code> / свій аналог; ролі вставляються як системні промпти, навички - як файли-промпти, на які посилаєшся.</li>
             <li>Методологія в <code>docs/</code> взагалі не залежить від інструмента - це просто Markdown.</li>
           </ul>
 

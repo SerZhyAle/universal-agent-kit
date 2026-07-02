@@ -18,6 +18,7 @@ low, and keep the assistant terse and honest.
 universal-agent-kit/
   README.md                 <- you are here: import guide + manifest
   CLAUDE.md                 <- project-rules template (fill the <PLACEHOLDERS>)
+  AGENTS.md                 <- pointer: the same contract for tools that read AGENTS.md
   .claude/
     settings.json           <- default agent + permission template
     commands/               <- slash-command "skills"
@@ -88,11 +89,20 @@ Hand this whole folder to your coding agent and say something like:
 6. Optionally copy `memory/` - the index template and one sample entry per type - if your
    runtime supports persistent agent memory.
 
+### Minimal start
+
+Not ready for the full set? Take three files: `CLAUDE.md` (rename it to `AGENTS.md` if that is
+what your tool reads), `.claude/commands/quick.md`, and `.claude/commands/fix.md`. Add `/spec` +
+`docs/SPEC_LIFECYCLE.md` the first time a task carries real design decisions, and `memory/`
+once re-explaining things starts to hurt. Same lowest-rung rule the kit preaches, applied to
+adopting it.
+
 ### For other agents (adaptation, not drop-in)
 
-Only Claude Code reads `.claude/` and `/slash` commands natively. Elsewhere the kit is an
-*adaptation*: the rules become your tool's rules file, each skill becomes a saved prompt you paste
-or trigger, and the agents become custom modes / system prompts. The `docs/` methodology is
+Only Claude Code reads `.claude/` and `/slash` commands natively. The kit ships an `AGENTS.md`
+pointer at its root, so tools that follow that convention (Codex and others) find the
+contract immediately. Beyond the rules file the kit is an *adaptation*: each skill becomes a
+saved prompt you paste or trigger, and the agents become custom modes / system prompts. The `docs/` methodology is
 tool-independent as-is. Concrete homes (conventions evolve - check your tool's current docs):
 
 | Tool | `CLAUDE.md` → | Skills (`.claude/commands/*`) → | Agents (`.claude/agents/*`) → |

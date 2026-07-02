@@ -55,7 +55,8 @@ Do not change anything yet. Show me the plan first; on any conflict, my existing
 **Which path?** *Just adopting* - paste the prompt above. *Reviewing the method first* - browse
 `kit/` or [read the article](https://serzhyale.github.io/universal-agent-kit/). *Reproducible team
 merge* - hand `merge-prompt.txt` plus the unzipped folder to your agent (it inventories, plans, and
-stops for your approval). *Offline* - grab the `.zip` and unpack it in place.
+stops for your approval). *Offline* - grab the `.zip` and unpack it in place. *Want the bare
+minimum* - copy `CLAUDE.md` + `/quick` + `/fix` and add the rest when a task earns it.
 
 ---
 
@@ -73,6 +74,7 @@ universal-agent-kit.zip     the downloadable kit
 merge-prompt.txt            paste this at your agent to merge the kit into your repo
 kit/                        the kit source, browsable here
   CLAUDE.md                 project-rules template (fill the <PLACEHOLDERS>)
+  AGENTS.md                 the same contract for tools that read AGENTS.md (pointer)
   .claude/commands/*        slash-command skills (/spec, /spec-tech, /spec-dev, /spec-check,
                             /spec-all, /research, /quick, /fix, /park, /backlog, /git,
                             /verify, /ui-clarify, ..)
@@ -89,6 +91,8 @@ kit/                        the kit source, browsable here
    your files always win, nothing is overwritten silently.
 3. Fill the `<PLACEHOLDER>` tokens for your stack (build/test/run commands, source root,
    architecture, plan dir, logger).
+
+Minimal start: take just `CLAUDE.md` + `/quick` + `/fix` - add the rest when a task earns it.
 
 Works natively with **Claude Code**; for **Cursor / Cline / Windsurf / Codex / Aider** it is an
 adaptation, not a drop-in - the slash commands become saved prompts and the role briefs become
@@ -115,6 +119,7 @@ universal-agent-kit.zip     скачиваемый kit
 merge-prompt.txt            вставь это агенту, чтобы влить kit в свой репозиторий
 kit/                        исходник kit, можно листать прямо здесь
   CLAUDE.md                 шаблон правил проекта (заполни <PLACEHOLDER>)
+  AGENTS.md                 тот же контракт для инструментов, читающих AGENTS.md (указатель)
   .claude/commands/*        навыки-команды (/spec, /spec-tech, /spec-dev, /spec-check,
                             /spec-all, /research, /quick, /fix, /park, /backlog, /git,
                             /verify, /ui-clarify, ..)
@@ -131,6 +136,9 @@ kit/                        исходник kit, можно листать пр
    подтверждения - твои файлы всегда главнее, ничего не перезаписывается молча.
 3. Заполни `<PLACEHOLDER>` под свой стек (команды сборки/тестов/запуска, корень исходников,
    архитектуру, папку планов, логгер).
+
+Минимальный старт: возьми только `CLAUDE.md` + `/quick` + `/fix` - остальное добавишь, когда
+задача этого потребует.
 
 Нативно работает с **Claude Code**; для **Cursor / Cline / Windsurf / Codex / Aider** это
 адаптация, не drop-in - slash-команды становятся сохранёнными промптами, а роли - системными
@@ -163,6 +171,9 @@ Kit - **MIT** (см. `LICENSE`). Текст статьи - **CC BY 4.0**. Исх
    твої файли завжди головніші, нічого не перезаписується мовчки.
 3. Заповни `<PLACEHOLDER>` під свій стек (команди збірки/тестів/запуску, корінь коду, архітектуру,
    теку планів, логгер).
+
+Мінімальний старт: візьми лише `CLAUDE.md` + `/quick` + `/fix` - решту додаси, коли задача цього
+потребуватиме.
 
 Нативно працює з **Claude Code**; для **Cursor / Cline / Windsurf / Codex / Aider** це адаптація,
 не drop-in (`kit/README.md` вказує файл під кожен інструмент). Метод у `docs/` майже не залежить

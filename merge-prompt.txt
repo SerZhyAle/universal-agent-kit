@@ -9,6 +9,7 @@ everywhere below (referred to as KIT/). If neither is present, stop and ask me w
 INPUTS
 - Kit: KIT/  (i.e. ./universal-agent-kit/ or ./kit/)
     CLAUDE.md                      project-rules template
+    AGENTS.md                      pointer to the same contract, for tools that read AGENTS.md
     .claude/commands/*             slash-command skills (/spec, /spec-tech, /spec-dev,
                                    /spec-check, /spec-fix, /spec-all, /research, /quick, /fix,
                                    /park, /backlog, /git, /verify, /ui-clarify, /review,

@@ -1,13 +1,18 @@
-You are merging an external "Universal Agent Kit" (in ./universal-agent-kit/) into THIS
-repository. My existing setup is the source of truth; the kit is an ADDITIVE library, not a
-drop-in replacement. Your job is to integrate the useful parts without breaking my project.
+You are merging an external "Universal Agent Kit" into THIS repository. My existing setup is
+the source of truth; the kit is an ADDITIVE library, not a drop-in replacement. Your job is to
+integrate the useful parts without breaking my project.
+
+First, locate the kit folder: it is `./universal-agent-kit/` when unzipped from the release
+archive, or `./kit/` if the repo was copied in directly. Detect which exists and use that path
+everywhere below (referred to as KIT/). If neither is present, stop and ask me where it is.
 
 INPUTS
-- Kit: ./universal-agent-kit/
+- Kit: KIT/  (i.e. ./universal-agent-kit/ or ./kit/)
     CLAUDE.md                      project-rules template
     .claude/commands/*             slash-command skills (/spec, /spec-tech, /spec-dev,
                                    /spec-check, /spec-fix, /spec-all, /research, /quick, /fix,
-                                   /git, /verify, /ui-clarify, /review, /caveman*)
+                                   /park, /backlog, /git, /verify, /ui-clarify, /review,
+                                   /caveman*)
     .claude/agents/*               role briefs (rd-lead, solution-researcher, implementer,
                                    doc-writer)
     .claude/settings.json          default agent + permission template
@@ -16,8 +21,9 @@ INPUTS
     docs/AGENT_MEMORY.md           persistent memory discipline (four entry types)
     docs/RESEARCH_INDEX.md         research order + the queryable code index
     docs/VALIDATION.md             the validation ladder
+    docs/COST.md                   agent cost & fan-out discipline, model-tier routing
     docs/REPLACES.md               placeholder replacements reference (EN)
-    docs/REPLACES_RU.md            placeholder replacements reference (RU)
+    docs/REPLACES_RU.md            placeholder replacements reference (RU mirror, optional)
     memory/                        memory index template + one sample entry per type
     README.md                      import guide + manifest
 - Mine: my existing CLAUDE.md, .claude/, settings, conventions, and codebase.
@@ -26,7 +32,7 @@ HARD SAFETY RULES (non-negotiable)
 1. Do NOT modify anything until I approve the plan (Step 2). Plan first, write second.
 2. Do NOT overwrite or delete any of my existing files. On any name collision, keep mine and
    surface the conflict - never silently replace.
-3. Do NOT touch ./universal-agent-kit/ itself (it is the read-only source).
+3. Do NOT touch KIT/ itself (it is the read-only source).
 4. Create a new git branch before any write. Do NOT commit, push, or rebase.
 5. Back up any of my files you are about to change into a git-ignored scratch directory first
    (e.g. ./tmp/kit-merge-backup/) - never the repo root.
@@ -42,7 +48,7 @@ STEP 1 - INVENTORY (read-only)
 - Detect which agent tool THIS repo targets (Claude Code, Cursor, Cline, Windsurf, Aider, Codex).
   Only Claude Code loads .claude/commands/* and .claude/agents/* natively. For any other tool,
   plan to TRANSLATE each command/agent into that tool's rules format (mapping in
-  universal-agent-kit/README.md) - do not copy .claude/ verbatim, the files would be dead.
+  KIT/README.md) - do not copy .claude/ verbatim, the files would be dead.
 - Grep the kit for <PLACEHOLDER> tokens; for each, propose a concrete value derived from THIS
   repo. The full set: <PROJECT_NAME>, <CHAT_LANGUAGE>, <INDEX_DOC>, <SRC_ROOT>, <ARCH_LAYERS>,
   <BUILD_CMD>, <TEST_CMD>, <LINT_CMD>, <RUN_CMD>, <LOGGER>, <PLAN_DIR>, <SCRATCH_DIR>, <MAX_LOC>,

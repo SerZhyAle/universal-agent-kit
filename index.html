@@ -44,7 +44,7 @@
 </script>
 <style>
   :root{
-    --wide: 1160px;          /* page container on wide monitors */
+    --wide: min(1640px, 94vw); /* page container: scales with the screen instead of capping at a fixed width */
     --bg:#0f1115; --bg2:#161922; --bg3:#1d2230; --fg:#e6e8ee; --muted:#9aa3b2;
     --acc:#7aa2ff; --acc2:#9d7bff; --line:#272d3a; --code:#0b0d12; --ok:#5fd08a;
     --warn:#e7b15a; --pill:#222838;
@@ -94,22 +94,22 @@
   main{max-width:var(--wide); margin:0 auto; padding:0 22px 80px}
 
   /* ---------- hero ---------- */
-  .hero{padding:30px 0 18px; border-bottom:1px solid var(--line); margin-bottom:4px}
-  .hero h1{font-size:34px; line-height:1.14; margin:0 0 10px; letter-spacing:-.5px}
-  .hero p.lead{font-size:17px; color:var(--muted); margin:0 0 20px}
+  .hero{padding:22px 0 14px; border-bottom:1px solid var(--line); margin-bottom:4px}
+  .hero h1{font-size:clamp(34px, 3.1vw, 52px); line-height:1.1; margin:0 0 10px; letter-spacing:-.5px}
+  .hero p.lead{font-size:clamp(17px, 1.15vw, 19px); color:var(--muted); margin:0 0 16px}
   .hero .cta{display:flex; gap:10px; flex-wrap:wrap}
-  .kicker{font-size:13px; color:var(--muted); font-weight:600; margin:0 0 12px; letter-spacing:.01em}
+  .kicker{font-size:13px; color:var(--muted); font-weight:600; margin:0 0 10px; letter-spacing:.01em}
   .kicker b{color:var(--acc2); font-weight:700}
-  .hero .hero-note{font-size:14px; margin:14px 0 0}
-  .hero .provenance{font-size:13px; margin:7px 0 0}
+  .hero .hero-note{font-size:14px; margin:12px 0 0}
+  .hero .provenance{font-size:13px; margin:6px 0 0}
   .hero .provenance a{color:var(--acc); font-weight:600}
 
   /* shared demo + expand/collapse toolbar between the hero and the language articles */
-  .demo{margin:22px 0 4px}
-  .demo-cap{font-size:14px; margin:0 0 9px}
+  .demo{margin:16px 0 4px}
+  .demo-cap{font-size:14px; margin:0 0 8px}
   .demo-cap strong{color:var(--fg)}
-  .demo-log{margin:0; font-size:12.5px; line-height:1.55}
-  .toolbar{display:flex; gap:10px; flex-wrap:wrap; margin:18px 0 2px}
+  .demo-log{margin:0; font-size:12.5px; line-height:1.5}
+  .toolbar{display:flex; gap:10px; flex-wrap:wrap; margin:14px 0 2px}
 
   /* before/after: the same assistant, week one, side by side */
   .ba{display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--line);
@@ -121,7 +121,7 @@
   .ba>.l:not(.h){color:var(--muted)}
 
   /* ---------- collapsible sections grid (the table of contents) ---------- */
-  .sections{display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:14px; align-items:start; margin-top:24px}
+  .sections{display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:14px; align-items:start; margin-top:16px}
   @media(max-width:760px){ .sections{grid-template-columns:1fr} }
 
   .sec{
@@ -150,14 +150,14 @@
   .secteaser{color:var(--muted); font-size:13px; line-height:1.42}
   .sec[open] .secteaser{display:none}
 
-  .secbody{padding:4px 18px 20px 18px}
+  .secbody{padding:4px 18px 16px 18px}
   .secbody h3{scroll-margin-top:72px}
-  .sec[open] .secbody{border-top:1px solid var(--line); margin-top:2px; padding-top:14px}
+  .sec[open] .secbody{border-top:1px solid var(--line); margin-top:2px; padding-top:12px}
 
-  h3{font-size:17px; margin:22px 0 4px}
-  p{margin:12px 0}
-  ul,ol{margin:12px 0; padding-left:22px}
-  li{margin:6px 0}
+  h3{font-size:17px; margin:18px 0 4px}
+  p{margin:10px 0}
+  ul,ol{margin:10px 0; padding-left:22px}
+  li{margin:5px 0}
   strong{color:var(--fg)}
   .muted{color:var(--muted)}
 
@@ -287,32 +287,6 @@
       <span data-l="en">Not an install - you hand the kit to your coding agent, and it merges the pieces that fit.</span>
       <span data-l="uk">Це не встановлення: ти віддаєш kit своєму кодинг-агенту, і він вливає те, що підходить.</span>
     </p>
-    <p class="provenance muted">
-      <span data-l="ru">Дистиллировано из <a href="https://github.com/SerZhyAle" target="_blank" rel="noopener">FastMediaSorter</a> - Android-приложения, которое живёт на этом методе каждый день, 800+ тикетов.</span>
-      <span data-l="en">Distilled from <a href="https://github.com/SerZhyAle" target="_blank" rel="noopener">FastMediaSorter</a> - a shipping Android app run on this method every day, 800+ tickets deep.</span>
-      <span data-l="uk">Дистильовано з <a href="https://github.com/SerZhyAle" target="_blank" rel="noopener">FastMediaSorter</a> - Android-застосунку, що живе на цьому методі щодня, 800+ тикетів.</span>
-    </p>
-  </section>
-
-  <!-- ============ DEMO (shared across languages; the log itself is English) ============ -->
-  <section class="demo">
-    <p class="demo-cap muted">
-      <span data-l="ru"><strong>Не слайд, а настоящий навык.</strong> <code>/spec-check</code> читает репозиторий и отказывается звать тикет готовым, пока путь не доказан - и отдаёт механическую починку в <code>/spec-fix</code>. (иллюстрация)</span>
-      <span data-l="en"><strong>A real skill, not a slide.</strong> <code>/spec-check</code> reads the repo and refuses to call a ticket done on an unproven path - then hands the mechanical fix to <code>/spec-fix</code>. (illustrative)</span>
-      <span data-l="uk"><strong>Не слайд, а справжня навичка.</strong> <code>/spec-check</code> читає репозиторій і відмовляється звати тикет готовим, поки шлях не доведено - і віддає механічну лагодку в <code>/spec-fix</code>. (ілюстрація)</span>
-    </p>
-    <pre class="demo-log">$ /spec-check T0207
-T0207: auditing the strategic spec + 3 phases against the repo..
-  PASS    file exists          export/CsvWriter
-  PASS    symbol declared      writeRows(rows)
-  PASS    no forbidden call    grep raw-logger -> 0 hits
-  WARN    dead weight          old ExportHelper still wired in the container
-  MANUAL  export writes a valid file on a real run
-  PASS    changelog            an entry for every touched file
-verdict: BlockNeedUserTest     (PASS 6 / WARN 1 / FAIL 0)
-  was "Implemented" -> downgraded: the build is sound, but the headline
-  behaviour is unproven until a human runs the export once.
-  next -> /spec-fix drops the orphaned ExportHelper binding, then re-audits.</pre>
   </section>
 
   <div class="toolbar">
@@ -400,6 +374,21 @@ verdict: BlockNeedUserTest     (PASS 6 / WARN 1 / FAIL 0)
 /spec-check аудит против спеки                       → Verified / Partial / Broken
 /spec-fix   механический ремонт после аудита         Partial / Broken → переаудит
 /spec-all   прогнать весь пайплайн целиком           idea → verified</pre>
+          <div class="demo">
+            <p class="demo-cap muted"><strong>Не слайд, а настоящий навык.</strong> <code>/spec-check</code> читает репозиторий и отказывается звать тикет готовым, пока путь не доказан - и отдаёт механическую починку в <code>/spec-fix</code>. (иллюстрация)</p>
+            <pre class="demo-log">$ /spec-check T0207
+T0207: auditing the strategic spec + 3 phases against the repo..
+  PASS    file exists          export/CsvWriter
+  PASS    symbol declared      writeRows(rows)
+  PASS    no forbidden call    grep raw-logger -> 0 hits
+  WARN    dead weight          old ExportHelper still wired in the container
+  MANUAL  export writes a valid file on a real run
+  PASS    changelog            an entry for every touched file
+verdict: BlockNeedUserTest     (PASS 6 / WARN 1 / FAIL 0)
+  was "Implemented" -> downgraded: the build is sound, but the headline
+  behaviour is unproven until a human runs the export once.
+  next -> /spec-fix drops the orphaned ExportHelper binding, then re-audits.</pre>
+          </div>
           <p>Под пайплайном - дешёвые пути: <code>/quick</code> (опечатка), <code>/fix</code> (узкий баг). Перед всем пользовательским - <code>/ui-clarify</code>. Для краткости - <code>/caveman</code>. Плюс <code>/git</code>, <code>/verify</code>, <code>/review</code>.</p>
           <p>Рядом с пайплайном, но не внутри него, живут две дисциплины:</p>
           <ul>
@@ -722,6 +711,21 @@ Do not change anything yet. Show me the plan first; on any conflict, my existing
 /spec-check audit the build against the spec        → Verified / Partial / Broken
 /spec-fix   mechanical repair after an audit        Partial / Broken → re-audit
 /spec-all   drive the whole pipeline at once        idea → verified</pre>
+          <div class="demo">
+            <p class="demo-cap muted"><strong>A real skill, not a slide.</strong> <code>/spec-check</code> reads the repo and refuses to call a ticket done on an unproven path - then hands the mechanical fix to <code>/spec-fix</code>. (illustrative)</p>
+            <pre class="demo-log">$ /spec-check T0207
+T0207: auditing the strategic spec + 3 phases against the repo..
+  PASS    file exists          export/CsvWriter
+  PASS    symbol declared      writeRows(rows)
+  PASS    no forbidden call    grep raw-logger -> 0 hits
+  WARN    dead weight          old ExportHelper still wired in the container
+  MANUAL  export writes a valid file on a real run
+  PASS    changelog            an entry for every touched file
+verdict: BlockNeedUserTest     (PASS 6 / WARN 1 / FAIL 0)
+  was "Implemented" -> downgraded: the build is sound, but the headline
+  behaviour is unproven until a human runs the export once.
+  next -> /spec-fix drops the orphaned ExportHelper binding, then re-audits.</pre>
+          </div>
           <p>Below the pipeline sit the cheap paths: <code>/quick</code> (typo), <code>/fix</code> (narrow bug). Before anything user-facing, <code>/ui-clarify</code>. For brevity, <code>/caveman</code>. Plus <code>/git</code>, <code>/verify</code>, <code>/review</code>.</p>
           <p>Two disciplines live beside the pipeline, not inside it:</p>
           <ul>
@@ -1044,6 +1048,21 @@ Do not change anything yet. Show me the plan first; on any conflict, my existing
 /spec-check аудит проти спеки                       → Verified / Partial / Broken
 /spec-fix   механічний ремонт після аудиту         Partial / Broken → переаудит
 /spec-all   прогнати весь пайплайн цілком           idea → verified</pre>
+          <div class="demo">
+            <p class="demo-cap muted"><strong>Не слайд, а справжня навичка.</strong> <code>/spec-check</code> читає репозиторій і відмовляється звати тикет готовим, поки шлях не доведено - і віддає механічну лагодку в <code>/spec-fix</code>. (ілюстрація)</p>
+            <pre class="demo-log">$ /spec-check T0207
+T0207: auditing the strategic spec + 3 phases against the repo..
+  PASS    file exists          export/CsvWriter
+  PASS    symbol declared      writeRows(rows)
+  PASS    no forbidden call    grep raw-logger -> 0 hits
+  WARN    dead weight          old ExportHelper still wired in the container
+  MANUAL  export writes a valid file on a real run
+  PASS    changelog            an entry for every touched file
+verdict: BlockNeedUserTest     (PASS 6 / WARN 1 / FAIL 0)
+  was "Implemented" -> downgraded: the build is sound, but the headline
+  behaviour is unproven until a human runs the export once.
+  next -> /spec-fix drops the orphaned ExportHelper binding, then re-audits.</pre>
+          </div>
           <p>Під пайплайном - дешеві шляхи: <code>/quick</code> (одрук), <code>/fix</code> (вузький баг). Перед усім користувацьким - <code>/ui-clarify</code>. Для стислості - <code>/caveman</code>. Плюс <code>/git</code>, <code>/verify</code>, <code>/review</code>.</p>
           <p>Поряд із пайплайном - а не всередині нього - живуть дві дисципліни:</p>
           <ul>
@@ -1321,6 +1340,11 @@ Do not change anything yet. Show me the plan first; on any conflict, my existing
     <a href="https://sza.od.ua" target="_blank" rel="noopener">SZA.od.ua</a> ·
     <a href="mailto:sza@ukr.net">sza@ukr.net</a> ·
     <a href="https://github.com/SerZhyAle" target="_blank" rel="noopener">github.com/SerZhyAle</a>
+  </p>
+  <p class="provenance muted">
+    <span data-l="ru">Собрано по опыту разработки из <a href="https://github.com/SerZhyAle" target="_blank" rel="noopener">FastMediaSorter</a> - Android-приложения, которое живёт на этом методе каждый день более года.</span>
+    <span data-l="en">Built from hands-on experience with <a href="https://github.com/SerZhyAle" target="_blank" rel="noopener">FastMediaSorter</a> - a shipping Android app run on this method every day for over a year.</span>
+    <span data-l="uk">Зібрано за досвідом розробки з <a href="https://github.com/SerZhyAle" target="_blank" rel="noopener">FastMediaSorter</a> - Android-застосунку, що живе на цьому методі щодня понад рік.</span>
   </p>
 </footer>
 

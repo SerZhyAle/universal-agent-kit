@@ -10,8 +10,8 @@
 <link rel="alternate" hreflang="ru" href="https://serzhyale.github.io/universal-agent-kit/?lang=ru">
 <link rel="alternate" hreflang="uk" href="https://serzhyale.github.io/universal-agent-kit/?lang=uk">
 <link rel="alternate" hreflang="x-default" href="https://serzhyale.github.io/universal-agent-kit/">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%237aa2ff'/%3E%3Cstop offset='1' stop-color='%239d7bff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='url(%23g)'/%3E%3Cpath d='M20 18h24M20 30h24M20 42h16' stroke='%23fff' stroke-width='5' stroke-linecap='round' fill='none'/%3E%3C/svg%3E">
-<meta name="theme-color" content="#0f1115">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230a0f0a'/%3E%3Cpath d='M20 18h24M20 30h24M20 42h16' stroke='%233fb950' stroke-width='5' stroke-linecap='round' fill='none'/%3E%3C/svg%3E">
+<meta name="theme-color" content="#0a0f0a">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Universal Agent Kit">
 <meta property="og:url" content="https://serzhyale.github.io/universal-agent-kit/">
@@ -45,24 +45,24 @@
 <style>
   :root{
     --wide: min(1640px, 94vw); /* page container: scales with the screen instead of capping at a fixed width */
-    --bg:#0f1115; --bg2:#161922; --bg3:#1d2230; --fg:#e6e8ee; --muted:#9aa3b2;
-    --acc:#7aa2ff; --acc2:#9d7bff; --line:#272d3a; --code:#0b0d12; --ok:#5fd08a;
-    --warn:#e7b15a; --pill:#222838;
+    --bg:#0a0f0a; --bg2:#0f1610; --bg3:#131c14; --fg:#f1f5ee; --muted:#94a08c;
+    --acc:#3fb950; --acc2:#e3b341; --line:rgba(255,255,255,.08); --code:#070f08; --ok:#3fb950;
+    --warn:#e3b341; --pill:#131c14;
     /* Darker accent for filled controls so white text on them meets WCAG AA (>=4.5:1);
        the lighter --acc stays for text/links/borders on the dark background. */
-    --acc-fill:#3b63d6; --acc-fill2:#7a52dd; --on-acc:#fff;
+    --acc-fill:#3fb950; --acc-fill2:#3fb950; --on-acc:#04130c;
     --shadow: 0 6px 24px rgba(0,0,0,.35);
   }
   html[data-theme="light"]{
-    --bg:#f7f8fa; --bg2:#ffffff; --bg3:#eef1f6; --fg:#1b2230; --muted:#5b6675;
-    --acc:#2f5fe0; --acc2:#6a40d8; --line:#e2e6ee; --code:#0e1117; --ok:#1f8b4c;
-    --warn:#9a6a13; --pill:#e9edf5; --shadow:0 6px 24px rgba(20,30,60,.10);
+    --bg:#eef3ea; --bg2:#fff; --bg3:#e4ecdf; --fg:#16210f; --muted:#5f6b54;
+    --acc:#2f8f3a; --acc2:#9a6a13; --line:rgba(16,40,20,.12); --code:#0e1411; --ok:#2f8f3a;
+    --warn:#9a6a13; --pill:#e4ecdf; --shadow:0 6px 24px rgba(20,40,20,.10);
   }
   *{box-sizing:border-box}
   html,body{margin:0;padding:0}
   body{
     background:var(--bg); color:var(--fg);
-    font:16px/1.62 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Inter,Arial,sans-serif;
+    font:16px/1.62 'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
     -webkit-font-smoothing:antialiased;
   }
   a{color:var(--acc); text-decoration:none}
@@ -229,24 +229,31 @@
     a[href^="http"]::after{content:" (" attr(href) ")"; font-size:.8em; color:#555}
   }
 </style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&amp;family=Plus+Jakarta+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="sza-kit.css">
+<style>
+  :root{--bg2:var(--bg-2);--bg3:var(--bg-3);--fg:var(--text);--line:var(--border);--code:var(--code-bg);--pill:var(--bg-3);--acc2:var(--gold);--acc-fill:var(--acc);--acc-fill2:var(--acc);--on-acc:var(--acc-ink)}
+  main.container{padding-bottom:3rem}.sections{display:block;margin-top:0}.sections .sec{grid-column:auto}.sections .sec:nth-child(n){background:var(--card)}.sections .sec[open]{box-shadow:none;background:var(--card)}.secbody{padding:4px 0 16px}.sec[open] .secbody{border-top:1px solid var(--border)}.secbody h3{color:var(--text)}.toolbar{margin:0 0 1rem}.toolbar .btn{border-color:var(--border);background:transparent;color:var(--text)}.adopt-prompt details{background:var(--bg-3);border-color:var(--border)}.adopt-prompt summary{color:var(--acc-strong)}.adopt-prompt summary::before{color:var(--acc)}.hero .cta{display:none}.hero{border:0;margin:0}.intro-grid{margin:0 0 1.5rem}.intro-grid .card h2{font-size:1.05rem;margin-bottom:.35rem}.intro-grid .card p{font-size:.9rem;color:var(--text-2)}.get{max-width:none;margin-top:0}.get h2{font-size:1.25rem}.site-footer{max-width:none;padding:2rem 0}.site-footer .cta{display:none}.site-footer .author{border-color:var(--border)}
+  @media print{.site-header,.toolbar{display:none!important}.sections{display:block!important}.sec{background:#fff!important;border-color:#bbb!important}.card,.note,pre{background:#fff!important;color:#111!important;border-color:#bbb!important}.muted,.card p,.secteaser{color:#333!important}}
+</style>
 </head>
 <body>
-<header class="top">
-  <div class="wrap">
-    <span class="brand">Universal&nbsp;Agent&nbsp;Kit<span class="dot">.</span></span>
+<header class="site-header">
+    <span class="brand">Universal Agent Kit<span class="dot">.</span></span>
     <span class="seg" role="group" aria-label="Language" id="langGroup">
       <button id="lng-ru" type="button" onclick="setLang('ru')" aria-pressed="false" aria-label="Русский">RU</button>
       <button id="lng-en" type="button" onclick="setLang('en')" aria-pressed="true" aria-label="English">EN</button>
-      <button id="lng-uk" type="button" onclick="setLang('uk')" aria-pressed="false" aria-label="Українська">UK</button>
+      <button id="lng-uk" type="button" onclick="setLang('uk')" aria-pressed="false" aria-label="Українська">UA</button>
     </span>
-    <button class="btn" id="themeBtn" type="button" onclick="toggleTheme()" title="Theme" aria-label="Theme" aria-pressed="false">◐</button>
-    <a class="btn primary" href="universal-agent-kit.zip" download>
-      <span data-l="ru">Скачать kit</span><span data-l="en">Download kit</span><span data-l="uk">Завантажити kit</span>
+    <button class="theme-btn" id="themeBtn" type="button" onclick="toggleTheme()" title="Theme" aria-label="Theme" aria-pressed="false">◐</button>
+    <a class="btn btn-primary btn-sm" href="#get">
+       <span data-l="ru">Начать</span><span data-l="en">Get started</span><span data-l="uk">Почати</span>
     </a>
-  </div>
 </header>
 
-<main>
+<main class="container">
   <noscript>
     <p style="margin:14px 0 0;padding:11px 14px;border:1px solid var(--line);border-radius:10px;background:var(--bg2);color:var(--muted);font-size:14px">
       The language switch, theme, expand/collapse, and copy buttons need JavaScript - with it
@@ -257,36 +264,34 @@
   <!-- ===================== HERO ===================== -->
   <section class="hero">
     <div class="kicker">
-      <span data-l="ru"><b>Для любого ИИ-агента:</b> Claude · Codex · Gemini · Cursor · Cline · любая модель</span>
-      <span data-l="en"><b>For any AI agent:</b> Claude · Codex · Gemini · Cursor · Cline · any model</span>
-      <span data-l="uk"><b>Для будь-якого ШІ-агента:</b> Claude · Codex · Gemini · Cursor · Cline · будь-яка модель</span>
+      <span data-l="ru">Метод для git-репозиториев и ИИ-агентов</span>
+      <span data-l="en">Method for git repositories and AI coding agents</span>
+      <span data-l="uk">Метод для git-репозиторіїв і ШІ-агентів</span>
     </div>
     <h1>
-      <span data-l="ru">Дай своему ИИ-агенту операционную систему</span>
-      <span data-l="en">Give your AI agent an operating system</span>
-      <span data-l="uk">Дай своєму ШІ-агенту операційну систему</span>
+      <span data-l="ru">Настройте агенту исследование, план и проверку до первой правки</span>
+      <span data-l="en">Set up research, planning, and verification before the first edit</span>
+      <span data-l="uk">Налаштуйте агенту дослідження, план і перевірку до першої правки</span>
     </h1>
     <p class="lead">
-      <span data-l="ru">Переносимый набор правил, навыков, ролей, спек-процесса и памяти для ИИ-агента. Это метод, а не инструмент - он не зависит ни от уровня развития ИИ, ни от конкретных моделей, ни от даты. Берёшь - и кладёшь почти в любой git-репозиторий.</span>
-      <span data-l="en">A portable set of rules, skills, roles, a spec lifecycle, and memory for an AI agent. It's a method, not a tool - independent of how far AI has advanced, of any specific model, and of the date. Take it, drop it into most git-backed repos.</span>
-      <span data-l="uk">Переносний набір правил, навичок, ролей, спек-процесу та пам'яті для ШІ-агента. Це метод, а не інструмент - не залежить ні від рівня розвитку ШІ, ні від конкретних моделей, ні від дати. Береш - і кладеш майже в будь-який git-репозиторій.</span>
+      <span data-l="ru">Universal Agent Kit — набор правил, промптов, ролей и справки для человека, который ведёт разработку с ИИ-агентом. Подходит для нового проекта или аккуратного внедрения в уже работающий репозиторий.</span>
+      <span data-l="en">Universal Agent Kit is a set of rules, prompts, roles, and reference material for people developing with an AI coding agent. Use it for a new project or to introduce a method carefully into an existing repository.</span>
+      <span data-l="uk">Universal Agent Kit — набір правил, промптів, ролей і довідки для людини, яка розробляє з ШІ-агентом. Підходить для нового проєкту або обережного впровадження в уже робочий репозиторій.</span>
     </p>
-    <div class="cta">
-      <a class="btn primary" href="universal-agent-kit.zip" download>
-        <span data-l="ru">⤓ Скачать kit (.zip)</span><span data-l="en">⤓ Download kit (.zip)</span><span data-l="uk">⤓ Завантажити kit (.zip)</span>
-      </a>
-      <a class="btn" href="#old-ru" data-l="ru">Влить в существующий проект</a>
-      <a class="btn" href="#old-en" data-l="en">Adopt in an existing project</a>
-      <a class="btn" href="#old-uk" data-l="uk">Влити в наявний проєкт</a>
-      <a class="btn" href="#new-ru" data-l="ru">Поднять новый проект</a>
-      <a class="btn" href="#new-en" data-l="en">Start a new project</a>
-      <a class="btn" href="#new-uk" data-l="uk">Підняти новий проєкт</a>
-    </div>
-    <p class="hero-note muted">
-      <span data-l="ru">Это не установка: ты отдаёшь kit своему кодинг-агенту, и он вливает то, что подходит.</span>
-      <span data-l="en">Not an install - you hand the kit to your coding agent, and it merges the pieces that fit.</span>
-      <span data-l="uk">Це не встановлення: ти віддаєш kit своєму кодинг-агенту, і він вливає те, що підходить.</span>
-    </p>
+  </section>
+
+  <section class="intro-grid grid" aria-label="Common starting paths">
+    <article class="card"><h2><span data-l="ru">Новый проект</span><span data-l="en">New project</span><span data-l="uk">Новий проєкт</span></h2><p><span data-l="ru">Сначала попросите агента собрать карту кода, затем применяйте правила и команды под ваш стек.</span><span data-l="en">Have the agent map the codebase first, then adapt rules and commands to your stack.</span><span data-l="uk">Спершу попросіть агента скласти карту коду, потім адаптуйте правила й команди під свій стек.</span></p></article>
+    <article class="card"><h2><span data-l="ru">Существующий репозиторий</span><span data-l="en">Existing repository</span><span data-l="uk">Наявний репозиторій</span></h2><p><span data-l="ru">Передавайте kit вместе с merge-prompt: агент инвентаризирует совпадения и сначала показывает план.</span><span data-l="en">Give the kit with merge-prompt: the agent inventories overlaps and shows a plan first.</span><span data-l="uk">Передавайте kit разом з merge-prompt: агент інвентаризує збіги й спершу показує план.</span></p></article>
+    <article class="card"><h2><span data-l="ru">Минимальный старт</span><span data-l="en">Minimal start</span><span data-l="uk">Мінімальний старт</span></h2><p><span data-l="ru">Возьмите CLAUDE.md или AGENTS.md, затем /quick и /fix; остальные части добавляйте, когда они нужны.</span><span data-l="en">Start with CLAUDE.md or AGENTS.md, then /quick and /fix; add the rest when needed.</span><span data-l="uk">Візьміть CLAUDE.md або AGENTS.md, потім /quick і /fix; решту додавайте, коли вона потрібна.</span></p></article>
+    <article class="card"><h2><span data-l="ru">Другой агент</span><span data-l="en">Another agent</span><span data-l="uk">Інший агент</span></h2><p><span data-l="ru">Для Codex, Cursor, Cline, Windsurf и Aider это адаптация: промпты и роли нужно положить в формат инструмента.</span><span data-l="en">For Codex, Cursor, Cline, Windsurf, and Aider this is an adaptation: place prompts and roles in that tool’s format.</span><span data-l="uk">Для Codex, Cursor, Cline, Windsurf і Aider це адаптація: розмістіть промпти й ролі у форматі інструмента.</span></p></article>
+  </section>
+
+  <section class="get" id="get">
+    <p class="whatfor"><span data-l="ru">Безопасный первый результат: скачанный и распакованный набор, который агент сначала изучит вместе с вашим проектом — без молчаливой замены существующих правил.</span><span data-l="en">Safe first outcome: a downloaded, unpacked kit that the agent studies alongside your project first — without silently replacing existing rules.</span><span data-l="uk">Безпечний перший результат: завантажений і розпакований набір, який агент спершу вивчить разом із вашим проєктом — без мовчазної заміни чинних правил.</span></p>
+    <div class="channels"><a class="btn btn-primary" href="universal-agent-kit.zip" download><span data-l="ru">Получить kit (.zip)</span><span data-l="en">Get kit (.zip)</span><span data-l="uk">Отримати kit (.zip)</span></a><a class="btn btn-ghost" href="https://github.com/SerZhyAle/universal-agent-kit" target="_blank" rel="noopener"><span data-l="ru">Исходный код</span><span data-l="en">Source code</span><span data-l="uk">Вихідний код</span></a></div>
+    <ol class="quickstart"><li><span data-l="ru">Скачайте и распакуйте архив рядом с проектом.</span><span data-l="en">Download and unpack the archive beside your project.</span><span data-l="uk">Завантажте й розпакуйте архів поруч із проєктом.</span></li><li><span data-l="ru">Отдайте агенту папку и <code>merge-prompt.txt</code>.</span><span data-l="en">Give the folder and <code>merge-prompt.txt</code> to your agent.</span><span data-l="uk">Передайте агенту теку й <code>merge-prompt.txt</code>.</span></li><li><span data-l="ru">Проверьте предложенный план и изменения в ваших правилах перед применением.</span><span data-l="en">Review the proposed plan and changes to your rules before applying them.</span><span data-l="uk">Перевірте запропонований план і зміни до ваших правил перед застосуванням.</span></li></ol>
+    <div class="note"><div class="tag"><span data-l="ru">Важно</span><span data-l="en">Important</span><span data-l="uk">Важливо</span></div><p><span data-l="ru">Набор ничего не запускает сам. Файлы <code>.claude/</code> нативны для Claude Code; для других инструментов используйте карту адаптации. Проверьте шаблон permissions до слияния.</span><span data-l="en">The kit runs nothing by itself. Files in <code>.claude/</code> are native to Claude Code; use the adaptation map for other tools. Review the permissions template before merging.</span><span data-l="uk">Набір нічого не запускає сам. Файли <code>.claude/</code> нативні для Claude Code; для інших інструментів використовуйте карту адаптації. Перевірте шаблон permissions перед злиттям.</span></p></div>
   </section>
 
   <div class="toolbar">
@@ -303,7 +308,7 @@
 
     <div class="sections">
 
-      <details class="sec" open>
+      <details class="sec">
         <summary><span class="secnum" aria-hidden="true">00</span><span class="sechead"><span class="sectitle" role="heading" aria-level="2">Зачем это всё</span><span class="secteaser">Ассистент быстрый, но дрейфует - лечит метод, а не инструмент</span></span></summary>
         <div class="secbody">
           <p>ИИ-ассистент быстрый, но дрейфует. Он угадывает пути к файлам, придумывает API, который изменился две версии назад, пишет правдоподобный мусор, который компилируется и тихо гниёт, забывает всё между сессиями и либо спрашивает разрешения на каждый чих, либо молча делает не то. По сути - гениальный стажёр с амнезией: печатает быстрее тебя, но к обеду уже не помнит, как тебя зовут.</p>
@@ -337,7 +342,7 @@
         </div>
       </details>
 
-      <details class="sec" open>
+      <details class="sec">
         <summary><span class="secnum" aria-hidden="true">01</span><span class="sechead"><span class="sectitle" role="heading" aria-level="2">Восемь принципов на один экран</span><span class="secteaser">Сводка всего метода одним взглядом</span></span></summary>
         <div class="secbody">
           <div class="grid">
@@ -640,7 +645,7 @@ Do not change anything yet. Show me the plan first; on any conflict, my existing
 
     <div class="sections">
 
-      <details class="sec" open>
+      <details class="sec">
         <summary><span class="secnum" aria-hidden="true">00</span><span class="sechead"><span class="sectitle" role="heading" aria-level="2">Why any of this</span><span class="secteaser">The assistant is fast but drifts - a method fixes it, not a tool</span></span></summary>
         <div class="secbody">
           <p>An AI assistant is fast, but it drifts. It guesses file paths, invents an API that changed two versions ago, writes plausible slop that compiles and quietly rots, forgets everything between sessions, and either asks permission for every keystroke or silently does the wrong thing. Essentially a brilliant intern with amnesia: types faster than you, but by lunch can't recall your name.</p>
@@ -674,7 +679,7 @@ Do not change anything yet. Show me the plan first; on any conflict, my existing
         </div>
       </details>
 
-      <details class="sec" open>
+      <details class="sec">
         <summary><span class="secnum" aria-hidden="true">01</span><span class="sechead"><span class="sectitle" role="heading" aria-level="2">Eight principles, one screen</span><span class="secteaser">The whole method at a glance</span></span></summary>
         <div class="secbody">
           <div class="grid">
@@ -977,7 +982,7 @@ Do not change anything yet. Show me the plan first; on any conflict, my existing
 
     <div class="sections">
 
-      <details class="sec" open>
+      <details class="sec">
         <summary><span class="secnum" aria-hidden="true">00</span><span class="sechead"><span class="sectitle" role="heading" aria-level="2">Навіщо це все</span><span class="secteaser">Асистент швидкий, але дрейфує - лікує метод, а не інструмент</span></span></summary>
         <div class="secbody">
           <p>ШІ-асистент швидкий, але дрейфує. Він вгадує шляхи до файлів, вигадує API, що змінився дві версії тому, пише правдоподібне сміття, яке компілюється і тихо гниє, забуває все між сесіями і або питає дозволу на кожен чих, або мовчки робить не те. По суті - геніальний стажер з амнезією: друкує швидше за тебе, але до обіду вже не пам'ятає, як тебе звати.</p>
@@ -1011,7 +1016,7 @@ Do not change anything yet. Show me the plan first; on any conflict, my existing
         </div>
       </details>
 
-      <details class="sec" open>
+      <details class="sec">
         <summary><span class="secnum" aria-hidden="true">01</span><span class="sechead"><span class="sectitle" role="heading" aria-level="2">Вісім принципів на один екран</span><span class="secteaser">Зведення всього методу одним поглядом</span></span></summary>
         <div class="secbody">
           <div class="grid">
@@ -1310,32 +1315,29 @@ Do not change anything yet. Show me the plan first; on any conflict, my existing
   </article>
 </main>
 
-<footer>
+<footer class="site-footer"><div class="container">
   <div data-l="ru">
     <strong>Universal Agent Kit</strong> - переносимый метод работы с ИИ-агентами.
-    <div class="cta">
-      <a class="btn primary" href="universal-agent-kit.zip" download>⤓ Скачать kit (.zip)</a>
-      <a class="btn" href="https://github.com/SerZhyAle/universal-agent-kit" target="_blank" rel="noopener">GitHub</a>
-    </div>
     <p class="muted">Kit - MIT · текст - CC BY 4.0 · выжимка из реального проекта, без привязки к стеку.</p>
   </div>
   <div data-l="en">
     <strong>Universal Agent Kit</strong> - a portable method for working with AI agents.
-    <div class="cta">
-      <a class="btn primary" href="universal-agent-kit.zip" download>⤓ Download kit (.zip)</a>
-      <a class="btn" href="https://github.com/SerZhyAle/universal-agent-kit" target="_blank" rel="noopener">GitHub</a>
-    </div>
     <p class="muted">Kit is MIT · prose is CC BY 4.0 · distilled from a real project, stack-agnostic.</p>
   </div>
   <div data-l="uk">
     <strong>Universal Agent Kit</strong> - переносний метод роботи з ШІ-агентами.
-    <div class="cta">
-      <a class="btn primary" href="universal-agent-kit.zip" download>⤓ Завантажити kit (.zip)</a>
-      <a class="btn" href="https://github.com/SerZhyAle/universal-agent-kit" target="_blank" rel="noopener">GitHub</a>
-    </div>
     <p class="muted">Kit - MIT · текст - CC BY 4.0 · дистильовано з реального проєкту, без прив'язки до стеку.</p>
   </div>
-  <p class="author">
+  <div class="tools-grid" aria-label="More tools by SZA">
+    <a href="https://serzhyale.github.io/FastMediaSorter_mob_v2/"><b>FastMediaSorter v2</b><span>Android media sorter</span></a>
+    <a href="https://serzhyale.github.io/FastMediaSorter_Lite/"><b>Fast Media Sorter</b><span>Windows media sorter</span></a>
+    <a href="https://serzhyale.github.io/CyrFlip/"><b>CyrFlip</b><span>Windows layout fixer</span></a>
+    <a href="https://serzhyale.github.io/doc-html-translate/"><b>doc-html-translate</b><span>Windows ebook converter</span></a>
+    <a href="https://serzhyale.github.io/FileDO/"><b>FileDO</b><span>Windows storage CLI</span></a>
+    <a href="https://github.com/SerZhyAle/OneClickRunner"><b>OneClickRunner</b><span>Windows tray launcher</span></a>
+    <a href="https://sza.od.ua"><b>SZA</b><span>Portfolio</span></a>
+  </div>
+  <p class="author footer-bottom">
     <span data-l="ru">Автор</span><span data-l="en">Author</span><span data-l="uk">Автор</span>:
     <a href="https://sza.od.ua" target="_blank" rel="noopener">SZA.od.ua</a> ·
     <a href="mailto:sza@ukr.net">sza@ukr.net</a> ·
@@ -1346,7 +1348,7 @@ Do not change anything yet. Show me the plan first; on any conflict, my existing
     <span data-l="en">Built from hands-on experience with <a href="https://github.com/SerZhyAle" target="_blank" rel="noopener">FastMediaSorter</a> - a shipping Android app run on this method every day for over a year.</span>
     <span data-l="uk">Зібрано за досвідом розробки з <a href="https://github.com/SerZhyAle" target="_blank" rel="noopener">FastMediaSorter</a> - Android-застосунку, що живе на цьому методі щодня понад рік.</span>
   </p>
-</footer>
+</div></footer>
 
 <script>
   var I18N = {
@@ -1372,7 +1374,7 @@ Do not change anything yet. Show me the plan first; on any conflict, my existing
     var dark = d.getAttribute('data-theme') !== 'light';
     var b = document.getElementById('themeBtn');
     if(b){ b.setAttribute('aria-label', dark ? m.toLight : m.toDark); b.setAttribute('title', m.theme); b.setAttribute('aria-pressed', String(!dark)); }
-    metaSet('meta[name="theme-color"]', dark ? '#0f1115' : '#f7f8fa');
+    metaSet('meta[name="theme-color"]', dark ? '#0a0f0a' : '#eef3ea');
   }
   function applyLang(l){
     var d = document.documentElement, m = I18N[l]||I18N.en;
@@ -1439,7 +1441,7 @@ Do not change anything yet. Show me the plan first; on any conflict, my existing
       setTimeout(function(){ btn.innerHTML = btn.dataset.orig; btn.removeAttribute('disabled'); }, 1600);
     }
     function done(){ btn.setAttribute('disabled',''); flash('✓ ' + m.copied); }
-    function fail(){ flash('⚠ ' + m.copyFail); }   /* both clipboard paths failed - don't lie */
+    function fail(){ flash(m.copyFail); }   /* both clipboard paths failed - don't lie */
     function fallback(){
       try{ var ta=document.createElement('textarea'); ta.value=txt; ta.style.position='fixed'; ta.style.left='-9999px';
         document.body.appendChild(ta); ta.focus(); ta.select();

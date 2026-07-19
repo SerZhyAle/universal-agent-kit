@@ -1,3 +1,7 @@
+---
+description: "Use to apply the mechanical action items from a spec audit and then re-audit. Triggers: 'spec-fix', 'fix the audit findings', after /spec-check reports Partial or Broken."
+---
+
 # Specification Audit Fix-up
 
 Apply the **mechanical** action items from the latest `/spec-check` audit, then re-audit. This

@@ -19,6 +19,7 @@ INPUTS
     .claude/settings.json          default agent + permission template
     docs/SPEC_LIFECYCLE.md         the ticket methodology
     docs/CODE_QUALITY.md           anti-slop conventions
+    docs/AUTHORING.md              how to write a new rule/skill/agent (test-first, SDO descriptions)
     docs/AGENT_MEMORY.md           persistent memory discipline (four entry types)
     docs/RESEARCH_INDEX.md         research order + the queryable code index
     docs/VALIDATION.md             the validation ladder

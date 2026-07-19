@@ -44,6 +44,20 @@ have missed. A check whose `actual` you did not read did not happen.
 `FAIL` on any check means the step is not done: record the blocker and stop. Never auto-revert
 and never paper over a failure by moving on - a human decides from the evidence.
 
+## Red flags: you are about to claim without proof
+
+The ladder only helps if you actually climb it. The failure mode is subtle: you *narrate* a result
+instead of *reading* one. Certain words are the tell that you are about to assert a status you have
+not verified this run - treat them as a hard stop, not a hedge:
+
+> "should work", "probably passes", "seems fixed", "looks right", "I think it compiles"
+
+Each of those means the proving command has not been run and read yet. Stop, run it, read the exit
+code and the specific verdict line, then state the result in the past tense with the evidence. A
+claim you softened with "should" is a claim you already knew you could not back - the softening is
+the confession. Self-reports carry the same trap: a subagent's "build passed" is its narration, not
+your evidence; re-run and read it yourself.
+
 ## Post-change discipline
 
 A change is not just its diff. Before calling a step complete, run the housekeeping the project

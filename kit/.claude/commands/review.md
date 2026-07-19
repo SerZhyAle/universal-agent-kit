@@ -1,3 +1,7 @@
+---
+description: "Use for a terse, actionable code review of a diff or change - findings with severity, no cheerleading. Triggers: 'review this', 'look over my change', a pre-merge pass."
+---
+
 # Code Review
 
 > **GLOBAL DIRECTIVES (anti-bureaucracy):**

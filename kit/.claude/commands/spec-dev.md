@@ -1,3 +1,7 @@
+---
+description: "Use to execute a tactical plan step by step, running each step's static check before marking it done and hard-stopping on ambiguity. Triggers: 'spec-dev', 'implement this plan', 'continue the ticket'."
+---
+
 # Specification Developer Executor
 
 Execute a tactical spec **one step at a time**. Read `<PLAN_DIR>/<ID>_<slug>/INDEX.md` +

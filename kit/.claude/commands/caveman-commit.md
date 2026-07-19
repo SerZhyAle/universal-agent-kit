@@ -1,3 +1,7 @@
+---
+description: "Use to write a terse Conventional Commit message with no filler. Triggers: 'caveman commit', a quick commit when the change is already understood."
+---
+
 # Caveman Commit
 
 > **LOCAL DIRECTIVES:**

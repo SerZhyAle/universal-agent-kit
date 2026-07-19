@@ -1,3 +1,7 @@
+---
+description: "Use to resolve user-facing ambiguity - placement, wording, visibility, fallback - before building. Triggers: 'ui-clarify', any user-visible change with an unresolved presentation decision."
+---
+
 # Clarification Gate (user-facing decisions)
 
 Block implementation until every meaningful **user-facing** decision is explicit. "UI" here

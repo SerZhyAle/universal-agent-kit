@@ -1,3 +1,7 @@
+---
+description: "Use to write the strategic what/why of a feature - no class names, no file paths, just intent and scope. Triggers: 'write a spec', 'create a ticket for', 'we need a plan for', a task carrying real design decisions."
+---
+
 # Strategic Specification Writer
 
 Write a **strategic** spec: the product-level *what* and *why*. No class names, file paths,

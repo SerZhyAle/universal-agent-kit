@@ -48,6 +48,7 @@ universal-agent-kit/
   docs/
     SPEC_LIFECYCLE.md       <- the ticket methodology, tooling-agnostic
     CODE_QUALITY.md         <- anti-slop conventions, layering, comments
+    AUTHORING.md            <- how to write a new rule/skill/agent (test-first, SDO descriptions)
     AGENT_MEMORY.md         <- persistent memory that survives across sessions
     RESEARCH_INDEX.md       <- research order + the queryable code index
     VALIDATION.md           <- the validation ladder: "done" means evidence
@@ -83,8 +84,9 @@ Hand this whole folder to your coding agent and say something like:
    subagents.
 3. Merge `CLAUDE.md` into your repo root (or `.claude/CLAUDE.md`). Fill the placeholders.
 4. Optionally merge `.claude/settings.json` (review permissions first - see below).
-5. Copy the `docs/*` files (`SPEC_LIFECYCLE`, `CODE_QUALITY`, `AGENT_MEMORY`, `RESEARCH_INDEX`,
-   `VALIDATION`, `COST`, `REPLACES`) wherever your docs live; reference them from `CLAUDE.md`.
+5. Copy the `docs/*` files (`SPEC_LIFECYCLE`, `CODE_QUALITY`, `AUTHORING`, `AGENT_MEMORY`,
+   `RESEARCH_INDEX`, `VALIDATION`, `COST`, `REPLACES`) wherever your docs live; reference them
+   from `CLAUDE.md`.
    `REPLACES_RU.md` is a Russian mirror of `REPLACES.md` - skip it unless your team reads Russian.
 6. Optionally copy `memory/` - the index template and one sample entry per type - if your
    runtime supports persistent agent memory.

@@ -128,8 +128,16 @@ but never up (see `docs/CODE_QUALITY.md`). And when a gate keeps catching the sa
 close the source: add the matching DON'T here and reinforce it in the code-generating skills
 - a detector stops a human once, but the agent re-emits the pattern every generation.
 
+When you write a *new* rule, gate, skill, or agent on top of the kit, follow `docs/AUTHORING.md`:
+author it against a failure you actually observed, name the excuse it must close, and give every
+skill/agent a trigger-focused `description` (not a summary of its steps).
+
 ## 10. Post-change discipline
 - Record `expected: X | actual: Y` for every check you run.
+- No completion claim without fresh evidence. "should work", "probably passes", "seems fixed",
+  "looks right" mean the proving command has not been run this run - stop and run it, read the
+  exit code, then state the result. A subagent's "build passed" is its narration, not your
+  evidence; re-run and read it yourself. See `docs/VALIDATION.md`.
 - A ticket is done only when its headline user-visible behaviour works end-to-end; created
   classes, wired contracts, and a passing compile are milestones, not deliverables. Never
   mark phases done or invite a manual test while the headline action still only logs, shows

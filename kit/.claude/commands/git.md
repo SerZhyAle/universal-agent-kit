@@ -1,3 +1,7 @@
+---
+description: "Use for git work - branch model, staging, commit grouping, and what not to commit. Triggers: 'commit', 'branch', 'stage these', 'push', questions about commit hygiene."
+---
+
 # Git Guide
 
 > **GLOBAL DIRECTIVES (anti-bureaucracy):**

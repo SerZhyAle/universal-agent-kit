@@ -1,3 +1,7 @@
+---
+description: "Use to capture an out-of-scope finding as a Draft stub and immediately return to the current task - never chase it now. Triggers: 'park this', an unrelated problem surfaced mid-task, an idea to note without derailing."
+---
+
 # Park - Capture an Out-of-Scope Finding
 
 > **GLOBAL DIRECTIVES (anti-bureaucracy):**

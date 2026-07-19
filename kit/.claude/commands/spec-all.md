@@ -1,3 +1,7 @@
+---
+description: "Use to run the whole pipeline end to end - research, strategic spec, tactical plan, execution, audit - for one feature. Triggers: 'spec-all', 'take this from idea to done', a feature you want driven start to finish."
+---
+
 # /spec-all - full pipeline, idea to verified
 
 Orchestrate the whole spec pipeline end to end: research → strategic spec → tactical plan →

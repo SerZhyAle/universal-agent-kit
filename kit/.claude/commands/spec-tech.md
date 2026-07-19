@@ -1,3 +1,7 @@
+---
+description: "Use to break an approved strategic spec into a phased, verifiable plan where every step ends in a static check. Triggers: 'spec-tech', 'make the plan', 'turn this spec into steps'."
+---
+
 # Tactical Specification Writer
 
 Break an approved strategic spec into **sequenced, verifiable phases**. Creates

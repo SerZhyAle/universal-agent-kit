@@ -1,3 +1,7 @@
+---
+description: "Use for a trivial edit - a typo, one constant, one string, a colour or spacing tweak, renaming a single local. No spec, no build gate. Triggers: 'quick fix', 'just change this one thing'."
+---
+
 # Quick Fix
 
 > **GLOBAL DIRECTIVES (anti-bureaucracy):**

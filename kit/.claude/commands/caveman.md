@@ -1,3 +1,7 @@
+---
+description: "Use when the user wants brevity mode for the whole chat - drop filler, keep only signal. Triggers: '/caveman', 'be brief', 'stop padding'."
+---
+
 # Caveman Mode
 
 > **LOCAL DIRECTIVES:**

@@ -1,3 +1,7 @@
+---
+description: "Use for a narrow bug or behaviour fix with a known-enough cause - local validation only, no spec, no ceremony. Triggers: 'fix this bug', 'this is broken', a small behavioural correction."
+---
+
 # Fix - Narrow Bug / Behaviour Fix
 
 > **GLOBAL DIRECTIVES (anti-bureaucracy):**

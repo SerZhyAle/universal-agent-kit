@@ -1,3 +1,7 @@
+---
+description: "Use to run the app and observe the actual behaviour, reporting PASS/FAIL with evidence. Triggers: 'verify', 'does it actually work', a behaviour claim that needs run-and-observe proof."
+---
+
 # Verify - Run-and-Observe Sanity Check
 
 > **GLOBAL DIRECTIVES (anti-bureaucracy):**

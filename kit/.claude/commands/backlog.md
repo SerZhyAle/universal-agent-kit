@@ -1,3 +1,7 @@
+---
+description: "Use to drain the backlog unattended - pick the highest-priority eligible ticket, run the full pipeline, repeat, and defer human-gated tickets to one end-of-run report. Triggers: 'work through the backlog', 'clear the queue', autonomous multi-ticket runs."
+---
+
 # Backlog - Drain the Backlog Unattended
 
 > **GLOBAL DIRECTIVES (anti-bureaucracy):**

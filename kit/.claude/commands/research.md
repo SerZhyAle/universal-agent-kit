@@ -1,3 +1,7 @@
+---
+description: "Use to investigate before any non-trivial change - read the map, then the code, and persist findings instead of re-grepping. Triggers: 'research', 'investigate', 'how does X work here', 'where does this live', before writing a spec."
+---
+
 # Research Guide
 
 > **GLOBAL DIRECTIVES (anti-bureaucracy):**

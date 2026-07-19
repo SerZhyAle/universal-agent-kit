@@ -1,3 +1,7 @@
+---
+description: "Use to audit an implementation against its spec and set the ticket status from reality (Verified/Partial/Broken). Triggers: 'spec-check', 'is this actually implemented', 'audit ticket X'."
+---
+
 # Specification Implementation Audit
 
 Audit a spec against the **actual repository state**. Status comes from what the code proves,

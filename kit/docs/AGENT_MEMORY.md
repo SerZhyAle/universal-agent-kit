@@ -137,6 +137,11 @@ scratch/handoff file or the plan itself, never `memory/`).
 
 ## Adapting it
 
+- **Committed vs per-user is a per-project choice.** Committing `memory/` makes the memory
+  project-scoped and team-shared through git - the default this document assumes. A runtime
+  with its own per-user store keeps the memory local to one person instead. The discipline is
+  identical either way - only the home differs. Prefer per-user when the entries are personal
+  working preferences rather than project context, or when the repo is public.
 - The four types are a strong default, not a law. If your team needs a fifth, add it - but
   resist turning memory into a wiki; the index is always-loaded and must stay short.
 - No runtime memory feature? Keep `memory/` in the repo and add a line to `CLAUDE.md`: "At the

@@ -51,7 +51,7 @@ BlockNeedUserTest), report, stop. No `/spec-dev` chain. If ANY fails: continue.
 
 **3 - Design the phase graph.** This is the highest-risk output of the skill: a wrong order
 or a missed strategic requirement costs a full `/spec-dev` cycle. Do not write any file
-until 3.1–3.4 pass.
+until 3.1-3.4 pass.
 
 **3.1 - Coverage inventory.** Re-read the strategic spec end-to-end plus every research
 file. Build a scratch inventory (chat-side, never a file): one line per §2 goal, §5.1
@@ -86,7 +86,7 @@ Sole exception: the final docs-cleanup phase. A phase where most steps fail this
 not a phase - merge the survivors into a real one.
 
 Phase shape: each phase mergeable as a coherent unit; one build-time invariant proving
-completion; no half-broken state between steps. Target 3–8 phases. > 10 → split the feature
+completion; no half-broken state between steps. Target 3-8 phases. > 10 → split the feature
 into multiple specs.
 
 **4 - Write `INDEX.md`** (template below).

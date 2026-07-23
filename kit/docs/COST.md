@@ -19,6 +19,16 @@ something inline cannot:
 
 For a quick lookup, an inline grep beats a spawned reader every time.
 
+## Tool budget per subagent
+
+Scope is a budget too. Give a subagent only the tools its job needs: a read-only
+investigator gets read/search, never edit or UI-automation; an implementer gets the editor,
+not the deploy keys. Beyond safety, unused capability costs real overhead - an attached tool
+server (MCP or similar) can spin up its own process and context for every agent that carries
+it, so a reader with automation tools enabled is pure waste. The kit's role briefs declare
+their tool lists in frontmatter; keep that discipline when you author new ones
+(see `AUTHORING.md`).
+
 ## Context hygiene
 
 - The context window fills fast and answer quality degrades as it fills. Between unrelated tasks,

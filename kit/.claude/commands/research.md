@@ -65,6 +65,6 @@ read):
 
 - Report the dossier path in `<SCRATCH_DIR>/`.
 - Ticket-bound: report the artifact path under `<PLAN_DIR>/`.
-- List the next 3–6 high-value reads.
+- List the next 3-6 high-value reads.
 - Answer the direct question after the dossier-backed reads.
 - If a section had no matches, say so and continue - absence is a finding.

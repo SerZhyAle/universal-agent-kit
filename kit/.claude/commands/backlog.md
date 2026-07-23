@@ -62,6 +62,6 @@ terminal `Verified` or land in the skip-cache. Stop when the eligible set is emp
   `BlockExternal` (what it waits on). One actionable line each.
 - **Stuck** - anything that could not advance for a non-human reason, with the failing check.
 
-`--dry-run` runs Steps 1–2 in a loop against a *simulated* skip-cache and prints the selection
+`--dry-run` runs Steps 1-2 in a loop against a *simulated* skip-cache and prints the selection
 order it would take, then the would-be report buckets - touching no ticket file and invoking no
 `/spec*` skill.

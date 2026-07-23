@@ -29,7 +29,7 @@ date-slug scheme allocates the id that way instead. The tactical folder
 
 ## Process
 
-**1 - Parse and normalize.** Derive a kebab-case `slug` from the description (2–5
+**1 - Parse and normalize.** Derive a kebab-case `slug` from the description (2-5
 content-bearing words, ≤ 60 chars). Prefix `bugfix-` for fix/crash wording, `hotfix-` for
 urgent/blocker wording. When the input is free-form, keep the user's original phrasing -
 §1 must paraphrase *their* problem statement, not a reinterpretation. Default priority 50
@@ -49,7 +49,7 @@ capability.
 - [ ] Mechanically deterministic - no deferred design decisions
 - [ ] Estimated delta < ~100 lines total
 
-**If ALL pass → PRIMITIVE path** (skip steps 3–7):
+**If ALL pass → PRIMITIVE path** (skip steps 3-7):
 1. Allocate the id, write a minimal spec (`## Problem`, `## Approach` - one bullet per file,
    `## Done criteria` - one observable check per file). Set `Status: In Progress`.
 2. Implement directly, then run the narrowest meaningful check from `docs/VALIDATION.md` (a

@@ -42,7 +42,7 @@ present). If not, report the blocker and stop - do not fake a pass.
 tail of the output to `<SCRATCH_DIR>/verify_<TS>.md` and abort. Do not proceed.
 
 **4 - Author the scenario.** Write `<SCRATCH_DIR>/verify_<TS>.md` with a header (target,
-version, environment) and an ordered 1–5 step scenario. Each step: `goal`, `action`,
+version, environment) and an ordered 1-5 step scenario. Each step: `goal`, `action`,
 `expected observable result`, optional `expected log line`. Sources, in priority order:
 user free-text → ticket acceptance criteria → default smoke (start, exercise the main
 path, assert no error/crash).

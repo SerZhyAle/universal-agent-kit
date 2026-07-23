@@ -66,6 +66,9 @@ needs so it is never "remembered later":
 - **Changelog / dev log** - append the entry if the project keeps one.
 - **User-facing docs** - update them for any new user-visible capability, in every language the
   docs ship in. Do this *before* marking the step done, not in a cleanup pass that never comes.
+  Keep the full list of ship-together surfaces (README, site page, each locale, each listing)
+  in one manifest and touch them in the same change - the surface missing from the list is the
+  one that silently goes stale.
 - **Code index** - regenerate it if you changed code (see `RESEARCH_INDEX.md`); a stale index
   misdirects the next search.
 - **Ticket status** - move the spec's status to match reality (see `SPEC_LIFECYCLE.md`).

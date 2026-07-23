@@ -55,7 +55,7 @@ affected.
 assumptions. Mark every unresolved item as blocking.
 
 **Step 3 - Ask or propose.** Ask only the questions needed to unblock. Where a choice can be
-delegated, present 2–3 concrete options with trade-offs rather than an open question.
+delegated, present 2-3 concrete options with trade-offs rather than an open question.
 
 **Step 4 - Produce one outcome.**
 

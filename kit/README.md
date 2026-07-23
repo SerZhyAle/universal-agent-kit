@@ -189,5 +189,7 @@ more confirmation prompts.
 
 Adapted from the FastMediaSorter Android project's `.claude/` setup. Android-, PowerShell-,
 and Russian-locale-specific machinery was removed; the transferable methodology was kept
-and rewritten to be stack-neutral. No source code or proprietary content is included -
-only the working method.
+and rewritten to be stack-neutral. The same core has since been reconciled against the
+author's wider portfolio - an Android app, Windows desktop apps, Go command-line tools, a
+browser extension - and the rules that survived every shape are the ones kept here. No
+source code or proprietary content is included - only the working method.

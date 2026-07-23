@@ -33,7 +33,7 @@ On `$ARGUMENTS`:
   2. `git branch --show-current` - confirm the active branch.
   3. Group files by feature/concern.
   4. Identify files that should NOT be committed (see exclusion list).
-  5. Suggest 2–4 logical commit groups + proposed messages.
+  5. Suggest 2-4 logical commit groups + proposed messages.
   6. Show the exact `git add` commands per group.
 - **Specific file/topic** → focus there, use exact commands, never guess.
 

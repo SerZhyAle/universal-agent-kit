@@ -20,10 +20,11 @@ INPUTS
     docs/SPEC_LIFECYCLE.md         the ticket methodology
     docs/CODE_QUALITY.md           anti-slop conventions
     docs/AUTHORING.md              how to write a new rule/skill/agent (test-first, SDO descriptions)
+    docs/HOOKS.md                  event hooks: which verdict, and the hook inventory
     docs/AGENT_MEMORY.md           persistent memory discipline (four entry types)
     docs/RESEARCH_INDEX.md         research order + the queryable code index
     docs/VALIDATION.md             the validation ladder
-    docs/COST.md                   agent cost & fan-out discipline, model-tier routing
+    docs/COST.md                   cost & fan-out, model-tier routing, the shared-resource lock queue
     docs/REPLACES.md               placeholder replacements reference (EN)
     docs/REPLACES_RU.md            placeholder replacements reference (RU mirror, optional)
     memory/                        memory index template + one sample entry per type

@@ -144,7 +144,7 @@ its own row, and `VALIDATION.md` and the skill files defer to it rather than red
 | `/spec` | none (allocates an id) | `Approved` (complex), or `Implemented` / `BlockNeedUserTest` (primitive, implemented in place) | `/spec-tech` (complex only; a primitive stops after implementing) | a required research item is Open |
 | `/spec-tech` | `Approved` or later | `Tactical` | `/spec-dev` | an unchecked pre-implementation blocker remains |
 | `/spec-dev` | `Tactical` / `In Progress` | `Implemented` or `BlockNeedUserTest` | `/spec-check` | ambiguity, a failed check, or a `Block*` condition |
-| `/spec-check` | `Implemented` or later | `Verified` / `Partial` / `Broken` / `BlockNeedUserTest` | `/spec-fix` (only if `Partial`/`Broken`) | an open manual check holds at `BlockNeedUserTest` |
+| `/spec-check` | `Implemented` or later | `Verified` / `Partial` / `Broken` / `BlockNeedUserTest` | `/spec-fix` (only if `Partial`/`Broken`) | an open manual check holds at `BlockNeedUserTest`; an unhanded open §6 question refuses `Verified` |
 | `/spec-fix` | `Partial` / `Broken` | re-runs `/spec-check` | `/spec-check` | a fix needs a decision the audit cannot supply |
 | `/verify` | any | no status change | - | - |
 
@@ -170,6 +170,61 @@ Three rules bind the whole table:
   `BlockNeedUserTest` - it never enters `/spec-tech`. A sound build with an unresolved manual check
   produces `BlockNeedUserTest`, not `Verified`. Everything else follows the linear flow.
 
+## Two literal tokens: direction, and the question that leaves with a closed ticket
+
+A ticket's prose about its neighbours cannot be read by a machine, and a closed ticket takes its
+unanswered questions with it. Two literal tokens fix both, and they are the only place in this
+lifecycle where a field exists for a *reader that is not human*.
+
+Put them in the ticket's header block, next to `**Status:**`, and make both mandatory - `none` is a
+value, an absent line is not:
+
+```
+**Blocked-by:** <ID>[, <ID>..] | none
+**Carried-to:** <ID> | none
+```
+
+**Why a token and not the prose.** A "related tickets" section names blockers, successors,
+consumers and neighbours in one breath, and it is equally happy to *deny* a relationship. Measured
+on the reference corpus: **98 spec files yield a ticket id in that section against 15 that carry a
+real directional line**, and of the lines containing the word "blocks", most use it to say "does not
+block". A scraper reading ids out of that prose makes a producer look blocked by its own consumers.
+**An id in prose is a mention; an id in the token is a claim.** Keep the prose - a human reads it -
+but never let a skill route on it.
+
+**Why `Carried-to` exists at all.** Closing a ticket requires every open question in §6 to be
+answered, or explicitly handed to a named successor. Measured on the same corpus: **134 of 1 506
+closed tickets carried at least one still-open research item - 372 items in all, 8.9% of every
+closure.** Nothing breaks and nothing fails; the question is simply gone. The successor is an
+ordinary ticket, so it reappears in the queue on its own - which is why no separate registry of
+unanswered questions is needed, and why any such registry would be a second source of truth.
+
+**Say which one is actually enforced, because they are usually not enforced alike.** In this kit:
+
+- `Carried-to` is a **hard gate at closure** - `/spec-check` refuses `Verified` while §6 holds an
+  unhanded `Open` item.
+- `Blocked-by` is a **soft exclusion at selection** - nothing refuses the write; `/backlog` simply
+  skips the ticket while its blocker is unresolved.
+
+Both designs are legitimate; the costs differ. Claiming both are gated is what is not.
+
+**Four mechanics decide whether such a gate does anything at all**, and every one of them was
+learned by watching a gate that stayed green while enforcing nothing:
+
+1. **Gate the transition, not the state**, and only on an actual change. Re-writing a record that is
+   already closed must not re-run the gate.
+2. **Do not gate the archive transition.** It closes a ticket that already passed, and blocking
+   cleanup makes tidying harder than leaving the mess.
+3. **An unfilled template placeholder counts as unanswered.** A ticket still carrying the template's
+   literal `Open / Resolved` line has resolved nothing; treating the placeholder as absent lets a
+   whole class through.
+4. **Locate a section by its heading text, never by its number**, and **wire the gate into every
+   path that can close a ticket.** Numbers shift the moment a template gains a section, and the gate
+   then reads the wrong part of every older file while its verdict stays green. A gate wired into
+   one of several equivalent closing paths guards the path used least - in the reference case it sat
+   on the general update command while the canonical closure ran through a different script that
+   enforced nothing, for weeks, almost never firing.
+
 ## Draining BlockNeedUserTest
 
 The lifecycle accumulates human-gated tickets by design: every ticket whose headline behaviour
@@ -192,6 +247,9 @@ enough; no new status model is needed.
 - Replace `<PLAN_DIR>` with your docs location.
 - If you do not want block states, drop them - the linear flow still works. `Archived` is
   optional in the same way; without it, just stop touching a dead ticket and leave its record.
+- The two direction tokens earn their place only where something *machine-reads* the tickets - an
+  unattended drainer, a status report, a dependency view. If you read every ticket by hand, keep the
+  prose and drop the tokens; if you later automate, add them before the scraper, not after.
 - If your team already has tickets in an external tracker, keep the *file* as the spec and
   link the tracker id; the discipline is in the document, not the tool.
 - If you *do* build tooling around this (a ledger, a CLI, a status command), make the

@@ -84,6 +84,10 @@ exists - keep it to stable trigger phrases so the two do not drift.
   description.
 - **Agent** (a role brief / mode): a subagent definition or system-prompt preamble, with an SDO
   description that says when to pick it *over its neighbours*.
+- **Event hook** (a verdict your runtime returns on an event, not a place you wire a gate into):
+  a program that fires inside a tool call nobody is reading. Picking its verdict - correct the
+  input, or refuse the call - is the design decision, and it must be listed in a hook inventory in
+  the same change that registers it. See `HOOKS.md`.
 
 Substance lives in the canonical rule or the skill body; everywhere else points to it. Do not
 paste the same paragraph into three files - state it once, reference it twice.

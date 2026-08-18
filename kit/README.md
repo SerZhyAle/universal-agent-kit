@@ -49,10 +49,11 @@ universal-agent-kit/
     SPEC_LIFECYCLE.md       <- the ticket methodology, tooling-agnostic
     CODE_QUALITY.md         <- anti-slop conventions, layering, comments
     AUTHORING.md            <- how to write a new rule/skill/agent (test-first, SDO descriptions)
+    HOOKS.md                <- event hooks: which verdict, what it owes when it errs, the inventory
     AGENT_MEMORY.md         <- persistent memory that survives across sessions
     RESEARCH_INDEX.md       <- research order + the queryable code index
     VALIDATION.md           <- the validation ladder: "done" means evidence
-    COST.md                 <- agent cost & fan-out discipline, model-tier routing
+    COST.md                 <- cost & fan-out, model-tier routing, the shared-resource lock queue
     REPLACES.md             <- placeholder replacements reference (EN)
     REPLACES_RU.md          <- placeholder replacements reference (RU mirror - optional)
   memory/
@@ -81,12 +82,14 @@ Hand this whole folder to your coding agent and say something like:
 1. Copy `.claude/commands/*` into your repo's `.claude/commands/`. They become
    `/spec`, `/research`, `/git`, etc. immediately.
 2. Copy `.claude/agents/*` into your repo's `.claude/agents/`. They become selectable
-   subagents.
+   subagents. Each declares an explicit `model:` tier rather than inheriting the session's -
+   an unpinned spawn silently takes the most expensive model you have (`docs/COST.md`). The tier
+   names are Claude Code's; on another runtime map them to its own.
 3. Merge `CLAUDE.md` into your repo root (or `.claude/CLAUDE.md`). Fill the placeholders.
 4. Optionally merge `.claude/settings.json` (review permissions first - see below).
-5. Copy the `docs/*` files (`SPEC_LIFECYCLE`, `CODE_QUALITY`, `AUTHORING`, `AGENT_MEMORY`,
-   `RESEARCH_INDEX`, `VALIDATION`, `COST`, `REPLACES`) wherever your docs live; reference them
-   from `CLAUDE.md`.
+5. Copy the `docs/*` files (`SPEC_LIFECYCLE`, `CODE_QUALITY`, `AUTHORING`, `HOOKS`,
+   `AGENT_MEMORY`, `RESEARCH_INDEX`, `VALIDATION`, `COST`, `REPLACES`) wherever your docs live;
+   reference them from `CLAUDE.md`.
    `REPLACES_RU.md` is a Russian mirror of `REPLACES.md` - skip it unless your team reads Russian.
 6. Optionally copy `memory/` - the index template and one sample entry per type - if your
    runtime supports persistent agent memory.

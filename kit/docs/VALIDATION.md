@@ -93,6 +93,14 @@ or test you care about - a passing wrapper masks a failing core. Read the specif
 the operation that matters, or have it emit its own result. A green that lies is worse than no
 check at all.
 
+The worst shape this takes is a **backgrounded gate**. A command that could never run - a missing
+interpreter, a refused lock - still exits through its launch line, so the wrapper reports success and
+a failed build or a failed gate masquerades as passing. The false green is then the thing that gets
+read and reported. Anything you background must write its verdict where a reader can find it - a
+marker file with a closed set of outcome values - and never in its exit code. Related, and cheaper:
+where a name can simply be **made to work** rather than guarded, make it work. No pre-call guard can
+fix and retry a failed command; it can only refuse it before it starts.
+
 ## Closing a change on a dirty tree
 
 Most real work happens with other changes in flight. Scope the "done" gate to the *change*, not

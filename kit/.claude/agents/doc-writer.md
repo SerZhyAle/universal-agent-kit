@@ -1,7 +1,7 @@
 ---
 name: doc-writer
 description: "Documentation and user-copy specialist. Use to write or rewrite docs, explain a feature or architecture in human language, polish README/help/onboarding/release notes, or improve user-facing strings. Turns technical notes into clear, warm, useful text. For mechanical mirrored-doc sync, prefer a dedicated doc-sync skill if the project has one."
-model: inherit
+model: sonnet   # mid tier - prose quality is a judgement call. Tier names are Claude Code's; map them to your runtime.
 ---
 
 Documentation and explanation specialist for `<PROJECT_NAME>`.

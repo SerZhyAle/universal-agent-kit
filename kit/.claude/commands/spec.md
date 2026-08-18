@@ -72,8 +72,10 @@ for a numeric scheme; otherwise follow that scheme).
 
 **5.1 - Owner inputs (Approval gate).** Fill §3.3 with only the bullets that match the
 spec's actual scope - do not pad with `n/a` lines to look thorough. The one universally
-required field is **Related tickets**. Emit a bullet only when its tag is triggered by the
-slug or the §1/§3.2 text, for example:
+required field is **Related tickets** - prose, for a human. A dependency a *skill* must act on
+goes in the header's `**Blocked-by:**` token as well; an id in prose is a mention, an id in the
+token is a claim (`docs/SPEC_LIFECYCLE.md`, "Two literal tokens"). Emit a bullet only when its tag
+is triggered by the slug or the §1/§3.2 text, for example:
 - user-facing wording touched → **Copy/tone policy**
 - data/schema touched → **Data compatibility**
 - performance-critical → **Performance budget**
@@ -97,8 +99,10 @@ The gate table - which status each skill requires and produces, the full flow, a
 state - is defined once in `docs/SPEC_LIFECYCLE.md`; this skill does not restate it. This skill's
 row: requires none (allocates an id), produces `Approved` (or `Implemented` / `BlockNeedUserTest`
 for a primitive), auto-chains to `/spec-tech` for a complex spec. When `/spec` records a
-dependency it sets `BlockByOtherTask` in §10; every transition into a `Block*` status carries a
-one-line note - what must be tested, or what the blocker is and what resolves it.
+dependency it sets `BlockByOtherTask` **and** names the blocker in the header's `**Blocked-by:**`
+token - §10 prose is for the human, the token is what `/backlog` reads. Every transition into a
+`Block*` status carries a one-line note - what must be tested, or what the blocker is and what
+resolves it.
 
 ## Template
 
@@ -110,6 +114,8 @@ one-line note - what must be tested, or what the blocker is and what resolves it
 **Priority:** <0..100>
 **Date:** <YYYY-MM-DD>
 **Tier:** <label>
+**Blocked-by:** <ID, or "none">
+**Carried-to:** <ID, or "none">
 **Tactical plan:** `<PLAN_DIR>/<ID>_<slug>/` (created by /spec-tech)
 
 > **Scope:** STRATEGIC. Goals, constraints, open questions. No class names, paths, line
@@ -199,6 +205,9 @@ in under N minutes".>
   DI modules.
 - §11: observable outcomes only.
 - §6 and §7 are mandatory even if trivial - write an explicit "none" rather than omitting.
+- The header's `**Blocked-by:**` and `**Carried-to:**` tokens are mandatory too, and `none` is a
+  value - an absent line is not. `/backlog` reads `Blocked-by`; `/spec-check` reads `Carried-to`
+  when it decides whether §6 is closed. Never infer either from §3.3 or §10 prose.
 - Do not duplicate an existing feature-doc entry.
 - The style + completeness gate runs only at the `Draft -> Approved` flip; a Draft may keep
   rough phrasing.

@@ -38,6 +38,16 @@ run's skip-cache. Drop the human-gated states (`BlockQuestions`, `BlockNeedUserT
 `BlockExternal`) into the report bucket. `BlockByOtherTask` is eligible **iff** its blocker has
 since reached `Verified`; otherwise it too is deferred.
 
+Read the blocker from the header's `**Blocked-by:**` token and **from nowhere else**. §3.3 and
+§10 name blockers, successors, consumers and neighbours in one breath, and are equally happy to
+*deny* a relationship - scraping ids out of that prose makes a producer look blocked by its own
+consumers (`docs/SPEC_LIFECYCLE.md`, "Two literal tokens"). A missing token is a defect in the
+ticket, not a licence to guess: treat it as `none`, advance the ticket, and say so in the report.
+
+This is the **soft** half of the two tokens: nothing refuses a write here. `Blocked-by` only
+decides what `/backlog` picks up, while `Carried-to` is a hard gate enforced by `/spec-check` at
+closure. Do not describe either as the other.
+
 **Step 2 - Select.** From the eligible set pick the highest `Priority`; break ties by the
 furthest-along status (closer to `Verified` first, so work finishes before new work starts), then
 by `<ID>`. State the choice in one line: `<ID> (Priority <P>, <status>) - <why now>`.

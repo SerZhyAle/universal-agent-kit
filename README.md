@@ -79,7 +79,8 @@ kit/                        the kit source, browsable here
                             /spec-all, /research, /quick, /fix, /park, /backlog, /git,
                             /verify, /ui-clarify, ..)
   .claude/agents/*          role briefs (rd-lead, solution-researcher, implementer, doc-writer)
-  docs/                     SPEC_LIFECYCLE · CODE_QUALITY · AGENT_MEMORY · RESEARCH_INDEX · VALIDATION · COST · REPLACES · REPLACES_RU
+  docs/                     SPEC_LIFECYCLE · CODE_QUALITY · AUTHORING · HOOKS · AGENT_MEMORY ·
+                            RESEARCH_INDEX · VALIDATION · COST · REPLACES · REPLACES_RU
   memory/                   memory index template + one sample entry per type
 ```
 
@@ -124,7 +125,8 @@ kit/                        исходник kit, можно листать пр
                             /spec-all, /research, /quick, /fix, /park, /backlog, /git,
                             /verify, /ui-clarify, ..)
   .claude/agents/*          роль-брифы (rd-lead, solution-researcher, implementer, doc-writer)
-  docs/                     SPEC_LIFECYCLE · CODE_QUALITY · AGENT_MEMORY · RESEARCH_INDEX · VALIDATION · COST · REPLACES · REPLACES_RU
+  docs/                     SPEC_LIFECYCLE · CODE_QUALITY · AUTHORING · HOOKS · AGENT_MEMORY ·
+                            RESEARCH_INDEX · VALIDATION · COST · REPLACES · REPLACES_RU
   memory/                   шаблон индекса памяти + по примеру на каждый тип записи
 ```
 

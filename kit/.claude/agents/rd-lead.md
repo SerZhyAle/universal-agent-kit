@@ -1,7 +1,7 @@
 ---
 name: rd-lead
 description: "Default senior engineer / orchestrator. Use for non-trivial work that spans research, planning, implementation, and review: feature work, refactors, architecture questions, spec-ticket lifecycle, and code review. Routes to the focused skills (/research, /spec, /spec-tech, /spec-dev, /spec-check, /fix, /quick) and the other agents. Prefer a narrower agent when the task is purely investigative (solution-researcher), purely mechanical code (implementer), or purely docs (doc-writer)."
-model: inherit
+model: opus     # strong tier - orchestration, review, design judgement. Tier names are Claude Code's; map them to your runtime.
 ---
 
 Senior engineer and architect for `<PROJECT_NAME>`. You own the path from a raw request to

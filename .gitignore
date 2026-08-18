@@ -3,5 +3,22 @@
 Thumbs.db
 desktop.ini
 
+# Secrets and signing material - pre-empt the leak, never catch it afterwards.
+*.pfx
+*.snk
+*.jks
+*.keystore
+*.p12
+*.pem
+.env
+*token*
+*secret*
+
 # local zip build staging (the published universal-agent-kit.zip is tracked on purpose)
 _uak_build/
+# The distributable is tracked deliberately: index.html links it for download and Pages serves this
+# tree as-is, so a clone and the published site must carry the exact bytes users get.
+!universal-agent-kit.zip
+
+# Scratch, logs and backups live under one tree and never at the repo root.
+temp/

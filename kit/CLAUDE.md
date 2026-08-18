@@ -69,12 +69,26 @@ verified it. See `docs/RESEARCH_INDEX.md`.
 - `/git` - branch model, staging, commit grouping.
 - `/review`, `/caveman`, `/caveman-commit`, `/caveman-review`.
 
+**This list routes nothing on its own.** Measured on a project shipping exactly this ordering: 434
+slash-command invocations in a month, of which `/quick` **0** and `/fix` **2**, against **150** for the
+pipeline commands. The cheapest tier was never once chosen. Routing is decided the moment the user types,
+so put an advisory nudge on your runtime's prompt-submit event: match the prompt against a short,
+high-precision micro-task pattern list, veto on a real-work list, drop anything past a length ceiling, and
+print one line naming the cheap tiers. Keep it advisory and **always exit 0** - a false fire that refuses a
+prompt costs more than the miss it prevents. Wiring: `.claude/settings.json`, key `//hooks-example`.
+Which verdict a hook should return, what it owes when it errs, and the inventory that keeps it from
+being invisible: `docs/HOOKS.md`.
+
 ## 5. Spec / Plan tickets
 - One ticket = one Markdown file `<PLAN_DIR>/<ID>_<slug>.md`, where `<ID>` is e.g. `T0042`.
 - Status header is the first `**Status:**` line in the file; keep it accurate by hand.
 - Lifecycle: `Draft -> Approved -> Tactical -> In Progress -> Implemented -> Verified`
   (plus `Partial` / `Broken` from an audit, and explicit `Block*` states).
 - Status comes from reality (code + checks), never inferred from the filename.
+- Two mandatory header tokens carry what a *skill* must act on: `**Blocked-by:**` (read by
+  `/backlog`) and `**Carried-to:**` (read by `/spec-check` before it grants `Verified`). `none` is
+  a value; an absent line is not. Never infer either from the ticket's prose about related tickets
+  - an id in prose is a mention, an id in the token is a claim.
 - See `docs/SPEC_LIFECYCLE.md` for the full flow.
 - No time/effort estimates in spec files.
 - Spec style: lists over tables (tables only for 3+ columns); one idea per bullet; no
@@ -165,4 +179,8 @@ skill/agent a trigger-focused `description` (not a summary of its steps).
 - Gate a parallel fan-out: estimate the count and cost, keep a small ceiling (~6-8), get an
   explicit GO above it, stage find-then-verify, and never silently resume a limit-killed run.
 - Route mechanical leaf skills to a cheap model; keep diagnosis/review/orchestration on a
-  strong one. Full discipline: `docs/COST.md`.
+  strong one - and route the **spawn** too: name the tier at the call site, and give every agent
+  you define an explicit tier. An unpinned spawn silently takes the most expensive one.
+- Serialize a shared resource with a lock that **queues** rather than refuses; take it immediately
+  before the edit and release it right after, never for a whole task; judge staleness by liveness,
+  never by a clock. Full discipline: `docs/COST.md`.

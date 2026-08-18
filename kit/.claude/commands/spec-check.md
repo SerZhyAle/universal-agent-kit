@@ -60,9 +60,12 @@ not from a filename or a hope. Auto-detects strategic vs tactical scope.
 | Step status consistency | parse `[x] done`; cross-check against the Verification predicates |
 | Phase status consistency | INDEX row status == phase header status |
 | Verification-tag invariant | if status is `BlockNeedUserTest`: grep for `<ID>:` tags - PASS iff ≥ 1 hit. For any other status: PASS iff zero hits - surviving tags are stale (WARN; step 6 deletes them) |
+| Open questions closed | locate §6 **by its heading text, never its number**; PASS iff every item is `Resolved`, or the header's `**Carried-to:**` token names a real successor ticket. An item still carrying the template's literal `Open / Resolved` line counts as **unanswered**, not as absent. FAIL otherwise |
 
 **4 - Score.** (Gates are defined once in `docs/SPEC_LIFECYCLE.md`; this is that rule applied.)
 - `Verified` - every check is PASS or EXEMPT. Zero FAIL, zero WARN, and **no open MANUAL item**.
+  This is the hard half of the two direction tokens (`docs/SPEC_LIFECYCLE.md`): an unhanded open
+  §6 item refuses the flip, because a closed ticket leaves the queue and takes its question with it.
 - `BlockNeedUserTest` - zero FAIL and zero WARN, but ≥ 1 open MANUAL / on-target item. The build
   is sound; a human signal is still outstanding. Do **not** call this Verified and do **not**
   remove verification tags - re-run `/spec-check` once the human closes the item.
@@ -115,6 +118,9 @@ the outcome is BlockNeedUserTest until a human closes it. If Verified: drop "Act
 
 ## Constraints
 
+- Gate the **transition**, not the state: run the open-questions check only when this audit
+  actually changes the status. Re-auditing an already-`Verified` ticket must not re-run it, and an
+  `Archived` ticket is never gated - it closed a ticket that already passed.
 - Never mutate spec content beyond `Status:` and the `## Last Audit` block. The one source
   mutation allowed is deleting `<ID>:` verification tags on a status flip out of
   `BlockNeedUserTest`.

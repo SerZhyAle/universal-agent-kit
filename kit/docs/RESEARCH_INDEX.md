@@ -39,7 +39,7 @@ modules, files) with, for each, its path and a short role - and optionally what 
 is injected with. The agent queries the index ("show me everything matching `*Repository`",
 "what plays the role `data-source`") and gets the location in one shot.
 
-Two rules keep an index trustworthy:
+Three rules keep an index trustworthy:
 
 - **Query it before you grep.** For "where is class/module X", the index answers faster and more
   precisely than a content search.
@@ -47,6 +47,25 @@ Two rules keep an index trustworthy:
   path that moved. Make regeneration a step in your post-change routine, or a hook, so it is
   never skipped. The index is a derived artifact: regenerate, don't hand-edit, and it can be
   git-ignored.
+- **Measure how often it answers.** An index earns its place by answering, and one that returns
+  nothing costs a turn and then sends the agent to grep anyway - worse than not having it. In the
+  reference corpus one such registry came back empty on 57% of its queries and nobody noticed,
+  because a miss looks exactly like a cheap call. Log the miss rate. Treat a high one as a defect in
+  the index's coverage or in its query vocabulary, never as the caller's fault.
+
+**An index alone does not get used - pair it with a refusal.** Making the cheap path available does
+not close the expensive one. A pre-filter that narrowed oversized reads was measured being retried
+immediately at full width in ~32% of the reads it caught: the agent still wanted the whole file,
+because nothing had told it which part it needed. The pairing that works is an index that answers
+with an address and a signature, plus an event hook that refuses the unnarrowed search until the
+index has been queried in this session (`HOOKS.md`). Each half is bypassable on its own.
+
+**Expensive once, cheap every time - and that is the shape of the investment.** Building the index
+and the project's knowledge base is a deliberate, heavy, one-off cost, repaid by every later task
+starting from an address instead of from a warm-up. It also fixes the build order for a large shared
+codebase: retrieval tooling first, knowledge base second, skills and agent roles last. Skills make a
+repeated procedure cheap to invoke; they do nothing about the code an agent drags into context while
+hunting for the place to apply them.
 
 This is optional. A small or flat repo does not need it - the research *order* above still
 applies. Adopt the index when "find where this lives" has become a tax.

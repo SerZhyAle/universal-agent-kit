@@ -56,6 +56,9 @@ STEP 1 - INVENTORY (read-only)
   repo. The full set: <PROJECT_NAME>, <CHAT_LANGUAGE>, <INDEX_DOC>, <SRC_ROOT>, <ARCH_LAYERS>,
   <BUILD_CMD>, <TEST_CMD>, <LINT_CMD>, <RUN_CMD>, <LOGGER>, <PLAN_DIR>, <SCRATCH_DIR>, <MAX_LOC>,
   <READONLY_ZONES>, <ID>. Mark any you cannot resolve.
+- Size the navigation problem: how many source files, the median and the largest, and whether a
+  code index already exists. Name three questions a task here typically answers by reading a large
+  file end to end - those are what an index would have to answer instead.
 - If I have no persistent-memory setup yet, note whether my runtime supports one and how the
   kit's memory/ templates would map onto it.
 

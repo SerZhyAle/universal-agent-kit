@@ -92,6 +92,15 @@ exists - keep it to stable trigger phrases so the two do not drift.
 Substance lives in the canonical rule or the skill body; everywhere else points to it. Do not
 paste the same paragraph into three files - state it once, reference it twice.
 
+**That ranking is not stylistic, it is a compliance measurement.** In the reference corpus,
+directives with a mechanical check behind them - a gate or an event hook - were followed ~99% of the
+time; directives that existed only as rulebook prose were followed 1-8%. Rewording the prose did not
+close the gap, and a rule can sit in the always-loaded preamble, be re-read on every request for
+months, and still be obeyed almost never. So: when a directive is mechanically checkable, the check
+*is* the directive and the sentence is only its explanation. When it is not checkable, expect the low
+number and place it where it is read at the moment of the decision - a skill body, an agent brief, a
+hook's refusal message - rather than in a rulebook read once at session start.
+
 ## When NOT to add a rule
 
 - The failure was a genuine one-off with no recurrence risk - fix it inline and move on.

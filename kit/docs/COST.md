@@ -5,6 +5,31 @@ research order that fans out, a pipeline that re-audits, a reviewer that spawns 
 document is the discipline that keeps the spend proportional to the value. It is not a cap; it is
 a policy for deciding *when the spend is worth it*.
 
+## Where the spend actually is - do not optimise the visible half
+
+The intuitive levers are the visible ones: the agent's answers look long and the rulebook looks
+long, so both look like the place to cut. Mined over the reference corpus, neither is:
+
+- **Re-read context dominates.** Cached input was ~72% of the bill. Everything the agent *wrote* -
+  prose, code, specs, every produced artifact - was ~12%.
+- **The always-loaded preamble is a fifth of everything.** System prompt plus rulebook plus tool
+  descriptions ride on every single request and accounted for ~23% of total spend.
+- **A small minority of sessions carries half the bill.** ~7% of sessions accounted for 50% of all
+  cached-input spend, nearly all of them long unattended pipeline runs that compacted repeatedly
+  instead of resetting.
+
+Two consequences are worth stating out loud, because both contradict the reflex:
+
+- **"Answer more briefly" is not a cost lever.** Output is roughly a ninth of the bill. Brevity is a
+  legibility decision - argue it as that, and never sell it as savings.
+- **Trimming the rulebook's prose is not one either.** One deliberate pass cut the always-loaded
+  preamble by 2.5% and moved the bill by 0.23%, two orders of magnitude below the corpus's own daily
+  variance and therefore unmeasurable by construction. Write each directive at the length that makes
+  it hold, and buy the savings from session boundaries instead (`Context hygiene`, below).
+
+Culling artifacts is still worth doing, for the reader's sanity and the agent's signal-to-noise. Just
+not on the token argument.
+
 ## Inline vs subagent - when to spawn
 
 Do the work **inline by default**. A subagent is not free: it costs a full context spin-up plus

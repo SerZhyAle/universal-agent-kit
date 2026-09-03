@@ -28,6 +28,18 @@ lower than necessary ships a bug.
 The rule of thumb: **grep < run-script < compile < targeted test < full build < run-and-observe.**
 Pick the lowest rung that actually proves *this* change, and stop there.
 
+### The top rung is often a human, and a human check has not happened yet
+
+The last rung frequently cannot be climbed by the agent at all - it needs real hardware, a real
+account, a real pair of eyes. Say what that scores, because the intuitive answer is wrong: an audit
+that finds **no failures** but leaves an unobserved manual line does **not** score "verified", it
+scores "needs a human test". Nothing is broken; something is merely unlooked-at, and those are
+different verdicts. So count the unticked manual items and let a single one of them hold the closing
+status back - only the human pass converts it. This is not a formality: one ticket was declared done
+carrying one unticked device line, and an hour on real hardware showed **one of its five acceptance
+criteria failing outright**. The kit wires this as the `BlockNeedUserTest` status and the "no open
+MANUAL item" rule in `/spec-check`; `SPEC_LIFECYCLE.md` owns the mechanics.
+
 ## Record expected vs actual
 
 For every check you run, write down what you expected and what you got:
@@ -64,11 +76,19 @@ A change is not just its diff. Before calling a step complete, run the housekeep
 needs so it is never "remembered later":
 
 - **Changelog / dev log** - append the entry if the project keeps one.
-- **User-facing docs** - update them for any new user-visible capability, in every language the
-  docs ship in. Do this *before* marking the step done, not in a cleanup pass that never comes.
-  Keep the full list of ship-together surfaces (README, site page, each locale, each listing)
-  in one manifest and touch them in the same change - the surface missing from the list is the
-  one that silently goes stale.
+- **User-facing docs** - update them for any new user-visible capability, in every surface and
+  every **authored** locale. Do this *before* marking the step done, not in a cleanup pass that
+  never comes. Keep the full list of ship-together surfaces (README, site page, each locale, each
+  listing) in one manifest and touch them in the same change - the surface missing from the list is
+  the one that silently goes stale.
+  **Surfaces must move together; the rest of the declared locale set need not.** Where the project
+  has a release boundary, nothing reaches a user between releases, so the locales nobody on the team
+  authors by hand fan out in one bulk pass at that boundary - one pass clears every new key of a
+  release, while translating per change buys a full fan-out per key with no shipping benefit (in one
+  product: ten further translations per key on top of the three authored ones). Put the **refusal**
+  in the pre-release gate, and let the change's own closure only *name* what is still missing rather
+  than block on it. A continuously published product - a site, a rolling library - has no boundary to
+  batch to, and there the whole fan-out stays part of the one edit.
 - **Code index** - regenerate it if you changed code (see `RESEARCH_INDEX.md`); a stale index
   misdirects the next search.
 - **Ticket status** - move the spec's status to match reality (see `SPEC_LIFECYCLE.md`).
@@ -84,6 +104,15 @@ kind behind a single "done" entry point; any one failing gate aborts the whole r
 remember each. Keep the kind-to-checks mapping in one place so it cannot silently rot, and scope
 each gate by kind *and* touched path so "done" stays cheap - a gate that always runs everything
 gets slow, then gets skipped, which defeats fail-closed.
+
+**The closure RUNS the rung; it does not merely ask for it.** When a change set carries an artifact
+class whose only proof is a link, render, or compile step that nothing else in the routine performs,
+the "done" command must run that step, selected by artifact class. Otherwise the matching rung of
+the ladder above is a *request*, and a request is an ungated rule - which `AUTHORING.md` measures at
+1-8% compliance. The observed failure: nothing in one project's closure routine linked its
+resources, and its compile-only check compiled code without linking any, so a broken user-facing
+layout closed **green** and its ticket reached "install this and test it" without the thing to be
+installed ever having been built.
 
 ## A green can lie
 
@@ -115,6 +144,38 @@ the whole tree:
   sibling's in-flight edit, not yours. Confirm the failure is inside your diff first; the working
   tree, not git history, is the authority for what is currently done, so re-read the live files
   rather than chasing a red that was never yours.
+
+### Place a gate by its subject, not by how much it once hurt
+
+The split above is only worth having if each gate is on the correct side of it, and the default -
+"we were burned by this, so check it every time" - puts whole-tree checks in the per-change closure
+where they cannot work. Applied to one changed file, a check whose subject is the *tree* or a
+*shipped artifact* cannot attribute its finding to that change: it either fails on a sibling's work
+in flight or gets demoted to advisory and stops meaning anything. Measured on one project, three
+such gates produced **68 of the 191 red lines across 53 batch runs**, and one of them spent **33
+minutes of closure time in a month to report a single finding**.
+
+Move a gate to the **release scope** (a pre-release sweep) when all four hold:
+
+- between releases the defect cannot reach a user;
+- its subject is the tree or a shipped artifact, not the changed file;
+- the finding names its own location, so no attribution is needed;
+- batch fixing costs no more than per-change fixing.
+
+Keep it **per-change** when any one holds:
+
+- later work builds on the defect - compilation, resource linking, a migration, a cross-module
+  contract;
+- the evidence exists only at the moment of the change - the author's intent, a ticket state a probe
+  is bound to;
+- agents read the artifact between releases, where staleness poisons their decisions.
+
+Two corollaries. **A relocation is a script with an exit code, never a line of prose** - moving a
+rule in prose changes its force, not its stage, at the compliance rates `AUTHORING.md` records. And
+**age is not the test**: "we were burned by this long ago" describes no gate in a repo whose gates
+are all months old. A new gate names its scope class at birth, and unnamed means per-change - which
+is exactly how the imbalance builds. A project with no release boundary substitutes "CI-only" for
+the release scope and applies the same four-part test.
 
 ## A lightweight progress journal (optional)
 

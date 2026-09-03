@@ -62,6 +62,20 @@ their tool lists in frontmatter; keep that discipline when you author new ones
   **cost**, which you can measure; do **not** argue it on answer quality unless you have actually
   measured quality degrading with context size. Attaching a real practice to a rationale you cannot
   show is how the practice gets reverted the first time someone challenges it.
+- **For an unattended batch, make the PROCESS boundary the reset.** "Start fresh between tasks"
+  depends on someone noticing a threshold and acting on it, and in an unattended run nobody is
+  watching. A driver *outside* the session removes the dependency: it takes the next work item off
+  the queue, runs it in a **fresh headless process**, and repeats however that run ended - so every
+  item starts on an empty context and the reset cannot be forgotten. That is the structural version
+  of the rule above, and it is the shape `/backlog` should take once a run is genuinely unattended;
+  an in-session loop over N tickets carries ticket 1 into ticket 9. Measured on one machine over a
+  week, before such a driver existed: **83% of usage was spent above 150k tokens of carried
+  context** - the shape an endless interactive loop produces by construction. (That threshold is
+  that machine's window, not a recommendation; the transferable part is measuring where your own
+  usage sits.) Two things the boundary buys on top of the reset: the driver picks the **model per
+  item** instead of fixing one tier for the whole run, and several instances can run at once - the
+  lock queue below already keeps them off each other. Keep the in-session loop for work a human is
+  watching.
 - **Offload raw artifacts** - full build logs, grep dumps, large file bodies - to `<SCRATCH_DIR>/`
   and reference them by path. Never paste them into the running context or a durable doc; keep the
   proof available, keep the context scannable.
@@ -128,6 +142,19 @@ file, which shell, which liveness API is a stack decision. The shape is the tran
 - **Take the lock immediately before the edit and release it right after - never for a whole
   task.** Everyone behind you waits exactly as long as you hold it. The observed failure that
   produced this rule: one lock held for **479 seconds** across an entire implementation phase.
+- **A lock is a (kind, domain) pair, and the domain is DERIVED from the changed set, never declared
+  by the caller.** One global word per lock kind serializes agents that never touch the same thing -
+  two independent modules against each other, or either against a repo-scripts edit. Split each kind
+  by domain, keep the path-to-domain table in exactly one place, and map the caller's file set
+  through it; a caller allowed to name its own domain will eventually name the wrong one. Three
+  rules stop the split from becoming a deadlock generator: a set that does not decompose - a
+  top-level build file, a path the table does not know, or no file set at all - takes the **full**
+  set, because over-protection is the safe direction to be wrong; a multi-domain set is taken **all
+  at once, in the table's canonical order, all-or-nothing**, releasing everything it holds if it
+  cannot complete, since holding half a set in a hand-picked order is exactly what turns a split
+  into a deadlock; and a lock file written before the split existed is honoured as holding *every*
+  domain of its kind until its owner releases it. Observed after splitting one build lock per
+  module: two module checks that used to serialize ran together in 12 s, with no queue wait.
 - **Judge staleness by liveness, not by a clock, and pick the signal per lock kind.** A build lock
   is held by a *process*, so process liveness answers it. An edit lock is held by a *session*, which
   is not a process and needs a heartbeat - a live owner keeps its lock for however long the edit
@@ -137,6 +164,16 @@ file, which shell, which liveness API is a stack decision. The shape is the tran
   liveness answer, or on an absolute ceiling - never on an unreadable one.
 - **A re-entrant call returns success without queueing.** A caller that already holds the lock must
   not queue behind itself; that is a self-deadlock with a timeout attached.
+- **Abandoning a queued intent obliges you to withdraw your own ticket.** Nothing else will: an
+  eviction sweep judges the owning *session*, that session is alive, and it was the *intent* that
+  died - so the ticket sits at the head of the queue while every sibling waits behind it. This fires
+  whenever the operator switches the agent to other work, a wait is interrupted, or a phase
+  collapses mid-queue. Exactly one half of it self-heals: a head that was **granted** its turn and
+  did not take it inside the reservation window can be dropped by the sweep, because past that
+  window it holds no privilege anyway and leaving it there tells every remaining waiter "your turn"
+  at once. A ticket that was never granted a turn is never removed by age, so the withdrawal stays
+  mandatory - make it part of whatever the agent does when it abandons the work, not a line of
+  advice.
 - **A background waiter reports its verdict in a marker file, never in its exit code.** A
   backgrounded task's exit code is the exit of the last command in its launch line, so a refused
   build comes back looking green - the `VALIDATION.md` "A green can lie" failure, in its most

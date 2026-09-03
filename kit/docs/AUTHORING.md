@@ -79,7 +79,9 @@ exists - keep it to stable trigger phrases so the two do not drift.
 - **Always-loaded rule** (behavioural, applies everywhere): the rulebook - `CLAUDE.md` (and its
   `AGENTS.md` pointer). Keep exactly one canonical copy; a duplicated rulebook drifts.
 - **Automated gate** (mechanical, greppable, recurring): a check wired into your "done" command /
-  pre-commit hook / CI, ratcheted on new violations only.
+  pre-commit hook / CI, ratcheted on new violations only. It names its **scope class** - per-change
+  closure or release/CI sweep - at the moment you write it; unnamed defaults to per-change, which is
+  where whole-tree checks accumulate until the closure gets skipped (`VALIDATION.md`).
 - **Skill** (a named procedure you invoke): a slash command / saved prompt, with an SDO
   description.
 - **Agent** (a role brief / mode): a subagent definition or system-prompt preamble, with an SDO

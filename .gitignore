@@ -2,6 +2,8 @@
 .DS_Store
 Thumbs.db
 desktop.ini
+# Personal editor preferences only - the checked-in settings this repo needs are none.
+.vscode/
 
 # Secrets and signing material - pre-empt the leak, never catch it afterwards.
 *.pfx

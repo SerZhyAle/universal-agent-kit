@@ -159,8 +159,14 @@ skill/agent a trigger-focused `description` (not a summary of its steps).
 - Journal at the granularity of the logical change, not the touched file: one entry per
   change batching its files, and regenerate any index/catalog once per change, not once per
   edit.
+- A check only a human can run has not happened yet. An audit with **no failures** but an
+  unobserved manual line is not "verified", it is "needs a human test" - one unticked manual item
+  holds the closing status back, and only the human pass converts it.
 - Keep the change log / dev log current if the project has one.
-- Update user-facing docs for any new user-visible capability.
+- Update user-facing docs for any new user-visible capability - every surface and every **authored**
+  locale in the same change. Where the project has a release boundary, the remaining declared
+  locales fan out there in one bulk pass and the closure only *names* what is missing; with no
+  release boundary the whole fan-out stays in the one edit.
 - Re-run the touched area's narrowest meaningful check (compile > targeted test > full run)
   before declaring done.
 - Match the evidence to the change type - the validation ladder is in `docs/VALIDATION.md`.
@@ -183,4 +189,9 @@ skill/agent a trigger-focused `description` (not a summary of its steps).
   you define an explicit tier. An unpinned spawn silently takes the most expensive one.
 - Serialize a shared resource with a lock that **queues** rather than refuses; take it immediately
   before the edit and release it right after, never for a whole task; judge staleness by liveness,
-  never by a clock. Full discipline: `docs/COST.md`.
+  never by a clock. A lock is a (kind, domain) pair and the domain is derived from the changed file
+  set, never declared by the caller. Abandoning a queued intent obliges you to withdraw your own
+  ticket - nothing else will.
+- For an **unattended** run, make the process boundary the reset: a driver outside the session takes
+  the next item, runs it in a fresh process, repeats. A self-imposed "compact between tickets" is a
+  request; a new process is a guarantee. Full discipline: `docs/COST.md`.

@@ -65,6 +65,15 @@ that *did* progress (even one stage) is not cached - it stays eligible for a lat
 **Step 5 - Loop.** Return to Step 1. The eligible set shrinks each pass: tickets either reach a
 terminal `Verified` or land in the skip-cache. Stop when the eligible set is empty.
 
+> **Prefer looping the PROCESS, not the session.** Read as written, Step 5 loops *inside* one
+> session, so ticket 1 is still in context while ticket 9 runs, and the bill grows quadratically
+> across a run nobody is watching (`docs/COST.md`, "Context hygiene"). Where your runtime has a
+> headless mode, implement Steps 2-4 as a driver script outside the session: select the ticket, run
+> the pipeline on it in a **fresh process**, record the outcome, repeat. The skip-cache and the
+> report buckets then live in a file rather than in the context, which is what makes them survive
+> the boundary. The in-session loop stays the right shape for a short run a human is watching, and
+> is the fallback where no headless mode exists.
+
 **Step 6 - Report (the only output a human reads).** One block, no mid-loop interruptions:
 - **Advanced** - per ticket: `<ID>`, start status → end status, one line of what moved it.
 - **Needs you** - every human-gated ticket collected across the run, grouped by reason:

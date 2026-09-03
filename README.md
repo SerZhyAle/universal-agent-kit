@@ -4,16 +4,19 @@
 **[⤓ Download the kit](https://github.com/SerZhyAle/universal-agent-kit/raw/main/universal-agent-kit.zip)**
 
 A portable method for AI-assisted development - rules, skills (slash commands), roles, a spec
-lifecycle, and persistent memory. Distilled from a real project and stripped of its language and
-stack, so it carries over to most **git-backed repos with a promptable agent**.
+lifecycle, persistent memory, and the discipline for running several agents at once. Distilled from
+a real project and stripped of its language and stack, so it carries over to most **git-backed repos
+with a promptable agent**.
 
 Переносимый метод разработки с ИИ-агентами - правила, навыки (slash-команды), роли, жизненный
-цикл спецификаций и постоянная память. Выжимка из реального проекта, очищенная от языка и стека,
-- ложится в большинство **git-репозиториев с агентом, которым можно управлять через промпты**.
+цикл спецификаций, постоянная память и дисциплина параллельной работы нескольких агентов. Выжимка
+из реального проекта, очищенная от языка и стека, - ложится в большинство **git-репозиториев с
+агентом, которым можно управлять через промпты**.
 
 Переносний метод розробки з ШІ-агентами - правила, навички (slash-команди), ролі, життєвий цикл
-специфікацій та постійна пам'ять. Дистильовано з реального проєкту, очищено від мови та стека -
-лягає в більшість **git-репозиторіїв з агентом, яким можна керувати через промпти**.
+специфікацій, постійна пам'ять і дисципліна паралельної роботи кількох агентів. Дистильовано з
+реального проєкту, очищено від мови та стека - лягає в більшість **git-репозиторіїв з агентом,
+яким можна керувати через промпти**.
 
 ---
 
@@ -64,7 +67,8 @@ minimum* - copy `CLAUDE.md` + `/quick` + `/fix` and add the rest when a task ear
 
 The value is not the tooling - it is the **working method**: research before you act, split
 *what* from *how*, plan in verifiable phases, keep autonomy high and bureaucracy low, write
-clean from the start, and let the assistant remember across sessions.
+clean from the start, let the assistant remember across sessions, and run several agents at
+once without them overwriting each other's work.
 
 ### What's inside
 
@@ -80,7 +84,8 @@ kit/                        the kit source, browsable here
                             /verify, /ui-clarify, ..)
   .claude/agents/*          role briefs (rd-lead, solution-researcher, implementer, doc-writer)
   docs/                     SPEC_LIFECYCLE · CODE_QUALITY · AUTHORING · HOOKS · AGENT_MEMORY ·
-                            RESEARCH_INDEX · VALIDATION · COST · REPLACES · REPLACES_RU
+                            RESEARCH_INDEX · VALIDATION · COST · PARALLEL · REPLACES ·
+                            REPLACES_RU
   memory/                   memory index template + one sample entry per type
 ```
 
@@ -110,7 +115,8 @@ from the origin project is included - only the working method.
 
 Ценность - не в инструментах, а в **методе работы**: сначала исследуй, потом действуй; отделяй
 *что* от *как*; планируй проверяемыми фазами; держи автономию высокой, а бюрократию низкой; пиши
-чисто с самого начала; и дай ассистенту помнить между сессиями.
+чисто с самого начала; дай ассистенту помнить между сессиями; и запускай несколько агентов
+одновременно так, чтобы они не затирали работу друг друга.
 
 ### Что внутри
 
@@ -126,7 +132,8 @@ kit/                        исходник kit, можно листать пр
                             /verify, /ui-clarify, ..)
   .claude/agents/*          роль-брифы (rd-lead, solution-researcher, implementer, doc-writer)
   docs/                     SPEC_LIFECYCLE · CODE_QUALITY · AUTHORING · HOOKS · AGENT_MEMORY ·
-                            RESEARCH_INDEX · VALIDATION · COST · REPLACES · REPLACES_RU
+                            RESEARCH_INDEX · VALIDATION · COST · PARALLEL · REPLACES ·
+                            REPLACES_RU
   memory/                   шаблон индекса памяти + по примеру на каждый тип записи
 ```
 
@@ -157,7 +164,8 @@ Kit - **MIT** (см. `LICENSE`). Текст статьи - **CC BY 4.0**. Исх
 
 Цінність - не в інструментах, а в **методі роботи**: спершу досліджуй, потім дій; відділяй
 *що* від *як*; плануй перевірюваними фазами; тримай автономію високою, а бюрократію низькою; пиши
-чисто від початку; і дай асистенту пам'ятати між сесіями.
+чисто від початку; дай асистенту пам'ятати між сесіями; і запускай кілька агентів одночасно так,
+щоб вони не затирали роботу одне одного.
 
 ### Що всередині
 

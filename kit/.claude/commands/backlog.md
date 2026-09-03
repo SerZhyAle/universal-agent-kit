@@ -71,8 +71,10 @@ terminal `Verified` or land in the skip-cache. Stop when the eligible set is emp
 > headless mode, implement Steps 2-4 as a driver script outside the session: select the ticket, run
 > the pipeline on it in a **fresh process**, record the outcome, repeat. The skip-cache and the
 > report buckets then live in a file rather than in the context, which is what makes them survive
-> the boundary. The in-session loop stays the right shape for a short run a human is watching, and
-> is the fallback where no headless mode exists.
+> the boundary. What else such a driver owes - telling "failed" apart from "not attempted", picking
+> the model per item, running several instances behind the lock queue - is in `docs/PARALLEL.md`.
+> The in-session loop stays the right shape for a short run a human is watching, and is the fallback
+> where no headless mode exists.
 
 **Step 6 - Report (the only output a human reads).** One block, no mid-loop interruptions:
 - **Advanced** - per ticket: `<ID>`, start status → end status, one line of what moved it.

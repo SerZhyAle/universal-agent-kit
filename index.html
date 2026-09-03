@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Universal Agent Kit - how AI-assisted development is wired</title>
-<meta name="description" content="A portable method for AI-assisted development: rules, skills, roles, a spec lifecycle, and persistent memory. Distilled from a real project, stripped of its stack. Article and kit in English, Russian, and Ukrainian.">
+<meta name="description" content="A portable method for AI-assisted development: rules, skills, roles, a spec lifecycle, persistent memory, and parallel-agent discipline. Distilled from a real project, stripped of its stack. Article and kit in English, Russian, and Ukrainian.">
 <link rel="canonical" href="https://serzhyale.github.io/universal-agent-kit/">
 <link rel="alternate" hreflang="en" href="https://serzhyale.github.io/universal-agent-kit/?lang=en">
 <link rel="alternate" hreflang="ru" href="https://serzhyale.github.io/universal-agent-kit/?lang=ru">
@@ -16,14 +16,14 @@
 <meta property="og:site_name" content="Universal Agent Kit">
 <meta property="og:url" content="https://serzhyale.github.io/universal-agent-kit/">
 <meta property="og:title" content="Universal Agent Kit - how AI-assisted development is wired">
-<meta property="og:description" content="A portable method for AI-assisted development: rules, skills, role agents, a spec lifecycle, and persistent memory. English, Russian, Ukrainian.">
+<meta property="og:description" content="A portable method for AI-assisted development: rules, skills, role agents, a spec lifecycle, persistent memory, and parallel-agent discipline. English, Russian, Ukrainian.">
 <meta property="og:image" content="https://serzhyale.github.io/universal-agent-kit/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Universal Agent Kit - a portable method for AI-assisted development, in English, Russian, and Ukrainian.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Universal Agent Kit">
-<meta name="twitter:description" content="A portable method for AI-assisted development - rules, skills, roles, spec lifecycle, memory. English, Russian, Ukrainian.">
+<meta name="twitter:description" content="A portable method for AI-assisted development - rules, skills, roles, spec lifecycle, memory, parallel agents. English, Russian, Ukrainian.">
 <meta name="twitter:image" content="https://serzhyale.github.io/universal-agent-kit/og-image.png">
 <script type="application/ld+json">
 {
@@ -280,9 +280,9 @@
       <span data-l="uk">Дай своєму ШІ-агенту операційну систему</span>
     </h1>
     <p class="lead">
-      <span data-l="ru">Набор понятных правил, готовых промптов и заметок для ИИ-агента. Он помогает агенту не терять контекст и работать аккуратно. Подходит и для личной папки с проектом на компьютере, и для проекта с Git - не зависит от языка, модели и инструмента.</span>
-      <span data-l="en">A set of clear rules, ready-made prompts, and notes for an AI agent. It helps the agent keep context and work carefully. It fits both a personal project folder on your computer and a Git project - regardless of language, model, or tool.</span>
-      <span data-l="uk">Набір зрозумілих правил, готових промптів і нотаток для ШІ-агента. Він допомагає агенту не губити контекст і працювати акуратно. Підходить і для особистої папки з проєктом на комп'ютері, і для проєкту з Git - незалежно від мови, моделі чи інструмента.</span>
+      <span data-l="ru">Набор понятных правил, готовых промптов и заметок для ИИ-агента. Он помогает агенту не терять контекст, работать аккуратно и не затирать чужую работу, когда агентов несколько. Подходит и для личной папки с проектом на компьютере, и для проекта с Git - не зависит от языка, модели и инструмента.</span>
+      <span data-l="en">A set of clear rules, ready-made prompts, and notes for an AI agent. It helps the agent keep context, work carefully, and stay out of the other agents' way when there is more than one. It fits both a personal project folder on your computer and a Git project - regardless of language, model, or tool.</span>
+      <span data-l="uk">Набір зрозумілих правил, готових промптів і нотаток для ШІ-агента. Він допомагає агенту не губити контекст, працювати акуратно й не затирати чужу роботу, коли агентів декілька. Підходить і для особистої папки з проєктом на комп'ютері, і для проєкту з Git - незалежно від мови, моделі чи інструмента.</span>
     </p>
     <div class="cta">
       <a class="btn primary" href="universal-agent-kit.zip" download>
@@ -351,7 +351,7 @@
       </details>
 
       <details class="sec" open>
-        <summary><span class="secnum" aria-hidden="true">01</span><span class="sechead"><span class="sectitle" role="heading" aria-level="2">Восемь принципов на один экран</span><span class="secteaser">Сводка всего метода одним взглядом</span></span></summary>
+        <summary><span class="secnum" aria-hidden="true">01</span><span class="sechead"><span class="sectitle" role="heading" aria-level="2">Девять принципов на один экран</span><span class="secteaser">Сводка всего метода одним взглядом</span></span></summary>
         <div class="secbody">
           <div class="grid">
             <div class="card"><div class="num">01</div><h3>Сначала исследуй</h3><p>Никогда не угадывай путь или поведение. Прочитай карту, потом код. Сохрани находки, не грепай дважды.</p></div>
@@ -362,6 +362,7 @@
             <div class="card"><div class="num">06</div><h3>Чисто с самого начала</h3><p>Не пиши слоп: пустые catch, мусорные комментарии, хардкод вместо токена, мёртвый код. Лови на ревью.</p></div>
             <div class="card"><div class="num">07</div><h3>Помни между сессиями</h3><p>Файловая память хранит то, что рантайм забывает: предпочтения, причины решений, контекст проекта.</p></div>
             <div class="card"><div class="num">08</div><h3>Статус - из реальности</h3><p>Статус тикета истинен, потому что так делает код, а не потому что так написано в имени файла или хочется.</p></div>
+            <div class="card"><div class="num">09</div><h3>Несколько агентов сразу</h3><p>Читающие агенты работают параллельно бесплатно. Пишущим нужен свой чекаут: одна команда на всё дерево откатывает несохранённые правки всем остальным - даже в файлах, которых она не касалась.</p></div>
           </div>
         </div>
       </details>
@@ -690,7 +691,7 @@ Do not change anything yet. Show me the plan first; on any conflict, my existing
       </details>
 
       <details class="sec" open>
-        <summary><span class="secnum" aria-hidden="true">01</span><span class="sechead"><span class="sectitle" role="heading" aria-level="2">Eight principles, one screen</span><span class="secteaser">The whole method at a glance</span></span></summary>
+        <summary><span class="secnum" aria-hidden="true">01</span><span class="sechead"><span class="sectitle" role="heading" aria-level="2">Nine principles, one screen</span><span class="secteaser">The whole method at a glance</span></span></summary>
         <div class="secbody">
           <div class="grid">
             <div class="card"><div class="num">01</div><h3>Research first</h3><p>Never guess a path or behaviour. Read the map, then the code. Persist findings, don't re-grep.</p></div>
@@ -701,6 +702,7 @@ Do not change anything yet. Show me the plan first; on any conflict, my existing
             <div class="card"><div class="num">06</div><h3>Clean from the start</h3><p>No slop: empty catches, trivial comments, hardcoded values, dead weight. Catch it in review.</p></div>
             <div class="card"><div class="num">07</div><h3>Remember across sessions</h3><p>File-based memory keeps what the runtime forgets: preferences, decision rationale, project context.</p></div>
             <div class="card"><div class="num">08</div><h3>Status from reality</h3><p>A ticket's status is true because the code makes it true - never inferred from a filename or a hope.</p></div>
+            <div class="card"><div class="num">09</div><h3>Several agents at once</h3><p>Readers parallelize for free. Writers need a checkout each: one whole-tree VCS command reverts every other writer's uncommitted edits, on files it never touched.</p></div>
           </div>
         </div>
       </details>
@@ -1029,7 +1031,7 @@ Do not change anything yet. Show me the plan first; on any conflict, my existing
       </details>
 
       <details class="sec" open>
-        <summary><span class="secnum" aria-hidden="true">01</span><span class="sechead"><span class="sectitle" role="heading" aria-level="2">Вісім принципів на один екран</span><span class="secteaser">Зведення всього методу одним поглядом</span></span></summary>
+        <summary><span class="secnum" aria-hidden="true">01</span><span class="sechead"><span class="sectitle" role="heading" aria-level="2">Дев'ять принципів на один екран</span><span class="secteaser">Зведення всього методу одним поглядом</span></span></summary>
         <div class="secbody">
           <div class="grid">
             <div class="card"><div class="num">01</div><h3>Спершу досліджуй</h3><p>Ніколи не вгадуй шлях чи поведінку. Прочитай карту, потім код. Збережи знахідки, не грепай двічі.</p></div>
@@ -1040,6 +1042,7 @@ Do not change anything yet. Show me the plan first; on any conflict, my existing
             <div class="card"><div class="num">06</div><h3>Чисто від початку</h3><p>Не пиши слоп: порожні catch, сміттєві коментарі, хардкод замість токена, мертвий код. Лови на рев'ю.</p></div>
             <div class="card"><div class="num">07</div><h3>Пам'ятай між сесіями</h3><p>Файлова пам'ять зберігає те, що рантайм забуває: уподобання, причини рішень, контекст проєкту.</p></div>
             <div class="card"><div class="num">08</div><h3>Статус - з реальності</h3><p>Статус тикета істинний, бо так робить код, а не бо так написано в імені файлу чи хочеться.</p></div>
+            <div class="card"><div class="num">09</div><h3>Кілька агентів одразу</h3><p>Читачі паралеляться безкоштовно. Тим, хто пише, потрібен свій чекаут: одна команда на все дерево відкочує незбережені правки всім іншим - навіть у файлах, яких вона не торкалась.</p></div>
           </div>
         </div>
       </details>
@@ -1371,17 +1374,17 @@ Do not change anything yet. Show me the plan first; on any conflict, my existing
   var I18N = {
     ru:{
       title:'Universal Agent Kit - как устроена разработка с ИИ-агентами',
-      desc:'Переносимый метод разработки с ИИ-агентами: правила, навыки, роли, жизненный цикл спеки и постоянная память. Выжимка из реального проекта, очищенная от стека. Статья и kit на русском, английском и украинском.',
+      desc:'Переносимый метод разработки с ИИ-агентами: правила, навыки, роли, жизненный цикл спеки, постоянная память и дисциплина параллельной работы агентов. Выжимка из реального проекта, очищенная от стека. Статья и kit на русском, английском и украинском.',
       langGroup:'Язык', theme:'Тема', toLight:'Включить светлую тему', toDark:'Включить тёмную тему', copied:'Скопировано', copyFail:'Не удалось'
     },
     en:{
       title:'Universal Agent Kit - how AI-assisted development is wired',
-      desc:'A portable method for AI-assisted development: rules, skills, roles, a spec lifecycle, and persistent memory. Distilled from a real project, stripped of its stack. Article and kit in English, Russian, and Ukrainian.',
+      desc:'A portable method for AI-assisted development: rules, skills, roles, a spec lifecycle, persistent memory, and parallel-agent discipline. Distilled from a real project, stripped of its stack. Article and kit in English, Russian, and Ukrainian.',
       langGroup:'Language', theme:'Theme', toLight:'Switch to light theme', toDark:'Switch to dark theme', copied:'Copied', copyFail:'Copy failed'
     },
     uk:{
       title:'Universal Agent Kit - як влаштована розробка з ШІ-агентами',
-      desc:'Переносний метод розробки з ШІ-агентами: правила, навички, ролі, життєвий цикл спеки та постійна пам\'ять. Дистильовано з реального проєкту, очищено від стеку. Стаття і kit російською, англійською та українською.',
+      desc:'Переносний метод розробки з ШІ-агентами: правила, навички, ролі, життєвий цикл спеки, постійна пам\'ять і дисципліна паралельної роботи агентів. Дистильовано з реального проєкту, очищено від стеку. Стаття і kit російською, англійською та українською.',
       langGroup:'Мова', theme:'Тема', toLight:'Увімкнути світлу тему', toDark:'Увімкнути темну тему', copied:'Скопійовано', copyFail:'Не вдалося'
     }
   };

@@ -8,7 +8,8 @@ regardless of language.
 
 The value here is not the tooling - it is the **working method**: research before you act,
 split *what/why* from *how*, plan in verifiable phases, keep autonomy high and bureaucracy
-low, and keep the assistant terse and honest.
+low, run several agents at once without losing each other's work, and keep the assistant
+terse and honest.
 
 ---
 
@@ -54,6 +55,7 @@ universal-agent-kit/
     RESEARCH_INDEX.md       <- research order + the queryable code index
     VALIDATION.md           <- the validation ladder: "done" means evidence
     COST.md                 <- cost & fan-out, model-tier routing, the shared-resource lock queue
+    PARALLEL.md             <- several agents at once: isolation, merge-back, unattended drivers
     REPLACES.md             <- placeholder replacements reference (EN)
     REPLACES_RU.md          <- placeholder replacements reference (RU mirror - optional)
   memory/
@@ -88,7 +90,7 @@ Hand this whole folder to your coding agent and say something like:
 3. Merge `CLAUDE.md` into your repo root (or `.claude/CLAUDE.md`). Fill the placeholders.
 4. Optionally merge `.claude/settings.json` (review permissions first - see below).
 5. Copy the `docs/*` files (`SPEC_LIFECYCLE`, `CODE_QUALITY`, `AUTHORING`, `HOOKS`,
-   `AGENT_MEMORY`, `RESEARCH_INDEX`, `VALIDATION`, `COST`, `REPLACES`) wherever your docs live;
+   `AGENT_MEMORY`, `RESEARCH_INDEX`, `VALIDATION`, `COST`, `PARALLEL`, `REPLACES`) wherever your docs live;
    reference them from `CLAUDE.md`.
    `REPLACES_RU.md` is a Russian mirror of `REPLACES.md` - skip it unless your team reads Russian.
 6. Optionally copy `memory/` - the index template and one sample entry per type - if your
@@ -172,6 +174,9 @@ are filled per ticket as you use the skills. A good first move: ask your agent t
    catches, no dead weight left behind.
 9. **Remember across sessions** (`docs/AGENT_MEMORY.md`). A small, file-based memory keeps
    the durable, non-obvious context the runtime would otherwise forget every session.
+10. **Run several agents without losing work** (`docs/PARALLEL.md`). Readers fan out freely;
+   writers get one checkout each and a single owner for whole-tree commands. Unattended runs
+   loop the *process*, not the session, so every item starts on an empty context.
 
 See `docs/SPEC_LIFECYCLE.md` for the full status flow.
 

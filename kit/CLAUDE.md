@@ -192,6 +192,12 @@ skill/agent a trigger-focused `description` (not a summary of its steps).
   never by a clock. A lock is a (kind, domain) pair and the domain is derived from the changed file
   set, never declared by the caller. Abandoning a queued intent obliges you to withdraw your own
   ticket - nothing else will.
+- **Parallel readers are free; parallel writers need isolation, and disjoint files are not it.** Any
+  whole-tree VCS op one writer runs (stash, checkout, reset, restore, clean) reverts every other
+  writer's uncommitted edits. Either you own VCS/build/index commands between waves, or each writer
+  gets its own checkout - and then the lock path must resolve from the **shared** git directory, or
+  every worktree holds its own lock and serializes nothing.
 - For an **unattended** run, make the process boundary the reset: a driver outside the session takes
   the next item, runs it in a fresh process, repeats. A self-imposed "compact between tickets" is a
-  request; a new process is a guarantee. Full discipline: `docs/COST.md`.
+  request; a new process is a guarantee. Full discipline: `docs/COST.md` for the spend,
+  `docs/PARALLEL.md` for running several at once.

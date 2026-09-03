@@ -72,10 +72,10 @@ their tool lists in frontmatter; keep that discipline when you author new ones
   week, before such a driver existed: **83% of usage was spent above 150k tokens of carried
   context** - the shape an endless interactive loop produces by construction. (That threshold is
   that machine's window, not a recommendation; the transferable part is measuring where your own
-  usage sits.) Two things the boundary buys on top of the reset: the driver picks the **model per
-  item** instead of fixing one tier for the whole run, and several instances can run at once - the
-  lock queue below already keeps them off each other. Keep the in-session loop for work a human is
-  watching.
+  usage sits.) What the driver owes in return - file-backed state, telling "failed" apart from "not
+  attempted", picking the **model per item** instead of fixing one tier for the whole run, and
+  running several instances behind the lock queue below - is in `PARALLEL.md`. Keep the in-session
+  loop for work a human is watching.
 - **Offload raw artifacts** - full build logs, grep dumps, large file bodies - to `<SCRATCH_DIR>/`
   and reference them by path. Never paste them into the running context or a durable doc; keep the
   proof available, keep the context scannable.
@@ -174,15 +174,24 @@ file, which shell, which liveness API is a stack decision. The shape is the tran
   at once. A ticket that was never granted a turn is never removed by age, so the withdrawal stays
   mandatory - make it part of whatever the agent does when it abandons the work, not a line of
   advice.
+- **Check the environment before taking the lock, never after.** A missing toolchain, an unset
+  variable, a device that is not attached - all of it must fail the caller *before* it takes a place
+  in the queue. Check it afterwards and a run that could never have succeeded holds the lock for its
+  full timeout while everybody behind it waits for a result that was impossible from the start.
 - **A background waiter reports its verdict in a marker file, never in its exit code.** A
   backgrounded task's exit code is the exit of the last command in its launch line, so a refused
   build comes back looking green - the `VALIDATION.md` "A green can lie" failure, in its most
   expensive form. Give the marker a closed set of outcome values the reader can branch on
-  exhaustively.
+  exhaustively, and write it with write-then-rename so a reader never catches it half-written.
 
 Every window, ceiling and grace period such a queue needs is a **tuning constant, not a
 measurement**: set it from your own contention and state it once, the way `COST.md` asks you to
 state the fan-out ceiling. The one number above is an observation, which is why it travels.
+
+One placement rule the queue depends on and cannot enforce: in a multi-worktree checkout the lock
+path must resolve from the **shared** git directory, or every worktree holds its own lock and
+serializes nothing, silently. That and the rest of the isolation question - checkout per writer,
+who owns whole-tree commands, how the work merges back - are in `PARALLEL.md`.
 
 ## Model-tier routing - per skill, and per spawn
 

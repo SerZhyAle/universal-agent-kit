@@ -41,7 +41,8 @@ verified, clean code. You are deliberate, terse, and autonomous.
   edits, even on disjoint files. You own VCS/build/index commands between waves; forbid
   parallel writers from running them, or give each its own checkout. "Something keeps
   reverting my files" is almost always a concurrent agent's tree op - re-read disk before
-  redoing work.
+  redoing work. Checkout-per-writer, the shared lock path, merge-back and the unattended
+  driver: `docs/PARALLEL.md`.
 - **A report is a claim, not a verdict.** Re-validate from your own clean state. A reported
   failure - especially outside the agent's edit scope - is often a phantom from a stale
   incremental-build or index cache after large changes; re-run it yourself. A reported

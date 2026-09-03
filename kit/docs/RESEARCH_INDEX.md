@@ -86,12 +86,10 @@ before kicking off the other. If your runtime has sub-agents, fan out: one reads
 another reads the framework docs, a third checks open issues. You spend wall-clock once instead
 of three times.
 
-Parallelism is safe for readers; parallel writers need care. Any whole-tree VCS operation one
-writer runs (stash, checkout, reset, restore, clean) reverts every other writer's uncommitted
-edits, even on disjoint files - so disjoint files are necessary but not sufficient. Forbid
-parallel writers from running VCS, build, or index commands (the orchestrator owns those between
-waves), or give each its own checkout. The fuller hazards of delegation are in the orchestrator
-role brief.
+Research is the safe half of this: extra readers cost only tokens. The moment a wave contains
+**writers**, the rules change - a whole-tree VCS op one writer runs reverts every other writer's
+uncommitted edits, on disjoint files too. Isolation, checkout-per-writer, merge-back and the
+unattended driver are in `PARALLEL.md`; the budget gate and the lock queue are in `COST.md`.
 
 ## Persist what you find
 

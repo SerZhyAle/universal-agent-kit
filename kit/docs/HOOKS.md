@@ -91,6 +91,76 @@ yourself done"* - the one decision an agent otherwise makes entirely alone. If y
 **Every escape hatch is unconditional**, and so is the off switch. A guard with a conditional
 bypass gets bypassed by other means.
 
+## Skeletons - the four contracts as programs
+
+Everything above is a decision; below is what the decision looks like once it runs. These are
+**illustrative shapes, not drop-in scripts**: the event names, the field names and the shape of the
+event object are your runtime's, they change between versions, and the only reliable way to learn
+them is to probe your runtime with a hook that prints what it received. POSIX shell and `jq` are
+used for brevity - any language with a JSON reader does the same job.
+
+Read them for the control flow, which is the part that travels: where the fail-open sits, what
+happens on an unparseable input, and which channel the message goes out on.
+
+**Refusing, with a cheap pre-filter.** The pre-filter is a second program with its own bugs; give it
+must-reach and must-skip cases (see below) and run them in the shell that actually evaluates it.
+
+```sh
+#!/bin/sh
+# PreToolUse guard. Non-zero exit blocks the call; the reason goes to stderr.
+input=$(cat) || exit 0                      # fail open: no input, no verdict
+case "$input" in *"$TRIGGER_SUBSTRING"*) ;; *) exit 0 ;; esac   # cheap pre-filter
+target=$(printf '%s' "$input" | jq -r '.tool_input.command // empty' 2>/dev/null) || exit 0
+[ -n "$target" ] || exit 0                  # fail open: field absent or renamed
+if is_forbidden "$target"; then
+  echo "Blocked: <what is wrong> - do <the specific allowed alternative> instead." >&2
+  exit 2                                    # the only path that blocks
+fi
+exit 0
+```
+
+**Rewriting.** Two mistakes are fatal and both are visible here: the replacement carries the
+**whole** input object, and the notice goes on the context channel where the model reads it.
+
+```sh
+input=$(cat) || exit 0
+fixed=$(printf '%s' "$input" | jq -c '.tool_input |= correct_it' 2>/dev/null) || exit 0
+[ "$fixed" = "$(printf '%s' "$input" | jq -c '.')" ] && exit 0   # unchanged: say nothing
+printf '%s' "$fixed" | emit_replacement_with_context "Adjusted <field>: <why>."
+exit 0
+```
+
+**Arming.** A session-start marker its companion gate reads, so a gate can be once-per-session.
+
+```sh
+: > "$STATE_DIR/armed.$SESSION_ID"    # create, never fail
+exit 0                                # a session start is never worth blocking
+```
+
+**Refusing the end of a turn.** The one gate whose verdict does *not* travel in the exit code.
+
+```sh
+exit_zero_always() { exit 0; }
+trap exit_zero_always EXIT            # a session must never fail to end because this errored
+
+marker="$STATE_DIR/pending.$SESSION_ID"
+[ -f "$marker" ] || exit 0                            # no marker: silence means allow
+owner_still_alive "$marker" || { rm -f "$marker"; exit 0; }   # liveness, not a clock
+older_than_ceiling "$marker" && { rm -f "$marker"; exit 0; }  # absolute ceiling
+waiter_in_flight "$marker" && exit 0                  # a sanctioned way to be idle
+
+bounces=$(bump_counter "$marker")
+if [ "$bounces" -gt 1 ]; then
+  emit_refusal "Still not done. Run: $(named_next_action "$marker")"   # escalate, do not repeat
+else
+  emit_refusal "Not done: <what is outstanding>."
+fi
+```
+
+Note what is *not* in any of them: a conditional escape hatch. Every bypass is unconditional, and so
+is the off switch - a guard that can only be disabled by knowing a trick gets disabled by other
+means, and then nobody knows it is off.
+
 ## The hook inventory
 
 **Registering, removing or re-registering a hook requires editing an inventory in the same

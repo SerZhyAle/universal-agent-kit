@@ -1,9 +1,15 @@
 # Research Order & the Code Index - never guess
 
 The most expensive thing an AI assistant does is *guess*: invent a file path, assume a function
-signature, recall an API that changed two versions ago. A guess looks like progress and costs a
-full wrong implementation. The cure is a fixed order for finding things, and - for a large
-codebase - a maintained index so finding is one query instead of a blind grep.
+signature, recall an API that changed two versions ago, cite a clause that was renumbered last
+spring, quote a figure from a table that has since been re-cut. A guess looks like progress and
+costs a full wrong implementation. The cure is a fixed order for finding things, and - for a large
+project - a maintained index so finding is one query instead of a blind search.
+
+The index is called a *code index* throughout this document because that is the sharpest example.
+Its non-code siblings are the same artifact under other names: a data dictionary, a clause library,
+a document register, a table of sources, a service catalogue. Every rule below applies to them
+unchanged.
 
 The one rule under all of it: **if you state a path, a symbol, or an API, you have verified it.**
 
@@ -15,8 +21,9 @@ symbols go dead, get renamed in meaning, or never get wired up.
 
 Read in this order and stop as soon as a source answers the question:
 
-1. **The map.** The repo's index/overview doc - `README`, `ARCHITECTURE.md`, an operations
-   index, a feature-to-path map. This tells you *where* to look before you look. The map is not
+1. **The map.** The project's index/overview doc - `README`, `ARCHITECTURE.md`, an operations
+   index, a feature-to-path map, a table of contents, a matter index. This tells you *where* to
+   look before you look. The map is not
    just something you read - it is something you author and keep fresh: a curated
    feature-area-to-location lookup kept in step with the structure it describes, with someone
    owning its correctness. "Consult the map" presumes a map that someone maintains.
@@ -31,12 +38,12 @@ Read in this order and stop as soon as a source answers the question:
 Each rung is cheaper to consult than the one below it is to get wrong. The discipline is to
 climb, not to jump straight into reading source or - worse - straight into writing it.
 
-## The code index (for codebases big enough to get lost in)
+## The index (for projects big enough to get lost in)
 
-Grep is fine until the tree is large, names collide, or "where does X live" takes five searches.
-At that point, maintain an **index**: a generated list of the codebase's units (classes,
-modules, files) with, for each, its path and a short role - and optionally what it depends on or
-is injected with. The agent queries the index ("show me everything matching `*Repository`",
+Search is fine until the tree is large, names collide, or "where does X live" takes five attempts.
+At that point, maintain an **index**: a generated list of the project's units - classes, modules and
+files in a codebase; tables and fields in an analysis; sections, terms and owners in a document
+set - with, for each, its location and a short role, and optionally what it depends on. The agent queries the index ("show me everything matching `*Repository`",
 "what plays the role `data-source`") and gets the location in one shot.
 
 Three rules keep an index trustworthy:

@@ -1,5 +1,5 @@
 ---
-description: "Use to run the app and observe the actual behaviour, reporting PASS/FAIL with evidence. Triggers: 'verify', 'does it actually work', a behaviour claim that needs run-and-observe proof."
+description: "Use to run the thing and observe what actually happens, reporting PASS/FAIL with evidence. Triggers: 'verify', 'does it actually work', a behaviour claim that needs run-and-observe proof."
 ---
 
 # Verify - Run-and-Observe Sanity Check
@@ -9,9 +9,9 @@ description: "Use to run the app and observe the actual behaviour, reporting PAS
 > 2. Surface only what matters: PASS/FAIL + evidence. Do not edit specs or status.
 > 3. Terse report: end with one line - verdict + evidence path.
 
-Lightweight check that a change **actually works when run**, not just that it compiles.
-Build (optional), run/launch, walk a minimal scenario, capture output/logs, report
-PASS/FAIL with evidence. Read-only on specs and plans. Artifacts go to `<SCRATCH_DIR>/`.
+Lightweight check that a change **actually works when exercised**, not just that the cheap check
+passed. Produce (optional), run, walk a minimal scenario, capture output, report PASS/FAIL with
+evidence. Read-only on specs and plans. Artifacts go to `<SCRATCH_DIR>/`.
 
 This is the in-between tool: heavier than reading the diff, lighter than a full QA pass.
 Use it after `/quick`, `/fix`, or `/spec-dev` to catch a trivial breakage early.
@@ -26,9 +26,11 @@ Use it after `/quick`, `/fix`, or `/spec-dev` to catch a trivial breakage early.
 /verify --dry-run                        # author the scenario only, no execution
 ```
 
-Adapt the *how* to your stack: a web app → drive a browser or hit endpoints; a CLI → run
+Adapt the *how* to your project: a web app → drive a browser or hit endpoints; a CLI → run
 it with representative args; a service → start it and probe; a mobile app → launch on a
-device/emulator. The kit defines the *method*, not the driver.
+device/emulator; a document → render it and read the result as a stranger would; a dataset or
+report → run the pipeline on a sample and reconcile the numbers against their source; a procedure →
+have someone follow it from the text alone. The kit defines the *method*, not the driver.
 
 ## Process
 
@@ -38,8 +40,9 @@ device/emulator. The kit defines the *method*, not the driver.
 **2 - Pre-flight.** Confirm the run target is reachable (server up, device online, binary
 present). If not, report the blocker and stop - do not fake a pass.
 
-**3 - Build + install (only when `--build`).** Run `<BUILD_CMD>`. On failure: capture the
-tail of the output to `<SCRATCH_DIR>/verify_<TS>.md` and abort. Do not proceed.
+**3 - Produce the thing (only when `--build`).** Run `<BUILD_CMD>` - or whatever your project's
+produce step is: a render, an export, a pipeline run. On failure: capture the tail of the output to
+`<SCRATCH_DIR>/verify_<TS>.md` and abort. Do not proceed.
 
 **4 - Author the scenario.** Write `<SCRATCH_DIR>/verify_<TS>.md` with a header (target,
 version, environment) and an ordered 1-5 step scenario. Each step: `goal`, `action`,

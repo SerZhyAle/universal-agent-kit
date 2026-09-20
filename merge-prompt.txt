@@ -1,10 +1,15 @@
-You are merging an external "Universal Agent Kit" into THIS repository. My existing setup is
+You are merging an external "Universal Agent Kit" into THIS project. My existing setup is
 the source of truth; the kit is an ADDITIVE library, not a drop-in replacement. Your job is to
-integrate the useful parts without breaking my project.
+integrate the useful parts without breaking my work.
 
 First, locate the kit folder: it is `./universal-agent-kit/` when unzipped from the release
 archive, or `./kit/` if the repo was copied in directly. Detect which exists and use that path
 everywhere below (referred to as KIT/). If neither is present, stop and ask me where it is.
+
+The kit does NOT assume my project is a codebase. It assumes five things: a workspace with
+history, artifacts, work items, checks, and an agent that can read and write my files. Read
+KIT/docs/PROJECT_SHAPES.md early - it decides which rules apply to work like mine, which need a
+local equivalent, and which to delete outright rather than adapt.
 
 INPUTS
 - Kit: KIT/  (i.e. ./universal-agent-kit/ or ./kit/)
@@ -17,19 +22,23 @@ INPUTS
     .claude/agents/*               role briefs (rd-lead, solution-researcher, implementer,
                                    doc-writer)
     .claude/settings.json          default agent + permission template
+    docs/PROJECT_SHAPES.md         what the method assumes; the vocabulary in five kinds of
+                                   project; what to delete when a rule has no subject
     docs/SPEC_LIFECYCLE.md         the ticket methodology
-    docs/CODE_QUALITY.md           anti-slop conventions
+    docs/VALIDATION.md             the validation ladder, the four answers a check has, and the
+                                   gate that guards an irreversible step
+    docs/CODE_QUALITY.md           anti-slop conventions (code layer)
     docs/AUTHORING.md              how to write a new rule/skill/agent (test-first, SDO descriptions)
-    docs/HOOKS.md                  event hooks: which verdict, and the hook inventory
+    docs/HOOKS.md                  event hooks: which verdict, and who the event actually reaches
     docs/AGENT_MEMORY.md           persistent memory discipline (four entry types)
-    docs/RESEARCH_INDEX.md         research order + the queryable code index
-    docs/VALIDATION.md             the validation ladder
+    docs/RESEARCH_INDEX.md         research order + the queryable index of the material
     docs/COST.md                   cost & fan-out, model-tier routing, the shared-resource lock queue
+    docs/PARALLEL.md               several agents at once: isolation, merge-back, unattended drivers
     docs/REPLACES.md               placeholder replacements reference (EN)
     docs/REPLACES_RU.md            placeholder replacements reference (RU mirror, optional)
-    memory/                        memory index template + one sample entry per type
+    memory/                        memory index template + sample entries
     README.md                      import guide + manifest
-- Mine: my existing CLAUDE.md, .claude/, settings, conventions, and codebase.
+- Mine: my existing CLAUDE.md, .claude/, settings, conventions, and the project itself.
 
 HARD SAFETY RULES (non-negotiable)
 1. Do NOT modify anything until I approve the plan (Step 2). Plan first, write second.
@@ -37,33 +46,43 @@ HARD SAFETY RULES (non-negotiable)
    surface the conflict - never silently replace.
 3. Do NOT touch KIT/ itself (it is the read-only source).
 4. Create a new git branch before any write. Do NOT commit, push, or rebase.
-5. Back up any of my files you are about to change into a git-ignored scratch directory first
-   (e.g. ./tmp/kit-merge-backup/) - never the repo root.
+5. Back up any of my files you are about to change into an ignored scratch directory first
+   (e.g. ./tmp/kit-merge-backup/) - never the project root.
 6. Do NOT loosen my permissions/settings. Propose additions for my review only.
-7. Keep my conventions, naming, language, and architecture rules authoritative. Where the kit
+7. Keep my conventions, naming, language, and structure rules authoritative. Where the kit
    conflicts with mine, mine wins; mention the conflict so I can decide.
 
 STEP 1 - INVENTORY (read-only)
+- Classify my project against KIT/docs/PROJECT_SHAPES.md: what my artifacts are, what my
+  workspace is, what I already use as a map, and which of the five assumptions I am missing.
+  Name the code-layer rules to delete if my project does not build or run.
 - List what the kit offers vs what I already have: commands, agents, CLAUDE.md rules, docs,
   the memory system.
 - Classify each kit item as: NEW (no equivalent of mine), DUPLICATE (I already have one), or
   CONFLICT (mine exists and differs in intent).
-- Detect which agent tool THIS repo targets (Claude Code, Cursor, Cline, Windsurf, Aider, Codex).
-  Only Claude Code loads .claude/commands/* and .claude/agents/* natively. For any other tool,
-  plan to TRANSLATE each command/agent into that tool's rules format (mapping in
+- Detect which agent tool THIS project targets (Claude Code, Cursor, Cline, Windsurf, Aider,
+  Codex). Only Claude Code loads .claude/commands/* and .claude/agents/* natively. For any other
+  tool, plan to TRANSLATE each command/agent into that tool's rules format (mapping in
   KIT/README.md) - do not copy .claude/ verbatim, the files would be dead.
 - Grep the kit for <PLACEHOLDER> tokens; for each, propose a concrete value derived from THIS
-  repo. The full set: <PROJECT_NAME>, <CHAT_LANGUAGE>, <INDEX_DOC>, <SRC_ROOT>, <ARCH_LAYERS>,
-  <BUILD_CMD>, <TEST_CMD>, <LINT_CMD>, <RUN_CMD>, <LOGGER>, <PLAN_DIR>, <SCRATCH_DIR>, <MAX_LOC>,
-  <READONLY_ZONES>, <ID>. Mark any you cannot resolve.
-- Size the navigation problem: how many source files, the median and the largest, and whether a
-  code index already exists. Name three questions a task here typically answers by reading a large
-  file end to end - those are what an index would have to answer instead.
+  project. Tier 1, always: <PROJECT_NAME>, <CHAT_LANGUAGE>, <INDEX_DOC>, <WORK_ROOT>,
+  <CHECK_CMD>, <PLAN_DIR>, <SCRATCH_DIR>, <SIZE_BUDGET>, <READONLY_ZONES>, <ID>. Tier 2, the
+  code layer, only if this project builds or runs: <ARCH_LAYERS>, <BUILD_CMD>, <TEST_CMD>,
+  <LINT_CMD>, <RUN_CMD>, <LOGGER>. Mark any you cannot resolve.
+- <CHECK_CMD> gets its own answer, not a shrug. Name the cheapest mechanical check this project
+  already has or could have this week - a build, a test, a render, a link check, a schema
+  validation, a reconciliation between two totals, a sweep that every cross-reference resolves.
+  If you genuinely find none, say so explicitly and propose the one that would be cheapest to
+  build, with the command it would run.
+- Size the navigation problem: how many files, the median and the largest, and whether an index
+  already exists. Name three questions a task here typically answers by reading a large file end
+  to end - those are what an index would have to answer instead.
 - If I have no persistent-memory setup yet, note whether my runtime supports one and how the
   kit's memory/ templates would map onto it.
 
 STEP 2 - PLAN (stop and wait for my approval)
 Present a concrete merge plan, then STOP:
+- The project-shape verdict: which rules apply, which need a local equivalent, which to delete.
 - NEW items -> which files you'll copy in, to which paths.
 - DUPLICATE/CONFLICT items -> for each, recommend one: skip, or import under a suffixed name
   (e.g. /spec-kit, agent "rd-lead-kit") so nothing of mine is shadowed. Show a short diff of
@@ -80,8 +99,9 @@ Wait for my "go" (or my edits) before writing anything.
 STEP 3 - APPLY (only after I approve)
 - On the new branch, back up touched files, then apply exactly the approved plan.
 - Fill all approved placeholders. Leave unresolved ones as TODO and list them.
+- Delete, do not keep "just in case", the rules the shape verdict said have no subject here.
 - Do not commit. End with: the file tree of what changed, the backup location, the unresolved
   TODOs, and how to try one new command safely.
 
 Start with Step 1 now. Ask me questions only if something in Step 2 is genuinely undecidable
-from the repo.
+from the project itself.

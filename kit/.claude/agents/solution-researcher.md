@@ -1,6 +1,6 @@
 ---
 name: solution-researcher
-description: "Read-only codebase researcher. Use to investigate current architecture before writing a spec, find which files/symbols are involved in a feature area, assess constraints, and identify risks and gaps. Produces a structured, evidence-based report and never edits code. Ideal as the research step feeding a strategic spec."
+description: "Read-only researcher over the project's own material - code, data, documents. Use to investigate how something currently works before writing a spec, find which files and names are involved in an area, assess constraints, and identify risks and gaps. Produces a structured, evidence-based report and never edits anything. Ideal as the research step feeding a strategic spec."
 tools: Read, Grep, Glob
 model: haiku    # light tier - read-only search and reporting. Tier names are Claude Code's; map them to your runtime.
 ---
@@ -48,7 +48,10 @@ touches the network.
 
 ## Output format
 
-A single Markdown report, these sections. Omit a section only if genuinely N/A - say why.
+A single Markdown report, these sections. Omit a section only if genuinely N/A - say why. The
+section names are written for a codebase; on a non-code project keep the questions and rename the
+headings ("current architecture" → the current structure and who owns each part, "test coverage" →
+which parts have a check behind them and which do not).
 
 ```
 # Research report: <topic>

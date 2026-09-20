@@ -6,6 +6,13 @@ that look fine and quietly rot a codebase. The rule is not "review for these lat
 
 Adapt the concrete syntax to your language; the intent is universal.
 
+**This is the code layer of the kit.** If your artifacts are documents, datasets, contracts or
+procedures, the seven below have direct analogues and `PROJECT_SHAPES.md` lists the generic ones -
+but write your own list from what you actually caught in review, the way this one was written. The
+two sections that follow the list ("Adopting a rule on a codebase that already violates it" and
+"Close the source, not just the detector") apply to any artifact and are worth reading whatever your
+project is made of.
+
 ## The seven slop patterns
 
 1. **Trivial comments.** A comment that restates the adjacent line adds noise and goes stale.
@@ -57,7 +64,7 @@ Adapt the concrete syntax to your language; the intent is universal.
   one, never the reverse. No cross-layer shortcuts "just this once".
 - **Thin entry points.** Controllers / activities / route handlers wire and delegate; they do
   not hold business logic. Logic lives in named helper/service classes.
-- **File-size budget.** Past ~`<MAX_LOC>` lines, extract a cohesive helper. Size is a proxy
+- **File-size budget.** Past ~`<SIZE_BUDGET>` lines, extract a cohesive helper. Size is a proxy
   for "this file does too many things".
 - **Naming.** Match the codebase's existing convention exactly. Consistency beats your
   personal preference.
@@ -93,6 +100,27 @@ rename, a signature change, or a reformat moves the anchor, and the linter repor
 finding as new. Prefer a content- or count-based baseline where the tool allows it; and when a
 resurfaced item is the same accepted debt, re-accept it rather than "fixing" churn just to satisfy
 the gate. This trap is identical across detekt, ESLint, Ruff, and PHPStan.
+
+## A point fix on a shared contract is half a fix
+
+There are two kinds of defect and only one of them is local. "This code is wrong" is local. **"This
+code did not pay what the platform, the API, the wire format or the template demands" is not** - the
+same debt is almost certainly unpaid elsewhere, written by the same hand, on the same day, against
+the same contract.
+
+So when the finding is of the second kind, **sweep every site of that contract in the same
+ticket**. The sweep is cheap, because the contract names its own call sites: grep the interface, the
+annotation, the base class, the schema key. The alternative is discovering them one production
+crash at a time.
+
+Measured on one project (2026-09-20): the identical service-lifecycle contract had already been paid
+**twice** in one subsystem, each time as a point fix. A third service in the same repo was never
+looked at. It crashed in the field, was reported by remote diagnostics **three hours after the
+release shipped**, and cost a same-day fix-release. The two earlier fixes were, between them, the
+map of every place to look - and nobody read the map, because each of them had closed green.
+
+The tell that you are in this case: your fix adds a call, an override or a field that the framework
+*always* wanted. Ask immediately who else should have been calling it.
 
 ## Close the source, not just the detector
 

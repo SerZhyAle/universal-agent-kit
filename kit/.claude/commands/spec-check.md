@@ -4,8 +4,8 @@ description: "Use to audit an implementation against its spec and set the ticket
 
 # Specification Implementation Audit
 
-Audit a spec against the **actual repository state**. Status comes from what the code proves,
-not from a filename or a hope. Auto-detects strategic vs tactical scope.
+Audit a spec against the **actual state of the workspace**. Status comes from what the artifacts
+and their checks prove, not from a filename or a hope. Auto-detects strategic vs tactical scope.
 
 > No separate audit file is written. Findings go in a compact `## Last Audit` block at the
 > bottom of the strategic spec, overwritten each run. Old audit history is intentionally

@@ -12,6 +12,7 @@ lines once you have real memories.
 ## Ways of working
 
 - [PR granularity](examples/feedback_pr_granularity.md) - prefers one bundled PR for a cohesive refactor over many tiny ones
+- [Figures carry their source](examples/feedback_figures_carry_source.md) - an unsourced number in a deliverable is returned, not queried
 
 ## Project context
 

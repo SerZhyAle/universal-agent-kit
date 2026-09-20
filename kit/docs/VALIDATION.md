@@ -8,7 +8,13 @@ not a heavier one.
 ## The ladder
 
 Match the evidence to the kind of change. Climbing higher than necessary wastes time; climbing
-lower than necessary ships a bug.
+lower than necessary ships a defect.
+
+The rungs below are named for code because that is where they are sharpest, not because the ladder
+needs a compiler. If your artifacts are documents, datasets, contracts or procedures, read your own
+column in `PROJECT_SHAPES.md`: the rungs are the same shape - a cheap mechanical answer, then a
+narrow one, then an expensive one, then a human - and the rule that picks between them is
+unchanged.
 
 - **Doc / text only** → grep the file for the content you claim you wrote. If the words are
   there, the change is real.
@@ -16,6 +22,11 @@ lower than necessary ships a bug.
   did not run is a guess.
 - **Config / build files** → the target build passes. Config that "looks right" but breaks the
   build is the most common self-inflicted wound.
+- **A structured artifact** - a dataset, a sheet, a register, a form, a contract - → the structural
+  check first (it parses, every required field is present, every cross-reference resolves), then
+  the reconciliation (the total here equals the total there, the cited source says what it is
+  cited for). Both are mechanical, both are seconds, and skipping them is how a confident wrong
+  number reaches a reader.
 - **Code** → the *narrowest meaningful* check:
   - a compile / type-check for a pure symbol or signature change,
   - a targeted test for changed logic,
@@ -39,6 +50,33 @@ status back - only the human pass converts it. This is not a formality: one tick
 carrying one unticked device line, and an hour on real hardware showed **one of its five acceptance
 criteria failing outright**. The kit wires this as the `BlockNeedUserTest` status and the "no open
 MANUAL item" rule in `/spec-check`; `SPEC_LIFECYCLE.md` owns the mechanics.
+
+### A check has four answers, and folding the last two together is how it starts lying
+
+PASS and found-a-defect are the obvious two. *Could not verify* is the third - the check ran, the
+subject was out of reach, nothing was measured. **Not applicable in this configuration** is the
+fourth, and it is the one nobody builds. A check with no way to say the last two will report one of
+the first two instead, and from then on its output is fiction with a green tick on it.
+
+Two rules follow, both measured on one release sweep (2026-09-20):
+
+- **Validate the instrument before you trust its reading.** A reading that is physically impossible
+  means the instrument is broken, not that the subject failed. One geometry check took an impossible
+  measurement at face value and called **5 of 5** screens defective; a walk over a navigation tree
+  reported **18 of 28** rows unreachable. Both were false. A checker in that state does not merely
+  miss defects - it **manufactures blockers that do not exist**, and the cost lands twice: once on
+  whoever chases them, once on the credibility of every later red from the same check.
+- **A false finding is as expensive as a miss, and louder.** "A real defect would have been one row
+  among eighteen false ones" is the failure stated exactly. The check kept running, kept reporting,
+  and had become unreadable. Precision is not a nicety on any check whose output a human must
+  triage.
+
+And a *could not verify* is never waived into a pass. A sweep that cannot reach its subject has
+measured nothing; signing that off converts an unknown into a recorded pass, which is the one
+conversion the whole exercise exists to prevent. Observed: a smoke check returned
+`VERDICT FAIL .. no-device/infra`, the gate filed it as a waiver-eligible coverage gap, and the
+waiver was signed - so a **tooling fault and a genuinely absent subject produced the same bucket**.
+Separate them at the source; an infrastructure fault is not a known limitation.
 
 ## Record expected vs actual
 
@@ -114,6 +152,45 @@ resources, and its compile-only check compiled code without linking any, so a br
 layout closed **green** and its ticket reached "install this and test it" without the thing to be
 installed ever having been built.
 
+## Before an irreversible step, the verdict is an input - not a report filed next to it
+
+A release, a publication, a filing, a payment, a send: the class of step that cannot be undone by
+editing a file. Everything above is about proving a change; this is about the one moment where being
+wrong is permanent, and it fails in three specific ways. All three were measured on one project
+(2026-09-20), and none of them involved anybody breaking a rule.
+
+- **The absence of a verdict is not a pass.** "A red blocks the ship" says nothing about a sweep
+  that never ran, so a project can hold the rule perfectly and ship unverified for months - nothing
+  went red, because nothing ran. Close it by making the irreversible step itself **refuse without a
+  verdict artifact that names what it judged**. Naming matters as much as producing: a verdict from
+  the previous round is exactly what a hurried step reaches for.
+- **Wire the gate into the command that ships, not into a command beside it.** One project had the
+  whole apparatus - a documented gate emitting a single PASS / FAIL / WAIVED verdict, working - owned
+  by its *pre-release sweep*, while releases were cut by a separate runbook that never mentioned it.
+  Grep of that runbook for the gate's own name: **zero matches**. Skipping the sweep therefore
+  skipped the gate silently, and two consecutive releases went out with no written verdict at all.
+  Whenever a check and the irreversible act it guards live in two different commands, the check is
+  optional in practice however the docs read.
+- **Nothing the step generates may be committed after it. Generate, commit, then ship.** Listing
+  text, release notes, a cleanup of markers the version retires - all of it is part of what you
+  shipped, so it belongs in history before the act that freezes it. Put it after and it becomes work
+  with no deadline behind it. Observed: the commit the tag pointed at landed at **17:33**, the store
+  changelogs at **17:45**, and that one late commit was carrying the orphaned text of **three
+  earlier releases** nobody had noticed.
+
+One more, because it is where the surface rules break first: **a hurried fix-release is exactly the
+pressure that splits one surface set across two commits.** In the same project the English notes and
+all three READMEs went in one commit and the other two locales followed **eight minutes later** - the
+"every surface, every authored locale, one edit" rule broken not by disagreement but by haste. That
+is evidence the rule wants a gate on the shipping path, not another paragraph telling people to be
+careful.
+
+**A gate that has not run since the last irreversible step is itself unverified.** One smoke check
+had rotted so far that three independent defects sat in it at once, found by the release that needed
+it rather than before it. Anything the ship depends on runs on a cadence that does not wait for the
+ship - in CI, in a periodic sweep, or on a schedule - or its first run in months happens at the worst
+possible moment.
+
 ## A green can lie
 
 A pass/fail signal can come from the wrong command. When commands are chained, piped, or
@@ -177,6 +254,36 @@ are all months old. A new gate names its scope class at birth, and unnamed means
 is exactly how the imbalance builds. A project with no release boundary substitutes "CI-only" for
 the release scope and applies the same four-part test.
 
+### Retiring a gate: demonstrated redundancy, never silence
+
+Gates accumulate, and eventually one of them has to go. Two arguments get offered and only one of
+them is worth anything.
+
+**"It never fires" is not an argument.** A gate that finds nothing may be the reason the failure
+stopped happening. Retire one only on a stated argument about the risk.
+
+**"A cheaper check standing in front of it already found everything" is an argument** - and it is
+measurable. Measure the *pair*, not the gate alone. Observed on one project (2026-09-20): an
+expensive static-analysis step ran in **291 closures, and in 291 of 291 the cheap lexical pass had
+already come back clean**; over the whole corpus, real findings the cheap pass missed came to
+**0**. It cost **21.4% of the summed gate wall**, and a closure that ran it took **67.1 s against
+26.6 s** for one that did not. That is a retirement argument.
+
+One trap sits inside it: **count findings, not non-passes.** That gate's only two non-PASS verdicts
+were *could not verify* - which is not yield. Reading them as "it caught two things" is how a
+redundant gate survives its own audit.
+
+### Every number a gate rests on ships with its date and the command that regenerates it
+
+A threshold is a measurement, and a measurement decays. Observed: a concurrency bound of **14.1 s**,
+measured once, was still refusing work seven weeks later when the real median over 157 runs was
+**56.0 s** - about **4x drift**, with the stale figure quoted all the while as if it were current.
+
+The second-order failure is worse than the first: **a standing refusal blinds the audit that would
+have caught it.** The range it forbids produces no runs, so the data that would show the bound is
+wrong can never be collected. Date every threshold, name its regenerating command beside it, and
+treat a bound that has never been re-measured as an assumption rather than a limit.
+
 ## A lightweight progress journal (optional)
 
 For multi-step work it helps to keep a human-readable journal - one concise entry per step, with
@@ -210,8 +317,9 @@ a full build, and a migration does not get waved through on a compile. Make the 
 
 ## Adapting it
 
-- Map each rung to your stack's real commands (your compiler, your test runner, your build, your
-  run/launch command).
+- Map each rung to your project's real commands - your compiler and test runner, or your renderer,
+  your validator, your reconciliation query. If a rung has no command yet, that is the next thing
+  worth an hour (`PROJECT_SHAPES.md`, "We have no checks" is almost always false).
 - If your CI already gates merges, the local ladder is your *fast feedback* before CI - it should
   be a subset you can run in seconds-to-a-minute, not a duplicate of the full pipeline.
 - Drop the journal if your tasks are small; keep it the moment a task spans more than a handful of

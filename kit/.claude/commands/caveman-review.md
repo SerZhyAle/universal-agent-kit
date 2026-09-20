@@ -1,5 +1,5 @@
 ---
-description: "Use for a terse code review - one line per finding, no preamble. Triggers: 'caveman review', a blunt fast pass over a diff."
+description: "Use for a terse review of a change - one line per finding, no preamble. Triggers: 'caveman review', a blunt fast pass over a diff."
 ---
 
 # Caveman Review

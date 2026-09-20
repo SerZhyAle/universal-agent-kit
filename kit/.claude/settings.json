@@ -2,13 +2,18 @@
   "//": "Universal Agent Kit defaults for Claude Code. Grants read/glob/grep + edit/write + git with acceptEdits. Build/test/run are NOT granted - see //allow-examples and add the ones you trust. Review and tighten `allow` before adopting. `agent` names the default subagent from .claude/agents/.",
   "agent": "rd-lead",
   "//hooks-example": [
-    "A command ladder documented in CLAUDE.md alone measured 0 uses of the cheapest tier over 434 invocations.",
-    "Routing is decided when the user types, so nudge there. Add a hooks block and point it at your script:",
+    "A worked example of the population question, NOT a recommendation - count before you wire it (docs/HOOKS.md).",
+    "The premise: a command ladder documented in CLAUDE.md alone measured 0 uses of the cheapest tier over 434",
+    "invocations, and routing is decided when the human types - so nudge at prompt submit. Right about WHEN.",
+    "The measurement (2026-09-20): 0 of 17 free-text prompts matched, because entering the pipeline means typing",
+    "'/' and the hook skips slash prompts; and 69% of pipeline entries (64 of 93) were headless, where the event",
+    "does not exist. Reach: zero. Where a driver enters the pipeline, it picks the tier as it picks the item.",
+    "If your own work IS entered by hand, the shape is:",
     "\"hooks\": { \"UserPromptSubmit\": [ { \"hooks\": [ { \"type\": \"command\", \"command\": \"<YOUR_NUDGE_SCRIPT>\" } ] } ] }",
     "The script: match the prompt against a short, high-precision micro-task pattern list, veto on a real-work",
     "list, drop anything past a length ceiling, print one line naming /quick and /fix, and ALWAYS exit 0.",
     "Advisory only - a hook that refuses a prompt costs more on one false fire than it saves on many hits.",
-    "Left as an example, not wired: a hooks entry pointing at a script you have not written yet fails on every prompt."
+    "Left unwired regardless: a hooks entry pointing at a script you have not written yet fails on every prompt."
   ],
   "permissions": {
     "allow": [

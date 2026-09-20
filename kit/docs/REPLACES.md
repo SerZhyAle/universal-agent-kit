@@ -1,98 +1,110 @@
 # Placeholder Replacements Reference
 
-This document provides a comprehensive guide for replacing the configuration `<PLACEHOLDER>` tokens in `CLAUDE.md`, the skills (slash commands), and the agents when importing the **Universal Agent Kit** into your repository.
+How to fill the `<PLACEHOLDER>` tokens in `CLAUDE.md`, the skills (slash commands), and the agents
+when importing the **Universal Agent Kit** into your project.
+
+There are two tiers. **Fill tier 1 always.** Fill tier 2 only if your project compiles or runs -
+and if it does not, delete the rules that use those tokens rather than inventing values for them. A
+rule pointing at a placeholder nobody filled is the fastest way to teach everyone to skim the
+rulebook.
+
+A good first move after copying the kit in: ask your agent to grep it for `<` + `>` tokens and
+propose a value for each from the actual project.
 
 ---
 
-## Configuration Placeholders
+## Tier 1 - every project
 
-These tokens must be replaced once during the initial setup/merge of the kit into your project.
+These ten apply to any project that has files, work items and checks.
 
-| Placeholder Token | Description | Frontend / Node.js | Backend (Go / Python) | Mobile (Kotlin / Swift) | Systems (Rust / C++) |
+| Token | What it is | Software | Data & analysis | Writing & docs | Legal & ops |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| `<PROJECT_NAME>` | Name of your repository/project. | `my-web-app` | `user-service` | `photo-gallery` | `game-engine` |
-| `<CHAT_LANGUAGE>` | Language the agent speaks to you. | `English` / `Russian` | `English` | `Russian` | `English` |
-| `<INDEX_DOC>` | Project entry point / map file. | `README.md` | `docs/ARCH.md` | `README.md` | `README.md` |
-| `<PLAN_DIR>` | Folder where spec/plan files live. | `PLAN` | `docs/plans` | `PLAN` | `PLAN` |
-| `<SCRATCH_DIR>` | Git-ignored directory for temp files. | `tmp` | `.scratch` | `.scratch` | `.scratch` |
-| `<ID>` | Ticket ID format / pattern. | `TNNNN` (e.g. `T0042`) | `JIRA-NNN` | `PG-NNN` | `TNNNN` |
-| `<LOGGER>` | Logging call/facade name. | `logger.info` | `logging.info` / `log.Printf` | `Log.d` / `os_log` | `log::info!` |
-| `<SRC_ROOT>` | Main source code directory. | `src` | `src` / `.` (root) | `app/src/main/java` | `src` |
-| `<ARCH_LAYERS>` | Dependency direction rules. | `page -> widget -> api` | `handler -> service -> repo` | `UI -> VM -> Repo` | `mod -> impl -> core` |
-| `<BUILD_CMD>` | Build command for compilation. | `npm run build` | `go build ./...` | `./gradlew assemble` | `cargo build` |
-| `<TEST_CMD>` | Command to run unit/integration tests. | `npm test` | `pytest` / `go test ./...` | `./gradlew test` | `cargo test` |
-| `<LINT_CMD>` | Command to run static analysis. | `npm run lint` | `flake8` / `golangci-lint run` | `./gradlew lint` | `cargo clippy` |
-| `<RUN_CMD>` | Command to launch the dev environment. | `npm run dev` | `python main.py` | `./gradlew installDebug` | `cargo run` |
-| `<MAX_LOC>` | File size limit before refactoring. | `500` | `400` | `600` | `500` |
-| `<READONLY_ZONES>`| Path zones the agent must never write to. | `dist, node_modules` | `vendor, .venv` | `build` | `target` |
+| `<PROJECT_NAME>` | The project's name. | `user-service` | `q3-churn-model` | `platform-handbook` | `acme-msa-2026` |
+| `<CHAT_LANGUAGE>` | The language the agent talks to you in. Artifacts stay English. | `English` | `English` | `Russian` | `English` |
+| `<INDEX_DOC>` | The map the agent reads first. | `README.md` | `docs/DATA_DICTIONARY.md` | `SUMMARY.md` | `MATTER_INDEX.md` |
+| `<WORK_ROOT>` | Where the project's real material lives. | `src` | `pipelines` | `content` | `drafts` |
+| `<CHECK_CMD>` | The command that proves a change is sound. The one nobody may leave empty. | `npm test` | `make validate` (schema + row counts) | `npm run lint:docs` (links, headings, terms) | `pwsh tools/check-terms.ps1` |
+| `<PLAN_DIR>` | Where spec/plan files live. | `PLAN` | `PLAN` | `PLAN` | `PLAN` |
+| `<SCRATCH_DIR>` | Throwaway artifacts and backups, ignored by version control. | `tmp` | `.scratch` | `tmp` | `tmp` |
+| `<SIZE_BUDGET>` | Size past which a file gets split along a real seam. | `500` lines | `400` lines | `800` lines (one chapter) | `1200` lines (one agreement) |
+| `<READONLY_ZONES>` | Paths the agent must never modify. | `dist, node_modules` | `data/raw` | `locales/generated` | `executed, filed` |
+| `<ID>` | The ticket id scheme. | `T0042` | `AN-042` | `DOC-042` | `M-042` |
+
+### The ones worth a second thought
+
+**`<CHECK_CMD>`** - the most valuable line in the file. It answers "what command tells me this
+change is not broken?", and it is the placeholder people skip because they believe their project
+has nothing mechanical in it. That belief is usually false: `PROJECT_SHAPES.md` lists the five
+shapes a check takes in work that never compiles (a total that must match another total, a name
+that must exist elsewhere, a structure that must hold, a reference that must resolve, a rendering
+that must succeed). Point this at the cheapest real one you have, today, and improve it later.
+
+**`<INDEX_DOC>`** - not just something to read, something to *maintain*. It is where the agent's
+research order starts, so a stale map costs a wrong turn on every task (`RESEARCH_INDEX.md`).
+
+**`<CHAT_LANGUAGE>`** - the conversational language only. Code, symbols, commit messages, file
+names and comments stay English regardless, so the project stays readable to anyone who joins it.
+
+**`<READONLY_ZONES>`** - vendored code, generated output, raw data, anything already executed or
+filed. Write `none` if there is nothing; an empty value reads as an unfinished merge.
+
+**`<SIZE_BUDGET>`** - a heuristic for "this file does too many things", not a law. Set it where
+your own review starts complaining.
 
 ---
 
-## Detailed Placeholder Reference
+## Tier 2 - the code layer
 
-### `<PROJECT_NAME>`
-The name of the project. Used in title headers and logging comments to scope the agent's work.
-* *Example:* `universal-agent-kit`
+Fill these if your project builds or runs. If it does not, delete the rules that reference them -
+`CLAUDE.md` section 7's code-layer bullet, section 6 (verification tags), the structural rules in
+`CODE_QUALITY.md`, and the stack lines in the `implementer` and `rd-lead` agents.
 
-### `<CHAT_LANGUAGE>`
-The conversational language between the human and the AI assistant. Note that code, symbols, commit messages, and comments should remain in English regardless of this setting to maintain consistency.
-* *Example:* `Russian` or `English`
+| Token | What it is | Frontend / Node.js | Backend (Go / Python) | Mobile (Kotlin / Swift) | Systems (Rust / C++) |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| `<ARCH_LAYERS>` | Dependency direction. | `page -> widget -> api` | `handler -> service -> repo` | `UI -> VM -> Repo` | `mod -> impl -> core` |
+| `<BUILD_CMD>` | Build / compile. | `npm run build` | `go build ./...` | `./gradlew assemble` | `cargo build` |
+| `<TEST_CMD>` | Unit / integration tests. | `npm test` | `pytest` / `go test ./...` | `./gradlew test` | `cargo test` |
+| `<LINT_CMD>` | Static analysis. | `npm run lint` | `golangci-lint run` | `./gradlew lint` | `cargo clippy` |
+| `<RUN_CMD>` | Launch it. | `npm run dev` | `python main.py` | `./gradlew installDebug` | `cargo run` |
+| `<LOGGER>` | The logging facade. | `logger.info` | `logging.info` / `log.Printf` | `Log.d` / `os_log` | `log::info!` |
 
-### `<INDEX_DOC>`
-The entry point file where the agent starts researching the codebase map. It should contain high-level architecture details, project setup instructions, or links to other documentation.
-* *Example:* `README.md` or `docs/ARCHITECTURE.md`
+`<LOGGER>` must name a real facade: a bare `console.log` / `print` is exactly what the anti-slop
+rule bans. `<ARCH_LAYERS>` reads left-to-right as "may depend on": `A -> B` means A imports B and
+never the reverse. Where a project genuinely has no layering, write `n/a` rather than inventing one.
 
-### `<PLAN_DIR>`
-The directory that holds specification and plan markdown files. The kit relies on structured specs to split *what* from *how*.
-* *Example:* `PLAN/`
-
-### `<SCRATCH_DIR>`
-A folder used by the agent to store temporary scratch files, script outputs, or pre-edit backups. This directory **must be added to `.gitignore`**.
-* *Example:* `tmp/` or `.scratch/`
-
-### `<ID>`
-The ticket ID prefix formatting pattern. The kit groups work by tickets (e.g., spec files named `<PLAN_DIR>/<ID>_<slug>.md`).
-* *Example:* `T0042` or `PROJ-101`
-
-### `<LOGGER>`
-The project's logging utility. The anti-slop rules forbid raw console logging or prints in production code. Any debug logs must go through this facade.
-* *Example:* `logger.debug` (a winston/pino wrapper for JS), `logging.info` (Python), or `Log.d` (Android). Point this at a real facade - a bare `console.log`/`print` is exactly what the anti-slop rule bans.
-
-### `<SRC_ROOT>`
-The primary source code root where the application logic resides. Keeps the agent focused on actual code directories during searches.
-* *Example:* `src/` or `app/src/main/`
-
-### `<ARCH_LAYERS>`
-Specifies the architectural boundaries and the allowed direction of dependencies. E.g., `A -> B -> C` means layer A can import layer B, but B cannot import A.
-* *Example:* `controller -> service -> repository`
-
-### `<BUILD_CMD>`, `<TEST_CMD>`, `<LINT_CMD>`, `<RUN_CMD>`
-The shell commands used to compile, test, lint, and run the project. The agent uses these commands to verify that code changes do not break the project.
-* *Examples:*
-  * Build: `npm run build` | `go build ./...` | `mvn compile`
-  * Test: `npm test` | `pytest` | `cargo test`
-  * Lint: `npm run lint` | `golangci-lint run` | `cargo clippy`
-  * Run: `npm run dev` | `python main.py` | `cargo run`
-
-### `<MAX_LOC>`
-The lines-of-code limit for a single file. Used as a heuristic to enforce modularity and cohesion. If a file exceeds this limit, the agent should extract code into helpers.
-* *Example:* `500`
-
-### `<READONLY_ZONES>`
-Comma-separated paths that the agent is strictly prohibited from modifying (e.g., third-party libraries, generated code, database migrations).
-* *Example:* `node_modules/, vendor/, gen/`
+The four command tokens are refinements of `<CHECK_CMD>`, not replacements for it: the kit's rules
+reach for the narrowest one that proves the change (`VALIDATION.md`), so having all five filled is
+what lets it pick a compile over a full build.
 
 ---
 
-## Transient Template Tokens
+## Transient template tokens
 
-These tokens are **not** configuration values. They are dynamic placeholders filled on the fly by you or the agent during daily workflow execution:
+These are **not** configuration. They are filled on the fly, per ticket, as you use the skills:
 
-* `<slug>` - A short, hyphenated description of the ticket (e.g., `add-login-button`).
-* `<NN>` / `<NNNN>` - A short sequence number for a phase or a research artifact (e.g., `01`, `0042`) - not the ticket id itself.
-* `<TS>` - A timestamp slug for scratch filenames (e.g., `20260702_1530`), used by `/verify` and `/research`.
-* `<TODO>` - An action item or unimplemented task.
-* `<symbol>` - A code class, function, struct, or variable name.
-* `<path>` - A file or folder path.
-* `???` - An unresolved decision or check.
-* `$ARGUMENTS` - Claude Code injects whatever you typed after the slash command here. In other tools it is the text after your saved-prompt trigger - substitute your tool's equivalent.
+* `<slug>` - a short hyphenated description of the ticket (`add-login-button`).
+* `<NN>` / `<NNNN>` - a sequence number for a phase or a research artifact (`01`, `0042`) - not the
+  ticket id itself.
+* `<TS>` - a timestamp slug for scratch filenames (`20260702_1530`), used by `/verify` and
+  `/research`.
+* `<TODO>` - an action item or unfinished piece.
+* `<symbol>` - a name in the material: a class, a function, a column, a defined term.
+* `<path>` - a file or folder path.
+* `???` - an unresolved decision or check.
+* `$ARGUMENTS` - Claude Code injects whatever you typed after the slash command here. In other
+  tools it is the text after your saved-prompt trigger - substitute your tool's equivalent.
+
+---
+
+## Coming from an earlier copy of the kit
+
+Two tokens were renamed when the kit stopped assuming its projects were codebases, and one is new:
+
+| Was | Now | Why |
+| :--- | :--- | :--- |
+| `<SRC_ROOT>` | `<WORK_ROOT>` | The material is not always source. |
+| `<MAX_LOC>` | `<SIZE_BUDGET>` | Lines of code is one unit among several. |
+| - | `<CHECK_CMD>` | The generic proof step the four build tokens specialize. |
+
+A find-and-replace over your filled-in copy covers the first two. The third has no old value to
+carry over: pick the cheapest check you already run by hand, and write it down.

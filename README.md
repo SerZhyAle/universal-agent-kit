@@ -3,27 +3,33 @@
 **[→ Read the article / Читать статью](https://serzhyale.github.io/universal-agent-kit/)** ·
 **[⤓ Download the kit](https://github.com/SerZhyAle/universal-agent-kit/raw/main/universal-agent-kit.zip)**
 
-A portable method for AI-assisted development - rules, skills (slash commands), roles, a spec
-lifecycle, persistent memory, and the discipline for running several agents at once. Distilled from
-a real project and stripped of its language and stack, so it carries over to most **git-backed repos
-with a promptable agent**.
+A portable method for working with AI agents on a project - rules, skills (slash commands), roles, a
+spec lifecycle, persistent memory, and the discipline for running several agents at once. Distilled
+from a real project and stripped of its language and stack. It assumes five things and a compiler is
+not one of them: **a workspace with history, artifacts, work items, checks, and an agent that can
+read and write your files.** If your project is code, the sharpest examples are yours. If it is
+data, documents, contracts or procedures, `kit/docs/PROJECT_SHAPES.md` is the translation table.
 
-Переносимый метод разработки с ИИ-агентами - правила, навыки (slash-команды), роли, жизненный
-цикл спецификаций, постоянная память и дисциплина параллельной работы нескольких агентов. Выжимка
-из реального проекта, очищенная от языка и стека, - ложится в большинство **git-репозиториев с
-агентом, которым можно управлять через промпты**.
+Переносимый метод работы с ИИ-агентами над проектом - правила, навыки (slash-команды), роли,
+жизненный цикл спецификаций, постоянная память и дисциплина параллельной работы нескольких агентов.
+Выжимка из реального проекта, очищенная от языка и стека. Методу нужны пять вещей, и компилятор в
+них не входит: **рабочая папка с историей, артефакты, единицы работы, проверки и агент, который
+умеет читать и писать ваши файлы.** Если проект - код, примеры кита ваши. Если это данные, тексты,
+договоры или процедуры - таблица перевода лежит в `kit/docs/PROJECT_SHAPES.md`.
 
-Переносний метод розробки з ШІ-агентами - правила, навички (slash-команди), ролі, життєвий цикл
-специфікацій, постійна пам'ять і дисципліна паралельної роботи кількох агентів. Дистильовано з
-реального проєкту, очищено від мови та стека - лягає в більшість **git-репозиторіїв з агентом,
-яким можна керувати через промпти**.
+Переносний метод роботи з ШІ-агентами над проєктом - правила, навички (slash-команди), ролі,
+життєвий цикл специфікацій, постійна пам'ять і дисципліна паралельної роботи кількох агентів.
+Дистильовано з реального проєкту, очищено від мови та стека. Методу потрібні п'ять речей, і
+компілятора серед них немає: **робоча тека з історією, артефакти, одиниці роботи, перевірки і
+агент, який уміє читати й писати ваші файли.** Таблиця перекладу для некодових проєктів -
+`kit/docs/PROJECT_SHAPES.md`.
 
 ---
 
 ## Fastest start
 
-Just adopting the method? Paste this at your coding agent inside an existing repo - it downloads
-the kit, unpacks it, and imports what fits (your files always win):
+Just adopting the method? Paste this at your agent inside an existing project - it downloads the
+kit, unpacks it, and imports what fits (your files always win):
 
 <details>
 <summary>Paste-at-your-agent prompt</summary>
@@ -32,24 +38,32 @@ the kit, unpacks it, and imports what fits (your files always win):
 Download
 https://github.com/SerZhyAle/universal-agent-kit/raw/main/universal-agent-kit.zip
 into a temp or scratch directory and unpack it locally; it extracts to a
-`universal-agent-kit/` folder beside a `merge-prompt.txt`. Use those extracted
+`universal-agent-kit/` folder that contains `merge-prompt.txt`. Use those extracted
 files as the source of truth: read `universal-agent-kit/README.md` first, then
-use `universal-agent-kit/CLAUDE.md`, `universal-agent-kit/.claude/`,
+`universal-agent-kit/docs/PROJECT_SHAPES.md`, then use
+`universal-agent-kit/CLAUDE.md`, `universal-agent-kit/.claude/`,
 `universal-agent-kit/docs/`, `universal-agent-kit/memory/`, and
-`merge-prompt.txt`. Do not use the article page as the primary source. If you
+`universal-agent-kit/merge-prompt.txt`. Do not use the article page as the
+primary source. If you
 cannot download files in this environment, stop and ask me to place the
 archive in the workspace.
 
-Then study THIS repository and import what fits it:
+Then study THIS project and import what fits it:
 
-1. Draft a CLAUDE.md (or my tool's equivalent rules file) that adopts the method, with every
-   placeholder filled from this repo: project name, chat language, source root, architecture
-   layers, build / test / lint / run commands, logger, plan directory, scratch directory,
-   file-size budget, read-only zones, and ticket-id scheme.
-2. Recommend which skills (/research, /spec, /spec-tech, /spec-dev, /spec-check, /spec-fix,
+1. Say what kind of project this is in the kit's own terms: what my artifacts are, what my
+   workspace is, what I already use as a map - and which rules to delete because they have no
+   subject here.
+2. Draft a CLAUDE.md (or my tool's equivalent rules file) that adopts the method, with every
+   tier-1 placeholder filled from this project: project name, chat language, map document, work
+   root, THE CHECK COMMAND that proves a change is sound, plan directory, scratch directory, size
+   budget, read-only zones, ticket-id scheme. Fill the code-layer ones (architecture layers, build
+   / test / lint / run, logger) only if this project builds or runs.
+3. For the check command, do not shrug: name the cheapest mechanical check this project already
+   has or could have this week, and the command that runs it.
+4. Recommend which skills (/research, /spec, /spec-tech, /spec-dev, /spec-check, /spec-fix,
    /quick, /fix, /verify, /git, /review) and which role agents are worth adding here, and say
    why for each.
-3. Tell me whether my runtime supports persistent agent memory and, if so, how to wire it up.
+5. Tell me whether my runtime supports persistent agent memory and, if so, how to wire it up.
 
 Do not change anything yet. Show me the plan first; on any conflict, my existing files win.
 ```
@@ -65,17 +79,25 @@ minimum* - copy `CLAUDE.md` + `/quick` + `/fix` and add the rest when a task ear
 
 ## English
 
-The value is not the tooling - it is the **working method**: research before you act, split
-*what* from *how*, plan in verifiable phases, keep autonomy high and bureaucracy low, write
-clean from the start, let the assistant remember across sessions, and run several agents at
-once without them overwriting each other's work.
+The value is not the tooling - it is the **working method**: research before you act, split *what*
+from *how*, plan in verifiable phases, keep autonomy high and bureaucracy low, write clean from the
+start, let the assistant remember across sessions, and run several agents at once without them
+overwriting each other's work.
+
+Most rules here carry a measurement and a date, because the difference between a rule people follow
+and a rule people nod at is measurable: a directive with a mechanical check behind it was followed
+**~99%** of the time in the source corpus, the same directive as prose **1-8%**, and the best case
+ever recorded for prose - shipped in the tool's own description, re-read every single turn - was
+**22%**. The kit also keeps its own corrections: one hook it used to recommend turned out to have a
+measured reach of **zero**, and it now ships as a worked example of the question nobody asks - *how
+many of the events I care about actually pass through here?*
 
 ### What's inside
 
 ```
-index.html                 the article (this is what GitHub Pages serves), EN + RU + UK
+index.html                  the article (this is what GitHub Pages serves), EN + RU + UK
 universal-agent-kit.zip     the downloadable kit
-merge-prompt.txt            paste this at your agent to merge the kit into your repo
+merge-prompt.txt            paste this at your agent to merge the kit into your project
 kit/                        the kit source, browsable here
   CLAUDE.md                 project-rules template (fill the <PLACEHOLDERS>)
   AGENTS.md                 the same contract for tools that read AGENTS.md (pointer)
@@ -83,26 +105,26 @@ kit/                        the kit source, browsable here
                             /spec-all, /research, /quick, /fix, /park, /backlog, /git,
                             /verify, /ui-clarify, ..)
   .claude/agents/*          role briefs (rd-lead, solution-researcher, implementer, doc-writer)
-  docs/                     SPEC_LIFECYCLE · CODE_QUALITY · AUTHORING · HOOKS · AGENT_MEMORY ·
-                            RESEARCH_INDEX · VALIDATION · COST · PARALLEL · REPLACES ·
-                            REPLACES_RU
-  memory/                   memory index template + one sample entry per type
+  docs/                     PROJECT_SHAPES · SPEC_LIFECYCLE · VALIDATION · CODE_QUALITY ·
+                            AUTHORING · HOOKS · AGENT_MEMORY · RESEARCH_INDEX · COST ·
+                            PARALLEL · REPLACES · REPLACES_RU
+  memory/                   memory index template + sample entries
 ```
 
 ### How to use it
 
-1. Download and unzip `universal-agent-kit.zip` into your repo (or copy `kit/` in).
-2. Hand the folder and `merge-prompt.txt` to your coding agent: *"Merge the Universal Agent Kit
-   into this repo."* It inventories your setup, proposes a merge, and stops for your approval -
-   your files always win, nothing is overwritten silently.
-3. Fill the `<PLACEHOLDER>` tokens for your stack (build/test/run commands, source root,
-   architecture, plan dir, logger).
+1. Download and unzip `universal-agent-kit.zip` into your project (or copy `kit/` in).
+2. Hand the folder and `merge-prompt.txt` to your agent: *"Merge the Universal Agent Kit into this
+   project."* It inventories your setup, proposes a merge, and stops for your approval - your files
+   always win, nothing is overwritten silently.
+3. Fill the ten tier-1 `<PLACEHOLDER>` tokens; fill the six code-layer ones only if your project
+   builds or runs, and delete the rules that use them if it does not.
 
 Minimal start: take just `CLAUDE.md` + `/quick` + `/fix` - add the rest when a task earns it.
 
 Works natively with **Claude Code**; for **Cursor / Cline / Windsurf / Codex / Aider** it is an
 adaptation, not a drop-in - the slash commands become saved prompts and the role briefs become
-system prompts (`kit/README.md` maps each tool's file). The `docs/` method is largely tool-independent.
+system prompts (`kit/README.md` maps each tool's file). The `docs/` method is tool-independent.
 
 ### License
 
@@ -118,12 +140,20 @@ from the origin project is included - only the working method.
 чисто с самого начала; дай ассистенту помнить между сессиями; и запускай несколько агентов
 одновременно так, чтобы они не затирали работу друг друга.
 
+Почти каждое правило здесь идёт с замером и датой, потому что разница между правилом, которое
+выполняют, и правилом, которому кивают, измерима: директива с механической проверкой за спиной
+выполнялась в **~99%** случаев, та же директива в виде прозы - в **1-8%**, а лучший результат,
+когда-либо замеренный для прозы (совет, который лежит в описании инструмента и перечитывается
+каждый ход), - **22%**. Кит хранит и собственные опровержения: хук, который он сам же и советовал,
+показал замеренный охват **ноль**, и теперь едет в комплекте как разбор вопроса, который забывают
+задать: *сколько интересующих меня событий вообще проходит через эту точку?*
+
 ### Что внутри
 
 ```
-index.html                 статья (её отдаёт GitHub Pages), EN + RU + UK
+index.html                  статья (её отдаёт GitHub Pages), EN + RU + UK
 universal-agent-kit.zip     скачиваемый kit
-merge-prompt.txt            вставь это агенту, чтобы влить kit в свой репозиторий
+merge-prompt.txt            вставь это агенту, чтобы влить kit в свой проект
 kit/                        исходник kit, можно листать прямо здесь
   CLAUDE.md                 шаблон правил проекта (заполни <PLACEHOLDER>)
   AGENTS.md                 тот же контракт для инструментов, читающих AGENTS.md (указатель)
@@ -131,27 +161,28 @@ kit/                        исходник kit, можно листать пр
                             /spec-all, /research, /quick, /fix, /park, /backlog, /git,
                             /verify, /ui-clarify, ..)
   .claude/agents/*          роль-брифы (rd-lead, solution-researcher, implementer, doc-writer)
-  docs/                     SPEC_LIFECYCLE · CODE_QUALITY · AUTHORING · HOOKS · AGENT_MEMORY ·
-                            RESEARCH_INDEX · VALIDATION · COST · PARALLEL · REPLACES ·
-                            REPLACES_RU
-  memory/                   шаблон индекса памяти + по примеру на каждый тип записи
+  docs/                     PROJECT_SHAPES · SPEC_LIFECYCLE · VALIDATION · CODE_QUALITY ·
+                            AUTHORING · HOOKS · AGENT_MEMORY · RESEARCH_INDEX · COST ·
+                            PARALLEL · REPLACES · REPLACES_RU
+  memory/                   шаблон индекса памяти + примеры записей
 ```
 
 ### Как пользоваться
 
-1. Скачай и распакуй `universal-agent-kit.zip` в свой репозиторий (или скопируй папку `kit/`).
-2. Отдай папку и `merge-prompt.txt` своему агенту: *«Влей Universal Agent Kit в этот
-   репозиторий»*. Он сделает инвентарь твоего сетапа, предложит план слияния и остановится для
-   подтверждения - твои файлы всегда главнее, ничего не перезаписывается молча.
-3. Заполни `<PLACEHOLDER>` под свой стек (команды сборки/тестов/запуска, корень исходников,
-   архитектуру, папку планов, логгер).
+1. Скачай и распакуй `universal-agent-kit.zip` в свой проект (или скопируй папку `kit/`).
+2. Отдай папку и `merge-prompt.txt` своему агенту: *«Влей Universal Agent Kit в этот проект»*. Он
+   сделает инвентарь твоего сетапа, предложит план слияния и остановится для подтверждения - твои
+   файлы всегда главнее, ничего не перезаписывается молча.
+3. Заполни десять плейсхолдеров первого яруса; шесть кодовых - только если проект собирается или
+   запускается, а если нет - удали правила, которые на них ссылаются.
 
-Минимальный старт: возьми только `CLAUDE.md` + `/quick` + `/fix` - остальное добавишь, когда
-задача этого потребует.
+Минимальный старт: возьми только `CLAUDE.md` + `/quick` + `/fix` - остальное добавишь, когда задача
+этого потребует.
 
 Нативно работает с **Claude Code**; для **Cursor / Cline / Windsurf / Codex / Aider** это
 адаптация, не drop-in - slash-команды становятся сохранёнными промптами, а роли - системными
-промптами (`kit/README.md` указывает файл под каждый инструмент). Метод в `docs/` почти не зависит от инструмента.
+промптами (`kit/README.md` указывает файл под каждый инструмент). Метод в `docs/` почти не зависит
+от инструмента.
 
 ### Лицензия
 
@@ -162,25 +193,32 @@ Kit - **MIT** (см. `LICENSE`). Текст статьи - **CC BY 4.0**. Исх
 
 ## Українська
 
-Цінність - не в інструментах, а в **методі роботи**: спершу досліджуй, потім дій; відділяй
-*що* від *як*; плануй перевірюваними фазами; тримай автономію високою, а бюрократію низькою; пиши
-чисто від початку; дай асистенту пам'ятати між сесіями; і запускай кілька агентів одночасно так,
-щоб вони не затирали роботу одне одного.
+Цінність - не в інструментах, а в **методі роботи**: спершу досліджуй, потім дій; відділяй *що* від
+*як*; плануй перевірюваними фазами; тримай автономію високою, а бюрократію низькою; пиши чисто від
+початку; дай асистенту пам'ятати між сесіями; і запускай кілька агентів одночасно так, щоб вони не
+затирали роботу одне одного.
+
+Майже кожне правило тут іде із заміром і датою: директива з механічною перевіркою за спиною
+виконувалася в **~99%** випадків, та сама директива у вигляді прози - в **1-8%**, а найкращий
+будь-коли заміряний результат для прози - **22%**. Кіт зберігає й власні спростування: хук, який
+він сам радив, показав заміряне охоплення **нуль**, і тепер їде в комплекті як розбір питання, яке
+забувають поставити: *скільки подій, що мене цікавлять, узагалі проходить через цю точку?*
 
 ### Що всередині
 
 Структура репозиторію та сама, що й у розділах вище: `index.html` (стаття, EN + RU + UK),
 `universal-agent-kit.zip` (kit для завантаження), `merge-prompt.txt` (встав агенту, щоб влити kit),
-і тека `kit/` (правила, навички-команди, ролі, `docs/`, `memory/`).
+і тека `kit/` (правила, навички-команди, ролі, `docs/`, `memory/`). Некодовим проєктам почати варто
+з `kit/docs/PROJECT_SHAPES.md`.
 
 ### Як користуватися
 
-1. Завантаж і розпакуй `universal-agent-kit.zip` у свій репозиторій (або скопіюй теку `kit/`).
-2. Віддай теку й `merge-prompt.txt` своєму агенту: *«Влий Universal Agent Kit у цей репозиторій»*.
-   Він зробить інвентар твого сетапу, запропонує план злиття й зупиниться для підтвердження -
-   твої файли завжди головніші, нічого не перезаписується мовчки.
-3. Заповни `<PLACEHOLDER>` під свій стек (команди збірки/тестів/запуску, корінь коду, архітектуру,
-   теку планів, логгер).
+1. Завантаж і розпакуй `universal-agent-kit.zip` у свій проєкт (або скопіюй теку `kit/`).
+2. Віддай теку й `merge-prompt.txt` своєму агенту: *«Влий Universal Agent Kit у цей проєкт»*. Він
+   зробить інвентар твого сетапу, запропонує план злиття й зупиниться для підтвердження - твої
+   файли завжди головніші, нічого не перезаписується мовчки.
+3. Заповни десять плейсхолдерів першого ярусу; шість кодових - лише якщо проєкт збирається або
+   запускається, а якщо ні - видали правила, що на них посилаються.
 
 Мінімальний старт: візьми лише `CLAUDE.md` + `/quick` + `/fix` - решту додаси, коли задача цього
 потребуватиме.

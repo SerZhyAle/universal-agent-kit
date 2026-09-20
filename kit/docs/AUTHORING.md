@@ -89,7 +89,10 @@ exists - keep it to stable trigger phrases so the two do not drift.
 - **Event hook** (a verdict your runtime returns on an event, not a place you wire a gate into):
   a program that fires inside a tool call nobody is reading. Picking its verdict - correct the
   input, or refuse the call - is the design decision, and it must be listed in a hook inventory in
-  the same change that registers it. See `HOOKS.md`.
+  the same change that registers it. Before either: **count the occurrences that event will actually
+  see** over a real window. An event that carries a tenth of the decisions you are trying to
+  influence gives you a hook that is inert, and an inert hook is indistinguishable from a rule
+  nobody needed. See `HOOKS.md`.
 
 Substance lives in the canonical rule or the skill body; everywhere else points to it. Do not
 paste the same paragraph into three files - state it once, reference it twice.
@@ -98,7 +101,13 @@ paste the same paragraph into three files - state it once, reference it twice.
 directives with a mechanical check behind them - a gate or an event hook - were followed ~99% of the
 time; directives that existed only as rulebook prose were followed 1-8%. Rewording the prose did not
 close the gap, and a rule can sit in the always-loaded preamble, be re-read on every request for
-months, and still be obeyed almost never. So: when a directive is mechanically checkable, the check
+months, and still be obeyed almost never.
+
+**And know the ceiling before you spend a week on wording.** The best case measured for a directive
+with no mechanism behind it - advice shipped in the tool's own description, re-read on literally
+every turn, as close to the decision as prose can physically get - was **22% compliance**. That is
+the number to compare your rewrite against, not 100%. If 22% is not enough for the failure you are
+closing, no sentence is; build the check. So: when a directive is mechanically checkable, the check
 *is* the directive and the sentence is only its explanation. When it is not checkable, expect the low
 number and place it where it is read at the moment of the decision - a skill body, an agent brief, a
 hook's refusal message - rather than in a rulebook read once at session start.

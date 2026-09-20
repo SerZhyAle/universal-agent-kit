@@ -97,8 +97,9 @@ into multiple specs.
 flip, re-read INDEX + every phase against the 3.1 inventory and 3.2 topology:
 - Every inventory line maps to a *written* step (not an intended one), or carries its
   `out-of-scope` reason.
-- Every symbol a step consumes either greps in the current codebase or is created by an
-  earlier step - check the actual `Files Touched` + prompts, not intent.
+- Every name a step consumes - a symbol, a column, a defined term, a section - either exists in the
+  workspace today or is created by an earlier step. Check the actual `Files Touched` + prompts, not
+  intent.
 - Every `Depends on` matches the topology; no step references a later phase's artifact.
 - No step violates the 3.4 real-work filter.
 - Research findings are reflected. A step contradicting a resolved §6 artifact is a planning
@@ -182,10 +183,10 @@ unchecked.>
 ## Files touched
 | File | New / Modified | Line budget |
 |------|:--------------:|------------:|
-| `<SRC_ROOT>/<path>/<File>` | New | ≤ <MAX_LOC> |
-| `<SRC_ROOT>/<path>/<Existing>` | Modified | ≤ <MAX_LOC> |
+| `<WORK_ROOT>/<path>/<File>` | New | ≤ <SIZE_BUDGET> |
+| `<WORK_ROOT>/<path>/<Existing>` | Modified | ≤ <SIZE_BUDGET> |
 
-> Backup any file over ~`<MAX_LOC>` lines before editing; split anything heading past your
+> Backup any file over ~`<SIZE_BUDGET>` lines before editing; split anything heading past your
 > file-size budget via a helper/extraction step.
 
 ## Steps
@@ -216,7 +217,7 @@ unchecked.>
 ## Phase done criteria
 - [ ] Every `Step NN.*` is `[x] done`.
 - [ ] Narrowest meaningful check for this phase passes - pick the lowest sufficient rung from
-      `docs/VALIDATION.md` (a compile / type-check, a targeted test, or `<BUILD_CMD>` only when
+      `docs/VALIDATION.md` (`<CHECK_CMD>`, a compile / type-check, a targeted test, or `<BUILD_CMD>` only when
       this phase touches packaging, resources, or wiring). Name the actual command here.
 - [ ] Grep for `TODO(phase-<NN>)` returns zero hits.
 - [ ] Changelog has one entry for this phase's change, listing every file in "Files touched".
@@ -233,7 +234,7 @@ unchecked.>
 - One step = one atomic, independently committable unit that does not break the build.
 - Every Verification must be static (file exists / symbol present / value equality) - never
   "works correctly".
-- File > ~`<MAX_LOC>` lines after edit → backup step required. Heading past the size budget →
+- File > ~`<SIZE_BUDGET>` lines after edit → backup step required. Heading past the size budget →
   refuse; split first.
 - The final phase is always the docs-cleanup phase.
 - Do not duplicate strategic content - tactical says *what*, not *why*.

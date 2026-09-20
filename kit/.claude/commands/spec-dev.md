@@ -47,7 +47,7 @@ are ticked - if any unchecked, abort with the blocker text.
    exists at the stated path, else abort: "Prompt references `<symbol>` at `<path>`, not found."
 4. **Ambiguity check.** Any unresolved placeholder (`<TODO>`, `<choose ..>`, `???`) → abort,
    request a spec update. If it needs user input, set `BlockQuestions` and stop.
-5. **Pre-edit guards:** read-only zone → abort; file over ~`<MAX_LOC>` lines and not yet backed
+5. **Pre-edit guards:** read-only zone → abort; file over ~`<SIZE_BUDGET>` lines and not yet backed
    up → back up to `<SCRATCH_DIR>/` first; projected size past the budget → abort and split;
    multiple form-factor variants → confirm the step covers the counterpart.
 6. **Flip the step to `[~] in progress`.**
@@ -67,7 +67,8 @@ After all planned steps in a phase:
   inserted **before** the phase check below so one run validates code + tags.
 - **Phase done criteria:** run each checkbox. For the phase's verification rung, run the
   narrowest meaningful check the phase names (per `docs/VALIDATION.md`) - a compile / type-check,
-  a targeted test, or `<BUILD_CMD>` only when the phase touches packaging, resources, or wiring.
+  a targeted test, or `<BUILD_CMD>` only when the phase touches packaging, resources, or wiring; in a
+  project with no build, `<CHECK_CMD>` is that rung.
   Exit 0 → tick; non-zero → append the output tail and hard stop.
 - All ticked → flip the phase to ✅ Done, update the INDEX row + counter. Any unticked →
   leave 🚧, update the step counter only, hard stop.

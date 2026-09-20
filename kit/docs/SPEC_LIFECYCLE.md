@@ -4,6 +4,12 @@ This is the methodology behind the `/spec*` skills. It needs no special tooling:
 one Markdown file, and a status is a line in that file you keep honest. If you later want a
 JSONL index, a CLI, or a database behind it, fine - the method does not depend on it.
 
+It does not depend on code either. "Implement" below means *do the work the plan describes*, and a
+step's check is whatever mechanical answer your project can produce - a compiler, a renderer, a
+reconciliation query, a cross-reference sweep. `PROJECT_SHAPES.md` has the translation per kind of
+project; the only rule that matters here is that a check is something a second person could re-run
+and get the same answer from.
+
 ## Why split strategy from tactics
 
 A spec answers two different questions that get muddled when written together:
@@ -62,10 +68,12 @@ pipeline. `/quick` and `/fix` need no spec at all.
 To choose between the top two rungs, score the task:
 
 - ≤ 3 existing files change, no new files
-- no new public types
-- no schema/migration change
-- no new dependency-injection wiring
-- no new screen/route/destination
+- no new interface anyone else consumes - a public type, a published column, a clause others cite,
+  a form field, a reported figure
+- no change to a shared structure or its history: a schema, a migration, a data model, a document
+  template, a numbering scheme
+- no new wiring: a dependency injected, a source joined in, a document incorporated by reference
+- no new surface a reader reaches: a screen, a route, a page, a section, an exhibit
 - mechanically deterministic - no deferred decisions
 - under ~100 lines of delta
 
@@ -99,7 +107,11 @@ exits 0 - never "works correctly". A step is done only when its check passes *in
 not when you intended it. The executor runs one step, runs its check, and hard-stops on the
 first failure or ambiguity rather than guessing forward.
 
-## Verification tags (optional but neat)
+## Verification tags (optional but neat, and code-layer)
+
+This one needs an execution trace you can grep during a manual run - a log, a workflow engine's
+history, a form system's audit trail. If your artifacts produce none, skip the section; nothing
+else depends on it.
 
 When a ticket needs manual testing before it can be called done, insert a temporary log line
 at each changed-flow entry point:

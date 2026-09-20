@@ -1,8 +1,13 @@
 # Parallel Agents - several at once, without losing each other's work
 
 `COST.md` answers *how much* a fan-out may spend. This document answers the other half: how several
-agents work the same repository at the same time without destroying each other. The two questions
+agents work the same workspace at the same time without destroying each other. The two questions
 are separate, and only one of them is about money.
+
+Nothing here is specific to code. It is specific to **shared files**, which is every kind of project
+in `PROJECT_SHAPES.md` - two agents rewriting one contract bundle lose work the same way two agents
+rewriting one module do, and the version-control operation that takes it away does not ask what the
+files contained.
 
 The asymmetry that organizes everything below: **extra readers cost you tokens; extra writers cost
 you work.** A wave of readers that goes wrong produces a bill. A wave of writers that goes wrong

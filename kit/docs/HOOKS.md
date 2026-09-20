@@ -10,6 +10,34 @@ Reach for one only when `AUTHORING.md` says to: the failure is real, observed, r
 mechanically detectable, and prose has already failed to stop it. A hook is the most expensive
 directive to get wrong, because a wrong one is invisible.
 
+## First question: does this event see the population you care about?
+
+Before the verdict, before the script, count. **Two questions decide whether a hook can work at
+all, and they are separate: is this event where the decision happens, and how many of the
+occurrences I care about actually pass through it.** A hook that answers only the first is not
+advisory-but-weak. It is inert - and an inert hook reads, in every later audit, exactly like a rule
+nobody needed.
+
+This document used to recommend one without asking the second question, so the correction is worth
+having in full. The reasoning was sound: a command ladder documented in prose alone was measured at
+**0 uses of its cheapest tier over 434 invocations**, and routing is decided the moment the human
+types - so nudge at prompt submit, where that decision is made. The event was right about *when*.
+Then the hook's own window was measured (2026-09-20):
+
+- **Not one of the owner's 17 free-text prompts** in the window matched its pattern lists - because
+  entering the pipeline means typing `/`, and the hook skips slash prompts by design.
+- **69% of pipeline entries (64 of 93) were headless processes**, where a prompt-submit event does
+  not exist at all.
+
+The population that still types free text was not the population doing the work. Where a queue or a
+driver enters the pipeline, the routing decision belongs at **that** entry point - the driver picks
+the tier as it picks the item - and the prompt-submit nudge covers only what a human types by hand,
+which is worth building only if that population is large enough to matter in your project.
+
+So, before writing any hook: name the event, then count the occurrences it will see over a real
+window, and compare that to the total you are trying to influence. If the ratio is small, the hook
+is not the mechanism - move the decision to the entry point that carries the volume.
+
 ## Which verdict - the decision you make first
 
 A hook has more verdicts than "block" and "allow", and picking between them is a design decision,
@@ -215,9 +243,13 @@ there; it is named here because a hook is a common way to arrive at it.
 ## The one already in this kit, deliberately not wired
 
 `.claude/settings.json` carries a `//hooks-example` key describing a prompt-submit nudge for the
-skill-routing ladder (`CLAUDE.md` section 4). It is **left as an example, not wired**: a hooks entry
-pointing at a script you have not written yet fails on every prompt. That is itself the preference
-order in miniature - a broken guard costs more than the miss it prevents.
+skill-routing ladder (`CLAUDE.md` section 4). It is **left as an example, not wired**, for two
+reasons that are worth keeping apart. The mechanical one: a hooks entry pointing at a script you
+have not written yet fails on every prompt - the preference order in miniature, since a broken guard
+costs more than the miss it prevents. The measured one: that hook's reach was zero on the project
+that built it (above), so it is shipped as a **worked example of the population question**, not as a
+recommendation to wire it. If your own work is entered by hand rather than by a driver, it may earn
+its place. Count first.
 
 ## Why this is a document, not a vibe
 

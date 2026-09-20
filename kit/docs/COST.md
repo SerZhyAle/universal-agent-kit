@@ -20,8 +20,12 @@ long, so both look like the place to cut. Mined over the reference corpus, neith
 
 Two consequences are worth stating out loud, because both contradict the reflex:
 
-- **"Answer more briefly" is not a cost lever.** Output is roughly a ninth of the bill. Brevity is a
-  legibility decision - argue it as that, and never sell it as savings.
+- **"Answer more briefly" is not a cost lever - but it is a latency lever.** Output is roughly a
+  ninth of the bill, so brevity is a legibility decision and must be argued as one. It is, however,
+  what you are waiting for: turn latency tracks what the model *writes* (correlation **+0.681** with
+  output tokens) and barely tracks what it *reads* (**+0.065** with context size). Measured
+  2026-08-28, on the same window that found **76.5% of billed output is hidden reasoning, of which
+  5.6% reaches a file**. Sell brevity on the clock and on the reader, never on the bill.
 - **Trimming the rulebook's prose is not one either.** One deliberate pass cut the always-loaded
   preamble by 2.5% and moved the bill by 0.23%, two orders of magnitude below the corpus's own daily
   variance and therefore unmeasurable by construction. Write each directive at the length that makes
@@ -56,6 +60,12 @@ their tool lists in frontmatter; keep that discipline when you author new ones
 
 ## Context hygiene
 
+- **Context is replayed, not read once.** This is the fact the whole section rests on and the one
+  most people have backwards: every turn re-sends everything before it, so a long context is not a
+  one-off purchase, it is a subscription you pay per turn. What that looks like once measured
+  (2026-08-05, one machine, one month): a **median request of 215k tokens against a 28.7k floor**,
+  with **29% of requests past 300k**. The floor is what a task actually needed; the rest is history
+  riding along.
 - The context window fills fast, and cost is accumulated context multiplied by turns - inside one
   unbroken block it is quadratic, because every turn re-reads everything before it. Between unrelated
   tasks, start fresh (compact / clear) rather than dragging a stale context forward. Argue this on
@@ -81,6 +91,33 @@ their tool lists in frontmatter; keep that discipline when you author new ones
   proof available, keep the context scannable.
 - Journal at the grain of the logical change (see `VALIDATION.md`), not per file, so the narrative
   stays short.
+
+## Waiting is not free either - never fire-and-forget, never poll
+
+Two opposite failures sit around a check you launched and cannot see finish, and they are the most
+expensive pair of habits in this whole document.
+
+**Fire-and-forget** is reporting what you assume the check said. It is the `VALIDATION.md` "green
+can lie" failure arriving through impatience rather than through tooling, and it costs whatever the
+unverified claim costs downstream.
+
+**Polling** is the well-behaved version and it is not cheap either: every "let me check again" is a
+full turn, and a turn re-sends the whole context (above). Measured over one month on one project
+(2026-08-02): about **1,300 polling turns and 81 minutes of literal sleep**, spent entirely on
+asking whether something had finished.
+
+The shape that costs neither:
+
+- **Wait on a condition your runtime can actually signal** - a notification, a blocking wait, a
+  completion event - rather than on a clock you re-read.
+- **Have the background work write its verdict where a reader can branch on it**: a marker file with
+  a closed set of outcome values, written with write-then-rename so a reader never catches it
+  half-written. Never in an exit code - a backgrounded task's exit code is the exit of its launch
+  line, so a refused run comes back green.
+- **If you genuinely must poll, poll at the rate the thing actually changes.** A check that takes
+  eight minutes deserves one look at eight minutes, not eight looks at one.
+- **And say what you are waiting for**, in one line, each time. A silent wait and a hung run look
+  identical from outside, which is how a dead run keeps a human waiting for an hour.
 
 ## Measure before you rule
 

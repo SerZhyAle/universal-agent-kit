@@ -60,7 +60,7 @@
   :root{
     --wide: min(1640px, 94vw); /* page container: scales with the screen instead of capping at a fixed width */
     --bg:#0f1115; --bg2:#161922; --bg3:#1d2230; --fg:#e6e8ee; --muted:#9aa3b2;
-    --acc:#7aa2ff; --acc2:#9d7bff; --line:#272d3a; --code:#0b0d12; --ok:#5fd08a;
+    --acc:#7aa2ff; --acc2:#9d7bff; --line:#272d3a; --code:#0b0d12; --ok:#81c784; --error:#ef5350;
     --warn:#e7b15a; --pill:#222838;
     /* Darker accent for filled controls so white text on them meets WCAG AA (>=4.5:1);
        the lighter --acc stays for text/links/borders on the dark background. */
@@ -69,7 +69,7 @@
   }
   html[data-theme="light"]{
     --bg:#f7f8fa; --bg2:#ffffff; --bg3:#eef1f6; --fg:#1b2230; --muted:#5b6675;
-    --acc:#2f5fe0; --acc2:#6a40d8; --line:#e2e6ee; --code:#0e1117; --ok:#1f8b4c;
+    --acc:#2f5fe0; --acc2:#6a40d8; --line:#e2e6ee; --code:#0e1117; --ok:#2e7d32; --error:#d32f2f;
     --warn:#9a6a13; --pill:#e9edf5; --shadow:0 6px 24px rgba(20,30,60,.10);
   }
   *{box-sizing:border-box}
@@ -101,6 +101,10 @@
   }
   .btn:hover{border-color:var(--acc); text-decoration:none}
   .btn.primary{background:linear-gradient(180deg,var(--acc-fill),var(--acc-fill2)); border:none; color:var(--on-acc); font-weight:600}
+  .icon{width:16px; height:16px; fill:currentColor; flex:none}
+  .icon-sprite{display:none}
+  .icon-status-ok,.feedback-status-ok{color:var(--ok)}
+  .icon-status-error,.feedback-status-error{color:var(--error)}
   .seg{display:inline-flex; border:1px solid var(--line); border-radius:8px; overflow:hidden}
   .seg button{border:none; background:var(--bg2); color:var(--muted); padding:8px 12px; cursor:pointer; font-size:13px; min-height:38px; display:inline-flex; align-items:center}
   .seg button[aria-pressed="true"]{background:var(--acc-fill); color:var(--on-acc)}
@@ -155,8 +159,6 @@
     padding:13px 16px;
   }
   .sec > summary::-webkit-details-marker{display:none}
-  .sec > summary::before{content:"▸"; color:var(--acc2); font-size:11px; line-height:1.7; flex:none}
-  .sec[open] > summary::before{content:"▾"}
   .sec > summary:hover .sectitle{color:var(--acc)}
   .secnum{color:var(--acc); font-weight:700; font-variant-numeric:tabular-nums; font-size:13px; line-height:1.5; flex:none; min-width:2ch}
   .sechead{display:flex; flex-direction:column; gap:2px; min-width:0}
@@ -201,6 +203,11 @@
 
   footer{max-width:var(--wide); margin:0 auto; padding:26px 22px 60px; border-top:1px solid var(--line); color:var(--muted); font-size:14px}
   footer .cta{display:flex; gap:10px; flex-wrap:wrap; margin:14px 0}
+  .tools-family{margin:24px 0 0; padding-top:14px; border-top:1px solid var(--line)}
+  .tools-family h2{margin:0 0 10px; color:var(--fg); font-size:15px}
+  .tools-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:8px}
+  .tools-grid a{display:flex; align-items:center; min-height:44px; padding:9px 11px; border:1px solid var(--line); border-radius:8px; background:var(--bg2); color:var(--fg)}
+  .tools-grid a:hover{border-color:var(--acc); text-decoration:none}
   .author{margin:22px 0 0; padding-top:14px; border-top:1px solid var(--line); font-size:13px; color:var(--muted)}
 
   pre:focus-visible, summary:focus-visible,
@@ -213,8 +220,6 @@
   .adopt-prompt details{background:var(--bg3); border:1px solid var(--line); border-radius:12px; padding:4px 14px 14px}
   .adopt-prompt summary{cursor:pointer; font-weight:600; color:var(--acc); list-style:none; display:flex; align-items:center; gap:8px; min-height:44px; padding:4px 2px}
   .adopt-prompt summary::-webkit-details-marker{display:none}
-  .adopt-prompt summary::before{content:"▸"; color:var(--acc2)}
-  .adopt-prompt details[open] summary::before{content:"▾"}
   .adopt-prompt .prompt-actions{display:flex; justify-content:flex-end; margin:2px 0 8px}
   .adopt-prompt pre{margin:0; max-height:none}
   .adopt-step{font-weight:700; color:var(--acc)}
@@ -246,6 +251,13 @@
 </style>
 </head>
 <body>
+<!-- ICON-SET: action.download, action.copy, status.ok, status.error. Source glyphs are Material Icons (Apache-2.0). -->
+<svg class="icon-sprite" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+  <symbol id="icon-action-download" viewBox="0 0 24 24"><g transform="translate(12 12) scale(.917 .917) translate(-12 -12)"><path d="M19.35,10.04C18.67,6.59 15.64,4 12,4 9.11,4 6.6,5.64 5.35,8.04 2.34,8.36 0,10.91 0,14c0,3.31 2.69,6 6,6h13c2.76,0 5,-2.24 5,-5 0,-2.64 -2.05,-4.78 -4.65,-4.96zM17,13l-5,5 -5,-5h3V9h4v4h3z"/></g></symbol>
+  <symbol id="icon-action-copy" viewBox="0 0 24 24"><path d="M16,1L4,1C2.9,1 2,1.9 2,3L2,17L4,17L4,3L16,3L16,1ZM19,5L8,5C6.9,5 6,5.9 6,7L6,21C6,22.1 6.9,23 8,23L19,23C20.1,23 21,22.1 21,21L21,7C21,5.9 20.1,5 19,5ZM19,21L8,21L8,7L19,7L19,21Z"/></symbol>
+  <symbol id="icon-status-ok" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></symbol>
+  <symbol id="icon-status-error" viewBox="0 0 24 24"><path d="M11 15h2v2h-2zm0-8h2v6h-2zm.99-5C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"/></symbol>
+</svg>
 <header class="top">
   <div class="wrap">
     <span class="brand">Universal&nbsp;Agent&nbsp;Kit<span class="dot">.</span></span>
@@ -254,9 +266,9 @@
       <button id="lng-en" type="button" onclick="setLang('en')" aria-pressed="true" aria-label="English">EN</button>
       <button id="lng-uk" type="button" onclick="setLang('uk')" aria-pressed="false" aria-label="Українська">UK</button>
     </span>
-    <button class="btn" id="themeBtn" type="button" onclick="toggleTheme()" title="Theme" aria-label="Theme" aria-pressed="false">◐</button>
+    <button class="btn" id="themeBtn" type="button" onclick="toggleTheme()" title="Theme" aria-label="Theme" aria-pressed="false"><span data-l="ru">Тема</span><span data-l="en">Theme</span><span data-l="uk">Тема</span></button>
     <a class="btn primary" href="universal-agent-kit.zip" download>
-      <span data-l="ru">Скачать kit</span><span data-l="en">Download kit</span><span data-l="uk">Завантажити kit</span>
+      <svg class="icon" aria-hidden="true"><use href="#icon-action-download"/></svg><span data-l="ru">Скачать kit</span><span data-l="en">Download kit</span><span data-l="uk">Завантажити kit</span>
     </a>
   </div>
 </header>
@@ -288,7 +300,7 @@
     </p>
     <div class="cta">
       <a class="btn primary" href="universal-agent-kit.zip" download>
-        <span data-l="ru">⤓ Скачать kit (.zip)</span><span data-l="en">⤓ Download kit (.zip)</span><span data-l="uk">⤓ Завантажити kit (.zip)</span>
+        <svg class="icon" aria-hidden="true"><use href="#icon-action-download"/></svg><span data-l="ru">Скачать kit (.zip)</span><span data-l="en">Download kit (.zip)</span><span data-l="uk">Завантажити kit (.zip)</span>
       </a>
       <a class="btn" href="#old-ru" data-l="ru">Влить в существующий проект</a>
       <a class="btn" href="#old-en" data-l="en">Adopt in an existing project</a>
@@ -564,7 +576,7 @@ reference  указатель во внешнюю систему и зачем  
             <details>
               <summary>Промпт для нового проекта (на английском)</summary>
               <div class="prompt-actions">
-                <button class="btn" type="button" onclick="copyPrompt(this)" aria-label="Скопировать промпт">⧉ Скопировать</button>
+                <button class="btn" type="button" onclick="copyPrompt(this)" aria-label="Копировать"><svg class="icon" aria-hidden="true"><use href="#icon-action-copy"/></svg>Копировать</button>
               </div>
               <pre>This is a fresh or mostly empty project folder. It may be a personal local
 project without Git. First run your codebase-init
@@ -605,7 +617,7 @@ Show me the plan first; create nothing until I approve.</pre>
             <details>
               <summary>Промпт для существующего проекта (на английском)</summary>
               <div class="prompt-actions">
-                <button class="btn" type="button" onclick="copyPrompt(this)" aria-label="Скопировать промпт">⧉ Скопировать</button>
+                <button class="btn" type="button" onclick="copyPrompt(this)" aria-label="Копировать"><svg class="icon" aria-hidden="true"><use href="#icon-action-copy"/></svg>Копировать</button>
               </div>
               <pre>Download
 https://github.com/SerZhyAle/universal-agent-kit/raw/main/universal-agent-kit.zip
@@ -943,7 +955,7 @@ doc       script         type change  logic           config/resources  user-vis
             <details>
               <summary>Prompt for a new project (English)</summary>
               <div class="prompt-actions">
-                <button class="btn" type="button" onclick="copyPrompt(this)" aria-label="Copy prompt">⧉ Copy</button>
+                <button class="btn" type="button" onclick="copyPrompt(this)" aria-label="Copy"><svg class="icon" aria-hidden="true"><use href="#icon-action-copy"/></svg>Copy</button>
               </div>
               <pre>This is a fresh or mostly empty project folder. It may be a personal local
 project without Git. First run your codebase-init
@@ -984,7 +996,7 @@ Show me the plan first; create nothing until I approve.</pre>
             <details>
               <summary>Prompt for an existing project (English)</summary>
               <div class="prompt-actions">
-                <button class="btn" type="button" onclick="copyPrompt(this)" aria-label="Copy prompt">⧉ Copy</button>
+                <button class="btn" type="button" onclick="copyPrompt(this)" aria-label="Copy"><svg class="icon" aria-hidden="true"><use href="#icon-action-copy"/></svg>Copy</button>
               </div>
               <pre>Download
 https://github.com/SerZhyAle/universal-agent-kit/raw/main/universal-agent-kit.zip
@@ -1322,7 +1334,7 @@ reference  вказівник у зовнішню систему та навіщ
             <details>
               <summary>Промпт для нового проєкту (англійською)</summary>
               <div class="prompt-actions">
-                <button class="btn" type="button" onclick="copyPrompt(this)" aria-label="Скопіювати промпт">⧉ Копіювати</button>
+                <button class="btn" type="button" onclick="copyPrompt(this)" aria-label="Копіювати"><svg class="icon" aria-hidden="true"><use href="#icon-action-copy"/></svg>Копіювати</button>
               </div>
               <pre>This is a fresh or mostly empty project folder. It may be a personal local
 project without Git. First run your codebase-init
@@ -1363,7 +1375,7 @@ Show me the plan first; create nothing until I approve.</pre>
             <details>
               <summary>Промпт для наявного проєкту (англійською)</summary>
               <div class="prompt-actions">
-                <button class="btn" type="button" onclick="copyPrompt(this)" aria-label="Скопіювати промпт">⧉ Копіювати</button>
+                <button class="btn" type="button" onclick="copyPrompt(this)" aria-label="Копіювати"><svg class="icon" aria-hidden="true"><use href="#icon-action-copy"/></svg>Копіювати</button>
               </div>
               <pre>Download
 https://github.com/SerZhyAle/universal-agent-kit/raw/main/universal-agent-kit.zip
@@ -1460,7 +1472,7 @@ Do not change anything yet. Show me the plan first; on any conflict, my existing
   <div data-l="ru">
     <strong>Universal Agent Kit</strong> - переносимый метод работы с ИИ-агентами.
     <div class="cta">
-      <a class="btn primary" href="universal-agent-kit.zip" download>⤓ Скачать kit (.zip)</a>
+      <a class="btn primary" href="universal-agent-kit.zip" download><svg class="icon" aria-hidden="true"><use href="#icon-action-download"/></svg>Скачать kit (.zip)</a>
       <a class="btn" href="https://github.com/SerZhyAle/universal-agent-kit" target="_blank" rel="noopener">GitHub</a>
     </div>
     <p class="muted">Kit - MIT · текст - CC BY 4.0 · выжимка из реального проекта, без привязки к стеку.</p>
@@ -1468,7 +1480,7 @@ Do not change anything yet. Show me the plan first; on any conflict, my existing
   <div data-l="en">
     <strong>Universal Agent Kit</strong> - a portable method for working with AI agents.
     <div class="cta">
-      <a class="btn primary" href="universal-agent-kit.zip" download>⤓ Download kit (.zip)</a>
+      <a class="btn primary" href="universal-agent-kit.zip" download><svg class="icon" aria-hidden="true"><use href="#icon-action-download"/></svg>Download kit (.zip)</a>
       <a class="btn" href="https://github.com/SerZhyAle/universal-agent-kit" target="_blank" rel="noopener">GitHub</a>
     </div>
     <p class="muted">Kit is MIT · prose is CC BY 4.0 · distilled from a real project, stack-agnostic.</p>
@@ -1476,11 +1488,25 @@ Do not change anything yet. Show me the plan first; on any conflict, my existing
   <div data-l="uk">
     <strong>Universal Agent Kit</strong> - переносний метод роботи з ШІ-агентами.
     <div class="cta">
-      <a class="btn primary" href="universal-agent-kit.zip" download>⤓ Завантажити kit (.zip)</a>
+      <a class="btn primary" href="universal-agent-kit.zip" download><svg class="icon" aria-hidden="true"><use href="#icon-action-download"/></svg>Завантажити kit (.zip)</a>
       <a class="btn" href="https://github.com/SerZhyAle/universal-agent-kit" target="_blank" rel="noopener">GitHub</a>
     </div>
     <p class="muted">Kit - MIT · текст - CC BY 4.0 · дистильовано з реального проєкту, без прив'язки до стеку.</p>
   </div>
+  <!-- SITE-FAMILY-MAP 1.1 §2: all siblings and the hub; this product is intentionally omitted. -->
+  <section class="tools-family" aria-labelledby="more-tools-heading">
+    <h2 id="more-tools-heading"><span data-l="ru">Другие инструменты SZA</span><span data-l="en">More tools by SZA</span><span data-l="uk">Інші інструменти SZA</span></h2>
+    <div class="tools-grid">
+      <a href="https://serzhyale.github.io/FastMediaSorter_mob_v2/" target="_blank" rel="noopener">FastMediaSorter v2</a>
+      <a href="https://serzhyale.github.io/FastMediaSorter_Lite/" target="_blank" rel="noopener">Fast Media Sorter for Windows</a>
+      <a href="https://serzhyale.github.io/CyrFlip/" target="_blank" rel="noopener">CyrFlip</a>
+      <a href="https://serzhyale.github.io/doc-html-translate/" target="_blank" rel="noopener">doc-html-translate</a>
+      <a href="https://serzhyale.github.io/FileDO/" target="_blank" rel="noopener">FileDO</a>
+      <a href="https://serzhyale.github.io/StreamsPlayer/" target="_blank" rel="noopener">StreamsPlayer</a>
+      <a href="https://serzhyale.github.io/OneClickRunner/" target="_blank" rel="noopener">OneClickRunner</a>
+      <a href="https://sza.od.ua" target="_blank" rel="noopener">SZA (hub)</a>
+    </div>
+  </section>
   <p class="author">
     <span data-l="ru">Автор</span><span data-l="en">Author</span><span data-l="uk">Автор</span>:
     <a href="https://sza.od.ua" target="_blank" rel="noopener">SZA.od.ua</a> ·
@@ -1488,9 +1514,9 @@ Do not change anything yet. Show me the plan first; on any conflict, my existing
     <a href="https://github.com/SerZhyAle" target="_blank" rel="noopener">github.com/SerZhyAle</a>
   </p>
   <p class="provenance muted">
-    <span data-l="ru">Собрано по опыту разработки из <a href="https://github.com/SerZhyAle" target="_blank" rel="noopener">FastMediaSorter</a> - Android-приложения, которое живёт на этом методе каждый день более года.</span>
-    <span data-l="en">Built from hands-on experience with <a href="https://github.com/SerZhyAle" target="_blank" rel="noopener">FastMediaSorter</a> - a shipping Android app run on this method every day for over a year.</span>
-    <span data-l="uk">Зібрано за досвідом розробки з <a href="https://github.com/SerZhyAle" target="_blank" rel="noopener">FastMediaSorter</a> - Android-застосунку, що живе на цьому методі щодня понад рік.</span>
+    <span data-l="ru">Собрано по опыту разработки из <a href="https://serzhyale.github.io/FastMediaSorter_mob_v2/" target="_blank" rel="noopener">FastMediaSorter</a> - Android-приложения, которое живёт на этом методе каждый день более года.</span>
+    <span data-l="en">Built from hands-on experience with <a href="https://serzhyale.github.io/FastMediaSorter_mob_v2/" target="_blank" rel="noopener">FastMediaSorter</a> - a shipping Android app run on this method every day for over a year.</span>
+    <span data-l="uk">Зібрано за досвідом розробки з <a href="https://serzhyale.github.io/FastMediaSorter_mob_v2/" target="_blank" rel="noopener">FastMediaSorter</a> - Android-застосунку, що живе на цьому методі щодня понад рік.</span>
   </p>
 </footer>
 
@@ -1499,17 +1525,17 @@ Do not change anything yet. Show me the plan first; on any conflict, my existing
     ru:{
       title:'Universal Agent Kit - как устроена разработка с ИИ-агентами',
       desc:'Переносимый метод работы с ИИ-агентами: правила, навыки, роли, жизненный цикл спеки, постоянная память и дисциплина параллельной работы агентов. Для разработки и для любого проекта из файлов - аналитики, документации, договоров, регламентов. Выжимка из реального проекта, очищенная от стека. Статья и kit на русском, английском и украинском.',
-      langGroup:'Язык', theme:'Тема', toLight:'Включить светлую тему', toDark:'Включить тёмную тему', copied:'Скопировано', copyFail:'Не удалось'
+      langGroup:'Язык', theme:'Тема', toLight:'Включить светлую тему', toDark:'Включить тёмную тему', ok:'В порядке', error:'Ошибка', copied:'Скопировано', copyFail:'Не удалось'
     },
     en:{
       title:'Universal Agent Kit - how AI-assisted development is wired',
       desc:'A portable method for working with AI agents: rules, skills, roles, a spec lifecycle, persistent memory, and parallel-agent discipline. For AI-assisted development and for any project made of files. Distilled from a real project, stripped of its stack. Article and kit in English, Russian, and Ukrainian.',
-      langGroup:'Language', theme:'Theme', toLight:'Switch to light theme', toDark:'Switch to dark theme', copied:'Copied', copyFail:'Copy failed'
+      langGroup:'Language', theme:'Theme', toLight:'Switch to light theme', toDark:'Switch to dark theme', ok:'OK', error:'Error', copied:'Copied', copyFail:'Copy failed'
     },
     uk:{
       title:'Universal Agent Kit - як влаштована розробка з ШІ-агентами',
       desc:'Переносний метод роботи з ШІ-агентами: правила, навички, ролі, життєвий цикл спеки, постійна пам\'ять і дисципліна паралельної роботи агентів. Для розробки і для будь-якого проєкту з файлів. Дистильовано з реального проєкту, очищено від стеку. Стаття і kit російською, англійською та українською.',
-      langGroup:'Мова', theme:'Тема', toLight:'Увімкнути світлу тему', toDark:'Увімкнути темну тему', copied:'Скопійовано', copyFail:'Не вдалося'
+      langGroup:'Мова', theme:'Тема', toLight:'Увімкнути світлу тему', toDark:'Увімкнути темну тему', ok:'Гаразд', error:'Помилка', copied:'Скопійовано', copyFail:'Не вдалося'
     }
   };
   function metaSet(sel, val){ var m = document.querySelector(sel); if(m) m.setAttribute('content', val); }
@@ -1579,13 +1605,16 @@ Do not change anything yet. Show me the plan first; on any conflict, my existing
     var box = btn.closest('.adopt-prompt'); if(!box) return;
     var pre = box.querySelector('pre'); var txt = pre ? pre.innerText : '';
     var l = document.documentElement.getAttribute('data-lang')||'en', m = I18N[l]||I18N.en;
-    function flash(label){
-      if(btn.dataset.orig === undefined) btn.dataset.orig = btn.innerHTML;
-      btn.innerHTML = label;
-      setTimeout(function(){ btn.innerHTML = btn.dataset.orig; btn.removeAttribute('disabled'); }, 1600);
+    function flash(icon, state, label){
+      if(btn.dataset.orig === undefined){ btn.dataset.orig = btn.innerHTML; btn.dataset.origLabel = btn.getAttribute('aria-label') || ''; }
+      var feedbackClass = icon === 'icon-status-ok' ? 'feedback-status-ok' : 'feedback-status-error';
+      var message = state + ': ' + label;
+      btn.setAttribute('aria-label', message);
+      btn.innerHTML = '<svg class="icon ' + icon + '" aria-hidden="true"><use href="#' + icon + '"/></svg><span class="' + feedbackClass + '">' + message + '</span>';
+      setTimeout(function(){ btn.innerHTML = btn.dataset.orig; btn.setAttribute('aria-label', btn.dataset.origLabel); btn.removeAttribute('disabled'); }, 1600);
     }
-    function done(){ btn.setAttribute('disabled',''); flash('✓ ' + m.copied); }
-    function fail(){ flash('⚠ ' + m.copyFail); }   /* both clipboard paths failed - don't lie */
+    function done(){ btn.setAttribute('disabled',''); flash('icon-status-ok', m.ok, m.copied); }
+    function fail(){ flash('icon-status-error', m.error, m.copyFail); }   /* both clipboard paths failed - don't lie */
     function fallback(){
       try{ var ta=document.createElement('textarea'); ta.value=txt; ta.style.position='fixed'; ta.style.left='-9999px';
         document.body.appendChild(ta); ta.focus(); ta.select();

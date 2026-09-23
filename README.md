@@ -1,7 +1,9 @@
 # Universal Agent Kit
 
-**[→ Read the article / Читать статью](https://serzhyale.github.io/universal-agent-kit/)** ·
-**[⤓ Download the kit](https://github.com/SerZhyAle/universal-agent-kit/raw/main/universal-agent-kit.zip)**
+**[Read the article / Читать статью](https://serzhyale.github.io/universal-agent-kit/)** ·
+**[Download the kit](https://github.com/SerZhyAle/universal-agent-kit/raw/main/universal-agent-kit.zip)**
+
+Contact: [sza@ukr.net](mailto:sza@ukr.net) · [github.com/SerZhyAle](https://github.com/SerZhyAle)
 
 A portable method for working with AI agents on a project - rules, skills (slash commands), roles, a
 spec lifecycle, persistent memory, and the discipline for running several agents at once. Distilled

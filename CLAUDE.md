@@ -19,10 +19,10 @@ section is the only place in this repository that names it.** Everything else ci
 `<DOCUMENT>.md section N`, `<ID> rule N` - and never links to it, because whoever clones this repo does not
 have that drive. A pointer would go in `docs/contracts/`; the contract text itself never does.
 
-This repo **implements no contract and consumes none**, checked on 2026-09-22: it ships Markdown, one HTML
-page and a zip of the same Markdown, so there is no format a second product parses and no artifact another
-product reads. `kit/` is method - how we develop - which the catalog keeps out by name, and the canon owns
-instead.
+This repository consumes `ICON-SET` 0.10, `ICON-RENDER` 0.10 and `ICON-EXTERNAL` 0.9 as the static site's
+icon consumer. The site maps each interface glyph to the vocabulary, uses the contract's rendering roles,
+and records its conformance in `docs/contracts/`; it creates no icon vocabulary or contract artifact.
+`kit/` is method - how we develop - which the catalog keeps out by name, and the canon owns instead.
 
 Like the canon pointer, this one must never be added under `kit/`, for the same reason: the kit
 re-expresses shared method for an outside audience, it does not advertise where the portfolio keeps its

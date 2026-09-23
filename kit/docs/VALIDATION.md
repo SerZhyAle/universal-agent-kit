@@ -34,7 +34,11 @@ unchanged.
     proof.
   Do not run the whole suite to validate a one-line rename; do not claim a behaviour fix with
   only a compile.
-- **User-visible behaviour** → run it and observe. Compiling is not behaving.
+- **User-visible behaviour** → run it and observe. Compiling is not behaving. Observe it in every
+  input mode the product declares - touch, keyboard, pointer, controller, a screen reader - and in
+  every layout class it claims (narrow, wide, rotated), or record a mode as not applicable. A flow
+  that works by touch has proved nothing about the keyboard: each control must be reachable, in a
+  predictable order, and say what it does to assistive technology.
 
 The rule of thumb: **grep < run-script < compile < targeted test < full build < run-and-observe.**
 Pick the lowest rung that actually proves *this* change, and stop there.

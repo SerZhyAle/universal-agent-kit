@@ -35,6 +35,7 @@
   "codeRepository": "https://github.com/SerZhyAle/universal-agent-kit",
   "license": "https://opensource.org/license/mit/",
   "author": { "@type": "Person", "name": "Serhii Zhyhunenko", "url": "https://github.com/SerZhyAle" },
+  "dateModified": "2026-09-23",
   "inLanguage": ["en", "ru", "uk"]
 }
 </script>
@@ -114,6 +115,7 @@
   .kicker{font-size:13px; color:var(--muted); font-weight:600; margin:0 0 10px; letter-spacing:.01em}
   .kicker b{color:var(--acc2); font-weight:700}
   .hero .hero-note{font-size:14px; margin:12px 0 0}
+  .hero .kit-updated{font-size:13px; margin:6px 0 0}
   .hero .provenance{font-size:13px; margin:6px 0 0}
   .hero .provenance a{color:var(--acc); font-weight:600}
 
@@ -299,6 +301,11 @@
       <span data-l="ru">Это не установка: отдай kit своему агенту, и он добавит в проект только то, что действительно пригодится.</span>
       <span data-l="en">This is not an install: give the kit to your agent and it will add only the parts that are useful for your project.</span>
       <span data-l="uk">Це не встановлення: віддай kit своєму агенту, і він додасть до проєкту лише те, що справді стане у пригоді.</span>
+    </p>
+    <p class="kit-updated muted">
+      <span data-l="ru">Kit обновлён: <time class="kit-date" datetime="2026-09-23">2026-09-23</time></span>
+      <span data-l="en">Kit updated: <time class="kit-date" datetime="2026-09-23">2026-09-23</time></span>
+      <span data-l="uk">Kit оновлено: <time class="kit-date" datetime="2026-09-23">2026-09-23</time></span>
     </p>
   </section>
 
@@ -540,6 +547,7 @@ reference  указатель во внешнюю систему и зачем  
           <p>Каждый можно механически просканировать в диффе. Сделай проверку частью «готово», а не «когда-нибудь». Если в стеке есть линтер - закодируй паттерны как правила, чтобы гейт был автоматическим.</p>
           <p>Две вещи замыкают петлю. Первое: <strong>как внедрить правило на коде, который его уже нарушает?</strong> Ставь гейт на <em>новые</em> нарушения, а не на все: заморозь сегодняшнее число как закоммиченную базовую линию, проваливай только при росте и дай базовой линии опускаться по мере уборки, как трещотке, - но не подниматься. Правило кусает сразу, без уборки большим взрывом. Это и есть недостающее звено между «закодируй паттерн» и реальной легаси-базой.</p>
           <p>Второе: <strong>детектор - лишь половина починки.</strong> Линтер останавливает человека один раз; агент переиздаёт тот же паттерн каждое поколение. Так что закрой источник - добавь соответствующий DON'T во всегда загруженный свод правил и подкрепи его в навыках, генерирующих код, чтобы агент перестал производить дефект, а не просто помечал его постфактум.</p>
+          <p>И отдельно - <strong>то, что читает другой проект, живёт в одном месте и меняется первым.</strong> Формат файла, выгрузка, константы алгоритма, от которых зависит соседний проект, - это контракт между проектами. Он лежит в одном месте вне обоих, а каждый проект держит только указатель, не копию: копия расходится с оригиналом после первой же правки. Сначала контракт (новая версия и датированная запись), потом код; не согласен - исправь контракт или запиши исключение с датой окончания. Тихого дрейфа не бывает.</p>
           <p class="muted">Пользовательские доки - часть изменения, которое меняет поведение, а не довесок: то же изменение обновляет док, и проверка проваливается, когда поведение и его описание расходятся. Держи пополняемый (append-only) лог «что выпущено» отдельно от выверенной сводки, которую регенерируешь на релизе.</p>
         </div>
       </details>
@@ -918,6 +926,7 @@ doc       script         type change  logic           config/resources  user-vis
           <p>Each is mechanically scannable in a diff. Make the check part of "done", not part of "someday". If your stack has a linter, encode the patterns as rules so the gate is automatic.</p>
           <p>Two things finish the loop. First, <strong>how do you adopt a rule on code that already breaks it?</strong> Gate on <em>new</em> violations, not all of them: freeze today's count as a checked-in baseline, fail only when it rises, and let the baseline ratchet down as you clean up - never up. The rule bites immediately, with no big-bang cleanup. That's the missing piece between "encode the pattern" and a real legacy codebase.</p>
           <p>Second, <strong>a detector is only half the fix.</strong> A linter stops a human once; an agent re-emits the same pattern every generation. So close the source - add the matching DON'T to the always-loaded rulebook and reinforce it in the code-generating skills, so the agent stops producing the defect, not just flagging it after the fact.</p>
+          <p>And separately, <strong>what another project reads has one home, and it changes first.</strong> A file format, an export, an algorithm's constants that a neighbouring project depends on - that is a contract between projects. It lives in one place outside both, and each project keeps a pointer, never a copy: a copy drifts from the original at the first local edit. The contract changes before the code (a new version and a dated note); disagree, and you either amend the contract or record an exception with an expiry date. Silent drift is not an option.</p>
           <p class="muted">User-facing docs are part of the change that alters behaviour, not a follow-up: the same change updates the doc, and a check fails when behaviour and its description drift. Keep an always-append "what shipped" log separate from the curated summary you regenerate at release.</p>
         </div>
       </details>
@@ -1296,6 +1305,7 @@ reference  вказівник у зовнішню систему та навіщ
           <p>Кожен можна механічно просканувати в дифі. Зроби перевірку частиною «готово», а не «колись». Якщо у стеку є лінтер - закодуй патерни як правила, щоб гейт був автоматичним.</p>
           <p>Дві речі замикають петлю. Перше, <strong>як ввести правило на коді, що вже його порушує?</strong> Гейтуй <em>нові</em> порушення, а не всі: заморозь сьогоднішню кількість як закомічену базову лінію, валі лише коли вона зростає, і дай базовій лінії спускатися, поки прибираєш, як тріскачці, - ніколи не вгору. Правило кусає одразу, без прибирання великим вибухом. Це і є відсутня ланка між «закодуй патерн» і реальним легасі-кодом.</p>
           <p>Друге, <strong>детектор - це лише пів ліків.</strong> Лінтер зупиняє людину один раз; агент видає той самий патерн щогенерації. Тож закрий джерело - додай відповідне DON'T у завжди-завантажений звід правил і підкріпи в навичках, що генерують код, щоб агент перестав <em>виробляти</em> дефект, а не лише позначати його постфактум.</p>
+          <p>І окремо - <strong>те, що читає інший проєкт, живе в одному місці й змінюється першим.</strong> Формат файлу, вивантаження, константи алгоритму, від яких залежить сусідній проєкт, - це контракт між проєктами. Він лежить в одному місці поза обома, а кожен проєкт тримає лише вказівник, не копію: копія розходиться з оригіналом після першої ж правки. Спершу контракт (нова версія й датований запис), потім код; не згоден - виправ контракт або запиши виняток із датою закінчення. Тихого дрейфу не буває.</p>
           <p class="muted">Користувацькі доки - частина зміни, що змінює поведінку, а не післядія: та сама зміна оновлює док, а перевірка валиться, коли поведінка та її опис розходяться. Тримай завжди-доповнюваний лог «що вийшло» окремо від кураторського зведення, яке регенеруєш на релізі.</p>
         </div>
       </details>
@@ -1612,6 +1622,13 @@ Do not change anything yet. Show me the plan first; on any conflict, my existing
         var numEl = secs[s].querySelector('.secnum');
         secs[s].id = 'sec-' + (numEl ? numEl.textContent.replace(/\D/g,'') : s) + '-' + lang;
       }
+    }
+    /* The kit date is stamped as ISO by tools/build-kit.ps1; render it in each span's own locale. */
+    var kd = document.querySelectorAll('time.kit-date');
+    for(var k=0;k<kd.length;k++){
+      var host = kd[k].closest('[data-l]'), kl = host ? host.getAttribute('data-l') : 'en';
+      try{ kd[k].textContent = new Date(kd[k].getAttribute('datetime') + 'T00:00:00Z').toLocaleDateString(
+        {ru:'ru-RU', uk:'uk-UA'}[kl] || 'en-GB', {year:'numeric', month:'long', day:'numeric', timeZone:'UTC'}); }catch(e){}
     }
     openFromHash();
   })();

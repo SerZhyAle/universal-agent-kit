@@ -142,7 +142,10 @@ feature, not class names).>
 - **Performance:** <budget if critical, else "n/a">
 - **Data compatibility:** <migration shape, no version numbers>
 - **Localization:** <required locales, or "n/a">
-- **Accessibility:** <if the feature is user-facing>
+- **Accessibility:** <if the feature is user-facing: the input modes and layout classes it must work in>
+- **Shared boundary:** <a format, payload or behaviour another project reads that this changes, and
+  where its contract lives - the contract amendment is the plan's first phase; or "none">
+
 
 ### 3.3 Owner inputs (Approval gate)
 <Only the bullets matching detected scope; fill concrete values, no placeholders.>

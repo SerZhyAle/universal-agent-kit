@@ -122,6 +122,35 @@ map of every place to look - and nobody read the map, because each of them had c
 The tell that you are in this case: your fix adds a call, an override or a field that the framework
 *always* wanted. Ask immediately who else should have been calling it.
 
+## What another project reads has one home, and it changes first
+
+The section above is about a contract inside one project. There is a second kind: something a
+**different** project reads, writes or reproduces - a file format, a wire payload, an export's
+columns, an algorithm's pinned constants, what an import must never overwrite. Not only code has
+these: a dataset another team loads and a template another office fills are the same thing.
+
+- **One home, pointers everywhere else.** The contract lives in exactly one place outside both
+  projects. Each project keeps a short pointer - the contract's id, its version, where it lives,
+  whether this project produces or consumes it - never a copy. A copy is a fork, and describing the
+  format "in our own words" is a copy too. Two copies agree only until the first edit.
+- **Name the home after the function, not the first project that built it.** A folder named after a
+  product quietly hands that product the shared decision, and cannot answer "how must this behave
+  everywhere".
+- **The contract changes before the code.** A change at the boundary starts with the contract: a
+  version bump and a dated line saying what changed. Code ahead of its contract is a defect whatever
+  the tests say. Never reshape silently, and keep a reader for every version that ever wrote a
+  user's data.
+- **Comply or amend.** A project that finds the contract wrong either amends it at the home or
+  records a dated exception with an expiry date. There is no third option, and an exception past
+  its date is a violation, not a formality.
+- **Conformance runs against the home's copy.** Test vectors copied into the repo and edited locally
+  prove only that the local copy agrees with itself.
+- **Unreachable home, unknown verdict.** If the check cannot reach the home from this machine, its
+  answer is *could not verify*, never PASS (`VALIDATION.md`, the four answers).
+
+Adopted as canon 2026-09-22, after per-repo contract copies had been kept as "frozen" files - which
+is exactly what a copy stops being after the first local edit.
+
 ## Close the source, not just the detector
 
 A gate that catches a recurring defect is only half the loop: a detector stops a human once,

@@ -11,6 +11,23 @@ arrive as the `sza` plugin's skills and rule docs.
   `role: portfolio`, and its `$comment` says why.
 - Per-project record: `rules/contrib/universal_agent_kit.md`, in the canon repo.
 
+## Shared contracts
+
+The portfolio's shared contracts - the formats, algorithms and boundary behaviours that outlive one
+repository - live in one catalog outside every repo, at `P:\Contracts`, organized by function. **This
+section is the only place in this repository that names it.** Everything else cites a contract by id -
+`<DOCUMENT>.md section N`, `<ID> rule N` - and never links to it, because whoever clones this repo does not
+have that drive. A pointer would go in `docs/contracts/`; the contract text itself never does.
+
+This repo **implements no contract and consumes none**, checked on 2026-09-22: it ships Markdown, one HTML
+page and a zip of the same Markdown, so there is no format a second product parses and no artifact another
+product reads. `kit/` is method - how we develop - which the catalog keeps out by name, and the canon owns
+instead.
+
+Like the canon pointer, this one must never be added under `kit/`, for the same reason: the kit
+re-expresses shared method for an outside audience, it does not advertise where the portfolio keeps its
+own material.
+
 ## `kit/` is product payload, not this repo's rules
 
 `kit/CLAUDE.md`, `kit/AGENTS.md`, `kit/.claude/**` and `kit/docs/**` are a `<PLACEHOLDER>` template that a
@@ -40,7 +57,9 @@ governs work here.** Everything below follows from that one distinction:
 - `README.md` and `kit/README.md` - the listing surfaces.
 
 A `kit/` change that does not reach the zip and the page ships a kit whose download disagrees with its own
-documentation.
+documentation. `pwsh -NoProfile -File tools/build-kit.ps1` is the one way to rebuild the zip: it verifies
+every entry against `kit/` and stamps the build date into the page's "Kit updated" line, JSON-LD
+`dateModified` and `sitemap.xml` - so that date is a render target too, never hand-edited.
 
 ## Release shape
 

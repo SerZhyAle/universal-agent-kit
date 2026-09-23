@@ -185,6 +185,11 @@ contract in the same ticket - the contract names its own call sites, so the swee
 time as a point fix; a third site nobody looked at crashed in the field and was reported **three
 hours after the release shipped**. Two paid fixes were, between them, the map of every place to look.
 
+**What another project reads has one home, and it changes first.** A format, payload or behaviour a
+second project depends on lives in one place outside both; each project holds a pointer, never a copy.
+Amend the contract (version bump, dated note) before the code, or record a dated exception - never
+drift in silence (`docs/CODE_QUALITY.md`).
+
 When you write a *new* rule, gate, skill, or agent on top of the kit, follow `docs/AUTHORING.md`:
 author it against a failure you actually observed, name the excuse it must close, and give every
 skill/agent a trigger-focused `description` (not a summary of its steps).

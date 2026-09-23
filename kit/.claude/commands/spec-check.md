@@ -56,6 +56,7 @@ and their checks prove, not from a filename or a hope. Auto-detects strategic vs
 | Index up to date | grep the symbol in your code index, if any |
 | Dead weight introduced | grep for remnants the change should have removed (orphaned symbols, keep-rules for deleted code, unreferenced resources); WARN per remnant. Cross-check `<PLAN_DIR>/` before calling a zero-ref artifact dead - it may be active-ticket scaffolding |
 | User docs | read strategic §8 first. "No changes" → EXEMPT. Else grep the keyword in the user docs - PASS only if present |
+| Shared boundary | read strategic §3.2. "None" → EXEMPT. Else confirm the contract's version was bumped at its home before the boundary code changed, and the conformance run used the home's copy - FAIL if the code is ahead of its contract; UNCHECKABLE, never PASS, if the home cannot be reached |
 | File size vs budget | read the file, count lines, compare to the step budget |
 | Step status consistency | parse `[x] done`; cross-check against the Verification predicates |
 | Phase status consistency | INDEX row status == phase header status |

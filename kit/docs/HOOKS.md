@@ -121,6 +121,10 @@ bypass gets bypassed by other means.
 
 ## Skeletons - the four contracts as programs
 
+**Do not confuse a hook runtime signal with a check verdict.** In the refusal example below, `exit 2`
+means "block this tool call" in that runtime. It is not the `COULD NOT VERIFY` outcome a check may report;
+the surrounding hook protocol, not this kit's four-answer check vocabulary, gives that exit code its meaning.
+
 Everything above is a decision; below is what the decision looks like once it runs. These are
 **illustrative shapes, not drop-in scripts**: the event names, the field names and the shape of the
 event object are your runtime's, they change between versions, and the only reliable way to learn

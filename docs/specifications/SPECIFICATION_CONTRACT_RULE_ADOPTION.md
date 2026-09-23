@@ -1,4 +1,4 @@
-**Status:** Draft
+**Status:** Verified
 
 # SPECIFICATION - Conform to the rule-adoption contracts
 
@@ -68,3 +68,32 @@ between a rule set and a repository that adopts it.
 ## Open questions
 
 None needing the owner: the re-sync path is the adoption skill's.
+
+## Verification - 2026-09-23
+
+- **Baseline gate** (plugin `2026.922.2`): exit 1, 1 error, 1 warning. The error was new since the audit:
+  `SZA-RULES02 AGENTS.md: no canon pointer` - a root `AGENTS.md` had been added as a companion to
+  `CLAUDE.md`. The warning was the expected `SZA-CANON03`.
+- **Re-sync, goal 1.** The rule documents that changed since `2026.09.08.2` (`AI_USAGE`, `CONTRACTS` (new),
+  `DEVELOPMENT`, `DOCUMENTATION_CONCEPT`, `INVARIANTS`, `NEW_PROJECT_CHECKLIST`, `PLATFORM_OVERLAYS`,
+  `README`, `RELEASE_AND_DISTRIBUTION`, `REPOSITORY_LAYOUT`, `TESTING_AND_QA`) were diffed and reconciled.
+  The method additions had already reached `kit/` on 2026-09-21; `CONTRACTS` and the new-project checklist
+  ask for registry rows, pointers, and the catalog named once in the agent-rules file, which this
+  specification set delivers; the release contract gate needs a one-way step this rolling repository does
+  not have. The stamp was rewritten from `-PrintDigest`: `2026.09.22.2`,
+  `sha256:13abcb8a7c2f..`, `adoptedOn` 2026-09-23. The canon checkout's head is already `2026.09.23.1`;
+  the stamp follows the installed plugin, never a version ahead of the published one.
+- **Root `AGENTS.md`** now carries the canon pointer and names `CLAUDE.md` as authoritative; `CLAUDE.md`
+  says the same. Both gate commands resolve the plugin root from the install record, because
+  `CLAUDE_PLUGIN_ROOT` is not set in a tool shell.
+- **Goal 2.** `docs/contracts/` holds `REPO-STAMP.md`, `REPO-LAYOUT.md`, `RULE-DELIVERY.md` beside the
+  page and icon pointers, with an index; every specification carries the `SPECIFICATION_` prefix.
+- **Goal 3.** Registry rows for `REPO-STAMP` (P), `REPO-LAYOUT` (C) and `RULE-DELIVERY` (C) are written for
+  this product, dated 2026-09-23; `HARNESS-PROFILE` is recorded there as having no role. No deviation is
+  left open, so no exception row.
+- **Goal 4.** `kit/` carries no stamp, no plugin name and no catalog name - the scrub grep over `kit/` for
+  `sza|unified.rules|contracts catalog|p:\` returns nothing.
+- **Proposals.** Both filed as `rule-adoption/PROPOSAL-2026-09-23-universal-agent-kit-adoption.md`; item 2
+  also asks what a reader does with two names at one root.
+- **Gate after:** `check-compliance: universal-agent-kit - 0 error(s), 0 warning(s) (overlay ?, canon
+  2026.09.22.2)`, exit 0.

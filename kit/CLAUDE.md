@@ -76,7 +76,7 @@ one, you have verified it. See `docs/RESEARCH_INDEX.md`.
 - `/backlog` - drain the backlog unattended: pick the highest-priority eligible ticket, run
   the pipeline, repeat; defer human-gated tickets to one end-of-run report.
 - `/ui-clarify` - resolve reader-facing or user-facing ambiguity before building.
-- `/verify` - run it, observe, report PASS/FAIL with evidence.
+- `/verify` - run it, observe, report PASS, DEFECT, COULD NOT VERIFY, or NOT APPLICABLE with evidence.
 - `/git` - branch model, staging, commit grouping.
 - `/review`, `/caveman`, `/caveman-commit`, `/caveman-review`.
 
@@ -224,11 +224,10 @@ skill/agent a trigger-focused `description` (not a summary of its steps).
   no release boundary the whole fan-out stays in the one edit.
 - Re-run the touched area's narrowest meaningful check before declaring done, and match the
   evidence to the change type - the validation ladder is in `docs/VALIDATION.md`.
-- **Before anything irreversible** - a release, a publication, a filing, a send - take a written
-  PASS/FAIL that **names what it judged** as the input to that step. The absence of a verdict is not
-  a pass, and that is how this gate actually fails: nobody breaks the rule, nothing ever goes red,
-  and months ship unverified. Everything the step itself generates is committed *before* it, never
-  after.
+- **Before anything irreversible** - a release, a publication, a filing, a send - take a written verdict
+  that **names what it judged** as the input to that step. The absence of a verdict is not a pass, and
+  that is how this gate actually fails: nobody breaks the rule, nothing ever goes red, and months ship
+  unverified. Everything the step itself generates is committed *before* it, never after.
 
 ## 11. Persistent memory (if your runtime supports it)
 - Keep a small, file-based memory under `memory/` so non-obvious context survives across sessions.

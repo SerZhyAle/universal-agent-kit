@@ -1,0 +1,3 @@
+# The shared stylesheet is a byte-identical copy of the PAGE-STYLE reference; its hash is the
+# conformance check, so line endings must never be converted on checkout or commit.
+assets/sza-kit.css -text

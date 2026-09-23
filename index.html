@@ -10,8 +10,8 @@
 <link rel="alternate" hreflang="ru" href="https://serzhyale.github.io/universal-agent-kit/?lang=ru">
 <link rel="alternate" hreflang="uk" href="https://serzhyale.github.io/universal-agent-kit/?lang=uk">
 <link rel="alternate" hreflang="x-default" href="https://serzhyale.github.io/universal-agent-kit/">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%237aa2ff'/%3E%3Cstop offset='1' stop-color='%239d7bff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='url(%23g)'/%3E%3Cpath d='M20 18h24M20 30h24M20 42h16' stroke='%23fff' stroke-width='5' stroke-linecap='round' fill='none'/%3E%3C/svg%3E">
-<meta name="theme-color" content="#0f1115">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%233fb950'/%3E%3Cpath d='M20 18h24M20 30h24M20 42h16' stroke='%2304130c' stroke-width='5' stroke-linecap='round' fill='none'/%3E%3C/svg%3E">
+<meta name="theme-color" content="#0a0f0a">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Universal Agent Kit">
 <meta property="og:url" content="https://serzhyale.github.io/universal-agent-kit/">
@@ -20,7 +20,7 @@
 <meta property="og:image" content="https://serzhyale.github.io/universal-agent-kit/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Universal Agent Kit - a portable method for AI-assisted development, in English, Russian, and Ukrainian.">
+<meta property="og:image:alt" content="Universal Agent Kit - a portable method for working with AI agents, in English, Russian, and Ukrainian.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Universal Agent Kit">
 <meta name="twitter:description" content="A portable method for working with AI agents - rules, skills, roles, spec lifecycle, memory, parallel agents. Not only for code. English, Russian, Ukrainian.">
@@ -40,210 +40,173 @@
 }
 </script>
 <script>
-/* Resolve language + theme before first paint to avoid a flash of the wrong state.
-   Language priority: ?lang= in the URL (a shared link wins) > saved choice > browser. */
+/* PAGE-STYLE section 7 pre-paint resolver, on the portfolio's shared keys sza-lang / sza-theme.
+   Language priority: ?lang= in the URL (a shared link wins) > saved choice > browser.
+   The UA switch keys "ua"; the URL, lang and hreflang keep the ISO code "uk". The legacy
+   uak-* keys are read once so a returning reader keeps their choice. */
 (function(){
   var l, t;
   try{
-    var q = (location.search.match(/[?&]lang=(ru|en|uk)\b/i) || [])[1];
-    if(q){ l = q.toLowerCase(); try{ localStorage.setItem('uak-lang', l); }catch(e){} }
-    else { l = localStorage.getItem('uak-lang'); }
-    t = localStorage.getItem('uak-theme');
+    var q = (location.search.match(/[?&]lang=(ru|en|uk|ua)\b/i) || [])[1];
+    if(q){ l = q.toLowerCase(); }
+    else { l = localStorage.getItem('sza-lang') || localStorage.getItem('uak-lang'); }
+    if(l === 'uk') l = 'ua';
+    if(l){ localStorage.setItem('sza-lang', l); }
+    t = localStorage.getItem('sza-theme') || localStorage.getItem('uak-theme');
+    if(t){ localStorage.setItem('sza-theme', t); }
   }catch(e){}
-  if(!l){ var nav=(navigator.language||'en').toLowerCase(); l = nav.indexOf('ru')===0 ? 'ru' : (nav.indexOf('uk')===0 ? 'uk' : 'en'); }
-  if(!t){ t = (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) ? 'light' : 'dark'; }
+  if(l !== 'ru' && l !== 'en' && l !== 'ua'){ var nav=(navigator.language||'en').toLowerCase(); l = nav.indexOf('ru')===0 ? 'ru' : (nav.indexOf('uk')===0 ? 'ua' : 'en'); }
+  if(t !== 'light' && t !== 'dark'){ t = (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) ? 'light' : 'dark'; }
   var d = document.documentElement;
-  d.setAttribute('data-lang', l); d.setAttribute('lang', l); d.setAttribute('data-theme', t);
+  d.setAttribute('data-lang', l); d.setAttribute('lang', l === 'ua' ? 'uk' : l); d.setAttribute('data-theme', t);
 })();
 </script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/sza-kit.css">
 <style>
+  /* Page layer on top of the shared PAGE-STYLE kit (assets/sza-kit.css, byte-identical to the reference).
+     Only what this Informational / Docs page needs beyond the kit lives here, in the kit's tokens. */
   :root{
-    --wide: min(1640px, 94vw); /* page container: scales with the screen instead of capping at a fixed width */
-    --bg:#0f1115; --bg2:#161922; --bg3:#1d2230; --fg:#e6e8ee; --muted:#9aa3b2;
-    --acc:#7aa2ff; --acc2:#9d7bff; --line:#272d3a; --code:#0b0d12; --ok:#81c784; --error:#ef5350;
-    --warn:#e7b15a; --pill:#222838;
-    /* Darker accent for filled controls so white text on them meets WCAG AA (>=4.5:1);
-       the lighter --acc stays for text/links/borders on the dark background. */
-    --acc-fill:#3b63d6; --acc-fill2:#7a52dd; --on-acc:#fff;
-    --shadow: 0 6px 24px rgba(0,0,0,.35);
+    --wide: min(1640px, 94vw); /* PAGE-CONTENT full-width reading; the 1100px kit cap is a filed proposal */
+    --pill-bg: color-mix(in srgb, var(--acc) 10%, transparent);
   }
-  html[data-theme="light"]{
-    --bg:#f7f8fa; --bg2:#ffffff; --bg3:#eef1f6; --fg:#1b2230; --muted:#5b6675;
-    --acc:#2f5fe0; --acc2:#6a40d8; --line:#e2e6ee; --code:#0e1117; --ok:#2e7d32; --error:#d32f2f;
-    --warn:#9a6a13; --pill:#e9edf5; --shadow:0 6px 24px rgba(20,30,60,.10);
-  }
-  *{box-sizing:border-box}
-  html,body{margin:0;padding:0}
-  body{
-    background:var(--bg); color:var(--fg);
-    font:16px/1.62 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Inter,Arial,sans-serif;
-    -webkit-font-smoothing:antialiased;
-  }
-  a{color:var(--acc); text-decoration:none}
+  body{font-size:16px}
   a:hover{text-decoration:underline}
-  code,kbd,pre{font-family:"SFMono-Regular",ui-monospace,"Cascadia Code",Consolas,Menlo,monospace}
-  code{background:var(--bg3); padding:.08em .38em; border-radius:5px; font-size:.88em}
+  code{background:var(--bg-3); padding:.08em .38em; border-radius:5px; font-size:.88em}
 
-  header.top{
-    position:sticky; top:0; z-index:20; backdrop-filter:saturate(140%) blur(8px);
-    background:var(--bg);   /* fallback for browsers without color-mix() */
-    background:color-mix(in srgb, var(--bg) 82%, transparent);
-    border-bottom:1px solid var(--line);
-  }
-  .top .wrap{max-width:var(--wide); margin:0 auto; padding:10px 22px;
-    display:flex; align-items:center; gap:12px; flex-wrap:wrap}
-  .brand{font-weight:700; letter-spacing:.2px; margin-right:auto; font-size:15px}
-  .brand .dot{color:var(--acc2)}
-  .btn{
-    border:1px solid var(--line); background:var(--bg2); color:var(--fg);
-    padding:8px 13px; border-radius:8px; font-size:13px; cursor:pointer; line-height:1.1;
-    display:inline-flex; align-items:center; justify-content:center; gap:6px; min-height:38px;
-  }
-  .btn:hover{border-color:var(--acc); text-decoration:none}
-  .btn.primary{background:linear-gradient(180deg,var(--acc-fill),var(--acc-fill2)); border:none; color:var(--on-acc); font-weight:600}
+  /* header: the kit's floating glass bar, allowed to wrap at 360px */
+  .site-header{flex-wrap:wrap; width:calc(100% - 24px)}
+  .brand{font-size:15px}
   .icon{width:16px; height:16px; fill:currentColor; flex:none}
   .icon-sprite{display:none}
   .icon-status-ok,.feedback-status-ok{color:var(--ok)}
-  .icon-status-error,.feedback-status-error{color:var(--error)}
-  .seg{display:inline-flex; border:1px solid var(--line); border-radius:8px; overflow:hidden}
-  .seg button{border:none; background:var(--bg2); color:var(--muted); padding:8px 12px; cursor:pointer; font-size:13px; min-height:38px; display:inline-flex; align-items:center}
-  .seg button[aria-pressed="true"]{background:var(--acc-fill); color:var(--on-acc)}
+  .icon-status-error,.feedback-status-error{color:var(--danger)}
+  /* 44px targets for every pointer, not only coarse ones */
+  .btn, .seg button, .theme-btn, .to-top{min-height:44px; min-width:44px}
+  .theme-btn{width:auto; height:auto; padding:0 14px; border-radius:var(--radius-pill); font-family:var(--font-heading); font-size:12px; font-weight:700}
+  .btn{justify-content:center}
+  .seg button{display:inline-flex; align-items:center; justify-content:center}
+  .to-top{width:44px; height:44px}
+  .to-top .icon{width:20px; height:20px}
 
-  main{max-width:var(--wide); margin:0 auto; padding:0 22px 80px}
+  main{max-width:var(--wide); margin:0 auto; padding:0 22px 40px; position:relative; z-index:1}
 
   /* ---------- hero ---------- */
-  .hero{padding:22px 0 14px; border-bottom:1px solid var(--line); margin-bottom:4px}
-  .hero h1{font-size:clamp(34px, 3.1vw, 52px); line-height:1.1; margin:0 0 10px; letter-spacing:-.5px}
-  .hero p.lead{font-size:clamp(17px, 1.15vw, 19px); color:var(--muted); margin:0 0 16px}
+  .hero{padding:1.2rem 0 14px; border-bottom:1px solid var(--border); margin-bottom:4px}
+  .hero .kicker b{font-weight:800; color:var(--text)}
+  .hero .lead{color:var(--text-2)}
   .hero .cta{display:flex; gap:10px; flex-wrap:wrap}
-  .kicker{font-size:13px; color:var(--muted); font-weight:600; margin:0 0 10px; letter-spacing:.01em}
-  .kicker b{color:var(--acc2); font-weight:700}
   .hero .hero-note{font-size:14px; margin:12px 0 0}
   .hero .kit-updated{font-size:13px; margin:6px 0 0}
-  .hero .provenance{font-size:13px; margin:6px 0 0}
-  .hero .provenance a{color:var(--acc); font-weight:600}
+  .minimum-start{margin:16px 0 4px; padding:14px 16px; border:1px solid var(--border); border-left:3px solid var(--acc); border-radius:0 var(--radius-sm) var(--radius-sm) 0; background:var(--card); scroll-margin-top:90px}
+  .minimum-start h2{margin:0 0 5px; font-size:16px; line-height:1.35}
+  .minimum-start p{margin:0; font-size:14.5px; color:var(--text-2)}
 
-  /* shared demo + expand/collapse toolbar between the hero and the language articles */
-  .demo{margin:16px 0 4px}
+  /* the skill-run illustration inside a section (not the kit's one-line .demo strip) */
+  .demo-panel{margin:16px 0 4px}
   .demo-cap{font-size:14px; margin:0 0 8px}
-  .demo-cap strong{color:var(--fg)}
+  .demo-cap strong{color:var(--text)}
   .demo-log{margin:0; font-size:12.5px; line-height:1.5}
   .toolbar{display:flex; gap:10px; flex-wrap:wrap; margin:14px 0 2px}
 
   /* before/after: the same assistant, week one, side by side */
-  .ba{display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--line);
-    border:1px solid var(--line); border-radius:12px; overflow:hidden; margin:16px 0 6px; font-size:13.5px}
-  .ba>div{background:var(--bg2); padding:9px 13px; line-height:1.45}
-  .ba>.h{font-size:11.5px; font-weight:700; text-transform:uppercase; letter-spacing:.1em}
-  .ba>.h.l{color:var(--warn)}
+  .ba{display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--border);
+    border:1px solid var(--border); border-radius:var(--radius-sm); overflow:hidden; margin:16px 0 6px; font-size:13.5px}
+  .ba>div{background:var(--bg-2); padding:9px 13px; line-height:1.45}
+  .ba>.h{font-family:var(--font-heading); font-size:11.5px; font-weight:700; text-transform:uppercase; letter-spacing:.1em}
+  .ba>.h.l{color:var(--gold)}
   .ba>.h.r{color:var(--ok)}
   .ba>.l:not(.h){color:var(--muted)}
 
-  /* ---------- collapsible sections grid (the table of contents) ---------- */
+  /* ---------- numbered collapsible sections (the table of contents) ---------- */
   .sections{display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:14px; align-items:start; margin-top:16px}
   @media(max-width:760px){ .sections{grid-template-columns:1fr} }
-
-  .sec{
-    background:var(--bg2); border:1px solid var(--line); border-radius:12px;
-    overflow:hidden; scroll-margin-top:66px;
-  }
-  /* chessboard tint on the 2-column grid: shade cells by row+col parity */
-  .sec:nth-child(4n+2), .sec:nth-child(4n+3){background:color-mix(in srgb, var(--acc) 7%, var(--bg2))}
-  @media(max-width:760px){
-    .sec:nth-child(4n+2), .sec:nth-child(4n+3){background:var(--bg2)}
-    .sec:nth-child(even){background:color-mix(in srgb, var(--acc) 7%, var(--bg2))}
-  }
-  .sec[open]{grid-column:1 / -1; background:var(--bg2); border-color:color-mix(in srgb, var(--acc) 38%, var(--line)); box-shadow:var(--shadow)}
-  .sec > summary{
-    cursor:pointer; list-style:none; display:flex; align-items:flex-start; gap:11px;
-    padding:13px 16px;
-  }
-  .sec > summary::-webkit-details-marker{display:none}
-  .sec > summary:hover .sectitle{color:var(--acc)}
-  .secnum{color:var(--acc); font-weight:700; font-variant-numeric:tabular-nums; font-size:13px; line-height:1.5; flex:none; min-width:2ch}
+  details.sec{padding:0; margin:0; overflow:hidden; scroll-margin-top:90px}
+  details.sec[open]{grid-column:1 / -1; box-shadow:var(--shadow)}
+  details.sec>summary{align-items:flex-start; gap:11px; padding:13px 16px; font-family:var(--font-body); font-weight:600; font-size:inherit}
+  details.sec>summary::after{content:none} /* disclosure stays text-only under ICON-SET; see the PAGE-STYLE exception */
+  details.sec>summary:hover .sectitle{color:var(--acc-strong)}
+  details.sec>*:not(summary){margin-bottom:0}
+  .secnum{font-size:13px; line-height:1.6; flex:none}
   .sechead{display:flex; flex-direction:column; gap:2px; min-width:0}
-  .sectitle{margin:0; font-size:15.5px; font-weight:600; letter-spacing:-.1px; line-height:1.35}
-  .sectitle code{font-size:.9em; background:var(--bg3); padding:.05em .35em}
-  .secteaser{color:var(--muted); font-size:13px; line-height:1.42}
-  .sec[open] .secteaser{display:none}
-
+  .sectitle{margin:0; font-family:var(--font-heading); font-size:16px; font-weight:700; letter-spacing:-.01em; line-height:1.35}
+  .sectitle code{font-size:.9em; padding:.05em .35em}
+  .secteaser{color:var(--muted); font-weight:400; font-size:13px; line-height:1.42}
+  details.sec[open] .secteaser{display:none}
   .secbody{padding:4px 18px 16px 18px}
-  .secbody h3{scroll-margin-top:72px}
-  .sec[open] .secbody{border-top:1px solid var(--line); margin-top:2px; padding-top:12px}
+  .secbody h3{scroll-margin-top:90px}
+  details.sec[open] .secbody{border-top:1px solid var(--border); margin-top:2px; padding-top:12px}
 
   h3{font-size:17px; margin:18px 0 4px}
   p{margin:10px 0}
   ul,ol{margin:10px 0; padding-left:22px}
   li{margin:5px 0}
-  strong{color:var(--fg)}
+  strong{color:var(--text)}
   .muted{color:var(--muted)}
 
   pre{
-    background:var(--code); color:#cdd6f4; border:1px solid var(--line); border-radius:10px;
-    padding:14px 16px; overflow:auto; font-size:13px; line-height:1.5; box-shadow:var(--shadow);
+    background:var(--code-bg); color:var(--code-ink); border:1px solid var(--border); border-radius:var(--radius-sm);
+    padding:14px 16px; overflow:auto; font-size:13px; line-height:1.5; margin:10px 0;
   }
-  pre.diagram{color:#aeb9d6}
+  pre.diagram{color:color-mix(in srgb, var(--code-ink) 80%, transparent)}
 
-  .grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(230px,1fr)); gap:12px; margin:16px 0}
-  .card{background:var(--bg3); border:1px solid var(--line); border-radius:12px; padding:14px 16px}
+  .grid{grid-template-columns:repeat(auto-fit, minmax(230px,1fr)); gap:12px; margin:16px 0}
+  .card{padding:14px 16px; border-radius:var(--radius-sm)}
   .card h3{margin:0 0 4px; font-size:15px}
   .card p{margin:4px 0 0; font-size:14px; color:var(--muted)}
-  .card .num{font-size:12px; font-weight:700; color:var(--acc); letter-spacing:.1em}
+  .card .num{font-family:var(--font-heading); font-size:12px; font-weight:700; color:var(--acc); letter-spacing:.1em}
 
-  .note{
-    border-left:3px solid var(--acc2); background:var(--bg3); border-radius:0 10px 10px 0;
-    padding:12px 16px; margin:18px 0; font-size:14.5px;
-  }
-  .note .tag{font-size:11px; text-transform:uppercase; letter-spacing:.14em; color:var(--acc2); font-weight:700}
-  .note p{margin:.4em 0 0}
+  .note{font-size:14.5px; margin:18px 0}
+  .note p{font-size:inherit; margin:.4em 0 0}
 
-  .pills{display:flex; flex-wrap:wrap; gap:7px; margin:14px 0}
-  .pill{background:var(--pill); border:1px solid var(--line); border-radius:999px; padding:4px 11px; font-size:12.5px; color:var(--muted)}
-  .pill b{color:var(--fg); font-weight:600}
+  .pills{margin:14px 0}
+  .pill{font-family:var(--font-body); font-size:12.5px; font-weight:500; letter-spacing:0; color:var(--text-2)}
+  .pill b{color:var(--text); font-weight:700}
 
-  footer{max-width:var(--wide); margin:0 auto; padding:26px 22px 60px; border-top:1px solid var(--line); color:var(--muted); font-size:14px}
-  footer .cta{display:flex; gap:10px; flex-wrap:wrap; margin:14px 0}
-  .tools-family{margin:24px 0 0; padding-top:14px; border-top:1px solid var(--line)}
-  .tools-family h2{margin:0 0 10px; color:var(--fg); font-size:15px}
-  .tools-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:8px}
-  .tools-grid a{display:flex; align-items:center; min-height:44px; padding:9px 11px; border:1px solid var(--line); border-radius:8px; background:var(--bg2); color:var(--fg)}
-  .tools-grid a:hover{border-color:var(--acc); text-decoration:none}
-  .author{margin:22px 0 0; padding-top:14px; border-top:1px solid var(--line); font-size:13px; color:var(--muted)}
+  /* ---------- footer: kit form, plus the per-locale product line ---------- */
+  .site-footer{color:var(--muted); font-size:14px; position:relative; z-index:1}
+  .site-footer .container{max-width:var(--wide)}
+  .site-footer .cta{display:flex; gap:10px; flex-wrap:wrap; margin:14px 0}
+  .tools-family{margin:24px 0 0; padding-top:14px; border-top:1px solid var(--border)}
+  .tools-family h2{margin:0 0 10px; color:var(--text); font-size:15px}
+  .tools-grid a{display:flex; align-items:center; min-height:44px}
+  .tools-grid a:hover{text-decoration:none; color:var(--text)}
+  .footer-bottom{padding-top:14px; border-top:1px solid var(--border); margin-top:4px}
+  .provenance{font-size:13px; margin:14px 0 0}
 
-  pre:focus-visible, summary:focus-visible,
-  button:focus-visible, a:focus-visible{outline:2px solid var(--acc); outline-offset:2px}
+  pre:focus-visible{outline:2px solid var(--acc); outline-offset:2px}
   .seg button:focus-visible{outline-offset:-2px}
-  @media(max-width:480px){ header.top .btn.primary{display:none} }
-  @media (pointer:coarse){ .btn, .seg button{min-height:44px; min-width:44px} }
 
   .adopt-prompt{margin:16px 0 22px}
-  .adopt-prompt details{background:var(--bg3); border:1px solid var(--line); border-radius:12px; padding:4px 14px 14px}
-  .adopt-prompt summary{cursor:pointer; font-weight:600; color:var(--acc); list-style:none; display:flex; align-items:center; gap:8px; min-height:44px; padding:4px 2px}
+  .adopt-prompt details{background:var(--bg-3); border:1px solid var(--border); border-radius:var(--radius-sm); padding:4px 14px 14px}
+  .adopt-prompt summary{cursor:pointer; font-weight:600; color:var(--acc-strong); list-style:none; display:flex; align-items:center; gap:8px; min-height:44px; padding:4px 2px}
   .adopt-prompt summary::-webkit-details-marker{display:none}
   .adopt-prompt .prompt-actions{display:flex; justify-content:flex-end; margin:2px 0 8px}
   .adopt-prompt pre{margin:0; max-height:none}
-  .adopt-step{font-weight:700; color:var(--acc)}
+  .adopt-step{font-weight:700; color:var(--acc-strong)}
   .adopt-prompt + p{margin-top:2px}
 
-  /* language switching: hide every variant that is not the active language */
-  html[data-lang="ru"] [data-l="en"], html[data-lang="ru"] [data-l="uk"]{display:none}
-  html[data-lang="en"] [data-l="ru"], html[data-lang="en"] [data-l="uk"]{display:none}
-  html[data-lang="uk"] [data-l="ru"], html[data-lang="uk"] [data-l="en"]{display:none}
+  /* language switching (PAGE-STYLE section 6): the UA label keys "ua"; lang, hreflang and ?lang= keep ISO "uk" */
+  html[data-lang="ru"] [data-l]:not([data-l="ru"]){display:none}
+  html[data-lang="en"] [data-l]:not([data-l="en"]){display:none}
+  html[data-lang="ua"] [data-l]:not([data-l="ua"]){display:none}
 
   /* Print: dark theme prints unreadable, and collapsed sections drop their content.
      A beforeprint handler opens every collapsed section; these rules force readable ink on white. */
   @media print{
-    header.top, .hero .cta, footer .cta, .adopt-prompt .prompt-actions{display:none !important}
+    .site-header, .bg-blobs, .to-top, .hero .cta, .site-footer .cta, .adopt-prompt .prompt-actions{display:none !important}
     html, body{background:#fff !important; color:#111 !important}
     .sections{display:block !important}
-    .sec{grid-column:auto !important; break-inside:avoid; box-shadow:none !important;
+    details.sec{grid-column:auto !important; break-inside:avoid; box-shadow:none !important; backdrop-filter:none !important;
       background:#fff !important; border-color:#bbb !important; margin:0 0 10px}
-    .sec[open]{box-shadow:none !important}
     .secteaser{display:none !important}
-    .card, .note, pre{background:#fff !important; color:#111 !important; border-color:#bbb !important; box-shadow:none !important}
+    .card, .note, .minimum-start, pre{background:#fff !important; color:#111 !important; border-color:#bbb !important; box-shadow:none !important}
     .ba{background:#bbb !important; border-color:#bbb !important}
     .ba>div{background:#fff !important; color:#111 !important}
     pre, pre.diagram{color:#111 !important}
+    strong, .sectitle{color:#111 !important}
     .muted, .card p, .secteaser{color:#333 !important}
     a{color:#111 !important; text-decoration:underline}
     a[href^="http"]::after{content:" (" attr(href) ")"; font-size:.8em; color:#555}
@@ -251,34 +214,34 @@
 </style>
 </head>
 <body>
-<!-- ICON-SET: action.download, action.copy, status.ok, status.error. Source glyphs are Material Icons (Apache-2.0). -->
+<div class="bg-blobs" aria-hidden="true"><div class="blob blob-1"></div><div class="blob blob-2"></div><div class="blob blob-3"></div></div>
+<!-- ICON-SET: action.download, action.copy, nav.scroll-top, status.ok, status.error. Source glyphs are Material Icons (Apache-2.0). -->
 <svg class="icon-sprite" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
   <symbol id="icon-action-download" viewBox="0 0 24 24"><g transform="translate(12 12) scale(.917 .917) translate(-12 -12)"><path d="M19.35,10.04C18.67,6.59 15.64,4 12,4 9.11,4 6.6,5.64 5.35,8.04 2.34,8.36 0,10.91 0,14c0,3.31 2.69,6 6,6h13c2.76,0 5,-2.24 5,-5 0,-2.64 -2.05,-4.78 -4.65,-4.96zM17,13l-5,5 -5,-5h3V9h4v4h3z"/></g></symbol>
   <symbol id="icon-action-copy" viewBox="0 0 24 24"><path d="M16,1L4,1C2.9,1 2,1.9 2,3L2,17L4,17L4,3L16,3L16,1ZM19,5L8,5C6.9,5 6,5.9 6,7L6,21C6,22.1 6.9,23 8,23L19,23C20.1,23 21,22.1 21,21L21,7C21,5.9 20.1,5 19,5ZM19,21L8,21L8,7L19,7L19,21Z"/></symbol>
   <symbol id="icon-status-ok" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></symbol>
+  <symbol id="icon-nav-scroll-top" viewBox="0 0 24 24"><path d="M8 11h3v10h2V11h3l-4-4-4 4zM4 3v2h16V3H4z"/></symbol>
   <symbol id="icon-status-error" viewBox="0 0 24 24"><path d="M11 15h2v2h-2zm0-8h2v6h-2zm.99-5C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"/></symbol>
 </svg>
-<header class="top">
-  <div class="wrap">
+<header class="site-header">
     <span class="brand">Universal&nbsp;Agent&nbsp;Kit<span class="dot">.</span></span>
     <span class="seg" role="group" aria-label="Language" id="langGroup">
       <button id="lng-ru" type="button" onclick="setLang('ru')" aria-pressed="false" aria-label="Русский">RU</button>
       <button id="lng-en" type="button" onclick="setLang('en')" aria-pressed="true" aria-label="English">EN</button>
-      <button id="lng-uk" type="button" onclick="setLang('uk')" aria-pressed="false" aria-label="Українська">UK</button>
+      <button id="lng-ua" type="button" onclick="setLang('ua')" aria-pressed="false" aria-label="Українська">UA</button>
     </span>
-    <button class="btn" id="themeBtn" type="button" onclick="toggleTheme()" title="Theme" aria-label="Theme" aria-pressed="false"><span data-l="ru">Тема</span><span data-l="en">Theme</span><span data-l="uk">Тема</span></button>
-    <a class="btn primary" href="universal-agent-kit.zip" download>
-      <svg class="icon" aria-hidden="true"><use href="#icon-action-download"/></svg><span data-l="ru">Скачать kit</span><span data-l="en">Download kit</span><span data-l="uk">Завантажити kit</span>
+    <button class="theme-btn" id="themeBtn" type="button" onclick="toggleTheme()" title="Theme" aria-label="Theme" aria-pressed="false"><span data-l="ru">Тема</span><span data-l="en">Theme</span><span data-l="ua">Тема</span></button>
+    <a class="btn btn-primary btn-sm" href="universal-agent-kit.zip" download>
+      <svg class="icon" aria-hidden="true"><use href="#icon-action-download"/></svg><span data-l="ru">Скачать kit (.zip)</span><span data-l="en">Download kit (.zip)</span><span data-l="ua">Завантажити kit (.zip)</span>
     </a>
-  </div>
 </header>
 
 <main>
   <noscript>
-    <p style="margin:14px 0 0;padding:11px 14px;border:1px solid var(--line);border-radius:10px;background:var(--bg2);color:var(--muted);font-size:14px">
+    <p style="margin:14px 0 0;padding:11px 14px;border:1px solid var(--border);border-radius:10px;background:var(--bg-2);color:var(--muted);font-size:14px">
       The language switch, theme, expand/collapse, and copy buttons need JavaScript - with it
       off they are inert, but you still get the full English article. Download the kit from the
-      links in the header or footer, or on <a href="https://github.com/SerZhyAle/universal-agent-kit">GitHub</a>.
+      links in the header or footer, or in the <a href="https://github.com/SerZhyAle/universal-agent-kit">Source code repository</a>.
     </p>
   </noscript>
   <!-- ===================== HERO ===================== -->
@@ -286,47 +249,56 @@
     <div class="kicker">
       <span data-l="ru"><b>Для любого ИИ-агента:</b> Claude · Codex · Gemini · Cursor · Cline · любая модель</span>
       <span data-l="en"><b>For any AI agent:</b> Claude · Codex · Gemini · Cursor · Cline · any model</span>
-      <span data-l="uk"><b>Для будь-якого ШІ-агента:</b> Claude · Codex · Gemini · Cursor · Cline · будь-яка модель</span>
+      <span data-l="ua"><b>Для будь-якого ШІ-агента:</b> Claude · Codex · Gemini · Cursor · Cline · будь-яка модель</span>
     </div>
     <h1>
       <span data-l="ru">Дай своему ИИ-агенту операционную систему</span>
       <span data-l="en">Give your AI agent an operating system</span>
-      <span data-l="uk">Дай своєму ШІ-агенту операційну систему</span>
+      <span data-l="ua">Дай своєму ШІ-агенту операційну систему</span>
     </h1>
     <p class="lead">
       <span data-l="ru">Набор понятных правил, готовых промптов и заметок для ИИ-агента. Он помогает агенту не терять контекст, работать аккуратно и не затирать чужую работу, когда агентов несколько. И это не только про код: метод держится на файлах, а не на компиляторе, поэтому ложится и на аналитику, и на документацию, и на договоры, и на регламенты. Подходит и для личной папки на компьютере, и для проекта с Git - не зависит от языка, модели и инструмента.</span>
       <span data-l="en">A set of clear rules, ready-made prompts, and notes for an AI agent. It helps the agent keep context, work carefully, and stay out of the other agents' way when there is more than one. And it is not only about code: the method rests on files, not on a compiler, so it fits analysis, documentation, contracts and procedures just as well. It works for a personal folder on your computer and for a Git project - regardless of language, model, or tool.</span>
-      <span data-l="uk">Набір зрозумілих правил, готових промптів і нотаток для ШІ-агента. Він допомагає агенту не губити контекст, працювати акуратно й не затирати чужу роботу, коли агентів декілька. І це не лише про код: метод тримається на файлах, а не на компіляторі, тому лягає і на аналітику, і на документацію, і на договори, і на регламенти. Підходить і для особистої папки на комп'ютері, і для проєкту з Git - незалежно від мови, моделі чи інструмента.</span>
+      <span data-l="ua">Набір зрозумілих правил, готових промптів і нотаток для ШІ-агента. Він допомагає агенту не губити контекст, працювати акуратно й не затирати чужу роботу, коли агентів декілька. І це не лише про код: метод тримається на файлах, а не на компіляторі, тому лягає і на аналітику, і на документацію, і на договори, і на регламенти. Підходить і для особистої папки на комп'ютері, і для проєкту з Git - незалежно від мови, моделі чи інструмента.</span>
     </p>
     <div class="cta">
-      <a class="btn primary" href="universal-agent-kit.zip" download>
-        <svg class="icon" aria-hidden="true"><use href="#icon-action-download"/></svg><span data-l="ru">Скачать kit (.zip)</span><span data-l="en">Download kit (.zip)</span><span data-l="uk">Завантажити kit (.zip)</span>
+      <a class="btn btn-primary" href="universal-agent-kit.zip" download>
+        <svg class="icon" aria-hidden="true"><use href="#icon-action-download"/></svg><span data-l="ru">Скачать kit (.zip)</span><span data-l="en">Download kit (.zip)</span><span data-l="ua">Завантажити kit (.zip)</span>
       </a>
-      <a class="btn" href="#old-ru" data-l="ru">Влить в существующий проект</a>
-      <a class="btn" href="#old-en" data-l="en">Adopt in an existing project</a>
-      <a class="btn" href="#old-uk" data-l="uk">Влити в наявний проєкт</a>
-      <a class="btn" href="#new-ru" data-l="ru">Поднять новый проект</a>
-      <a class="btn" href="#new-en" data-l="en">Start a new project</a>
-      <a class="btn" href="#new-uk" data-l="uk">Підняти новий проєкт</a>
+      <a class="btn btn-ghost" href="#old-ru" data-l="ru">Начать: существующий проект</a>
+      <a class="btn btn-ghost" href="#old-en" data-l="en">Get started: existing project</a>
+      <a class="btn btn-ghost" href="#old-uk" data-l="ua">Почати: наявний проєкт</a>
+      <a class="btn btn-ghost" href="#new-ru" data-l="ru">Начать: новый проект</a>
+      <a class="btn btn-ghost" href="#new-en" data-l="en">Get started: new project</a>
+      <a class="btn btn-ghost" href="#new-uk" data-l="ua">Почати: новий проєкт</a>
     </div>
     <p class="hero-note muted">
       <span data-l="ru">Это не установка: отдай kit своему агенту, и он добавит в проект только то, что действительно пригодится.</span>
       <span data-l="en">This is not an install: give the kit to your agent and it will add only the parts that are useful for your project.</span>
-      <span data-l="uk">Це не встановлення: віддай kit своєму агенту, і він додасть до проєкту лише те, що справді стане у пригоді.</span>
+      <span data-l="ua">Це не встановлення: віддай kit своєму агенту, і він додасть до проєкту лише те, що справді стане у пригоді.</span>
     </p>
     <p class="kit-updated muted">
       <span data-l="ru">Kit обновлён: <time class="kit-date" datetime="2026-09-23">2026-09-23</time></span>
       <span data-l="en">Kit updated: <time class="kit-date" datetime="2026-09-23">2026-09-23</time></span>
-      <span data-l="uk">Kit оновлено: <time class="kit-date" datetime="2026-09-23">2026-09-23</time></span>
+      <span data-l="ua">Kit оновлено: <time class="kit-date" datetime="2026-09-23">2026-09-23</time></span>
+    </p>
+  </section>
+
+  <section class="minimum-start" id="minimum-start" aria-labelledby="minimum-start-title">
+    <h2 id="minimum-start-title"><span data-l="ru">Минимальный старт</span><span data-l="en">Minimum start</span><span data-l="ua">Мінімальний старт</span></h2>
+    <p>
+      <span data-l="ru">Не готов к полному набору - возьми три файла: <code>CLAUDE.md</code> (переименуй в <code>AGENTS.md</code>, если твой инструмент читает его), <code>/quick</code> и <code>/fix</code>. Добавь <code>/spec</code> и жизненный цикл, когда впервые попадётся задача с настоящими проектными решениями, а <code>memory/</code> - когда надоест объяснять одно и то же.</span>
+      <span data-l="en">Not ready for the full set - take three files: <code>CLAUDE.md</code> (rename it to <code>AGENTS.md</code> if that's what your tool reads), <code>/quick</code>, and <code>/fix</code>. Add <code>/spec</code> and the lifecycle the first time a task carries real design decisions, and <code>memory/</code> once re-explaining things starts to hurt.</span>
+      <span data-l="ua">Не готовий до повного набору - візьми три файли: <code>CLAUDE.md</code> (перейменуй на <code>AGENTS.md</code>, якщо твій інструмент читає його), <code>/quick</code> і <code>/fix</code>. Додай <code>/spec</code> і життєвий цикл, щойно трапиться задача зі справжніми проєктними рішеннями, а <code>memory/</code> - коли набридне пояснювати те саме.</span>
     </p>
   </section>
 
   <div class="toolbar">
-    <button class="btn" type="button" onclick="setAll(true)">
-      <span data-l="ru">Развернуть все разделы</span><span data-l="en">Expand all sections</span><span data-l="uk">Розгорнути всі розділи</span>
+    <button class="btn btn-ghost" type="button" onclick="setAll(true)">
+      <span data-l="ru">Развернуть все разделы</span><span data-l="en">Expand all sections</span><span data-l="ua">Розгорнути всі розділи</span>
     </button>
-    <button class="btn" type="button" onclick="setAll(false)">
-      <span data-l="ru">Свернуть всё</span><span data-l="en">Collapse all</span><span data-l="uk">Згорнути все</span>
+    <button class="btn btn-ghost" type="button" onclick="setAll(false)">
+      <span data-l="ru">Свернуть всё</span><span data-l="en">Collapse all</span><span data-l="ua">Згорнути все</span>
     </button>
   </div>
 
@@ -437,7 +409,7 @@
 /spec-check аудит против спеки                       → Verified / Partial / Broken
 /spec-fix   механический ремонт после аудита         Partial / Broken → переаудит
 /spec-all   прогнать весь пайплайн целиком           idea → verified</pre>
-          <div class="demo">
+          <div class="demo-panel">
             <p class="demo-cap muted"><strong>Не слайд, а настоящий навык.</strong> <code>/spec-check</code> читает репозиторий и отказывается звать тикет готовым, пока путь не доказан - и отдаёт механическую починку в <code>/spec-fix</code>. (иллюстрация)</p>
             <pre class="demo-log">$ /spec-check T0207
 T0207: auditing the strategic spec + 3 phases against the repo..
@@ -568,15 +540,13 @@ reference  указатель во внешнюю систему и зачем  
         <summary><span class="secnum" aria-hidden="true">11</span><span class="sechead"><span class="sectitle" role="heading" aria-level="2">Как внедрить</span><span class="secteaser">Новый или существующий проект, любой инструмент, любая модель</span></span></summary>
         <div class="secbody">
           <p>Метод не привязан ни к инструменту, ни к модели. Ниже три ситуации - выбери свою.</p>
-          <div class="note"><div class="tag">Минимальный старт</div><p>Не готов к полному набору - возьми три файла: <code>CLAUDE.md</code> (переименуй в <code>AGENTS.md</code>, если твой инструмент читает его), <code>/quick</code> и <code>/fix</code>. Добавь <code>/spec</code> и жизненный цикл, когда впервые попадётся задача с настоящими проектными решениями, а <code>memory/</code> - когда надоест объяснять одно и то же. Это то же правило нижней ступени, применённое к самому kit'у.</p></div>
-
           <h3 id="new-ru">A · Новый или почти пустой проект</h3>
           <p>Сначала дай агенту собрать карту кода его штатной командой - <code>/init</code> в Claude Code (или аналог в твоём инструменте). Потом отдай этот промпт, чтобы он поднял проект сразу по методу:</p>
           <div class="adopt-prompt">
             <details>
               <summary>Промпт для нового проекта (на английском)</summary>
               <div class="prompt-actions">
-                <button class="btn" type="button" onclick="copyPrompt(this)" aria-label="Копировать"><svg class="icon" aria-hidden="true"><use href="#icon-action-copy"/></svg>Копировать</button>
+                <button class="btn btn-ghost" type="button" onclick="copyPrompt(this)" aria-label="Копировать"><svg class="icon" aria-hidden="true"><use href="#icon-action-copy"/></svg>Копировать</button>
               </div>
               <pre>This is a fresh or mostly empty project folder. It may be a personal local
 project without Git. First run your codebase-init
@@ -617,7 +587,7 @@ Show me the plan first; create nothing until I approve.</pre>
             <details>
               <summary>Промпт для существующего проекта (на английском)</summary>
               <div class="prompt-actions">
-                <button class="btn" type="button" onclick="copyPrompt(this)" aria-label="Копировать"><svg class="icon" aria-hidden="true"><use href="#icon-action-copy"/></svg>Копировать</button>
+                <button class="btn btn-ghost" type="button" onclick="copyPrompt(this)" aria-label="Копировать"><svg class="icon" aria-hidden="true"><use href="#icon-action-copy"/></svg>Копировать</button>
               </div>
               <pre>Download
 https://github.com/SerZhyAle/universal-agent-kit/raw/main/universal-agent-kit.zip
@@ -816,7 +786,7 @@ Do not change anything yet. Show me the plan first; on any conflict, my existing
 /spec-check audit the build against the spec        → Verified / Partial / Broken
 /spec-fix   mechanical repair after an audit        Partial / Broken → re-audit
 /spec-all   drive the whole pipeline at once        idea → verified</pre>
-          <div class="demo">
+          <div class="demo-panel">
             <p class="demo-cap muted"><strong>A real skill, not a slide.</strong> <code>/spec-check</code> reads the repo and refuses to call a ticket done on an unproven path - then hands the mechanical fix to <code>/spec-fix</code>. (illustrative)</p>
             <pre class="demo-log">$ /spec-check T0207
 T0207: auditing the strategic spec + 3 phases against the repo..
@@ -947,15 +917,13 @@ doc       script         type change  logic           config/resources  user-vis
         <summary><span class="secnum" aria-hidden="true">11</span><span class="sechead"><span class="sectitle" role="heading" aria-level="2">How to adopt</span><span class="secteaser">New or existing project, any tool, any model</span></span></summary>
         <div class="secbody">
           <p>The method is tied to neither a tool nor a model. Three situations below - pick yours.</p>
-          <div class="note"><div class="tag">Minimal start</div><p>Not ready for the full set - take three files: <code>CLAUDE.md</code> (rename it to <code>AGENTS.md</code> if that's what your tool reads), <code>/quick</code>, and <code>/fix</code>. Add <code>/spec</code> and the lifecycle the first time a task carries real design decisions, and <code>memory/</code> once re-explaining things starts to hurt. That's the kit's own lowest-rung rule, applied to the kit itself.</p></div>
-
           <h3 id="new-en">A · A new or near-empty project</h3>
           <p>First let the agent build a map of the code with its built-in command - <code>/init</code> in Claude Code (or the equivalent in your tool). Then hand it this prompt to stand the project up on the method directly:</p>
           <div class="adopt-prompt">
             <details>
               <summary>Prompt for a new project (English)</summary>
               <div class="prompt-actions">
-                <button class="btn" type="button" onclick="copyPrompt(this)" aria-label="Copy"><svg class="icon" aria-hidden="true"><use href="#icon-action-copy"/></svg>Copy</button>
+                <button class="btn btn-ghost" type="button" onclick="copyPrompt(this)" aria-label="Copy"><svg class="icon" aria-hidden="true"><use href="#icon-action-copy"/></svg>Copy</button>
               </div>
               <pre>This is a fresh or mostly empty project folder. It may be a personal local
 project without Git. First run your codebase-init
@@ -996,7 +964,7 @@ Show me the plan first; create nothing until I approve.</pre>
             <details>
               <summary>Prompt for an existing project (English)</summary>
               <div class="prompt-actions">
-                <button class="btn" type="button" onclick="copyPrompt(this)" aria-label="Copy"><svg class="icon" aria-hidden="true"><use href="#icon-action-copy"/></svg>Copy</button>
+                <button class="btn btn-ghost" type="button" onclick="copyPrompt(this)" aria-label="Copy"><svg class="icon" aria-hidden="true"><use href="#icon-action-copy"/></svg>Copy</button>
               </div>
               <pre>Download
 https://github.com/SerZhyAle/universal-agent-kit/raw/main/universal-agent-kit.zip
@@ -1089,7 +1057,7 @@ Do not change anything yet. Show me the plan first; on any conflict, my existing
   </article>
 
   <!-- ===================== UK ARTICLE ===================== -->
-  <article data-l="uk">
+  <article data-l="ua">
 
     <div class="sections">
 
@@ -1195,7 +1163,7 @@ Do not change anything yet. Show me the plan first; on any conflict, my existing
 /spec-check аудит проти спеки                       → Verified / Partial / Broken
 /spec-fix   механічний ремонт після аудиту         Partial / Broken → переаудит
 /spec-all   прогнати весь пайплайн цілком           idea → verified</pre>
-          <div class="demo">
+          <div class="demo-panel">
             <p class="demo-cap muted"><strong>Не слайд, а справжня навичка.</strong> <code>/spec-check</code> читає репозиторій і відмовляється звати тикет готовим, поки шлях не доведено - і віддає механічну лагодку в <code>/spec-fix</code>. (ілюстрація)</p>
             <pre class="demo-log">$ /spec-check T0207
 T0207: auditing the strategic spec + 3 phases against the repo..
@@ -1326,15 +1294,13 @@ reference  вказівник у зовнішню систему та навіщ
         <summary><span class="secnum" aria-hidden="true">11</span><span class="sechead"><span class="sectitle" role="heading" aria-level="2">Як впровадити</span><span class="secteaser">Новий чи наявний проєкт, будь-який інструмент, будь-яка модель</span></span></summary>
         <div class="secbody">
           <p>Метод не прив'язаний ні до інструмента, ні до моделі. Нижче три ситуації - обери свою.</p>
-          <div class="note"><div class="tag">Мінімальний старт</div><p>Не готовий до повного набору - візьми три файли: <code>CLAUDE.md</code> (перейменуй на <code>AGENTS.md</code>, якщо твій інструмент читає його), <code>/quick</code> і <code>/fix</code>. Додай <code>/spec</code> і життєвий цикл, щойно трапиться задача зі справжніми проєктними рішеннями, а <code>memory/</code> - коли набридне пояснювати те саме. Це те саме правило нижнього щабля, застосоване до самого kit'а.</p></div>
-
           <h3 id="new-uk">A · Новий або майже порожній проєкт</h3>
           <p>Спершу дай агенту зібрати карту коду його штатною командою - <code>/init</code> у Claude Code (або аналог у твоєму інструменті). Потім віддай цей промпт, щоб він підняв проєкт одразу за методом:</p>
           <div class="adopt-prompt">
             <details>
               <summary>Промпт для нового проєкту (англійською)</summary>
               <div class="prompt-actions">
-                <button class="btn" type="button" onclick="copyPrompt(this)" aria-label="Копіювати"><svg class="icon" aria-hidden="true"><use href="#icon-action-copy"/></svg>Копіювати</button>
+                <button class="btn btn-ghost" type="button" onclick="copyPrompt(this)" aria-label="Копіювати"><svg class="icon" aria-hidden="true"><use href="#icon-action-copy"/></svg>Копіювати</button>
               </div>
               <pre>This is a fresh or mostly empty project folder. It may be a personal local
 project without Git. First run your codebase-init
@@ -1375,7 +1341,7 @@ Show me the plan first; create nothing until I approve.</pre>
             <details>
               <summary>Промпт для наявного проєкту (англійською)</summary>
               <div class="prompt-actions">
-                <button class="btn" type="button" onclick="copyPrompt(this)" aria-label="Копіювати"><svg class="icon" aria-hidden="true"><use href="#icon-action-copy"/></svg>Копіювати</button>
+                <button class="btn btn-ghost" type="button" onclick="copyPrompt(this)" aria-label="Копіювати"><svg class="icon" aria-hidden="true"><use href="#icon-action-copy"/></svg>Копіювати</button>
               </div>
               <pre>Download
 https://github.com/SerZhyAle/universal-agent-kit/raw/main/universal-agent-kit.zip
@@ -1468,34 +1434,34 @@ Do not change anything yet. Show me the plan first; on any conflict, my existing
   </article>
 </main>
 
-<footer>
+<footer class="site-footer"><div class="container">
   <div data-l="ru">
     <strong>Universal Agent Kit</strong> - переносимый метод работы с ИИ-агентами.
     <div class="cta">
-      <a class="btn primary" href="universal-agent-kit.zip" download><svg class="icon" aria-hidden="true"><use href="#icon-action-download"/></svg>Скачать kit (.zip)</a>
-      <a class="btn" href="https://github.com/SerZhyAle/universal-agent-kit" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn btn-primary" href="universal-agent-kit.zip" download><svg class="icon" aria-hidden="true"><use href="#icon-action-download"/></svg>Скачать kit (.zip)</a>
+      <a class="btn btn-ghost" href="https://github.com/SerZhyAle/universal-agent-kit" target="_blank" rel="noopener">Исходный код</a>
     </div>
     <p class="muted">Kit - MIT · текст - CC BY 4.0 · выжимка из реального проекта, без привязки к стеку.</p>
   </div>
   <div data-l="en">
     <strong>Universal Agent Kit</strong> - a portable method for working with AI agents.
     <div class="cta">
-      <a class="btn primary" href="universal-agent-kit.zip" download><svg class="icon" aria-hidden="true"><use href="#icon-action-download"/></svg>Download kit (.zip)</a>
-      <a class="btn" href="https://github.com/SerZhyAle/universal-agent-kit" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn btn-primary" href="universal-agent-kit.zip" download><svg class="icon" aria-hidden="true"><use href="#icon-action-download"/></svg>Download kit (.zip)</a>
+      <a class="btn btn-ghost" href="https://github.com/SerZhyAle/universal-agent-kit" target="_blank" rel="noopener">Source code</a>
     </div>
     <p class="muted">Kit is MIT · prose is CC BY 4.0 · distilled from a real project, stack-agnostic.</p>
   </div>
-  <div data-l="uk">
+  <div data-l="ua">
     <strong>Universal Agent Kit</strong> - переносний метод роботи з ШІ-агентами.
     <div class="cta">
-      <a class="btn primary" href="universal-agent-kit.zip" download><svg class="icon" aria-hidden="true"><use href="#icon-action-download"/></svg>Завантажити kit (.zip)</a>
-      <a class="btn" href="https://github.com/SerZhyAle/universal-agent-kit" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn btn-primary" href="universal-agent-kit.zip" download><svg class="icon" aria-hidden="true"><use href="#icon-action-download"/></svg>Завантажити kit (.zip)</a>
+      <a class="btn btn-ghost" href="https://github.com/SerZhyAle/universal-agent-kit" target="_blank" rel="noopener">Вихідний код</a>
     </div>
     <p class="muted">Kit - MIT · текст - CC BY 4.0 · дистильовано з реального проєкту, без прив'язки до стеку.</p>
   </div>
   <!-- SITE-FAMILY-MAP 1.1 §2: all siblings and the hub; this product is intentionally omitted. -->
   <section class="tools-family" aria-labelledby="more-tools-heading">
-    <h2 id="more-tools-heading"><span data-l="ru">Другие инструменты SZA</span><span data-l="en">More tools by SZA</span><span data-l="uk">Інші інструменти SZA</span></h2>
+    <h2 id="more-tools-heading"><span data-l="ru">Другие инструменты SZA</span><span data-l="en">More tools by SZA</span><span data-l="ua">Інші інструменти SZA</span></h2>
     <div class="tools-grid">
       <a href="https://serzhyale.github.io/FastMediaSorter_mob_v2/" target="_blank" rel="noopener">FastMediaSorter v2</a>
       <a href="https://serzhyale.github.io/FastMediaSorter_Lite/" target="_blank" rel="noopener">Fast Media Sorter for Windows</a>
@@ -1507,67 +1473,71 @@ Do not change anything yet. Show me the plan first; on any conflict, my existing
       <a href="https://sza.od.ua" target="_blank" rel="noopener">SZA (hub)</a>
     </div>
   </section>
-  <p class="author">
-    <span data-l="ru">Автор</span><span data-l="en">Author</span><span data-l="uk">Автор</span>:
-    <a href="https://sza.od.ua" target="_blank" rel="noopener">SZA.od.ua</a> ·
-    <a href="mailto:sza@ukr.net">sza@ukr.net</a> ·
-    <a href="https://github.com/SerZhyAle" target="_blank" rel="noopener">github.com/SerZhyAle</a>
-  </p>
+  <div class="footer-bottom">
+    <span>© 2026 Serhii Zhyhunenko</span>
+    <span><a href="https://sza.od.ua" target="_blank" rel="noopener">sza.od.ua</a> · <a href="https://github.com/SerZhyAle" target="_blank" rel="noopener">GitHub</a> · <a href="mailto:sza@ukr.net">sza@ukr.net</a></span>
+  </div>
   <p class="provenance muted">
     <span data-l="ru">Собрано по опыту разработки из <a href="https://serzhyale.github.io/FastMediaSorter_mob_v2/" target="_blank" rel="noopener">FastMediaSorter</a> - Android-приложения, которое живёт на этом методе каждый день более года.</span>
     <span data-l="en">Built from hands-on experience with <a href="https://serzhyale.github.io/FastMediaSorter_mob_v2/" target="_blank" rel="noopener">FastMediaSorter</a> - a shipping Android app run on this method every day for over a year.</span>
-    <span data-l="uk">Зібрано за досвідом розробки з <a href="https://serzhyale.github.io/FastMediaSorter_mob_v2/" target="_blank" rel="noopener">FastMediaSorter</a> - Android-застосунку, що живе на цьому методі щодня понад рік.</span>
+    <span data-l="ua">Зібрано за досвідом розробки з <a href="https://serzhyale.github.io/FastMediaSorter_mob_v2/" target="_blank" rel="noopener">FastMediaSorter</a> - Android-застосунку, що живе на цьому методі щодня понад рік.</span>
   </p>
-</footer>
+</div></footer>
+<button class="to-top" id="toTop" type="button" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top" title="Back to top"><svg class="icon" aria-hidden="true"><use href="#icon-nav-scroll-top"/></svg></button>
 
 <script>
   var I18N = {
     ru:{
       title:'Universal Agent Kit - как устроена разработка с ИИ-агентами',
       desc:'Переносимый метод работы с ИИ-агентами: правила, навыки, роли, жизненный цикл спеки, постоянная память и дисциплина параллельной работы агентов. Для разработки и для любого проекта из файлов - аналитики, документации, договоров, регламентов. Выжимка из реального проекта, очищенная от стека. Статья и kit на русском, английском и украинском.',
-      langGroup:'Язык', theme:'Тема', toLight:'Включить светлую тему', toDark:'Включить тёмную тему', ok:'В порядке', error:'Ошибка', copied:'Скопировано', copyFail:'Не удалось'
+      langGroup:'Язык', theme:'Тема', toLight:'Включить светлую тему', toDark:'Включить тёмную тему', ok:'В порядке', error:'Ошибка', copied:'Скопировано', copyFail:'Не удалось', toTop:'Наверх'
     },
     en:{
       title:'Universal Agent Kit - how AI-assisted development is wired',
       desc:'A portable method for working with AI agents: rules, skills, roles, a spec lifecycle, persistent memory, and parallel-agent discipline. For AI-assisted development and for any project made of files. Distilled from a real project, stripped of its stack. Article and kit in English, Russian, and Ukrainian.',
-      langGroup:'Language', theme:'Theme', toLight:'Switch to light theme', toDark:'Switch to dark theme', ok:'OK', error:'Error', copied:'Copied', copyFail:'Copy failed'
+      langGroup:'Language', theme:'Theme', toLight:'Switch to light theme', toDark:'Switch to dark theme', ok:'OK', error:'Error', copied:'Copied', copyFail:'Copy failed', toTop:'Back to top'
     },
-    uk:{
+    ua:{
       title:'Universal Agent Kit - як влаштована розробка з ШІ-агентами',
       desc:'Переносний метод роботи з ШІ-агентами: правила, навички, ролі, життєвий цикл спеки, постійна пам\'ять і дисципліна паралельної роботи агентів. Для розробки і для будь-якого проєкту з файлів. Дистильовано з реального проєкту, очищено від стеку. Стаття і kit російською, англійською та українською.',
-      langGroup:'Мова', theme:'Тема', toLight:'Увімкнути світлу тему', toDark:'Увімкнути темну тему', ok:'Гаразд', error:'Помилка', copied:'Скопійовано', copyFail:'Не вдалося'
+      langGroup:'Мова', theme:'Тема', toLight:'Увімкнути світлу тему', toDark:'Увімкнути темну тему', ok:'Гаразд', error:'Помилка', copied:'Скопійовано', copyFail:'Не вдалося', toTop:'Нагору'
     }
   };
+  /* The switch keys Ukrainian as "ua" (PAGE-STYLE section 4.2); lang, hreflang and ?lang= use ISO "uk". */
+  function isoLang(l){ return l === 'ua' ? 'uk' : l; }
   function metaSet(sel, val){ var m = document.querySelector(sel); if(m) m.setAttribute('content', val); }
   function applyThemeLabel(){
     var d = document.documentElement, l = d.getAttribute('data-lang')||'en', m = I18N[l]||I18N.en;
     var dark = d.getAttribute('data-theme') !== 'light';
     var b = document.getElementById('themeBtn');
     if(b){ b.setAttribute('aria-label', dark ? m.toLight : m.toDark); b.setAttribute('title', m.theme); b.setAttribute('aria-pressed', String(!dark)); }
-    metaSet('meta[name="theme-color"]', dark ? '#0f1115' : '#f7f8fa');
+    metaSet('meta[name="theme-color"]', dark ? '#0a0f0a' : '#eef3ea');   /* the kit's --bg per theme */
   }
   function applyLang(l){
     var d = document.documentElement, m = I18N[l]||I18N.en;
-    d.setAttribute('data-lang', l); d.setAttribute('lang', l);
+    d.setAttribute('data-lang', l); d.setAttribute('lang', isoLang(l));
     document.title = m.title;
     metaSet('meta[name="description"]', m.desc);
     metaSet('meta[property="og:title"]', m.title);
     metaSet('meta[property="og:description"]', m.desc);
-    ['ru','en','uk'].forEach(function(code){
+    metaSet('meta[name="twitter:title"]', m.title);
+    metaSet('meta[name="twitter:description"]', m.desc);
+    ['ru','en','ua'].forEach(function(code){
       var btn = document.getElementById('lng-'+code);
       if(btn) btn.setAttribute('aria-pressed', String(l===code));
     });
     var g = document.getElementById('langGroup'); if(g) g.setAttribute('aria-label', m.langGroup);
+    var tt = document.getElementById('toTop'); if(tt){ tt.setAttribute('aria-label', m.toTop); tt.setAttribute('title', m.toTop); }
     applyThemeLabel();
   }
-  function setLang(l){ applyLang(l); try{ localStorage.setItem('uak-lang', l); }catch(e){}
+  function setLang(l){ applyLang(l); try{ localStorage.setItem('sza-lang', l); }catch(e){}
     /* Keep ?lang= in the URL in sync with the active language, so a copied link and the
        hreflang alternates carry the reader's language. */
-    try{ var u = new URL(location.href); u.searchParams.set('lang', l); history.replaceState(null, '', u); }catch(e){} }
+    try{ var u = new URL(location.href); u.searchParams.set('lang', isoLang(l)); history.replaceState(null, '', u); }catch(e){} }
   function toggleTheme(){
     var d = document.documentElement, t = d.getAttribute('data-theme')==='dark' ? 'light' : 'dark';
     d.setAttribute('data-theme', t);
-    try{ localStorage.setItem('uak-theme', t); }catch(e){}
+    try{ localStorage.setItem('sza-theme', t); }catch(e){}
     applyThemeLabel();
   }
   /* Expand / collapse every section card (only the .sec details, not nested ones). */
@@ -1625,6 +1595,9 @@ Do not change anything yet. Show me the plan first; on any conflict, my existing
     } else { fallback() ? done() : fail(); }
   }
   window.addEventListener('hashchange', openFromHash);
+  /* Back-to-top (PAGE-STYLE section 4.12): shown after ~600px of scroll. */
+  function syncToTop(){ var b = document.getElementById('toTop'); if(b) b.classList.toggle('show', window.scrollY > 600); }
+  window.addEventListener('scroll', syncToTop, {passive:true});
   /* Re-clicking a CTA whose hash is already in the URL fires no hashchange - run it anyway. */
   document.addEventListener('click', function(e){
     var a = e.target.closest ? e.target.closest('a[href^="#"]') : null;
@@ -1649,7 +1622,7 @@ Do not change anything yet. Show me the plan first; on any conflict, my existing
       for(var s=0;s<secs.length;s++){
         if(secs[s].id) continue;
         var numEl = secs[s].querySelector('.secnum');
-        secs[s].id = 'sec-' + (numEl ? numEl.textContent.replace(/\D/g,'') : s) + '-' + lang;
+        secs[s].id = 'sec-' + (numEl ? numEl.textContent.replace(/\D/g,'') : s) + '-' + isoLang(lang);   /* ids keep -uk */
       }
     }
     /* The kit date is stamped as ISO by tools/build-kit.ps1; render it in each span's own locale. */
@@ -1657,9 +1630,10 @@ Do not change anything yet. Show me the plan first; on any conflict, my existing
     for(var k=0;k<kd.length;k++){
       var host = kd[k].closest('[data-l]'), kl = host ? host.getAttribute('data-l') : 'en';
       try{ kd[k].textContent = new Date(kd[k].getAttribute('datetime') + 'T00:00:00Z').toLocaleDateString(
-        {ru:'ru-RU', uk:'uk-UA'}[kl] || 'en-GB', {year:'numeric', month:'long', day:'numeric', timeZone:'UTC'}); }catch(e){}
+        {ru:'ru-RU', ua:'uk-UA'}[kl] || 'en-GB', {year:'numeric', month:'long', day:'numeric', timeZone:'UTC'}); }catch(e){}
     }
     openFromHash();
+    syncToTop();
   })();
 </script>
 </body>

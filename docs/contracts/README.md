@@ -1,5 +1,21 @@
 # Shared-contract pointers
 
-This directory identifies shared contracts used by this repository without copying their text. The iconography
-consumer pointers are [`ICON-SET.md`](ICON-SET.md), [`ICON-RENDER.md`](ICON-RENDER.md), and
-[`ICON-EXTERNAL.md`](ICON-EXTERNAL.md).
+This directory identifies the shared contracts this repository touches, without copying their text. Each
+file names the contract id, its version, its home in the catalog, this repository's role, and what
+conformance requires.
+
+| Pointer | Role | Surface |
+| --- | --- | --- |
+| [`PAGE-CONTENT.md`](PAGE-CONTENT.md) | consumer | `index.html` |
+| [`PAGE-STYLE.md`](PAGE-STYLE.md) | consumer | `index.html`, `assets/sza-kit.css` |
+| [`SITE-FAMILY-MAP.md`](SITE-FAMILY-MAP.md) | consumer | `index.html` footer, `README.md` |
+| [`ICON-SET.md`](ICON-SET.md) | consumer | `index.html` glyphs |
+| [`ICON-RENDER.md`](ICON-RENDER.md) | consumer | `index.html` glyphs |
+| [`ICON-EXTERNAL.md`](ICON-EXTERNAL.md) | consumer | `index.html` imagery |
+| [`REPO-STAMP.md`](REPO-STAMP.md) | producer | `.sza-canon.json` |
+| [`REPO-LAYOUT.md`](REPO-LAYOUT.md) | consumer | root files, `docs/` |
+| [`RULE-DELIVERY.md`](RULE-DELIVERY.md) | consumer | the `sza` plugin |
+
+`HARNESS-PROFILE` has no role here: no `.sza-profile.json`, which the contract reads as the defaults, and
+the packaged harness is not run. The contracts declared not applicable are listed in
+[SPECIFICATION_CONTRACTS_SYNC.md](../specifications/SPECIFICATION_CONTRACTS_SYNC.md).

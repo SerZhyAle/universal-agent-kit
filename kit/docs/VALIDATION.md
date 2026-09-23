@@ -57,10 +57,11 @@ MANUAL item" rule in `/spec-check`; `SPEC_LIFECYCLE.md` owns the mechanics.
 
 ### A check has four answers, and folding the last two together is how it starts lying
 
-PASS and found-a-defect are the obvious two. *Could not verify* is the third - the check ran, the
-subject was out of reach, nothing was measured. **Not applicable in this configuration** is the
-fourth, and it is the one nobody builds. A check with no way to say the last two will report one of
-the first two instead, and from then on its output is fiction with a green tick on it.
+The fixed set is **PASS**, **DEFECT**, **COULD NOT VERIFY**, and **NOT APPLICABLE**. DEFECT means the
+check inspected the subject and found a failed expectation. COULD NOT VERIFY means the subject or
+instrument was out of reach, so nothing was measured. NOT APPLICABLE means the selected configuration
+deliberately has no scenario to execute; it is not a pass. A check with no way to say the last two will
+report one of the first two instead, and from then on its output is fiction with a green tick on it.
 
 Two rules follow, both measured on one release sweep (2026-09-20):
 
@@ -169,7 +170,7 @@ wrong is permanent, and it fails in three specific ways. All three were measured
   verdict artifact that names what it judged**. Naming matters as much as producing: a verdict from
   the previous round is exactly what a hurried step reaches for.
 - **Wire the gate into the command that ships, not into a command beside it.** One project had the
-  whole apparatus - a documented gate emitting a single PASS / FAIL / WAIVED verdict, working - owned
+  whole apparatus - a documented gate emitting one of its declared verdicts, working - owned
   by its *pre-release sweep*, while releases were cut by a separate runbook that never mentioned it.
   Grep of that runbook for the gate's own name: **zero matches**. Skipping the sweep therefore
   skipped the gate silently, and two consecutive releases went out with no written verdict at all.

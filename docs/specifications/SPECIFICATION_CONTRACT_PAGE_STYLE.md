@@ -1,4 +1,4 @@
-**Status:** Draft
+**Status:** Verified
 
 # SPECIFICATION - Conform the site to PAGE-STYLE 1.0
 
@@ -15,28 +15,29 @@ Parent: [SPECIFICATION_CONTRACTS_SYNC.md](SPECIFICATION_CONTRACTS_SYNC.md). Audi
 
 ## Where the page stands
 
-The page was built before the contract and never moved onto the shared kit. Structure mostly conforms;
-the visual system does not.
+Audited 2026-09-23 as built before the contract, with its own inline stylesheet, indigo-violet palette,
+system fonts, a `UK` label, `uak-*` storage keys, no back-to-top and no blobs. Moved onto the kit the same
+day. The verdicts below are the rendered page after that move, walked in headless Chrome in both themes
+and all three locales.
 
 | Rule | Verdict | Evidence |
 | --- | --- | --- |
-| Shared stylesheet and tokens (sections 0, 11) | **deviates** | an own inline stylesheet; the shared kit is not referenced |
-| No indigo, violet or cyan (section 11) | **deviates** | accent tokens `#7aa2ff` / `#9d7bff`, a gradient primary button, a gradient favicon, a violet callout border, a lavender code colour |
-| Fonts Outfit + Plus Jakarta Sans (sections 5, 11) | **deviates** | a system stack naming Inter; no web fonts |
-| Sticky header, brand in header, hero without it | holds | |
-| Language switch RU EN UA, no flags (sections 4.2, 6) | **deviates** | Ukrainian is labelled **UK** and keyed `uk`; order RU, EN is right |
-| Metadata follows the language (section 6) | holds, partly | title, description and Open Graph switch; Twitter card tags do not |
-| Pre-paint script before CSS (section 7) | holds in substance | storage keys are `uak-lang` / `uak-theme` rather than the shared `sza-*` keys; an extra `?lang=` parameter |
-| Theme toggle, dark default, `theme-color`, labelled (section 4.3) | holds | `theme-color` values are the page's own, not the kit's |
+| Shared stylesheet and tokens (sections 0, 11) | holds | `assets/sza-kit.css` and the catalog reference both hash to SHA-256 `72bd903e...332593f`; the page layer after it uses kit tokens only |
+| No indigo, violet or cyan (section 11) | holds | `grep` for the old values (`#7aa2ff`, `#9d7bff`, `#3b63d6`, `#cdd6f4`, gradients) finds nothing; favicon and `og-image.png` redrawn in Pine + Gold |
+| Fonts Outfit + Plus Jakarta Sans (sections 5, 11) | holds | computed `font-family`: body `"Plus Jakarta Sans"`, `h1` `Outfit` |
+| Sticky header, brand in header, hero without it | holds | kit `.site-header`, allowed to wrap at 360 px |
+| Language switch RU EN UA, no flags (sections 4.2, 6) | holds | label **UA**, key `ua`; `lang`, `?lang=`, `hreflang`, section ids and sitemap keep `uk`; `setLang('ua')` gave `lang=uk`, `?lang=uk`, `sza-lang=ua` |
+| Metadata follows the language (section 6) | holds | title, description, Open Graph and now Twitter card tags switch |
+| Pre-paint script before CSS (section 7) | holds | before the font link and the kit; shared `sza-lang` / `sza-theme` keys, legacy `uak-*` read once; `?lang=` kept (exception, proposal 3) |
+| Theme toggle, dark default, `theme-color`, labelled (section 4.3) | holds | `theme-color` is the kit `--bg` per theme (`#0a0f0a` / `#eef3ea`); the toggle is a labelled `.theme-btn`, visible at 360 px |
 | Numbered sections with expand / collapse all (section 4.6) | holds | |
-| Open the section named by the hash, on load and on change (section 7) | holds | |
-| Copy box (section 4.7) | **deviates in form** | an inline `onclick` handler instead of the declared `data-copy` box; clipboard with fallback and a timed confirmation exist, but the confirmation text is localised rather than the contract's exact text |
-| Tagged note with a gold border (section 4.8) | **deviates** | the border uses the violet accent |
-| Back-to-top (section 4.12) | **deviates** | absent on a very long page, although the page type requires it |
-| Footer tools grid and contact line (section 4.11) | **deviates** | no tools grid; covered by the `SITE-FAMILY-MAP` specification |
-| Background blobs (section 5) | **deviates** | absent |
-| 44 px targets, visible focus, reduced motion (sections 1, 11) | partly holds | 44 px only under a coarse pointer, 38 px otherwise; focus ring present; no motion to reduce |
-
+| Open the section named by the hash, on load and on change (section 7) | holds | `#sec-09-uk` switches to UA and opens section 09; `#adopt-uk`, `#new-uk`, `#old-en` resolve |
+| Copy box (section 4.7) | exception | multi-line prompts copy from their `<pre>` with a localised confirmation and the `status.ok` glyph (proposals 4 and 7) |
+| Tagged note with a gold border (section 4.8) | holds | kit `.note` |
+| Back-to-top (section 4.12) | holds | hidden at the top, shown after 600 px of scroll, 44 x 44, `nav.scroll-top` glyph, localised label |
+| Footer tools grid and contact line (section 4.11) | holds | kit `.site-footer` / `.tools-grid` / `.footer-bottom`; grid per `SITE-FAMILY-MAP` |
+| Background blobs (section 5) | holds | kit `.bg-blobs`; motion off under `prefers-reduced-motion` by the kit |
+| 44 px targets, visible focus, reduced motion (sections 1, 11) | holds | every visible button, `.btn` and tools-grid link measured at 44 px or more; kit focus ring; kit reduced-motion rule |
 ## Goals
 
 1. The page is built from the shared kit: its tokens, fonts, components and the section 11 checklist pass
@@ -81,11 +82,18 @@ the visual system does not.
 - The seven proposals exist in the catalog or have been answered.
 - Registry row for `PAGE-STYLE` written with the date of that walk.
 
-## Open questions
+## Open questions - answered 2026-09-23
 
-1. **Adopt the shared visual identity, or keep the page's own?** Full conformance replaces the
-   indigo-violet palette, the gradient favicon and the fonts. The alternative is a dated exception, which
-   the contract permits only with an `until` date. (Recommended: adopt - the page is one of the family's
-   eight, and the exception would have no natural end date.)
-2. Inline the shared stylesheet or reference it as a separate file? (Recommended: a separate tracked file,
-   so byte-identity with the reference can be checked by hash.)
+1. **Adopt the shared visual identity** - adopted, as recommended. No exception covers the palette, the
+   fonts or the favicon.
+2. **A separate tracked file**, as recommended: `assets/sza-kit.css`, pinned by `.gitattributes` against
+   line-ending conversion so its hash stays comparable with the reference.
+
+## Where the seven proposals went
+
+Filed in the catalog as `product-web-pages/PROPOSAL-2026-09-23-universal-agent-kit-page-style.md`, item 1
+by reference to the width item already filed in `PROPOSAL-2026-09-23-documentation-method-start-and-actions.md`.
+It also reports one defect in the reference: `.to-top` is 42 px and the other targets reach 44 px only under
+a coarse pointer, against section 1. The page layer's four local forms (width, `?lang=`, prompt copy,
+text-only disclosure and theme control) are one registry exception until 2026-12-31. The registry row for
+`PAGE-STYLE` carries this walk's date.

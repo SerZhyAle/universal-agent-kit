@@ -42,7 +42,7 @@ universal-agent-kit/
       quick.md              <- fast path for trivial edits
       fix.md                <- narrow defect fix, no ceremony
       git.md                <- branch model, commit grouping, what-not-to-commit
-      verify.md             <- run it, observe, report PASS/FAIL
+      verify.md             <- run it, observe, report one of four verdicts
       ui-clarify.md         <- resolve reader-facing ambiguity before building
       review.md             <- terse, actionable review
       caveman.md            <- brevity mode for the whole chat

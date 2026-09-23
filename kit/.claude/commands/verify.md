@@ -1,16 +1,17 @@
 ---
-description: "Use to run the thing and observe what actually happens, reporting PASS/FAIL with evidence. Triggers: 'verify', 'does it actually work', a behaviour claim that needs run-and-observe proof."
+description: "Use to run the thing and observe what actually happens, reporting PASS, DEFECT, COULD NOT VERIFY, or NOT APPLICABLE with evidence. Triggers: 'verify', 'does it actually work', a behaviour claim that needs run-and-observe proof."
 ---
 
 # Verify - Run-and-Observe Sanity Check
 
 > **GLOBAL DIRECTIVES (anti-bureaucracy):**
 > 1. Dry technical prose, no filler.
-> 2. Surface only what matters: PASS/FAIL + evidence. Do not edit specs or status.
+> 2. Surface only what matters: PASS, DEFECT, COULD NOT VERIFY, or NOT APPLICABLE + evidence. Do not edit specs or status.
 > 3. Terse report: end with one line - verdict + evidence path.
 
 Lightweight check that a change **actually works when exercised**, not just that the cheap check
-passed. Produce (optional), run, walk a minimal scenario, capture output, report PASS/FAIL with
+passed. Produce (optional), run, walk a minimal scenario, capture output, then report one of the four
+verdicts with
 evidence. Read-only on specs and plans. Artifacts go to `<SCRATCH_DIR>/`.
 
 This is the in-between tool: heavier than reading the diff, lighter than a full QA pass.
@@ -38,11 +39,11 @@ have someone follow it from the text alone. The kit defines the *method*, not th
 (read-only). Otherwise treat the text as the scenario. Empty → default smoke.
 
 **2 - Pre-flight.** Confirm the run target is reachable (server up, device online, binary
-present). If not, report the blocker and stop - do not fake a pass.
+present). If not, report `COULD NOT VERIFY` with the blocker and stop - do not fake a pass.
 
 **3 - Produce the thing (only when `--build`).** Run `<BUILD_CMD>` - or whatever your project's
 produce step is: a render, an export, a pipeline run. On failure: capture the tail of the output to
-`<SCRATCH_DIR>/verify_<TS>.md` and abort. Do not proceed.
+`<SCRATCH_DIR>/verify_<TS>.md`, report `DEFECT`, and abort. Do not proceed.
 
 **4 - Author the scenario.** Write `<SCRATCH_DIR>/verify_<TS>.md` with a header (target,
 version, environment) and an ordered 1-5 step scenario. Each step: `goal`, `action`,
@@ -50,7 +51,8 @@ version, environment) and an ordered 1-5 step scenario. Each step: `goal`, `acti
 user free-text → ticket acceptance criteria → default smoke (start, exercise the main
 path, assert no error/crash).
 
-If `--dry-run`, stop here and report the path.
+If `--dry-run`, stop here and report `NOT APPLICABLE - dry run requested; no scenario was executed`, plus
+the path.
 
 **5 - Capture output.** Start log/stdout capture before the run; record the start time.
 
@@ -63,10 +65,19 @@ ticket awaiting manual test, additionally grep for its verification tag (`<ID>:`
 hit means that code path was exercised. Append a findings section: counts per level, top
 errors with references.
 
-**8 - Report.** One line:
-`verify: <target>, PASS/FAIL N/N, log errors N, crashes K. Scenario: <SCRATCH_DIR>/verify_<TS>.md`
-Optional next step: all PASS → "OK to commit." Any FAIL → one-sentence root-cause guess +
-route to `/fix` or `/spec-fix`.
+**8 - Report.** End with one line naming the target and exactly one verdict:
+
+```text
+verify: <target>, PASS N/N, log errors N, crashes K. Scenario: <SCRATCH_DIR>/verify_<TS>.md
+verify: <target>, DEFECT - <failed expectation>. Scenario: <SCRATCH_DIR>/verify_<TS>.md
+verify: <target>, COULD NOT VERIFY - <blocker>. Scenario: <SCRATCH_DIR>/verify_<TS>.md
+verify: <target>, NOT APPLICABLE - <configuration reason>. Scenario: <SCRATCH_DIR>/verify_<TS>.md
+```
+
+Use `DEFECT` only after inspecting the target and finding a failed expectation. Use `COULD NOT VERIFY`
+when the target or instrument was out of reach. Use `NOT APPLICABLE` only when the requested configuration
+deliberately has no executable scenario; it is not a pass. Optional next step: PASS → "OK to commit." Any
+DEFECT → one-sentence root-cause guess + route to `/fix` or `/spec-fix`.
 
 ## Constraints
 

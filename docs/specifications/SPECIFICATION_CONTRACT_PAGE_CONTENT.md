@@ -1,4 +1,4 @@
-**Status:** Draft
+**Status:** Verified
 
 # SPECIFICATION - Conform the site to PAGE-CONTENT 1.1
 
@@ -23,15 +23,15 @@ Parent: [SPECIFICATION_CONTRACTS_SYNC.md](SPECIFICATION_CONTRACTS_SYNC.md). Audi
 | --- | --- | --- |
 | Hero states the method's promise | holds | H1 and lead in the hero block |
 | Audience named | holds | hero kicker; "who this is for" in the open section 00 |
-| Choice of path | holds | hero buttons "adopt in an existing project" / "start new" jump to the two paths |
-| **Minimal start near the top** | **deviates** | the minimal-start callout lives inside collapsed section 11; the record's paragraph on this product asks for the path choice and the minimal result at the top |
+| Choice of path | holds | hero buttons use the stable “Get started” vocabulary and jump to the existing-project and new-project paths |
+| Minimal start near the top | holds | the always-open `#minimum-start` block follows the hero and gives the supported three-file first step in all locales |
 | Detailed method in disclosure groups | holds | sections 00-13, only 00 and 01 open by default |
 | Download and help | holds | footer: zip, repository, licence |
 | Full content width | holds | container scales to 1640 px / 94 vw |
 | Brand once, hero without the name | holds | brand in the header only |
 | No emoji, no urgency, no ads | holds | only text glyphs (the icon specification handles them) |
-| **Stable action labels** | **deviates, minor** | "Download kit", "Adopt..." rather than the contract's stable labels; the repository link is labelled "GitHub" |
-| **Sibling tool linked for what it does** | **deviates** | the provenance line's "FastMediaSorter" points to the author's GitHub profile, not to the product's page in the family map |
+| Stable action labels | holds with pending owner decision | path actions use “Get started”; the repository action uses “Source code”; the zip action is the documented proposal because the contract provides no fitting stable label |
+| Sibling tool linked for what it does | holds | the FastMediaSorter provenance link in all locales points to its canonical page from `SITE-FAMILY-MAP` §2 |
 | Acceptance test | holds on reading | "this is ___, I need it when ___, I start with ___" is answerable above the fold |
 
 ## Goals
@@ -44,6 +44,10 @@ Parent: [SPECIFICATION_CONTRACTS_SYNC.md](SPECIFICATION_CONTRACTS_SYNC.md). Audi
    with `SITE-FAMILY-MAP` rule 4).
 
 ## Changes asked of the contract (proposals to the owner)
+
+Filed 2026-09-23 beside `PAGE-CONTENT` in the shared-contract catalog as
+`PROPOSAL-2026-09-23-documentation-method-start-and-actions.md`. The catalog is intentionally not linked:
+clones of this repository do not have its local path.
 
 1. **Where the minimal start sits** in the documentation/method variant, and whether the path choice must
    be above the fold - the variant names the blocks but not their placement.
@@ -63,10 +67,10 @@ Parent: [SPECIFICATION_CONTRACTS_SYNC.md](SPECIFICATION_CONTRACTS_SYNC.md). Audi
 ## Done criteria
 
 - A read of the rendered page in each locale passes the acceptance test and shows the minimal start without
-  expanding anything.
-- The provenance link resolves to the sibling product's page from the family map.
-- Each proposal above exists in the catalog beside the contract, or the owner has answered it.
-- This product's registry row for `PAGE-CONTENT` is written with the date of that read.
+  expanding anything - verified 2026-09-23.
+- The provenance link resolves to the sibling product's page from the family map - verified 2026-09-23.
+- Each proposal above exists in the catalog beside the contract - filed 2026-09-23.
+- This product's registry row for `PAGE-CONTENT` is written with the date of that read - written 2026-09-23.
 
 ## Open questions
 

@@ -1,4 +1,4 @@
-**Status:** Draft
+**Status:** Verified
 
 # SPECIFICATION - Align the repository with the shared contracts (umbrella)
 
@@ -88,10 +88,24 @@ contracts too.
 - Each per-contract specification is at `Verified` or carries a `Block*` status with a one-line reason.
 - Gate run cited with exit code and output.
 
-## Open questions
+## Open questions - answered 2026-09-23
 
 1. **Iconography opt-in.** The icon contracts are drafts and bind only products that opt in. Opt in now,
    or wait until the conflict with `PAGE-STYLE` section 9 is settled? (Recommended: opt in now and file
    the conflict as a proposal - the site gains a coherent glyph set either way.)
 2. **Visual identity.** Full `PAGE-STYLE` conformance replaces the site's own indigo-violet palette and
    fonts with the shared kit. Adopt, or record a dated exception? See the `PAGE-STYLE` specification.
+
+Both were answered as recommended: the site opted in to the iconography contracts (see the iconography
+specification) and adopted the shared visual identity with no exception on palette, fonts or favicon (see
+the `PAGE-STYLE` specification).
+
+## Verification - 2026-09-23
+
+| Done criterion | Result |
+| --- | --- |
+| `CLAUDE.md` names every touched contract, the catalog once | The "Shared contracts" section lists the six site contracts, the three rule-adoption contracts with their roles, `HARNESS-PROFILE` as having no role, and the not-applicable set. The catalog path appears in that section only; the gate's contracts check agrees. |
+| One pointer per id with a role | `docs/contracts/` holds `PAGE-CONTENT`, `PAGE-STYLE`, `SITE-FAMILY-MAP`, `ICON-SET`, `ICON-RENDER`, `ICON-EXTERNAL`, `REPO-STAMP`, `REPO-LAYOUT`, `RULE-DELIVERY`, each short and naming id, version, role and home, plus a `README.md` index. |
+| Registry rows and exceptions | Rows for all nine, dated 2026-09-23. The `INSTALL-TRUST` note now names the 45 entries including `merge-prompt.txt`; the phrase "no contract of any kind" was already gone. The one open deviation, the `PAGE-STYLE` page layer, is an exception until 2026-12-31. The `PAGE-CONTENT` zip-download label is an owner question filed as a proposal, not a deviation. |
+| Per-contract specifications | `PAGE-CONTENT`, `PAGE-STYLE`, `SITE-FAMILY-MAP`, iconography, rule adoption and automated checks: all `Verified`. |
+| Gate | `check-compliance: universal-agent-kit - 0 error(s), 0 warning(s) (overlay ?, canon 2026.09.22.2)`, exit 0. |

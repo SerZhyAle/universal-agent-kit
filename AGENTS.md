@@ -1,5 +1,9 @@
 # Repository Guidelines
 
+## Canon
+
+This repository adopts the SZA Unified Rules canon: plugin `sza`, from the public marketplace repo `SerZhyAle/sza-unified-rules`, consumption model **reference**, no platform overlay (`role: portfolio` in `.sza-canon.json`), per-project record `rules/contrib/universal_agent_kit.md` in the canon repo. The root `CLAUDE.md` is the authoritative agent-rules file for this repository; this file is its companion for agents that read `AGENTS.md`, and where the two differ, the stricter one wins. `kit/AGENTS.md` is product payload, never this repository's rules.
+
 ## Project Structure & Module Organization
 
 This repository publishes the Universal Agent Kit and its GitHub Pages article. The root `index.html` is the trilingual site; `README.md` is the repository landing page. Treat `kit/` as the product source: it contains the portable rule templates, `.claude/` commands and agent briefs, `docs/` methodology, and `memory/` examples. `merge-prompt.txt` accompanies the kit. `universal-agent-kit.zip`, `sitemap.xml`, and the date shown in `index.html` are generated release surfaces. `tools/build-kit.ps1` owns their rebuild.
@@ -17,8 +21,12 @@ It recreates `universal-agent-kit.zip`, verifies each archive entry against `kit
 Before committing, also run the configured compliance gate when the shared canon plugin is available:
 
 ```powershell
-pwsh -File "$env:CLAUDE_PLUGIN_ROOT/tools/check-compliance.ps1"
+$sza = ((Get-Content "$HOME/.claude/plugins/installed_plugins.json" -Raw | ConvertFrom-Json).plugins.'sza@sza-unified-rules' |
+    Sort-Object lastUpdated -Descending | Select-Object -First 1).installPath
+pwsh -NoProfile -File "$sza/tools/check-compliance.ps1"
 ```
+
+`CLAUDE_PLUGIN_ROOT` is set only for the plugin's own hooks, not in a tool shell, so the plugin root is resolved from the install record.
 
 ## Content Style & Naming
 

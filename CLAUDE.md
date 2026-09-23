@@ -19,9 +19,20 @@ section is the only place in this repository that names it.** Everything else ci
 `<DOCUMENT>.md section N`, `<ID> rule N` - and never links to it, because whoever clones this repo does not
 have that drive. A pointer would go in `docs/contracts/`; the contract text itself never does.
 
-This repository consumes `ICON-SET` 0.10, `ICON-RENDER` 0.10 and `ICON-EXTERNAL` 0.9 as the static site's
-icon consumer. The site maps each interface glyph to the vocabulary, uses the contract's rendering roles,
-and records its conformance in `docs/contracts/`; it creates no icon vocabulary or contract artifact.
+What this repository touches, each with a pointer in [docs/contracts/](docs/contracts/README.md) and a
+specification in [docs/specifications/](docs/specifications/SPECIFICATION_CONTRACTS_SYNC.md):
+
+- **The site consumes** `PAGE-CONTENT` 1.1 (documentation / method page), `PAGE-STYLE` 1.0 (Informational /
+  Docs, the shared stylesheet byte-identical in `assets/`), `SITE-FAMILY-MAP` 1.1 (footer family grid), and
+  the opted-in iconography drafts `ICON-SET` 0.10, `ICON-RENDER` 0.10, `ICON-EXTERNAL` 0.9. It creates no
+  vocabulary, style or map of its own.
+- **The repository produces** `REPO-STAMP` 0.9 (`.sza-canon.json`, written only by the adoption skill) and
+  **consumes** `REPO-LAYOUT` 0.9 and `RULE-DELIVERY` 0.9. `HARNESS-PROFILE` has no role: no
+  `.sza-profile.json`, and the packaged harness is not run here.
+- **Declared not applicable:** `INSTALL-TRUST` (the zip installs and executes nothing), `WAVE-PARTICLES`,
+  the desktop-app contracts, and every format this repository neither reads nor writes. The automated-checks
+  drafts are not bound; the build check aligns with them voluntarily.
+
 `kit/` is method - how we develop - which the catalog keeps out by name, and the canon owns instead.
 
 Like the canon pointer, this one must never be added under `kit/`, for the same reason: the kit
@@ -31,8 +42,10 @@ own material.
 ## `kit/` is product payload, not this repo's rules
 
 `kit/CLAUDE.md`, `kit/AGENTS.md`, `kit/.claude/**` and `kit/docs/**` are a `<PLACEHOLDER>` template that a
-stranger downloads and fills in for their own project. **This file is the only agent-rules file that
-governs work here.** Everything below follows from that one distinction:
+stranger downloads and fills in for their own project. **This file is the authoritative agent-rules file
+for work here**; the root [AGENTS.md](AGENTS.md) is its companion for agents that read that name, carries
+the same canon pointer, and yields to this file where they differ, unless it is stricter. Everything below
+follows from that one distinction:
 
 - **Never apply `kit/CLAUDE.md` to work in this repo.** It addresses the downstream user, and its
   placeholders resolve to their project, not to this one.
@@ -70,7 +83,12 @@ why the stamp carries `tagRegex: null` and `ledgerShape: "none"`.
 ## Gate
 
 ```powershell
-pwsh -File "$env:CLAUDE_PLUGIN_ROOT/tools/check-compliance.ps1"
+$sza = ((Get-Content "$HOME/.claude/plugins/installed_plugins.json" -Raw | ConvertFrom-Json).plugins.'sza@sza-unified-rules' |
+    Sort-Object lastUpdated -Descending | Select-Object -First 1).installPath
+pwsh -NoProfile -File "$sza/tools/check-compliance.ps1"
 ```
+
+`CLAUDE_PLUGIN_ROOT` is expanded only for the plugin's own hooks, never in a tool shell, so the bare
+`$env:CLAUDE_PLUGIN_ROOT/tools/..` form dies with exit 64; resolve the root from the install record.
 
 Exit 0 before committing anything at the repo root or under `kit/`.

@@ -1,6 +1,6 @@
 # `ICON-SET` pointer
 
-- Version: 0.10 (draft)
+- Version: 0.13 (draft)
 - Role: consumer
 - Home: `iconography/README.md` in the shared contracts catalog
 

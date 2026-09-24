@@ -1,6 +1,6 @@
 # `ICON-RENDER` pointer
 
-- Version: 0.10 (draft)
+- Version: 0.11 (draft)
 - Role: consumer
 - Home: `iconography/README.md` in the shared contracts catalog
 

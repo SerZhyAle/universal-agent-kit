@@ -6,8 +6,8 @@ Parent: [SPECIFICATION_CONTRACTS_SYNC.md](SPECIFICATION_CONTRACTS_SYNC.md). Audi
 
 ## Contracts
 
-- **`ICON-SET` 0.10** - one glyph and one name per meaning; the vocabulary with its glyph files.
-- **`ICON-RENDER` 0.10** - colour on light, dark and product themes; sizes from a button to a tile.
+- **`ICON-SET` 0.13** - one glyph and one name per meaning; the vocabulary with its glyph files.
+- **`ICON-RENDER` 0.11** - colour on light, dark and product themes; sizes from a button to a tile.
 - **`ICON-EXTERNAL` 0.9** - third-party marks and downloaded pictures.
 - All three are **drafts**, owned by FastMediaSorter Android. A draft binds only the products that opt in,
   and any product may supplement it by proposal. Scope: "every product with a user interface" - the site

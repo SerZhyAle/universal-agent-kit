@@ -24,7 +24,7 @@ specification in [docs/specifications/](docs/specifications/SPECIFICATION_CONTRA
 
 - **The site consumes** `PAGE-CONTENT` 1.1 (documentation / method page), `PAGE-STYLE` 1.0 (Informational /
   Docs, the shared stylesheet byte-identical in `assets/`), `SITE-FAMILY-MAP` 1.1 (footer family grid), and
-  the opted-in iconography drafts `ICON-SET` 0.10, `ICON-RENDER` 0.10, `ICON-EXTERNAL` 0.9. It creates no
+  the opted-in iconography drafts `ICON-SET` 0.13, `ICON-RENDER` 0.11, `ICON-EXTERNAL` 0.9. It creates no
   vocabulary, style or map of its own.
 - **The repository produces** `REPO-STAMP` 0.9 (`.sza-canon.json`, written only by the adoption skill) and
   **consumes** `REPO-LAYOUT` 0.9 and `RULE-DELIVERY` 0.9. `HARNESS-PROFILE` has no role: no

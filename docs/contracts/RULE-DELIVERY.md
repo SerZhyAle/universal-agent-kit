@@ -10,3 +10,9 @@ digest is reconciled by re-running the adoption skill: re-read the changed rule 
 The staleness ladder judges age from `canon.reconciledOn` when the stamp carries it, and from
 `canon.adoptedOn` otherwise (rule 5); where neither is present and parseable the age is unknown and read as
 past the 180-day window.
+
+The installed plugin `2026.1002.3` has not delivered that unknown-age reading: the isolated probe documented
+in the synchronization specification reports `WARN SZA-CANON03`, exit 0. Use of that reader is recorded in
+REGISTRY section 3 until 2026-12-31, with
+`PROPOSAL-2026-10-09-universal-agent-kit-stamp-reader.md` asking its owner for delivery. The current stamp's
+valid dates and equal digest pass the gate; that result does not prove the missing-date branch conforms.

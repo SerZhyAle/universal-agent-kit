@@ -1,0 +1,17 @@
+# Addresses of this site that an outside surface holds (SITE-STRUCTURE rule 8). One JSON record per line: address, holder, kind, note, optionally anchor.
+# Holders: repo:<file> is a file of this repository (the gate checks it contains the address); site:<name> is a sibling or hub surface of SITE-FAMILY-MAP (not decidable offline, listed from a scan of the sibling working copies on 2026-10-09).
+# tools/check-site.ps1 -Dimension held-addresses resolves every entry against the page set and refuses an entry that is a forwarder, a noindex page or answers nothing.
+# An anchor that an outside surface links is never renamed; none is held outside today, so none is listed.
+{"holder":"repo:README.md","kind":"readme","note":"the title block link, \"Read the article\"","address":"https://serzhyale.github.io/universal-agent-kit/"}
+{"holder":"repo:README.md","kind":"readme","note":"the documentation portal link in the title block","address":"https://serzhyale.github.io/universal-agent-kit/portal/"}
+{"holder":"repo:robots.txt","kind":"robots","note":"the Sitemap directive","address":"https://serzhyale.github.io/universal-agent-kit/sitemap.xml"}
+{"holder":"site:sza-hub","kind":"sibling-grid","note":"project grid of the hub landing and its embed page (sza.od.ua)","address":"https://serzhyale.github.io/universal-agent-kit/"}
+{"holder":"site:sza-hub-readme","kind":"readme","note":"the hub README","address":"https://serzhyale.github.io/universal-agent-kit/"}
+{"holder":"site:SerZhyAle.github.io","kind":"robots","note":"robots.txt of the user-site root lists this site's sitemap","address":"https://serzhyale.github.io/universal-agent-kit/sitemap.xml"}
+{"holder":"site:FastMediaSorter_mob_v2","kind":"sibling-grid","note":"footer tools grid of the landing and its per-language pages, README","address":"https://serzhyale.github.io/universal-agent-kit/"}
+{"holder":"site:FastMediaSorter_Lite","kind":"sibling-grid","note":"footer tools grid, trust page, README","address":"https://serzhyale.github.io/universal-agent-kit/"}
+{"holder":"site:CyrFlip","kind":"sibling-grid","note":"footer tools grid of the docs landing and its per-language pages","address":"https://serzhyale.github.io/universal-agent-kit/"}
+{"holder":"site:doc-html-translate","kind":"sibling-grid","note":"footer tools grid of every page, README","address":"https://serzhyale.github.io/universal-agent-kit/"}
+{"holder":"site:FileDO","kind":"sibling-grid","note":"footer tools grid, privacy page, README","address":"https://serzhyale.github.io/universal-agent-kit/"}
+{"holder":"site:StreamsPlayer","kind":"sibling-grid","note":"footer template of the generated site","address":"https://serzhyale.github.io/universal-agent-kit/"}
+{"holder":"site:OneClickRunner","kind":"sibling-grid","note":"footer tools grid, guide and privacy pages, README","address":"https://serzhyale.github.io/universal-agent-kit/"}

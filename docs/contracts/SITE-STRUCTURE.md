@@ -17,7 +17,7 @@ core three, nothing beyond - in one document per page, the language being the `?
 shared `sza-lang` state, so a missing translation cannot exist (rules 9 to 11). The address scheme is one
 permanent address per page (`portal/<page>.html`, `portal/functions/<id>.html`, `portal/guides/<id>.html`,
 the root documents) with section anchors never renamed; the addresses outside surfaces hold are listed in
-`docs/site-held-addresses.jsonl` and resolved against the page set by `tools/check-site.ps1 -Dimension
+`tools/site-held-addresses.jsonl` and resolved against the page set by `tools/check-site.ps1 -Dimension
 held-addresses` (rule 8). Reach, the sitemap, landmarks and the not-found page are held by the same script
 (`page-set`). Staying conformant: keep the tier declaration true, publish every new page group in the core
 three, leave a forwarder at any moved address, change a capability's page in the same change as the capability,

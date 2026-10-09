@@ -7,7 +7,7 @@
     Every dimension is decidable against the static tree with a near-zero false-positive rate; a rule that needs a
     rendered page (contrast, focus order, reduced motion, the network panel) is not here and is run in a browser.
 
-      held-addresses  SITE-STRUCTURE 8, 11 - docs/site-held-addresses.jsonl: every entry resolves against the page
+      held-addresses  SITE-STRUCTURE 8, 11 - tools/site-held-addresses.jsonl: every entry resolves against the page
                       set, is not itself a forwarder, and every address this repository holds in its own surfaces
                       is on the list.
       page-width      SITE-EXPERIENCE 20, 4 - no max-width, min(NNNpx, NNvw), fixed pixel width or centred margin on a
@@ -72,7 +72,7 @@ function Resolve-Address([string]$addr) {
 # ---------------------------------------------------------------------------------------------------------
 function Test-HeldAddresses {
     $d = 'held-addresses'
-    $path = 'docs/site-held-addresses.jsonl'
+    $path = 'tools/site-held-addresses.jsonl'
     $text = Read-Text $path
     $entries = New-Object System.Collections.Generic.List[object]
     $n = 0

@@ -35,7 +35,7 @@
   "codeRepository": "https://github.com/SerZhyAle/universal-agent-kit",
   "license": "https://opensource.org/license/mit/",
   "author": { "@type": "Person", "name": "Serhii Zhyhunenko", "url": "https://github.com/SerZhyAle" },
-  "dateModified": "2026-09-24",
+  "dateModified": "2026-10-09",
   "inLanguage": ["en", "ru", "uk"]
 }
 </script>
@@ -67,9 +67,10 @@
 <link rel="stylesheet" href="assets/sza-kit.css">
 <style>
   /* Page layer on top of the shared PAGE-STYLE kit (assets/sza-kit.css, byte-identical to the reference).
-     Only what this Informational / Docs page needs beyond the kit lives here, in the kit's tokens. */
+     Only what this Informational / Docs page needs beyond the kit lives here, in the kit's tokens
+     (PAGE-STYLE section 5 "Extending the kit"). The page itself spans the full viewport less the
+     kit's --gutter; the page layer sets no width cap anywhere. */
   :root{
-    --wide: min(1640px, 94vw); /* PAGE-CONTENT full-width reading; the 1100px kit cap is a filed proposal */
     --pill-bg: color-mix(in srgb, var(--acc) 10%, transparent);
   }
   body{font-size:16px}
@@ -77,21 +78,17 @@
   code{background:var(--bg-3); padding:.08em .38em; border-radius:5px; font-size:.88em}
 
   /* header: the kit's floating glass bar, allowed to wrap at 360px */
-  .site-header{flex-wrap:wrap; width:calc(100% - 24px)}
+  .site-header{flex-wrap:wrap}
   .brand{font-size:15px}
   .icon{width:16px; height:16px; fill:currentColor; flex:none}
   .icon-sprite{display:none}
-  .icon-status-ok,.feedback-status-ok{color:var(--ok)}
+  .feedback-copy-done{color:var(--acc)}   /* PAGE-STYLE 4.7: the copied word beside the action.copy glyph */
   .icon-status-error,.feedback-status-error{color:var(--danger)}
-  /* 44px targets for every pointer, not only coarse ones */
-  .btn, .seg button, .theme-btn, .to-top{min-height:44px; min-width:44px}
-  .theme-btn{width:auto; height:auto; padding:0 14px; border-radius:var(--radius-pill); font-family:var(--font-heading); font-size:12px; font-weight:700}
-  .btn{justify-content:center}
   .seg button{display:inline-flex; align-items:center; justify-content:center}
-  .to-top{width:44px; height:44px}
+  .btn{justify-content:center}
   .to-top .icon{width:20px; height:20px}
 
-  main{max-width:var(--wide); margin:0 auto; padding:0 22px 40px; position:relative; z-index:1}
+  main{padding:0 var(--gutter) 40px; position:relative; z-index:1}
 
   /* ---------- hero ---------- */
   .hero{padding:1.2rem 0 14px; border-bottom:1px solid var(--border); margin-bottom:4px}
@@ -126,7 +123,6 @@
   details.sec{padding:0; margin:0; overflow:hidden; scroll-margin-top:90px}
   details.sec[open]{grid-column:1 / -1; box-shadow:var(--shadow)}
   details.sec>summary{align-items:flex-start; gap:11px; padding:13px 16px; font-family:var(--font-body); font-weight:600; font-size:inherit}
-  details.sec>summary::after{content:none} /* disclosure stays text-only under ICON-SET; see the PAGE-STYLE exception */
   details.sec>summary:hover .sectitle{color:var(--acc-strong)}
   details.sec>*:not(summary){margin-bottom:0}
   .secnum{font-size:13px; line-height:1.6; flex:none}
@@ -167,7 +163,6 @@
 
   /* ---------- footer: kit form, plus the per-locale product line ---------- */
   .site-footer{color:var(--muted); font-size:14px; position:relative; z-index:1}
-  .site-footer .container{max-width:var(--wide)}
   .site-footer .cta{display:flex; gap:10px; flex-wrap:wrap; margin:14px 0}
   .tools-family{margin:24px 0 0; padding-top:14px; border-top:1px solid var(--border)}
   .tools-family h2{margin:0 0 10px; color:var(--text); font-size:15px}
@@ -215,11 +210,12 @@
 </head>
 <body>
 <div class="bg-blobs" aria-hidden="true"><div class="blob blob-1"></div><div class="blob blob-2"></div><div class="blob blob-3"></div></div>
-<!-- ICON-SET: action.download, action.copy, nav.scroll-top, status.ok, status.error. Source glyphs are Material Icons (Apache-2.0). -->
+<!-- ICON-SET: action.download, action.copy, nav.scroll-top, status.error. The copied state is the localized
+     word "Copied" beside the same action.copy glyph (ICON-SET 0.15 note on action.copy). Source glyphs are
+     Material Icons (Apache-2.0). -->
 <svg class="icon-sprite" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
   <symbol id="icon-action-download" viewBox="0 0 24 24"><g transform="translate(12 12) scale(.917 .917) translate(-12 -12)"><path d="M19.35,10.04C18.67,6.59 15.64,4 12,4 9.11,4 6.6,5.64 5.35,8.04 2.34,8.36 0,10.91 0,14c0,3.31 2.69,6 6,6h13c2.76,0 5,-2.24 5,-5 0,-2.64 -2.05,-4.78 -4.65,-4.96zM17,13l-5,5 -5,-5h3V9h4v4h3z"/></g></symbol>
   <symbol id="icon-action-copy" viewBox="0 0 24 24"><path d="M16,1L4,1C2.9,1 2,1.9 2,3L2,17L4,17L4,3L16,3L16,1ZM19,5L8,5C6.9,5 6,5.9 6,7L6,21C6,22.1 6.9,23 8,23L19,23C20.1,23 21,22.1 21,21L21,7C21,5.9 20.1,5 19,5ZM19,21L8,21L8,7L19,7L19,21Z"/></symbol>
-  <symbol id="icon-status-ok" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></symbol>
   <symbol id="icon-nav-scroll-top" viewBox="0 0 24 24"><path d="M8 11h3v10h2V11h3l-4-4-4 4zM4 3v2h16V3H4z"/></symbol>
   <symbol id="icon-status-error" viewBox="0 0 24 24"><path d="M11 15h2v2h-2zm0-8h2v6h-2zm.99-5C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"/></symbol>
 </svg>
@@ -246,6 +242,7 @@
   </noscript>
   <!-- ===================== HERO ===================== -->
   <section class="hero">
+    <p class="product-name">Universal Agent Kit</p>
     <div class="kicker">
       <span data-l="ru"><b>Для любого ИИ-агента:</b> Claude · Codex · Gemini · Cursor · Cline · любая модель</span>
       <span data-l="en"><b>For any AI agent:</b> Claude · Codex · Gemini · Cursor · Cline · any model</span>
@@ -278,9 +275,9 @@
       <span data-l="ua">Це не встановлення: віддай kit своєму агенту, і він додасть до проєкту лише те, що справді стане у пригоді.</span>
     </p>
     <p class="kit-updated muted">
-      <span data-l="ru">Kit обновлён: <time class="kit-date" datetime="2026-09-24">2026-09-24</time></span>
-      <span data-l="en">Kit updated: <time class="kit-date" datetime="2026-09-24">2026-09-24</time></span>
-      <span data-l="ua">Kit оновлено: <time class="kit-date" datetime="2026-09-24">2026-09-24</time></span>
+      <span data-l="ru">Kit обновлён: <time class="kit-date" datetime="2026-10-09">2026-10-09</time></span>
+      <span data-l="en">Kit updated: <time class="kit-date" datetime="2026-10-09">2026-10-09</time></span>
+      <span data-l="ua">Kit оновлено: <time class="kit-date" datetime="2026-10-09">2026-10-09</time></span>
     </p>
   </section>
 
@@ -1459,22 +1456,22 @@ Do not change anything yet. Show me the plan first; on any conflict, my existing
     </div>
     <p class="muted">Kit - MIT · текст - CC BY 4.0 · дистильовано з реального проєкту, без прив'язки до стеку.</p>
   </div>
-  <!-- SITE-FAMILY-MAP 1.1 §2: all siblings and the hub; this product is intentionally omitted. -->
+  <!-- SITE-FAMILY-MAP §2: all siblings and the hub; this product is intentionally omitted. -->
   <section class="tools-family" aria-labelledby="more-tools-heading">
     <h2 id="more-tools-heading"><span data-l="ru">Другие инструменты SZA</span><span data-l="en">More tools by SZA</span><span data-l="ua">Інші інструменти SZA</span></h2>
     <div class="tools-grid">
-      <a href="https://serzhyale.github.io/FastMediaSorter_mob_v2/" target="_blank" rel="noopener">FastMediaSorter v2</a>
+      <a href="https://serzhyale.github.io/FastMediaSorter_mob_v2/" target="_blank" rel="noopener">Fast Media Sorter &amp; Organizer</a>
       <a href="https://serzhyale.github.io/FastMediaSorter_Lite/" target="_blank" rel="noopener">Fast Media Sorter for Windows</a>
       <a href="https://serzhyale.github.io/CyrFlip/" target="_blank" rel="noopener">CyrFlip</a>
       <a href="https://serzhyale.github.io/doc-html-translate/" target="_blank" rel="noopener">doc-html-translate</a>
       <a href="https://serzhyale.github.io/FileDO/" target="_blank" rel="noopener">FileDO</a>
-      <a href="https://serzhyale.github.io/StreamsPlayer/" target="_blank" rel="noopener">StreamsPlayer</a>
+      <a href="https://serzhyale.github.io/StreamsPlayer/" target="_blank" rel="noopener">STREAMS Player</a>
       <a href="https://serzhyale.github.io/OneClickRunner/" target="_blank" rel="noopener">OneClickRunner</a>
       <a href="https://sza.od.ua" target="_blank" rel="noopener">SZA (hub)</a>
     </div>
   </section>
   <div class="footer-bottom">
-    <span>© 2026 Serhii Zhyhunenko</span>
+    <span>© 2026 <a href="https://sza.od.ua" target="_blank" rel="noopener">Serhii Zhyhunenko</a></span>
     <span><a href="https://sza.od.ua" target="_blank" rel="noopener">sza.od.ua</a> · <a href="https://github.com/SerZhyAle" target="_blank" rel="noopener">GitHub</a> · <a href="mailto:sza@ukr.net">sza@ukr.net</a></span>
   </div>
   <p class="provenance muted">
@@ -1490,17 +1487,17 @@ Do not change anything yet. Show me the plan first; on any conflict, my existing
     ru:{
       title:'Universal Agent Kit - как устроена разработка с ИИ-агентами',
       desc:'Переносимый метод работы с ИИ-агентами: правила, навыки, роли, жизненный цикл спеки, постоянная память и дисциплина параллельной работы агентов. Для разработки и для любого проекта из файлов - аналитики, документации, договоров, регламентов. Выжимка из реального проекта, очищенная от стека. Статья и kit на русском, английском и украинском.',
-      langGroup:'Язык', theme:'Тема', toLight:'Включить светлую тему', toDark:'Включить тёмную тему', ok:'В порядке', error:'Ошибка', copied:'Скопировано', copyFail:'Не удалось', toTop:'Наверх'
+      langGroup:'Язык', theme:'Тема', toLight:'Включить светлую тему', toDark:'Включить тёмную тему', copied:'Скопировано', copyFail:'Не удалось', toTop:'Наверх'
     },
     en:{
       title:'Universal Agent Kit - how AI-assisted development is wired',
       desc:'A portable method for working with AI agents: rules, skills, roles, a spec lifecycle, persistent memory, and parallel-agent discipline. For AI-assisted development and for any project made of files. Distilled from a real project, stripped of its stack. Article and kit in English, Russian, and Ukrainian.',
-      langGroup:'Language', theme:'Theme', toLight:'Switch to light theme', toDark:'Switch to dark theme', ok:'OK', error:'Error', copied:'Copied', copyFail:'Copy failed', toTop:'Back to top'
+      langGroup:'Language', theme:'Theme', toLight:'Switch to light theme', toDark:'Switch to dark theme', copied:'Copied', copyFail:'Copy failed', toTop:'Back to top'
     },
     ua:{
       title:'Universal Agent Kit - як влаштована розробка з ШІ-агентами',
       desc:'Переносний метод роботи з ШІ-агентами: правила, навички, ролі, життєвий цикл спеки, постійна пам\'ять і дисципліна паралельної роботи агентів. Для розробки і для будь-якого проєкту з файлів. Дистильовано з реального проєкту, очищено від стеку. Стаття і kit російською, англійською та українською.',
-      langGroup:'Мова', theme:'Тема', toLight:'Увімкнути світлу тему', toDark:'Увімкнути темну тему', ok:'Гаразд', error:'Помилка', copied:'Скопійовано', copyFail:'Не вдалося', toTop:'Нагору'
+      langGroup:'Мова', theme:'Тема', toLight:'Увімкнути світлу тему', toDark:'Увімкнути темну тему', copied:'Скопійовано', copyFail:'Не вдалося', toTop:'Нагору'
     }
   };
   /* The switch keys Ukrainian as "ua" (PAGE-STYLE section 4.2); lang, hreflang and ?lang= use ISO "uk". */
@@ -1575,16 +1572,16 @@ Do not change anything yet. Show me the plan first; on any conflict, my existing
     var box = btn.closest('.adopt-prompt'); if(!box) return;
     var pre = box.querySelector('pre'); var txt = pre ? pre.innerText : '';
     var l = document.documentElement.getAttribute('data-lang')||'en', m = I18N[l]||I18N.en;
-    function flash(icon, state, label){
+    function flash(icon, word, cls){
       if(btn.dataset.orig === undefined){ btn.dataset.orig = btn.innerHTML; btn.dataset.origLabel = btn.getAttribute('aria-label') || ''; }
-      var feedbackClass = icon === 'icon-status-ok' ? 'feedback-status-ok' : 'feedback-status-error';
-      var message = state + ': ' + label;
-      btn.setAttribute('aria-label', message);
-      btn.innerHTML = '<svg class="icon ' + icon + '" aria-hidden="true"><use href="#' + icon + '"/></svg><span class="' + feedbackClass + '">' + message + '</span>';
+      btn.setAttribute('aria-label', word);
+      btn.innerHTML = '<svg class="icon ' + icon + '" aria-hidden="true"><use href="#' + icon + '"/></svg><span class="' + cls + '">' + word + '</span>';
       setTimeout(function(){ btn.innerHTML = btn.dataset.orig; btn.setAttribute('aria-label', btn.dataset.origLabel); btn.removeAttribute('disabled'); }, 1600);
     }
-    function done(){ btn.setAttribute('disabled',''); flash('icon-status-ok', m.ok, m.copied); }
-    function fail(){ flash('icon-status-error', m.error, m.copyFail); }   /* both clipboard paths failed - don't lie */
+    /* PAGE-STYLE 4.7 (1.4) + the ICON-SET note on action.copy: the done state is the localized word
+       for "Copied" beside the same copy glyph - never a status glyph, never a check. */
+    function done(){ btn.setAttribute('disabled',''); flash('icon-action-copy', m.copied, 'feedback-copy-done'); }
+    function fail(){ flash('icon-status-error', m.copyFail, 'feedback-status-error'); }   /* both clipboard paths failed - don't lie */
     function fallback(){
       try{ var ta=document.createElement('textarea'); ta.value=txt; ta.style.position='fixed'; ta.style.left='-9999px';
         document.body.appendChild(ta); ta.focus(); ta.select();

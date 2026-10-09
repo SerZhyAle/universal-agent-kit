@@ -2,9 +2,10 @@
   "$comment": "Adoption stamp for universal-agent-kit. This repo is two things at once: it CONSUMES the canon for its own development (this stamp, the root CLAUDE.md), and it PUBLISHES kit/ as a scrubbed, stack-neutral sibling distillation of the shared method for an outside audience. role portfolio: no product build and no platform overlay to declare, which is the only thing the gate reads role for. No tags, no changelog - rolling release, the site and the zip are regenerated in place.",
 
   "canon": {
-    "version": "2026.09.22.2",
-    "coreDigest": "sha256:13abcb8a7c2f0a354328bdd03c12e75ea361b6f8208134dc1ba3d1bd884e567d",
+    "version": "2026.10.02.3",
+    "coreDigest": "sha256:410463a9ccdfd75af7a233fc91656c200fe05f047cf7617d7fc53d32e7b81afa",
     "adoptedOn": "2026-09-23",
+    "reconciledOn": "2026-10-09",
     "model": "reference",
     "contribRecord": "contrib/universal_agent_kit.md"
   },

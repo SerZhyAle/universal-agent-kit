@@ -6,16 +6,18 @@ conformance requires.
 
 | Pointer | Version | Role | Surface |
 | --- | --- | --- | --- |
-| [`PAGE-CONTENT.md`](PAGE-CONTENT.md) | 1.1 | consumer | `index.html` |
-| [`PAGE-STYLE.md`](PAGE-STYLE.md) | 1.0 | consumer | `index.html`, `assets/sza-kit.css` |
-| [`SITE-FAMILY-MAP.md`](SITE-FAMILY-MAP.md) | 1.1 | consumer | `index.html` footer, `README.md` |
-| [`ICON-SET.md`](ICON-SET.md) | 0.13 | consumer | `index.html` glyphs |
-| [`ICON-RENDER.md`](ICON-RENDER.md) | 0.11 | consumer | `index.html` glyphs |
-| [`ICON-EXTERNAL.md`](ICON-EXTERNAL.md) | 0.9 | consumer | `index.html` imagery |
-| [`REPO-STAMP.md`](REPO-STAMP.md) | 0.9 | producer | `.sza-canon.json` |
-| [`REPO-LAYOUT.md`](REPO-LAYOUT.md) | 0.9 | consumer | root files, `docs/` |
-| [`RULE-DELIVERY.md`](RULE-DELIVERY.md) | 0.9 | consumer | the `sza` plugin |
+| [`PAGE-CONTENT.md`](PAGE-CONTENT.md) | 1.4 | consumer | `index.html` |
+| [`PAGE-STYLE.md`](PAGE-STYLE.md) | 1.6 | consumer | `index.html`, `assets/sza-kit.css` |
+| [`SITE-FAMILY-MAP.md`](SITE-FAMILY-MAP.md) | 1.4 | consumer | `index.html` footer, `README.md` |
+| [`ICON-SET.md`](ICON-SET.md) | 0.29 | consumer, opted in | `index.html` glyphs |
+| [`ICON-RENDER.md`](ICON-RENDER.md) | 0.18 | consumer, opted in | `index.html` glyphs |
+| [`ICON-EXTERNAL.md`](ICON-EXTERNAL.md) | 0.12 | consumer, opted in | `index.html` imagery |
+| [`REPO-STAMP.md`](REPO-STAMP.md) | 0.12 | producer | `.sza-canon.json` |
+| [`REPO-LAYOUT.md`](REPO-LAYOUT.md) | 0.11 | consumer | root files, `docs/` |
+| [`RULE-DELIVERY.md`](RULE-DELIVERY.md) | 0.12 | consumer | the `sza` plugin |
+| [`HARNESS-PROFILE.md`](HARNESS-PROFILE.md) | 0.11 | not bound | none - declared not bound (rule 7) |
 
-`HARNESS-PROFILE` has no role here: no `.sza-profile.json`, which the contract reads as the defaults, and
-the packaged harness is not run. The contracts declared not applicable are listed in
+`HARNESS-PROFILE` is not bound: this repository never runs the shipped harness, so it has no
+`.sza-profile.json` for that reason, which rule 7 of the contract reads as a different fact from "the
+defaults apply". The contracts declared not applicable are listed in
 [SPECIFICATION_CONTRACTS_SYNC.md](../specifications/SPECIFICATION_CONTRACTS_SYNC.md).

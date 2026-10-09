@@ -22,13 +22,14 @@ have that drive. A pointer would go in `docs/contracts/`; the contract text itse
 What this repository touches, each with a pointer in [docs/contracts/](docs/contracts/README.md) and a
 specification in [docs/specifications/](docs/specifications/SPECIFICATION_CONTRACTS_SYNC.md):
 
-- **The site consumes** `PAGE-CONTENT` 1.1 (documentation / method page), `PAGE-STYLE` 1.0 (Informational /
-  Docs, the shared stylesheet byte-identical in `assets/`), `SITE-FAMILY-MAP` 1.1 (footer family grid), and
-  the opted-in iconography drafts `ICON-SET` 0.13, `ICON-RENDER` 0.11, `ICON-EXTERNAL` 0.9. It creates no
+- **The site consumes** `PAGE-CONTENT` 1.4 (documentation / method page), `PAGE-STYLE` 1.6 (Informational /
+  Docs, the shared stylesheet byte-identical in `assets/`), `SITE-FAMILY-MAP` 1.4 (footer family grid), and
+  the opted-in iconography drafts `ICON-SET` 0.29, `ICON-RENDER` 0.18, `ICON-EXTERNAL` 0.12. It creates no
   vocabulary, style or map of its own.
-- **The repository produces** `REPO-STAMP` 0.9 (`.sza-canon.json`, written only by the adoption skill) and
-  **consumes** `REPO-LAYOUT` 0.9 and `RULE-DELIVERY` 0.9. `HARNESS-PROFILE` has no role: no
-  `.sza-profile.json`, and the packaged harness is not run here.
+- **The repository produces** `REPO-STAMP` 0.12 (`.sza-canon.json`, written only by the adoption skill) and
+  **consumes** `REPO-LAYOUT` 0.11 and `RULE-DELIVERY` 0.12. `HARNESS-PROFILE` 0.11 is **not bound**: this
+  repository never runs the packaged harness, so it keeps no `.sza-profile.json`, and the contract's rule 7
+  reads that as a different fact from "the defaults apply" - declared so in its pointer and the registry row.
 - **Declared not applicable:** `INSTALL-TRUST` (the zip installs and executes nothing), `WAVE-PARTICLES`,
   the desktop-app contracts, and every format this repository neither reads nor writes. The automated-checks
   drafts are not bound; the build check aligns with them voluntarily.

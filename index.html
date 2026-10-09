@@ -3,34 +3,30 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Universal Agent Kit - how AI-assisted development is wired</title>
-<meta name="description" content="A portable method for working with AI agents: rules, skills, roles, a spec lifecycle, persistent memory, and parallel-agent discipline. Built for AI-assisted development, and for any project made of files - analysis, documentation, contracts, procedures. Distilled from a real project, stripped of its stack. Article and kit in English, Russian, and Ukrainian.">
+<title>Universal Agent Kit - portable AI coding agent rules</title>
+<meta name="description" content="AI coding agent rules, skills, roles, a spec lifecycle, and persistent memory - a portable, free MIT kit for any project made of files. Not only code.">
 <link rel="canonical" href="https://serzhyale.github.io/universal-agent-kit/">
-<link rel="alternate" hreflang="en" href="https://serzhyale.github.io/universal-agent-kit/?lang=en">
-<link rel="alternate" hreflang="ru" href="https://serzhyale.github.io/universal-agent-kit/?lang=ru">
-<link rel="alternate" hreflang="uk" href="https://serzhyale.github.io/universal-agent-kit/?lang=uk">
-<link rel="alternate" hreflang="x-default" href="https://serzhyale.github.io/universal-agent-kit/">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%233fb950'/%3E%3Cpath d='M20 18h24M20 30h24M20 42h16' stroke='%2304130c' stroke-width='5' stroke-linecap='round' fill='none'/%3E%3C/svg%3E">
 <meta name="theme-color" content="#0a0f0a">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Universal Agent Kit">
 <meta property="og:url" content="https://serzhyale.github.io/universal-agent-kit/">
-<meta property="og:title" content="Universal Agent Kit - how AI-assisted development is wired">
-<meta property="og:description" content="A portable method for working with AI agents: rules, skills, role agents, a spec lifecycle, persistent memory, and parallel-agent discipline. For AI-assisted development and for any project made of files. English, Russian, Ukrainian.">
+<meta property="og:title" content="Universal Agent Kit - portable AI coding agent rules">
+<meta property="og:description" content="AI coding agent rules, skills, role agents, a spec lifecycle, persistent memory, and parallel-agent discipline - a portable, free MIT kit for any project made of files. English, Russian, Ukrainian.">
 <meta property="og:image" content="https://serzhyale.github.io/universal-agent-kit/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Universal Agent Kit - a portable method for working with AI agents, in English, Russian, and Ukrainian.">
+<meta property="og:image:alt" content="Universal Agent Kit - portable AI coding agent rules, in English, Russian, and Ukrainian.">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Universal Agent Kit">
-<meta name="twitter:description" content="A portable method for working with AI agents - rules, skills, roles, spec lifecycle, memory, parallel agents. Not only for code. English, Russian, Ukrainian.">
+<meta name="twitter:title" content="Universal Agent Kit - portable AI coding agent rules">
+<meta name="twitter:description" content="AI coding agent rules - rules, skills, roles, a spec lifecycle, memory, parallel agents. Not only for code. Free, MIT. English, Russian, Ukrainian.">
 <meta name="twitter:image" content="https://serzhyale.github.io/universal-agent-kit/og-image.png">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "SoftwareSourceCode",
   "name": "Universal Agent Kit",
-  "description": "A portable method for working with AI agents: rules, skills (slash commands), role agents, a spec lifecycle, and persistent memory. For AI-assisted development and for any project made of files. Article and kit in English, Russian, and Ukrainian.",
+  "description": "AI coding agent rules, skills (slash commands), role agents, a spec lifecycle, and persistent memory - a portable, free MIT kit for any project made of files. Article and kit in English, Russian, and Ukrainian.",
   "url": "https://serzhyale.github.io/universal-agent-kit/",
   "codeRepository": "https://github.com/SerZhyAle/universal-agent-kit",
   "license": "https://opensource.org/license/mit/",
@@ -42,7 +38,7 @@
 <script>
 /* PAGE-STYLE section 7 pre-paint resolver, on the portfolio's shared keys sza-lang / sza-theme.
    Language priority: ?lang= in the URL (a shared link wins) > saved choice > browser.
-   The UA switch keys "ua"; the URL, lang and hreflang keep the ISO code "uk". The legacy
+   The UA switch keys "ua"; the URL and lang keep the ISO code "uk". The legacy
    uak-* keys are read once so a returning reader keeps their choice. */
 (function(){
   var l, t;
@@ -1385,22 +1381,22 @@ Do not change anything yet. Show me the plan first; on any conflict, my existing
 <script>
   var I18N = {
     ru:{
-      title:'Universal Agent Kit - как устроена разработка с ИИ-агентами',
-      desc:'Переносимый метод работы с ИИ-агентами: правила, навыки, роли, жизненный цикл спеки, постоянная память и дисциплина параллельной работы агентов. Для разработки и для любого проекта из файлов - аналитики, документации, договоров, регламентов. Выжимка из реального проекта, очищенная от стека. Статья и kit на русском, английском и украинском.',
+      title:'Universal Agent Kit - переносимые правила для ИИ-агентов, пишущих код',
+      desc:'Переносимый набор правил для ИИ-агентов, пишущих код: навыки (slash-команды), роли, жизненный цикл спеки, постоянная память и дисциплина параллельной работы агентов. Для любого проекта из файлов - аналитики, документации, договоров, регламентов. Выжимка из реального проекта, очищенная от стека. Статья и kit на русском, английском и украинском.',
       langGroup:'Язык', theme:'Тема', toLight:'Включить светлую тему', toDark:'Включить тёмную тему', copied:'Скопировано', copyFail:'Не удалось', toTop:'Наверх', navSite:'Сайт', navTools:'Другие инструменты SZA', navAuthor:'Ссылки автора'
     },
     en:{
-      title:'Universal Agent Kit - how AI-assisted development is wired',
-      desc:'A portable method for working with AI agents: rules, skills, roles, a spec lifecycle, persistent memory, and parallel-agent discipline. For AI-assisted development and for any project made of files. Distilled from a real project, stripped of its stack. Article and kit in English, Russian, and Ukrainian.',
+      title:'Universal Agent Kit - portable AI coding agent rules',
+      desc:'A portable kit of AI coding agent rules: skills (slash commands), role agents, a spec lifecycle, persistent memory, and parallel-agent discipline. For AI-assisted development and for any project made of files. Distilled from a real project, stripped of its stack. Article and kit in English, Russian, and Ukrainian.',
       langGroup:'Language', theme:'Theme', toLight:'Switch to light theme', toDark:'Switch to dark theme', copied:'Copied', copyFail:'Copy failed', toTop:'Back to top', navSite:'Site', navTools:'More tools by SZA', navAuthor:'Author links'
     },
     ua:{
-      title:'Universal Agent Kit - як влаштована розробка з ШІ-агентами',
-      desc:'Переносний метод роботи з ШІ-агентами: правила, навички, ролі, життєвий цикл спеки, постійна пам\'ять і дисципліна паралельної роботи агентів. Для розробки і для будь-якого проєкту з файлів. Дистильовано з реального проєкту, очищено від стеку. Стаття і kit російською, англійською та українською.',
+      title:'Universal Agent Kit - портативні правила для ШІ-агентів, що пишуть код',
+      desc:'Переносний набір правил для ШІ-агентів, що пишуть код: навички (slash-команди), ролі, життєвий цикл спеки, постійна пам\'ять і дисципліна паралельної роботи агентів. Для будь-якого проєкту з файлів - аналізу, документації, договорів, регламентів. Дистильовано з реального проєкту, очищено від стеку. Стаття і kit російською, англійською та українською.',
       langGroup:'Мова', theme:'Тема', toLight:'Увімкнути світлу тему', toDark:'Увімкнути темну тему', copied:'Скопійовано', copyFail:'Не вдалося', toTop:'Нагору', navSite:'Сайт', navTools:'Інші інструменти SZA', navAuthor:'Посилання автора'
     }
   };
-  /* The switch keys Ukrainian as "ua" (PAGE-STYLE section 4.2); lang, hreflang and ?lang= use ISO "uk". */
+  /* The switch keys Ukrainian as "ua" (PAGE-STYLE section 4.2); lang and ?lang= use ISO "uk". */
   function isoLang(l){ return l === 'ua' ? 'uk' : l; }
   function metaSet(sel, val){ var m = document.querySelector(sel); if(m) m.setAttribute('content', val); }
   function applyThemeLabel(){
@@ -1430,8 +1426,8 @@ Do not change anything yet. Show me the plan first; on any conflict, my existing
     applyThemeLabel();
   }
   function setLang(l){ applyLang(l); try{ localStorage.setItem('sza-lang', l); }catch(e){}
-    /* Keep ?lang= in the URL in sync with the active language, so a copied link and the
-       hreflang alternates carry the reader's language. */
+    /* Keep ?lang= in the URL in sync with the active language, so a copied link
+       carries the reader's language. */
     try{ var u = new URL(location.href); u.searchParams.set('lang', isoLang(l)); history.replaceState(null, '', u); }catch(e){} }
   function toggleTheme(){
     var d = document.documentElement, t = d.getAttribute('data-theme')==='dark' ? 'light' : 'dark';

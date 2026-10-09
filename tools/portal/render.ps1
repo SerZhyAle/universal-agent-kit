@@ -106,13 +106,6 @@ function Frame([hashtable]$p) {
     $i18n = [ordered]@{ t = $titles; d = $descs; ui = $ui } | ConvertTo-Json -Depth 6 -Compress
     $url = $Base + $p.Path
     $noIndex = $p.ContainsKey('NoIndex') -and $p.NoIndex
-    $alt = ''
-    if (-not $noIndex) {
-        $alt = '<link rel="alternate" hreflang="en" href="' + $url + '?lang=en">' + "`n" +
-               '<link rel="alternate" hreflang="ru" href="' + $url + '?lang=ru">' + "`n" +
-               '<link rel="alternate" hreflang="uk" href="' + $url + '?lang=uk">' + "`n" +
-               '<link rel="alternate" hreflang="x-default" href="' + $url + '">' + "`n"
-    }
     $robots = ''
     if ($noIndex) { $robots = '<meta name="robots" content="noindex">' + "`n" }
     $ld = [ordered]@{ '@context' = 'https://schema.org'; '@type' = 'WebPage'; name = $titles.en; description = $descs.en; url = $url; inLanguage = @('en', 'ru', 'uk'); isPartOf = [ordered]@{ '@type' = 'WebSite'; name = $site; url = $Base } } | ConvertTo-Json -Depth 4 -Compress
@@ -126,7 +119,7 @@ function Frame([hashtable]$p) {
 <title>$te</title>
 <meta name="description" content="$de">
 $robots<link rel="canonical" href="$url">
-$alt<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%233fb950'/%3E%3Cpath d='M20 18h24M20 30h24M20 42h16' stroke='%2304130c' stroke-width='5' stroke-linecap='round' fill='none'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%233fb950'/%3E%3Cpath d='M20 18h24M20 30h24M20 42h16' stroke='%2304130c' stroke-width='5' stroke-linecap='round' fill='none'/%3E%3C/svg%3E">
 <meta name="theme-color" content="#0a0f0a">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="$site">
@@ -632,14 +625,11 @@ function Build-SearchIndex {
 
 function Build-Sitemap([string]$lastmod, [string[]]$paths) {
     $sb = [System.Text.StringBuilder]::new()
-    [void]$sb.Append("<?xml version=`"1.0`" encoding=`"UTF-8`"?>`n<urlset xmlns=`"http://www.sitemaps.org/schemas/sitemap/0.9`"`n        xmlns:xhtml=`"http://www.w3.org/1999/xhtml`">`n")
+    [void]$sb.Append("<?xml version=`"1.0`" encoding=`"UTF-8`"?>`n<urlset xmlns=`"http://www.sitemaps.org/schemas/sitemap/0.9`">`n")
     foreach ($p in $paths) {
         $u = $Base + $p
         [void]$sb.Append("  <url>`n    <loc>$u</loc>`n    <lastmod>$lastmod</lastmod>`n")
-        [void]$sb.Append("    <xhtml:link rel=`"alternate`" hreflang=`"en`" href=`"${u}?lang=en`"/>`n")
-        [void]$sb.Append("    <xhtml:link rel=`"alternate`" hreflang=`"ru`" href=`"${u}?lang=ru`"/>`n")
-        [void]$sb.Append("    <xhtml:link rel=`"alternate`" hreflang=`"uk`" href=`"${u}?lang=uk`"/>`n")
-        [void]$sb.Append("    <xhtml:link rel=`"alternate`" hreflang=`"x-default`" href=`"$u`"/>`n  </url>`n")
+        [void]$sb.Append("  </url>`n")
     }
     [void]$sb.Append("</urlset>`n")
     return $sb.ToString()

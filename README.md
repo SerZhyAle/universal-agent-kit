@@ -6,21 +6,21 @@
 
 Contact: [sza@ukr.net](mailto:sza@ukr.net) · [github.com/SerZhyAle](https://github.com/SerZhyAle)
 
-A portable method for working with AI agents on a project - rules, skills (slash commands), roles, a
-spec lifecycle, persistent memory, and the discipline for running several agents at once. Distilled
+A portable kit of AI coding agent rules: rules, skills (slash commands), roles, a spec lifecycle,
+persistent memory, and the discipline for running several agents at once. Distilled
 from a real project and stripped of its language and stack. It assumes five things and a compiler is
 not one of them: **a workspace with history, artifacts, work items, checks, and an agent that can
 read and write your files.** If your project is code, the sharpest examples are yours. If it is
 data, documents, contracts or procedures, `kit/docs/PROJECT_SHAPES.md` is the translation table.
 
-Переносимый метод работы с ИИ-агентами над проектом - правила, навыки (slash-команды), роли,
+Переносимый набор правил для ИИ-агентов, пишущих код: правила, навыки (slash-команды), роли,
 жизненный цикл спецификаций, постоянная память и дисциплина параллельной работы нескольких агентов.
 Выжимка из реального проекта, очищенная от языка и стека. Методу нужны пять вещей, и компилятор в
 них не входит: **рабочая папка с историей, артефакты, единицы работы, проверки и агент, который
 умеет читать и писать ваши файлы.** Если проект - код, примеры кита ваши. Если это данные, тексты,
 договоры или процедуры - таблица перевода лежит в `kit/docs/PROJECT_SHAPES.md`.
 
-Переносний метод роботи з ШІ-агентами над проєктом - правила, навички (slash-команди), ролі,
+Переносний набір правил для ШІ-агентів, що пишуть код: правила, навички (slash-команди), ролі,
 життєвий цикл специфікацій, постійна пам'ять і дисципліна паралельної роботи кількох агентів.
 Дистильовано з реального проєкту, очищено від мови та стека. Методу потрібні п'ять речей, і
 компілятора серед них немає: **робоча тека з історією, артефакти, одиниці роботи, перевірки і
@@ -136,8 +136,9 @@ method is tool-independent.
 
 ### License
 
-Kit: **MIT** (see `LICENSE`). Article prose: **CC BY 4.0**. No source code or proprietary content
-from the origin project is included - only the working method.
+Kit: **MIT** (see [LICENSE](LICENSE)). Article prose: **CC BY 4.0** (see
+[LICENSE-PROSE.md](LICENSE-PROSE.md)). No source code or proprietary content from the origin project
+is included - only the working method.
 
 ---
 
@@ -196,8 +197,9 @@ Skills) нативно читают и **Codex, Cursor, GitHub Copilot, Gemini C
 
 ### Лицензия
 
-Kit - **MIT** (см. `LICENSE`). Текст статьи - **CC BY 4.0**. Исходного кода и проприетарного
-содержимого проекта-источника здесь нет - только рабочий метод.
+Kit - **MIT** (см. [LICENSE](LICENSE)). Текст статьи - **CC BY 4.0** (см.
+[LICENSE-PROSE.md](LICENSE-PROSE.md)). Исходного кода и проприетарного содержимого
+проекта-источника здесь нет - только рабочий метод.
 
 ---
 
@@ -240,5 +242,6 @@ Skills) нативно читають також **Codex, Cursor, GitHub Copilot
 
 ### Ліцензія
 
-Kit - **MIT** (див. `LICENSE`). Текст статті - **CC BY 4.0**. Вихідного коду та пропрієтарного
-вмісту проєкту-джерела тут немає - лише робочий метод.
+Kit - **MIT** (див. [LICENSE](LICENSE)). Текст статті - **CC BY 4.0** (див.
+[LICENSE-PROSE.md](LICENSE-PROSE.md)). Вихідного коду та пропрієтарного вмісту проєкту-джерела
+тут немає - лише робочий метод.

@@ -1,436 +1,219 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://serzhyale.github.io/universal-agent-kit/</loc>
     <lastmod>2026-10-09</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://serzhyale.github.io/universal-agent-kit/?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://serzhyale.github.io/universal-agent-kit/?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="uk" href="https://serzhyale.github.io/universal-agent-kit/?lang=uk"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://serzhyale.github.io/universal-agent-kit/"/>
   </url>
   <url>
     <loc>https://serzhyale.github.io/universal-agent-kit/portal/</loc>
     <lastmod>2026-10-09</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://serzhyale.github.io/universal-agent-kit/portal/?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://serzhyale.github.io/universal-agent-kit/portal/?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="uk" href="https://serzhyale.github.io/universal-agent-kit/portal/?lang=uk"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://serzhyale.github.io/universal-agent-kit/portal/"/>
   </url>
   <url>
     <loc>https://serzhyale.github.io/universal-agent-kit/portal/overview.html</loc>
     <lastmod>2026-10-09</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://serzhyale.github.io/universal-agent-kit/portal/overview.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://serzhyale.github.io/universal-agent-kit/portal/overview.html?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="uk" href="https://serzhyale.github.io/universal-agent-kit/portal/overview.html?lang=uk"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://serzhyale.github.io/universal-agent-kit/portal/overview.html"/>
   </url>
   <url>
     <loc>https://serzhyale.github.io/universal-agent-kit/portal/showcase.html</loc>
     <lastmod>2026-10-09</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://serzhyale.github.io/universal-agent-kit/portal/showcase.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://serzhyale.github.io/universal-agent-kit/portal/showcase.html?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="uk" href="https://serzhyale.github.io/universal-agent-kit/portal/showcase.html?lang=uk"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://serzhyale.github.io/universal-agent-kit/portal/showcase.html"/>
   </url>
   <url>
     <loc>https://serzhyale.github.io/universal-agent-kit/portal/subjects.html</loc>
     <lastmod>2026-10-09</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://serzhyale.github.io/universal-agent-kit/portal/subjects.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://serzhyale.github.io/universal-agent-kit/portal/subjects.html?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="uk" href="https://serzhyale.github.io/universal-agent-kit/portal/subjects.html?lang=uk"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://serzhyale.github.io/universal-agent-kit/portal/subjects.html"/>
   </url>
   <url>
     <loc>https://serzhyale.github.io/universal-agent-kit/portal/glossary.html</loc>
     <lastmod>2026-10-09</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://serzhyale.github.io/universal-agent-kit/portal/glossary.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://serzhyale.github.io/universal-agent-kit/portal/glossary.html?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="uk" href="https://serzhyale.github.io/universal-agent-kit/portal/glossary.html?lang=uk"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://serzhyale.github.io/universal-agent-kit/portal/glossary.html"/>
   </url>
   <url>
     <loc>https://serzhyale.github.io/universal-agent-kit/portal/guides/agents-in-parallel.html</loc>
     <lastmod>2026-10-09</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://serzhyale.github.io/universal-agent-kit/portal/guides/agents-in-parallel.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://serzhyale.github.io/universal-agent-kit/portal/guides/agents-in-parallel.html?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="uk" href="https://serzhyale.github.io/universal-agent-kit/portal/guides/agents-in-parallel.html?lang=uk"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://serzhyale.github.io/universal-agent-kit/portal/guides/agents-in-parallel.html"/>
   </url>
   <url>
     <loc>https://serzhyale.github.io/universal-agent-kit/portal/guides/beyond-code.html</loc>
     <lastmod>2026-10-09</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://serzhyale.github.io/universal-agent-kit/portal/guides/beyond-code.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://serzhyale.github.io/universal-agent-kit/portal/guides/beyond-code.html?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="uk" href="https://serzhyale.github.io/universal-agent-kit/portal/guides/beyond-code.html?lang=uk"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://serzhyale.github.io/universal-agent-kit/portal/guides/beyond-code.html"/>
   </url>
   <url>
     <loc>https://serzhyale.github.io/universal-agent-kit/portal/guides/feature-end-to-end.html</loc>
     <lastmod>2026-10-09</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://serzhyale.github.io/universal-agent-kit/portal/guides/feature-end-to-end.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://serzhyale.github.io/universal-agent-kit/portal/guides/feature-end-to-end.html?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="uk" href="https://serzhyale.github.io/universal-agent-kit/portal/guides/feature-end-to-end.html?lang=uk"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://serzhyale.github.io/universal-agent-kit/portal/guides/feature-end-to-end.html"/>
   </url>
   <url>
     <loc>https://serzhyale.github.io/universal-agent-kit/portal/guides/first-week.html</loc>
     <lastmod>2026-10-09</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://serzhyale.github.io/universal-agent-kit/portal/guides/first-week.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://serzhyale.github.io/universal-agent-kit/portal/guides/first-week.html?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="uk" href="https://serzhyale.github.io/universal-agent-kit/portal/guides/first-week.html?lang=uk"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://serzhyale.github.io/universal-agent-kit/portal/guides/first-week.html"/>
   </url>
   <url>
     <loc>https://serzhyale.github.io/universal-agent-kit/portal/guides/small-changes.html</loc>
     <lastmod>2026-10-09</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://serzhyale.github.io/universal-agent-kit/portal/guides/small-changes.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://serzhyale.github.io/universal-agent-kit/portal/guides/small-changes.html?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="uk" href="https://serzhyale.github.io/universal-agent-kit/portal/guides/small-changes.html?lang=uk"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://serzhyale.github.io/universal-agent-kit/portal/guides/small-changes.html"/>
   </url>
   <url>
     <loc>https://serzhyale.github.io/universal-agent-kit/portal/guides/trust-but-verify.html</loc>
     <lastmod>2026-10-09</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://serzhyale.github.io/universal-agent-kit/portal/guides/trust-but-verify.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://serzhyale.github.io/universal-agent-kit/portal/guides/trust-but-verify.html?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="uk" href="https://serzhyale.github.io/universal-agent-kit/portal/guides/trust-but-verify.html?lang=uk"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://serzhyale.github.io/universal-agent-kit/portal/guides/trust-but-verify.html"/>
   </url>
   <url>
     <loc>https://serzhyale.github.io/universal-agent-kit/portal/functions/rules-file.html</loc>
     <lastmod>2026-10-09</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/rules-file.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/rules-file.html?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="uk" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/rules-file.html?lang=uk"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/rules-file.html"/>
   </url>
   <url>
     <loc>https://serzhyale.github.io/universal-agent-kit/portal/functions/validation-ladder.html</loc>
     <lastmod>2026-10-09</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/validation-ladder.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/validation-ladder.html?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="uk" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/validation-ladder.html?lang=uk"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/validation-ladder.html"/>
   </url>
   <url>
     <loc>https://serzhyale.github.io/universal-agent-kit/portal/functions/anti-slop.html</loc>
     <lastmod>2026-10-09</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/anti-slop.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/anti-slop.html?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="uk" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/anti-slop.html?lang=uk"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/anti-slop.html"/>
   </url>
   <url>
     <loc>https://serzhyale.github.io/universal-agent-kit/portal/functions/hooks.html</loc>
     <lastmod>2026-10-09</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/hooks.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/hooks.html?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="uk" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/hooks.html?lang=uk"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/hooks.html"/>
   </url>
   <url>
     <loc>https://serzhyale.github.io/universal-agent-kit/portal/functions/budget-gate.html</loc>
     <lastmod>2026-10-09</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/budget-gate.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/budget-gate.html?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="uk" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/budget-gate.html?lang=uk"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/budget-gate.html"/>
   </url>
   <url>
     <loc>https://serzhyale.github.io/universal-agent-kit/portal/functions/quick.html</loc>
     <lastmod>2026-10-09</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/quick.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/quick.html?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="uk" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/quick.html?lang=uk"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/quick.html"/>
   </url>
   <url>
     <loc>https://serzhyale.github.io/universal-agent-kit/portal/functions/fix.html</loc>
     <lastmod>2026-10-09</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/fix.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/fix.html?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="uk" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/fix.html?lang=uk"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/fix.html"/>
   </url>
   <url>
     <loc>https://serzhyale.github.io/universal-agent-kit/portal/functions/park.html</loc>
     <lastmod>2026-10-09</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/park.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/park.html?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="uk" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/park.html?lang=uk"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/park.html"/>
   </url>
   <url>
     <loc>https://serzhyale.github.io/universal-agent-kit/portal/functions/research.html</loc>
     <lastmod>2026-10-09</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/research.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/research.html?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="uk" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/research.html?lang=uk"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/research.html"/>
   </url>
   <url>
     <loc>https://serzhyale.github.io/universal-agent-kit/portal/functions/prove.html</loc>
     <lastmod>2026-10-09</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/prove.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/prove.html?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="uk" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/prove.html?lang=uk"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/prove.html"/>
   </url>
   <url>
     <loc>https://serzhyale.github.io/universal-agent-kit/portal/functions/critique.html</loc>
     <lastmod>2026-10-09</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/critique.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/critique.html?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="uk" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/critique.html?lang=uk"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/critique.html"/>
   </url>
   <url>
     <loc>https://serzhyale.github.io/universal-agent-kit/portal/functions/git.html</loc>
     <lastmod>2026-10-09</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/git.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/git.html?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="uk" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/git.html?lang=uk"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/git.html"/>
   </url>
   <url>
     <loc>https://serzhyale.github.io/universal-agent-kit/portal/functions/ui-clarify.html</loc>
     <lastmod>2026-10-09</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/ui-clarify.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/ui-clarify.html?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="uk" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/ui-clarify.html?lang=uk"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/ui-clarify.html"/>
   </url>
   <url>
     <loc>https://serzhyale.github.io/universal-agent-kit/portal/functions/surfaces.html</loc>
     <lastmod>2026-10-09</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/surfaces.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/surfaces.html?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="uk" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/surfaces.html?lang=uk"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/surfaces.html"/>
   </url>
   <url>
     <loc>https://serzhyale.github.io/universal-agent-kit/portal/functions/caveman.html</loc>
     <lastmod>2026-10-09</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/caveman.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/caveman.html?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="uk" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/caveman.html?lang=uk"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/caveman.html"/>
   </url>
   <url>
     <loc>https://serzhyale.github.io/universal-agent-kit/portal/functions/caveman-commit.html</loc>
     <lastmod>2026-10-09</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/caveman-commit.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/caveman-commit.html?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="uk" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/caveman-commit.html?lang=uk"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/caveman-commit.html"/>
   </url>
   <url>
     <loc>https://serzhyale.github.io/universal-agent-kit/portal/functions/caveman-review.html</loc>
     <lastmod>2026-10-09</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/caveman-review.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/caveman-review.html?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="uk" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/caveman-review.html?lang=uk"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/caveman-review.html"/>
   </url>
   <url>
     <loc>https://serzhyale.github.io/universal-agent-kit/portal/functions/rd-lead.html</loc>
     <lastmod>2026-10-09</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/rd-lead.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/rd-lead.html?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="uk" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/rd-lead.html?lang=uk"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/rd-lead.html"/>
   </url>
   <url>
     <loc>https://serzhyale.github.io/universal-agent-kit/portal/functions/solution-researcher.html</loc>
     <lastmod>2026-10-09</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/solution-researcher.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/solution-researcher.html?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="uk" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/solution-researcher.html?lang=uk"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/solution-researcher.html"/>
   </url>
   <url>
     <loc>https://serzhyale.github.io/universal-agent-kit/portal/functions/implementer.html</loc>
     <lastmod>2026-10-09</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/implementer.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/implementer.html?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="uk" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/implementer.html?lang=uk"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/implementer.html"/>
   </url>
   <url>
     <loc>https://serzhyale.github.io/universal-agent-kit/portal/functions/doc-writer.html</loc>
     <lastmod>2026-10-09</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/doc-writer.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/doc-writer.html?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="uk" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/doc-writer.html?lang=uk"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/doc-writer.html"/>
   </url>
   <url>
     <loc>https://serzhyale.github.io/universal-agent-kit/portal/functions/spec-lifecycle.html</loc>
     <lastmod>2026-10-09</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/spec-lifecycle.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/spec-lifecycle.html?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="uk" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/spec-lifecycle.html?lang=uk"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/spec-lifecycle.html"/>
   </url>
   <url>
     <loc>https://serzhyale.github.io/universal-agent-kit/portal/functions/spec.html</loc>
     <lastmod>2026-10-09</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/spec.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/spec.html?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="uk" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/spec.html?lang=uk"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/spec.html"/>
   </url>
   <url>
     <loc>https://serzhyale.github.io/universal-agent-kit/portal/functions/spec-tech.html</loc>
     <lastmod>2026-10-09</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/spec-tech.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/spec-tech.html?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="uk" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/spec-tech.html?lang=uk"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/spec-tech.html"/>
   </url>
   <url>
     <loc>https://serzhyale.github.io/universal-agent-kit/portal/functions/spec-dev.html</loc>
     <lastmod>2026-10-09</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/spec-dev.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/spec-dev.html?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="uk" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/spec-dev.html?lang=uk"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/spec-dev.html"/>
   </url>
   <url>
     <loc>https://serzhyale.github.io/universal-agent-kit/portal/functions/spec-check.html</loc>
     <lastmod>2026-10-09</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/spec-check.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/spec-check.html?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="uk" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/spec-check.html?lang=uk"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/spec-check.html"/>
   </url>
   <url>
     <loc>https://serzhyale.github.io/universal-agent-kit/portal/functions/spec-fix.html</loc>
     <lastmod>2026-10-09</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/spec-fix.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/spec-fix.html?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="uk" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/spec-fix.html?lang=uk"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/spec-fix.html"/>
   </url>
   <url>
     <loc>https://serzhyale.github.io/universal-agent-kit/portal/functions/spec-all.html</loc>
     <lastmod>2026-10-09</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/spec-all.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/spec-all.html?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="uk" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/spec-all.html?lang=uk"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/spec-all.html"/>
   </url>
   <url>
     <loc>https://serzhyale.github.io/universal-agent-kit/portal/functions/backlog.html</loc>
     <lastmod>2026-10-09</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/backlog.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/backlog.html?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="uk" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/backlog.html?lang=uk"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/backlog.html"/>
   </url>
   <url>
     <loc>https://serzhyale.github.io/universal-agent-kit/portal/functions/agent-memory.html</loc>
     <lastmod>2026-10-09</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/agent-memory.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/agent-memory.html?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="uk" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/agent-memory.html?lang=uk"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/agent-memory.html"/>
   </url>
   <url>
     <loc>https://serzhyale.github.io/universal-agent-kit/portal/functions/research-index.html</loc>
     <lastmod>2026-10-09</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/research-index.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/research-index.html?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="uk" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/research-index.html?lang=uk"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/research-index.html"/>
   </url>
   <url>
     <loc>https://serzhyale.github.io/universal-agent-kit/portal/functions/parallel-writers.html</loc>
     <lastmod>2026-10-09</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/parallel-writers.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/parallel-writers.html?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="uk" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/parallel-writers.html?lang=uk"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/parallel-writers.html"/>
   </url>
   <url>
     <loc>https://serzhyale.github.io/universal-agent-kit/portal/functions/fan-out-readers.html</loc>
     <lastmod>2026-10-09</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/fan-out-readers.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/fan-out-readers.html?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="uk" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/fan-out-readers.html?lang=uk"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/fan-out-readers.html"/>
   </url>
   <url>
     <loc>https://serzhyale.github.io/universal-agent-kit/portal/functions/unattended-loop.html</loc>
     <lastmod>2026-10-09</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/unattended-loop.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/unattended-loop.html?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="uk" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/unattended-loop.html?lang=uk"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/unattended-loop.html"/>
   </url>
   <url>
     <loc>https://serzhyale.github.io/universal-agent-kit/portal/functions/adopt-new.html</loc>
     <lastmod>2026-10-09</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/adopt-new.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/adopt-new.html?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="uk" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/adopt-new.html?lang=uk"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/adopt-new.html"/>
   </url>
   <url>
     <loc>https://serzhyale.github.io/universal-agent-kit/portal/functions/adopt-existing.html</loc>
     <lastmod>2026-10-09</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/adopt-existing.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/adopt-existing.html?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="uk" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/adopt-existing.html?lang=uk"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/adopt-existing.html"/>
   </url>
   <url>
     <loc>https://serzhyale.github.io/universal-agent-kit/portal/functions/project-shapes.html</loc>
     <lastmod>2026-10-09</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/project-shapes.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/project-shapes.html?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="uk" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/project-shapes.html?lang=uk"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/project-shapes.html"/>
   </url>
   <url>
     <loc>https://serzhyale.github.io/universal-agent-kit/portal/functions/placeholders.html</loc>
     <lastmod>2026-10-09</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/placeholders.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/placeholders.html?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="uk" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/placeholders.html?lang=uk"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/placeholders.html"/>
   </url>
   <url>
     <loc>https://serzhyale.github.io/universal-agent-kit/portal/functions/authoring.html</loc>
     <lastmod>2026-10-09</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/authoring.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/authoring.html?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="uk" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/authoring.html?lang=uk"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/authoring.html"/>
   </url>
   <url>
     <loc>https://serzhyale.github.io/universal-agent-kit/portal/functions/worked-example.html</loc>
     <lastmod>2026-10-09</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/worked-example.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/worked-example.html?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="uk" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/worked-example.html?lang=uk"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/worked-example.html"/>
   </url>
   <url>
     <loc>https://serzhyale.github.io/universal-agent-kit/portal/functions/upgrade-kit.html</loc>
     <lastmod>2026-10-09</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/upgrade-kit.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/upgrade-kit.html?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="uk" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/upgrade-kit.html?lang=uk"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/upgrade-kit.html"/>
   </url>
   <url>
     <loc>https://serzhyale.github.io/universal-agent-kit/privacy.html</loc>
     <lastmod>2026-10-09</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://serzhyale.github.io/universal-agent-kit/privacy.html?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://serzhyale.github.io/universal-agent-kit/privacy.html?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="uk" href="https://serzhyale.github.io/universal-agent-kit/privacy.html?lang=uk"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://serzhyale.github.io/universal-agent-kit/privacy.html"/>
   </url>
 </urlset>

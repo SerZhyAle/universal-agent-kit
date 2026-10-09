@@ -1,6 +1,6 @@
 # Authoring Rules, Skills & Agents - write the directive against a real failure
 
-The kit gives you a rulebook (`CLAUDE.md`), skills (slash commands), and agents. The moment you
+The kit gives you a rulebook (`AGENTS.md`), skills (slash commands), and agents. The moment you
 extend them - a new rule, a new command, a new gate - you are writing a directive that must change
 an agent's behaviour, not just read well to you. Most hand-written rules fail at exactly that: they
 describe what a careful agent already does, so they add tokens and change nothing.
@@ -76,14 +76,22 @@ exists - keep it to stable trigger phrases so the two do not drift.
 
 ## Where each kind of directive lives
 
-- **Always-loaded rule** (behavioural, applies everywhere): the rulebook - `CLAUDE.md` (and its
-  `AGENTS.md` pointer). Keep exactly one canonical copy; a duplicated rulebook drifts.
+- **Always-loaded rule** (behavioural, applies everywhere): the rulebook - `AGENTS.md` (which
+  `CLAUDE.md` imports for Claude Code). Keep exactly one canonical copy; a duplicated rulebook
+  drifts. Keep it short enough to be read: Claude Code's own guidance is under 200 lines per rules
+  file, because a longer one costs context every turn and is followed less.
 - **Automated gate** (mechanical, greppable, recurring): a check wired into your "done" command /
   pre-commit hook / CI, ratcheted on new violations only. It names its **scope class** - per-change
   closure or release/CI sweep - at the moment you write it; unnamed defaults to per-change, which is
   where whole-tree checks accumulate until the closure gets skipped (`VALIDATION.md`).
-- **Skill** (a named procedure you invoke): a slash command / saved prompt, with an SDO
-  description.
+- **Skill** (a named procedure you invoke): a folder with a `SKILL.md` (the open Agent Skills
+  format several tools read) or a saved prompt, with an SDO description. A skill loads on demand:
+  only its description sits in context every turn, so a procedure that one kind of task needs
+  belongs in a skill, not in the always-loaded rulebook. Once invoked, the whole body arrives and
+  stays for the rest of the session, paid on every later turn - so split a large skill into a
+  driver (`SKILL.md`, the load-bearing rules on top) and a reference beside it (the kit's skills
+  use `references/`) that the driver opens by name when a stated condition holds. A runtime that
+  trims a long skill to fit its context keeps the start.
 - **Agent** (a role brief / mode): a subagent definition or system-prompt preamble, with an SDO
   description that says when to pick it *over its neighbours*.
 - **Event hook** (a verdict your runtime returns on an event, not a place you wire a gate into):

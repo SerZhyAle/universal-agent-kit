@@ -1,0 +1,10 @@
+{
+  "id": "context",
+  "term": { "en": "Context", "ru": "Контекст", "ua": "Контекст" },
+  "def": {
+    "en": "Everything the agent holds in view during a session: the files it has read, the commands it has run, the replies so far. It grows as work goes on, the agent cannot reset it on its own, and a new session or a fresh process starts with it empty.",
+    "ru": "Всё, что агент держит в поле зрения во время сессии: прочитанные файлы, выполненные команды, прежние ответы. Он растёт по ходу работы, агент не может сбросить его сам, а новая сессия или свежий процесс начинаются с пустого контекста.",
+    "ua": "Усе, що агент тримає в полі зору під час сесії: прочитані файли, виконані команди, попередні відповіді. Він росте в ході роботи, агент не може скинути його сам, а нова сесія чи свіжий процес починаються з порожнього контексту."
+  },
+  "see": ["headless-process", "memory"]
+}

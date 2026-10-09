@@ -1,0 +1,119 @@
+{
+  "id": "spec-tech",
+  "title": {
+    "en": "Turn an approved spec into a phased plan with a check on every step",
+    "ru": "Разбить утверждённую спеку на поэтапный план с проверкой каждого шага",
+    "ua": "Розбити затверджену спеку на поетапний план із перевіркою кожного кроку"
+  },
+  "pitch": {
+    "en": "`/spec-tech` writes the tactical plan: an index and phase files, each step ending in a static check, with the phase order self-reviewed before the status flips.",
+    "ru": "`/spec-tech` пишет тактический план: индекс и файлы фаз, каждый шаг кончается статической проверкой, а порядок фаз сам проверяется до смены статуса.",
+    "ua": "`/spec-tech` пише тактичний план: індекс і файли фаз, кожен крок закінчується статичною перевіркою, а порядок фаз сам перевіряється до зміни статусу."
+  },
+  "lead": {
+    "en": "Give `/spec-tech` an approved strategic spec and it creates a plan folder: `INDEX.md` and one file per phase, in an order it has checked for forward references. Every step carries a verification that anyone can re-run. You get a [plan](term:plan) that an executor can follow without guessing.",
+    "ru": "Дайте `/spec-tech` утверждённую стратегическую спеку, и он создаст каталог плана: `INDEX.md` и по файлу на каждую фазу, в порядке, проверенном на ссылки вперёд. У каждого шага есть проверка, которую может повторить кто угодно. Получится [план](term:plan), по которому исполнитель идёт, ничего не угадывая.",
+    "ua": "Дайте `/spec-tech` затверджену стратегічну спеку, і він створить каталог плану: `INDEX.md` та по файлу на кожну фазу, у порядку, перевіреному на посилання вперед. У кожного кроку є перевірка, яку може повторити будь-хто. Вийде [план](term:plan), за яким виконавець іде, нічого не вгадуючи."
+  },
+  "situation": {
+    "en": "A strategic spec stands at `Approved` or later and you want it broken into sequenced steps before any work starts: 'spec-tech', 'make the plan', 'turn this spec into steps'.",
+    "ru": "Стратегическая спека стоит на `Approved` или дальше, и её нужно разбить на упорядоченные шаги до начала работы: «spec-tech», «сделай план», «преврати эту спеку в шаги».",
+    "ua": "Стратегічна спека стоїть на `Approved` або далі, і її треба розбити на впорядковані кроки до початку роботи: «spec-tech», «зроби план», «перетвори цю спеку на кроки»."
+  },
+  "warning": {
+    "en": "A `Draft` is refused, not promoted: it may be a one-line `/park` stub, and the skill stops with `<ID> is Draft - run /spec <ID> first.` A ticket in any `Block*` status is a hard abort too: resolve the block first. If `INDEX.md` lists an unchecked pre-implementation blocker, the plan is written but `/spec-dev` does not start: the skill lists the blockers and stops.",
+    "ru": "`Draft` отклоняется, а не повышается: это может быть однострочная заглушка от `/park`, и навык останавливается с сообщением `<ID> is Draft - run /spec <ID> first.` Тикет в любом статусе `Block*` - тоже жёсткий отказ: сначала снимите блокировку. Если в `INDEX.md` остался неотмеченный блокер до реализации, план пишется, но `/spec-dev` не запускается: навык перечисляет блокеры и останавливается.",
+    "ua": "`Draft` відхиляється, а не підвищується: це може бути однорядкова заглушка від `/park`, і навичка зупиняється з повідомленням `<ID> is Draft - run /spec <ID> first.` Будь-який статус `Block*` - теж жорстка відмова: спершу зніміть блокування. Якщо в `INDEX.md` лишився невідмічений блокер до реалізації, план пишеться, але `/spec-dev` не запускається: навичка перелічує блокери й зупиняється."
+  },
+  "steps": [
+    {
+      "en": "Run it on a ticket: `/spec-tech T0042` (an id or a slug both work). The usage lines also list `--phase NN` and `--dry-run` forms. The skill reads the strategic spec and extracts the name, tier, priority, goals (§2), constraints (§3.2), pillars (§5.1), open research items (§6) with their artifact links, ADRs (§9) and done criteria (§11).",
+      "ru": "Запустите его на тикете: `/spec-tech T0042` (подойдёт и идентификатор, и слаг). В строках использования есть ещё формы `--phase NN` и `--dry-run`. Навык читает стратегическую спеку и извлекает название, уровень, приоритет, цели (§2), ограничения (§3.2), опоры (§5.1), открытые пункты исследования (§6) со ссылками на артефакты, ADR (§9) и критерии готовности (§11).",
+      "ua": "Запустіть його на тікеті: `/spec-tech T0042` (підійде і ідентифікатор, і слаг). У рядках використання є ще форми `--phase NN` та `--dry-run`. Навичка читає стратегічну спеку й виймає назву, рівень, пріоритет, цілі (§2), обмеження (§3.2), опори (§5.1), відкриті пункти дослідження (§6) із посиланнями на артефакти, ADR (§9) і критерії готовності (§11)."
+    },
+    {
+      "en": "It reads every file in `research/` in full first: a resolved finding that contradicts the intended approach is a planning input, not a footnote. Then it reads the repo map, the architecture doc and the real source of the affected area. Every file path a step names must exist or be marked **New**.",
+      "ru": "Сначала он целиком читает каждый файл в `research/`: найденный и решённый вывод, который противоречит задуманному подходу, - это вход для планирования, а не сноска. Затем читает карту репозитория, документ об архитектуре и реальный исходный код затронутой области. Каждый путь к файлу в шаге должен существовать или быть помечен **New**.",
+      "ua": "Спершу він повністю читає кожен файл у `research/`: знайдений і вирішений висновок, що суперечить задуманому підходу, - це вхід для планування, а не примітка. Потім читає мапу репозиторію, документ про архітектуру та справжній вихідний код зачепленої ділянки. Кожен шлях до файлу в кроці має існувати або бути позначений **New**."
+    },
+    {
+      "en": "It scores the task with the same checklist as `/spec`. If all points pass, it implements directly with no phase files, sets `Implemented` or `BlockNeedUserTest` according to the acceptance, reports and stops, without calling `/spec-dev`. If any point fails, it goes on to the plan.",
+      "ru": "Он оценивает задачу тем же списком, что и `/spec`. Если выполнены все пункты, он делает всё сразу, без файлов фаз, ставит `Implemented` или `BlockNeedUserTest` по приёмке, отчитывается и останавливается, не вызывая `/spec-dev`. Если не выполнен хоть один пункт, он переходит к плану.",
+      "ua": "Він оцінює задачу тим самим списком, що й `/spec`. Якщо виконано всі пункти, він робить усе одразу, без файлів фаз, ставить `Implemented` або `BlockNeedUserTest` за приймання, звітує і зупиняється, не викликаючи `/spec-dev`. Якщо не виконано хоч один пункт, він переходить до плану."
+    },
+    {
+      "en": "It designs the phase graph before writing any file. First a coverage inventory, kept in chat and never in a file: every §2 goal, §5.1 pillar, §3.2 constraint with impact, resolved §6 finding, §9 ADR and §11 criterion maps to a phase or is marked `out-of-scope: reason`. Then a Produces / Consumes topology: no phase may consume what a later phase produces, and a forward reference means reorder now.",
+      "ru": "Перед записью любого файла он проектирует граф фаз. Сначала опись покрытия, она остаётся в чате и никогда не попадает в файл: каждая цель из §2, опора из §5.1, ограничение из §3.2 с влиянием, решённый вывод из §6, ADR из §9 и критерий из §11 сопоставляется фазе или помечается `out-of-scope: reason`. Затем топология Produces / Consumes: ни одна фаза не потребляет то, что произведёт более поздняя, а ссылка вперёд означает, что порядок надо менять сразу.",
+      "ua": "Перед записом будь-якого файлу він проєктує граф фаз. Спершу опис покриття, він лишається в чаті й ніколи не потрапляє у файл: кожна ціль із §2, опора з §5.1, обмеження з §3.2 з упливом, вирішений висновок із §6, ADR із §9 і критерій із §11 зіставляється фазі або позначається `out-of-scope: reason`. Потім топологія Produces / Consumes: жодна фаза не споживає те, що вироблятиме пізніша, а посилання вперед означає, що порядок треба міняти одразу."
+    },
+    {
+      "en": "Ordering follows the topology and never overrides it: foundations first, producer before consumer, user-visible changes last in their area, and the final phase is always `PHASE_NN__docs-cleanup.md`. Every step's main action must change source, resources, config or scripts, not edit plan text or restate an earlier step. Aim for 3 to 8 phases; more than 10 means split the feature into several specs.",
+      "ru": "Порядок следует топологии и никогда её не отменяет: сначала основы, производитель раньше потребителя, видимые пользователю изменения последними в своей области, а последняя фаза всегда `PHASE_NN__docs-cleanup.md`. Главное действие каждого шага должно менять исходники, ресурсы, конфигурацию или скрипты, а не править текст плана и не пересказывать прошлый шаг. Цель - от 3 до 8 фаз; больше 10 значит, что фичу надо разделить на несколько спек.",
+      "ua": "Порядок іде за топологією і ніколи її не скасовує: спершу основи, виробник раніше за споживача, видимі користувачеві зміни останніми у своїй ділянці, а остання фаза завжди `PHASE_NN__docs-cleanup.md`. Головна дія кожного кроку має змінювати вихідний код, ресурси, конфігурацію чи скрипти, а не правити текст плану й не переказувати попередній крок. Мета - від 3 до 8 фаз; понад 10 означає, що фічу треба розділити на кілька спек."
+    },
+    {
+      "en": "It writes `INDEX.md` and each `PHASE_NN__slug.md` from the templates in the skill's `references/`. The index holds the phase overview, pre-implementation blockers as checkboxes, the completion gate, progress tracking and `## Plan revisions`; a phase holds objective, prerequisites, files touched, steps `NN.M`, done criteria, handoff notes, a rollback plan and an append-only `## Step Log` for `/spec-dev`. Each step has a `Prompt for implementer:` and a verification.",
+      "ru": "Он пишет `INDEX.md` и каждый `PHASE_NN__slug.md` по шаблонам из папки `references/` навыка. В индексе обзор фаз, блокеры до реализации флажками, условие завершения, учёт прогресса и `## Plan revisions`; в фазе цель, предпосылки, затрагиваемые файлы, шаги `NN.M`, критерии готовности, заметки передачи, план отката и дописываемый `## Step Log` для `/spec-dev`. У каждого шага есть `Prompt for implementer:` и проверка.",
+      "ua": "Він пише `INDEX.md` і кожен `PHASE_NN__slug.md` за шаблонами з теки `references/` навички. В індексі огляд фаз, блокери до реалізації прапорцями, умова завершення, облік прогресу та `## Plan revisions`; у фазі мета, передумови, зачеплені файли, кроки `NN.M`, критерії готовності, нотатки передачі, план відкоту й `## Step Log`, який лише дописується, для `/spec-dev`. У кожного кроку є `Prompt for implementer:` і перевірка."
+    },
+    {
+      "en": "Mandatory self-review before any status flip: it re-reads `INDEX.md` and every phase against the inventory and the topology. Every inventory line must map to a written step, every consumed name must exist now or be created earlier, and no step may break the real-work filter. It fixes findings in place, re-runs the failed check once and reports `Plan self-check: PASS - N inventory items mapped, M reorders applied.`",
+      "ru": "Обязательная самопроверка до смены любого статуса: он перечитывает `INDEX.md` и каждую фазу против описи и топологии. Каждая строка описи должна соответствовать написанному шагу, каждое потребляемое имя должно уже существовать или создаваться раньше, и ни один шаг не должен нарушать фильтр настоящей работы. Находки он исправляет на месте, один раз повторяет провалившуюся проверку и сообщает `Plan self-check: PASS - N inventory items mapped, M reorders applied.`",
+      "ua": "Обов'язкова самоперевірка до зміни будь-якого статусу: він перечитує `INDEX.md` і кожну фазу проти опису та топології. Кожен рядок опису має відповідати написаному кроку, кожне споживане ім'я має вже існувати або створюватися раніше, і жоден крок не повинен порушувати фільтр справжньої роботи. Знахідки він виправляє на місці, один раз повторює провалену перевірку і повідомляє `Plan self-check: PASS - N inventory items mapped, M reorders applied.`"
+    },
+    {
+      "en": "It sets the strategic spec's `Status:` to `Tactical` and replaces the body of its §12 Next step with the link to the plan and `/spec-dev <ID>`, so the spec never points at a step already done. With no unchecked pre-implementation blocker it then runs `/spec-dev` on the ticket; otherwise it lists the blockers and stops.",
+      "ru": "Он ставит в стратегической спеке `Status:` `Tactical` и заменяет тело её §12 Next step ссылкой на план и командой `/spec-dev <ID>`, чтобы спека никогда не указывала на уже сделанный шаг. Если неотмеченных блокеров до реализации нет, дальше он запускает `/spec-dev` на этом тикете, а иначе перечисляет блокеры и останавливается.",
+      "ua": "Він ставить у стратегічній спеці `Status:` `Tactical` і замінює тіло її §12 Next step посиланням на план і командою `/spec-dev <ID>`, щоб спека ніколи не вказувала на вже зроблений крок. Якщо невідмічених блокерів до реалізації немає, далі він запускає `/spec-dev` на цьому тікеті, а інакше перелічує блокери й зупиняється."
+    }
+  ],
+  "outcome": {
+    "en": "A folder `PLAN_DIR/ID_slug/` with `INDEX.md` and a `PHASE_NN__slug.md` per phase, the last one `PHASE_NN__docs-cleanup.md`, and the strategic spec at `Status: Tactical` with the plan's link in its §12 Next step. The chat line gives the number of phases and the blockers, or none.",
+    "ru": "Каталог `PLAN_DIR/ID_slug/` с `INDEX.md` и `PHASE_NN__slug.md` на каждую фазу, последний из них `PHASE_NN__docs-cleanup.md`, и стратегическая спека со `Status: Tactical` и ссылкой на план в её §12 Next step. В строке чата указано число фаз и блокеры либо что их нет.",
+    "ua": "Каталог `PLAN_DIR/ID_slug/` з `INDEX.md` і `PHASE_NN__slug.md` на кожну фазу, останній із них `PHASE_NN__docs-cleanup.md`, і стратегічна спека зі `Status: Tactical` та посиланням на план у її §12 Next step. У рядку чату вказано кількість фаз і блокери чи що їх немає."
+  },
+  "tips": [
+    {
+      "en": "Every verification is static: a file exists, a symbol is declared, a value equals, a command exits 0. Never 'works correctly'. One step is one atomic unit that is independently committable and does not break the build.",
+      "ru": "Каждая проверка статическая: файл существует, символ объявлен, значение совпадает, команда завершается с кодом 0. Никогда «работает правильно». Один шаг - одна атомарная единица, которую можно закоммитить отдельно и которая не ломает сборку.",
+      "ua": "Кожна перевірка статична: файл існує, символ оголошено, значення збігається, команда завершується з кодом 0. Ніколи «працює правильно». Один крок - одна атомарна одиниця, яку можна закомітити окремо і яка не ламає збірку."
+    },
+    {
+      "en": "A phase's done criterion names the actual narrowest check, the lowest sufficient rung of the [validation ladder](fn:validation-ladder); the full build is for a phase that touches packaging, resources or wiring.",
+      "ru": "Критерий готовности фазы называет конкретную самую узкую проверку, самую нижнюю достаточную ступень [лестницы проверок](fn:validation-ladder); полная сборка нужна только фазе, затрагивающей упаковку, ресурсы или связки.",
+      "ua": "Критерій готовності фази називає конкретну найвужчу перевірку, найнижчий достатній щабель [драбини перевірок](fn:validation-ladder); повна збірка потрібна лише фазі, що зачіпає пакування, ресурси чи зв'язки."
+    },
+    {
+      "en": "A file over about the [size budget](term:size-budget) needs a backup step before the edit, and a file heading past the budget is refused: split it first. If the project has several form factors (portrait and landscape, light and dark, locale variants), a step that edits one variant must cover its counterpart or note its absence.",
+      "ru": "Файлу сверх примерно [бюджета размера](term:size-budget) нужен шаг резервной копии перед правкой, а файл, который выходит за бюджет, отклоняется: сначала разделите его. Если у проекта несколько форм-факторов (портрет и ландшафт, светлая и тёмная темы, варианты локали), шаг, правящий один вариант, должен охватить парный или отметить его отсутствие.",
+      "ua": "Файлу понад приблизно [бюджет розміру](term:size-budget) потрібен крок резервної копії перед правкою, а файл, що виходить за бюджет, відхиляється: спершу розділіть його. Якщо проєкт має кілька форм-факторів (портрет і ландшафт, світла й темна теми, варіанти локалі), крок, що править один варіант, має охопити парний або зазначити його відсутність."
+    },
+    {
+      "en": "The final phase, `PHASE_NN__docs-cleanup.md`, carries the changelog, the index regeneration and, only if strategic §8 mandates an update, the user-facing docs, written through [`/surfaces`](fn:surfaces) so that every surface and authored locale moves in that phase, before the audit checks them.",
+      "ru": "Последняя фаза, `PHASE_NN__docs-cleanup.md`, несёт журнал изменений, перегенерацию индекса и, только если §8 стратегической спеки требует обновления, документацию для пользователя, которую пишут через [`/surfaces`](fn:surfaces), чтобы все поверхности и все авторские локали сдвинулись в этой фазе, до проверки аудитом.",
+      "ua": "Остання фаза, `PHASE_NN__docs-cleanup.md`, несе журнал змін, перегенерацію індексу і, лише якщо §8 стратегічної спеки вимагає оновлення, документацію для користувача, яку пишуть через [`/surfaces`](fn:surfaces), щоб усі поверхні й усі авторські локалі зрушили в цій фазі, до перевірки аудитом."
+    },
+    {
+      "en": "Plan text is `<ARTIFACT_LANGUAGE>`, imperative and free of rationale: the why stays in the strategic spec. A `Prompt for implementer:` is self-contained, so its reader, a person or an agent, does not need the spec. The index's own `Status:` line tracks the plan's progress and is written by `/spec-dev`; the ticket's status lives in the spec.",
+      "ru": "Текст плана - на языке `<ARTIFACT_LANGUAGE>`, в повелительном наклонении и без обоснований: зачем - остаётся в стратегической спеке. `Prompt for implementer:` самодостаточен, поэтому читателю, человеку или агенту, спека не нужна. Собственная строка `Status:` индекса отражает прогресс плана и пишется `/spec-dev`; статус тикета живёт в спеке.",
+      "ua": "Текст плану - мовою `<ARTIFACT_LANGUAGE>`, у наказовому способі й без обґрунтувань: навіщо - лишається в стратегічній спеці. `Prompt for implementer:` самодостатній, тож читачеві, людині чи агенту, спека не потрібна. Власний рядок `Status:` індексу відбиває поступ плану й пишеться `/spec-dev`; статус тікета живе в спеці."
+    },
+    {
+      "en": "A phase's `## Step Log` is append-only and written by `/spec-dev`: one line per step run, with the date, the step number, what was expected and what the run actually returned. A line is never rewritten, and a step is ticked only on a PASS in the current run.",
+      "ru": "`## Step Log` фазы только дописывается и ведётся `/spec-dev`: по строке на каждый запуск шага, с датой, номером шага, ожидаемым и тем, что запуск действительно вернул. Строка не переписывается, а шаг отмечается только по PASS в текущем запуске.",
+      "ua": "`## Step Log` фази лише дописується й ведеться `/spec-dev`: по рядку на кожен запуск кроку, з датою, номером кроку, очікуваним і тим, що запуск справді повернув. Рядок не переписується, а крок позначається лише за PASS у поточному запуску."
+    },
+    {
+      "en": "A phase is mergeable as a coherent unit: one build-time invariant proves it complete, and no half-broken state sits between its steps. Every strategic pillar (§5.1) gets at least one phase, and small pillars may fuse.",
+      "ru": "Фазу можно вливать как цельную единицу: её завершённость доказывает один инвариант времени сборки, и между шагами нет полусломанного состояния. Каждой опоре стратегии (§5.1) достаётся хотя бы одна фаза, а малые опоры можно объединять.",
+      "ua": "Фазу можна вливати як цілісну одиницю: її завершеність доводить один інваріант часу збирання, і між кроками немає напівзламаного стану. Кожній опорі стратегії (§5.1) дістається хоча б одна фаза, а малі опори можна об'єднувати."
+    }
+  ],
+  "related": ["spec", "spec-dev", "spec-lifecycle", "research", "validation-ladder"],
+  "terms": ["plan", "spec", "ticket", "status", "block-status", "size-budget"],
+  "keywords": {
+    "en": ["tactical plan", "phased plan", "make the plan", "phase files", "INDEX.md", "Approved to Tactical", "verifiable steps"],
+    "ru": ["тактический план", "поэтапный план", "сделать план", "файлы фаз", "INDEX.md", "от Approved до Tactical", "проверяемые шаги"],
+    "ua": ["тактичний план", "поетапний план", "зробити план", "файли фаз", "INDEX.md", "від Approved до Tactical", "перевірювані кроки"]
+  }
+}

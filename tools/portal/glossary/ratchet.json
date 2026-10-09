@@ -1,0 +1,10 @@
+{
+  "id": "ratchet",
+  "term": { "en": "Ratchet", "ru": "Храповик (ratchet)", "ua": "Храповик (ratchet)" },
+  "def": {
+    "en": "A recorded number that may fall and never rise. To adopt a rule on a codebase that already breaks it, freeze the violation count as a checked-in baseline: the gate fails only above it, and tooling may lower it but must refuse to raise it. The memory docs use it for the line count of the `MEMORY.md` index: a change that would add a line pays with a prune.",
+    "ru": "Записанное число, которое может уменьшаться и никогда не растёт. Чтобы ввести правило в кодовой базе, которая его уже нарушает, число нарушений фиксируют как закоммиченную базовую линию: гейт падает, лишь когда оно выше, а инструмент может его снижать, но обязан отказываться поднимать. Документы о памяти применяют его к числу строк индекса `MEMORY.md`: изменение, добавляющее строку, оплачивается чисткой.",
+    "ua": "Записане число, що може зменшуватися й ніколи не зростає. Щоб запровадити правило в кодовій базі, що його вже порушує, кількість порушень фіксують як закомічену базову лінію: гейт падає, лише коли вона вища, а інструмент може її знижувати, але мусить відмовлятися піднімати. Документи про пам'ять застосовують його до кількості рядків індексу `MEMORY.md`: зміна, що додає рядок, оплачується чищенням."
+  },
+  "see": ["anti-slop", "gate", "memory"]
+}

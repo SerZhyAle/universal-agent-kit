@@ -1,0 +1,84 @@
+{
+  "id": "fix",
+  "title": {
+    "en": "Fix a narrow bug without ceremony",
+    "ru": "Исправить узкий баг без церемоний",
+    "ua": "Виправити вузький баг без церемоній"
+  },
+  "pitch": {
+    "en": "A bug with a known cause is fixed at the root: smallest change, one local check, a three-line report, no spec.",
+    "ru": "Баг с понятной причиной исправлен в корне: минимальная правка, одна локальная проверка, отчёт в три строки, без спеки.",
+    "ua": "Баг зі зрозумілою причиною виправлено в корені: мінімальна правка, одна локальна перевірка, звіт у три рядки, без спеки."
+  },
+  "lead": {
+    "en": "`/fix` is for a bug or a behaviour correction that is bigger than a `/quick` edit but needs no spec. The agent names the root cause before it touches code, changes as little as it can, checks the result locally and reports the cause, the fix and the validation in one line each.",
+    "ru": "`/fix` нужен для бага или поправки поведения, которые больше правки через `/quick`, но спеки не требуют. Агент называет первопричину до того, как тронет код, меняет как можно меньше, проверяет результат локально и отчитывается по одной строке на причину, правку и проверку.",
+    "ua": "`/fix` потрібен для бага чи поправки поведінки, що більші за правку через `/quick`, але спеки не потребують. Агент називає першопричину, перш ніж торкнеться коду, змінює якомога менше, перевіряє результат локально й звітує по одному рядку на причину, правку та перевірку."
+  },
+  "situation": {
+    "en": "A well-understood bug: no new design decisions, a bounded blast radius, and local validation is enough. For example `/fix retry loop never backs off, hammers the server on 503`.",
+    "ru": "Хорошо понятный баг: новых проектных решений нет, последствия правки ограничены, локальной проверки достаточно. Например: `/fix retry loop never backs off, hammers the server on 503`.",
+    "ua": "Добре зрозумілий баг: нових проєктних рішень немає, наслідки правки обмежені, локальної перевірки досить. Наприклад: `/fix retry loop never backs off, hammers the server on 503`."
+  },
+  "warning": {
+    "en": "Do not use `/fix` when the fix needs design or UX decisions (`/ui-clarify`, then `/spec`), adds an abstraction, a schema or migration, or a public API (`/spec`), or when you do not yet understand the root cause (`/research` first). A one-token edit is `/quick`. If the file list outgrows a handful of files midway, the agent stops and escalates to `/spec`.",
+    "ru": "Не используйте `/fix`, если правка требует решений по дизайну или UX (`/ui-clarify`, затем `/spec`), вводит новую абстракцию, схему или миграцию либо публичный API (`/spec`), или если вы ещё не понимаете первопричину (сначала `/research`). Правка в один токен - это `/quick`. Если по ходу список файлов вырастает больше чем до нескольких, агент останавливается и передаёт задачу в `/spec`.",
+    "ua": "Не використовуйте `/fix`, якщо правка потребує рішень щодо дизайну чи UX (`/ui-clarify`, потім `/spec`), вводить нову абстракцію, схему чи міграцію або публічний API (`/spec`), або якщо ви ще не розумієте першопричину (спершу `/research`). Правка в один токен - це `/quick`. Якщо посеред роботи список файлів виростає більше ніж до кількох, агент зупиняється й передає задачу до `/spec`."
+  },
+  "steps": [
+    {
+      "en": "Describe the broken behaviour: `/fix list scroll position jumps to top after returning from detail`.",
+      "ru": "Опишите сломанное поведение: `/fix list scroll position jumps to top after returning from detail`.",
+      "ua": "Опишіть зламану поведінку: `/fix list scroll position jumps to top after returning from detail`."
+    },
+    {
+      "en": "The agent confirms the failing path and names the root cause before it touches code. If it cannot name it, it stops and researches first (`/research`, mentally or for real).",
+      "ru": "Агент подтверждает, что путь действительно падает, и называет первопричину до того, как тронет код. Если назвать её не получается, он останавливается и сначала исследует (`/research`, мысленно или всерьёз).",
+      "ua": "Агент підтверджує, що шлях справді падає, і називає першопричину, перш ніж торкнеться коду. Якщо назвати її не виходить, він зупиняється й спершу досліджує (`/research`, подумки чи всерйоз)."
+    },
+    {
+      "en": "It lists the files it expects to touch and why. If the list grows past a handful of files or starts needing new types, it stops and escalates to `/spec`.",
+      "ru": "Он перечисляет файлы, которые собирается менять, и объясняет зачем. Если список вырастает больше чем до нескольких файлов или начинают требоваться новые типы, он останавливается и передаёт задачу в `/spec`.",
+      "ua": "Він перелічує файли, які збирається змінювати, і пояснює навіщо. Якщо список виростає більше ніж до кількох файлів або починають бути потрібними нові типи, він зупиняється й передає задачу до `/spec`."
+    },
+    {
+      "en": "It applies the smallest change that fixes the root cause, not the symptom: no surrounding refactor, no unrelated import cleanup, no comment spray. Existing comments and invariants in the area are honoured, and [anti-slop](term:anti-slop) rules apply. A handled edge case or a non-obvious cause earns one comment saying why, written in `<ARTIFACT_LANGUAGE>`, nothing more.",
+      "ru": "Он вносит самую маленькую правку, которая устраняет первопричину, а не симптом: без рефакторинга по соседству, без чистки посторонних импортов, без россыпи комментариев. Существующие комментарии и инварианты в этом месте учитываются, [правила против мусора](term:anti-slop) действуют. Обработанный крайний случай или неочевидная причина заслуживают одного комментария «почему» на языке `<ARTIFACT_LANGUAGE>` и не больше.",
+      "ua": "Він вносить найменшу правку, що усуває першопричину, а не симптом: без рефакторингу поруч, без чищення сторонніх імпортів, без розсипу коментарів. Наявні коментарі та інваріанти в цьому місці враховуються, [правила проти сміття](term:anti-slop) діють. Оброблений крайній випадок чи неочевидна причина заслуговують на один коментар «чому» мовою `<ARTIFACT_LANGUAGE>` і не більше."
+    },
+    {
+      "en": "It runs the narrowest meaningful check that proves the fix: a targeted test if one exists (adding or adjusting one if that is cheap and the project has tests), otherwise a compile and a manual run of the path. The result is recorded as `expected | actual`.",
+      "ru": "Он запускает самую узкую осмысленную проверку, которая доказывает исправление: целевой тест, если он есть (добавляет или правит тест, когда это дёшево и в проекте есть тесты), иначе компиляцию и ручной прогон этого пути. Результат записывается как `expected | actual`.",
+      "ua": "Він запускає найвужчу змістовну перевірку, що доводить виправлення: цільовий тест, якщо він є (додає чи правит тест, коли це дешево й у проєкті є тести), інакше компіляцію та ручний прогін цього шляху. Результат записується як `expected | actual`."
+    },
+    {
+      "en": "It reports in three lines: root cause, fix, validation. Adjacent bugs it found are listed as follow-ups and are not fixed in this pass.",
+      "ru": "Он отчитывается тремя строками: первопричина, правка, проверка. Соседние баги, если они попались, перечисляются как последующие задачи и в этом проходе не исправляются.",
+      "ua": "Він звітує трьома рядками: першопричина, правка, перевірка. Сусідні баги, якщо трапилися, перелічуються як подальші задачі й у цьому проході не виправляються."
+    }
+  ],
+  "outcome": {
+    "en": "A three-line report: root cause, fix and validation result, one line each, plus a list of adjacent bugs left for later if any were found. The change touches only what the root cause required.",
+    "ru": "Отчёт из трёх строк: первопричина, правка и результат проверки, по одной строке на каждое, плюс список соседних багов, оставленных на потом, если такие нашлись. Изменение затрагивает только то, чего требовала первопричина.",
+    "ua": "Звіт із трьох рядків: першопричина, правка й результат перевірки, по одному рядку на кожне, плюс список сусідніх багів, залишених на потім, якщо такі знайшлися. Зміна зачіпає лише те, чого вимагала першопричина."
+  },
+  "tips": [
+    {
+      "en": "Adjacent bugs go on the follow-up list, not into this pass. When one is real and needs its own investigation, [park it](fn:park) as a stub and keep working.",
+      "ru": "Соседние баги идут в список последующих задач, а не в этот проход. Если такой баг настоящий и требует отдельного расследования, [отложите его](fn:park) в виде заготовки и работайте дальше.",
+      "ua": "Сусідні баги йдуть у список подальших задач, а не в цей прохід. Якщо такий баг справжній і потребує окремого розслідування, [відкладіть його](fn:park) у вигляді заготовки й працюйте далі."
+    },
+    {
+      "en": "After the fix, a [run-and-observe check](fn:prove) shows whether it holds when exercised, not only that the cheap check passed.",
+      "ru": "После правки [проверка запуском](fn:prove) покажет, держится ли она в работе, а не только прошла ли дешёвая проверка.",
+      "ua": "Після правки [перевірка запуском](fn:prove) покаже, чи вона тримається в роботі, а не лише чи пройшла дешева перевірка."
+    }
+  ],
+  "related": ["quick", "spec", "research", "park", "prove"],
+  "terms": ["anti-slop", "park"],
+  "keywords": {
+    "en": ["bug fix", "narrow fix", "root cause", "behaviour fix", "no spec"],
+    "ru": ["исправление бага", "узкая правка", "первопричина", "исправление поведения", "без спеки"],
+    "ua": ["виправлення багу", "вузька правка", "першопричина", "виправлення поведінки", "без спеки"]
+  }
+}

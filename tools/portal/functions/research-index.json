@@ -1,0 +1,114 @@
+{
+  "id": "research-index",
+  "title": {
+    "en": "Make the agent look things up instead of guessing",
+    "ru": "Научить агента искать, а не угадывать",
+    "ua": "Навчити агента шукати, а не вгадувати"
+  },
+  "pitch": {
+    "en": "A fixed order for finding things and, for a big project, a maintained index of your material, so every path, symbol and API the agent states has been verified.",
+    "ru": "Фиксированный порядок поиска и, для большого проекта, поддерживаемый индекс вашего материала: каждый путь, символ и API, названные агентом, проверены.",
+    "ua": "Фіксований порядок пошуку і, для великого проєкту, підтримуваний індекс вашого матеріалу: кожен шлях, символ і API, названі агентом, перевірені."
+  },
+  "lead": {
+    "en": "The most expensive thing an agent does is guess: an invented path, an assumed signature, a clause renumbered last spring. `docs/RESEARCH_INDEX.md` turns \"don't guess\" into one rule and one order. If you state a path, a symbol or an API, you have verified it, and you look in a fixed sequence that stops as soon as a source answers. A large project adds an index, so that finding something is one query.",
+    "ru": "Самое дорогое, что делает агент, - угадывает: выдуманный путь, предполагаемая сигнатура, пункт, перенумерованный прошлой весной. `docs/RESEARCH_INDEX.md` превращает «не угадывай» в одно правило и один порядок. Если вы называете путь, символ или API, вы их проверили, а искать надо в фиксированной последовательности, которая останавливается, как только источник ответил. Большому проекту добавляется индекс, и поиск превращается в один запрос.",
+    "ua": "Найдорожче, що робить агент, - вгадує: вигаданий шлях, припущена сигнатура, пункт, перенумерований минулої весни. `docs/RESEARCH_INDEX.md` перетворює «не вгадуй» на одне правило й один порядок. Якщо ви називаєте шлях, символ чи API, ви їх перевірили, а шукати треба у фіксованій послідовності, що зупиняється, щойно джерело відповіло. Великому проєктові додається індекс, і пошук стає одним запитом."
+  },
+  "situation": {
+    "en": "The agent invents file names or signatures, finding where something lives takes several attempts, or research from one session is done again in the next.",
+    "ru": "Агент выдумывает имена файлов или сигнатуры, поиск места, где что-то лежит, занимает несколько попыток, или исследование одной сессии заново делается в следующей.",
+    "ua": "Агент вигадує імена файлів чи сигнатури, пошук місця, де щось лежить, забирає кілька спроб, або дослідження однієї сесії заново робиться в наступній."
+  },
+  "warning": {
+    "en": "A stale index is worse than none: it sends the agent to a path that moved. An index that comes back empty costs a turn and then sends the agent to search anyway, and a miss looks exactly like a cheap call, so nobody notices.",
+    "ru": "Устаревший индекс хуже, чем никакого: он отправляет агента к файлу, который переехал. Индекс, который возвращает пустоту, стоит ход и всё равно отправляет агента искать по тексту, а промах выглядит как дешёвый вызов, поэтому его никто не замечает.",
+    "ua": "Застарілий індекс гірший, ніж жодного: він відправляє агента до файлу, який переїхав. Індекс, що повертає порожнечу, коштує крок і все одно відправляє агента шукати по тексту, а промах виглядає як дешевий виклик, тож його ніхто не помічає."
+  },
+  "steps": [
+    {
+      "en": "Name your map in the rules: the project's index or overview document, such as a `README`, `ARCHITECTURE.md`, an operations index, a feature-to-path map or a matter index. Author it and keep it fresh, a feature-area-to-location lookup kept in step with the structure, with someone owning its correctness. Replace the docs the kit names with whatever your repo actually has.",
+      "ru": "Назовите карту в правилах: индексный или обзорный документ проекта, например `README`, `ARCHITECTURE.md`, индекс операций, карту «функция - путь» или реестр дел. Карту пишут и поддерживают свежей: это справочник от области функций к месту в коде, идущий в ногу со структурой, и у его верности есть владелец. Замените названные в kit документы тем, что есть в вашем репозитории.",
+      "ua": "Назвіть карту в правилах: індексний або оглядовий документ проєкту, наприклад `README`, `ARCHITECTURE.md`, індекс операцій, мапу «функція - шлях» чи реєстр справ. Карту пишуть і підтримують свіжою: це довідник від області функцій до місця в коді, що йде в ногу зі структурою, і за його правильність хтось відповідає. Замініть названі в kit документи тим, що є у вашому репозиторії."
+    },
+    {
+      "en": "Fix the research order and stop as soon as a source answers. First the map. Then the spec or plan under your plan directory, if the work is ticket-bound, because its decisions are already made. Then the code index or grep, to find the file, and read that file, not the directory. Last, external docs, changelogs and issue trackers, when the answer is version-specific or about third-party behaviour.",
+      "ru": "Закрепите порядок поиска и останавливайтесь, как только источник ответил. Сначала карта. Затем спека или план в каталоге планов, если работа привязана к тикету: решения там уже приняты. Затем индекс кода или grep, чтобы найти файл, и читать надо файл, а не каталог. В конце внешняя документация, журналы изменений и трекеры, когда ответ зависит от версии или касается поведения сторонних продуктов.",
+      "ua": "Закріпіть порядок пошуку й зупиняйтеся, щойно джерело відповіло. Спочатку карта. Потім спека чи план у теці планів, якщо робота прив'язана до тікета: рішення там уже ухвалені. Далі індекс коду чи grep, щоб знайти файл, і читати треба файл, а не теку. Наприкінці зовнішня документація, журнали змін і трекери, коли відповідь залежить від версії або стосується поведінки сторонніх продуктів."
+    },
+    {
+      "en": "Add an index only when search has become a tax: the tree is large, names collide, or finding where something lives takes several attempts. Generate a list of the project's units, each with its location and a short role, and optionally what it depends on. If your stack already has a language server or a symbol index, that is your code index, and the custom one can be skipped.",
+      "ru": "Добавляйте индекс, только когда поиск стал налогом: дерево большое, имена совпадают, а поиск места занимает несколько попыток. Сгенерируйте список единиц проекта, у каждой место и короткая роль, при желании ещё и то, от чего она зависит. Если в вашем стеке уже есть языковой сервер или индекс символов, это и есть ваш индекс кода, а собственный можно не делать.",
+      "ua": "Додавайте індекс, лише коли пошук став податком: дерево велике, імена збігаються, а пошук місця забирає кілька спроб. Згенеруйте список одиниць проєкту, у кожної місце й коротка роль, за бажання ще й те, від чого вона залежить. Якщо у вашому стеку вже є мовний сервер чи індекс символів, це і є ваш індекс коду, а власний можна не робити."
+    },
+    {
+      "en": "Query the index before you grep, and regenerate it after you change code, as a step of the post-change routine or a hook, so it is never skipped. A generated index is a derived artifact: regenerate it, do not hand-edit it, and it can be git-ignored. Log how often it answers: a high miss rate is a defect in its coverage or query vocabulary, never the caller's fault.",
+      "ru": "Сначала обращайтесь к индексу, потом к grep, а после изменения кода перегенерируйте индекс - шагом рутины после правки или хуком, чтобы это нельзя было пропустить. Сгенерированный индекс - производный артефакт: его перегенерируют, а не правят вручную, и его можно добавить в git-ignore. Ведите журнал того, как часто он отвечает: высокая доля промахов - дефект его покрытия или словаря запросов, а не вина вызывающего.",
+      "ua": "Спочатку звертайтеся до індексу, потім до grep, а після зміни коду перегенеруйте індекс - кроком рутини після правки або хуком, щоб цього не можна було пропустити. Згенерований індекс - похідний артефакт: його перегенеровують, а не правлять вручну, і його можна додати до git-ignore. Ведіть журнал того, як часто він відповідає: висока частка промахів - дефект його покриття або словника запитів, а не вина того, хто питає."
+    },
+    {
+      "en": "Check a declared register in both directions. Some indexes cannot be generated: a register of every document in a maintained area, such as `docs/`, each with its role and whether it is published. Checking that every record points at an existing file is only half. The other half is reverse coverage: walk the area and fail on any file with no record and no named exclusion, or a new file joins in silence.",
+      "ru": "Проверяйте объявленный реестр в обе стороны. Не каждый индекс можно сгенерировать: например, реестр всех документов в сопровождаемой области вроде `docs/`, с ролью каждого и признаком, опубликован ли он. Проверка, что каждая запись указывает на существующий файл, - лишь половина. Вторая половина - обратное покрытие: пройдите по области и считайте ошибкой любой файл без записи и без названного исключения, иначе новый файл войдёт молча.",
+      "ua": "Перевіряйте оголошений реєстр в обидва боки. Не кожен індекс можна згенерувати: наприклад, реєстр усіх документів у супроводжуваній області на кшталт `docs/`, з роллю кожного й ознакою, опублікований він чи ні. Перевірка, що кожен запис указує на наявний файл, - лише половина. Друга половина - зворотне покриття: пройдіть областю й вважайте помилкою будь-який файл без запису й без названого винятку, інакше новий файл увійде мовчки."
+    },
+    {
+      "en": "Pair the index with a refusal. Making the cheap path available does not close the expensive one, so add an event hook that refuses the unnarrowed search until the index has been queried in this session. Each half is bypassable on its own. See [hooks](fn:hooks).",
+      "ru": "Соедините индекс с отказом. Дешёвый путь сам по себе не закрывает дорогой, поэтому добавьте хук на событие, который отклоняет неузкий поиск, пока в этой сессии не обратились к индексу. Каждая половина по отдельности обходится. См. [хуки](fn:hooks).",
+      "ua": "З'єднайте індекс із відмовою. Дешевий шлях сам по собі не закриває дорогий, тому додайте хук на подію, який відхиляє неузький пошук, поки в цій сесії не звернулися до індексу. Кожна половина окремо обходиться. Див. [хуки](fn:hooks)."
+    },
+    {
+      "en": "Keep a queryable inventory of the capabilities the project already ships, a list of what the product does rather than of code units, and scan it before designing a new feature. Record the capability when a unit of work lands: a stale inventory hides duplicates instead of preventing them.",
+      "ru": "Ведите запрашиваемый перечень возможностей, которые проект уже поставляет: список того, что делает продукт, а не единиц кода. Просматривайте его перед проектированием новой функции. Когда единица работы закончена, записывайте возможность, которую она дала: устаревший перечень прячет дубликаты, а не предотвращает их.",
+      "ua": "Ведіть перелік можливостей, які проєкт уже постачає, до якого можна робити запити: список того, що робить продукт, а не одиниць коду. Переглядайте його перед проєктуванням нової функції. Коли одиницю роботи завершено, записуйте можливість, яку вона дала: застарілий перелік ховає дублікати, а не запобігає їм."
+    },
+    {
+      "en": "Write findings down. For anything beyond a trivial lookup, put the files and symbols touched, exact locations, external references and open questions in a [scratch](term:scratch) file, or in the spec for ticket-bound work, so the next step and the next session read the notes instead of searching again.",
+      "ru": "Записывайте находки. Для всего, что больше тривиального поиска, складывайте затронутые файлы и символы, точные места, внешние ссылки и открытые вопросы в [черновой](term:scratch) файл или, для работы по тикету, в спеку: следующий шаг и следующая сессия прочтут заметки, а не будут искать заново.",
+      "ua": "Записуйте знахідки. Для всього, що більше за тривіальний пошук, складайте зачеплені файли й символи, точні місця, зовнішні посилання та відкриті питання в [чорновий](term:scratch) файл або, для роботи за тікетом, у спеку: наступний крок і наступна сесія прочитають нотатки, а не шукатимуть заново."
+    }
+  ],
+  "outcome": {
+    "en": "Every path, symbol and API in a change is one the agent verified and can point at. Where the project is large, finding a unit is one query with an address as the answer, and what the research found sits in a file for the next step.",
+    "ru": "Каждый путь, символ и API в изменении агент проверил и может на них указать. В большом проекте поиск единицы - один запрос, ответом на который служит адрес, а то, что нашло исследование, лежит в файле для следующего шага.",
+    "ua": "Кожен шлях, символ і API у зміні агент перевірив і може на них вказати. У великому проєкті пошук одиниці - один запит, відповіддю на який слугує адреса, а те, що знайшло дослідження, лежить у файлі для наступного кроку."
+  },
+  "tips": [
+    {
+      "en": "A name is not evidence of behaviour. Before reasoning about what a flag, constant or key does, confirm a live read or call site: a comment or a doc mention is a hit, not a usage.",
+      "ru": "Имя не доказывает поведения. Прежде чем рассуждать о том, что делает флаг, константа или ключ, найдите живое место чтения или вызова: комментарий или упоминание в документации - это совпадение, а не использование.",
+      "ua": "Ім'я не доводить поведінки. Перш ніж міркувати про те, що робить прапорець, константа чи ключ, знайдіть живе місце читання чи виклику: коментар або згадка в документації - це збіг, а не використання."
+    },
+    {
+      "en": "Register a file before anything links to it, and build the first register from the tree as it is, exclusions and their reasons included, never from the tree somebody remembers. Without reverse coverage a register describes only what it already knew.",
+      "ru": "Регистрируйте файл до того, как на него что-то ссылается, а первый реестр стройте по дереву, каким оно есть, вместе с исключениями и их причинами, а не по дереву, которое кто-то помнит. Без обратного покрытия реестр описывает лишь то, что уже знал.",
+      "ua": "Реєструйте файл до того, як на нього щось посилається, а перший реєстр будуйте за деревом, яким воно є, разом із винятками та їхніми причинами, а не за деревом, яке хтось пам'ятає. Без зворотного покриття реєстр описує лише те, що вже знав."
+    },
+    {
+      "en": "The index is optional; the research order is not. Building the index and a knowledge base is a heavy one-off cost, repaid when every later task starts from an address. For a large shared codebase the build order is retrieval tooling first, knowledge base second, skills and agent roles last.",
+      "ru": "Индекс необязателен, порядок поиска обязателен. Построить индекс и базу знаний - тяжёлые разовые затраты, которые окупаются, когда каждая следующая задача начинается с адреса. Для большой общей кодовой базы порядок такой: сначала инструменты поиска, потом база знаний, в конце навыки и роли агентов.",
+      "ua": "Індекс необов'язковий, порядок пошуку обов'язковий. Побудувати індекс і базу знань - важкі разові витрати, які окупаються, коли кожна наступна задача починається з адреси. Для великої спільної кодової бази порядок такий: спершу інструменти пошуку, потім база знань, наприкінці навички та ролі агентів."
+    },
+    {
+      "en": "It is called a code index because that is the sharpest example. A data dictionary, a clause library, a document register, a table of sources or a service catalogue is the same artifact, and every rule here applies to it unchanged.",
+      "ru": "Он называется индексом кода, потому что это самый наглядный пример. Словарь данных, библиотека пунктов, реестр документов, таблица источников или каталог сервисов - тот же артефакт, и все правила здесь применимы к нему без изменений.",
+      "ua": "Він називається індексом коду, бо це найнаочніший приклад. Словник даних, бібліотека пунктів, реєстр документів, таблиця джерел чи каталог сервісів - той самий артефакт, і всі правила тут застосовні до нього без змін."
+    },
+    {
+      "en": "The [`/research`](fn:research) skill is a repeatable research pass that builds a scratch dossier first and then narrows into code.",
+      "ru": "Навык [`/research`](fn:research) - повторяемый проход исследования: сначала собирается черновое досье, затем поиск сужается до кода.",
+      "ua": "Навичка [`/research`](fn:research) - повторюваний прохід дослідження: спершу збирається чорнове досьє, потім пошук звужується до коду."
+    },
+    {
+      "en": "Independent lookups run concurrently, not in sequence: see [run independent lookups in parallel](fn:fan-out-readers). Research is the safe half of parallel work, but once a wave contains writers the rules change: see [run several writing agents without losing work](fn:parallel-writers).",
+      "ru": "Независимые поиски идут одновременно, а не по очереди: см. [независимые поиски параллельно](fn:fan-out-readers). Исследование - безопасная половина параллельной работы, но как только в волне появляются пишущие, правила меняются: см. [как запустить нескольких пишущих агентов, не потеряв работу](fn:parallel-writers).",
+      "ua": "Незалежні пошуки йдуть одночасно, а не по черзі: див. [незалежні пошуки паралельно](fn:fan-out-readers). Дослідження - безпечна половина паралельної роботи, але щойно в хвилі з'являються ті, що пишуть, правила змінюються: див. [як запустити кількох агентів, що пишуть, не втративши роботи](fn:parallel-writers)."
+    }
+  ],
+  "related": ["research", "fan-out-readers", "parallel-writers", "hooks", "agent-memory"],
+  "terms": ["research-index", "hook", "scratch"],
+  "keywords": {
+    "en": ["research order", "code index", "don't guess", "verify before you state", "capability inventory", "index of sources", "document register", "reverse coverage"],
+    "ru": ["порядок исследования", "индекс кода", "не угадывать", "проверять до утверждения", "перечень возможностей", "индекс источников", "реестр документов", "обратное покрытие"],
+    "ua": ["порядок дослідження", "індекс коду", "не вгадувати", "перевіряти до твердження", "перелік можливостей", "індекс джерел", "реєстр документів", "зворотне покриття"]
+  }
+}

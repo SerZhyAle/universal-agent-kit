@@ -1,14 +1,14 @@
 ---
 name: release-freeze
-description: Non-critical merges paused from 2026-03-05 for the release cut
+description: Non-critical changes on hold from 2026-03-05 until the release is signed off
 type: project
 ---
 
-Non-critical merges are frozen starting 2026-03-05 while the team cuts a release branch.
+Non-critical changes are on hold from 2026-03-05 while the release is checked and signed off.
 
-**Why:** the release is being stabilized; landing unrelated changes during the cut risks
-destabilizing the branch and muddying the release diff.
+**Why:** the version going out is being checked end to end; an unrelated change landing during the
+check makes part of that check stale and blurs what this release actually contains.
 
-**How to apply:** before proposing to merge non-critical work scheduled on or after that date,
-flag the freeze and suggest holding or targeting the post-release branch. Critical fixes still
-go in. Re-check whether the freeze is still active before relying on this - it is short-lived.
+**How to apply:** before proposing a non-critical change on or after that date, flag the freeze and
+suggest holding it until after sign-off. Critical corrections still go in. Re-check that the freeze
+is still on before relying on this, and delete this entry once the release is signed off.

@@ -1,0 +1,10 @@
+{
+  "id": "memory",
+  "term": { "en": "Memory (persistent agent memory)", "ru": "Память (постоянная память агента)", "ua": "Пам'ять (постійна пам'ять агента)" },
+  "def": {
+    "en": "A small file-based memory in a `memory/` directory: a `MEMORY.md` index the agent reads at the start of every session, and one Markdown file per entry, each of type `user`, `feedback`, `project` or `reference`. It is the committed, team-shared layer, and it holds what the agent cannot re-read from the repository.",
+    "ru": "Небольшая файловая память в каталоге `memory/`: индекс `MEMORY.md`, который агент читает в начале каждой сессии, и по одному Markdown-файлу на запись, каждая типа `user`, `feedback`, `project` или `reference`. Это закоммиченный слой для всей команды; в нём лежит то, что агент не может заново прочитать из репозитория.",
+    "ua": "Невелика файлова пам'ять у теці `memory/`: індекс `MEMORY.md`, який агент читає на початку кожної сесії, і по одному Markdown-файлу на запис, кожен типу `user`, `feedback`, `project` або `reference`. Це закомічений шар для всієї команди; у ньому лежить те, що агент не може заново прочитати з репозиторію."
+  },
+  "see": ["research-index", "context"]
+}

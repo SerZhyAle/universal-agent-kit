@@ -1,0 +1,10 @@
+{
+  "id": "audit",
+  "term": { "en": "Audit", "ru": "Аудит", "ua": "Аудит" },
+  "def": {
+    "en": "The check that sets a ticket's [status](term:status) from the files, not from a filename or a hope. `/spec-check` runs static checks of the spec against the project, scores the ticket (the worst verdict wins) and writes the findings into a compact `## Last Audit` block that the next audit overwrites. Human sign-off lives in `## Manual checks`, which it reads and never overwrites.",
+    "ru": "Проверка, которая выставляет [статус](term:status) тикета по файлам, а не по имени файла или надежде. `/spec-check` прогоняет статические проверки спеки по проекту, оценивает тикет (побеждает худший вердикт) и записывает результаты в компактный блок `## Last Audit`, который следующий аудит перезаписывает. Подпись человека лежит в `## Manual checks`: его аудит читает и никогда не перезаписывает.",
+    "ua": "Перевірка, що виставляє [статус](term:status) тікета за файлами, а не за назвою файлу чи надією. `/spec-check` проганяє статичні перевірки спеки за проєктом, оцінює тікет (перемагає найгірший вердикт) і записує результати в компактний блок `## Last Audit`, який наступний аудит перезаписує. Підпис людини лежить у `## Manual checks`: його аудит читає й ніколи не перезаписує."
+  },
+  "see": ["status", "block-status"]
+}

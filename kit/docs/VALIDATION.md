@@ -55,6 +55,12 @@ carrying one unticked device line, and an hour on real hardware showed **one of 
 criteria failing outright**. The kit wires this as the `BlockNeedUserTest` status and the "no open
 MANUAL item" rule in `/spec-check`; `SPEC_LIFECYCLE.md` owns the mechanics.
 
+**The human status is for what only a human can see.** A ticket names its rung of the ladder up
+front, and a change a build or a targeted test settles closes there, with no human pass. Parking a
+static fix behind `BlockNeedUserTest` spends the scarcest reviewer on what a machine already proved,
+and teaches them the queue is noise. What truly needs a human is batched into one pass after the work
+that produced it, not drained ticket by ticket.
+
 ### A check has four answers, and folding the last two together is how it starts lying
 
 The fixed set is **PASS**, **DEFECT**, **COULD NOT VERIFY**, and **NOT APPLICABLE**. DEFECT means the
@@ -83,6 +89,30 @@ conversion the whole exercise exists to prevent. Observed: a smoke check returne
 waiver was signed - so a **tooling fault and a genuinely absent subject produced the same bucket**.
 Separate them at the source; an infrastructure fault is not a known limitation.
 
+**Force every answer once, and prove the red with a positive control.** A gate's failure branches are
+the code that runs least and matters most: a typo in a could-not-verify branch survives until the day
+that branch is needed. Give each gate a fixture that drives every answer it can give against a
+throwaway input, plus a known-bad input - the pre-fix build, a dropped row - that must turn it red. A
+gate never seen going red is not known to be able to.
+
+### One vocabulary, three places that speak it
+
+The run-and-observe skill reports four verdicts, the audit records six per check, and the executor
+acts on the result. They are one vocabulary, and every skill that reads another's verdict reads it
+through this table rather than through its own guess:
+
+| Meaning | `/prove` says | `/spec-check` records | A caller does |
+| --- | --- | --- | --- |
+| inspected, as expected | `PASS` | `PASS` | proceed |
+| inspected, a non-blocking mismatch | - | `WARN` | proceed to `Partial`; `--strict` treats it as `FAIL` |
+| inspected, an expectation failed | `DEFECT` | `FAIL` | hard stop |
+| the subject or instrument was out of reach | `COULD NOT VERIFY` | `UNCHECKABLE` | hard stop, exactly as for a defect - and never a mechanical fix |
+| no scenario exists in this configuration | `NOT APPLICABLE` | `EXEMPT` | proceed, and record why |
+| only a human can observe it | - | `MANUAL` | `BlockNeedUserTest` until the human ticks it |
+
+A skill that handles only `PASS` and "everything else" has quietly folded the third and fourth rows
+into the second, which is the lie the section above is about.
+
 ## Record expected vs actual
 
 For every check you run, write down what you expected and what you got:
@@ -98,6 +128,11 @@ have missed. A check whose `actual` you did not read did not happen.
 
 `FAIL` on any check means the step is not done: record the blocker and stop. Never auto-revert
 and never paper over a failure by moving on - a human decides from the evidence.
+
+**Never re-run a red check until it goes green.** A retry removes the report of the flake, not the
+flake: a check that fails one run in five passes more than 99% of the time behind three retries. A
+known flaky or known-broken check gets a row in a known-red ledger - owner, ticket - and stays visible
+in every report, so an old red cannot hide a new regression behind it.
 
 ## Red flags: you are about to claim without proof
 
@@ -118,12 +153,15 @@ your evidence; re-run and read it yourself.
 A change is not just its diff. Before calling a step complete, run the housekeeping the project
 needs so it is never "remembered later":
 
-- **Changelog / dev log** - append the entry if the project keeps one.
+- **Changelog / dev log** - if the project keeps one, the ticket has **one** entry, and each step
+  adds its files to it. An entry per step or per phase buries the change; no change log at all is a
+  legitimate choice, and a check for an entry is then not applicable.
 - **User-facing docs** - update them for any new user-visible capability, in every surface and
   every **authored** locale. Do this *before* marking the step done, not in a cleanup pass that
   never comes. Keep the full list of ship-together surfaces (README, site page, each locale, each
   listing) in one manifest and touch them in the same change - the surface missing from the list is
-  the one that silently goes stale.
+  the one that silently goes stale. `/surfaces` runs this list: it prints the surface table before
+  any edit and greps the change's key noun across every touched surface.
   **Surfaces must move together; the rest of the declared locale set need not.** Where the project
   has a release boundary, nothing reaches a user between releases, so the locales nobody on the team
   authors by hand fan out in one bulk pass at that boundary - one pass clears every new key of a
@@ -146,7 +184,9 @@ kind behind a single "done" entry point; any one failing gate aborts the whole r
 "finished" mechanically means "all applicable gates passed" rather than trusting yourself to
 remember each. Keep the kind-to-checks mapping in one place so it cannot silently rot, and scope
 each gate by kind *and* touched path so "done" stays cheap - a gate that always runs everything
-gets slow, then gets skipped, which defeats fail-closed.
+gets slow, then gets skipped, which defeats fail-closed. Where the runtime can refuse to end a turn
+until a command passes (Claude Code's `Stop` hook, `docs/HOOKS.md`), that is the natural place to
+wire the "done" command: the claim of completion and the check of it become one event.
 
 **The closure RUNS the rung; it does not merely ask for it.** When a change set carries an artifact
 class whose only proof is a link, render, or compile step that nothing else in the routine performs,
@@ -156,6 +196,11 @@ the ladder above is a *request*, and a request is an ungated rule - which `AUTHO
 resources, and its compile-only check compiled code without linking any, so a broken user-facing
 layout closed **green** and its ticket reached "install this and test it" without the thing to be
 installed ever having been built.
+
+**A closure that prints a fix command and then fails is a ritual.** When the repair is deterministic
+and local - regenerate a derived file, register a new one - the per-change closure performs it and
+reports it as repaired, naming the file it rewrote, instead of going red with a command for somebody
+to paste. The release path stays a pure check: there, the same drift is a finding.
 
 ## Before an irreversible step, the verdict is an input - not a report filed next to it
 
@@ -204,6 +249,16 @@ or test you care about - a passing wrapper masks a failing core. Read the specif
 the operation that matters, or have it emit its own result. A green that lies is worse than no
 check at all.
 
+**A green that does not name its subject proves nothing.** A verdict is evidence only about what the
+check inspected, so the check prints it - the module, variant, file set or document - where nobody can
+miss it, and a completion claim quotes that line with the exit code. A check of the neighbouring module
+exits 0 on a change it never looked at, and gets quoted as proof all the same.
+
+**A gate's reach is a claim, so prove it.** A gate that reads only the main source root is silent
+about every other variant, module or folder while its record says "covered". Have the gate declare what
+it reads, check that list against the real tree, and give each new matcher a fixture for every shape it
+claims to recognise - one input that must match and one that must not.
+
 The worst shape this takes is a **backgrounded gate**. A command that could never run - a missing
 interpreter, a refused lock - still exits through its launch line, so the wrapper reports success and
 a failed build or a failed gate masquerades as passing. The false green is then the thing that gets
@@ -211,6 +266,15 @@ read and reported. Anything you background must write its verdict where a reader
 marker file with a closed set of outcome values - and never in its exit code. Related, and cheaper:
 where a name can simply be **made to work** rather than guarded, make it work. No pre-call guard can
 fix and retry a failed command; it can only refuse it before it starts.
+
+**Delete the previous output before the run.** A result file left by the last run looks exactly like
+this run's result. Remove it first, so a run that dies before writing reads as *could not verify*,
+never as the last run's pass.
+
+**A gate that checks only shape is satisfied by boilerplate.** A field that must be non-empty gets the
+same sentence every time, and every copy passes. Reject duplicated evidence and placeholder text, make
+each recorded fix cite its own command and exit code, and record an owner's exception in the owner's
+own words with the date and where they said it - never as text the agent wrote on their behalf.
 
 ## Closing a change on a dirty tree
 
@@ -263,6 +327,12 @@ the release scope and applies the same four-part test.
 
 Gates accumulate, and eventually one of them has to go. Two arguments get offered and only one of
 them is worth anything.
+
+**Measure the per-gate cost distribution before pruning anything.** Gate cost is usually skewed: one
+or two gates carry most of the wall time, and the quiet ones cost a rounding error between them.
+Deleting the quiet ones removes insurance and buys almost nothing. Record each gate's wall time over
+real runs, then optimise the head: narrow its trigger, move it off the hot path, stop it re-proving
+inputs that did not change.
 
 **"It never fires" is not an argument.** A gate that finds nothing may be the reason the failure
 stopped happening. Retire one only on a stated argument about the risk.

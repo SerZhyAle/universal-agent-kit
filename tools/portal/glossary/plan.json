@@ -1,0 +1,10 @@
+{
+  "id": "plan",
+  "term": { "en": "Plan (tactical plan)", "ru": "План (тактический план)", "ua": "План (тактичний план)" },
+  "def": {
+    "en": "The tactical document of a ticket: a folder with `INDEX.md` and one file per phase, naming the files and the order to build them, each step ending in a static check that anyone can re-run. Written by `/spec-tech`, only for a spec at `Approved` or later, and executed by `/spec-dev`.",
+    "ru": "Тактический документ тикета: каталог с `INDEX.md` и по файлу на каждую фазу, где названы файлы и порядок их сборки, а каждый шаг кончается статической проверкой, которую может повторить кто угодно. Его пишет `/spec-tech`, и только для спеки на `Approved` или дальше, а выполняет `/spec-dev`.",
+    "ua": "Тактичний документ тікета: каталог з `INDEX.md` та по файлу на кожну фазу, де названо файли й порядок їх збирання, а кожен крок закінчується статичною перевіркою, яку може повторити будь-хто. Його пише `/spec-tech`, і лише для спеки на `Approved` або далі, а виконує `/spec-dev`."
+  },
+  "see": ["spec", "ticket"]
+}

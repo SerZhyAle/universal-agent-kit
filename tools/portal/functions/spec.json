@@ -1,0 +1,114 @@
+{
+  "id": "spec",
+  "title": {
+    "en": "Turn a feature description into an approved strategic spec",
+    "ru": "Превратить описание фичи в утверждённую стратегическую спеку",
+    "ua": "Перетворити опис фічі на затверджену стратегічну спеку"
+  },
+  "pitch": {
+    "en": "`/spec` writes the what and why of a feature with no class names or file paths, approves it and passes it to `/spec-tech`. A small task is built in place.",
+    "ru": "`/spec` пишет, что и зачем нужно в фиче, без имён классов и путей к файлам, утверждает и передаёт `/spec-tech`. Мелкую задачу делает на месте.",
+    "ua": "`/spec` пише, що й навіщо потрібно у фічі, без назв класів і шляхів до файлів, затверджує та передає `/spec-tech`. Дрібну задачу робить на місці."
+  },
+  "lead": {
+    "en": "Describe the feature in your own words and `/spec` allocates a [ticket](term:ticket) id, writes the strategic [spec](term:spec) (problem, goals, constraints, open questions, risks, done criteria) and moves it from `Draft` to `Approved`. Give it the id of an existing `Draft` instead, such as a `/park` stub, and it expands that file in place. It keeps implementation out of the document on purpose: you agree on the problem before arguing about the solution.",
+    "ru": "Опишите фичу своими словами, и `/spec` выдаст идентификатор [тикета](term:ticket), напишет стратегическую [спеку](term:spec) (проблема, цели, ограничения, открытые вопросы, риски, критерии готовности) и переведёт её из `Draft` в `Approved`. Передайте вместо этого идентификатор существующего `Draft`, например заглушки от `/park`, и он развернёт этот файл на месте. Реализацию он в документ не пускает намеренно: сначала вы договариваетесь о проблеме и только потом спорите о решении.",
+    "ua": "Опишіть фічу своїми словами, і `/spec` видасть ідентифікатор [тікета](term:ticket), напише стратегічну [спеку](term:spec) (проблема, цілі, обмеження, відкриті питання, ризики, критерії готовності) і переведе її з `Draft` до `Approved`. Передайте натомість ідентифікатор наявного `Draft`, наприклад заглушки від `/park`, і він розгорне цей файл на місці. Реалізацію він у документ не пускає свідомо: спершу ви домовляєтеся про проблему і лише потім сперечаєтеся про рішення."
+  },
+  "situation": {
+    "en": "A task carries real design decisions, the kind where you would say 'write a spec', 'create a ticket for' or 'we need a plan for'. Or a `Draft` stub parked earlier is now worth working on. A task that is small and deterministic is handled in place by the same command.",
+    "ru": "В задаче есть настоящие проектные решения: такую задачу вы назвали бы словами «напиши спеку», «заведи тикет на» или «нам нужен план для». Или заглушка `Draft`, отложенная раньше, теперь стоит работы. Маленькую детерминированную задачу эта же команда делает на месте.",
+    "ua": "У задачі є справжні проєктні рішення: таку задачу ви назвали б словами «напиши спеку», «заведи тікет на» або «нам потрібен план для». Або заглушка `Draft`, відкладена раніше, тепер варта роботи. Маленьку детерміновану задачу ця сама команда робить на місці."
+  },
+  "warning": {
+    "en": "Unusable input, an empty line or one content-free token such as `?` or `help`, gets a short usage hint and nothing else. Anything recognizable as a feature description is never refused. When a §6 research item is `Open` and required before implementation, `/spec` does not chain on: it lists those items and asks whether to proceed.",
+    "ru": "На непригодный ввод, пустую строку или один пустой по смыслу токен вроде `?` или `help`, команда отвечает короткой подсказкой по использованию и больше ничем. Всё, что похоже на описание фичи, она не отклоняет. Если пункт исследования в §6 в статусе `Open` и нужен до реализации, `/spec` дальше по цепочке не идёт: он перечисляет эти пункты и спрашивает, продолжать ли.",
+    "ua": "На непридатне введення, порожній рядок чи один порожній за змістом токен на кшталт `?` або `help`, команда відповідає короткою підказкою щодо використання і більше нічим. Усе, що схоже на опис фічі, вона не відхиляє. Якщо пункт дослідження в §6 у статусі `Open` і потрібен до реалізації, `/spec` далі за ланцюжком не йде: він перелічує ці пункти й питає, чи продовжувати."
+  },
+  "steps": [
+    {
+      "en": "Describe the feature in free-form words: `/spec add CSV export to the monthly report`. Or name it yourself: `/spec csv-export --priority 70`, where `--priority N` takes 0..100. The agent derives a short kebab-case slug from your wording (prefix `bugfix-` for fix or crash wording, `hotfix-` for urgent or blocker wording), picks one without asking you to choose between candidates and confirms it in the output.",
+      "ru": "Опишите фичу свободными словами: `/spec add CSV export to the monthly report`. Или назовите её сами: `/spec csv-export --priority 70`, где `--priority N` принимает значения 0..100. Агент выводит из вашей формулировки короткий слаг в kebab-case (префикс `bugfix-` для слов про исправление или падение, `hotfix-` для слов про срочное или блокирующее), выбирает один сам, не прося вас выбирать между вариантами, и подтверждает его в ответе.",
+      "ua": "Опишіть фічу вільними словами: `/spec add CSV export to the monthly report`. Або назвіть її самі: `/spec csv-export --priority 70`, де `--priority N` приймає значення 0..100. Агент виводить із вашого формулювання короткий слаг у kebab-case (префікс `bugfix-` для слів про виправлення чи падіння, `hotfix-` для слів про термінове чи блокувальне), обирає один сам, не просячи вас вибирати між варіантами, і підтверджує його у відповіді."
+    },
+    {
+      "en": "To expand a ticket that already exists, pass its id: `/spec T0042`, where `T0042` stands at `Draft`, such as a one-line [`/park`](fn:park) stub or a rough draft that `/backlog` selected. The agent keeps its id, slug, priority and header tokens, reads the stub's one-line symptom as the problem statement and runs the steps below from reading the context, in the same file. It never allocates a second id.",
+      "ru": "Чтобы развернуть уже существующий тикет, передайте его идентификатор: `/spec T0042`, где `T0042` стоит на `Draft`, например однострочная заглушка от [`/park`](fn:park) или черновик, выбранный `/backlog`. Агент сохраняет его идентификатор, слаг, приоритет и токены шапки, берёт однострочный симптом заглушки как формулировку проблемы и проходит шаги ниже начиная с чтения контекста, в том же файле. Второй идентификатор он не выдаёт никогда.",
+      "ua": "Щоб розгорнути вже наявний тікет, передайте його ідентифікатор: `/spec T0042`, де `T0042` стоїть на `Draft`, наприклад однорядкова заглушка від [`/park`](fn:park) або чернетка, яку вибрав `/backlog`. Агент зберігає його ідентифікатор, слаг, пріоритет і токени шапки, бере однорядковий симптом заглушки як формулювання проблеми й проходить кроки нижче, починаючи з читання контексту, в тому самому файлі. Другого ідентифікатора він не видає ніколи."
+    },
+    {
+      "en": "It reads the repo map, the architecture and build docs and the feature list, enough to state the problem accurately and not duplicate a capability. Then it scores the task: at most 3 existing files and none new; no new classes, interfaces or public types; no schema or migration change; no new dependency-injection wiring or module; no new screen, route or navigation destination; mechanically deterministic; delta under about 100 lines. All pass is PRIMITIVE, any failure is COMPLEX.",
+      "ru": "Он читает карту репозитория, документы об архитектуре и сборке и список фич, достаточно, чтобы точно описать проблему и не дублировать существующее. Затем оценивает задачу: не больше 3 существующих файлов и нет новых; нет новых классов, интерфейсов и публичных типов; нет изменения схемы или миграции; нет нового внедрения зависимостей или модуля; нет нового экрана, маршрута или пункта навигации; всё детерминировано; дельта меньше примерно 100 строк. Всё выполнено - PRIMITIVE, иначе COMPLEX.",
+      "ua": "Він читає мапу репозиторію, документи про архітектуру та збірку і список фіч, достатньо, щоб точно описати проблему й не дублювати наявне. Потім оцінює задачу: не більше 3 наявних файлів і немає нових; немає нових класів, інтерфейсів і публічних типів; немає зміни схеми чи міграції; немає нового впровадження залежностей чи модуля; немає нового екрана, маршруту чи пункту навігації; усе детерміновано; дельта менша за приблизно 100 рядків. Усе виконано - PRIMITIVE, інакше COMPLEX."
+    },
+    {
+      "en": "PRIMITIVE path: it allocates the id and writes a minimal spec (the header with `Blocked-by` and `Carried-to`, `## Problem`, `## Approach` with a bullet per file, `## Done criteria` with a check per file) at `Status: In Progress`. It implements, then runs the narrowest meaningful check from `docs/VALIDATION.md`; a red or unrun check never becomes `Implemented`. If acceptance needs manual testing it adds the verification tags and a `## Manual checks` section, and sets `BlockNeedUserTest`.",
+      "ru": "Путь PRIMITIVE: выдаётся идентификатор и пишется минимальная спека (шапка шаблона с `Blocked-by` и `Carried-to`, `## Problem`, `## Approach` с пунктом на файл, `## Done criteria` с проверкой на файл) со `Status: In Progress`. Затем реализация и самая узкая осмысленная проверка из `docs/VALIDATION.md`; красная или незапущенная проверка `Implemented` не даёт. Если приёмка включает ручное тестирование, добавляются теги проверки и раздел `## Manual checks`, и статус `BlockNeedUserTest`.",
+      "ua": "Шлях PRIMITIVE: видається ідентифікатор і пишеться мінімальна спека (шапка із шаблону з `Blocked-by` та `Carried-to`, `## Problem`, `## Approach` з пунктом на файл, `## Done criteria` з перевіркою на файл) зі `Status: In Progress`. Далі йде реалізація й найвужча змістовна перевірка з `docs/VALIDATION.md`; червона чи незапущена перевірка `Implemented` не дає. Якщо приймання включає ручне тестування, додаються теги перевірки й розділ `## Manual checks`, а статус стає `BlockNeedUserTest`."
+    },
+    {
+      "en": "COMPLEX path: it picks a rough tier label (`Quick Win`, `Easy`, `Moderate`, `Strategic`, `Security/Compliance (urgent)`), a triage hint only, since `/backlog` selects by `Priority`. Before any file is written it allocates the id by your repo's scheme: scan the plan directory for the highest id and increment it (`T0041` to `T0042`), or take the id from your tracker (`JIRA-123`) or a date-slug.",
+      "ru": "Путь COMPLEX: выбирается примерная метка уровня (`Quick Win`, `Easy`, `Moderate`, `Strategic`, `Security/Compliance (urgent)`), только подсказка для сортировки, потому что `/backlog` выбирает по `Priority`. Перед записью любого файла выдаётся идентификатор по схеме вашего репозитория: найти в каталоге планов наибольший и прибавить единицу (`T0041` в `T0042`) либо взять из трекера (`JIRA-123`) или дату со слагом.",
+      "ua": "Шлях COMPLEX: обирається приблизна мітка рівня (`Quick Win`, `Easy`, `Moderate`, `Strategic`, `Security/Compliance (urgent)`), лише підказка для сортування, бо `/backlog` обирає за `Priority`. Перед записом будь-якого файлу видається ідентифікатор за схемою вашого репозиторію: знайти в каталозі планів найбільший і додати одиницю (`T0041` до `T0042`) або взяти з трекера (`JIRA-123`) чи дату зі слагом."
+    },
+    {
+      "en": "It writes the ticket file, `PLAN_DIR/ID_slug.md`, from the template in the skill's `references/TEMPLATE.md`: a header with `Status: Draft`, priority, date, tier, `Blocked-by`, `Carried-to` and the plan link, then 12 sections from Problem to Next step. §5 names architectural roles only and §11 observable outcomes. §6, §7 and both tokens are mandatory: write an explicit 'none' rather than omit them, since an absent line is not a value.",
+      "ru": "Он пишет файл тикета, `PLAN_DIR/ID_slug.md`, по шаблону из `references/TEMPLATE.md` навыка: шапка с `Status: Draft`, приоритетом, датой, уровнем, `Blocked-by`, `Carried-to` и ссылкой на план, затем 12 разделов от Problem до Next step. В §5 только архитектурные роли, в §11 только наблюдаемые результаты. §6, §7 и оба токена обязательны: вместо пропуска пишется явное «none», ведь отсутствующая строка значением не считается.",
+      "ua": "Він пише файл тікета, `PLAN_DIR/ID_slug.md`, за шаблоном із `references/TEMPLATE.md` навички: шапка зі `Status: Draft`, пріоритетом, датою, рівнем, `Blocked-by`, `Carried-to` і посиланням на план, потім 12 розділів від Problem до Next step. У §5 лише архітектурні ролі, у §11 лише спостережувані результати. §6, §7 і обидва токени обов'язкові: замість пропуску пишеться явне «none», адже відсутній рядок значенням не вважається."
+    },
+    {
+      "en": "It fills §3.3, Owner inputs, with only the bullets that match the real scope, no `n/a` padding. **Related tickets** is the one required bullet, prose for a human. A dependency a skill must act on also goes in the `Blocked-by` token, and the status becomes `BlockByOtherTask`, with the blocker named after a hyphen on the status line. A trigger (user-facing wording, data, performance, platform, localization) adds its bullet; any match also adds **Validation level** and **Owner sign-off**.",
+      "ru": "Он заполняет §3.3, Owner inputs, только пунктами по реальному объёму, без заполнителей `n/a`. Обязателен один пункт, **Related tickets**: проза для человека. Зависимость, на которую реагирует навык, пишется ещё и в `Blocked-by`, а статус становится `BlockByOtherTask`, блокер назван после дефиса на строке статуса. Триггер (формулировки для пользователя, данные, производительность, платформа, локализация) добавляет свой пункт, а любое совпадение ещё **Validation level** и **Owner sign-off**.",
+      "ua": "Він заповнює §3.3, Owner inputs, лише пунктами за реальним обсягом, без заповнювачів `n/a`. Обов'язковий один пункт, **Related tickets**, і це проза для людини. Залежність, на яку має реагувати навичка, пишеться ще й у токен `Blocked-by`, а статус стає `BlockByOtherTask`, із нотаткою про блокер після дефіса на рядку статусу. Тригер (формулювання для користувача, дані, продуктивність, платформа, локалізація) додає свій пункт, а будь-який збіг ще **Validation level** і **Owner sign-off**."
+    },
+    {
+      "en": "It flips `Status: Draft` to `Approved`. The style gate (lists over tables, one idea per bullet, no section summaries) is enforced here, at approval; a Draft may stay rough. Then it runs `/spec-tech` on the ticket at once, unless the research stop from the warning applies.",
+      "ru": "Он меняет `Status: Draft` на `Approved`. Стилевая проверка (списки вместо таблиц, одна мысль на пункт, без резюме разделов) выполняется именно здесь, при утверждении; черновик может оставаться сырым. Затем сразу запускается `/spec-tech` на этом тикете, если не сработала остановка из-за исследования, описанная выше.",
+      "ua": "Він міняє `Status: Draft` на `Approved`. Стильова перевірка (списки замість таблиць, одна думка на пункт, без резюме розділів) виконується саме тут, при затвердженні; чернетка може лишатися сирою. Потім одразу запускається `/spec-tech` на цьому тікеті, якщо не спрацювала зупинка через дослідження, описана вище."
+    }
+  ],
+  "outcome": {
+    "en": "A ticket file named by id and slug in your plan directory, at `Status: Approved`, with `Blocked-by` and `Carried-to` filled in, and `/spec-tech` already running on it. For an expanded `Draft` it is the same file under the same id. For a small task the result is instead a finished change, at `Implemented` or `BlockNeedUserTest`.",
+    "ru": "Файл тикета с идентификатором и слагом в имени в вашем каталоге планов, со `Status: Approved`, с заполненными `Blocked-by` и `Carried-to`, и `/spec-tech` уже работает над ним. Для развёрнутого `Draft` это тот же файл под тем же идентификатором. Для мелкой задачи результат другой: готовое изменение со статусом `Implemented` или `BlockNeedUserTest`.",
+    "ua": "Файл тікета з ідентифікатором і слагом у назві у вашому каталозі планів, зі `Status: Approved`, із заповненими `Blocked-by` і `Carried-to`, і `/spec-tech` уже працює над ним. Для розгорнутого `Draft` це той самий файл під тим самим ідентифікатором. Для дрібної задачі результат інший: готова зміна зі статусом `Implemented` або `BlockNeedUserTest`."
+  },
+  "tips": [
+    {
+      "en": "Keep strategy strategic: no class names, file paths, line budgets, schema versions or dependency-injection modules in §5, and outcomes a person can observe in §11. The tactical folder named in the header is created later, by `/spec-tech`.",
+      "ru": "Держите стратегию стратегической: в §5 никаких имён классов, путей к файлам, бюджетов строк, версий схемы и модулей внедрения зависимостей, в §11 только то, что человек может наблюдать. Тактический каталог из шапки создаст позже `/spec-tech`.",
+      "ua": "Тримайте стратегію стратегічною: у §5 жодних назв класів, шляхів до файлів, бюджетів рядків, версій схеми та модулів впровадження залежностей, у §11 лише те, що людина може спостерігати. Тактичний каталог із шапки створить пізніше `/spec-tech`."
+    },
+    {
+      "en": "An id in prose is a mention, an id in the `Blocked-by` token is a claim. `/backlog` reads that token and `/spec-check` reads `Carried-to` when it decides whether §6 is closed; neither infers anything from the prose of §3.3 or §10.",
+      "ru": "Идентификатор в прозе - упоминание, идентификатор в токене `Blocked-by` - утверждение. `/backlog` читает этот токен, а `/spec-check` читает `Carried-to`, решая, закрыт ли §6; ни тот ни другой ничего не выводят из прозы §3.3 или §10.",
+      "ua": "Ідентифікатор у прозі - згадка, ідентифікатор у токені `Blocked-by` - твердження. `/backlog` читає цей токен, а `/spec-check` читає `Carried-to`, вирішуючи, чи закрито §6; жоден із них нічого не виводить із прози §3.3 чи §10."
+    },
+    {
+      "en": "A check only a human can make goes in a `## Manual checks` section, one `[ ]` line per thing a person must see. A PRIMITIVE spec writes it when it enters `BlockNeedUserTest`; `/spec-check` can append it later. Agents never tick a box, the human does.",
+      "ru": "Проверка, которую может сделать только человек, попадает в раздел `## Manual checks`: по одной строке `[ ]` на всё, что человек должен увидеть. Спека PRIMITIVE пишет его при входе в `BlockNeedUserTest`, а `/spec-check` может дописать позже. Отметки агенты не ставят, их ставит человек.",
+      "ua": "Перевірка, яку може зробити лише людина, потрапляє в розділ `## Manual checks`: по одному рядку `[ ]` на все, що людина має побачити. Спека PRIMITIVE пише його, входячи в `BlockNeedUserTest`, а `/spec-check` може дописати пізніше. Позначок агенти не ставлять, їх ставить людина."
+    },
+    {
+      "en": "Every move into a `Block*` status carries a one-line note on the status line itself, after a hyphen: what must be tested, or what the blocker is and what resolves it. The full gate table lives once, in [the lifecycle](fn:spec-lifecycle), and this command restates only its own row.",
+      "ru": "Каждый переход в статус `Block*` сопровождается заметкой в одну строку на самой строке статуса, после дефиса: что нужно проверить либо в чём блокер и что его снимает. Полная таблица переходов живёт в одном месте, в [жизненном цикле](fn:spec-lifecycle), а эта команда повторяет только свою строку.",
+      "ua": "Кожен перехід у статус `Block*` супроводжується нотаткою в один рядок на самому рядку статусу, після дефіса: що треба перевірити або в чому блокер і що його знімає. Повна таблиця переходів живе в одному місці, у [життєвому циклі](fn:spec-lifecycle), а ця команда повторює лише свій рядок."
+    },
+    {
+      "en": "§3.2 Hard constraints has two lines that are easy to skip: **Accessibility** (if the feature is user-facing, the input modes and layout classes it must work in) and **Shared boundary** (a format, payload or behaviour another project reads that this change touches; the contract amendment is the plan's first phase; or 'none').",
+      "ru": "В §3.2 Hard constraints есть две строки, которые легко пропустить: **Accessibility** (если функция видна пользователю, режимы ввода и классы раскладки, в которых она должна работать) и **Shared boundary** (формат, данные или поведение, которые читает другой проект и которых касается изменение; поправка к контракту - первая фаза плана; либо 'none').",
+      "ua": "У §3.2 Hard constraints є два рядки, які легко пропустити: **Accessibility** (якщо функція видима користувачеві, режими введення й класи розкладки, у яких вона має працювати) і **Shared boundary** (формат, дані чи поведінка, які читає інший проєкт і яких стосується зміна; поправка до контракту - перша фаза плану; або 'none')."
+    },
+    {
+      "en": "Priority defaults to 50: 90 for a `bugfix-` slug and 95 for a `hotfix-` one, and `--priority N` overrides it. `/backlog` selects by `Priority`, which is why the tier label stays a rough hint. Until `/spec-tech` runs, §12 Next step points at `/spec-tech <ID>`; then it is replaced by the link to the plan.",
+      "ru": "Приоритет по умолчанию - 50: 90 для слага `bugfix-` и 95 для `hotfix-`, а `--priority N` его переопределяет. `/backlog` выбирает по `Priority`, поэтому метка уровня остаётся приблизительной подсказкой. Пока `/spec-tech` не запущен, §12 Next step указывает на `/spec-tech <ID>`; потом его заменяет ссылка на план.",
+      "ua": "Пріоритет за замовчуванням - 50: 90 для слага `bugfix-` і 95 для `hotfix-`, а `--priority N` його перевизначає. `/backlog` обирає за `Priority`, тому мітка рівня лишається приблизною підказкою. Доки `/spec-tech` не запущено, §12 Next step вказує на `/spec-tech <ID>`; потім його замінює посилання на план."
+    }
+  ],
+  "related": ["spec-tech", "spec-lifecycle", "research", "backlog", "park"],
+  "terms": ["ticket", "spec", "plan", "status", "block-status"],
+  "keywords": {
+    "en": ["write a spec", "strategic spec", "create a ticket", "feature description", "what and why", "Draft to Approved", "expand a Draft", "park stub"],
+    "ru": ["написать спеку", "стратегическая спека", "завести тикет", "описание фичи", "что и зачем", "от Draft до Approved", "развернуть Draft", "заглушка из park"],
+    "ua": ["написати спеку", "стратегічна спека", "завести тікет", "опис фічі", "що й навіщо", "від Draft до Approved", "розгорнути Draft", "заглушка з park"]
+  }
+}

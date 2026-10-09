@@ -1,0 +1,10 @@
+{
+  "id": "park",
+  "term": { "en": "Park", "ru": "Парковка (park)", "ua": "Паркування (park)" },
+  "def": {
+    "en": "To record a real but out-of-scope finding as a minimal ticket file (an id, the status `Draft`, a default priority, `Blocked-by: none`, `Carried-to: none`, a one-line symptom and where it was found) and return to the task at once. Parking never investigates or fixes; the command is `/park`.",
+    "ru": "Записать настоящую, но не относящуюся к задаче находку минимальным файлом тикета (идентификатор, статус `Draft`, приоритет по умолчанию, `Blocked-by: none`, `Carried-to: none`, симптом в одну строку и где найдено) и сразу вернуться к задаче. Парковка ничего не расследует и не чинит; команда - `/park`.",
+    "ua": "Записати справжню, але не пов'язану із задачею знахідку мінімальним файлом тікета (ідентифікатор, статус `Draft`, пріоритет за замовчуванням, `Blocked-by: none`, `Carried-to: none`, симптом в один рядок і де знайдено) та одразу повернутися до задачі. Паркування нічого не розслідує й не лагодить; команда - `/park`."
+  },
+  "see": ["ticket", "backlog"]
+}

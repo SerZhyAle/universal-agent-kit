@@ -1,0 +1,129 @@
+{
+  "id": "spec-lifecycle",
+  "title": {
+    "en": "Move a ticket through the lifecycle with a gate at every step",
+    "ru": "Провести тикет по жизненному циклу с проверкой на каждом шаге",
+    "ua": "Провести тікет життєвим циклом із перевіркою на кожному кроці"
+  },
+  "pitch": {
+    "en": "A ticket is one Markdown file with a status line. Each skill requires an entry status and produces an exit status, so no stage is skipped on a hunch.",
+    "ru": "Тикет - это один Markdown-файл со строкой статуса. Каждый навык требует входной статус и выдаёт выходной, поэтому этап нельзя пропустить на глаз.",
+    "ua": "Тікет - це один Markdown-файл із рядком статусу. Кожна навичка вимагає вхідний статус і видає вихідний, тож етап не можна пропустити на око."
+  },
+  "lead": {
+    "en": "The lifecycle is a method, not a tool: a [ticket](term:ticket) is one Markdown file and its [status](term:status) is a line in it that you keep honest. This page takes a ticket from `Draft` to `Verified` and shows which skill may move it at each step, what that skill requires first and what makes it stop. The result is a status that the code backs up, not a filename or a wish.",
+    "ru": "Жизненный цикл - это метод, а не инструмент: [тикет](term:ticket) - один Markdown-файл, а его [статус](term:status) - строка в нём, которую вы держите честной. Здесь тикет проходит путь от `Draft` до `Verified`: видно, какой навык может сдвинуть его на каждом шаге, что он требует на входе и что его останавливает. В итоге статус подтверждён кодом, а не названием файла или желанием.",
+    "ua": "Життєвий цикл - це метод, а не інструмент: [тікет](term:ticket) - один Markdown-файл, а його [статус](term:status) - рядок у ньому, який ви тримаєте чесним. Тут тікет проходить шлях від `Draft` до `Verified`: видно, яка навичка може зрушити його на кожному кроці, що вона вимагає на вході і що її зупиняє. У підсумку статус підтверджено кодом, а не назвою файлу чи бажанням."
+  },
+  "situation": {
+    "en": "The work carries real unknowns or real risk, and you want the what and why agreed before the how, with an audit after the build. For a typo or a known bug the lifecycle is skipped on purpose.",
+    "ru": "В работе есть настоящие неизвестные или настоящий риск, и вы хотите согласовать, что и зачем, до того как решать, как, а после сборки провести аудит. Для опечатки или известного бага цикл пропускают намеренно.",
+    "ua": "У роботі є справжні невідомі чи справжній ризик, і ви хочете погодити, що й навіщо, до того як вирішувати, як, а після збірки провести аудит. Для одруківки чи відомого багу цикл пропускають свідомо."
+  },
+  "warning": {
+    "en": "`Verified` means nothing is left open: zero FAIL, zero WARN, no open MANUAL item and no `Open` question in §6 that was not handed on. An open manual check holds the ticket at `BlockNeedUserTest`. Do not claim more gates than exist: `Carried-to` is enforced when a ticket closes, while `Blocked-by` only makes `/backlog` skip the ticket.",
+    "ru": "`Verified` значит, что ничего не осталось открытым: ноль FAIL, ноль WARN, ни одного открытого MANUAL и ни одного вопроса `Open` в §6, который не передан дальше. Открытая ручная проверка держит тикет на `BlockNeedUserTest`. Не заявляйте больше барьеров, чем есть: `Carried-to` проверяется жёстко при закрытии, а `Blocked-by` лишь заставляет `/backlog` пропустить тикет.",
+    "ua": "`Verified` означає, що нічого не лишилося відкритим: нуль FAIL, нуль WARN, жодного відкритого MANUAL і жодного питання `Open` у §6, яке не передано далі. Відкрита ручна перевірка тримає тікет на `BlockNeedUserTest`. Не заявляйте більше бар'єрів, ніж є: `Carried-to` перевіряється жорстко при закритті, а `Blocked-by` лише змушує `/backlog` пропустити тікет."
+  },
+  "steps": [
+    {
+      "en": "Pick the lowest rung of the complexity ladder that still proves the change. A typo is `/quick`, a known bug is `/fix` (neither needs a spec), a small deterministic change is a three-section PRIMITIVE spec (Problem / Approach / Done criteria), and anything with real unknowns is the full COMPLEX pipeline.",
+      "ru": "Выберите самую нижнюю ступень лестницы сложности, которая всё ещё доказывает изменение. Опечатка - это `/quick`, известный баг - `/fix` (спека не нужна ни там, ни там), небольшое детерминированное изменение - спека PRIMITIVE из трёх разделов (Problem / Approach / Done criteria), а всё, где есть настоящие неизвестные, - полный конвейер COMPLEX.",
+      "ua": "Оберіть найнижчий щабель драбини складності, який усе ще доводить зміну. Одруківка - це `/quick`, відомий баг - `/fix` (спека не потрібна ні там, ні там), невелика детермінована зміна - спека PRIMITIVE з трьох розділів (Problem / Approach / Done criteria), а все, де є справжні невідомі, - повний конвеєр COMPLEX."
+    },
+    {
+      "en": "To choose between the top two rungs, score the task. It is PRIMITIVE only if all of these hold: at most 3 existing files change and none is new; no new interface anyone else consumes; no change to a shared structure or its history; no new wiring; no new surface a reader reaches; mechanically deterministic, with no deferred decisions; under about 100 lines of delta. Any false means COMPLEX.",
+      "ru": "Чтобы выбрать между двумя верхними ступенями, оцените задачу. Это PRIMITIVE, только если верно всё: меняется не больше 3 существующих файлов и нет новых; нет нового интерфейса, которым пользуется кто-то ещё; нет изменений общей структуры или её истории; нет нового подключения; нет новой поверхности, до которой доходит читатель; всё механически детерминировано, без отложенных решений; дельта меньше примерно 100 строк. Хоть одно неверно - это COMPLEX.",
+      "ua": "Щоб вибрати між двома верхніми щаблями, оцініть задачу. Це PRIMITIVE, лише якщо правдиве все: змінюється не більше 3 наявних файлів і немає нових; немає нового інтерфейсу, яким користується хтось іще; немає змін спільної структури чи її історії; немає нового підключення; немає нової поверхні, до якої доходить читач; усе механічно детерміновано, без відкладених рішень; дельта менша за приблизно 100 рядків. Хоч одне хибне - це COMPLEX."
+    },
+    {
+      "en": "Run the pipeline forward; every skill reads and writes the same status. `/spec` takes the [spec](term:spec) from `Draft` to `Approved`, `/spec-tech` turns it into a [plan](term:plan) and sets `Tactical`, `/spec-dev` takes the ticket to `Implemented` or `BlockNeedUserTest`. `/research` comes first and changes no status, `/ui-clarify` goes before the pipeline while a user-facing decision is open, and [`/surfaces`](fn:surfaces) goes after a user-visible change is built, before the ticket closes.",
+      "ru": "Ведите тикет вперёд: каждый навык читает и пишет один и тот же статус. `/spec` переводит [спеку](term:spec) из `Draft` в `Approved`, `/spec-tech` строит [план](term:plan) и ставит `Tactical`, `/spec-dev` доводит тикет до `Implemented` или `BlockNeedUserTest`. `/research` идёт первым и статус не меняет, `/ui-clarify` стоит перед конвейером, пока не решён вопрос, видимый пользователю, а [`/surfaces`](fn:surfaces) идёт после сборки заметного пользователю изменения, до закрытия тикета.",
+      "ua": "Ведіть тікет уперед: кожна навичка читає й пише той самий статус. `/spec` переводить [спеку](term:spec) з `Draft` до `Approved`, `/spec-tech` будує [план](term:plan) і ставить `Tactical`, `/spec-dev` доводить тікет до `Implemented` або `BlockNeedUserTest`. `/research` іде першим і статус не змінює, `/ui-clarify` стоїть перед конвеєром, доки не вирішено питання, видиме користувачеві, а [`/surfaces`](fn:surfaces) іде після збірки помітної користувачеві зміни, до закриття тікета."
+    },
+    {
+      "en": "Audit the build. `/spec-check` needs `Implemented` or later and ends in `Verified`, `Partial` (warnings, no failures), `Broken` (at least one failure) or `BlockNeedUserTest`. For `Partial` or `Broken`, `/spec-fix` applies the audit's action items and re-runs `/spec-check` only if it fixed at least one; otherwise it stops, and decisions it cannot make go to `BlockQuestions`. `/prove` runs the result and observes it, and leaves the status alone.",
+      "ru": "Проведите аудит сборки. `/spec-check` требует `Implemented` или дальше и заканчивает на `Verified`, `Partial` (предупреждения, но нет провалов), `Broken` (есть хотя бы один провал) или `BlockNeedUserTest`. При `Partial` или `Broken` `/spec-fix` применяет пункты действий аудита и заново запускает `/spec-check`, только если исправил хотя бы один; иначе он останавливается, а решения не по его силам уходят в `BlockQuestions`. `/prove` запускает результат и наблюдает за ним, не трогая статус.",
+      "ua": "Проведіть аудит збірки. `/spec-check` вимагає `Implemented` або далі й завершується на `Verified`, `Partial` (попередження, але немає збоїв), `Broken` (є хоча б один збій) або `BlockNeedUserTest`. За `Partial` чи `Broken` `/spec-fix` застосовує пункти дій аудиту й знову запускає `/spec-check`, лише якщо виправив бодай один; інакше він зупиняється, а рішення, які йому не під силу, йдуть у `BlockQuestions`. `/prove` запускає результат і спостерігає за ним, не чіпаючи статус."
+    },
+    {
+      "en": "Let the skills chain: each requires an entry status, produces an exit status and calls the next unless a stop condition fires (a required research item still `Open`, an unchecked pre-implementation blocker, an ambiguity, a failed check, a `Block*` condition). There is no sign-off at every stage; to review between stages, run the skills one by one or pass `--dry-run` to those that take it: `/spec-tech`, `/spec-dev`, `/spec-fix`, `/backlog`.",
+      "ru": "Дайте навыкам идти цепочкой: каждый требует входной статус, выдаёт выходной и вызывает следующий, пока не сработает условие остановки (обязательный пункт исследования всё ещё `Open`, не снят блокер до реализации, неоднозначность, проваленная проверка, условие `Block*`). Подписи на каждом этапе нет; чтобы посмотреть между этапами, запускайте навыки по одному или передайте `--dry-run` тем, что его принимают: `/spec-tech`, `/spec-dev`, `/spec-fix`, `/backlog`.",
+      "ua": "Дайте навичкам іти ланцюжком: кожна вимагає вхідний статус, видає вихідний і викликає наступну, доки не спрацює умова зупинки (обов'язковий пункт дослідження все ще `Open`, не знято блокер до реалізації, неоднозначність, провалена перевірка, умова `Block*`). Підпису на кожному етапі немає; щоб подивитися між етапами, запускайте навички по одній або передайте `--dry-run` тим, що його приймають: `/spec-tech`, `/spec-dev`, `/spec-fix`, `/backlog`."
+    },
+    {
+      "en": "When a ticket cannot move, put it in a [block status](term:block-status), with a one-line note on the status line after a hyphen: `BlockNeedUserTest` (built, awaiting a manual check), `BlockByOtherTask` (depends on another ticket), `BlockQuestions` (awaiting a decision from the owner), `BlockExternal` (waiting on a library release, hardware or a third party). To clear one, remove the condition, note it and advance exactly one level.",
+      "ru": "Если тикет не может двигаться, поставьте ему [статус блокировки](term:block-status) с заметкой в одну строку на самой строке статуса, после дефиса: `BlockNeedUserTest` (собрано, ждёт ручной проверки), `BlockByOtherTask` (зависит от другого тикета), `BlockQuestions` (ждёт решения владельца), `BlockExternal` (ждёт релиза библиотеки, железа или третьей стороны). Чтобы выйти из блокировки, уберите причину, отметьте это и продвиньте тикет ровно на один уровень.",
+      "ua": "Якщо тікет не може рухатись, поставте йому [статус блокування](term:block-status) із нотаткою в один рядок на самому рядку статусу, після дефіса: `BlockNeedUserTest` (зібрано, чекає ручної перевірки), `BlockByOtherTask` (залежить від іншого тікета), `BlockQuestions` (чекає рішення власника), `BlockExternal` (чекає на реліз бібліотеки, залізо чи третю сторону). Щоб вийти з блокування, приберіть причину, позначте це й просуньте тікет рівно на один рівень."
+    },
+    {
+      "en": "Close the ticket honestly. `/spec-check` grants `Verified` only when every check is PASS or EXEMPT. A cancelled or superseded ticket goes to `Archived`: its files leave the active workspace, the record stays and is never hard-deleted, and any leftover verification tag is cleared. Keep `Blocked-by` and `Carried-to` in the header and write `none` when empty: an absent line is not a value.",
+      "ru": "Закрывайте тикет честно. `/spec-check` ставит `Verified` только когда каждая проверка - PASS или EXEMPT. Отменённый или замещённый тикет уходит в `Archived`: его файлы покидают рабочее пространство, запись остаётся и никогда не удаляется насовсем, а оставшийся тег проверки снимается. Держите в шапке `Blocked-by` и `Carried-to`, а пустые заполняйте `none`: отсутствующая строка значением не считается.",
+      "ua": "Закривайте тікет чесно. `/spec-check` ставить `Verified` лише коли кожна перевірка - PASS або EXEMPT. Скасований чи замінений тікет іде в `Archived`: його файли залишають робочий простір, запис лишається й ніколи не видаляється назавжди, а залишковий тег перевірки знімається. Тримайте в шапці `Blocked-by` і `Carried-to`, а порожні заповнюйте `none`: відсутній рядок значенням не вважається."
+    },
+    {
+      "en": "Sweep the tickets that wait for a human in one batch, not one interruption at a time. Group every ticket at `BlockNeedUserTest`, run each recorded manual check (grep the log for `<ID>:` to see which paths actually ran) and tick its line in `## Manual checks` with what you saw. Then re-audit the batch with `/spec-check`: tickets with every box ticked become `Verified` and lose their tags, the rest stay blocked with a note.",
+      "ru": "Разбирайте тикеты, которые ждут человека, одной пачкой, а не по одному прерыванию. Соберите все тикеты на `BlockNeedUserTest`, выполните записанную ручную проверку каждого (по `<ID>:` в логе видно, какие пути действительно выполнились) и отметьте её строку в `## Manual checks` тем, что вы увидели. Затем перепроверьте пачку через `/spec-check`: тикеты, где отмечены все пункты, станут `Verified` и потеряют теги, остальные останутся заблокированными с заметкой.",
+      "ua": "Розбирайте тікети, що чекають на людину, однією пачкою, а не по одному перериванню. Зберіть усі тікети на `BlockNeedUserTest`, виконайте записану ручну перевірку кожного (за `<ID>:` у лозі видно, які шляхи справді виконалися) і відмітьте її рядок у `## Manual checks` тим, що ви побачили. Потім перевірте пачку знову через `/spec-check`: тікети, де відмічено всі пункти, стануть `Verified` і втратять теги, решта лишиться заблокованою з нотаткою."
+    }
+  ],
+  "outcome": {
+    "en": "A ticket whose status was set by a skill that checked its entry condition, whose open questions were answered or handed to a named successor, and which stands at `Verified`, `Archived` or a block status with a note that says why.",
+    "ru": "Тикет, статус которого поставил навык, проверивший условие входа; открытые вопросы в нём либо отвечены, либо переданы названному преемнику; и стоит он на `Verified`, `Archived` или на статусе блокировки с заметкой о причине.",
+    "ua": "Тікет, статус якого поставила навичка, що перевірила умову входу; відкриті питання в ньому або отримали відповідь, або передані названому наступнику; і стоїть він на `Verified`, `Archived` або на статусі блокування із нотаткою про причину."
+  },
+  "tips": [
+    {
+      "en": "An id in prose is a mention, an id in the `Blocked-by` or `Carried-to` token is a claim. Keep the prose for people and never let a skill route on it. The tokens pay off only where something machine-reads the tickets; if you read every ticket by hand, you can drop them.",
+      "ru": "Идентификатор в прозе - упоминание, идентификатор в токене `Blocked-by` или `Carried-to` - утверждение. Прозу оставьте людям и не давайте навыку ходить по ней. Токены окупаются лишь там, где тикеты читает машина; если вы читаете каждый тикет руками, их можно убрать.",
+      "ua": "Ідентифікатор у прозі - згадка, ідентифікатор у токені `Blocked-by` чи `Carried-to` - твердження. Прозу залиште людям і не давайте навичці ходити по ній. Токени окуповуються лише там, де тікети читає машина; якщо ви читаєте кожен тікет руками, їх можна прибрати."
+    },
+    {
+      "en": "To clear `BlockQuestions`: isolate the decisions that block the next transition, settle silently any that the codebase or earlier research already determines, put only the genuine judgment calls to the owner with a researched default first, record the answers in the ticket and advance one level, then stop. Never invent an owner's answer.",
+      "ru": "Чтобы снять `BlockQuestions`: выделите решения, которые мешают следующему переходу, молча закройте те, что уже определены кодовой базой или прежним исследованием, владельцу задайте только настоящие вопросы суждения и сначала предложите проверенный вариант по умолчанию, запишите ответы в тикет, продвиньте его на один уровень и остановитесь. Ответ за владельца не придумывайте.",
+      "ua": "Щоб зняти `BlockQuestions`: виділіть рішення, що заважають наступному переходу, мовчки закрийте ті, які вже визначені кодовою базою чи попереднім дослідженням, власникові ставте лише справжні питання судження й спершу запропонуйте перевірений варіант за замовчуванням, запишіть відповіді в тікет, просуньте його на один рівень і зупиніться. Відповідь за власника не вигадуйте."
+    },
+    {
+      "en": "A block status is kept by every skill until its condition is removed. In particular `/spec-check` never overwrites `BlockQuestions` or `BlockExternal` with an audit score: that overwrite is what lets an audit and its fix-up hand the same unfixable items back and forth forever.",
+      "ru": "Статус блокировки сохраняет каждый навык, пока не снята его причина. В частности, `/spec-check` никогда не затирает `BlockQuestions` и `BlockExternal` оценкой аудита: именно такая перезапись заставляет аудит и его исправление вечно передавать друг другу одни и те же неустранимые пункты.",
+      "ua": "Статус блокування зберігає кожна навичка, доки не знято його причину. Зокрема, `/spec-check` ніколи не затирає `BlockQuestions` і `BlockExternal` оцінкою аудиту: саме такий перезапис змушує аудит і його виправлення вічно передавати одне одному одні й ті самі невиправні пункти."
+    },
+    {
+      "en": "A check only a human can make lives in its own `## Manual checks` section of the strategic spec: one `[ ]` line per thing a person must see, ticked `[x]` by that person with a date and what they observed. It is written once and never overwritten, because the audit's own block is rewritten on every run. Agents never tick a box; `/prove` can supply evidence, the human supplies the tick.",
+      "ru": "Проверка, которую может сделать только человек, живёт в разделе `## Manual checks` стратегической спеки: по строке `[ ]` на каждое, что нужно увидеть, а `[x]` ставит сам человек с датой и увиденным. Раздел пишется один раз и не перезаписывается, ведь блок аудита переписывается при каждом запуске. Агенты отметок не ставят: `/prove` может дать доказательство, а отметку ставит человек.",
+      "ua": "Перевірка, яку може зробити лише людина, живе в розділі `## Manual checks` стратегічної спеки: по рядку `[ ]` на кожне, що треба побачити, а `[x]` ставить сама людина з датою та побаченим. Розділ пишеться один раз і не перезаписується, адже блок аудиту переписується під час кожного запуску. Агенти позначок не ставлять: `/prove` може дати доказ, а позначку ставить людина."
+    },
+    {
+      "en": "Two entry rules are easy to misremember. `/spec` takes either a new description or the id of an existing `Draft` (a `/park` stub), which it expands in place under the same id. `/spec-tech` takes `Approved` or later and refuses a `Draft` instead of promoting it, because planning from a one-line symptom skips the gate `/spec` runs at approval.",
+      "ru": "Два правила входа легко перепутать. `/spec` принимает либо новое описание, либо идентификатор существующего `Draft` (заглушки от `/park`) и разворачивает его на месте под тем же идентификатором. `/spec-tech` принимает `Approved` или дальше и отказывает `Draft`, а не повышает его: планирование по однострочному симптому обходит проверку, которую `/spec` проводит при утверждении.",
+      "ua": "Два правила входу легко переплутати. `/spec` приймає або новий опис, або ідентифікатор наявного `Draft` (заглушки від `/park`) і розгортає його на місці під тим самим ідентифікатором. `/spec-tech` приймає `Approved` або далі й відмовляє `Draft`, а не підвищує його: планування за однорядковим симптомом оминає перевірку, яку `/spec` проводить при затвердженні."
+    },
+    {
+      "en": "Verification tags are optional and need a trace you can grep, such as a log. A tag exists if and only if the ticket is at `BlockNeedUserTest`: insert it as the last code edit before the final build, and the audit deletes it when the ticket leaves that status.",
+      "ru": "Теги проверки необязательны и нужны там, где есть трасса, по которой можно искать grep, например лог. Тег существует тогда и только тогда, когда тикет на `BlockNeedUserTest`: его вставляют последней правкой кода перед финальной сборкой, а аудит удаляет, когда тикет покидает этот статус.",
+      "ua": "Теги перевірки необов'язкові й потрібні там, де є слід, який можна шукати через grep, наприклад лог. Тег існує тоді й лише тоді, коли тікет на `BlockNeedUserTest`: його вставляють останньою правкою коду перед фінальною збіркою, а аудит видаляє, коли тікет полишає цей статус."
+    },
+    {
+      "en": "Adapt it freely: fill the [placeholder](term:placeholder) `<ID_SCHEME>` with your id scheme (`T0042`, `JIRA-123`, a date-slug); `<ID>` in the skills and templates is then one ticket's id. Drop the block states or `Archived` if you do not want them; with an external tracker, keep the file as the spec. Tooling you add should refuse a transition whose precondition is missing.",
+      "ru": "Адаптируйте свободно: впишите в [плейсхолдер](term:placeholder) `<ID_SCHEME>` свою схему идентификаторов (`T0042`, `JIRA-123`, дата со слагом); `<ID>` в навыках и шаблонах тогда означает идентификатор одного тикета. Состояния блокировки и `Archived` можно убрать; при внешнем трекере файл остаётся спекой. Любой инструмент поверх должен отказывать в переходе, если не выполнено его условие.",
+      "ua": "Адаптуйте вільно: впишіть у [плейсхолдер](term:placeholder) `<ID_SCHEME>` свою схему ідентифікаторів (`T0042`, `JIRA-123`, дата зі слагом); `<ID>` у навичках та шаблонах тоді означає ідентифікатор одного тікета. Стани блокування й `Archived` можна прибрати; за зовнішнього трекера файл лишається спекою. Будь-який інструмент поверх має відмовляти в переході, якщо не виконано його умову."
+    },
+    {
+      "en": "The status is the first `Status:` line in the file, and a reader takes its first word as the status. A block note follows a hyphen on that same line, for example `BlockExternal - waiting for the vendor's test key`, and goes when the block lifts. A status is true because the work makes it true, never because a filename or a wish says so.",
+      "ru": "Статус - это первая строка `Status:` в файле, и читатель берёт её первое слово как статус. Заметка о блокировке идёт после дефиса на той же строке, например `BlockExternal - waiting for the vendor's test key`, и уходит, когда блокировка снята. Статус верен потому, что его делает верным работа, а не потому, что так говорит название файла или желание.",
+      "ua": "Статус - це перший рядок `Status:` у файлі, і читач бере його перше слово як статус. Нотатка про блокування йде після дефіса на тому самому рядку, наприклад `BlockExternal - waiting for the vendor's test key`, і зникає, коли блокування знято. Статус правдивий тому, що його робить правдивим робота, а не тому, що так каже назва файлу чи бажання."
+    },
+    {
+      "en": "A ticket enters `Implemented` or `BlockNeedUserTest` only when its headline user-visible behaviour already works end to end. Created classes, wired contracts and a passing compile are milestones: never invite a human to test while the advertised action still only logs, shows a placeholder or does nothing.",
+      "ru": "Тикет входит в `Implemented` или `BlockNeedUserTest` только когда его главное видимое пользователю поведение уже работает от начала до конца. Созданные классы, подключённые контракты и успешная компиляция - вехи: не зовите человека проверять, пока заявленное действие всё ещё только пишет в лог, показывает заглушку или ничего не делает.",
+      "ua": "Тікет входить в `Implemented` або `BlockNeedUserTest` лише коли його головна видима користувачеві поведінка вже працює від початку до кінця. Створені класи, підключені контракти й успішна компіляція - віхи: не кличте людину перевіряти, доки заявлена дія досі лише пише в лог, показує заглушку чи нічого не робить."
+    }
+  ],
+  "related": ["spec", "spec-tech", "spec-dev", "spec-check", "backlog"],
+  "terms": ["ticket", "spec", "plan", "status", "block-status", "gate", "placeholder"],
+  "keywords": {
+    "en": ["spec lifecycle", "ticket status", "status gates", "complexity ladder", "Draft to Verified", "BlockNeedUserTest", "Archived", "Manual checks"],
+    "ru": ["жизненный цикл спеки", "статус тикета", "переходы между статусами", "лестница сложности", "от Draft до Verified", "BlockNeedUserTest", "Archived", "Manual checks"],
+    "ua": ["життєвий цикл спеки", "статус тікета", "переходи між статусами", "драбина складності", "від Draft до Verified", "BlockNeedUserTest", "Archived", "Manual checks"]
+  }
+}

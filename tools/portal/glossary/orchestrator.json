@@ -1,0 +1,10 @@
+{
+  "id": "orchestrator",
+  "term": { "en": "Orchestrator", "ru": "Оркестратор", "ua": "Оркестратор" },
+  "def": {
+    "en": "The agent that owns a job from the raw request to verified work and hands pieces of it to others: it classifies the request, runs the matching skills, [delegates](term:delegation) and re-validates what comes back. In the kit that is `rd-lead`, on the strong [tier](term:tier); it is the session's agent only by choice (`claude --agent rd-lead`). `/spec-all` orchestrates the spec pipeline by calling skills in order.",
+    "ru": "Агент, который ведёт задачу от сырого запроса до проверенной работы и передаёт её части другим: классифицирует запрос, запускает подходящие навыки, [делегирует](term:delegation) и перепроверяет то, что вернулось. В kit это `rd-lead` на сильном [уровне](term:tier); агентом всей сессии он становится только по выбору (`claude --agent rd-lead`). `/spec-all` оркестрирует конвейер спек, вызывая остальные навыки по порядку.",
+    "ua": "Агент, що веде завдання від сирого запиту до перевіреної роботи й передає її частини іншим: класифікує запит, запускає відповідні навички, [делегує](term:delegation) і перевіряє те, що повернулося. У kit це `rd-lead` на сильному [рівні](term:tier); агентом усієї сесії він стає лише за вибором (`claude --agent rd-lead`). `/spec-all` оркеструє конвеєр спек, викликаючи решту навичок по порядку."
+  },
+  "see": ["role-agent", "delegation"]
+}

@@ -1,0 +1,10 @@
+{
+  "id": "block-status",
+  "term": { "en": "Block status", "ru": "Статус блокировки", "ua": "Статус блокування" },
+  "def": {
+    "en": "A status that parks a ticket, with a one-line note on the status line itself, after a hyphen: `BlockNeedUserTest` (awaiting a manual check), `BlockByOtherTask` (depends on another ticket), `BlockQuestions` (awaiting an owner decision), `BlockExternal` (waiting on a library release, hardware or a third party). Every skill keeps it until the condition is removed; the exit is to note that and advance one level.",
+    "ru": "Статус, который останавливает тикет, с заметкой в одну строку на самой строке статуса, после дефиса: `BlockNeedUserTest` (ждёт ручной проверки), `BlockByOtherTask` (зависит от другого тикета), `BlockQuestions` (ждёт решения владельца), `BlockExternal` (ждёт релиза библиотеки, железа или третьей стороны). Каждый навык сохраняет его, пока причина не снята; выход - отметить это и продвинуть тикет на один уровень.",
+    "ua": "Статус, що зупиняє тікет, із нотаткою в один рядок на самому рядку статусу, після дефіса: `BlockNeedUserTest` (чекає ручної перевірки), `BlockByOtherTask` (залежить від іншого тікета), `BlockQuestions` (чекає рішення власника), `BlockExternal` (чекає на реліз бібліотеки, залізо чи третю сторону). Кожна навичка зберігає його, доки причину не знято; вихід - позначити це й просунути тікет на один рівень."
+  },
+  "see": ["status", "ticket"]
+}

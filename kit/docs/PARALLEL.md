@@ -29,15 +29,19 @@ the child instead of accumulating in the parent.
 
 ## Writers need a boundary, and disjoint files are not one
 
-**Any whole-tree VCS operation one writer runs - stash, checkout, reset, restore, clean - reverts
-every other writer's uncommitted edits, even on files it never touched.** This is the failure that
-makes parallel writing different in kind from parallel reading, and the reason "they are editing
-different files" is necessary but nowhere near sufficient.
+**Any whole-tree VCS operation one writer runs - in a git repository: stash, checkout, reset,
+restore, clean - reverts every other writer's uncommitted edits, even on files it never touched.**
+This is the failure that makes parallel writing different in kind from parallel reading, and the
+reason "they are editing different files" is necessary but nowhere near sufficient.
 
 It is also hard to diagnose from inside, because the victim sees no error. It sees its own finished
 work missing. **"Something keeps reverting my files" is almost always a concurrent agent's tree
 op** - so the standing instruction is: re-read from disk before redoing anything, or you will
 re-apply an edit that is already there and conclude the tool is broken.
+
+Do not count on a checkpoint to undo a wave either. Claude Code's `/rewind` restores edits its own
+file tools made in the current session, not files changed by shell commands and usually not a
+subagent's edits - undoing a wave is a version-control job.
 
 Two ways out, and you must pick one explicitly:
 
@@ -48,9 +52,13 @@ Two ways out, and you must pick one explicitly:
 
 ## One checkout per writer - what to split and what to keep shared
 
-A linked worktree is usually the right shape: it shares the object store, so it is cheap to create
-and cheap to throw away, and each writer gets its own working tree and its own branch. A full clone
-works too and isolates more, at the cost of a copy.
+If your workspace is a git repository, a linked worktree is usually the right shape: it shares the
+object store, so it is cheap to create and cheap to throw away, and each writer gets its own working
+tree and its own branch. A full clone works too and isolates more, at the cost of a copy.
+
+Claude Code can do this per subagent: `isolation: worktree` in the agent's frontmatter gives each
+spawn its own worktree. That worktree branches from the default branch, not from the session's
+current HEAD, so in-flight uncommitted work - and anything on your feature branch - is not in it.
 
 What must **not** be shared, or the split buys nothing:
 
@@ -61,11 +69,11 @@ What must **not** be shared, or the split buys nothing:
 
 What must **stay** shared, and this is the one people get backwards:
 
-- **The advisory lock path. Resolve it from the shared git directory, not from the working tree.**
-  A per-worktree lock serializes nothing, and it does so *silently*: every caller takes its lock
-  successfully, every caller believes it is the exclusive owner, and they all proceed at once. There
-  is no error to notice - the queue simply stops being a queue. The lock discipline itself (queue
-  rather than refuse, take it immediately before the edit, judge staleness by liveness, derive the
+- **The advisory lock path.** If your workspace is a git repository, **resolve it from the shared
+  git directory, not from the working tree.** A per-worktree lock serializes nothing, and it does
+  so *silently*: every caller takes its lock successfully, every caller believes it is the
+  exclusive owner, and they all proceed at once. There is no error to notice - the queue simply
+  stops being a queue. The lock discipline itself (queue rather than refuse, take it immediately before the edit, judge staleness by liveness, derive the
   domain from the changed set) lives in `COST.md`; only the path resolution is a worktree question.
 
 ## Merging back is part of the plan, not the aftermath
@@ -83,17 +91,18 @@ orchestrator's between-wave step must collect it, and that step is part of the w
 
 ## Shaping the wave
 
-- **Stage it: find first, then verify.** Do not fan out verification over findings you have not
-  deduplicated - you will pay to check the same thing three times. The budget gate that precedes
-  every wave (count, cost, ceiling, explicit GO above it) is in `COST.md`.
+- **The budget gate precedes every wave** - count, cost, ceiling, explicit GO above it, find before
+  verify, and what to do with a wave a limit killed. It lives in `COST.md`.
+- **Each writer gets its exact file list, in its own prompt.** Not a folder, not "the phase 2 files",
+  never a pointer into lines of one shared list. A writer left to work out its own scope reads the
+  neighbour's lines, edits past its boundary, and the overlap shows up only as missing work.
 - **The orchestrator re-validates centrally after the wave returns.** A child's report is a claim,
   not a verdict, and both directions of it are unproven - a reported failure is often a phantom from
   a stale incremental build, and a reported success ("compiles in isolation") was never checked
-  against the merged tree. The delegation hazards in full - tail bias, non-resumable children,
-  adversarial verification of a finding - are in the orchestrator role brief,
-  `.claude/agents/rd-lead.md`.
-- **Never silently resume a wave a limit killed.** It leaves partial, unverified results; report
-  what completed and what did not, then decide.
+  against the merged tree. Re-run the checker over each writer's file set, so a red lands on the
+  writer that owns it; a changed file that is on nobody's list is itself a finding. The delegation
+  hazards in full - tail bias, non-resumable children, adversarial verification of a finding - are in
+  the orchestrator role brief, `.claude/agents/rd-lead.md`.
 
 ## For unattended work, loop the process - not the session
 

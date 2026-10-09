@@ -1,0 +1,94 @@
+{
+  "id": "caveman",
+  "title": {
+    "en": "Put the whole chat into brief, signal-only replies",
+    "ru": "Перевести весь чат на короткие ответы по делу",
+    "ua": "Перевести весь чат на короткі відповіді по суті"
+  },
+  "pitch": {
+    "en": "`/caveman` switches the current chat into terse mode at three intensities, `lite`, `full` or `ultra`, and keeps it until you say `stop caveman` or `normal mode`.",
+    "ru": "`/caveman` переводит текущий чат в сжатый режим трёх степеней, `lite`, `full` или `ultra`, и держит его, пока вы не скажете `stop caveman` или `normal mode`.",
+    "ua": "`/caveman` переводить поточний чат у стислий режим трьох ступенів, `lite`, `full` або `ultra`, і тримає його, доки ви не скажете `stop caveman` чи `normal mode`."
+  },
+  "lead": {
+    "en": "`/caveman` turns on brevity for the current chat only: no filler, no cheerleading, no pleasantries, with the technical substance unchanged. You pick an intensity, `lite`, `full` (the default) or `ultra`, and it stays on until you switch it off. Code blocks, file paths, commands and error strings are left exact. Brevity never skips a check: the same checks run, and only the prose about them shrinks.",
+    "ru": "`/caveman` включает краткость только для текущего чата: без воды, без восторгов, без любезностей, а техническая суть остаётся прежней. Вы выбираете степень, `lite`, `full` (по умолчанию) или `ultra`, и режим работает, пока вы его не выключите. Блоки кода, пути к файлам, команды и тексты ошибок остаются точными. Краткость никогда не пропускает проверку: те же проверки идут, сжимается только проза о них.",
+    "ua": "`/caveman` вмикає стислість лише для поточного чату: без води, без захвату, без люб'язностей, а технічна суть лишається незмінною. Ви обираєте ступінь, `lite`, `full` (за замовчуванням) або `ultra`, і режим працює, доки ви його не вимкнете. Блоки коду, шляхи до файлів, команди й тексти помилок лишаються точними. Стислість ніколи не пропускає перевірку: ті самі перевірки йдуть, стискається лише проза про них."
+  },
+  "situation": {
+    "en": "The agent's answers are padded and you want only the signal, the moment you would say \"be brief\" or \"stop padding\".",
+    "ru": "Ответы агента раздуты, и вам нужна только суть: тот момент, когда хочется сказать «короче» или «хватит воды».",
+    "ua": "Відповіді агента роздуті, і вам потрібна лише суть: той момент, коли хочеться сказати «коротше» чи «досить води»."
+  },
+  "warning": {
+    "en": "Safety and workflow rules win over brevity. Security warnings, confirmations of destructive or irreversible actions, ordered multi-step instructions where compression can mislead and a refusing gate's reason are not compressed; the reason is quoted whole. Asking for a fuller explanation also pauses the compression.",
+    "ru": "Правила безопасности и порядка работы важнее краткости. Предупреждения о безопасности, подтверждения разрушительных или необратимых действий, упорядоченные многошаговые инструкции, где сжатие может ввести в заблуждение, и причина отказа гейта не сжимаются; причина приводится целиком. Просьба о более полном объяснении тоже приостанавливает сжатие.",
+    "ua": "Правила безпеки й порядку роботи важливіші за стислість. Попередження про безпеку, підтвердження руйнівних чи незворотних дій, впорядковані багатокрокові інструкції, де стискання може ввести в оману, і причина відмови гейта не стискаються; причина наводиться повністю. Прохання про повніше пояснення теж призупиняє стискання."
+  },
+  "steps": [
+    {
+      "en": "Type `/caveman` for the default `full` mode, or add an intensity: `/caveman lite` or `/caveman ultra`. The usage line is `/caveman [optional: lite|full|ultra]`.",
+      "ru": "Введите `/caveman` для режима `full` по умолчанию или добавьте степень: `/caveman lite` или `/caveman ultra`. Строка вызова: `/caveman [optional: lite|full|ultra]`.",
+      "ua": "Введіть `/caveman` для режиму `full` за замовчуванням або додайте ступінь: `/caveman lite` чи `/caveman ultra`. Рядок виклику: `/caveman [optional: lite|full|ultra]`."
+    },
+    {
+      "en": "The agent applies the chosen intensity. `lite`: short full sentences, no filler. `full`: fragments allowed, articles, filler and pleasantries dropped. `ultra`: maximum safe compression, abbreviating prose only.",
+      "ru": "Агент применяет выбранную степень. `lite`: короткие законченные предложения, без воды. `full`: допустимы обрывки фраз, артикли, вода и любезности убираются. `ultra`: максимальное безопасное сжатие, сокращается только проза.",
+      "ua": "Агент застосовує обрану ступінь. `lite`: короткі закінчені речення, без води. `full`: припустимі уривки фраз, артиклі, вода й люб'язності прибираються. `ultra`: максимальне безпечне стискання, скорочується лише проза."
+    },
+    {
+      "en": "Technical substance stays exact. Replies prefer the pattern `[thing] [action] [reason]. [next step].`, and code blocks, file paths, commands, symbols, function, class and API names and error strings are kept unchanged. `ultra` never abbreviates them.",
+      "ru": "Техническая суть остаётся точной. Ответы строятся по образцу `[thing] [action] [reason]. [next step].`, а блоки кода, пути к файлам, команды, символы, имена функций, классов и API и тексты ошибок остаются без изменений. `ultra` их никогда не сокращает.",
+      "ua": "Технічна суть лишається точною. Відповіді будуються за зразком `[thing] [action] [reason]. [next step].`, а блоки коду, шляхи до файлів, команди, символи, імена функцій, класів і API та тексти помилок лишаються без змін. `ultra` їх ніколи не скорочує."
+    },
+    {
+      "en": "Mandatory routing to the other skills is preserved: the `/spec` family, [/ui-clarify](fn:ui-clarify), [/git](fn:git) and [/prove](fn:prove) still apply.",
+      "ru": "Обязательная маршрутизация к другим навыкам сохраняется: семейство `/spec`, [/ui-clarify](fn:ui-clarify), [/git](fn:git) и [/prove](fn:prove) продолжают действовать.",
+      "ua": "Обов'язкова маршрутизація до інших навичок зберігається: родина `/spec`, [/ui-clarify](fn:ui-clarify), [/git](fn:git) і [/prove](fn:prove) продовжують діяти."
+    },
+    {
+      "en": "No check, [gate](term:gate) or confirmation is skipped to save words. The same checks run as in a normal chat; only the prose about them shrinks.",
+      "ru": "Ни проверка, ни [гейт](term:gate), ни подтверждение не пропускаются ради экономии слов. Идут те же проверки, что и в обычном чате; сжимается только проза о них.",
+      "ua": "Жодна перевірка, жоден [гейт](term:gate) і жодне підтвердження не пропускаються заради економії слів. Ідуть ті самі перевірки, що й у звичайному чаті; стискається лише проза про них."
+    },
+    {
+      "en": "When clarity matters, the agent suspends compression for that answer: security warnings, destructive or irreversible confirmations, ordered multi-step instructions where compression can mislead, a refusing gate's or check's reason, and any time you ask for a fuller explanation. The reason is quoted whole: `refused: the ticket has an unanswered open question` keeps it, a bare `refused` drops it.",
+      "ru": "Когда важна ясность, агент приостанавливает сжатие для этого ответа: при предупреждениях о безопасности, подтверждениях разрушительных или необратимых действий, упорядоченных многошаговых инструкциях, где сжатие может ввести в заблуждение, при причине отказа гейта или проверки и всякий раз, когда вы просите объяснить подробнее. Причина приводится целиком: `refused: the ticket has an unanswered open question` её сохраняет, голое `refused` теряет.",
+      "ua": "Коли важлива ясність, агент призупиняє стискання для цієї відповіді: за попереджень про безпеку, підтверджень руйнівних чи незворотних дій, впорядкованих багатокрокових інструкцій, де стискання може ввести в оману, за причини відмови гейта чи перевірки і щоразу, коли ви просите пояснити докладніше. Причина наводиться повністю: `refused: the ticket has an unanswered open question` її зберігає, голе `refused` втрачає."
+    },
+    {
+      "en": "The mode holds until you type `stop caveman` or `normal mode`. It is opt-in and applies to the current chat only.",
+      "ru": "Режим держится, пока вы не введёте `stop caveman` или `normal mode`. Он включается только по вашему желанию и действует лишь в текущем чате.",
+      "ua": "Режим тримається, доки ви не введете `stop caveman` чи `normal mode`. Він вмикається лише за вашим бажанням і діє тільки в поточному чаті."
+    }
+  ],
+  "outcome": {
+    "en": "Replies without filler, pleasantries or praise, shaped like `Build fails. Missing env var. Set it, rerun.`, with every command, path and error string intact. Safety-critical answers and a refusing gate's reason still come in full.",
+    "ru": "Ответы без воды, любезностей и похвал, построенные примерно так: `Build fails. Missing env var. Set it, rerun.`, при этом каждая команда, путь и текст ошибки остаются нетронутыми. Ответы, важные для безопасности, и причина отказа гейта по-прежнему приходят полностью.",
+    "ua": "Відповіді без води, люб'язностей і похвал, збудовані приблизно так: `Build fails. Missing env var. Set it, rerun.`, при цьому кожна команда, шлях і текст помилки лишаються недоторканими. Відповіді, важливі для безпеки, і причина відмови гейта, як і раніше, приходять повністю."
+  },
+  "tips": [
+    {
+      "en": "Replies stay in your chat language, while code, docs, logs and commits are written in the language your project set as `<ARTIFACT_LANGUAGE>`, a [placeholder](term:placeholder) of the rules file.",
+      "ru": "Ответы остаются на языке вашего чата, а код, документы, журналы и коммиты пишутся на языке, который ваш проект задал в `<ARTIFACT_LANGUAGE>` - [плейсхолдере](term:placeholder) файла правил.",
+      "ua": "Відповіді лишаються мовою вашого чату, а код, документи, журнали й коміти пишуться мовою, яку ваш проєкт задав у `<ARTIFACT_LANGUAGE>` - [плейсхолдері](term:placeholder) файлу правил."
+    },
+    {
+      "en": "The skill's header sets `disable-model-invocation: true`, so in Claude Code the agent does not switch brevity mode on by itself: only your `/caveman` does.",
+      "ru": "В заголовке навыка стоит `disable-model-invocation: true`, поэтому в Claude Code агент не включает режим краткости сам: его включает только ваш `/caveman`.",
+      "ua": "У заголовку навички стоїть `disable-model-invocation: true`, тому в Claude Code агент не вмикає режим стислості сам: його вмикає лише ваш `/caveman`."
+    },
+    {
+      "en": "`/caveman` changes how the whole chat talks. For one commit message use [/caveman-commit](fn:caveman-commit), for one review use [/caveman-review](fn:caveman-review). They are separate commands, each used on its own.",
+      "ru": "`/caveman` меняет манеру всего чата. Для одного сообщения коммита используйте [/caveman-commit](fn:caveman-commit), для одного ревью - [/caveman-review](fn:caveman-review). Это отдельные команды, каждая работает сама по себе.",
+      "ua": "`/caveman` змінює манеру всього чату. Для одного повідомлення коміту використовуйте [/caveman-commit](fn:caveman-commit), для одного рев'ю - [/caveman-review](fn:caveman-review). Це окремі команди, кожна працює сама по собі."
+    }
+  ],
+  "related": ["caveman-commit", "caveman-review", "critique", "git", "prove"],
+  "terms": ["terse-mode", "placeholder", "gate"],
+  "keywords": {
+    "en": ["caveman", "terse mode", "be brief", "no filler", "short answers", "brevity mode"],
+    "ru": ["caveman", "сжатый режим", "короче", "без воды", "короткие ответы", "режим краткости"],
+    "ua": ["caveman", "стислий режим", "коротше", "без води", "короткі відповіді", "режим стислості"]
+  }
+}

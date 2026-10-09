@@ -1,0 +1,10 @@
+{
+  "id": "backlog",
+  "term": { "en": "Backlog", "ru": "Бэклог", "ua": "Беклог" },
+  "def": {
+    "en": "The queue of tickets under the plan directory, and `/backlog`, the command that works it unattended: it picks the highest-priority [eligible ticket](term:eligible-ticket), runs the pipeline on it, repeats, and reports once at the end what advanced and what waits for a human.",
+    "ru": "Очередь тикетов в папке планов и команда `/backlog`, которая разбирает её без участия человека: берёт [подходящий тикет](term:eligible-ticket) с наивысшим приоритетом, прогоняет по нему конвейер, повторяет и один раз в конце отчитывается, что продвинулось, а что ждёт человека.",
+    "ua": "Черга тікетів у теці планів і команда `/backlog`, що розбирає її без участі людини: бере [придатний тікет](term:eligible-ticket) із найвищим пріоритетом, проганяє по ньому конвеєр, повторює й один раз наприкінці звітує, що просунулось, а що чекає на людину."
+  },
+  "see": ["eligible-ticket", "block-status"]
+}

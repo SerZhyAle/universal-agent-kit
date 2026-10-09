@@ -1,0 +1,10 @@
+{
+  "id": "known-red",
+  "term": { "en": "Known red", "ru": "Известное красное", "ua": "Відоме червоне" },
+  "def": {
+    "en": "A failing check that is not caused by your change. A known flaky or known-broken check gets a row in a known-red ledger, with an owner and a ticket, and stays visible in every report; it is never re-run until it goes green. A red from a sibling's unfinished edit is not yours either: attribute a failure to your own diff before you fix it.",
+    "ru": "Падающая проверка, причина которой не ваша правка. Заведомо нестабильной или сломанной проверке отводят строку в реестре известных красных, с владельцем и тикетом, и она остаётся видна в каждом отчёте; её не перезапускают, пока она не позеленеет. Красное из-за чужой незаконченной правки тоже не ваше: прежде чем чинить сбой, отнесите его к своему диффу.",
+    "ua": "Перевірка, що падає не через вашу правку. Завідомо нестабільній або зламаній перевірці відводять рядок у реєстрі відомих червоних, з власником і тікетом, і вона лишається видимою в кожному звіті; її не перезапускають, доки вона не позеленіє. Червоне через чужу незавершену правку теж не ваше: перш ніж лагодити збій, віднесіть його до свого діфа."
+  },
+  "see": ["ladder", "gate"]
+}

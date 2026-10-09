@@ -1,0 +1,10 @@
+{
+  "id": "terse-mode",
+  "term": { "en": "Terse mode (caveman)", "ru": "Режим краткости (caveman)", "ua": "Режим стислості (caveman)" },
+  "def": {
+    "en": "A reply style that drops filler, pleasantries and praise and keeps only the signal, while code, paths, commands and error strings stay exact. `/caveman` switches a whole chat into it; `/caveman-commit` and `/caveman-review` apply it to one commit message or one review. It never skips a check, and security warnings and a refusing [gate](term:gate)'s reason are not compressed.",
+    "ru": "Стиль ответов, который убирает воду, любезности и похвалу и оставляет только суть, а код, пути, команды и тексты ошибок остаются точными. `/caveman` переводит в него весь чат, `/caveman-commit` и `/caveman-review` применяют его к одному сообщению коммита или одному ревью. Он не пропускает проверок, а предупреждения о безопасности и причина отказа [гейта](term:gate) не сжимаются.",
+    "ua": "Стиль відповідей, що прибирає воду, люб'язності й похвалу та лишає тільки суть, а код, шляхи, команди й тексти помилок лишаються точними. `/caveman` переводить у нього весь чат, `/caveman-commit` та `/caveman-review` застосовують його до одного повідомлення коміту або одного рев'ю. Він не пропускає перевірок, а попередження про безпеку й причина відмови [гейта](term:gate) не стискаються."
+  },
+  "see": ["skill", "gate"]
+}

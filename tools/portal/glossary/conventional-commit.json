@@ -1,0 +1,9 @@
+{
+  "id": "conventional-commit",
+  "term": { "en": "Conventional Commit", "ru": "Conventional Commit", "ua": "Conventional Commit" },
+  "def": {
+    "en": "A commit-message format whose subject reads `type(scope): imperative summary`, the scope being optional. The kit lists the types `feat`, `fix`, `refactor`, `perf`, `docs`, `chore`, `test`, `build`, `ci`, `style` and `revert`, wants the subject to name the user-visible change, not the mechanism, and `/caveman-commit` keeps it to about 50 characters, 72 at most.",
+    "ru": "Формат сообщения коммита, где заголовок выглядит как `type(scope): imperative summary`, а область (scope) необязательна. Kit перечисляет типы `feat`, `fix`, `refactor`, `perf`, `docs`, `chore`, `test`, `build`, `ci`, `style` и `revert`, хочет, чтобы заголовок называл видимое пользователю изменение, а не механизм, а `/caveman-commit` держит его около 50 символов, не больше 72.",
+    "ua": "Формат повідомлення коміту, де заголовок має вигляд `type(scope): imperative summary`, а область (scope) необов'язкова. Kit перелічує типи `feat`, `fix`, `refactor`, `perf`, `docs`, `chore`, `test`, `build`, `ci`, `style` і `revert`, хоче, щоб заголовок називав видиму користувачеві зміну, а не механізм, а `/caveman-commit` тримає його близько 50 символів, не більше 72."
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "id": "scratch",
+  "term": { "en": "Scratch", "ru": "Scratch (черновая папка)", "ua": "Scratch (чернеткова тека)" },
+  "def": {
+    "en": "The directory for throwaway artifacts and backups, written `<SCRATCH_DIR>` in the kit and ignored by version control. Scratch and backups go there, never to the project root: research dossiers, `/prove` scenarios, raw logs and grep dumps, and the restore-point copy taken before a large edit to a file over the [size budget](term:size-budget).",
+    "ru": "Каталог для одноразовых артефактов и резервных копий, в kit записывается как `<SCRATCH_DIR>` и игнорируется системой контроля версий. Черновики и копии идут туда, а не в корень проекта: досье исследований, сценарии `/prove`, сырые логи и выдачи grep, а также копия - точка восстановления перед крупной правкой файла больше [бюджета размера](term:size-budget).",
+    "ua": "Тека для одноразових артефактів і резервних копій, у kit записується як `<SCRATCH_DIR>` та ігнорується системою контролю версій. Чернетки й копії йдуть туди, а не в корінь проєкту: досьє досліджень, сценарії `/prove`, сирі логи й видачі grep, а також копія - точка відновлення перед великою правкою файлу, більшого за [бюджет розміру](term:size-budget)."
+  },
+  "see": ["dossier", "size-budget"]
+}

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en" data-theme="dark" data-root="../../">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fix a narrow bug without ceremony - Universal Agent Kit</title>
+<meta name="description" content="A bug with a known cause is fixed at the root: smallest change, one local check, a three-line report, no spec.">
+<link rel="canonical" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/fix.html">
+<link rel="alternate" hreflang="en" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/fix.html?lang=en">
+<link rel="alternate" hreflang="ru" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/fix.html?lang=ru">
+<link rel="alternate" hreflang="uk" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/fix.html?lang=uk">
+<link rel="alternate" hreflang="x-default" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/fix.html">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%233fb950'/%3E%3Cpath d='M20 18h24M20 30h24M20 42h16' stroke='%2304130c' stroke-width='5' stroke-linecap='round' fill='none'/%3E%3C/svg%3E">
+<meta name="theme-color" content="#0a0f0a">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Universal Agent Kit">
+<meta property="og:url" content="https://serzhyale.github.io/universal-agent-kit/portal/functions/fix.html">
+<meta property="og:title" content="Fix a narrow bug without ceremony - Universal Agent Kit">
+<meta property="og:description" content="A bug with a known cause is fixed at the root: smallest change, one local check, a three-line report, no spec.">
+<meta property="og:image" content="https://serzhyale.github.io/universal-agent-kit/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Fix a narrow bug without ceremony - Universal Agent Kit">
+<meta name="twitter:description" content="A bug with a known cause is fixed at the root: smallest change, one local check, a three-line report, no spec.">
+<meta name="twitter:image" content="https://serzhyale.github.io/universal-agent-kit/og-image.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Fix a narrow bug without ceremony - Universal Agent Kit","description":"A bug with a known cause is fixed at the root: smallest change, one local check, a three-line report, no spec.","url":"https://serzhyale.github.io/universal-agent-kit/portal/functions/fix.html","inLanguage":["en","ru","uk"],"isPartOf":{"@type":"WebSite","name":"Universal Agent Kit","url":"https://serzhyale.github.io/universal-agent-kit/"}}</script>
+<script type="application/json" id="page-i18n">{"t":{"ru":"Исправить узкий баг без церемоний - Universal Agent Kit","en":"Fix a narrow bug without ceremony - Universal Agent Kit","ua":"Виправити вузький баг без церемоній - Universal Agent Kit"},"d":{"ru":"Баг с понятной причиной исправлен в корне: минимальная правка, одна локальная проверка, отчёт в три строки, без спеки.","en":"A bug with a known cause is fixed at the root: smallest change, one local check, a three-line report, no spec.","ua":"Баг зі зрозумілою причиною виправлено в корені: мінімальна правка, одна локальна перевірка, звіт у три рядки, без спеки."},"ui":{"langGroup":{"en":"Language","ru":"Язык","ua":"Мова"},"theme":{"en":"Theme","ru":"Тема","ua":"Тема"},"toLight":{"en":"Switch to light theme","ru":"Включить светлую тему","ua":"Увімкнути світлу тему"},"toDark":{"en":"Switch to dark theme","ru":"Включить тёмную тему","ua":"Увімкнути темну тему"},"toTop":{"en":"Back to top","ru":"Наверх","ua":"Нагору"},"menu":{"en":"Menu","ru":"Меню","ua":"Меню"},"navPortal":{"en":"Portal","ru":"Портал","ua":"Портал"},"navTools":{"en":"More tools by SZA","ru":"Другие инструменты SZA","ua":"Інші інструменти SZA"},"navAuthor":{"en":"Author links","ru":"Ссылки автора","ua":"Посилання автора"},"navSection":{"en":"In this section","ru":"В этом разделе","ua":"У цьому розділі"},"breadcrumb":{"en":"Breadcrumb","ru":"Путь по сайту","ua":"Шлях сайтом"},"searchTitle":{"en":"Search the portal","ru":"Поиск по порталу","ua":"Пошук по порталу"},"searchEmpty":{"en":"Nothing found for","ru":"Ничего не найдено по запросу","ua":"Нічого не знайдено за запитом"},"searchEmptyHelp":{"en":"Browse the subject index instead.","ru":"Откройте предметный указатель.","ua":"Відкрийте предметний покажчик."},"searchCount":{"en":"results","ru":"результатов","ua":"результатів"},"searchFail":{"en":"The search index could not be loaded.","ru":"Не удалось загрузить индекс поиска.","ua":"Не вдалося завантажити індекс пошуку."},"kind.command":{"en":"Slash command","ru":"Slash-команда","ua":"Slash-команда"},"kind.agent":{"en":"Role agent","ru":"Ролевой агент","ua":"Рольовий агент"},"kind.practice":{"en":"Practice","ru":"Практика","ua":"Практика"}}}</script>
+<script>
+/* PAGE-STYLE section 7 pre-paint resolver, on the portfolio's shared keys sza-lang / sza-theme.
+   Language priority: ?lang= in the URL (a shared link wins) > saved choice > browser.
+   The UA switch keys "ua"; the URL, lang and hreflang keep the ISO code "uk". The legacy
+   uak-* keys are read once so a returning reader keeps their choice. */
+(function(){
+  var l, t;
+  try{
+    var q = (location.search.match(/[?&]lang=(ru|en|uk|ua)\b/i) || [])[1];
+    if(q){ l = q.toLowerCase(); }
+    else { l = localStorage.getItem('sza-lang') || localStorage.getItem('uak-lang'); }
+    if(l === 'uk') l = 'ua';
+    if(l){ localStorage.setItem('sza-lang', l); }
+    t = localStorage.getItem('sza-theme') || localStorage.getItem('uak-theme');
+    if(t){ localStorage.setItem('sza-theme', t); }
+  }catch(e){}
+  if(l !== 'ru' && l !== 'en' && l !== 'ua'){ var nav=(navigator.language||'en').toLowerCase(); l = nav.indexOf('ru')===0 ? 'ru' : (nav.indexOf('uk')===0 ? 'ua' : 'en'); }
+  if(t !== 'light' && t !== 'dark'){ t = (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) ? 'light' : 'dark'; }
+  var d = document.documentElement;
+  d.setAttribute('data-lang', l); d.setAttribute('lang', l === 'ua' ? 'uk' : l); d.setAttribute('data-theme', t);
+})();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/sza-kit.css">
+<link rel="stylesheet" href="../../assets/site.css">
+<link rel="stylesheet" href="../../assets/portal.css">
+</head>
+<body>
+<a class="skip-link" href="#main"><span data-l="ru">Перейти к содержимому</span><span data-l="en">Skip to the content</span><span data-l="ua">Перейти до вмісту</span></a>
+<div class="bg-blobs" aria-hidden="true"><div class="blob blob-1"></div><div class="blob blob-2"></div><div class="blob blob-3"></div></div>
+<svg class="icon-sprite" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+  <symbol id="icon-action-download" viewBox="0 0 24 24"><g transform="translate(12 12) scale(.917 .917) translate(-12 -12)"><path d="M19.35,10.04C18.67,6.59 15.64,4 12,4 9.11,4 6.6,5.64 5.35,8.04 2.34,8.36 0,10.91 0,14c0,3.31 2.69,6 6,6h13c2.76,0 5,-2.24 5,-5 0,-2.64 -2.05,-4.78 -4.65,-4.96zM17,13l-5,5 -5,-5h3V9h4v4h3z"/></g></symbol>
+  <symbol id="icon-nav-scroll-top" viewBox="0 0 24 24"><path d="M8 11h3v10h2V11h3l-4-4-4 4zM4 3v2h16V3H4z"/></symbol>
+</svg>
+<header class="site-header portal-header">
+    <a class="brand" href="../../">Universal&nbsp;Agent&nbsp;Kit<span class="dot">.</span></a>
+    <button class="ctl nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="portalNav"><span data-l="ru">Меню</span><span data-l="en">Menu</span><span data-l="ua">Меню</span></button>
+    <nav class="portal-nav" id="portalNav" aria-label="Portal" data-aria="navPortal">
+      <a href="../"><span data-l="ru">Портал</span><span data-l="en">Portal</span><span data-l="ua">Портал</span></a>
+      <a href="../overview.html"><span data-l="ru">Обзор</span><span data-l="en">Overview</span><span data-l="ua">Огляд</span></a>
+      <a href="../showcase.html"><span data-l="ru">Витрина</span><span data-l="en">Showcase</span><span data-l="ua">Вітрина</span></a>
+      <a href="../subjects.html"><span data-l="ru">Предметный указатель</span><span data-l="en">Subject index</span><span data-l="ua">Предметний покажчик</span></a>
+      <a href="../glossary.html"><span data-l="ru">Глоссарий</span><span data-l="en">Glossary</span><span data-l="ua">Глосарій</span></a>
+    </nav>
+    <button class="ctl search-open" id="searchOpen" type="button" aria-haspopup="dialog" aria-controls="searchDialog"><span data-l="ru">Поиск</span><span data-l="en">Search</span><span data-l="ua">Пошук</span><kbd aria-hidden="true">/</kbd></button>
+    <span class="seg" role="group" aria-label="Language" id="langGroup" data-aria="langGroup">
+      <button id="lng-ru" type="button" data-set-lang="ru" aria-pressed="false" aria-label="Русский">RU</button>
+      <button id="lng-en" type="button" data-set-lang="en" aria-pressed="true" aria-label="English">EN</button>
+      <button id="lng-ua" type="button" data-set-lang="ua" aria-pressed="false" aria-label="Українська">UA</button>
+    </span>
+    <button class="theme-btn" id="themeBtn" type="button" title="Theme" aria-label="Theme" aria-pressed="false"><span data-l="ru">Тема</span><span data-l="en">Theme</span><span data-l="ua">Тема</span></button>
+    <a class="btn btn-primary btn-sm" href="../../universal-agent-kit.zip" download>
+      <svg class="icon" aria-hidden="true"><use href="#icon-action-download"/></svg><span data-l="ru">Скачать kit (.zip)</span><span data-l="en">Download kit (.zip)</span><span data-l="ua">Завантажити kit (.zip)</span>
+    </a>
+</header>
+<main id="main" class="page">
+<nav class="crumbs" aria-label="Breadcrumb" data-aria="breadcrumb"><ol><li><a href="../../"><span data-l="ru">Universal Agent Kit</span><span data-l="en">Universal Agent Kit</span><span data-l="ua">Universal Agent Kit</span></a></li><li><a href="../"><span data-l="ru">Портал</span><span data-l="en">Portal</span><span data-l="ua">Портал</span></a></li><li><a href="../#section-skills"><span data-l="ru">Навыки: сценарии как slash-команды</span><span data-l="en">Skills: workflows as slash commands</span><span data-l="ua">Навички: сценарії як slash-команди</span></a></li><li aria-current="page"><span data-l="ru">Исправить узкий баг без церемоний</span><span data-l="en">Fix a narrow bug without ceremony</span><span data-l="ua">Виправити вузький баг без церемоній</span></li></ol></nav>
+<header class="page-head">
+<p class="eyebrow"><span class="pill"><span data-l="ru">Slash-команда</span><span data-l="en">Slash command</span><span data-l="ua">Slash-команда</span></span> <a href="../#section-skills"><span data-l="ru">Навыки: сценарии как slash-команды</span><span data-l="en">Skills: workflows as slash commands</span><span data-l="ua">Навички: сценарії як slash-команди</span></a></p>
+<h1><span data-l="ru">Исправить узкий баг без церемоний</span><span data-l="en">Fix a narrow bug without ceremony</span><span data-l="ua">Виправити вузький баг без церемоній</span></h1>
+<p class="lead prose"><span data-l="ru"><code>/fix</code> нужен для бага или поправки поведения, которые больше правки через <code>/quick</code>, но спеки не требуют. Агент называет первопричину до того, как тронет код, меняет как можно меньше, проверяет результат локально и отчитывается по одной строке на причину, правку и проверку.</span><span data-l="en"><code>/fix</code> is for a bug or a behaviour correction that is bigger than a <code>/quick</code> edit but needs no spec. The agent names the root cause before it touches code, changes as little as it can, checks the result locally and reports the cause, the fix and the validation in one line each.</span><span data-l="ua"><code>/fix</code> потрібен для бага чи поправки поведінки, що більші за правку через <code>/quick</code>, але спеки не потребують. Агент називає першопричину, перш ніж торкнеться коду, змінює якомога менше, перевіряє результат локально й звітує по одному рядку на причину, правку та перевірку.</span></p>
+</header>
+<article class="fn" data-kind="command">
+<div class="panels">
+<section class="panel" aria-labelledby="h-situation"><h2 id="h-situation"><span data-l="ru">Когда это нужно</span><span data-l="en">When to reach for it</span><span data-l="ua">Коли це потрібно</span></h2><p class="prose"><span data-l="ru">Хорошо понятный баг: новых проектных решений нет, последствия правки ограничены, локальной проверки достаточно. Например: <code>/fix retry loop never backs off, hammers the server on 503</code>.</span><span data-l="en">A well-understood bug: no new design decisions, a bounded blast radius, and local validation is enough. For example <code>/fix retry loop never backs off, hammers the server on 503</code>.</span><span data-l="ua">Добре зрозумілий баг: нових проєктних рішень немає, наслідки правки обмежені, локальної перевірки досить. Наприклад: <code>/fix retry loop never backs off, hammers the server on 503</code>.</span></p></section>
+<section class="panel" aria-labelledby="h-requirements"><h2 id="h-requirements"><span data-l="ru">Требования</span><span data-l="en">Requirements</span><span data-l="ua">Вимоги</span></h2><dl class="req">
+<div><dt><span data-l="ru">Где доступно</span><span data-l="en">Available in</span><span data-l="ua">Де доступно</span></dt><dd><span data-l="ru">Каждая загрузка kit</span><span data-l="en">Every download of the kit</span><span data-l="ua">Кожне завантаження kit</span></dd></div>
+<div><dt><span data-l="ru">К чему обращается</span><span data-l="en">What it touches</span><span data-l="ua">До чого звертається</span></dt><dd><ul class="chips"><li class="pill"><span data-l="ru">Читает файлы проекта</span><span data-l="en">Reads the files of your project</span><span data-l="ua">Читає файли проєкту</span></li><li class="pill"><span data-l="ru">Правит файлы проекта</span><span data-l="en">Edits files in your project</span><span data-l="ua">Змінює файли проєкту</span></li><li class="pill"><span data-l="ru">Запускает команды (проверки, git)</span><span data-l="en">Runs commands (checks, git)</span><span data-l="ua">Запускає команди (перевірки, git)</span></li></ul></dd></div>
+<div><dt><span data-l="ru">Работает с</span><span data-l="en">Works with</span><span data-l="ua">Працює з</span></dt><dd><span data-l="ru">Сделано для Claude Code; другие агенты адаптируют</span><span data-l="en">Built for Claude Code; other agents adapt it</span><span data-l="ua">Зроблено для Claude Code; інші агенти адаптують</span></dd></div>
+<div><dt><span data-l="ru">Где выполняются шаги</span><span data-l="en">Where the steps happen</span><span data-l="ua">Де виконуються кроки</span></dt><dd><span data-l="ru">Чат вашего агента и ваши собственные файлы. Ни то ни другое не интерфейс этого сайта, поэтому шаги описаны текстом, а не скриншотами.</span><span data-l="en">Your agent's chat and your own files. Neither is an interface of this site, so the steps are text and not screenshots.</span><span data-l="ua">Чат вашого агента і ваші власні файли. Ні те, ні інше не є інтерфейсом цього сайту, тому кроки описано текстом, а не скриншотами.</span></dd></div>
+<div><dt><span data-l="ru">Где это лежит в kit</span><span data-l="en">Where it lives in the kit</span><span data-l="ua">Де це лежить у kit</span></dt><dd><code>.claude/skills/fix/SKILL.md</code></dd></div>
+</dl></section>
+<div class="note warn" role="note"><div class="tag"><span data-l="ru">Прежде чем начать</span><span data-l="en">Before you start</span><span data-l="ua">Перш ніж почати</span></div><p><span data-l="ru">Не используйте <code>/fix</code>, если правка требует решений по дизайну или UX (<code>/ui-clarify</code>, затем <code>/spec</code>), вводит новую абстракцию, схему или миграцию либо публичный API (<code>/spec</code>), или если вы ещё не понимаете первопричину (сначала <code>/research</code>). Правка в один токен - это <code>/quick</code>. Если по ходу список файлов вырастает больше чем до нескольких, агент останавливается и передаёт задачу в <code>/spec</code>.</span><span data-l="en">Do not use <code>/fix</code> when the fix needs design or UX decisions (<code>/ui-clarify</code>, then <code>/spec</code>), adds an abstraction, a schema or migration, or a public API (<code>/spec</code>), or when you do not yet understand the root cause (<code>/research</code> first). A one-token edit is <code>/quick</code>. If the file list outgrows a handful of files midway, the agent stops and escalates to <code>/spec</code>.</span><span data-l="ua">Не використовуйте <code>/fix</code>, якщо правка потребує рішень щодо дизайну чи UX (<code>/ui-clarify</code>, потім <code>/spec</code>), вводить нову абстракцію, схему чи міграцію або публічний API (<code>/spec</code>), або якщо ви ще не розумієте першопричину (спершу <code>/research</code>). Правка в один токен - це <code>/quick</code>. Якщо посеред роботи список файлів виростає більше ніж до кількох, агент зупиняється й передає задачу до <code>/spec</code>.</span></p></div>
+<section class="panel wide" aria-labelledby="h-steps"><h2 id="h-steps"><span data-l="ru">Шаги</span><span data-l="en">Steps</span><span data-l="ua">Кроки</span></h2><ol class="steps">
+<li><span class="prose"><span data-l="ru">Опишите сломанное поведение: <code>/fix list scroll position jumps to top after returning from detail</code>.</span><span data-l="en">Describe the broken behaviour: <code>/fix list scroll position jumps to top after returning from detail</code>.</span><span data-l="ua">Опишіть зламану поведінку: <code>/fix list scroll position jumps to top after returning from detail</code>.</span></span></li>
+<li><span class="prose"><span data-l="ru">Агент подтверждает, что путь действительно падает, и называет первопричину до того, как тронет код. Если назвать её не получается, он останавливается и сначала исследует (<code>/research</code>, мысленно или всерьёз).</span><span data-l="en">The agent confirms the failing path and names the root cause before it touches code. If it cannot name it, it stops and researches first (<code>/research</code>, mentally or for real).</span><span data-l="ua">Агент підтверджує, що шлях справді падає, і називає першопричину, перш ніж торкнеться коду. Якщо назвати її не виходить, він зупиняється й спершу досліджує (<code>/research</code>, подумки чи всерйоз).</span></span></li>
+<li><span class="prose"><span data-l="ru">Он перечисляет файлы, которые собирается менять, и объясняет зачем. Если список вырастает больше чем до нескольких файлов или начинают требоваться новые типы, он останавливается и передаёт задачу в <code>/spec</code>.</span><span data-l="en">It lists the files it expects to touch and why. If the list grows past a handful of files or starts needing new types, it stops and escalates to <code>/spec</code>.</span><span data-l="ua">Він перелічує файли, які збирається змінювати, і пояснює навіщо. Якщо список виростає більше ніж до кількох файлів або починають бути потрібними нові типи, він зупиняється й передає задачу до <code>/spec</code>.</span></span></li>
+<li><span class="prose"><span data-l="ru">Он вносит самую маленькую правку, которая устраняет первопричину, а не симптом: без рефакторинга по соседству, без чистки посторонних импортов, без россыпи комментариев. Существующие комментарии и инварианты в этом месте учитываются, <a href="../glossary.html#term-anti-slop">правила против мусора</a> действуют. Обработанный крайний случай или неочевидная причина заслуживают одного комментария «почему» на языке <code>&lt;ARTIFACT_LANGUAGE&gt;</code> и не больше.</span><span data-l="en">It applies the smallest change that fixes the root cause, not the symptom: no surrounding refactor, no unrelated import cleanup, no comment spray. Existing comments and invariants in the area are honoured, and <a href="../glossary.html#term-anti-slop">anti-slop</a> rules apply. A handled edge case or a non-obvious cause earns one comment saying why, written in <code>&lt;ARTIFACT_LANGUAGE&gt;</code>, nothing more.</span><span data-l="ua">Він вносить найменшу правку, що усуває першопричину, а не симптом: без рефакторингу поруч, без чищення сторонніх імпортів, без розсипу коментарів. Наявні коментарі та інваріанти в цьому місці враховуються, <a href="../glossary.html#term-anti-slop">правила проти сміття</a> діють. Оброблений крайній випадок чи неочевидна причина заслуговують на один коментар «чому» мовою <code>&lt;ARTIFACT_LANGUAGE&gt;</code> і не більше.</span></span></li>
+<li><span class="prose"><span data-l="ru">Он запускает самую узкую осмысленную проверку, которая доказывает исправление: целевой тест, если он есть (добавляет или правит тест, когда это дёшево и в проекте есть тесты), иначе компиляцию и ручной прогон этого пути. Результат записывается как <code>expected | actual</code>.</span><span data-l="en">It runs the narrowest meaningful check that proves the fix: a targeted test if one exists (adding or adjusting one if that is cheap and the project has tests), otherwise a compile and a manual run of the path. The result is recorded as <code>expected | actual</code>.</span><span data-l="ua">Він запускає найвужчу змістовну перевірку, що доводить виправлення: цільовий тест, якщо він є (додає чи правит тест, коли це дешево й у проєкті є тести), інакше компіляцію та ручний прогін цього шляху. Результат записується як <code>expected | actual</code>.</span></span></li>
+<li><span class="prose"><span data-l="ru">Он отчитывается тремя строками: первопричина, правка, проверка. Соседние баги, если они попались, перечисляются как последующие задачи и в этом проходе не исправляются.</span><span data-l="en">It reports in three lines: root cause, fix, validation. Adjacent bugs it found are listed as follow-ups and are not fixed in this pass.</span><span data-l="ua">Він звітує трьома рядками: першопричина, правка, перевірка. Сусідні баги, якщо трапилися, перелічуються як подальші задачі й у цьому проході не виправляються.</span></span></li>
+</ol></section>
+<div class="note outcome" role="note"><div class="tag"><span data-l="ru">Что вы должны увидеть</span><span data-l="en">What you should see</span><span data-l="ua">Що ви маєте побачити</span></div><p><span data-l="ru">Отчёт из трёх строк: первопричина, правка и результат проверки, по одной строке на каждое, плюс список соседних багов, оставленных на потом, если такие нашлись. Изменение затрагивает только то, чего требовала первопричина.</span><span data-l="en">A three-line report: root cause, fix and validation result, one line each, plus a list of adjacent bugs left for later if any were found. The change touches only what the root cause required.</span><span data-l="ua">Звіт із трьох рядків: першопричина, правка й результат перевірки, по одному рядку на кожне, плюс список сусідніх багів, залишених на потім, якщо такі знайшлися. Зміна зачіпає лише те, чого вимагала першопричина.</span></p></div>
+<section class="panel" aria-labelledby="h-tips"><h2 id="h-tips"><span data-l="ru">Советы</span><span data-l="en">Tips</span><span data-l="ua">Поради</span></h2><ul class="tips">
+<li class="prose"><span data-l="ru">Соседние баги идут в список последующих задач, а не в этот проход. Если такой баг настоящий и требует отдельного расследования, <a href="park.html">отложите его</a> в виде заготовки и работайте дальше.</span><span data-l="en">Adjacent bugs go on the follow-up list, not into this pass. When one is real and needs its own investigation, <a href="park.html">park it</a> as a stub and keep working.</span><span data-l="ua">Сусідні баги йдуть у список подальших задач, а не в цей прохід. Якщо такий баг справжній і потребує окремого розслідування, <a href="park.html">відкладіть його</a> у вигляді заготовки й працюйте далі.</span></li>
+<li class="prose"><span data-l="ru">После правки <a href="prove.html">проверка запуском</a> покажет, держится ли она в работе, а не только прошла ли дешёвая проверка.</span><span data-l="en">After the fix, a <a href="prove.html">run-and-observe check</a> shows whether it holds when exercised, not only that the cheap check passed.</span><span data-l="ua">Після правки <a href="prove.html">перевірка запуском</a> покаже, чи вона тримається в роботі, а не лише чи пройшла дешева перевірка.</span></li>
+</ul></section>
+<section class="panel" aria-labelledby="h-related"><h2 id="h-related"><span data-l="ru">Связанные функции</span><span data-l="en">Related functions</span><span data-l="ua">Пов'язані функції</span></h2><ul class="fn-list">
+<li><a href="quick.html"><span data-l="ru">Внести мелкую правку без церемоний</span><span data-l="en">Make a one-line edit without ceremony</span><span data-l="ua">Внести дрібну правку без церемоній</span></a><span class="fn-pitch"><span data-l="ru">Опечатка, константа или подпись исправлены за одно предложение: без спеки и без сборки.</span><span data-l="en">A typo, a constant or a label changed in one sentence's worth of work: no spec, no build gate.</span><span data-l="ua">Одруківку, константу чи підпис виправлено за одне речення: без спеки й без збірки.</span></span></li>
+<li><a href="spec.html"><span data-l="ru">Превратить описание фичи в утверждённую стратегическую спеку</span><span data-l="en">Turn a feature description into an approved strategic spec</span><span data-l="ua">Перетворити опис фічі на затверджену стратегічну спеку</span></a><span class="fn-pitch"><span data-l="ru"><code>/spec</code> пишет, что и зачем нужно в фиче, без имён классов и путей к файлам, утверждает и передаёт <code>/spec-tech</code>. Мелкую задачу делает на месте.</span><span data-l="en"><code>/spec</code> writes the what and why of a feature with no class names or file paths, approves it and passes it to <code>/spec-tech</code>. A small task is built in place.</span><span data-l="ua"><code>/spec</code> пише, що й навіщо потрібно у фічі, без назв класів і шляхів до файлів, затверджує та передає <code>/spec-tech</code>. Дрібну задачу робить на місці.</span></span></li>
+<li><a href="research.html"><span data-l="ru">Изучить область, прежде чем её менять</span><span data-l="en">Investigate an area before you change it</span><span data-l="ua">Вивчити ділянку, перш ніж її змінювати</span></a><span class="fn-pitch"><span data-l="ru">Один продуманный проход чтения оставляет черновое досье и, для тикета, долговечные выводы, чтобы никто не искал одно и то же пять раз.</span><span data-l="en">One deliberate reading pass leaves a scratch dossier and, for a ticket, durable findings, so nobody greps the same things five times.</span><span data-l="ua">Один продуманий прохід читання лишає чорнове досьє і, для тікета, довговічні висновки, щоб ніхто не шукав те саме п'ять разів.</span></span></li>
+<li><a href="park.html"><span data-l="ru">Отложить находку вне задачи и продолжить работу</span><span data-l="en">Park an out-of-scope finding and keep working</span><span data-l="ua">Відкласти знахідку поза задачею й продовжити роботу</span></a><span class="fn-pitch"><span data-l="ru">Настоящая проблема, замеченная по ходу дела, становится минимальной заготовкой со статусом Draft за одну строку, и вы сразу возвращаетесь к своему делу.</span><span data-l="en">A real problem found mid-task becomes a minimal Draft stub in one line, and you go straight back to what you were doing.</span><span data-l="ua">Справжню проблему, помічену по ходу діла, перетворено на мінімальну заготовку зі статусом Draft за один рядок, і ви одразу повертаєтеся до своєї справи.</span></span></li>
+<li><a href="prove.html"><span data-l="ru">Запустить изменение и проверить, что оно правда работает</span><span data-l="en">Run a change and see whether it actually works</span><span data-l="ua">Запустити зміну й перевірити, що вона справді працює</span></a><span class="fn-pitch"><span data-l="ru">Запустить и посмотреть: проверка заканчивается одной строкой, PASS, DEFECT, COULD NOT VERIFY или NOT APPLICABLE, с путём к свидетельствам.</span><span data-l="en">Run the thing and observe it: the check ends in one line, PASS, DEFECT, COULD NOT VERIFY or NOT APPLICABLE, with the path to its evidence.</span><span data-l="ua">Запустити й подивитися: перевірка закінчується одним рядком, PASS, DEFECT, COULD NOT VERIFY або NOT APPLICABLE, зі шляхом до свідчень.</span></span></li>
+</ul></section>
+<section class="panel wide" aria-labelledby="h-terms"><h2 id="h-terms"><span data-l="ru">Термины на этой странице</span><span data-l="en">Terms on this page</span><span data-l="ua">Терміни на цій сторінці</span></h2><ul class="chips">
+<li><a class="pill" href="../glossary.html#term-anti-slop"><span data-l="ru">Anti-slop (против мусора)</span><span data-l="en">Anti-slop</span><span data-l="ua">Anti-slop (проти сміття)</span></a></li>
+<li><a class="pill" href="../glossary.html#term-park"><span data-l="ru">Парковка (park)</span><span data-l="en">Park</span><span data-l="ua">Паркування (park)</span></a></li>
+</ul></section>
+</div>
+<nav class="pager" aria-label="In this section" data-aria="navSection"><a class="pager-prev" rel="prev" href="quick.html"><span class="pager-dir"><span data-l="ru">Назад</span><span data-l="en">Previous</span><span data-l="ua">Назад</span></span><span><span data-l="ru">Внести мелкую правку без церемоний</span><span data-l="en">Make a one-line edit without ceremony</span><span data-l="ua">Внести дрібну правку без церемоній</span></span></a><a class="pager-next" rel="next" href="park.html"><span class="pager-dir"><span data-l="ru">Дальше</span><span data-l="en">Next</span><span data-l="ua">Далі</span></span><span><span data-l="ru">Отложить находку вне задачи и продолжить работу</span><span data-l="en">Park an out-of-scope finding and keep working</span><span data-l="ua">Відкласти знахідку поза задачею й продовжити роботу</span></span></a></nav>
+</article>
+</main>
+<footer class="site-footer"><div class="container">
+  <div data-l="ru">
+    <strong>Universal Agent Kit</strong> - переносимый метод работы с ИИ-агентами.
+    <div class="cta">
+      <a class="btn btn-primary" href="../../universal-agent-kit.zip" download><svg class="icon" aria-hidden="true"><use href="#icon-action-download"/></svg>Скачать kit (.zip)</a>
+      <a class="btn btn-ghost" href="https://github.com/SerZhyAle/universal-agent-kit" target="_blank" rel="noopener">Исходный код</a>
+    </div>
+    <p class="muted">Kit - MIT · текст - CC BY 4.0 · выжимка из реального проекта, без привязки к стеку.</p>
+  </div>
+  <div data-l="en">
+    <strong>Universal Agent Kit</strong> - a portable method for working with AI agents.
+    <div class="cta">
+      <a class="btn btn-primary" href="../../universal-agent-kit.zip" download><svg class="icon" aria-hidden="true"><use href="#icon-action-download"/></svg>Download kit (.zip)</a>
+      <a class="btn btn-ghost" href="https://github.com/SerZhyAle/universal-agent-kit" target="_blank" rel="noopener">Source code</a>
+    </div>
+    <p class="muted">Kit is MIT · prose is CC BY 4.0 · distilled from a real project, stack-agnostic.</p>
+  </div>
+  <div data-l="ua">
+    <strong>Universal Agent Kit</strong> - переносний метод роботи з ШІ-агентами.
+    <div class="cta">
+      <a class="btn btn-primary" href="../../universal-agent-kit.zip" download><svg class="icon" aria-hidden="true"><use href="#icon-action-download"/></svg>Завантажити kit (.zip)</a>
+      <a class="btn btn-ghost" href="https://github.com/SerZhyAle/universal-agent-kit" target="_blank" rel="noopener">Вихідний код</a>
+    </div>
+    <p class="muted">Kit - MIT · текст - CC BY 4.0 · дистильовано з реального проєкту, без прив'язки до стеку.</p>
+  </div>
+  <section class="tools-family" aria-labelledby="more-tools-heading">
+    <h2 id="more-tools-heading"><span data-l="ru">Другие инструменты SZA</span><span data-l="en">More tools by SZA</span><span data-l="ua">Інші інструменти SZA</span></h2>
+    <nav class="tools-grid" aria-label="More tools by SZA" data-aria="navTools">
+        <a href="https://serzhyale.github.io/FastMediaSorter_mob_v2/" target="_blank" rel="noopener">Fast Media Sorter &amp; Organizer</a>
+        <a href="https://serzhyale.github.io/FastMediaSorter_Lite/" target="_blank" rel="noopener">Fast Media Sorter for Windows</a>
+        <a href="https://serzhyale.github.io/CyrFlip/" target="_blank" rel="noopener">CyrFlip</a>
+        <a href="https://serzhyale.github.io/doc-html-translate/" target="_blank" rel="noopener">doc-html-translate</a>
+        <a href="https://serzhyale.github.io/FileDO/" target="_blank" rel="noopener">FileDO</a>
+        <a href="https://serzhyale.github.io/StreamsPlayer/" target="_blank" rel="noopener">STREAMS Player</a>
+        <a href="https://serzhyale.github.io/OneClickRunner/" target="_blank" rel="noopener">OneClickRunner</a>
+        <a href="https://sza.od.ua" target="_blank" rel="noopener">SZA (hub)</a>
+    </nav>
+  </section>
+  <div class="footer-bottom">
+    <span>&copy; 2026 <a href="https://sza.od.ua" target="_blank" rel="noopener">Serhii Zhyhunenko</a></span>
+    <nav aria-label="Author links" data-aria="navAuthor"><a href="../../privacy.html"><span data-l="ru">Конфиденциальность</span><span data-l="en">Privacy</span><span data-l="ua">Конфіденційність</span></a> &middot; <a href="https://sza.od.ua" target="_blank" rel="noopener">sza.od.ua</a> &middot; <a href="https://github.com/SerZhyAle" target="_blank" rel="noopener">GitHub</a> &middot; <a href="mailto:sza@ukr.net">sza@ukr.net</a></nav>
+  </div>
+  <p class="provenance muted"><span data-l="ru">Собрано по опыту разработки из FastMediaSorter - Android-приложения, которое живёт на этом методе каждый день более года.</span><span data-l="en">Built from hands-on experience with FastMediaSorter - a shipping Android app run on this method every day for over a year.</span><span data-l="ua">Зібрано за досвідом розробки з FastMediaSorter - Android-застосунку, що живе на цьому методі щодня понад рік.</span></p>
+</div></footer>
+<button class="to-top" id="toTop" type="button" aria-label="Back to top" title="Back to top"><svg class="icon" aria-hidden="true"><use href="#icon-nav-scroll-top"/></svg></button>
+<dialog class="search-dialog" id="searchDialog" aria-labelledby="searchTitle">
+  <form method="dialog" class="search-form" id="searchForm">
+    <div class="search-head">
+      <h2 id="searchTitle"><span data-l="ru">Поиск по порталу</span><span data-l="en">Search the portal</span><span data-l="ua">Пошук по порталу</span></h2>
+      <button class="btn btn-ghost btn-sm" type="button" id="searchClose"><span data-l="ru">Закрыть</span><span data-l="en">Close</span><span data-l="ua">Закрити</span></button>
+    </div>
+    <input class="search-input" id="searchInput" type="search" autocomplete="off" spellcheck="false" aria-labelledby="searchTitle" placeholder="Search..">
+    <p class="search-status" id="searchStatus" role="status" aria-live="polite"></p>
+    <ul class="search-results" id="searchResults"></ul>
+  </form>
+</dialog>
+<script src="../../assets/portal.js" defer></script>
+</body>
+</html>

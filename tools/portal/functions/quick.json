@@ -1,0 +1,74 @@
+{
+  "id": "quick",
+  "title": {
+    "en": "Make a one-line edit without ceremony",
+    "ru": "Внести мелкую правку без церемоний",
+    "ua": "Внести дрібну правку без церемоній"
+  },
+  "pitch": {
+    "en": "A typo, a constant or a label changed in one sentence's worth of work: no spec, no build gate.",
+    "ru": "Опечатка, константа или подпись исправлены за одно предложение: без спеки и без сборки.",
+    "ua": "Одруківку, константу чи підпис виправлено за одне речення: без спеки й без збірки."
+  },
+  "lead": {
+    "en": "For a very minor edit, `/quick` goes straight to the file: it makes the change, runs the smallest check that fits and reports in one sentence. No spec is created, and no documentation or build gate runs.",
+    "ru": "Для совсем мелкой правки `/quick` идёт прямо в файл: вносит изменение, запускает самую маленькую подходящую проверку и отчитывается одним предложением. Спека не создаётся, документация и сборка не запускаются.",
+    "ua": "Для зовсім дрібної правки `/quick` іде просто у файл: вносить зміну, запускає найменшу відповідну перевірку й звітує одним реченням. Спека не створюється, документація й збірка не запускаються."
+  },
+  "situation": {
+    "en": "A typo, one constant, one string, a colour or spacing tweak, renaming a single local variable.",
+    "ru": "Опечатка, одна константа, одна строка, правка цвета или отступа, переименование одной локальной переменной.",
+    "ua": "Одруківка, одна константа, один рядок, правка кольору чи відступу, перейменування однієї локальної змінної."
+  },
+  "warning": {
+    "en": "`/quick` refuses anything that changes business logic or user-facing behaviour, visibility or states, adds a class, function, module or public API, touches a schema, dependency or build config, or spans more than 3 files or about 50 lines. It stops and sends you to `/fix` for a narrow bug or to `/spec` for anything wider.",
+    "ru": "`/quick` отказывается от всего, что меняет бизнес-логику или поведение, видимость и состояния для пользователя, добавляет класс, функцию, модуль или публичный API, трогает схему, зависимости или конфигурацию сборки либо затрагивает больше 3 файлов или примерно 50 строк. Он останавливается и отправляет вас к `/fix` для узкого бага или к `/spec` для чего-то шире.",
+    "ua": "`/quick` відмовляється від усього, що змінює бізнес-логіку чи поведінку, видимість і стани для користувача, додає клас, функцію, модуль або публічний API, торкається схеми, залежностей чи конфігурації збірки або зачіпає понад 3 файли чи приблизно 50 рядків. Він зупиняється й відправляє вас до `/fix` для вузького багу або до `/spec` для чогось ширшого."
+  },
+  "steps": [
+    {
+      "en": "Describe the edit in one line: `/quick fix typo in the Save button label`.",
+      "ru": "Опишите правку одной строкой: `/quick fix typo in the Save button label`.",
+      "ua": "Опишіть правку одним рядком: `/quick fix typo in the Save button label`."
+    },
+    {
+      "en": "The agent checks that the edit really is very minor. If it is not, it answers in one line with the reason and the command that fits, and does nothing else.",
+      "ru": "Агент проверяет, что правка действительно мелкая. Если нет, он одной строкой называет причину и подходящую команду и больше ничего не делает.",
+      "ua": "Агент перевіряє, що правка справді дрібна. Якщо ні, він одним рядком називає причину й відповідну команду та більше нічого не робить."
+    },
+    {
+      "en": "It locates the file by a symbol search or a direct path, reads it and makes the edit in the file's existing style.",
+      "ru": "Он находит файл поиском по символу или по прямому пути, читает его и вносит правку в стиле, который уже есть в файле.",
+      "ua": "Він знаходить файл пошуком за символом або за прямим шляхом, читає його й вносить правку в стилі, що вже є у файлі."
+    },
+    {
+      "en": "It runs the narrowest meaningful check for that file type, such as a compile for code or a lint for config, and none for a pure-text typo. The result is recorded as `expected | actual`.",
+      "ru": "Он запускает самую узкую осмысленную проверку для этого типа файла, например компиляцию для кода или линтер для конфигурации, а для опечатки в тексте не запускает ничего. Результат записывается как `expected | actual`.",
+      "ua": "Він запускає найвужчу змістовну перевірку для цього типу файлу, наприклад компіляцію для коду чи лінтер для конфігурації, а для одруківки в тексті не запускає нічого. Результат записується як `expected | actual`."
+    },
+    {
+      "en": "It reports in one sentence what changed and in which file.",
+      "ru": "Он отчитывается одним предложением: что изменилось и в каком файле.",
+      "ua": "Він звітує одним реченням: що змінилося і в якому файлі."
+    }
+  ],
+  "outcome": {
+    "en": "One sentence that names the change and the file, for example a corrected label in one screen file, and nothing else: no spec, no plan, no summary.",
+    "ru": "Одно предложение, где названы правка и файл, например исправленная подпись в файле одного экрана, и больше ничего: ни спеки, ни плана, ни пересказа.",
+    "ua": "Одне речення, де названо правку й файл, наприклад виправлений підпис у файлі одного екрана, і більше нічого: ні спеки, ні плану, ні переказу."
+  },
+  "tips": [
+    {
+      "en": "Anti-slop still applies to a one-liner: no trivial comments, no hardcoded value where a token exists, no broad catch that swallows errors. See [keep generated code from rotting](fn:anti-slop).",
+      "ru": "Правила против мусора действуют и для однострочной правки: никаких тривиальных комментариев, никаких зашитых значений там, где есть токен, никаких широких перехватов, глотающих ошибки. См. [как не дать сгенерированному коду гнить](fn:anti-slop).",
+      "ua": "Правила проти сміття діють і для однорядкової правки: жодних тривіальних коментарів, жодних зашитих значень там, де є токен, жодних широких перехоплень, що ковтають помилки. Див. [як не дати згенерованому коду гнити](fn:anti-slop)."
+    }
+  ],
+  "related": ["fix", "spec", "anti-slop"],
+  "terms": ["anti-slop"],
+  "keywords": {
+    "en": ["quick edit", "typo", "one-line change", "trivial edit", "no spec"],
+    "ru": ["быстрая правка", "опечатка", "правка в одну строку", "мелкая правка", "без спеки"],
+    "ua": ["швидка правка", "одруківка", "правка в один рядок", "дрібна правка", "без спеки"]
+  }
+}

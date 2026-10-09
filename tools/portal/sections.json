@@ -1,0 +1,68 @@
+{
+  "$comment": "The sections of the portal, in the order of the pillars of POSITIONING.md, plus one for adopting the kit. A section listing is a titled section of the portal home that links every function page of the section (SITE-STRUCTURE section 2). `pillar` is the id in POSITIONING.md, or null for a section that is not a pillar.",
+  "sections": [
+    {
+      "id": "rules", "pillar": "rules",
+      "title": { "en": "Rules the agent follows", "ru": "Правила, по которым работает агент", "ua": "Правила, за якими працює агент" },
+      "lead": {
+        "en": "A short rules file the agent reads before it starts, and the checks that make those rules more than advice.",
+        "ru": "Короткий файл правил, который агент читает перед началом работы, и проверки, превращающие правила из совета в механизм.",
+        "ua": "Короткий файл правил, який агент читає перед початком роботи, і перевірки, що перетворюють правила з поради на механізм."
+      }
+    },
+    {
+      "id": "skills", "pillar": "skills",
+      "title": { "en": "Skills: workflows as slash commands", "ru": "Навыки: сценарии как slash-команды", "ua": "Навички: сценарії як slash-команди" },
+      "lead": {
+        "en": "Workflows written down once and run with a slash, from a one-word edit to a review of a whole change.",
+        "ru": "Сценарии, записанные один раз и запускаемые через слеш: от правки одного слова до ревью целого изменения.",
+        "ua": "Сценарії, записані один раз і запущені через слеш: від правки одного слова до рев'ю цілої зміни."
+      }
+    },
+    {
+      "id": "agents", "pillar": "agents",
+      "title": { "en": "Role agents", "ru": "Ролевые агенты", "ua": "Рольові агенти" },
+      "lead": {
+        "en": "A lead, a researcher, a maker and a writer: each is a brief with one clear job and a model tier that fits it.",
+        "ru": "Руководитель, исследователь, исполнитель и автор текстов: у каждого свой бриф, одна понятная задача и подходящий уровень модели.",
+        "ua": "Керівник, дослідник, виконавець і автор текстів: у кожного свій бриф, одне зрозуміле завдання й відповідний рівень моделі."
+      }
+    },
+    {
+      "id": "lifecycle", "pillar": "lifecycle",
+      "title": { "en": "Spec lifecycle", "ru": "Жизненный цикл спеки", "ua": "Життєвий цикл спеки" },
+      "lead": {
+        "en": "From an idea to a checked result in stages, with a status that evidence earns rather than a hope.",
+        "ru": "От идеи до проверенного результата по этапам, со статусом, который заслуживается доказательствами, а не надеждой.",
+        "ua": "Від ідеї до перевіреного результату за етапами, зі статусом, який заслуговують доказами, а не надією."
+      }
+    },
+    {
+      "id": "memory", "pillar": "memory",
+      "title": { "en": "Persistent memory", "ru": "Постоянная память", "ua": "Постійна пам'ять" },
+      "lead": {
+        "en": "What the runtime forgets between sessions, kept as plain files the agent reads and you can edit.",
+        "ru": "То, что среда выполнения забывает между сессиями, лежит в обычных файлах: агент их читает, а вы можете править.",
+        "ua": "Те, що середовище виконання забуває між сесіями, лежить у звичайних файлах: агент їх читає, а ви можете правити."
+      }
+    },
+    {
+      "id": "parallel", "pillar": "parallel",
+      "title": { "en": "Parallel-agent discipline", "ru": "Дисциплина параллельной работы агентов", "ua": "Дисципліна паралельної роботи агентів" },
+      "lead": {
+        "en": "Several agents in one workspace without losing each other's work.",
+        "ru": "Несколько агентов в одной рабочей папке так, чтобы они не теряли работу друг друга.",
+        "ua": "Кілька агентів в одній робочій теці так, щоб вони не губили роботу одне одного."
+      }
+    },
+    {
+      "id": "adopt", "pillar": null,
+      "title": { "en": "Adopt and adapt", "ru": "Внедрение и адаптация", "ua": "Впровадження й адаптація" },
+      "lead": {
+        "en": "Bring the kit into a new or an existing project, fit it to work that is not code, and extend it with a rule of your own.",
+        "ru": "Внести kit в новый или существующий проект, подогнать под работу, которая не код, и дополнить собственным правилом.",
+        "ua": "Внести kit у новий або наявний проєкт, підігнати під роботу, що не є кодом, і доповнити власним правилом."
+      }
+    }
+  ]
+}

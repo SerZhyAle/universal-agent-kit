@@ -1,0 +1,99 @@
+{
+  "id": "git",
+  "title": {
+    "en": "Sort your changes into clean commits",
+    "ru": "Разложить изменения по чистым коммитам",
+    "ua": "Розкласти зміни по чистих комітах"
+  },
+  "pitch": {
+    "en": "`/git` groups your changes into 2 to 4 logical commits, with messages and exact `git add` commands, and does not commit or push unless you ask.",
+    "ru": "`/git` разбивает изменения на 2-4 логичных коммита, с сообщениями и точными командами `git add`, и не коммитит и не пушит, пока вы не попросите.",
+    "ua": "`/git` розбиває зміни на 2-4 логічні коміти, з повідомленнями й точними командами `git add`, і не комітить та не пушить, доки ви не попросите."
+  },
+  "lead": {
+    "en": "`/git` is the kit's guide to branching, staging and commit grouping. Ask it what to commit and it reads `git status` and the active branch, groups the files by concern, picks out the ones that must stay out and proposes commit messages. Run it with no arguments and you get the full reference instead.",
+    "ru": "`/git` - руководство kit по веткам, индексу и группировке коммитов. Спросите, что коммитить, и он прочитает `git status` и активную ветку, сгруппирует файлы по теме, выделит те, что коммитить нельзя, и предложит сообщения коммитов. Без аргументов вы получите полный справочник.",
+    "ua": "`/git` - посібник kit із гілок, індексу та групування комітів. Запитайте, що комітити, і він прочитає `git status` та активну гілку, згрупує файли за темою, виділить ті, що комітити не можна, і запропонує повідомлення комітів. Без аргументів ви отримаєте повний довідник."
+  },
+  "situation": {
+    "en": "A pile of modified and untracked files with no clear split into commits, doubt about which branch you are on or what must stay out of the commit, or a need to see an older version of a file.",
+    "ru": "Куча изменённых и неотслеживаемых файлов без понятного разбиения на коммиты, сомнение, на какой вы ветке и что нельзя включать в коммит, или нужна старая версия файла.",
+    "ua": "Купа змінених і невідстежуваних файлів без зрозумілого розбиття на коміти, сумнів, на якій ви гілці й що не можна включати до коміту, або потрібна стара версія файлу."
+  },
+  "warning": {
+    "en": "The agent does not run `git commit`, `git push` or a history rewrite unless you asked for it, and on a [protected or default branch](term:protected-branch) it branches first. It stages, groups and diffs on its own and stops only before irreversible or shared-history operations. Restoring a file from an old commit with `git checkout` overwrites your working copy.",
+    "ru": "Агент не выполняет `git commit`, `git push` и переписывание истории, пока вы об этом не попросили, а на [защищённой или основной ветке](term:protected-branch) сначала создаёт новую ветку. Индекс, группировку и diff он делает сам и останавливается лишь перед необратимыми действиями или правкой общей истории. Восстановление файла из старого коммита через `git checkout` перезаписывает рабочую копию.",
+    "ua": "Агент не виконує `git commit`, `git push` і переписування історії, доки ви про це не попросили, а на [захищеній або основній гілці](term:protected-branch) спершу створює окрему гілку. Індекс, групування й diff він робить сам і зупиняється лише перед незворотними операціями та операціями над спільною історією. Відновлення файлу зі старого коміту через `git checkout` перезаписує вашу робочу копію."
+  },
+  "steps": [
+    {
+      "en": "Ask a question or name an action: `/git analyze current changes and suggest commit groups`, `/git what should I commit now?`, or `/git show me the old version of` followed by a file name. A bare `/git` prints the full reference.",
+      "ru": "Задайте вопрос или назовите действие: `/git analyze current changes and suggest commit groups`, `/git what should I commit now?` или `/git show me the old version of` и имя файла. Просто `/git` выводит полный справочник.",
+      "ua": "Поставте запитання або назвіть дію: `/git analyze current changes and suggest commit groups`, `/git what should I commit now?` або `/git show me the old version of` та ім'я файлу. Просто `/git` виводить повний довідник."
+    },
+    {
+      "en": "For the analysis, the agent runs `git status` to list everything modified and untracked, then `git branch --show-current` to confirm the active branch.",
+      "ru": "Для анализа агент запускает `git status`, чтобы увидеть все изменённые и неотслеживаемые файлы, а затем `git branch --show-current`, чтобы подтвердить активную ветку.",
+      "ua": "Для аналізу агент запускає `git status`, щоб побачити всі змінені й невідстежувані файли, а потім `git branch --show-current`, щоб підтвердити активну гілку."
+    },
+    {
+      "en": "It groups the files by feature or concern. A typical split: the source change together with its spec or plan file, then docs and changelog, then infrastructure such as build config, dependencies and settings. One concern goes into one commit.",
+      "ru": "Он группирует файлы по функции или теме. Типичное разбиение: изменение в коде вместе с файлом спеки или плана, затем документация и changelog, затем инфраструктура: конфигурация сборки, зависимости, настройки. Одна тема - один коммит.",
+      "ua": "Він групує файли за функцією або темою. Типовий поділ: зміна в коді разом із файлом спеки чи плану, потім документація й changelog, потім інфраструктура: конфігурація збірки, залежності, налаштування. Одна тема - один коміт."
+    },
+    {
+      "en": "It picks out the files that should not be committed: build output, caches, local env and secrets, machine-specific config, generated or auto-indexed files, large binaries and anything under your [scratch directory](term:scratch). When in doubt it checks `.gitignore` and asks before adding a binary or a config file.",
+      "ru": "Он выделяет файлы, которые коммитить не нужно: результат сборки, кэши, локальное окружение и секреты, конфигурацию конкретной машины, сгенерированные или автоиндексируемые файлы, большие бинарники и всё, что лежит в вашей [scratch-папке](term:scratch). При сомнении он смотрит `.gitignore` и спрашивает, прежде чем добавлять бинарник или файл конфигурации.",
+      "ua": "Він виділяє файли, які комітити не треба: результат збирання, кеші, локальне середовище й секрети, конфігурацію конкретної машини, згенеровані або автоіндексовані файли, великі бінарники та все, що лежить у вашій [scratch-теці](term:scratch). У разі сумніву він дивиться `.gitignore` і питає, перш ніж додавати бінарник або файл конфігурації."
+    },
+    {
+      "en": "It suggests 2 to 4 logical commit groups, each with a proposed message under a [Conventional Commits](term:conventional-commit) prefix: `feat`, `fix`, `refactor`, `perf`, `docs`, `chore`, `test`, `build`, `ci`, `style` or `revert`. The message explains the why when it is not obvious.",
+      "ru": "Он предлагает от 2 до 4 логичных групп коммитов, у каждой своё сообщение с префиксом [Conventional Commits](term:conventional-commit): `feat`, `fix`, `refactor`, `perf`, `docs`, `chore`, `test`, `build`, `ci`, `style` или `revert`. Если причина неочевидна, сообщение объясняет, зачем это сделано.",
+      "ua": "Він пропонує від 2 до 4 логічних груп комітів, у кожної своє повідомлення з префіксом [Conventional Commits](term:conventional-commit): `feat`, `fix`, `refactor`, `perf`, `docs`, `chore`, `test`, `build`, `ci`, `style` або `revert`. Якщо причина неочевидна, повідомлення пояснює, навіщо це зроблено."
+    },
+    {
+      "en": "A subject names the user-visible change, not the mechanism: `fix: keep page breaks in PDF invoices`, not `fix: flush stream before close`. Attribution, such as a co-author line or a tool trailer, is a team choice that the project's [rules file](term:rules-file) states, and the agent follows it. If the file says nothing, it asks once, writes your answer into the rules file and follows it. It never adds or strips attribution silently.",
+      "ru": "Заголовок называет видимое пользователю изменение, а не механизм: `fix: keep page breaks in PDF invoices`, а не `fix: flush stream before close`. Указание авторства, например строка соавтора или трейлер инструмента, - выбор команды, который фиксирует [файл правил](term:rules-file) проекта, и агент ему следует. Если файл молчит, агент спрашивает один раз, записывает ваш ответ в файл правил и следует ему. Авторство он никогда не добавляет и не убирает молча.",
+      "ua": "Заголовок називає видиму користувачеві зміну, а не механізм: `fix: keep page breaks in PDF invoices`, а не `fix: flush stream before close`. Зазначення авторства, наприклад рядок співавтора чи трейлер інструмента, - вибір команди, який фіксує [файл правил](term:rules-file) проєкту, і агент його дотримується. Якщо файл мовчить, агент питає один раз, записує вашу відповідь у файл правил і дотримується її. Авторство він ніколи не додає й не прибирає мовчки."
+    },
+    {
+      "en": "It shows the exact `git add` commands for each group. Before you commit, check what is staged with `git diff --cached`.",
+      "ru": "Для каждой группы он показывает точные команды `git add`. Перед коммитом проверьте, что попало в индекс, командой `git diff --cached`.",
+      "ua": "Для кожної групи він показує точні команди `git add`. Перед комітом перевірте, що потрапило до індексу, командою `git diff --cached`."
+    }
+  ],
+  "outcome": {
+    "en": "A plan you can act on: the active branch confirmed, the files to leave out named, and 2 to 4 commit groups with messages and `git add` commands. The history stays unchanged until you commit or ask the agent to.",
+    "ru": "План, по которому можно действовать: подтверждённая активная ветка, названные файлы, которые нужно оставить за рамками коммита, и от 2 до 4 групп коммитов с сообщениями и командами `git add`. История не меняется, пока вы сами не закоммитите или не попросите об этом агента.",
+    "ua": "План, за яким можна діяти: підтверджена активна гілка, названі файли, які слід залишити поза комітом, і від 2 до 4 груп комітів із повідомленнями та командами `git add`. Історія не змінюється, доки ви самі не закомітите або не попросите про це агента."
+  },
+  "tips": [
+    {
+      "en": "The branching model in the reference is only a default: `main` stays release-stable and takes merges from work branches (`feat/x`, `fix/x` or sequential `dev-vNNN`), and the number of live work branches stays small. Replace it with your team's flow; the kit insists only that you know which branch you are on before you commit.",
+      "ru": "Модель веток в справочнике - лишь вариант по умолчанию: `main` остаётся стабильной для релизов и принимает слияния из рабочих веток (`feat/x`, `fix/x` или последовательные `dev-vNNN`), а число живых рабочих веток невелико. Замените её своим процессом; kit настаивает только на одном: перед коммитом вы знаете, на какой вы ветке.",
+      "ua": "Модель гілок у довіднику - лише варіант за замовчуванням: `main` лишається стабільною для релізів і приймає злиття з робочих гілок (`feat/x`, `fix/x` або послідовні `dev-vNNN`), а кількість живих робочих гілок невелика. Замініть її своїм процесом; kit наполягає лише на одному: перед комітом ви знаєте, на якій ви гілці."
+    },
+    {
+      "en": "For history questions the reference lists `git show HASH:path/to/file` for a file as it was at a commit, `git log --oneline -- path/to/file`, `git blame` and a `git diff` between two commits.",
+      "ru": "Для вопросов об истории справочник перечисляет `git show HASH:path/to/file` для файла в том виде, как он был в коммите, `git log --oneline -- path/to/file`, `git blame` и `git diff` между двумя коммитами.",
+      "ua": "Для питань про історію довідник перелічує `git show HASH:path/to/file` для файлу в тому вигляді, як він був у коміті, `git log --oneline -- path/to/file`, `git blame` і `git diff` між двома комітами."
+    },
+    {
+      "en": "If you ship, three invariants hold in any flow: pin the version once and stamp it into every artifact, derive release notes from a maintained list of user-visible changes rather than the raw commit log, and keep a single-ticket release path that cherry-picks only that ticket's commits.",
+      "ru": "Если вы выпускаете релизы, три правила действуют при любом процессе: зафиксируйте версию один раз и проставьте её во все артефакты, выводите заметки о релизе из поддерживаемого списка видимых пользователю изменений, а не из сырого журнала коммитов, и держите путь релиза одной задачи, который переносит только её коммиты.",
+      "ua": "Якщо ви випускаєте релізи, три правила діють за будь-якого процесу: зафіксуйте версію один раз і проставте її в усі артефакти, виводьте нотатки до релізу з підтримуваного списку видимих користувачеві змін, а не з сирого журналу комітів, і майте шлях релізу однієї задачі, що переносить лише її коміти."
+    },
+    {
+      "en": "The kit's `.claude/settings.json` (Claude Code only) lets `git add`, `git commit`, `git switch`, `git branch` and `git fetch` run without a prompt, asks before `git push` and `git rebase`, and denies force push, `git reset --hard` and `git clean`. That removes prompts, not the agent's own rule: no commit or push without your request. A deny rule is not a security boundary.",
+      "ru": "`.claude/settings.json` из kit (только Claude Code) разрешает `git add`, `git commit`, `git switch`, `git branch` и `git fetch` без запроса, спрашивает перед `git push` и `git rebase` и запрещает принудительный push, `git reset --hard` и `git clean`. Это убирает запросы, но не собственное правило агента: ни коммита, ни push без вашей просьбы. Правило запрета - не граница безопасности.",
+      "ua": "`.claude/settings.json` із kit (лише Claude Code) дозволяє `git add`, `git commit`, `git switch`, `git branch` і `git fetch` без запиту, питає перед `git push` та `git rebase` і забороняє примусовий push, `git reset --hard` та `git clean`. Це прибирає запити, але не власне правило агента: ні коміту, ні push без вашого прохання. Правило заборони - не межа безпеки."
+    }
+  ],
+  "related": ["caveman-commit", "critique", "spec-lifecycle"],
+  "terms": ["conventional-commit", "protected-branch", "scratch", "rules-file"],
+  "keywords": {
+    "en": ["git", "commit", "stage changes", "commit groups", "branch", "commit message", "commit attribution", "git history"],
+    "ru": ["git", "коммит", "индекс git", "группировка коммитов", "ветка", "сообщение коммита", "авторство коммита", "история git"],
+    "ua": ["git", "коміт", "індекс git", "групування комітів", "гілка", "повідомлення коміту", "авторство коміту", "історія git"]
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "id": "user-facing-decision",
+  "term": { "en": "User-facing decision", "ru": "Решение, видимое пользователю", "ua": "Рішення, видиме користувачеві" },
+  "def": {
+    "en": "Any choice about something a user perceives: a screen, a CLI flag and its help text, an API response shape, an error message or an email template. It covers where the thing appears, when it is shown, its exact wording and name, what happens when it is empty or fails, and whether each kind of reader reaches the result. `/ui-clarify` blocks implementation until each one is explicit.",
+    "ru": "Любой выбор, касающийся того, что воспринимает пользователь: экран, флаг CLI и его справка, форма ответа API, сообщение об ошибке или шаблон письма. Сюда входит, где это появляется, когда показывается, как точно сформулировано и названо, что происходит, когда оно пусто или даёт сбой, и доходит ли до результата каждый вид читателя. `/ui-clarify` не пускает к реализации, пока каждое такое решение не определено.",
+    "ua": "Будь-який вибір, що стосується того, що сприймає користувач: екран, прапорець CLI та його довідка, форма відповіді API, повідомлення про помилку або шаблон листа. Сюди входить, де це з'являється, коли показується, як точно сформульоване й назване, що відбувається, коли воно порожнє або дає збій, і чи доходить до результату кожен вид читача. `/ui-clarify` не пускає до реалізації, доки кожне таке рішення не визначено."
+  },
+  "see": ["surface"]
+}

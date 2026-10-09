@@ -1,0 +1,10 @@
+{
+  "id": "headless-process",
+  "term": { "en": "Headless process", "ru": "Headless-процесс", "ua": "Headless-процес" },
+  "def": {
+    "en": "A run of the agent with no interactive chat, started by a driver for one work item. Each run begins on an empty [context](term:context), so the process boundary is the context reset. The kit describes this shape and ships no driver script.",
+    "ru": "Запуск агента без интерактивного чата, который драйвер стартует под один рабочий элемент. Каждый запуск начинается с пустого [контекста](term:context), так что граница процесса и есть сброс контекста. Kit описывает эту схему и не поставляет скрипт-драйвер.",
+    "ua": "Запуск агента без інтерактивного чату, який драйвер стартує під один робочий елемент. Кожен запуск починається з порожнього [контексту](term:context), тож межа процесу і є скиданням контексту. Kit описує цю схему й не постачає скрипт-драйвер."
+  },
+  "see": ["context", "fan-out"]
+}

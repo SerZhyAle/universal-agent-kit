@@ -1,19 +1,20 @@
 {
-  "//": "Universal Agent Kit defaults for Claude Code. Grants read/glob/grep + edit/write + git with acceptEdits. Build/test/run are NOT granted - see //allow-examples and add the ones you trust. Review and tighten `allow` before adopting. `agent` names the default subagent from .claude/agents/.",
-  "agent": "rd-lead",
-  "//hooks-example": [
-    "A worked example of the population question, NOT a recommendation - count before you wire it (docs/HOOKS.md).",
-    "The premise: a command ladder documented in CLAUDE.md alone measured 0 uses of the cheapest tier over 434",
-    "invocations, and routing is decided when the human types - so nudge at prompt submit. Right about WHEN.",
-    "The measurement (2026-09-20): 0 of 17 free-text prompts matched, because entering the pipeline means typing",
-    "'/' and the hook skips slash prompts; and 69% of pipeline entries (64 of 93) were headless, where the event",
-    "does not exist. Reach: zero. Where a driver enters the pipeline, it picks the tier as it picks the item.",
-    "If your own work IS entered by hand, the shape is:",
-    "\"hooks\": { \"UserPromptSubmit\": [ { \"hooks\": [ { \"type\": \"command\", \"command\": \"<YOUR_NUDGE_SCRIPT>\" } ] } ] }",
-    "The script: match the prompt against a short, high-precision micro-task pattern list, veto on a real-work",
-    "list, drop anything past a length ceiling, print one line naming /quick and /fix, and ALWAYS exit 0.",
-    "Advisory only - a hook that refuses a prompt costs more on one false fire than it saves on many hits.",
-    "Left unwired regardless: a hooks entry pointing at a script you have not written yet fails on every prompt."
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "//": [
+    "Universal Agent Kit permission template for Claude Code. Review it before adopting; tighten it to taste.",
+    "allow: file reads and edits, plus the git commands that only stage, commit or move between branches.",
+    "  Read-only git (status, log, diff, show) needs no rule - Claude Code approves it already.",
+    "  Never widen this to Bash(git *): that pre-approves force push, hard reset, clean, and git -c,",
+    "  which runs any program you name - and in auto mode an allow rule is applied before the classifier.",
+    "ask: anything that publishes or rewrites shared history. deny: the destructive forms, and secrets.",
+    "  A Bash deny rule stops the form Claude usually writes, not every spelling of it - it is not a",
+    "  security boundary. Use the sandbox, or keep the secret off the machine, where that matters.",
+    "No defaultMode on purpose: the runtime's own default applies (auto mode on current Claude Code). A",
+    "  project value overrides every teammate's own choice - set one only to pin a mode for the whole team.",
+    "No \"agent\" on purpose: it would replace Claude Code's system prompt with one agent's brief for every",
+    "  session. Opt in per session with `claude --agent rd-lead`.",
+    "Build/test/run commands are not granted - add the ones you trust, e.g. Bash(npm run *), Bash(make *),",
+    "  Bash(./gradlew *), Bash(cargo *), Bash(go test *). Hooks: docs/HOOKS.md (none is wired here)."
   ],
   "permissions": {
     "allow": [
@@ -22,17 +23,25 @@
       "Grep(**)",
       "Edit(**)",
       "Write(**)",
-      "Bash(git *)"
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(git switch *)",
+      "Bash(git branch *)",
+      "Bash(git fetch *)"
     ],
-    "//allow-examples": [
-      "Add your build/test/run commands so the agent does not prompt, e.g.:",
-      "Bash(npm run *)",
-      "Bash(pnpm *)",
-      "Bash(make *)",
-      "Bash(./gradlew *)",
-      "Bash(cargo *)",
-      "Bash(go *)"
+    "ask": [
+      "Bash(git push *)",
+      "Bash(git rebase *)"
     ],
-    "defaultMode": "acceptEdits"
+    "deny": [
+      "Bash(git push --force *)",
+      "Bash(git push --force-with-lease *)",
+      "Bash(git push -f *)",
+      "Bash(git reset --hard *)",
+      "Bash(git clean *)",
+      "Read(./.env)",
+      "Read(./.env.*)",
+      "Read(./secrets/**)"
+    ]
   }
 }

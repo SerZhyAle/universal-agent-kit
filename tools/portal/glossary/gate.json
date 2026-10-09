@@ -1,0 +1,10 @@
+{
+  "id": "gate",
+  "term": { "en": "Gate", "ru": "Гейт", "ua": "Гейт" },
+  "def": {
+    "en": "A mechanical check that stops work when it fails: a step of the one fail-closed \"done\" command, a pre-commit hook or a CI job. The kit scopes each gate by the kind of change and the touched path, and names it per-change or release scope when it is written. Claude Code's `Stop` hook can run the \"done\" command.",
+    "ru": "Механическая проверка, которая останавливает работу при провале: шаг единой команды «готово», закрывающейся при отказе, pre-commit-хук или задание CI. Kit ограничивает каждый гейт видом правки и затронутыми путями и при создании называет его областью: на каждую правку или на релиз. Команду «готово» может запускать хук `Stop` в Claude Code.",
+    "ua": "Механічна перевірка, що зупиняє роботу за провалу: крок єдиної команди «готово», яка закривається за відмови, pre-commit-хук або завдання CI. Kit обмежує кожен гейт видом правки та зачепленими шляхами й під час створення називає його областю: на кожну правку чи на реліз. Команду «готово» може запускати хук `Stop` у Claude Code."
+  },
+  "see": ["ladder", "hook", "ratchet"]
+}

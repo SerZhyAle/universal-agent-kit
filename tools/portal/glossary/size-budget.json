@@ -1,0 +1,10 @@
+{
+  "id": "size-budget",
+  "term": { "en": "Size budget", "ru": "Лимит размера файла", "ua": "Ліміт розміру файлу" },
+  "def": {
+    "en": "The file length, `<SIZE_BUDGET>` lines, past which you split a file along a seam that means something. It is a bare number you set per project, where your own review starts complaining. A file over the budget is backed up to the scratch directory before a large edit, because size is a proxy for \"this file does too many things\".",
+    "ru": "Длина файла в строках, `<SIZE_BUDGET>`, за которой файл делят по шву, имеющему смысл. Это голое число, которое вы задаёте для проекта там, где ваше ревью начинает жаловаться. Файл сверх лимита копируют в каталог scratch перед крупной правкой, потому что размер - показатель того, что «файл делает слишком много».",
+    "ua": "Довжина файлу в рядках, `<SIZE_BUDGET>`, за якою файл ділять за швом, що має сенс. Це голе число, яке ви задаєте для проєкту там, де ваше рев'ю починає скаржитися. Файл понад ліміт копіюють у каталог scratch перед великою правкою, бо розмір - показник того, що «файл робить забагато»."
+  },
+  "see": ["rules-file", "read-only-zone", "scratch"]
+}

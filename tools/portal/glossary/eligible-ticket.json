@@ -1,0 +1,10 @@
+{
+  "id": "eligible-ticket",
+  "term": { "en": "Eligible ticket", "ru": "Подходящий тикет (eligible)", "ua": "Придатний тікет (eligible)" },
+  "def": {
+    "en": "A ticket the agent can advance alone: its status is a live pipeline stage (`Draft`, `Approved`, `Tactical`, `In Progress`, `Implemented`, `Partial`, `Broken`) and it is not in this run's skip-cache. `BlockByOtherTask` counts only once its blocker, read from the header's `Blocked-by:` token alone, is `Verified`; the other `Block*` states wait for a human.",
+    "ru": "Тикет, который агент может продвинуть сам: его статус - живая стадия конвейера (`Draft`, `Approved`, `Tactical`, `In Progress`, `Implemented`, `Partial`, `Broken`), и его нет в кэше пропуска (skip-cache) этого прогона. `BlockByOtherTask` подходит, только когда его блокер, прочитанный лишь из токена `Blocked-by:` в шапке, уже `Verified`; остальные состояния `Block*` ждут человека.",
+    "ua": "Тікет, який агент може просунути сам: його статус - жива стадія конвеєра (`Draft`, `Approved`, `Tactical`, `In Progress`, `Implemented`, `Partial`, `Broken`), і його немає в кеші пропуску (skip-cache) цього прогону. `BlockByOtherTask` придатний, лише коли його блокер, прочитаний тільки з токена `Blocked-by:` у шапці, уже `Verified`; решта станів `Block*` чекає на людину."
+  },
+  "see": ["backlog", "block-status"]
+}

@@ -1,0 +1,9 @@
+{
+  "id": "protected-branch",
+  "term": { "en": "Protected branch", "ru": "Защищённая ветка", "ua": "Захищена гілка" },
+  "def": {
+    "en": "A branch that takes no direct work: the repository's default branch, or one your team protects. The rule in `/git` is that on such a branch the agent creates a work branch first. The kit's default model keeps `main` release-stable and develops on work branches, and says to replace it with your team's flow.",
+    "ru": "Ветка, в которой не ведут работу напрямую: основная ветка репозитория или ветка, которую защищает ваша команда. По правилу `/git` на такой ветке агент сначала создаёт рабочую. Модель kit по умолчанию держит `main` стабильной для релизов, а разработку ведёт в рабочих ветках, и советует заменить её процессом вашей команды.",
+    "ua": "Гілка, у якій не ведуть роботу напряму: основна гілка репозиторію або гілка, яку захищає ваша команда. За правилом `/git` на такій гілці агент спершу створює робочу. Модель kit за замовчуванням тримає `main` стабільною для релізів, а розробку веде в робочих гілках, і радить замінити її процесом вашої команди."
+  }
+}

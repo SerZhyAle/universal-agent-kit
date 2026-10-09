@@ -1,0 +1,134 @@
+{
+  "id": "hooks",
+  "title": {
+    "en": "Enforce a rule mechanically with an event hook",
+    "ru": "Обеспечить соблюдение правила механически через хук события",
+    "ua": "Забезпечити дотримання правила механічно через хук події"
+  },
+  "pitch": {
+    "en": "Count what the event sees, pick a verdict, fail open when the hook errs, and list the hook in an inventory in the same change.",
+    "ru": "Посчитайте, что видит событие, выберите вердикт, при ошибке хука пропускайте вызов и внесите хук в реестр в том же изменении.",
+    "ua": "Порахуйте, що бачить подія, виберіть вердикт, за помилки хука пропускайте виклик і внесіть хук до реєстру в тій самій зміні."
+  },
+  "lead": {
+    "en": "`docs/HOOKS.md` uses \"hook\" for a program your runtime runs on an event, inside a tool call nobody is reading, and which returns a verdict. You decide whether the event sees enough of what you want to influence, pick the verdict, say what happens when the hook itself errs, and record the hook in an inventory so that someone can find out it exists.",
+    "ru": "В `docs/HOOKS.md` «хук» - это программа, которую среда выполнения запускает по событию внутри вызова инструмента, за которым никто не следит, и которая возвращает вердикт. Вы решаете, видит ли событие достаточно того, на что вы хотите повлиять, выбираете вердикт, описываете, что будет, если сам хук ошибётся, и записываете хук в реестр, чтобы кто-нибудь мог узнать, что он существует.",
+    "ua": "У `docs/HOOKS.md` «хук» - це програма, яку середовище виконання запускає за подією всередині виклику інструмента, за яким ніхто не стежить, і яка повертає вердикт. Ви вирішуєте, чи бачить подія достатньо того, на що ви хочете вплинути, обираєте вердикт, описуєте, що буде, коли сам хук помилиться, і записуєте хук до реєстру, щоб хтось міг дізнатися, що він існує."
+  },
+  "situation": {
+    "en": "A failure is real, observed, recurring and mechanically detectable, and a rule in prose has already failed to stop it.",
+    "ru": "Сбой настоящий, наблюдаемый, повторяющийся и механически обнаруживаемый, а правило в виде прозы уже не смогло его остановить.",
+    "ua": "Збій справжній, спостережуваний, повторюваний і механічно виявний, а правило у вигляді прози вже не змогло його зупинити."
+  },
+  "warning": {
+    "en": "A hook is the most expensive directive to get wrong, because a wrong one is invisible. And a hooks entry that points at a script you have not written yet fails on every prompt.",
+    "ru": "Хук - самая дорогая директива в случае ошибки, потому что неверный хук невидим. А запись в hooks, указывающая на скрипт, которого вы ещё не написали, падает на каждом запросе.",
+    "ua": "Хук - найдорожча директива в разі помилки, бо хибний хук невидимий. А запис у hooks, що вказує на скрипт, якого ви ще не написали, падає на кожному запиті."
+  },
+  "steps": [
+    {
+      "en": "Name the event, then count. Ask two separate questions: is this event where the decision happens, and how many of the occurrences you care about actually pass through it. Count over a real window. If the ratio is small, the hook is not the mechanism: move the decision to the entry point that carries the volume.",
+      "ru": "Назовите событие, затем посчитайте. Задайте два отдельных вопроса: здесь ли, на этом событии, принимается решение, и какая доля интересующих вас случаев через него вообще проходит. Считайте на реальном окне данных. Если доля мала, хук - не тот механизм: перенесите решение в точку входа, через которую идёт основной объём.",
+      "ua": "Назвіть подію, тоді порахуйте. Поставте два окремі питання: чи тут, на цій події, ухвалюється рішення, і яка частка цікавих вам випадків узагалі через неї проходить. Рахуйте на реальному вікні даних. Якщо частка мала, хук - не той механізм: перенесіть рішення в точку входу, якою йде основний обсяг."
+    },
+    {
+      "en": "Pick the verdict from the fixed vocabulary of seven: refuses, rewrites, injects, observes, warns, nudges, arms. Prefer correcting the input where the correct input is knowable, and refuse only where no correct input exists: a block cannot fix and retry, it can only cost the caller a round trip.",
+      "ru": "Выберите вердикт из закреплённого словаря из семи глаголов: refuses, rewrites, injects, observes, warns, nudges, arms. Где верный ввод известен, предпочитайте его исправить, а отказывайте только там, где верного ввода не существует: блокировка не умеет исправить и повторить, она лишь стоит вызывающему лишний заход.",
+      "ua": "Виберіть вердикт із закріпленого словника з семи дієслів: refuses, rewrites, injects, observes, warns, nudges, arms. Де правильний ввід відомий, віддавайте перевагу його виправленню, а відмовляйте лише там, де правильного вводу не існує: блокування не вміє виправити й повторити, воно лише коштує викликачеві зайвий захід."
+    },
+    {
+      "en": "Write the contract. A refusing hook blocks with the runtime's blocking signal, one specific exit code and not any failure; a clean exit allows. It puts the reason on the error stream and fails open on any parse, path or IO error. A rewriting hook returns the complete input object, not just the changed field, puts its notice on the context channel, and speaks only when something changed.",
+      "ru": "Опишите контракт. Хук с отказом блокирует сигналом блокировки, который задаёт среда: это один конкретный код выхода, а не любой сбой; чистый выход разрешает. Он пишет причину в поток ошибок и пропускает вызов при любой ошибке разбора, пути или ввода-вывода. Хук с подменой возвращает объект ввода целиком, а не только изменённое поле, кладёт уведомление в канал контекста и говорит, только когда что-то изменилось.",
+      "ua": "Опишіть контракт. Хук із відмовою блокує сигналом блокування, який задає середовище: це один конкретний код виходу, а не будь-який збій; чистий вихід дозволяє. Він пише причину в потік помилок і пропускає виклик за будь-якої помилки розбору, шляху чи вводу-виводу. Хук із підміною повертає об'єкт вводу цілком, а не лише змінене поле, кладе сповіщення в канал контексту й говорить, лише коли щось змінилося."
+    },
+    {
+      "en": "Cover the other shapes. An observing hook cannot change the result the model sees, so it speaks only when it holds a counter-example. An arming hook sets a session-start marker for a companion gate and always exits zero. A hook that refuses the end of a turn exits zero always, carries the verdict in its output, and writes nothing when it allows.",
+      "ru": "Учтите остальные формы. Наблюдающий хук не может изменить результат, который видит модель, поэтому он говорит, только когда у него в руках контрпример. Хук, который «взводит» (arms), ставит при старте сессии метку для парного гейта и всегда выходит с нулём. Хук, отказывающий завершить ход, всегда выходит с нулём, несёт вердикт в выводе и ничего не пишет, когда разрешает.",
+      "ua": "Врахуйте решту форм. Хук-спостерігач не може змінити результат, який бачить модель, тому він говорить, лише коли має в руках контрприклад. Хук, що «зводить» (arms), ставить на старті сесії мітку для парного гейта й завжди виходить із нулем. Хук, що відмовляє завершити хід, завжди виходить із нулем, несе вердикт у виводі й нічого не пише, коли дозволяє."
+    },
+    {
+      "en": "In Claude Code, exit 2 blocks: it stops the tool call and hands stderr to the model as the reason. Exit 1 is a non-blocking error, so a guard written with `exit 1` never blocks and nothing says so. Exit 0 allows. Or exit 0 and print JSON whose `hookSpecificOutput` holds `permissionDecision` (`allow`, `deny` or `ask`), `updatedInput` (the complete object) or `additionalContext`. Check the current docs: events and fields change.",
+      "ru": "В Claude Code блокирует выход с кодом 2: он останавливает вызов инструмента и передаёт stderr модели как причину. Выход с кодом 1 - неблокирующая ошибка, поэтому защита с `exit 1` никогда не блокирует, и об этом ничто не сообщает. Выход с 0 разрешает. Либо выйдите с 0 и выведите JSON, где в `hookSpecificOutput` лежит `permissionDecision` (`allow`, `deny` или `ask`), `updatedInput` (объект целиком) или `additionalContext`. Сверяйтесь с актуальной документацией: события и поля меняются.",
+      "ua": "У Claude Code блокує вихід із кодом 2: він зупиняє виклик інструмента й передає stderr моделі як причину. Вихід із кодом 1 - неблокувальна помилка, тому захист з `exit 1` ніколи не блокує, і про це ніщо не повідомляє. Вихід із 0 дозволяє. Або вийдіть із 0 і виведіть JSON, де в `hookSpecificOutput` лежить `permissionDecision` (`allow`, `deny` або `ask`), `updatedInput` (об'єкт цілком) чи `additionalContext`. Звіряйтеся з актуальною документацією: події та поля змінюються."
+    },
+    {
+      "en": "Make every escape hatch and the off switch unconditional. A guard with a conditional bypass gets bypassed by other means. For an end-of-turn hook, change the message when a refusal repeats and give the hook a sanctioned way to be idle, or it is a trap.",
+      "ru": "Сделайте каждую лазейку и выключатель безусловными. Защита с условным обходом обходится другими способами. Для хука конца хода меняйте сообщение, когда отказ повторяется, и дайте хуку разрешённый способ простаивать, иначе это ловушка.",
+      "ua": "Зробіть кожну лазівку та вимикач безумовними. Захист з умовним обходом обходять іншими способами. Для хука кінця ходу змінюйте повідомлення, коли відмова повторюється, і дайте хукові дозволений спосіб простоювати, інакше це пастка."
+    },
+    {
+      "en": "Test it from both sides. Give the cheap pre-filter its own must-reach and must-skip cases and run them in the shell that actually evaluates it. Try payloads the hook must refuse and payloads it must allow; the allow cases carry the weight, because a guard that over-blocks gets turned off. A hook that always exits zero is asserted on its output.",
+      "ru": "Проверьте с обеих сторон. Дайте дешёвому предфильтру собственные случаи «должен дойти» и «должен пропустить» и запускайте их в той оболочке, которая его действительно выполняет. Пробуйте и ввод, который хук обязан отклонить, и ввод, который обязан пропустить: вторые случаи самые важные, потому что защиту, которая блокирует лишнее, выключают. Хук, всегда выходящий с нулём, проверяют по его выводу.",
+      "ua": "Перевірте з обох боків. Дайте дешевому передфільтру власні випадки «має дійти» і «має пропустити» та запускайте їх у тій оболонці, яка його справді виконує. Пробуйте і ввід, який хук зобов'язаний відхилити, і ввід, який зобов'язаний пропустити: другі випадки найважливіші, бо захист, що блокує зайве, вимикають. Хук, який завжди виходить із нулем, перевіряють за його виводом."
+    },
+    {
+      "en": "Register the hook and edit the inventory in the same change. The inventory is a table with one row per hook: what it is, which event, which verdict, what it does and which rule it enforces. Write it before the second hook, not after the sixth.",
+      "ru": "Зарегистрируйте хук и правьте реестр в том же изменении. Реестр - таблица с одной строкой на хук: что это, какое событие, какой вердикт, что он делает и какое правило обеспечивает. Заведите его до второго хука, а не после шестого.",
+      "ua": "Зареєструйте хук і правте реєстр у тій самій зміні. Реєстр - таблиця з одним рядком на хук: що це, яка подія, який вердикт, що він робить і яке правило забезпечує. Заведіть його до другого хука, а не після шостого."
+    }
+  ],
+  "outcome": {
+    "en": "A hook whose event, verdict and failure behaviour are written down, that passes its must-refuse and must-allow cases, and that has a row in the inventory. Anyone reading the inventory can tell what the hook will do to them.",
+    "ru": "Хук, у которого записаны событие, вердикт и поведение при сбое, который проходит случаи «обязан отклонить» и «обязан пропустить» и у которого есть строка в реестре. Любой, кто читает реестр, понимает, что хук с ним сделает.",
+    "ua": "Хук, у якого записані подія, вердикт і поведінка за збою, який проходить випадки «зобов'язаний відхилити» та «зобов'язаний пропустити» і в якого є рядок у реєстрі. Будь-хто, хто читає реєстр, розуміє, що хук з ним зробить."
+  },
+  "tips": [
+    {
+      "en": "Correcting beats refusing, and it is measured. On a reference machine a blocking guard on uncapped file reads fired 381 times in one week, and 31.8% of those blocks were answered by re-issuing the same read with a limit large enough to pull the whole file. No context saved, a turn spent.",
+      "ru": "Исправлять лучше, чем отказывать, и это измерено. На эталонной машине блокирующая защита от чтения файлов без ограничения сработала 381 раз за неделю, и 31,8% блокировок закончились повтором того же чтения с лимитом, достаточным, чтобы вытянуть файл целиком. Контекст не сэкономлен, ход потрачен.",
+      "ua": "Виправляти краще, ніж відмовляти, і це виміряно. На еталонній машині блокувальний захист від читання файлів без обмеження спрацював 381 раз за тиждень, і 31,8% блокувань закінчилися повтором того самого читання з лімітом, достатнім, щоб витягти файл цілком. Контекст не заощаджено, хід витрачено."
+    },
+    {
+      "en": "The kit wires no hook. `docs/HOOKS.md` documents one as a worked example, a prompt-submit nudge (`UserPromptSubmit`), and leaves it unwired: its measured reach was zero, with 0 of 17 free-text prompts matched and 64 of 93 pipeline entries headless. It is advisory and always exits 0. If your work is entered by hand, count first; it may earn its place.",
+      "ru": "Kit не подключает ни одного хука. `docs/HOOKS.md` приводит один как пример, подсказку при отправке запроса (`UserPromptSubmit`), и оставляет его неподключённым: измеренный охват нулевой, из 17 свободных запросов не подошёл ни один, а 64 из 93 входов в конвейер были безголовыми. Хук совещательный и всегда выходит с 0. Если работу запускают вручную, сначала посчитайте: он может себя оправдать.",
+      "ua": "Kit не підключає жодного хука. `docs/HOOKS.md` описує один як розібраний приклад, підказку під час надсилання запиту (`UserPromptSubmit`), і лишає його непідключеним: виміряне охоплення нульове, із 17 вільних запитів не підійшов жоден, а 64 з 93 входів у конвеєр були безголовими. Хук дорадчий і завжди виходить із 0. Якщо роботу запускають уручну, спершу порахуйте: він може себе виправдати."
+    },
+    {
+      "en": "A hook's allow never overrides a permission rule: a matching deny rule still blocks and a matching ask rule still prompts. A hook that blocks stops the call before an allow rule is consulted. A hook can be registered in a settings file, in a skill's or an agent's frontmatter, or in a plugin, and each registration gets an inventory row.",
+      "ru": "Разрешение от хука никогда не отменяет правило прав: подходящее правило deny всё равно блокирует, а подходящее ask всё равно спрашивает. Хук, который блокирует, останавливает вызов раньше, чем проверяется правило allow. Хук можно зарегистрировать в файле настроек, во frontmatter навыка или агента либо в плагине, и каждой регистрации нужна строка в реестре.",
+      "ua": "Дозвіл від хука ніколи не скасовує правило прав: відповідне правило deny однаково блокує, а відповідне ask однаково питає. Хук, що блокує, зупиняє виклик раніше, ніж перевіряється правило allow. Хук можна зареєструвати у файлі налаштувань, у frontmatter навички чи агента або в плагіні, і кожній реєстрації потрібен рядок у реєстрі."
+    },
+    {
+      "en": "A Stop hook can refuse to let a turn end until a check passes, the native place for a \"done\" gate. It answers with `decision: \"block\"` and a `reason` the model reads; exit zero and silence-means-allow still hold. Prompt-submit and session-start hooks speak in plain text: their stdout on exit 0 is added to what the model sees.",
+      "ru": "Хук `Stop` может не давать ходу завершиться, пока проверка не пройдёт, - это родное место для гейта «готово». Он отвечает `decision: \"block\"` и `reason`, который читает модель; правила «выход с нулём» и «молчание значит разрешение» действуют по-прежнему. Хуки отправки запроса и старта сессии говорят простым текстом: их stdout при выходе с 0 добавляется к тому, что видит модель.",
+      "ua": "Хук `Stop` може не давати ходу завершитися, доки перевірка не пройде, - це рідне місце для гейта «готово». Він відповідає `decision: \"block\"` і `reason`, який читає модель; правила «вихід із нулем» і «мовчання означає дозвіл» діють, як і раніше. Хуки надсилання запиту та старту сесії говорять простим текстом: їхній stdout за виходу з 0 додається до того, що бачить модель."
+    },
+    {
+      "en": "`.claude/settings.json` in the kit is a permission template, not a hook registry. It allows file reads and edits and the git commands that only stage, commit or move between branches, asks before push and rebase, and denies force push, hard reset, clean and reads of `.env` and `secrets`. Its comment says a Bash deny rule stops the usual form of a command, so it is not a security boundary.",
+      "ru": "`.claude/settings.json` в kit - шаблон прав, а не реестр хуков. Он разрешает чтение и правку файлов и команды git, которые только индексируют, коммитят или переключают ветки, спрашивает перед push и rebase и запрещает force push, hard reset, clean и чтение `.env` и `secrets`. Его комментарий говорит, что запрет Bash останавливает обычную форму команды, так что это не граница безопасности.",
+      "ua": "`.claude/settings.json` у kit - шаблон прав, а не реєстр хуків. Він дозволяє читання й правку файлів та команди git, що лише індексують, комітять чи перемикають гілки, питає перед push і rebase та забороняє force push, hard reset, clean і читання `.env` та `secrets`. Його коментар каже, що заборона Bash зупиняє звичайну форму команди, тож це не межа безпеки."
+    },
+    {
+      "en": "Put the invariant in the script, not only in the hook. A hook protects one runtime, the one that reads its registration; a teammate on another agent tool, a CI job or a person at the shell never passes through it. Make the script or the gate refuse, and let the hook move that refusal earlier or correct the input on the way in.",
+      "ru": "Держите инвариант в скрипте, а не только в хуке. Хук защищает одну среду, ту, что читает его регистрацию; коллега в другом агентском инструменте, задание CI или человек в оболочке через него не проходят. Пусть отказывает сам скрипт или гейт, а хук лишь переносит этот отказ раньше или исправляет ввод по пути.",
+      "ua": "Тримайте інваріант у скрипті, а не лише в хуку. Хук захищає одне середовище, те, що читає його реєстрацію; колега в іншому агентському інструменті, завдання CI чи людина в оболонці крізь нього не проходять. Нехай відмовляє сам скрипт або гейт, а хук лише переносить цю відмову раніше чи виправляє ввід дорогою."
+    },
+    {
+      "en": "Verify the copy the runtime loads, not the source you edited. A runtime may run an installed copy and read registrations only when a session starts, so retiring a hand-wired registration because the new copy has it silently disarms the guard while the copy lags. In a fresh session, send a payload the hook must act on and watch it act.",
+      "ru": "Проверяйте ту копию, которую грузит среда, а не исходник, который вы правили. Среда может запускать установленную копию и читать регистрации только при старте сессии, поэтому снятие вручную прописанной регистрации «раз новая копия её содержит» молча разоружает защиту, пока копия отстаёт. В свежей сессии отправьте ввод, на который хук обязан сработать, и посмотрите, как он срабатывает.",
+      "ua": "Перевіряйте ту копію, яку вантажить середовище, а не вихідник, який ви правили. Середовище може запускати встановлену копію і читати реєстрації лише під час старту сесії, тому зняття вручну прописаної реєстрації «бо нова копія її містить» мовчки роззброює захист, поки копія відстає. У свіжій сесії надішліть ввід, на який хук мусить спрацювати, і подивіться, як він спрацьовує."
+    },
+    {
+      "en": "`docs/HOOKS.md` describes four recipes by intent and ships none: a guard against backgrounding a short check (refuses), a window for reads of large files (rewrites), a context-size warning at prompt submit (warns) and a session-start injection of a short rules page (injects). Set every window and threshold from your own measurement; a number copied from another project is a guess.",
+      "ru": "`docs/HOOKS.md` описывает четыре рецепта по намерению и не поставляет ни одного: защиту от запуска короткой проверки в фоне (refuses), окно для чтения больших файлов (rewrites), предупреждение о размере контекста при отправке запроса (warns) и вставку короткой страницы правил при старте сессии (injects). Окна и пороги берите из собственных измерений: чужое число - догадка.",
+      "ua": "`docs/HOOKS.md` описує чотири рецепти за наміром і не постачає жодного: захист від запуску короткої перевірки у фоні (refuses), вікно для читання великих файлів (rewrites), попередження про розмір контексту під час надсилання запиту (warns) і вставку короткої сторінки правил на старті сесії (injects). Розмір вікна й поріг беріть із власних вимірювань: число, скопійоване з іншого проєкту, - здогад."
+    },
+    {
+      "en": "The skeletons in `docs/HOOKS.md` are illustrative shapes, not drop-in scripts. Event names, field names and the exit code that blocks (`exit 2` in the example) belong to your runtime and change between versions, so probe it with a hook that prints what it received. That exit code is not the COULD NOT VERIFY outcome of a check.",
+      "ru": "Скелеты в `docs/HOOKS.md` - иллюстративные формы, а не готовые скрипты. Имена событий, полей и код выхода, который блокирует (`exit 2` в примере), принадлежат вашей среде и меняются от версии к версии: прощупайте её хуком, печатающим то, что он получил. Этот код - не исход COULD NOT VERIFY проверки.",
+      "ua": "Скелети в `docs/HOOKS.md` - ілюстративні форми, а не готові скрипти. Імена подій, полів і код виходу, що блокує (`exit 2` у прикладі), належать вашому середовищу й змінюються від версії до версії: прощупайте його хуком, що друкує отримане. Цей код - не наслідок COULD NOT VERIFY перевірки."
+    },
+    {
+      "en": "If you put a gate over the inventory, find the table by its heading rather than by a filename, parse the table only and never the prose around it, and compare in one direction: something registered must appear in the inventory. A hook file on disk that is registered nowhere is an advisory, not a failure.",
+      "ru": "Если вы ставите гейт над реестром, ищите таблицу по заголовку, а не по имени файла, разбирайте только таблицу и никогда окружающий текст, а сравнивайте в одну сторону: всё зарегистрированное должно быть в реестре. Файл хука на диске, не зарегистрированный нигде, - это замечание, а не сбой.",
+      "ua": "Якщо ви ставите гейт над реєстром, шукайте таблицю за заголовком, а не за назвою файлу, розбирайте лише таблицю і ніколи навколишній текст, а порівнюйте в один бік: усе зареєстроване має бути в реєстрі. Файл хука на диску, не зареєстрований ніде, - це зауваження, а не збій."
+    }
+  ],
+  "related": ["authoring", "validation-ladder", "rules-file", "unattended-loop"],
+  "terms": ["hook", "gate", "headless-process", "rules-file"],
+  "keywords": {
+    "en": ["hook", "event hook", "PreToolUse", "UserPromptSubmit", "Stop hook", "guard", "hook inventory"],
+    "ru": ["хук", "хук события", "PreToolUse", "UserPromptSubmit", "хук Stop", "защитный хук", "реестр хуков"],
+    "ua": ["хук", "хук події", "PreToolUse", "UserPromptSubmit", "хук Stop", "захисний хук", "реєстр хуків"]
+  }
+}

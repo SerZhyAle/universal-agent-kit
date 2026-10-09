@@ -1,0 +1,94 @@
+{
+  "id": "worked-example",
+  "title": {
+    "en": "Learn the method from one finished small ticket and a filled rules file",
+    "ru": "Изучить метод по одному законченному небольшому тикету и заполненному файлу правил",
+    "ua": "Вивчити метод за одним завершеним невеликим тікетом і заповненим файлом правил"
+  },
+  "pitch": {
+    "en": "The kit's `examples/` folder shows one small ticket in its finished state and a filled excerpt of a rules file. Reference only: read it, never copy it into a project.",
+    "ru": "Папка `examples/` в kit показывает один небольшой тикет в законченном виде и заполненный фрагмент файла правил. Только для чтения: в проект её не копируют.",
+    "ua": "Тека `examples/` у kit показує один невеликий тікет у завершеному вигляді та заповнений уривок файлу правил. Лише для читання: у проєкт її не копіюють."
+  },
+  "lead": {
+    "en": "`examples/` describes an imaginary project, `user-service`, and one [ticket](term:ticket) in it, T0042, which lets an admin download the user list as a CSV file. You read its [spec](term:spec), [plan](term:plan) index, one phase file and [audit](term:audit) block as they look when the work is done, then a filled excerpt of the [rules file](term:rules-file). Every value in it belongs to the imaginary project and not to yours, and nothing in the kit reads these files.",
+    "ru": "`examples/` описывает вымышленный проект `user-service` и один его [тикет](term:ticket), T0042: администратор скачивает список пользователей файлом CSV. Вы читаете [спеку](term:spec), индекс [плана](term:plan), один файл фазы и блок [аудита](term:audit) в том виде, какой они имеют по окончании работы, а затем заполненный фрагмент [файла правил](term:rules-file). Каждое значение в нём принадлежит вымышленному проекту, а не вашему, и ничто в kit эти файлы не читает.",
+    "ua": "`examples/` описує вигаданий проєкт `user-service` і один його [тікет](term:ticket), T0042: адміністратор завантажує список користувачів файлом CSV. Ви читаєте [спеку](term:spec), індекс [плану](term:plan), один файл фази та блок [аудиту](term:audit) у тому вигляді, який вони мають по завершенні роботи, а потім заповнений уривок [файлу правил](term:rules-file). Кожне значення в ньому належить вигаданому проєкту, а не вашому, і ніщо в kit ці файли не читає."
+  },
+  "situation": {
+    "en": "You have the kit but have not seen a finished ticket yet, or you are about to fill the rules file and want to see what filled values look like. Also when a ticket stands at `BlockNeedUserTest` and you wonder whether that is a mistake.",
+    "ru": "У вас есть kit, но законченного тикета вы ещё не видели, или вы собираетесь заполнять файл правил и хотите увидеть, как выглядят заполненные значения. Также когда тикет стоит на `BlockNeedUserTest` и вы сомневаетесь, не ошибка ли это.",
+    "ua": "У вас є kit, але завершеного тікета ви ще не бачили, або ви збираєтеся заповнювати файл правил і хочете побачити, як виглядають заповнені значення. Також коли тікет стоїть на `BlockNeedUserTest` і ви сумніваєтеся, чи це не помилка."
+  },
+  "warning": {
+    "en": "Reference only: do not copy this folder into a project. It holds an imaginary project's files, every value in it is that project's and not yours, and nothing in the kit reads it. Even in the filled excerpt, `<ID>` and `<slug>` are left as they are: they are filled per ticket, never at merge time.",
+    "ru": "Только для чтения: не копируйте эту папку в проект. В ней лежат файлы вымышленного проекта, каждое значение принадлежит ему, а не вам, и ничто в kit их не читает. Даже в заполненном фрагменте `<ID>` и `<slug>` оставлены как есть: они заполняются по тикету, а не при слиянии.",
+    "ua": "Лише для читання: не копіюйте цю теку в проєкт. У ній лежать файли вигаданого проєкту, кожне значення належить йому, а не вам, і ніщо в kit їх не читає. Навіть у заповненому уривку `<ID>` і `<slug>` залишено як є: вони заповнюються за тікетом, а не під час злиття."
+  },
+  "steps": [
+    {
+      "en": "Open `examples/README.md` first. It introduces `user-service`, set up with the 'Software' column of `docs/REPLACES.md`: tickets live in `PLAN/`, ids look like `T0042`, and the check that proves a change is `npm test`. Its table names each file, who writes it and what to look at; keep the table beside you for the next steps.",
+      "ru": "Сначала откройте `examples/README.md`. Он знакомит с `user-service`, настроенным по столбцу «Software» файла `docs/REPLACES.md`: тикеты лежат в `PLAN/`, идентификаторы выглядят как `T0042`, а проверка, доказывающая правку, - `npm test`. В его таблице названы все файлы, кто их пишет и на что смотреть; держите таблицу рядом на следующих шагах.",
+      "ua": "Спершу відкрийте `examples/README.md`. Він знайомить із `user-service`, налаштованим за стовпцем «Software» файлу `docs/REPLACES.md`: тікети лежать у `PLAN/`, ідентифікатори виглядають як `T0042`, а перевірка, що доводить правку, - `npm test`. У його таблиці названо всі файли, хто їх пише і на що дивитися; тримайте таблицю поруч на наступних кроках."
+    },
+    {
+      "en": "Open `AGENTS.filled-excerpt.md`. It is an excerpt, not a whole file: sections 1, 5 and 7 in full and the lines of section 8 that carry a setting. Notice the values that are filled (work root `src`, scratch `tmp`, the check `npm test`, the code-layer commands from the Node.js column) and the two that are not: `<ID>` and `<slug>` in section 5, because they are filled per ticket.",
+      "ru": "Откройте `AGENTS.filled-excerpt.md`. Это фрагмент, а не целый файл: разделы 1, 5 и 7 полностью и строки раздела 8, где есть настройка. Обратите внимание на заполненные значения (корень работы `src`, черновики `tmp`, проверка `npm test`, команды слоя кода из столбца Node.js) и на два незаполненных: `<ID>` и `<slug>` в разделе 5, ведь они заполняются по тикету.",
+      "ua": "Відкрийте `AGENTS.filled-excerpt.md`. Це уривок, а не цілий файл: розділи 1, 5 і 7 повністю та рядки розділу 8, де є налаштування. Зверніть увагу на заповнені значення (корінь роботи `src`, чернетки `tmp`, перевірка `npm test`, команди шару коду зі стовпця Node.js) і на два незаповнені: `<ID>` та `<slug>` у розділі 5, адже вони заповнюються за тікетом."
+    },
+    {
+      "en": "Open `PLAN/T0042_export-users-csv.md`, the strategic spec. [`/spec`](fn:spec), [`/spec-tech`](fn:spec-tech), [`/spec-dev`](fn:spec-dev) and [`/spec-check`](fn:spec-check) each wrote part of it, and a person ticked one line. Notice the header tokens `Blocked-by` and `Carried-to`, both `none`, a status line whose note follows a hyphen, §6 with its one question marked Resolved, and §11, where every criterion is something a person can observe.",
+      "ru": "Откройте `PLAN/T0042_export-users-csv.md` - стратегическую спеку. Каждый из навыков [`/spec`](fn:spec), [`/spec-tech`](fn:spec-tech), [`/spec-dev`](fn:spec-dev) и [`/spec-check`](fn:spec-check) написал в ней свою часть, а одну строку отметил человек. Обратите внимание на токены шапки `Blocked-by` и `Carried-to`, оба `none`, на строку статуса с заметкой после дефиса, на §6 с единственным вопросом в статусе Resolved и на §11, где каждый критерий - то, что человек может увидеть.",
+      "ua": "Відкрийте `PLAN/T0042_export-users-csv.md` - стратегічну спеку. Кожна з навичок [`/spec`](fn:spec), [`/spec-tech`](fn:spec-tech), [`/spec-dev`](fn:spec-dev) і [`/spec-check`](fn:spec-check) написала в ній свою частину, а один рядок позначила людина. Зверніть увагу на токени шапки `Blocked-by` і `Carried-to`, обидва `none`, на рядок статусу з нотаткою після дефіса, на §6 з єдиним питанням у статусі Resolved і на §11, де кожен критерій - те, що людина може побачити."
+    },
+    {
+      "en": "Open `PLAN/T0042_export-users-csv/INDEX.md`, the plan index. Notice the phase graph: 01 `csv-export`, then 02 `export-control` that depends on 01, then 03 `docs-cleanup` that depends on all. All three are Done, no pre-implementation blocker is listed, and one completion box is still open: `/spec-check T0042` returns Verified. Phases 02 and 03 are named without a link because only phase 01 is in the example; a real plan has every file.",
+      "ru": "Откройте `PLAN/T0042_export-users-csv/INDEX.md` - индекс плана. Смотрите на граф фаз: 01 `csv-export`, затем 02 `export-control`, зависящая от 01, затем 03 `docs-cleanup`, зависящая от всех. Все три Done, блокеров до реализации нет, а один пункт условия завершения ещё открыт: `/spec-check T0042` возвращает Verified. Фазы 02 и 03 названы без ссылки, потому что в примере есть только фаза 01; в настоящем плане есть все файлы.",
+      "ua": "Відкрийте `PLAN/T0042_export-users-csv/INDEX.md` - індекс плану. Дивіться на граф фаз: 01 `csv-export`, потім 02 `export-control`, що залежить від 01, потім 03 `docs-cleanup`, що залежить від усіх. Усі три Done, блокерів до реалізації немає, а один пункт умови завершення ще відкритий: `/spec-check T0042` повертає Verified. Фази 02 і 03 названо без посилання, бо в прикладі є лише фаза 01; у справжньому плані є всі файли."
+    },
+    {
+      "en": "Open `PLAN/T0042_export-users-csv/PHASE_01__csv-export.md`. Notice that each step has a `Prompt for implementer:` that can be followed without the spec and a `Verification:` made of static checks, such as a file exists or a declaration matches exactly once. The phase done criteria name the real check, `npm test`, and the closing `## Step Log` holds one line per step run, kept by `/spec-dev`.",
+      "ru": "Откройте `PLAN/T0042_export-users-csv/PHASE_01__csv-export.md`. Обратите внимание: у каждого шага есть `Prompt for implementer:`, по которому можно работать, не читая спеку, и `Verification:` из статических проверок, например файл существует или объявление встречается ровно один раз. Критерии готовности фазы называют настоящую проверку, `npm test`, а завершающий `## Step Log` хранит по строке на каждый запуск шага; его ведёт `/spec-dev`.",
+      "ua": "Відкрийте `PLAN/T0042_export-users-csv/PHASE_01__csv-export.md`. Зверніть увагу: у кожного кроку є `Prompt for implementer:`, за яким можна працювати, не читаючи спеку, і `Verification:` зі статичних перевірок, наприклад файл існує чи оголошення трапляється рівно один раз. Критерії готовності фази називають справжню перевірку, `npm test`, а завершальний `## Step Log` зберігає по рядку на кожен запуск кроку; його веде `/spec-dev`."
+    },
+    {
+      "en": "Go back to the end of the spec. `## Manual checks` has one ticked line, with a date and what the person saw, and one open `[ ]` line. `## Last Audit` shows the outcome `BlockNeedUserTest` and `MANUAL open 1` among its counts. The build is sound and the audit found nothing wrong, yet the ticket is not done, because nobody has yet seen the file in the spreadsheet app. The audit counts that line but never ticks or rewrites it.",
+      "ru": "Вернитесь к концу спеки. В `## Manual checks` одна отмеченная строка, с датой и тем, что увидел человек, и одна открытая строка `[ ]`. В `## Last Audit` итог `BlockNeedUserTest` и `MANUAL open 1` среди счётчиков. Сборка исправна, аудит ничего не нашёл, а тикет не закончен: файл в программе для электронных таблиц ещё никто не видел. Аудит считает эту строку, но не отмечает и не переписывает её.",
+      "ua": "Поверніться до кінця спеки. У `## Manual checks` один позначений рядок, з датою і тим, що побачила людина, та один відкритий рядок `[ ]`. У `## Last Audit` підсумок `BlockNeedUserTest` і `MANUAL open 1` серед лічильників. Збірка справна, аудит нічого не знайшов, а тікет не завершений: файл у програмі для електронних таблиць ще ніхто не бачив. Аудит рахує цей рядок, але не позначає й не переписує його."
+    },
+    {
+      "en": "Finish with the closing paragraph of `examples/README.md`, the next move: the support lead opens the file in the spreadsheet app, ticks the line and runs `/spec-check T0042`. The status becomes `Verified`, the `## Last Audit` block is rewritten and the temporary `T0042:` log lines are deleted from the code. The full flow is in [the lifecycle](fn:spec-lifecycle).",
+      "ru": "Закончите последним абзацем `examples/README.md` - следующим ходом: руководитель поддержки открывает файл в программе для электронных таблиц, отмечает строку и запускает `/spec-check T0042`. Статус становится `Verified`, блок `## Last Audit` переписывается, а временные строки лога `T0042:` удаляются из кода. Весь поток описан в [жизненном цикле](fn:spec-lifecycle).",
+      "ua": "Завершіть останнім абзацом `examples/README.md` - наступним ходом: керівник підтримки відкриває файл у програмі для електронних таблиць, позначає рядок і запускає `/spec-check T0042`. Статус стає `Verified`, блок `## Last Audit` переписується, а тимчасові рядки логу `T0042:` видаляються з коду. Увесь потік описано в [життєвому циклі](fn:spec-lifecycle)."
+    }
+  ],
+  "outcome": {
+    "en": "You have seen a small ticket whole: a spec with both header tokens and a note on its status line, a plan index, one phase with its Step Log, an audit block, one ticked and one open manual check. You also know what a filled excerpt of the rules file looks like. Nothing was copied into your project.",
+    "ru": "Вы увидели небольшой тикет целиком: спеку с обоими токенами шапки и заметкой в строке статуса, индекс плана, одну фазу с её Step Log, блок аудита, одну отмеченную и одну открытую ручную проверку. Вы знаете и то, как выглядит заполненный фрагмент файла правил. В ваш проект ничего не копировалось.",
+    "ua": "Ви побачили невеликий тікет цілком: спеку з обома токенами шапки та нотаткою в рядку статусу, індекс плану, одну фазу з її Step Log, блок аудиту, одну позначену й одну відкриту ручну перевірку. Ви знаєте й те, як виглядає заповнений уривок файлу правил. У ваш проєкт нічого не копіювалося."
+  },
+  "tips": [
+    {
+      "en": "The excerpt's values come from the 'Software' column of `docs/REPLACES.md`, with its Node.js column for the code layer: read the two side by side. To fill your own, see [fill the placeholders](fn:placeholders); to write the file itself, see [the rules file](fn:rules-file).",
+      "ru": "Значения во фрагменте взяты из столбца «Software» файла `docs/REPLACES.md` и его столбца Node.js для слоя кода: читайте их рядом. Чтобы заполнить свои, см. [заполнить плейсхолдеры](fn:placeholders); чтобы написать сам файл, см. [файл правил](fn:rules-file).",
+      "ua": "Значення в уривку взято зі стовпця «Software» файлу `docs/REPLACES.md` та його стовпця Node.js для шару коду: читайте їх поруч. Щоб заповнити свої, див. [заповнити плейсхолдери](fn:placeholders); щоб написати сам файл, див. [файл правил](fn:rules-file)."
+    },
+    {
+      "en": "`BlockNeedUserTest` is the state most often misread. It is not a failure and not yet done: the build is sound, and one thing only a person can see has not been seen. The [block status](term:block-status) stays until that person ticks the line and the ticket is audited again.",
+      "ru": "`BlockNeedUserTest` - состояние, которое понимают неверно чаще всего. Это не провал и ещё не конец: сборка исправна, а одно, что может увидеть только человек, ещё не увидено. [Статус блокировки](term:block-status) держится, пока человек не отметит строку и тикет не пройдёт аудит заново.",
+      "ua": "`BlockNeedUserTest` - стан, який розуміють хибно найчастіше. Це не збій і ще не кінець: збірка справна, а одне, що може побачити лише людина, ще не побачене. [Статус блокування](term:block-status) тримається, доки людина не позначить рядок і тікет не пройде аудит знову."
+    },
+    {
+      "en": "Do not confuse `examples/` with `memory/examples/`, which holds one sample memory entry per type, most of them not about code. That folder is described on the page [keep what the agent learns from one session to the next](fn:agent-memory).",
+      "ru": "Не путайте `examples/` с `memory/examples/`: там по одному образцу записи памяти на каждый тип, и большинство из них не про код. Эта папка описана на странице [сохранить то, чему агент научился, до следующей сессии](fn:agent-memory).",
+      "ua": "Не плутайте `examples/` із `memory/examples/`: там по одному зразку запису пам'яті на кожен тип, і більшість із них не про код. Цю теку описано на сторінці [зберегти те, чого агент навчився, до наступної сесії](fn:agent-memory)."
+    }
+  ],
+  "related": ["spec-lifecycle", "spec", "spec-tech", "rules-file", "placeholders"],
+  "terms": ["ticket", "spec", "plan", "audit", "block-status", "rules-file", "placeholder"],
+  "keywords": {
+    "en": ["worked example", "example ticket", "T0042", "filled rules file", "user-service", "reference only", "finished ticket"],
+    "ru": ["рабочий пример", "пример тикета", "T0042", "заполненный файл правил", "user-service", "только для чтения", "законченный тикет"],
+    "ua": ["робочий приклад", "приклад тікета", "T0042", "заповнений файл правил", "user-service", "лише для читання", "завершений тікет"]
+  }
+}

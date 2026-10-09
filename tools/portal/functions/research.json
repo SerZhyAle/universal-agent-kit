@@ -1,0 +1,79 @@
+{
+  "id": "research",
+  "title": {
+    "en": "Investigate an area before you change it",
+    "ru": "Изучить область, прежде чем её менять",
+    "ua": "Вивчити ділянку, перш ніж її змінювати"
+  },
+  "pitch": {
+    "en": "One deliberate reading pass leaves a scratch dossier and, for a ticket, durable findings, so nobody greps the same things five times.",
+    "ru": "Один продуманный проход чтения оставляет черновое досье и, для тикета, долговечные выводы, чтобы никто не искал одно и то же пять раз.",
+    "ua": "Один продуманий прохід читання лишає чорнове досьє і, для тікета, довговічні висновки, щоб ніхто не шукав те саме п'ять разів."
+  },
+  "lead": {
+    "en": "`/research` is a repeatable pass before development, documentation work or cross-surface debugging. The agent builds a rough [dossier](term:dossier) first, follows a fixed order of documents, then reads only the implementation files that answer the question. It ends with the dossier path, the next reads and the answer.",
+    "ru": "`/research` - повторяемый проход перед разработкой, работой с документацией или отладкой, затрагивающей несколько поверхностей. Агент сначала собирает черновое [досье](term:dossier), идёт по документам в заданном порядке и только потом читает те файлы реализации, что отвечают на вопрос. В конце он называет путь к досье, следующие чтения и ответ.",
+    "ua": "`/research` - повторюваний прохід перед розробкою, роботою з документацією чи налагодженням, що зачіпає кілька поверхонь. Агент спершу збирає чорнове [досьє](term:dossier), іде по документах у заданому порядку і лише потім читає ті файли реалізації, що відповідають на запитання. Наприкінці він називає шлях до досьє, наступні читання й відповідь."
+  },
+  "situation": {
+    "en": "Before any non-trivial change, before writing a spec, or when you need to know how something works in this project or where it lives.",
+    "ru": "Перед любой нетривиальной правкой, перед написанием спеки или когда нужно понять, как что-то устроено в проекте и где оно лежит.",
+    "ua": "Перед будь-якою нетривіальною правкою, перед написанням спеки або коли треба зрозуміти, як щось влаштоване в проєкті й де воно лежить."
+  },
+  "warning": {
+    "en": "Without a ticket id, nothing is saved outside the [scratch](term:scratch) dossier, which is allowed to be rough. Findings worth keeping, such as the chosen option and the rejected ones with reasons, need a ticket-bound run: `/research <ticket-id> <topic>`.",
+    "ru": "Без идентификатора тикета ничего не сохраняется вне чернового досье в [scratch](term:scratch), а оно вправе быть небрежным. Выводы, которые стоит сохранить, например выбранный вариант и отвергнутые с причинами, требуют запуска по тикету: `/research <ticket-id> <topic>`.",
+    "ua": "Без ідентифікатора тікета нічого не зберігається поза чорновим досьє в [scratch](term:scratch), а воно має право бути недбалим. Висновки, які варто зберегти, наприклад обраний варіант і відхилені з причинами, потребують запуску за тікетом: `/research <ticket-id> <topic>`."
+  },
+  "steps": [
+    {
+      "en": "Name the topic: `/research player startup`, or bind it to a ticket: `/research T0123 best strategy for full-text search over filenames`. A token that matches the project's ticket id scheme (such as `T0042`, `JIRA-123` or a date-slug, whatever `<ID_SCHEME>` says) makes the run ticket-bound, and the rest is the topic. The agent uses your explicit target when given and infers the affected area from the request and the open file.",
+      "ru": "Назовите тему: `/research player startup` или привяжите её к тикету: `/research T0123 best strategy for full-text search over filenames`. Слово, подходящее под схему идентификаторов проекта (вроде `T0042`, `JIRA-123` или даты со слагом, как задано в `<ID_SCHEME>`), делает запуск привязанным к тикету, остальное - тема. Названную вами цель агент берёт как есть, а затрагиваемую область выводит из запроса и открытого файла.",
+      "ua": "Назвіть тему: `/research player startup` або прив'яжіть її до тікета: `/research T0123 best strategy for full-text search over filenames`. Слово, що відповідає схемі ідентифікаторів проєкту (на кшталт `T0042`, `JIRA-123` чи дати зі слагом, як задано в `<ID_SCHEME>`), робить запуск прив'язаним до тікета, решта - тема. Названу вами мету агент бере як є, а зачеплену ділянку виводить із запиту та відкритого файлу."
+    },
+    {
+      "en": "Before broad reading, the agent writes the dossier to `<SCRATCH_DIR>/research_<topic-slug>.md` from a quick sweep: the docs to read first, the files and symbols that match (one grep or code-index pass, not exhaustive), existing specs and plans in the area, and a short list of suggested next reads.",
+      "ru": "До широкого чтения агент пишет досье в `<SCRATCH_DIR>/research_<topic-slug>.md` по быстрому обходу: что читать первым, подходящие файлы и символы (один проход grep или индекса кода, не исчерпывающий), существующие спеки и планы в этой области и короткий список следующих чтений.",
+      "ua": "До широкого читання агент пише досьє в `<SCRATCH_DIR>/research_<topic-slug>.md` за швидким обходом: що читати першим, відповідні файли й символи (один прохід grep чи індексу коду, не вичерпний), наявні спеки та плани в цій ділянці й короткий список наступних читань."
+    },
+    {
+      "en": "It follows the routing stack in order, unless the dossier shows a tighter first read: the repo map or index doc, the architecture doc, the build or ops doc, the dependency or stack doc, then your code index or `<PLAN_DIR>/` for prior decisions.",
+      "ru": "Он идёт по стеку маршрутизации по порядку, если досье не указывает более точного первого чтения: карта репозитория или индексный документ, документ об архитектуре, о сборке и эксплуатации, о зависимостях и стеке, затем индекс кода или `<PLAN_DIR>/` с прежними решениями.",
+      "ua": "Він іде по стеку маршрутизації за порядком, якщо досьє не вказує точнішого першого читання: мапа репозиторію чи індексний документ, документ про архітектуру, про збірку й експлуатацію, про залежності та стек, потім індекс коду або `<PLAN_DIR>/` з попередніми рішеннями."
+    },
+    {
+      "en": "It drills into the implementation files with the smallest set of follow-up reads that answers the question, using the dossier to avoid re-grepping. Cross-surface questions stay grounded in the dossier sections.",
+      "ru": "Он углубляется в файлы реализации наименьшим набором дальнейших чтений, который отвечает на вопрос, и использует досье, чтобы не искать заново. Вопросы, затрагивающие несколько поверхностей, опираются на разделы досье.",
+      "ua": "Він заглиблюється у файли реалізації найменшим набором подальших читань, що відповідає на запитання, і використовує досьє, щоб не шукати заново. Запитання, що зачіпають кілька поверхонь, спираються на розділи досьє."
+    },
+    {
+      "en": "Ticket-bound runs only: it writes curated findings to `<PLAN_DIR>/<ID>_<slug>/research/<NN>__<topic-slug>.md`, creating the folder if missing - conclusions, the chosen option, rejected options with reasons, affected areas. Raw grep dumps stay out, and the dossier stays scratch.",
+      "ru": "Только для запуска по тикету: он пишет отобранные выводы в `<PLAN_DIR>/<ID>_<slug>/research/<NN>__<topic-slug>.md`, создавая папку, если её нет: заключения, выбранный вариант, отвергнутые варианты с причинами, затронутые области. Сырые выдачи grep туда не попадают, а досье остаётся черновым.",
+      "ua": "Лише для запуску за тікетом: він пише відібрані висновки в `<PLAN_DIR>/<ID>_<slug>/research/<NN>__<topic-slug>.md`, створюючи теку, якщо її немає: висновки, обраний варіант, відхилені варіанти з причинами, зачеплені ділянки. Сирі видачі grep туди не потрапляють, а досьє лишається чорновим."
+    },
+    {
+      "en": "It reports the dossier path, the artifact path for a ticket-bound run, the next 3 to 6 high-value reads, and then the answer to your question. A section with no matches is stated as such and the work continues: absence is a finding.",
+      "ru": "Он сообщает путь к досье, для запуска по тикету - путь к артефакту, следующие 3-6 самых ценных чтений, а затем ответ на ваш вопрос. Раздел без совпадений так и называется, и работа продолжается: отсутствие - тоже находка.",
+      "ua": "Він повідомляє шлях до досьє, для запуску за тікетом - шлях до артефакту, наступні 3-6 найцінніших читань, а потім відповідь на ваше запитання. Розділ без збігів так і називається, і робота триває: відсутність - теж знахідка."
+    }
+  ],
+  "outcome": {
+    "en": "A dossier in the scratch directory, for a ticket-bound run a findings file under the ticket's `research/` folder, a short list of next reads and a direct answer to the question.",
+    "ru": "Досье в scratch-каталоге, для запуска по тикету - файл выводов в папке `research/` тикета, короткий список следующих чтений и прямой ответ на вопрос.",
+    "ua": "Досьє в scratch-каталозі, для запуску за тікетом - файл висновків у теці `research/` тікета, короткий список наступних читань і пряма відповідь на запитання."
+  },
+  "tips": [
+    {
+      "en": "The dossier exists only to stop repeated global greps, so rough is fine. The findings file is the durable result that a tactical plan will consume: write conclusions and reasons, not search output. See [break a spec into a plan](fn:spec-tech).",
+      "ru": "Досье нужно лишь затем, чтобы не повторять глобальные поиски, поэтому небрежность допустима. Файл выводов - долговечный результат, который потребит тактический план: пишите заключения и причины, а не выдачу поиска. См. [как разбить спеку на план](fn:spec-tech).",
+      "ua": "Досьє потрібне лише для того, щоб не повторювати глобальні пошуки, тому недбалість припустима. Файл висновків - довговічний результат, який спожиє тактичний план: пишіть висновки й причини, а не видачу пошуку. Див. [як розбити спеку на план](fn:spec-tech)."
+    }
+  ],
+  "related": ["spec", "spec-tech", "fix", "research-index"],
+  "terms": ["dossier", "scratch", "ticket", "plan", "research-index"],
+  "keywords": {
+    "en": ["research", "investigate", "dossier", "how does it work", "before a spec"],
+    "ru": ["исследование", "разобраться в коде", "досье", "как это устроено", "перед спекой"],
+    "ua": ["дослідження", "розібратися в коді", "досьє", "як це влаштовано", "перед спекою"]
+  }
+}

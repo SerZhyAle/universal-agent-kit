@@ -1,0 +1,10 @@
+{
+  "id": "project-shape",
+  "term": { "en": "Project shape (kind of project)", "ru": "Форма проекта (вид проекта)", "ua": "Форма проєкту (вид проєкту)" },
+  "def": {
+    "en": "One of five kinds of project that the kit's vocabulary table covers: software, data and analysis, writing and documentation, legal and compliance, operations and admin. Your shape tells you what the method's nouns mean in your work, which rules apply, which need a local equivalent and which to delete.",
+    "ru": "Один из пяти видов проектов, которые охватывает таблица словаря kit: софт, данные и аналитика, тексты и документация, юридическое и комплаенс, операции и админ. Ваша форма говорит, что слова метода значат в вашей работе, какие правила применимы, каким нужен местный аналог и какие удалить.",
+    "ua": "Один із п'яти видів проєктів, які охоплює таблиця словника kit: софт, дані та аналітика, тексти й документація, юридичне та комплаєнс, операції та адмін. Ваша форма каже, що слова методу означають у вашій роботі, які правила застосовні, яким потрібен місцевий аналог і які видалити."
+  },
+  "see": ["code-layer", "placeholder"]
+}

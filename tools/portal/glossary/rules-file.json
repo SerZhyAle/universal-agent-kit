@@ -1,0 +1,10 @@
+{
+  "id": "rules-file",
+  "term": { "en": "Rules file", "ru": "Файл правил", "ua": "Файл правил" },
+  "def": {
+    "en": "The one always-loaded Markdown file in which a project states its rules for the agent. In the kit it ships as `AGENTS.md`; `CLAUDE.md` is only a short Claude Code entry point that imports it and the memory index and adds what is specific to Claude Code. Edit the rules in one file, never in both.",
+    "ru": "Единственный постоянно загружаемый Markdown-файл, в котором проект излагает свои правила для агента. В kit это `AGENTS.md`; `CLAUDE.md` - лишь короткая точка входа для Claude Code, которая импортирует его и индекс памяти и добавляет то, что относится именно к Claude Code. Правила правят в одном файле, а не в обоих.",
+    "ua": "Єдиний постійно завантажуваний Markdown-файл, у якому проєкт викладає свої правила для агента. У kit це `AGENTS.md`; `CLAUDE.md` - лише коротка точка входу для Claude Code, що імпортує його та індекс пам'яті й додає те, що стосується саме Claude Code. Правила правлять в одному файлі, а не в обох."
+  },
+  "see": ["agent", "placeholder", "code-layer"]
+}

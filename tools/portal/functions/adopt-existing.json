@@ -1,0 +1,129 @@
+{
+  "id": "adopt-existing",
+  "title": {
+    "en": "Merge the kit into an existing project without losing your files",
+    "ru": "Влить kit в существующий проект, не потеряв свои файлы",
+    "ua": "Влити kit в наявний проєкт, не втративши свої файли"
+  },
+  "pitch": {
+    "en": "The agent inventories your project, shows a merge plan and stops. Nothing is written until you approve, and where the kit and your files disagree, yours win.",
+    "ru": "Агент описывает ваш проект, показывает план слияния и останавливается. Ничего не пишется до вашего согласия, а где kit и ваши файлы расходятся, побеждают ваши.",
+    "ua": "Агент описує ваш проєкт, показує план злиття й зупиняється. Нічого не пишеться до вашої згоди, а де kit і ваші файли розходяться, перемагають ваші."
+  },
+  "lead": {
+    "en": "For a project that already has files, rules or a `.claude/` of its own, the kit is an additive library, not a replacement. You hand your agent the kit together with `merge-prompt.txt`. It lists what is there, what it can add and where conflicts may happen, shows a plan and stops. After your approval it adds only the parts you chose.",
+    "ru": "Если в проекте уже есть свои файлы, правила или `.claude/`, kit для него не замена, а дополняющая библиотека. Вы отдаёте агенту kit вместе с `merge-prompt.txt`. Агент составляет список: что уже есть, что можно добавить и где возможны конфликты, затем показывает план и останавливается. После вашего согласия он добавляет только выбранное.",
+    "ua": "Якщо в проєкті вже є власні файли, правила чи `.claude/`, kit для нього не заміна, а доповнювальна бібліотека. Ви віддаєте агенту kit разом із `merge-prompt.txt`. Агент складає список: що вже є, що можна додати і де можливі конфлікти, далі показує план і зупиняється. Після вашої згоди він додає лише обране."
+  },
+  "situation": {
+    "en": "A codebase, a docs folder, a data project or a personal local folder with its own files, conventions or rules file (`AGENTS.md` or `CLAUDE.md`). For a new or near-empty folder use [set up a new project](fn:adopt-new) instead.",
+    "ru": "Кодовая база, папка с документацией, проект с данными или личная локальная папка со своими файлами, соглашениями или файлом правил (`AGENTS.md` или `CLAUDE.md`). Для новой или почти пустой папки подойдёт другой путь: [поднять новый проект](fn:adopt-new).",
+    "ua": "Кодова база, тека з документацією, проєкт з даними або особиста локальна тека зі своїми файлами, домовленостями чи файлом правил (`AGENTS.md` або `CLAUDE.md`). Для нової або майже порожньої теки є інший шлях: [підняти новий проєкт](fn:adopt-new)."
+  },
+  "warning": {
+    "en": "Step 3 of the merge writes into your project, so the plan is your last checkpoint. The merge prompt backs up every file it changes into an ignored scratch directory (for example `./tmp/kit-merge-backup/`), works on a new branch if the project is a git repository and never commits, pushes or rebases. With no repository those backups are the restore point.",
+    "ru": "Шаг 3 слияния пишет в ваш проект, поэтому план - ваша последняя контрольная точка. Промпт слияния копирует каждый меняемый файл в игнорируемую черновую папку (например, `./tmp/kit-merge-backup/`), работает в новой ветке, если проект - git-репозиторий, и никогда не коммитит, не пушит и не делает rebase. Если репозитория нет, точкой возврата служат эти копии.",
+    "ua": "Крок 3 злиття пише у ваш проєкт, тож план - ваша остання контрольна точка. Промпт злиття копіює кожен файл, який змінює, в ігноровану чернеткову теку (наприклад, `./tmp/kit-merge-backup/`), працює в новій гілці, якщо проєкт - git-репозиторій, і ніколи не комітить, не пушить і не робить rebase. Якщо репозиторію немає, точкою повернення правлять ці копії."
+  },
+  "steps": [
+    {
+      "en": "Get the kit next to the project. Download the archive and unpack it: it extracts to a `universal-agent-kit/` folder that contains `merge-prompt.txt`. The merge prompt looks for `./universal-agent-kit/`, or `./kit/` if the repository was copied in directly. If neither exists it stops and asks where the kit is.",
+      "ru": "Положите kit рядом с проектом. Скачайте архив и распакуйте: он даёт папку `universal-agent-kit/`, в которой лежит `merge-prompt.txt`. Промпт слияния ищет `./universal-agent-kit/`, а если репозиторий скопирован прямо, то `./kit/`. Если нет ни того, ни другого, он останавливается и спрашивает, где kit.",
+      "ua": "Покладіть kit поруч із проєктом. Завантажте архів і розпакуйте: він дає теку `universal-agent-kit/`, у якій лежить `merge-prompt.txt`. Промпт злиття шукає `./universal-agent-kit/`, а якщо репозиторій скопійовано прямо, то `./kit/`. Якщо немає ні того, ні того, він зупиняється й питає, де kit."
+    },
+    {
+      "en": "Choose a start. Quick: on the landing page, section 'How to adopt', part 'B · An existing or personal local project', copy the prompt for an existing project. It is in English on every language version and has the agent draft a rules file, recommend skills and agents, and change nothing yet. Detailed: give the agent the kit folder with `merge-prompt.txt` and say 'Add Universal Agent Kit to my project.'",
+      "ru": "Выберите старт. Быстрый: на главной странице, раздел «Как внедрить», часть «B · Существующий или личный локальный проект», скопируйте промпт для существующего проекта. Он на английском во всех языковых версиях и просит агента набросать файл правил, порекомендовать навыки и роли и пока ничего не менять. Подробный: отдайте агенту папку kit вместе с `merge-prompt.txt` и скажите: «Add Universal Agent Kit to my project.»",
+      "ua": "Оберіть старт. Швидкий: на головній сторінці, розділ «Як впровадити», частина «B · Наявний або особистий локальний проєкт», скопіюйте промпт для наявного проєкту. Він англійською в усіх мовних версіях і просить агента накидати файл правил, порадити навички й ролі та поки нічого не змінювати. Докладний: віддайте агенту теку kit разом із `merge-prompt.txt` і скажіть: «Add Universal Agent Kit to my project.»"
+    },
+    {
+      "en": "The agent takes an inventory, read-only. It classifies your project against `docs/PROJECT_SHAPES.md` and labels every kit item NEW, DUPLICATE or CONFLICT. It proposes a value for each setting placeholder, never for per-ticket tokens such as `<ID>` or `<slug>`, and marks the ones it cannot resolve. `<CHECK_CMD>` gets its own answer: the cheapest mechanical check the project has or could have this week. It never presents an invented command as found.",
+      "ru": "Агент проводит инвентаризацию, только чтение. Он сопоставляет ваш проект с `docs/PROJECT_SHAPES.md` и помечает каждый пункт kit как NEW, DUPLICATE или CONFLICT. Для каждого плейсхолдера-настройки он предлагает значение (не для токенов по тикету, вроде `<ID>` или `<slug>`) и отмечает те, что не смог определить. Про `<CHECK_CMD>` он отвечает отдельно: самая дешёвая механическая проверка, которая в проекте есть или может появиться на этой неделе. Выдуманную команду за найденную он не выдаёт.",
+      "ua": "Агент проводить інвентаризацію, лише читання. Він зіставляє ваш проєкт із `docs/PROJECT_SHAPES.md` і позначає кожен пункт kit як NEW, DUPLICATE або CONFLICT. Для кожного плейсхолдера-налаштування він пропонує значення, але не для токенів, що заповнюються за тікетом, як-от `<ID>` чи `<slug>`, а ті, які не зміг визначити, позначає. Про `<CHECK_CMD>` відповідає окремо: найдешевша механічна перевірка, яка в проєкті є або може з'явитися цього тижня. Вигадану команду за знайдену він не видає."
+    },
+    {
+      "en": "It then presents a plan and stops. First part: the project-shape verdict (which rules apply, which need a local equivalent, which to delete); the NEW files and their paths; for each DUPLICATE or CONFLICT a choice between skipping and importing under a suffixed name (for example a skill named spec-kit or an agent `rd-lead-kit`) with a short diff.",
+      "ru": "Затем он показывает план и останавливается. Первая часть: вердикт по форме проекта (какие правила применимы, каким нужен местный аналог, какие удалить); файлы NEW и пути для них; для каждого DUPLICATE и CONFLICT выбор между пропуском и импортом под именем с суффиксом (например, навык spec-kit или агент `rd-lead-kit`) с коротким diff.",
+      "ua": "Далі він показує план і зупиняється. Перша частина: вердикт щодо форми проєкту (які правила застосовні, яким потрібен місцевий аналог, які видалити); файли NEW та шляхи для них; для кожного DUPLICATE і CONFLICT вибір між пропуском та імпортом під іменем із суфіксом (наприклад, навичка spec-kit або агент `rd-lead-kit`) з коротким diff."
+    },
+    {
+      "en": "Next, the exact rule blocks to merge into your own rules file (`CLAUDE.md` if your rules live there): one file, never two copies, never replaced wholesale. With no `AGENTS.md` it proposes the kit's, plus the import lines `@AGENTS.md` and `@memory/MEMORY.md` for your `CLAUDE.md` in Claude Code. Then where `docs/` and `memory/` go, and the permission lines it suggests for `settings.json`, as a proposal only.",
+      "ru": "Дальше - точные блоки правил, которые он предлагает влить в ваш файл правил (в `CLAUDE.md`, если правила живут там): один файл, а не две копии, и никогда целиком поверх. Если `AGENTS.md` нет, он предложит файл из kit и для Claude Code строки импорта `@AGENTS.md` и `@memory/MEMORY.md` в ваш `CLAUDE.md`. Затем - куда лягут `docs/` и `memory/` и какие строки разрешений для `settings.json` он советует, только как предложение.",
+      "ua": "Далі - точні блоки правил, які він пропонує влити у ваш файл правил (у `CLAUDE.md`, якщо правила живуть там): один файл, а не дві копії, і ніколи цілком поверх. Якщо `AGENTS.md` немає, він запропонує файл із kit і для Claude Code рядки імпорту `@AGENTS.md` та `@memory/MEMORY.md` у ваш `CLAUDE.md`. Потім - куди лягуть `docs/` і `memory/` та які рядки дозволів для `settings.json` він радить, лише як пропозиція."
+    },
+    {
+      "en": "The plan ends with the resolved placeholder table, the unresolved ones it needs you to answer, and one line for your rules file: `Adopted from universal-agent-kit <date>`. Read it, answer the open questions and edit what you disagree with. The agent waits for your 'go' or your edits; until it has one of them, it writes nothing.",
+      "ru": "План заканчивается таблицей найденных значений плейсхолдеров, списком нерешённых, на которые нужен ваш ответ, и одной строкой для вашего файла правил: `Adopted from universal-agent-kit <date>`. Прочитайте его, ответьте на открытые вопросы и исправьте то, с чем не согласны. Агент ждёт вашего «go» или ваших правок. Пока их нет, он ничего не пишет.",
+      "ua": "План завершується таблицею знайдених значень плейсхолдерів, списком невирішених, на які потрібна ваша відповідь, і одним рядком для вашого файлу правил: `Adopted from universal-agent-kit <date>`. Прочитайте його, дайте відповіді на відкриті питання й виправте те, з чим не згодні. Агент чекає вашого «go» або ваших правок. Доки їх немає, він нічого не пише."
+    },
+    {
+      "en": "After approval the agent applies exactly the approved plan, on a new branch or, with no repository, with the backups as the restore point. It backs up the files it will touch, copies the approved parts and fills the approved placeholders. An unresolved one stays as its `<PLACEHOLDER>` token, never `TODO`, `TBD` or a guess, which would read as finished. Rules that the shape verdict found to have no subject are deleted, not kept 'just in case'.",
+      "ru": "После согласия агент применяет ровно утверждённый план: в новой ветке, а если репозитория нет, то с резервными копиями как точкой возврата. Он копирует в резерв файлы, которых коснётся, переносит утверждённые части и заполняет утверждённые плейсхолдеры. Нерешённый остаётся своим токеном `<PLACEHOLDER>`, а не `TODO`, `TBD` или догадкой, которая выглядела бы готовой. Правила, которым вердикт по форме проекта не нашёл применения, удаляются, а не хранятся «на всякий случай».",
+      "ua": "Після згоди агент застосовує рівно затверджений план: у новій гілці, а якщо репозиторію немає, то з резервними копіями як точкою повернення. Він копіює в резерв файли, яких торкнеться, переносить затверджені частини й заповнює затверджені плейсхолдери. Невирішений лишається своїм токеном `<PLACEHOLDER>`, а не `TODO`, `TBD` чи здогадом, що виглядав би готовим. Правила, яким вердикт щодо форми проєкту не знайшов застосування, видаляються, а не зберігаються «про всяк випадок»."
+    },
+    {
+      "en": "Before it reports, the agent runs a four-part self-check and pastes the result: no setting placeholder left in the files it wrote except those you left unresolved; every `docs/<NAME>.md` the merged files cite exists; every skill the rules file names exists as a folder or its translation; the `Adopted from` line is in place. The report adds the changed file tree, the backup location, the unresolved placeholders and a safe first command to try. It does not commit.",
+      "ru": "Перед отчётом агент проводит самопроверку из четырёх частей и вставляет результат: в написанных им файлах не осталось плейсхолдеров-настроек, кроме оставленных вами нерешёнными; каждый `docs/<NAME>.md`, на который ссылаются влитые файлы, существует; каждый навык из файла правил существует как папка или её перевод; строка `Adopted from` на месте. В отчёте также дерево изменённых файлов, место копий, нерешённые плейсхолдеры и безопасная первая команда для пробы. Коммита он не делает.",
+      "ua": "Перед звітом агент проводить самоперевірку з чотирьох частин і вставляє результат: у написаних ним файлах не лишилося плейсхолдерів-налаштувань, крім залишених вами невирішеними; кожен `docs/<NAME>.md`, на який посилаються влиті файли, існує; кожна навичка з файлу правил існує як тека або її переклад; рядок `Adopted from` на місці. У звіті також дерево змінених файлів, місце копій, невирішені плейсхолдери й безпечна перша команда для проби. Коміту він не робить."
+    }
+  ],
+  "outcome": {
+    "en": "The approved parts of the kit are in your project, on a new branch if it is a git repository. Your own files changed only as the plan listed, each with a backup, and your rules file carries the `Adopted from` line. The closing report gives the changed file tree, the backup location, any unresolved placeholders, the self-check result and a safe first command to try.",
+    "ru": "Утверждённые части kit лежат в вашем проекте, в новой ветке, если это git-репозиторий. Ваши файлы изменены только так, как перечислено в плане, у каждого есть резервная копия, а в файле правил стоит строка `Adopted from`. Итоговый отчёт даёт дерево изменений, место копий, нерешённые плейсхолдеры, результат самопроверки и безопасную первую команду для пробы.",
+    "ua": "Затверджені частини kit лежать у вашому проєкті, у новій гілці, якщо це git-репозиторій. Ваші файли змінено лише так, як перелічено в плані, у кожного є резервна копія, а у файлі правил стоїть рядок `Adopted from`. Підсумковий звіт дає дерево змін, місце копій, невирішені плейсхолдери, результат самоперевірки й безпечну першу команду для проби."
+  },
+  "tips": [
+    {
+      "en": "Your files always win. On a name collision the agent keeps yours and surfaces the conflict. Where the kit disagrees with your conventions, naming, language or structure rules, yours stay authoritative and it only mentions the difference. The kit folder itself is never modified, and your permissions are never loosened.",
+      "ru": "Ваши файлы всегда главнее. При совпадении имён агент оставляет ваш файл и показывает конфликт. Где kit расходится с вашими соглашениями, именами, языком или структурой, остаются ваши, а агент лишь упоминает разницу. Сама папка kit не меняется, а ваши разрешения не ослабляются.",
+      "ua": "Ваші файли завжди головніші. За збігу імен агент лишає ваш файл і показує конфлікт. Де kit розходиться з вашими домовленостями, іменами, мовою чи структурою, лишаються ваші, а агент лише згадує різницю. Сама тека kit не змінюється, а ваші дозволи не послаблюються."
+    },
+    {
+      "en": "The kit names its skills `/prove` and `/critique` so that they do not shadow Claude Code's built-in verify and review commands. If you already have a skill or command under the name of any kit skill, that is a CONFLICT, never an overwrite.",
+      "ru": "Навыки kit названы `/prove` и `/critique`, чтобы не перекрывать встроенные в Claude Code команды verify и review. Если у вас уже есть навык или команда с именем любого навыка kit, это CONFLICT, а не повод перезаписывать.",
+      "ua": "Навички kit названо `/prove` і `/critique`, щоб не перекривати вбудовані в Claude Code команди verify та review. Якщо у вас уже є навичка чи команда з іменем будь-якої навички kit, це CONFLICT, а не привід перезаписувати."
+    },
+    {
+      "en": "Another tool than Claude Code? The agent detects which tool the project targets. Most agent tools read `AGENTS.md` natively. The skills are in the open Agent Skills format: Claude Code, Cursor, Copilot and Cline load `.claude/skills/` as is, while Codex and Gemini CLI load `.agents/skills/`, so the plan copies or links the folder there.",
+      "ru": "Инструмент не Claude Code? Агент определяет, на какой инструмент рассчитан проект. Большинство агентных инструментов читают `AGENTS.md` нативно. Навыки лежат в открытом формате Agent Skills: Claude Code, Cursor, Copilot и Cline загружают `.claude/skills/` как есть, а Codex и Gemini CLI - `.agents/skills/`, поэтому план копирует папку туда или делает на неё ссылку.",
+      "ua": "Інструмент не Claude Code? Агент визначає, на який інструмент розрахований проєкт. Більшість агентних інструментів читають `AGENTS.md` нативно. Навички лежать у відкритому форматі Agent Skills: Claude Code, Cursor, Copilot і Cline завантажують `.claude/skills/` як є, а Codex та Gemini CLI - `.agents/skills/`, тому план копіює теку туди або робить на неї посилання."
+    },
+    {
+      "en": "The agents in `.claude/agents/*` load natively only in Claude Code. For any other tool the plan translates each one into that tool's agent or mode format instead of copying it, because a verbatim copy would be a dead file.",
+      "ru": "Агенты из `.claude/agents/*` нативно загружает только Claude Code. Для любого другого инструмента план переводит каждого в формат агентов или режимов этого инструмента, а не копирует, потому что дословная копия осталась бы мёртвым файлом.",
+      "ua": "Агентів із `.claude/agents/*` нативно завантажує лише Claude Code. Для будь-якого іншого інструмента план перекладає кожного у формат агентів чи режимів цього інструмента, а не копіює, бо дослівна копія лишилася б мертвим файлом."
+    },
+    {
+      "en": "Permissions come as a proposal only. The plan never suggests `Bash(git *)`, which would pre-approve force push and hard reset, and never the `agent` key, which replaces Claude Code's system prompt for every session.",
+      "ru": "Разрешения даются только как предложение. План никогда не предлагает `Bash(git *)`, который заранее одобрил бы force push и hard reset, и никогда ключ `agent`, заменяющий системный промпт Claude Code в каждой сессии.",
+      "ua": "Дозволи подаються лише як пропозиція. План ніколи не пропонує `Bash(git *)`, який наперед схвалив би force push і hard reset, і ніколи ключ `agent`, що підміняє системний промпт Claude Code в кожній сесії."
+    },
+    {
+      "en": "`memory/` goes to the project root, so the `@memory/MEMORY.md` import resolves. It is the committed, team-shared memory; Claude Code also keeps its own per-user auto memory, and a fact belongs in one of the two, never both.",
+      "ru": "`memory/` идёт в корень проекта, чтобы разрешался импорт `@memory/MEMORY.md`. Это закоммиченная общая память команды; у Claude Code есть и своя автопамять на пользователя, и каждый факт живёт в одной из двух, но не в обеих.",
+      "ua": "`memory/` іде в корінь проєкту, щоб розв'язувався імпорт `@memory/MEMORY.md`. Це закомічена спільна пам'ять команди; у Claude Code є й своя автопам'ять на користувача, і кожен факт живе в одній із двох, але не в обох."
+    },
+    {
+      "en": "No repository, a folder of documents? The kit works the same; only the safety net changes shape. The merge prompt then uses its backups instead of a branch and says so in the plan. Copy the whole folder somewhere safe first: that copy shows what changed since last time. Skip `/git` and delete the `git` lines from `.claude/settings.json`.",
+      "ru": "Нет репозитория, только папка документов? kit работает так же, меняется лишь страховка. Промпт слияния тогда использует резервные копии вместо ветки и говорит об этом в плане. Сначала скопируйте всю папку в надёжное место: сравнение с копией покажет, что изменилось с прошлого раза. `/git` пропустите, а строки `git` из `.claude/settings.json` удалите.",
+      "ua": "Немає репозиторію, лише тека документів? Kit працює так само, змінюється лише страховка. Промпт злиття тоді використовує резервні копії замість гілки й каже про це в плані. Спершу скопіюйте всю теку в надійне місце: порівняння з копією покаже, що змінилося від минулого разу. `/git` пропустіть, а рядки `git` із `.claude/settings.json` видаліть."
+    },
+    {
+      "en": "Reference only: the kit's `examples/` holds a filled ticket and a filled excerpt of the rules file. Read it to see the target; it is never copied in. See [the worked example](fn:worked-example).",
+      "ru": "Только для чтения: в `examples/` kit лежат заполненный тикет и заполненный фрагмент файла правил. Читайте их, чтобы увидеть цель; в проект они не копируются. См. [рабочий пример](fn:worked-example).",
+      "ua": "Лише для читання: в `examples/` kit лежать заповнений тікет і заповнений фрагмент файлу правил. Читайте їх, щоб побачити мету; у проєкт вони не копіюються. Див. [робочий приклад](fn:worked-example)."
+    },
+    {
+      "en": "Merged earlier and a newer kit is out? The same prompt does an upgrade: [move the project to a newer kit](fn:upgrade-kit).",
+      "ru": "Вносили раньше, а вышел более новый kit? Тот же промпт делает обновление: [перевести проект на более новый kit](fn:upgrade-kit).",
+      "ua": "Вносили раніше, а вийшов новіший kit? Той самий промпт робить оновлення: [перевести проєкт на новіший kit](fn:upgrade-kit)."
+    }
+  ],
+  "related": ["adopt-new", "upgrade-kit", "project-shapes", "placeholders", "agent-memory"],
+  "terms": ["merge-prompt", "project-shape", "placeholder", "rules-file", "kit", "skill", "agent"],
+  "keywords": {
+    "en": ["existing project", "merge the kit", "merge-prompt.txt", "personal local project", "your files win", "merge plan", "conflict", "AGENTS.md"],
+    "ru": ["существующий проект", "влить kit", "merge-prompt.txt", "личный локальный проект", "ваши файлы главнее", "план слияния", "конфликт", "AGENTS.md"],
+    "ua": ["наявний проєкт", "влити kit", "merge-prompt.txt", "особистий локальний проєкт", "ваші файли головніші", "план злиття", "конфлікт", "AGENTS.md"]
+  }
+}

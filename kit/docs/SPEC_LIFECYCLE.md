@@ -35,12 +35,18 @@ Draft ──► Approved ──► Tactical ──► In Progress ──► Impl
                                                              Broken   (at least one failure)
 ```
 
-Plus explicit block states, each entered with a one-line note:
+Plus explicit block states, each entered with a one-line note on the status line itself, after
+` - ` (`**Status:** BlockExternal - waiting for the vendor's test key`). A reader takes the first
+word as the status; the note goes when the block lifts.
 
 - `BlockNeedUserTest` - built, awaiting a hands-on / manual check.
 - `BlockByOtherTask` - depends on another ticket.
 - `BlockQuestions` - awaiting a decision from the owner.
 - `BlockExternal` - waiting on a library release, hardware, or a third party.
+
+A block status is **kept** by every skill until its condition is removed. `/spec-check` in
+particular never overwrites `BlockQuestions` or `BlockExternal` with an audit score - overwriting it
+is what lets an audit and its fix-up hand the same unfixable items back and forth forever.
 
 Block states need a defined exit. To clear a `BlockQuestions` ticket: isolate the decisions
 blocking the next transition, silently settle any the codebase or prior research already
@@ -57,6 +63,16 @@ part of archiving, or the "tag exists iff awaiting test" invariant breaks on the
 
 The status is the **first** `**Status:**` line in the file. It is true because the code makes
 it true, never because the filename or a wish says so.
+
+### Where a human signs off
+
+A check only a human can make lives in its own `## Manual checks` section of the strategic spec -
+one `[ ]` line per thing a person must see, ticked `[x]` by that person with a date and what they
+observed. It is written once (by `/spec-dev` or a primitive `/spec` when they enter
+`BlockNeedUserTest`, or appended by `/spec-check` when a criterion needs it), read on every audit,
+and **never overwritten** - the audit's own block is rewritten each run, so a box kept there would
+be wiped by the very re-audit meant to read it. Agents never tick a box: `/prove` can supply the
+evidence, the human supplies the tick.
 
 ## The complexity ladder
 
@@ -137,11 +153,12 @@ single greppable line so removal stays mechanical and safe.
 /spec-dev      execute one step at a time, check each       Tactical -> Implemented / BlockNeedUserTest
 /spec-check    audit the build against the spec             -> Verified / Partial / Broken
 /spec-fix      apply the audit's action items, re-audit     Partial / Broken -> (re-check)
-/verify        run it and observe, when behaviour matters   (read-only on status)
+/prove         run it and observe, when behaviour matters   (read-only on status)
 ```
 
 `/quick` and `/fix` sit *below* this pipeline for changes too small to deserve it. `/ui-clarify`
-sits *before* it whenever a user-facing decision is unresolved.
+sits *before* it whenever a user-facing decision is unresolved, and `/surfaces` *after* the build of
+a user-visible change, before the ticket closes.
 
 ## Status gates (the one rule)
 
@@ -153,20 +170,21 @@ its own row, and `VALIDATION.md` and the skill files defer to it rather than red
 | Skill | Requires | Produces | Auto-chains to | Stops instead when |
 | --- | --- | --- | --- | --- |
 | `/research` | any | no status change | the caller | - |
-| `/spec` | none (allocates an id) | `Approved` (complex), or `Implemented` / `BlockNeedUserTest` (primitive, implemented in place) | `/spec-tech` (complex only; a primitive stops after implementing) | a required research item is Open |
-| `/spec-tech` | `Approved` or later | `Tactical` | `/spec-dev` | an unchecked pre-implementation blocker remains |
+| `/spec` | none (allocates an id), or an existing `Draft` (expands it in place, same id) | `Approved` (complex), or `Implemented` / `BlockNeedUserTest` (primitive, implemented in place) | `/spec-tech` (complex only; a primitive stops after implementing) | a required research item is Open |
+| `/spec-tech` | `Approved` or later - a `Draft` is refused, never promoted | `Tactical` | `/spec-dev` | an unchecked pre-implementation blocker remains |
 | `/spec-dev` | `Tactical` / `In Progress` | `Implemented` or `BlockNeedUserTest` | `/spec-check` | ambiguity, a failed check, or a `Block*` condition |
-| `/spec-check` | `Implemented` or later | `Verified` / `Partial` / `Broken` / `BlockNeedUserTest` | `/spec-fix` (only if `Partial`/`Broken`) | an open manual check holds at `BlockNeedUserTest`; an unhanded open §6 question refuses `Verified` |
-| `/spec-fix` | `Partial` / `Broken` | re-runs `/spec-check` | `/spec-check` | a fix needs a decision the audit cannot supply |
-| `/verify` | any | no status change | - | - |
+| `/spec-check` | `Implemented` or later | `Verified` / `Partial` / `Broken` / `BlockNeedUserTest`; a `BlockQuestions` / `BlockExternal` already in place is kept | `/spec-fix` (only if it set `Partial`/`Broken`) | an open manual check holds at `BlockNeedUserTest`; an unhanded open §6 question refuses `Verified` |
+| `/spec-fix` | `Partial` / `Broken` | re-runs `/spec-check`, or `BlockQuestions` | `/spec-check`, only if it fixed at least one item | it fixed nothing, or a fix needs a decision the audit cannot supply |
+| `/prove` | any | no status change | - | - |
 
-Three rules bind the whole table:
+Four rules bind the whole table:
 
 - **Auto-chain by default; stop only at a real decision.** The pipeline flows on its own and
   pauses only at the encoded conditions above - an open required question, an unchecked blocker,
   an ambiguity. It does **not** wait for a sign-off at every stage; that would be bureaucracy, not
   safety. `/spec` records its own `Approved` flip and continues. To review between stages, run the
-  skills individually or pass `--dry-run`.
+  skills individually, or pass `--dry-run` to the ones that take it (`/spec-tech`, `/spec-dev`,
+  `/spec-fix`, `/backlog`).
 - **`Verified` means nothing is left open.** A ticket reaches `Verified` only when every check is
   PASS or EXEMPT - zero FAIL, zero WARN, and **no open MANUAL item**. An unresolved manual /
   on-target signal keeps the ticket at `BlockNeedUserTest` (or `Partial`) until a human closes it
@@ -250,12 +268,14 @@ sweep them in a batch rather than one interruption at a time:
    `Verified` and their tags are removed in the same pass; the rest stay blocked with a note.
 
 Keep it a periodic sweep, not a per-ticket prompt - deferring the human gate to one batch is the
-whole reason the block state exists. A lean `/sweep` command (or a filter over `<PLAN_DIR>/`) is
-enough; no new status model is needed.
+whole reason the block state exists. A filter over `<PLAN_DIR>/` for that status is enough - write
+a small skill for it if you sweep often; no new status model is needed. The human's half of step 2
+is ticking the `## Manual checks` lines with what they saw; step 3 reads those ticks.
 
 ## Adapting it
 
-- Replace `<ID>` with whatever id scheme you like (`T0042`, `JIRA-123`, a date-slug).
+- Set `<ID_SCHEME>` to whatever id scheme you like (`T0042`, `JIRA-123`, a date-slug); `<ID>` in
+  the skills and templates is then the id of one ticket, filled each time a ticket is made.
 - Replace `<PLAN_DIR>` with your docs location.
 - If you do not want block states, drop them - the linear flow still works. `Archived` is
   optional in the same way; without it, just stop touching a dead ticket and leave its record.

@@ -1,0 +1,10 @@
+{
+  "id": "rationalization-table",
+  "term": { "en": "Rationalization table", "ru": "Таблица оправданий", "ua": "Таблиця виправдань" },
+  "def": {
+    "en": "A list kept inside a discipline rule: the excuses an agent actually used to skip it, each paired with a counter, in the form 'excuse -> counter'. The excuse is the loophole the rule must close, so only excuses produced in a real run belong in the table.",
+    "ru": "Список внутри дисциплинарного правила: оправдания, которыми агент реально пользовался, чтобы его обойти, каждое в паре с ответом, в виде «оправдание -> ответ». Оправдание - это лазейка, которую правило обязано закрыть, поэтому в таблице место только оправданиям из настоящего запуска.",
+    "ua": "Список усередині дисциплінарного правила: виправдання, якими агент реально користувався, щоб його обійти, кожне в парі з відповіддю, у вигляді «виправдання -> відповідь». Виправдання - це лазівка, яку правило мусить закрити, тому в таблиці місце лише виправданням зі справжнього запуску."
+  },
+  "see": ["rules-file", "gate"]
+}

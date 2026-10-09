@@ -11,7 +11,7 @@ source it came from: the table and the cut, or the document and the clause.
 the person forty minutes to reconstruct where it came from before they could send the summary on.
 The rule is not about trust, it is about the next reader being able to check without asking anyone.
 
-**How to apply:** when writing or editing any reader-facing artifact, treat an unsourced figure the
-same way the code rules treat a hardcoded value - do not ship it. If the source is genuinely
-unavailable, say so beside the number rather than quietly leaving it bare. Related: [[pr-granularity]]
-for the same "one reviewable unit" instinct applied to changes.
+**How to apply:** when writing or editing any reader-facing artifact, treat an unsourced figure as
+unfinished work - do not ship it. If the source is genuinely unavailable, say so beside the number
+rather than quietly leaving it bare. Related: [[change-granularity]] for the same "one reviewable
+unit" instinct applied to changes.

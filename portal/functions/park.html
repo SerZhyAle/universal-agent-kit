@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en" data-theme="dark" data-root="../../">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Park an out-of-scope finding and keep working - Universal Agent Kit</title>
+<meta name="description" content="A real problem found mid-task becomes a minimal Draft stub in one line, and you go straight back to what you were doing.">
+<link rel="canonical" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/park.html">
+<link rel="alternate" hreflang="en" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/park.html?lang=en">
+<link rel="alternate" hreflang="ru" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/park.html?lang=ru">
+<link rel="alternate" hreflang="uk" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/park.html?lang=uk">
+<link rel="alternate" hreflang="x-default" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/park.html">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%233fb950'/%3E%3Cpath d='M20 18h24M20 30h24M20 42h16' stroke='%2304130c' stroke-width='5' stroke-linecap='round' fill='none'/%3E%3C/svg%3E">
+<meta name="theme-color" content="#0a0f0a">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Universal Agent Kit">
+<meta property="og:url" content="https://serzhyale.github.io/universal-agent-kit/portal/functions/park.html">
+<meta property="og:title" content="Park an out-of-scope finding and keep working - Universal Agent Kit">
+<meta property="og:description" content="A real problem found mid-task becomes a minimal Draft stub in one line, and you go straight back to what you were doing.">
+<meta property="og:image" content="https://serzhyale.github.io/universal-agent-kit/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Park an out-of-scope finding and keep working - Universal Agent Kit">
+<meta name="twitter:description" content="A real problem found mid-task becomes a minimal Draft stub in one line, and you go straight back to what you were doing.">
+<meta name="twitter:image" content="https://serzhyale.github.io/universal-agent-kit/og-image.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Park an out-of-scope finding and keep working - Universal Agent Kit","description":"A real problem found mid-task becomes a minimal Draft stub in one line, and you go straight back to what you were doing.","url":"https://serzhyale.github.io/universal-agent-kit/portal/functions/park.html","inLanguage":["en","ru","uk"],"isPartOf":{"@type":"WebSite","name":"Universal Agent Kit","url":"https://serzhyale.github.io/universal-agent-kit/"}}</script>
+<script type="application/json" id="page-i18n">{"t":{"ru":"Отложить находку вне задачи и продолжить работу - Universal Agent Kit","en":"Park an out-of-scope finding and keep working - Universal Agent Kit","ua":"Відкласти знахідку поза задачею й продовжити роботу - Universal Agent Kit"},"d":{"ru":"Настоящая проблема, замеченная по ходу дела, становится минимальной заготовкой со статусом Draft за одну строку, и вы сразу возвращаетесь к своему делу.","en":"A real problem found mid-task becomes a minimal Draft stub in one line, and you go straight back to what you were doing.","ua":"Справжню проблему, помічену по ходу діла, перетворено на мінімальну заготовку зі статусом Draft за один рядок, і ви одразу повертаєтеся до своєї справи."},"ui":{"langGroup":{"en":"Language","ru":"Язык","ua":"Мова"},"theme":{"en":"Theme","ru":"Тема","ua":"Тема"},"toLight":{"en":"Switch to light theme","ru":"Включить светлую тему","ua":"Увімкнути світлу тему"},"toDark":{"en":"Switch to dark theme","ru":"Включить тёмную тему","ua":"Увімкнути темну тему"},"toTop":{"en":"Back to top","ru":"Наверх","ua":"Нагору"},"menu":{"en":"Menu","ru":"Меню","ua":"Меню"},"navPortal":{"en":"Portal","ru":"Портал","ua":"Портал"},"navTools":{"en":"More tools by SZA","ru":"Другие инструменты SZA","ua":"Інші інструменти SZA"},"navAuthor":{"en":"Author links","ru":"Ссылки автора","ua":"Посилання автора"},"navSection":{"en":"In this section","ru":"В этом разделе","ua":"У цьому розділі"},"breadcrumb":{"en":"Breadcrumb","ru":"Путь по сайту","ua":"Шлях сайтом"},"searchTitle":{"en":"Search the portal","ru":"Поиск по порталу","ua":"Пошук по порталу"},"searchEmpty":{"en":"Nothing found for","ru":"Ничего не найдено по запросу","ua":"Нічого не знайдено за запитом"},"searchEmptyHelp":{"en":"Browse the subject index instead.","ru":"Откройте предметный указатель.","ua":"Відкрийте предметний покажчик."},"searchCount":{"en":"results","ru":"результатов","ua":"результатів"},"searchFail":{"en":"The search index could not be loaded.","ru":"Не удалось загрузить индекс поиска.","ua":"Не вдалося завантажити індекс пошуку."},"kind.command":{"en":"Slash command","ru":"Slash-команда","ua":"Slash-команда"},"kind.agent":{"en":"Role agent","ru":"Ролевой агент","ua":"Рольовий агент"},"kind.practice":{"en":"Practice","ru":"Практика","ua":"Практика"}}}</script>
+<script>
+/* PAGE-STYLE section 7 pre-paint resolver, on the portfolio's shared keys sza-lang / sza-theme.
+   Language priority: ?lang= in the URL (a shared link wins) > saved choice > browser.
+   The UA switch keys "ua"; the URL, lang and hreflang keep the ISO code "uk". The legacy
+   uak-* keys are read once so a returning reader keeps their choice. */
+(function(){
+  var l, t;
+  try{
+    var q = (location.search.match(/[?&]lang=(ru|en|uk|ua)\b/i) || [])[1];
+    if(q){ l = q.toLowerCase(); }
+    else { l = localStorage.getItem('sza-lang') || localStorage.getItem('uak-lang'); }
+    if(l === 'uk') l = 'ua';
+    if(l){ localStorage.setItem('sza-lang', l); }
+    t = localStorage.getItem('sza-theme') || localStorage.getItem('uak-theme');
+    if(t){ localStorage.setItem('sza-theme', t); }
+  }catch(e){}
+  if(l !== 'ru' && l !== 'en' && l !== 'ua'){ var nav=(navigator.language||'en').toLowerCase(); l = nav.indexOf('ru')===0 ? 'ru' : (nav.indexOf('uk')===0 ? 'ua' : 'en'); }
+  if(t !== 'light' && t !== 'dark'){ t = (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) ? 'light' : 'dark'; }
+  var d = document.documentElement;
+  d.setAttribute('data-lang', l); d.setAttribute('lang', l === 'ua' ? 'uk' : l); d.setAttribute('data-theme', t);
+})();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/sza-kit.css">
+<link rel="stylesheet" href="../../assets/site.css">
+<link rel="stylesheet" href="../../assets/portal.css">
+</head>
+<body>
+<a class="skip-link" href="#main"><span data-l="ru">Перейти к содержимому</span><span data-l="en">Skip to the content</span><span data-l="ua">Перейти до вмісту</span></a>
+<div class="bg-blobs" aria-hidden="true"><div class="blob blob-1"></div><div class="blob blob-2"></div><div class="blob blob-3"></div></div>
+<svg class="icon-sprite" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+  <symbol id="icon-action-download" viewBox="0 0 24 24"><g transform="translate(12 12) scale(.917 .917) translate(-12 -12)"><path d="M19.35,10.04C18.67,6.59 15.64,4 12,4 9.11,4 6.6,5.64 5.35,8.04 2.34,8.36 0,10.91 0,14c0,3.31 2.69,6 6,6h13c2.76,0 5,-2.24 5,-5 0,-2.64 -2.05,-4.78 -4.65,-4.96zM17,13l-5,5 -5,-5h3V9h4v4h3z"/></g></symbol>
+  <symbol id="icon-nav-scroll-top" viewBox="0 0 24 24"><path d="M8 11h3v10h2V11h3l-4-4-4 4zM4 3v2h16V3H4z"/></symbol>
+</svg>
+<header class="site-header portal-header">
+    <a class="brand" href="../../">Universal&nbsp;Agent&nbsp;Kit<span class="dot">.</span></a>
+    <button class="ctl nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="portalNav"><span data-l="ru">Меню</span><span data-l="en">Menu</span><span data-l="ua">Меню</span></button>
+    <nav class="portal-nav" id="portalNav" aria-label="Portal" data-aria="navPortal">
+      <a href="../"><span data-l="ru">Портал</span><span data-l="en">Portal</span><span data-l="ua">Портал</span></a>
+      <a href="../overview.html"><span data-l="ru">Обзор</span><span data-l="en">Overview</span><span data-l="ua">Огляд</span></a>
+      <a href="../showcase.html"><span data-l="ru">Витрина</span><span data-l="en">Showcase</span><span data-l="ua">Вітрина</span></a>
+      <a href="../subjects.html"><span data-l="ru">Предметный указатель</span><span data-l="en">Subject index</span><span data-l="ua">Предметний покажчик</span></a>
+      <a href="../glossary.html"><span data-l="ru">Глоссарий</span><span data-l="en">Glossary</span><span data-l="ua">Глосарій</span></a>
+    </nav>
+    <button class="ctl search-open" id="searchOpen" type="button" aria-haspopup="dialog" aria-controls="searchDialog"><span data-l="ru">Поиск</span><span data-l="en">Search</span><span data-l="ua">Пошук</span><kbd aria-hidden="true">/</kbd></button>
+    <span class="seg" role="group" aria-label="Language" id="langGroup" data-aria="langGroup">
+      <button id="lng-ru" type="button" data-set-lang="ru" aria-pressed="false" aria-label="Русский">RU</button>
+      <button id="lng-en" type="button" data-set-lang="en" aria-pressed="true" aria-label="English">EN</button>
+      <button id="lng-ua" type="button" data-set-lang="ua" aria-pressed="false" aria-label="Українська">UA</button>
+    </span>
+    <button class="theme-btn" id="themeBtn" type="button" title="Theme" aria-label="Theme" aria-pressed="false"><span data-l="ru">Тема</span><span data-l="en">Theme</span><span data-l="ua">Тема</span></button>
+    <a class="btn btn-primary btn-sm" href="../../universal-agent-kit.zip" download>
+      <svg class="icon" aria-hidden="true"><use href="#icon-action-download"/></svg><span data-l="ru">Скачать kit (.zip)</span><span data-l="en">Download kit (.zip)</span><span data-l="ua">Завантажити kit (.zip)</span>
+    </a>
+</header>
+<main id="main" class="page">
+<nav class="crumbs" aria-label="Breadcrumb" data-aria="breadcrumb"><ol><li><a href="../../"><span data-l="ru">Universal Agent Kit</span><span data-l="en">Universal Agent Kit</span><span data-l="ua">Universal Agent Kit</span></a></li><li><a href="../"><span data-l="ru">Портал</span><span data-l="en">Portal</span><span data-l="ua">Портал</span></a></li><li><a href="../#section-skills"><span data-l="ru">Навыки: сценарии как slash-команды</span><span data-l="en">Skills: workflows as slash commands</span><span data-l="ua">Навички: сценарії як slash-команди</span></a></li><li aria-current="page"><span data-l="ru">Отложить находку вне задачи и продолжить работу</span><span data-l="en">Park an out-of-scope finding and keep working</span><span data-l="ua">Відкласти знахідку поза задачею й продовжити роботу</span></li></ol></nav>
+<header class="page-head">
+<p class="eyebrow"><span class="pill"><span data-l="ru">Slash-команда</span><span data-l="en">Slash command</span><span data-l="ua">Slash-команда</span></span> <a href="../#section-skills"><span data-l="ru">Навыки: сценарии как slash-команды</span><span data-l="en">Skills: workflows as slash commands</span><span data-l="ua">Навички: сценарії як slash-команди</span></a></p>
+<h1><span data-l="ru">Отложить находку вне задачи и продолжить работу</span><span data-l="en">Park an out-of-scope finding and keep working</span><span data-l="ua">Відкласти знахідку поза задачею й продовжити роботу</span></h1>
+<p class="lead prose"><span data-l="ru"><code>/park</code> записывает находку, которая настоящая, но сейчас не ваша, чтобы она не потерялась, и возвращает вас к исходной задаче. Он ничего не чинит и никогда не переключает активную задачу. Заготовка - живой тикет: <code>/backlog</code> потом подберёт его, а <code>/spec &lt;ID&gt;</code> развернёт на месте.</span><span data-l="en"><code>/park</code> records a finding that is real but not yours right now, so it is not lost, and returns you to the original task. It never fixes anything and never switches the active task. The stub is a live ticket: <code>/backlog</code> can pick it up later and <code>/spec &lt;ID&gt;</code> can flesh it out in place.</span><span data-l="ua"><code>/park</code> записує знахідку, що справжня, але зараз не ваша, щоб вона не загубилася, і повертає вас до початкової задачі. Він нічого не лагодить і ніколи не перемикає активну задачу. Заготовка - живий тікет: <code>/backlog</code> потім підбере його, а <code>/spec &lt;ID&gt;</code> розгорне на місці.</span></p>
+</header>
+<article class="fn" data-kind="command">
+<div class="panels">
+<section class="panel" aria-labelledby="h-situation"><h2 id="h-situation"><span data-l="ru">Когда это нужно</span><span data-l="en">When to reach for it</span><span data-l="ua">Коли це потрібно</span></h2><p class="prose"><span data-l="ru">На любом этапе - исследование, реализация, аудит, ревью, тест, разбор логов - в тот момент, когда находка вне задачи, это больше однострочной правки на месте и для неё нужно отдельное расследование.</span><span data-l="en">At any stage - research, implementation, audit, review, test, log analysis - the moment a finding is out of scope for the active task, is more than a one-line inline fix, and needs its own investigation.</span><span data-l="ua">На будь-якому етапі - дослідження, реалізація, аудит, рев'ю, тест, розбір логів - у той момент, коли знахідка поза задачею, це більше за однорядкову правку на місці й для неї потрібне окреме розслідування.</span></p></section>
+<section class="panel" aria-labelledby="h-requirements"><h2 id="h-requirements"><span data-l="ru">Требования</span><span data-l="en">Requirements</span><span data-l="ua">Вимоги</span></h2><dl class="req">
+<div><dt><span data-l="ru">Где доступно</span><span data-l="en">Available in</span><span data-l="ua">Де доступно</span></dt><dd><span data-l="ru">Каждая загрузка kit</span><span data-l="en">Every download of the kit</span><span data-l="ua">Кожне завантаження kit</span></dd></div>
+<div><dt><span data-l="ru">К чему обращается</span><span data-l="en">What it touches</span><span data-l="ua">До чого звертається</span></dt><dd><ul class="chips"><li class="pill"><span data-l="ru">Читает файлы проекта</span><span data-l="en">Reads the files of your project</span><span data-l="ua">Читає файли проєкту</span></li><li class="pill"><span data-l="ru">Правит файлы проекта</span><span data-l="en">Edits files in your project</span><span data-l="ua">Змінює файли проєкту</span></li></ul></dd></div>
+<div><dt><span data-l="ru">Работает с</span><span data-l="en">Works with</span><span data-l="ua">Працює з</span></dt><dd><span data-l="ru">Сделано для Claude Code; другие агенты адаптируют</span><span data-l="en">Built for Claude Code; other agents adapt it</span><span data-l="ua">Зроблено для Claude Code; інші агенти адаптують</span></dd></div>
+<div><dt><span data-l="ru">Где выполняются шаги</span><span data-l="en">Where the steps happen</span><span data-l="ua">Де виконуються кроки</span></dt><dd><span data-l="ru">Чат вашего агента и ваши собственные файлы. Ни то ни другое не интерфейс этого сайта, поэтому шаги описаны текстом, а не скриншотами.</span><span data-l="en">Your agent's chat and your own files. Neither is an interface of this site, so the steps are text and not screenshots.</span><span data-l="ua">Чат вашого агента і ваші власні файли. Ні те, ні інше не є інтерфейсом цього сайту, тому кроки описано текстом, а не скриншотами.</span></dd></div>
+<div><dt><span data-l="ru">Где это лежит в kit</span><span data-l="en">Where it lives in the kit</span><span data-l="ua">Де це лежить у kit</span></dt><dd><code>.claude/skills/park/SKILL.md</code></dd></div>
+</dl></section>
+<div class="note warn" role="note"><div class="tag"><span data-l="ru">Прежде чем начать</span><span data-l="en">Before you start</span><span data-l="ua">Перш ніж почати</span></div><p><span data-l="ru">Не откладывайте то, что этого не требует. Тривиальную правку вне задачи (один токен, одна очевидная строка) вносят на месте. Косметическую придирку без цены для поведения отбрасывают. Находка в рамках текущей задачи - обычная работа. В роли только на чтение, которая не может записывать (аудит или ревью без доступа на запись), верните список кандидатов вызывающему.</span><span data-l="en">Do not park what does not need it. A trivial out-of-scope fix (one token, one obvious line) is made inline. A cosmetic nitpick with no behaviour cost is dropped. A finding in scope for the active task is just work. In a read-only role that cannot record items (audit or review with no write access), list the candidates back to your caller instead.</span><span data-l="ua">Не відкладайте те, що цього не потребує. Тривіальну правку поза задачею (один токен, один очевидний рядок) вносять на місці. Косметичну прискіпливість без ціни для поведінки відкидають. Знахідка в межах поточної задачі - звичайна робота. У ролі лише для читання, яка не може записувати (аудит чи рев'ю без доступу на запис), поверніть список кандидатів тому, хто викликав.</span></p></div>
+<section class="panel wide" aria-labelledby="h-steps"><h2 id="h-steps"><span data-l="ru">Шаги</span><span data-l="en">Steps</span><span data-l="ua">Кроки</span></h2><ol class="steps">
+<li><span class="prose"><span data-l="ru">Опишите симптом одной строкой и, если нужно, где нашли: <code>/park retry loop in sync_client never backs off - found while auditing the cache layer</code>.</span><span data-l="en">Describe the symptom in one line and, if useful, where you found it: <code>/park retry loop in sync_client never backs off - found while auditing the cache layer</code>.</span><span data-l="ua">Опишіть симптом одним рядком і, якщо потрібно, де знайшли: <code>/park retry loop in sync_client never backs off - found while auditing the cache layer</code>.</span></span></li>
+<li><span class="prose"><span data-l="ru">Агент подтверждает, что находка вне задачи. Если она относится к текущей задаче, её решают там; однострочную правку на месте вносят; косметическую придирку отбрасывают. Откладывается только настоящая находка вне задачи, которой нужно отдельное расследование.</span><span data-l="en">The agent confirms the finding is out of scope. If it belongs to the active task, it is handled there; a one-line inline fix is applied; a cosmetic nitpick is dropped. Only a real, out-of-scope finding that needs its own investigation is parked.</span><span data-l="ua">Агент підтверджує, що знахідка поза задачею. Якщо вона стосується поточної задачі, її вирішують там; однорядкову правку на місці вносять; косметичну прискіпливість відкидають. Відкладається лише справжня знахідка поза задачею, якій потрібне окреме розслідування.</span></span></li>
+<li><span class="prose"><span data-l="ru">Он ищет по симптому среди уже отложенных записей и в трекере в каталоге планов (<code>&lt;PLAN_DIR&gt;/</code>). Если совпадение есть, он сообщает <code>parked: &lt;existing-id&gt; (already tracked)</code> и останавливается. Пакетное ревью с несколькими находками даёт по одной заготовке на каждую отдельную проблему, а не на каждое упоминание.</span><span data-l="en">It searches the existing parked items and the tracker in the plan directory (<code>&lt;PLAN_DIR&gt;/</code>) by symptom. If a match exists, it reports <code>parked: &lt;existing-id&gt; (already tracked)</code> and stops. A batch review that surfaces several findings yields one stub per distinct problem, not one per mention.</span><span data-l="ua">Він шукає за симптомом серед уже відкладених записів і в трекері в каталозі планів (<code>&lt;PLAN_DIR&gt;/</code>). Якщо збіг є, він повідомляє <code>parked: &lt;existing-id&gt; (already tracked)</code> і зупиняється. Пакетне рев'ю з кількома знахідками дає по одній заготовці на кожну окрему проблему, а не на кожну згадку.</span></span></li>
+<li><span class="prose"><span data-l="ru">Он записывает заготовку как обычный файл <a href="../glossary.html#term-ticket">тикета</a>, <code>&lt;PLAN_DIR&gt;/&lt;ID&gt;_&lt;slug&gt;.md</code>, а идентификатор выдаёт по схеме идентификаторов проекта ровно так, как это делает <code>/spec</code>. Заметка в трекере или в общем <code>PARKED.md</code> невидима для <code>/backlog</code> и для выдачи идентификаторов, поэтому она потеряется или столкнётся с другой. Если вы ведёте трекер, привяжите его запись ссылкой из файла.</span><span data-l="en">It writes the stub as an ordinary <a href="../glossary.html#term-ticket">ticket</a> file, <code>&lt;PLAN_DIR&gt;/&lt;ID&gt;_&lt;slug&gt;.md</code>, with the id allocated by the project's id scheme exactly as <code>/spec</code> allocates one. A note in a tracker or in a shared <code>PARKED.md</code> is invisible to <code>/backlog</code> and to id allocation, so it would be lost or collide. If you keep a tracker, link its item from the file.</span><span data-l="ua">Він записує заготовку як звичайний файл <a href="../glossary.html#term-ticket">тікета</a>, <code>&lt;PLAN_DIR&gt;/&lt;ID&gt;_&lt;slug&gt;.md</code>, а ідентифікатор видає за схемою ідентифікаторів проєкту точно так, як це робить <code>/spec</code>. Нотатка в трекері чи в спільному <code>PARKED.md</code> невидима для <code>/backlog</code> і для видачі ідентифікаторів, тож вона загубиться або зіткнеться з іншою. Якщо ви ведете трекер, прив'яжіть його запис посиланням із файлу.</span></span></li>
+<li><span class="prose"><span data-l="ru">В файле минимум, по которому находку можно найти снова: стабильный <code>&lt;ID&gt;</code>, статус <code>Draft</code>, приоритет <code>Priority</code> по умолчанию (например, 40), <code>Blocked-by: none</code> и <code>Carried-to: none</code> (обязательны в каждом тикете, и в заготовке тоже, иначе <code>/backlog</code> сообщит о дефектном тикете), симптом в одну строку и где нашли (файл или поток, и задача, над которой вы работали). Ни расследования, ни первопричины, ни наброска правки.</span><span data-l="en">The file holds the least that makes the finding re-findable: a stable <code>&lt;ID&gt;</code>, the status <code>Draft</code>, a default <code>Priority</code> (for example 40), <code>Blocked-by: none</code> and <code>Carried-to: none</code> (mandatory on every ticket, a stub included, or <code>/backlog</code> reports a defective ticket), a one-line symptom, and where it was found (file or flow, and the task you were on). No investigation, no root cause, no fix sketch.</span><span data-l="ua">У файлі мінімум, за яким знахідку можна знайти знову: стабільний <code>&lt;ID&gt;</code>, статус <code>Draft</code>, пріоритет <code>Priority</code> за замовчуванням (наприклад, 40), <code>Blocked-by: none</code> і <code>Carried-to: none</code> (обов'язкові в кожному тікеті, і в заготовці теж, інакше <code>/backlog</code> повідомить про дефектний тікет), симптом в один рядок і де знайшли (файл чи потік, і задача, над якою ви працювали). Ні розслідування, ні першопричини, ні начерку правки.</span></span></li>
+<li><span class="prose"><span data-l="ru">Он отчитывается одной строкой, <code>parked: &lt;id&gt;</code>, и тут же возвращается к исходной задаче. Переключать активную задачу, чтобы гнаться за отложенной находкой, нельзя.</span><span data-l="en">It reports one line, <code>parked: &lt;id&gt;</code>, and immediately resumes the original task. Switching the active task to chase a parked finding is not allowed.</span><span data-l="ua">Він звітує одним рядком, <code>parked: &lt;id&gt;</code>, і одразу повертається до початкової задачі. Перемикати активну задачу, щоб гнатися за відкладеною знахідкою, не можна.</span></span></li>
+</ol></section>
+<div class="note outcome" role="note"><div class="tag"><span data-l="ru">Что вы должны увидеть</span><span data-l="en">What you should see</span><span data-l="ua">Що ви маєте побачити</span></div><p><span data-l="ru">Одна строка в чате, <code>parked: &lt;id&gt;</code>, файл тикета <code>&lt;PLAN_DIR&gt;/&lt;ID&gt;_&lt;slug&gt;.md</code> со статусом <code>Draft</code> и ваша исходная задача, продолженная с того места, где вы остановились.</span><span data-l="en">One line in the chat, <code>parked: &lt;id&gt;</code>, a ticket file <code>&lt;PLAN_DIR&gt;/&lt;ID&gt;_&lt;slug&gt;.md</code> with the status <code>Draft</code>, and your original task carried on from where you left it.</span><span data-l="ua">Один рядок у чаті, <code>parked: &lt;id&gt;</code>, файл тікета <code>&lt;PLAN_DIR&gt;/&lt;ID&gt;_&lt;slug&gt;.md</code> зі статусом <code>Draft</code> і ваша початкова задача, продовжена з того місця, де ви зупинилися.</span></p></div>
+<section class="panel" aria-labelledby="h-tips"><h2 id="h-tips"><span data-l="ru">Советы</span><span data-l="en">Tips</span><span data-l="ua">Поради</span></h2><ul class="tips">
+<li class="prose"><span data-l="ru">В заготовке нет ни первопричины, ни наброска правки, поэтому строка симптома и место, где вы это увидели, - всё, что получит следующий читатель. Пишите их так, чтобы тот, кого рядом не было, мог снова найти проблему.</span><span data-l="en">The stub carries no root cause and no fix sketch, so the symptom line and the place where you saw it are all the next reader gets. Write them so that someone who was not there can re-find the problem.</span><span data-l="ua">У заготовці немає ні першопричини, ні начерку правки, тому рядок симптому і місце, де ви це побачили, - усе, що отримає наступний читач. Пишіть їх так, щоб той, кого поруч не було, міг знову знайти проблему.</span></li>
+<li class="prose"><span data-l="ru">Чтобы позже превратить заготовку в спеку, запустите <code>/spec &lt;ID&gt;</code>: он сохраняет идентификатор, слаг, приоритет и токены шапки, читает симптом как постановку проблемы и работает с тем же файлом. Второй идентификатор для тикета, у которого он уже есть, не выдаётся. См. <a href="spec.html">как превратить описание в спеку</a>.</span><span data-l="en">To turn the stub into a spec later, run <code>/spec &lt;ID&gt;</code>: it keeps the id, slug, priority and header tokens, reads the symptom as the problem statement and works on the same file. It never allocates a second id for a ticket that already has one. See <a href="spec.html">turn a feature description into a spec</a>.</span><span data-l="ua">Щоб пізніше перетворити заготовку на спеку, запустіть <code>/spec &lt;ID&gt;</code>: він зберігає ідентифікатор, слаг, пріоритет і токени шапки, читає симптом як постановку проблеми й працює з тим самим файлом. Другий ідентифікатор для тікета, що вже має його, не видається. Див. <a href="spec.html">як перетворити опис на спеку</a>.</span></li>
+</ul></section>
+<section class="panel" aria-labelledby="h-related"><h2 id="h-related"><span data-l="ru">Связанные функции</span><span data-l="en">Related functions</span><span data-l="ua">Пов'язані функції</span></h2><ul class="fn-list">
+<li><a href="backlog.html"><span data-l="ru">Разобрать очередь тикетов без вашего участия и получить один отчёт в конце</span><span data-l="en">Drain the ticket queue unattended and get one report at the end</span><span data-l="ua">Розібрати чергу тікетів без вашої участі й отримати один звіт наприкінці</span></a><span class="fn-pitch"><span data-l="ru">Берёт тикет с наивысшим приоритетом из тех, что агент может двигать сам, прогоняет конвейер, повторяет, а всё, что требует человека, откладывает в один отчёт.</span><span data-l="en">Picks the highest-priority ticket the agent can move alone, runs the pipeline on it, repeats, and defers everything that needs a human to one report.</span><span data-l="ua">Бере тікет із найвищим пріоритетом серед тих, що агент може рухати сам, проганяє конвеєр, повторює, а все, що потребує людини, відкладає в один звіт.</span></span></li>
+<li><a href="spec.html"><span data-l="ru">Превратить описание фичи в утверждённую стратегическую спеку</span><span data-l="en">Turn a feature description into an approved strategic spec</span><span data-l="ua">Перетворити опис фічі на затверджену стратегічну спеку</span></a><span class="fn-pitch"><span data-l="ru"><code>/spec</code> пишет, что и зачем нужно в фиче, без имён классов и путей к файлам, утверждает и передаёт <code>/spec-tech</code>. Мелкую задачу делает на месте.</span><span data-l="en"><code>/spec</code> writes the what and why of a feature with no class names or file paths, approves it and passes it to <code>/spec-tech</code>. A small task is built in place.</span><span data-l="ua"><code>/spec</code> пише, що й навіщо потрібно у фічі, без назв класів і шляхів до файлів, затверджує та передає <code>/spec-tech</code>. Дрібну задачу робить на місці.</span></span></li>
+<li><a href="quick.html"><span data-l="ru">Внести мелкую правку без церемоний</span><span data-l="en">Make a one-line edit without ceremony</span><span data-l="ua">Внести дрібну правку без церемоній</span></a><span class="fn-pitch"><span data-l="ru">Опечатка, константа или подпись исправлены за одно предложение: без спеки и без сборки.</span><span data-l="en">A typo, a constant or a label changed in one sentence's worth of work: no spec, no build gate.</span><span data-l="ua">Одруківку, константу чи підпис виправлено за одне речення: без спеки й без збірки.</span></span></li>
+<li><a href="fix.html"><span data-l="ru">Исправить узкий баг без церемоний</span><span data-l="en">Fix a narrow bug without ceremony</span><span data-l="ua">Виправити вузький баг без церемоній</span></a><span class="fn-pitch"><span data-l="ru">Баг с понятной причиной исправлен в корне: минимальная правка, одна локальная проверка, отчёт в три строки, без спеки.</span><span data-l="en">A bug with a known cause is fixed at the root: smallest change, one local check, a three-line report, no spec.</span><span data-l="ua">Баг зі зрозумілою причиною виправлено в корені: мінімальна правка, одна локальна перевірка, звіт у три рядки, без спеки.</span></span></li>
+</ul></section>
+<section class="panel wide" aria-labelledby="h-terms"><h2 id="h-terms"><span data-l="ru">Термины на этой странице</span><span data-l="en">Terms on this page</span><span data-l="ua">Терміни на цій сторінці</span></h2><ul class="chips">
+<li><a class="pill" href="../glossary.html#term-park"><span data-l="ru">Парковка (park)</span><span data-l="en">Park</span><span data-l="ua">Паркування (park)</span></a></li>
+<li><a class="pill" href="../glossary.html#term-ticket"><span data-l="ru">Тикет</span><span data-l="en">Ticket</span><span data-l="ua">Тікет</span></a></li>
+<li><a class="pill" href="../glossary.html#term-status"><span data-l="ru">Статус</span><span data-l="en">Status</span><span data-l="ua">Статус</span></a></li>
+<li><a class="pill" href="../glossary.html#term-backlog"><span data-l="ru">Бэклог</span><span data-l="en">Backlog</span><span data-l="ua">Беклог</span></a></li>
+</ul></section>
+</div>
+<nav class="pager" aria-label="In this section" data-aria="navSection"><a class="pager-prev" rel="prev" href="fix.html"><span class="pager-dir"><span data-l="ru">Назад</span><span data-l="en">Previous</span><span data-l="ua">Назад</span></span><span><span data-l="ru">Исправить узкий баг без церемоний</span><span data-l="en">Fix a narrow bug without ceremony</span><span data-l="ua">Виправити вузький баг без церемоній</span></span></a><a class="pager-next" rel="next" href="research.html"><span class="pager-dir"><span data-l="ru">Дальше</span><span data-l="en">Next</span><span data-l="ua">Далі</span></span><span><span data-l="ru">Изучить область, прежде чем её менять</span><span data-l="en">Investigate an area before you change it</span><span data-l="ua">Вивчити ділянку, перш ніж її змінювати</span></span></a></nav>
+</article>
+</main>
+<footer class="site-footer"><div class="container">
+  <div data-l="ru">
+    <strong>Universal Agent Kit</strong> - переносимый метод работы с ИИ-агентами.
+    <div class="cta">
+      <a class="btn btn-primary" href="../../universal-agent-kit.zip" download><svg class="icon" aria-hidden="true"><use href="#icon-action-download"/></svg>Скачать kit (.zip)</a>
+      <a class="btn btn-ghost" href="https://github.com/SerZhyAle/universal-agent-kit" target="_blank" rel="noopener">Исходный код</a>
+    </div>
+    <p class="muted">Kit - MIT · текст - CC BY 4.0 · выжимка из реального проекта, без привязки к стеку.</p>
+  </div>
+  <div data-l="en">
+    <strong>Universal Agent Kit</strong> - a portable method for working with AI agents.
+    <div class="cta">
+      <a class="btn btn-primary" href="../../universal-agent-kit.zip" download><svg class="icon" aria-hidden="true"><use href="#icon-action-download"/></svg>Download kit (.zip)</a>
+      <a class="btn btn-ghost" href="https://github.com/SerZhyAle/universal-agent-kit" target="_blank" rel="noopener">Source code</a>
+    </div>
+    <p class="muted">Kit is MIT · prose is CC BY 4.0 · distilled from a real project, stack-agnostic.</p>
+  </div>
+  <div data-l="ua">
+    <strong>Universal Agent Kit</strong> - переносний метод роботи з ШІ-агентами.
+    <div class="cta">
+      <a class="btn btn-primary" href="../../universal-agent-kit.zip" download><svg class="icon" aria-hidden="true"><use href="#icon-action-download"/></svg>Завантажити kit (.zip)</a>
+      <a class="btn btn-ghost" href="https://github.com/SerZhyAle/universal-agent-kit" target="_blank" rel="noopener">Вихідний код</a>
+    </div>
+    <p class="muted">Kit - MIT · текст - CC BY 4.0 · дистильовано з реального проєкту, без прив'язки до стеку.</p>
+  </div>
+  <section class="tools-family" aria-labelledby="more-tools-heading">
+    <h2 id="more-tools-heading"><span data-l="ru">Другие инструменты SZA</span><span data-l="en">More tools by SZA</span><span data-l="ua">Інші інструменти SZA</span></h2>
+    <nav class="tools-grid" aria-label="More tools by SZA" data-aria="navTools">
+        <a href="https://serzhyale.github.io/FastMediaSorter_mob_v2/" target="_blank" rel="noopener">Fast Media Sorter &amp; Organizer</a>
+        <a href="https://serzhyale.github.io/FastMediaSorter_Lite/" target="_blank" rel="noopener">Fast Media Sorter for Windows</a>
+        <a href="https://serzhyale.github.io/CyrFlip/" target="_blank" rel="noopener">CyrFlip</a>
+        <a href="https://serzhyale.github.io/doc-html-translate/" target="_blank" rel="noopener">doc-html-translate</a>
+        <a href="https://serzhyale.github.io/FileDO/" target="_blank" rel="noopener">FileDO</a>
+        <a href="https://serzhyale.github.io/StreamsPlayer/" target="_blank" rel="noopener">STREAMS Player</a>
+        <a href="https://serzhyale.github.io/OneClickRunner/" target="_blank" rel="noopener">OneClickRunner</a>
+        <a href="https://sza.od.ua" target="_blank" rel="noopener">SZA (hub)</a>
+    </nav>
+  </section>
+  <div class="footer-bottom">
+    <span>&copy; 2026 <a href="https://sza.od.ua" target="_blank" rel="noopener">Serhii Zhyhunenko</a></span>
+    <nav aria-label="Author links" data-aria="navAuthor"><a href="../../privacy.html"><span data-l="ru">Конфиденциальность</span><span data-l="en">Privacy</span><span data-l="ua">Конфіденційність</span></a> &middot; <a href="https://sza.od.ua" target="_blank" rel="noopener">sza.od.ua</a> &middot; <a href="https://github.com/SerZhyAle" target="_blank" rel="noopener">GitHub</a> &middot; <a href="mailto:sza@ukr.net">sza@ukr.net</a></nav>
+  </div>
+  <p class="provenance muted"><span data-l="ru">Собрано по опыту разработки из FastMediaSorter - Android-приложения, которое живёт на этом методе каждый день более года.</span><span data-l="en">Built from hands-on experience with FastMediaSorter - a shipping Android app run on this method every day for over a year.</span><span data-l="ua">Зібрано за досвідом розробки з FastMediaSorter - Android-застосунку, що живе на цьому методі щодня понад рік.</span></p>
+</div></footer>
+<button class="to-top" id="toTop" type="button" aria-label="Back to top" title="Back to top"><svg class="icon" aria-hidden="true"><use href="#icon-nav-scroll-top"/></svg></button>
+<dialog class="search-dialog" id="searchDialog" aria-labelledby="searchTitle">
+  <form method="dialog" class="search-form" id="searchForm">
+    <div class="search-head">
+      <h2 id="searchTitle"><span data-l="ru">Поиск по порталу</span><span data-l="en">Search the portal</span><span data-l="ua">Пошук по порталу</span></h2>
+      <button class="btn btn-ghost btn-sm" type="button" id="searchClose"><span data-l="ru">Закрыть</span><span data-l="en">Close</span><span data-l="ua">Закрити</span></button>
+    </div>
+    <input class="search-input" id="searchInput" type="search" autocomplete="off" spellcheck="false" aria-labelledby="searchTitle" placeholder="Search..">
+    <p class="search-status" id="searchStatus" role="status" aria-live="polite"></p>
+    <ul class="search-results" id="searchResults"></ul>
+  </form>
+</dialog>
+<script src="../../assets/portal.js" defer></script>
+</body>
+</html>

@@ -5,14 +5,20 @@
 - Home: `product-site/SITE-STRUCTURE.md` in the shared contracts catalog; its conformance artifact is the
   run-list `SITE-CHECKLIST.md`, read off the rendered site
 
-This repository publishes the landing only; the portal-tier page set the contract's section 2 table requires
-beyond it (privacy page, guide pages, subject index, glossary, portal home, portal overview, section listings,
-function pages, features showcase, not-found page) does not exist and is held by dated registry exceptions with
-successor tickets - the tier is declared, never claimed below what is published. Conditional types whose
-conditions do not hold (release notes, roadmap, edition or channel page; the install-trust page is out of scope
-for this product) are owed nothing. The one page group is the landing at RU, EN and UA - the core three, nothing
-beyond. The address scheme is one permanent address, the root document, with the locale as the `?lang=<ISO>`
-parameter on it and section anchors never renamed; a file listing every address an outside surface holds is
-owed (rule 8, ticket `SPECIFICATION_SITE_HELD_ADDRESSES.md`). Staying conformant: keep the tier declaration
-true, publish every new page group at the core-three floor (rule 10), leave a forwarder at any moved address,
-and close or renew each exception before its `until` date.
+The site publishes the portal tier's page set: the landing, the privacy page, a portal home that carries a
+titled listing for each section, an overview, guides by task, one function page per capability of the kit,
+a features showcase, a subject index, a glossary, the local search and the not-found page. Conditional types
+whose conditions do not hold (release notes: no dated releases; roadmap; edition or channel page; settings
+reference: no settings screen) are owed nothing, and the install-trust page is out of scope for this product.
+The pages are generated from `tools/portal/` (the capability inventory, the page content, the glossary) by
+`tools/build-portal.ps1`; the inventory is checked against the file tree of `kit/`, so a payload file with no
+page and no recorded exclusion fails the build (rule 12). Every page group is published in RU, EN and UA - the
+core three, nothing beyond - in one document per page, the language being the `?lang=<ISO>` parameter and the
+shared `sza-lang` state, so a missing translation cannot exist (rules 9 to 11). The address scheme is one
+permanent address per page (`portal/<page>.html`, `portal/functions/<id>.html`, `portal/guides/<id>.html`,
+the root documents) with section anchors never renamed; the addresses outside surfaces hold are listed in
+`docs/site-held-addresses.jsonl` and resolved against the page set by `tools/check-site.ps1 -Dimension
+held-addresses` (rule 8). Reach, the sitemap, landmarks and the not-found page are held by the same script
+(`page-set`). Staying conformant: keep the tier declaration true, publish every new page group in the core
+three, leave a forwarder at any moved address, change a capability's page in the same change as the capability,
+and close or renew each registry exception before its `until` date.

@@ -1,0 +1,161 @@
+{
+  "$comment": "The copy of privacy.html (SITE-EXPERIENCE 14, SITE-REPRESENTATION 12). The origin table must equal the third-party origins the pages contact, both ways: tools/check-site.ps1 -Dimension origins compares them. Nothing on any other page may claim more or less about data than this page does.",
+  "title": { "en": "Privacy", "ru": "Конфиденциальность", "ua": "Конфіденційність" },
+  "desc": {
+    "en": "What the Universal Agent Kit site does with a visit: it collects nothing itself, keeps two preferences in your browser and loads fonts from two Google origins.",
+    "ru": "Что сайт Universal Agent Kit делает с вашим визитом: сам ничего не собирает, хранит в браузере две настройки и загружает шрифты с двух серверов Google.",
+    "ua": "Що сайт Universal Agent Kit робить із вашим візитом: сам нічого не збирає, зберігає в браузері два налаштування і завантажує шрифти з двох серверів Google."
+  },
+  "lead": {
+    "en": "This site collects nothing about you. It keeps two preferences in your own browser and asks two font servers for fonts. This page says exactly which, in three languages.",
+    "ru": "Этот сайт ничего о вас не собирает. Он хранит две настройки в вашем собственном браузере и запрашивает шрифты у двух серверов шрифтов. Эта страница говорит точно, у каких, на трёх языках.",
+    "ua": "Цей сайт нічого про вас не збирає. Він зберігає два налаштування у вашому власному браузері й запитує шрифти у двох серверів шрифтів. Ця сторінка каже точно, у яких, трьома мовами."
+  },
+  "cols": {
+    "origin":   { "en": "Origin", "ru": "Источник", "ua": "Джерело" },
+    "purpose":  { "en": "Purpose", "ru": "Назначение", "ua": "Призначення" },
+    "receives": { "en": "What it receives", "ru": "Что получает", "ua": "Що отримує" },
+    "key":      { "en": "Key", "ru": "Ключ", "ua": "Ключ" },
+    "values":   { "en": "Values", "ru": "Значения", "ua": "Значення" }
+  },
+  "sections": [
+    {
+      "id": "scope",
+      "title": { "en": "What this site is", "ru": "Что это за сайт", "ua": "Що це за сайт" },
+      "body": [
+        {
+          "en": "A static site served by GitHub Pages: pages, stylesheets, scripts and a downloadable zip. It has no accounts, no forms, no comments, no cookies, no analytics, no advertising and no tracking script.",
+          "ru": "Статический сайт на GitHub Pages: страницы, таблицы стилей, скрипты и скачиваемый zip. На нём нет учётных записей, форм, комментариев, cookie, аналитики, рекламы и скриптов слежения.",
+          "ua": "Статичний сайт на GitHub Pages: сторінки, таблиці стилів, скрипти й zip для завантаження. На ньому немає облікових записів, форм, коментарів, cookie, аналітики, реклами та скриптів стеження."
+        }
+      ]
+    },
+    {
+      "id": "collects",
+      "title": { "en": "What it collects", "ru": "Что он собирает", "ua": "Що він збирає" },
+      "body": [
+        {
+          "en": "Nothing. The pages send no data anywhere. The only request a page makes of its own is for the search index, to this same site, and only when you open the search. What you type in the search stays in your browser.",
+          "ru": "Ничего. Страницы никуда не отправляют данные. Единственный собственный запрос страницы - за индексом поиска, к этому же сайту, и только когда вы открываете поиск. То, что вы вводите в поиск, остаётся в вашем браузере.",
+          "ua": "Нічого. Сторінки нікуди не надсилають дані. Єдиний власний запит сторінки - за індексом пошуку, до цього ж сайту, і лише тоді, коли ви відкриваєте пошук. Те, що ви вводите в пошук, залишається у вашому браузері."
+        }
+      ]
+    },
+    {
+      "id": "origins",
+      "title": { "en": "Third-party origins", "ru": "Сторонние источники", "ua": "Сторонні джерела" },
+      "body": [
+        {
+          "en": "When a page loads, your browser contacts two servers that are not this site's. They are the whole list:",
+          "ru": "Когда страница загружается, ваш браузер обращается к двум серверам, которые не принадлежат этому сайту. Вот весь список:",
+          "ua": "Коли сторінка завантажується, ваш браузер звертається до двох серверів, які не належать цьому сайту. Ось увесь список:"
+        },
+        {
+          "en": "No other origin is contacted: no analytics, no advertising, no embeds and no release API. What the font servers do with a request is governed by [Google's privacy policy](https://policies.google.com/privacy). If you would rather not contact them, block those two hosts: the pages still work and fall back to system fonts.",
+          "ru": "Никакие другие источники не запрашиваются: ни аналитика, ни реклама, ни встраиваемые материалы, ни API релизов. Что серверы шрифтов делают с запросом, определяет [политика конфиденциальности Google](https://policies.google.com/privacy). Если не хотите обращаться к ним, заблокируйте эти два адреса: страницы продолжат работать и перейдут на системные шрифты.",
+          "ua": "Жодні інші джерела не запитуються: ні аналітика, ні реклама, ні вбудовані матеріали, ні API релізів. Що сервери шрифтів роблять із запитом, визначає [політика конфіденційності Google](https://policies.google.com/privacy). Якщо не хочете звертатися до них, заблокуйте ці дві адреси: сторінки й далі працюватимуть та перейдуть на системні шрифти."
+        }
+      ]
+    },
+    {
+      "id": "storage",
+      "title": { "en": "What stays in your browser", "ru": "Что остаётся в вашем браузере", "ua": "Що залишається у вашому браузері" },
+      "body": [
+        {
+          "en": "Two small values are kept in your browser's local storage so that your choices survive a reload. They never leave your browser.",
+          "ru": "Два небольших значения хранятся в локальном хранилище вашего браузера, чтобы ваш выбор пережил перезагрузку. Они никогда не покидают браузер.",
+          "ua": "Два невеликі значення зберігаються в локальному сховищі вашого браузера, щоб ваш вибір пережив перезавантаження. Вони ніколи не залишають браузер."
+        },
+        {
+          "en": "The same two keys are used by the author's other sites under the same address, so a choice made on one is the choice on the others. An older pair of keys, `uak-lang` and `uak-theme`, is read once if it is present and is never written again. Clearing the site data in your browser removes all of it.",
+          "ru": "Те же два ключа используют другие сайты автора по тому же адресу, поэтому выбор на одном остаётся выбором на остальных. Прежняя пара ключей, `uak-lang` и `uak-theme`, один раз читается, если есть, и больше не записывается. Очистка данных сайта в браузере удаляет всё это.",
+          "ua": "Ті самі два ключі використовують інші сайти автора за тією самою адресою, тому вибір на одному лишається вибором на решті. Попередня пара ключів, `uak-lang` і `uak-theme`, один раз читається, якщо є, і більше не записується. Очищення даних сайту в браузері видаляє все це."
+        }
+      ]
+    },
+    {
+      "id": "hosting",
+      "title": { "en": "Hosting", "ru": "Хостинг", "ua": "Хостинг" },
+      "body": [
+        {
+          "en": "GitHub Pages serves the files. Like any web host, GitHub receives your request, including your IP address, and keeps its own records under [GitHub's privacy statement](https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement). The author runs no analytics or logging of their own on top of it.",
+          "ru": "Файлы отдаёт GitHub Pages. Как и любой веб-хостинг, GitHub получает ваш запрос, включая IP-адрес, и ведёт собственные записи по [заявлению GitHub о конфиденциальности](https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement). Автор не ведёт поверх этого ни собственной аналитики, ни собственных логов.",
+          "ua": "Файли віддає GitHub Pages. Як і будь-який вебхостинг, GitHub отримує ваш запит, зокрема IP-адресу, і веде власні записи за [заявою GitHub про конфіденційність](https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement). Автор не веде поверх цього ні власної аналітики, ні власних логів."
+        }
+      ]
+    },
+    {
+      "id": "downloads",
+      "title": { "en": "The download", "ru": "Скачиваемый файл", "ua": "Файл для завантаження" },
+      "body": [
+        {
+          "en": "`universal-agent-kit.zip` holds plain Markdown files, one JSON settings template and one text file. Nothing in it installs or runs by itself, and it has no telemetry. What your own agent does with the files you give it is governed by that agent's vendor, not by this site.",
+          "ru": "В `universal-agent-kit.zip` лежат обычные Markdown-файлы, один JSON-шаблон настроек и один текстовый файл. Ничто в нём не устанавливается и не запускается само, телеметрии в нём нет. Что ваш агент делает с отданными ему файлами, определяет вендор этого агента, а не этот сайт.",
+          "ua": "У `universal-agent-kit.zip` лежать звичайні Markdown-файли, один JSON-шаблон налаштувань і один текстовий файл. Ніщо в ньому не встановлюється й не запускається саме, телеметрії в ньому немає. Що ваш агент робить із файлами, які йому дали, визначає вендор цього агента, а не цей сайт."
+        }
+      ]
+    },
+    {
+      "id": "links",
+      "title": { "en": "Links to other sites", "ru": "Ссылки на другие сайты", "ua": "Посилання на інші сайти" },
+      "body": [
+        {
+          "en": "The pages link to GitHub, to the author's other sites and to the documentation of agent vendors. Following a link leaves this site, and the other site's own policy applies from there.",
+          "ru": "Страницы ссылаются на GitHub, на другие сайты автора и на документацию вендоров агентов. Переход по ссылке покидает этот сайт, и дальше действует политика того сайта.",
+          "ua": "Сторінки посилаються на GitHub, на інші сайти автора й на документацію вендорів агентів. Перехід за посиланням залишає цей сайт, і далі діє політика того сайту."
+        }
+      ]
+    },
+    {
+      "id": "contact",
+      "title": { "en": "Contact", "ru": "Контакты", "ua": "Контакти" },
+      "body": [
+        {
+          "en": "Questions about this page: sza@ukr.net.",
+          "ru": "Вопросы по этой странице: sza@ukr.net.",
+          "ua": "Питання щодо цієї сторінки: sza@ukr.net."
+        }
+      ]
+    }
+  ],
+  "origins": [
+    {
+      "origin": "fonts.googleapis.com",
+      "purpose": {
+        "en": "Serves the stylesheet that names the two typefaces of the site, Outfit and Plus Jakarta Sans.",
+        "ru": "Отдаёт таблицу стилей с названиями двух шрифтов сайта, Outfit и Plus Jakarta Sans.",
+        "ua": "Віддає таблицю стилів із назвами двох шрифтів сайту, Outfit і Plus Jakarta Sans."
+      },
+      "receives": {
+        "en": "Your IP address and the usual request headers your browser sends. Nothing else is sent to it.",
+        "ru": "Ваш IP-адрес и обычные заголовки запроса, которые отправляет браузер. Больше ничего ему не передаётся.",
+        "ua": "Вашу IP-адресу й звичайні заголовки запиту, які надсилає браузер. Більше нічого йому не передається."
+      }
+    },
+    {
+      "origin": "fonts.gstatic.com",
+      "purpose": {
+        "en": "Serves the font files that the stylesheet points to.",
+        "ru": "Отдаёт файлы шрифтов, на которые указывает таблица стилей.",
+        "ua": "Віддає файли шрифтів, на які вказує таблиця стилів."
+      },
+      "receives": {
+        "en": "Your IP address and the usual request headers your browser sends. Nothing else is sent to it.",
+        "ru": "Ваш IP-адрес и обычные заголовки запроса, которые отправляет браузер. Больше ничего ему не передаётся.",
+        "ua": "Вашу IP-адресу й звичайні заголовки запиту, які надсилає браузер. Більше нічого йому не передається."
+      }
+    }
+  ],
+  "storage": [
+    {
+      "key": "sza-lang",
+      "purpose": { "en": "Your language choice.", "ru": "Выбранный вами язык.", "ua": "Обрана вами мова." },
+      "values": "ru, en, ua"
+    },
+    {
+      "key": "sza-theme",
+      "purpose": { "en": "Your theme choice.", "ru": "Выбранная вами тема.", "ua": "Обрана вами тема." },
+      "values": "dark, light"
+    }
+  ]
+}

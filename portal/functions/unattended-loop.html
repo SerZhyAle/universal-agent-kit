@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en" data-theme="dark" data-root="../../">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Run unattended work as a loop of fresh processes - Universal Agent Kit</title>
+<meta name="description" content="A driver outside the session feeds one work item at a time to a fresh headless process, with state kept in files, so each item starts on an empty context.">
+<link rel="canonical" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/unattended-loop.html">
+<link rel="alternate" hreflang="en" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/unattended-loop.html?lang=en">
+<link rel="alternate" hreflang="ru" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/unattended-loop.html?lang=ru">
+<link rel="alternate" hreflang="uk" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/unattended-loop.html?lang=uk">
+<link rel="alternate" hreflang="x-default" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/unattended-loop.html">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%233fb950'/%3E%3Cpath d='M20 18h24M20 30h24M20 42h16' stroke='%2304130c' stroke-width='5' stroke-linecap='round' fill='none'/%3E%3C/svg%3E">
+<meta name="theme-color" content="#0a0f0a">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Universal Agent Kit">
+<meta property="og:url" content="https://serzhyale.github.io/universal-agent-kit/portal/functions/unattended-loop.html">
+<meta property="og:title" content="Run unattended work as a loop of fresh processes - Universal Agent Kit">
+<meta property="og:description" content="A driver outside the session feeds one work item at a time to a fresh headless process, with state kept in files, so each item starts on an empty context.">
+<meta property="og:image" content="https://serzhyale.github.io/universal-agent-kit/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Run unattended work as a loop of fresh processes - Universal Agent Kit">
+<meta name="twitter:description" content="A driver outside the session feeds one work item at a time to a fresh headless process, with state kept in files, so each item starts on an empty context.">
+<meta name="twitter:image" content="https://serzhyale.github.io/universal-agent-kit/og-image.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Run unattended work as a loop of fresh processes - Universal Agent Kit","description":"A driver outside the session feeds one work item at a time to a fresh headless process, with state kept in files, so each item starts on an empty context.","url":"https://serzhyale.github.io/universal-agent-kit/portal/functions/unattended-loop.html","inLanguage":["en","ru","uk"],"isPartOf":{"@type":"WebSite","name":"Universal Agent Kit","url":"https://serzhyale.github.io/universal-agent-kit/"}}</script>
+<script type="application/json" id="page-i18n">{"t":{"ru":"Пустить работу без присмотра циклом свежих процессов - Universal Agent Kit","en":"Run unattended work as a loop of fresh processes - Universal Agent Kit","ua":"Пустити роботу без нагляду циклом свіжих процесів - Universal Agent Kit"},"d":{"ru":"Драйвер вне сессии отдаёт по одному рабочему элементу свежему headless-процессу, а состояние хранится в файлах, поэтому каждый элемент начинается с пустого контекста.","en":"A driver outside the session feeds one work item at a time to a fresh headless process, with state kept in files, so each item starts on an empty context.","ua":"Драйвер поза сесією віддає по одному робочому елементу свіжому headless-процесу, а стан зберігається у файлах, тож кожен елемент починається з порожнього контексту."},"ui":{"langGroup":{"en":"Language","ru":"Язык","ua":"Мова"},"theme":{"en":"Theme","ru":"Тема","ua":"Тема"},"toLight":{"en":"Switch to light theme","ru":"Включить светлую тему","ua":"Увімкнути світлу тему"},"toDark":{"en":"Switch to dark theme","ru":"Включить тёмную тему","ua":"Увімкнути темну тему"},"toTop":{"en":"Back to top","ru":"Наверх","ua":"Нагору"},"menu":{"en":"Menu","ru":"Меню","ua":"Меню"},"navPortal":{"en":"Portal","ru":"Портал","ua":"Портал"},"navTools":{"en":"More tools by SZA","ru":"Другие инструменты SZA","ua":"Інші інструменти SZA"},"navAuthor":{"en":"Author links","ru":"Ссылки автора","ua":"Посилання автора"},"navSection":{"en":"In this section","ru":"В этом разделе","ua":"У цьому розділі"},"breadcrumb":{"en":"Breadcrumb","ru":"Путь по сайту","ua":"Шлях сайтом"},"searchTitle":{"en":"Search the portal","ru":"Поиск по порталу","ua":"Пошук по порталу"},"searchEmpty":{"en":"Nothing found for","ru":"Ничего не найдено по запросу","ua":"Нічого не знайдено за запитом"},"searchEmptyHelp":{"en":"Browse the subject index instead.","ru":"Откройте предметный указатель.","ua":"Відкрийте предметний покажчик."},"searchCount":{"en":"results","ru":"результатов","ua":"результатів"},"searchFail":{"en":"The search index could not be loaded.","ru":"Не удалось загрузить индекс поиска.","ua":"Не вдалося завантажити індекс пошуку."},"kind.command":{"en":"Slash command","ru":"Slash-команда","ua":"Slash-команда"},"kind.agent":{"en":"Role agent","ru":"Ролевой агент","ua":"Рольовий агент"},"kind.practice":{"en":"Practice","ru":"Практика","ua":"Практика"}}}</script>
+<script>
+/* PAGE-STYLE section 7 pre-paint resolver, on the portfolio's shared keys sza-lang / sza-theme.
+   Language priority: ?lang= in the URL (a shared link wins) > saved choice > browser.
+   The UA switch keys "ua"; the URL, lang and hreflang keep the ISO code "uk". The legacy
+   uak-* keys are read once so a returning reader keeps their choice. */
+(function(){
+  var l, t;
+  try{
+    var q = (location.search.match(/[?&]lang=(ru|en|uk|ua)\b/i) || [])[1];
+    if(q){ l = q.toLowerCase(); }
+    else { l = localStorage.getItem('sza-lang') || localStorage.getItem('uak-lang'); }
+    if(l === 'uk') l = 'ua';
+    if(l){ localStorage.setItem('sza-lang', l); }
+    t = localStorage.getItem('sza-theme') || localStorage.getItem('uak-theme');
+    if(t){ localStorage.setItem('sza-theme', t); }
+  }catch(e){}
+  if(l !== 'ru' && l !== 'en' && l !== 'ua'){ var nav=(navigator.language||'en').toLowerCase(); l = nav.indexOf('ru')===0 ? 'ru' : (nav.indexOf('uk')===0 ? 'ua' : 'en'); }
+  if(t !== 'light' && t !== 'dark'){ t = (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) ? 'light' : 'dark'; }
+  var d = document.documentElement;
+  d.setAttribute('data-lang', l); d.setAttribute('lang', l === 'ua' ? 'uk' : l); d.setAttribute('data-theme', t);
+})();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/sza-kit.css">
+<link rel="stylesheet" href="../../assets/site.css">
+<link rel="stylesheet" href="../../assets/portal.css">
+</head>
+<body>
+<a class="skip-link" href="#main"><span data-l="ru">Перейти к содержимому</span><span data-l="en">Skip to the content</span><span data-l="ua">Перейти до вмісту</span></a>
+<div class="bg-blobs" aria-hidden="true"><div class="blob blob-1"></div><div class="blob blob-2"></div><div class="blob blob-3"></div></div>
+<svg class="icon-sprite" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+  <symbol id="icon-action-download" viewBox="0 0 24 24"><g transform="translate(12 12) scale(.917 .917) translate(-12 -12)"><path d="M19.35,10.04C18.67,6.59 15.64,4 12,4 9.11,4 6.6,5.64 5.35,8.04 2.34,8.36 0,10.91 0,14c0,3.31 2.69,6 6,6h13c2.76,0 5,-2.24 5,-5 0,-2.64 -2.05,-4.78 -4.65,-4.96zM17,13l-5,5 -5,-5h3V9h4v4h3z"/></g></symbol>
+  <symbol id="icon-nav-scroll-top" viewBox="0 0 24 24"><path d="M8 11h3v10h2V11h3l-4-4-4 4zM4 3v2h16V3H4z"/></symbol>
+</svg>
+<header class="site-header portal-header">
+    <a class="brand" href="../../">Universal&nbsp;Agent&nbsp;Kit<span class="dot">.</span></a>
+    <button class="ctl nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="portalNav"><span data-l="ru">Меню</span><span data-l="en">Menu</span><span data-l="ua">Меню</span></button>
+    <nav class="portal-nav" id="portalNav" aria-label="Portal" data-aria="navPortal">
+      <a href="../"><span data-l="ru">Портал</span><span data-l="en">Portal</span><span data-l="ua">Портал</span></a>
+      <a href="../overview.html"><span data-l="ru">Обзор</span><span data-l="en">Overview</span><span data-l="ua">Огляд</span></a>
+      <a href="../showcase.html"><span data-l="ru">Витрина</span><span data-l="en">Showcase</span><span data-l="ua">Вітрина</span></a>
+      <a href="../subjects.html"><span data-l="ru">Предметный указатель</span><span data-l="en">Subject index</span><span data-l="ua">Предметний покажчик</span></a>
+      <a href="../glossary.html"><span data-l="ru">Глоссарий</span><span data-l="en">Glossary</span><span data-l="ua">Глосарій</span></a>
+    </nav>
+    <button class="ctl search-open" id="searchOpen" type="button" aria-haspopup="dialog" aria-controls="searchDialog"><span data-l="ru">Поиск</span><span data-l="en">Search</span><span data-l="ua">Пошук</span><kbd aria-hidden="true">/</kbd></button>
+    <span class="seg" role="group" aria-label="Language" id="langGroup" data-aria="langGroup">
+      <button id="lng-ru" type="button" data-set-lang="ru" aria-pressed="false" aria-label="Русский">RU</button>
+      <button id="lng-en" type="button" data-set-lang="en" aria-pressed="true" aria-label="English">EN</button>
+      <button id="lng-ua" type="button" data-set-lang="ua" aria-pressed="false" aria-label="Українська">UA</button>
+    </span>
+    <button class="theme-btn" id="themeBtn" type="button" title="Theme" aria-label="Theme" aria-pressed="false"><span data-l="ru">Тема</span><span data-l="en">Theme</span><span data-l="ua">Тема</span></button>
+    <a class="btn btn-primary btn-sm" href="../../universal-agent-kit.zip" download>
+      <svg class="icon" aria-hidden="true"><use href="#icon-action-download"/></svg><span data-l="ru">Скачать kit (.zip)</span><span data-l="en">Download kit (.zip)</span><span data-l="ua">Завантажити kit (.zip)</span>
+    </a>
+</header>
+<main id="main" class="page">
+<nav class="crumbs" aria-label="Breadcrumb" data-aria="breadcrumb"><ol><li><a href="../../"><span data-l="ru">Universal Agent Kit</span><span data-l="en">Universal Agent Kit</span><span data-l="ua">Universal Agent Kit</span></a></li><li><a href="../"><span data-l="ru">Портал</span><span data-l="en">Portal</span><span data-l="ua">Портал</span></a></li><li><a href="../#section-parallel"><span data-l="ru">Дисциплина параллельной работы агентов</span><span data-l="en">Parallel-agent discipline</span><span data-l="ua">Дисципліна паралельної роботи агентів</span></a></li><li aria-current="page"><span data-l="ru">Пустить работу без присмотра циклом свежих процессов</span><span data-l="en">Run unattended work as a loop of fresh processes</span><span data-l="ua">Пустити роботу без нагляду циклом свіжих процесів</span></li></ol></nav>
+<header class="page-head">
+<p class="eyebrow"><span class="pill"><span data-l="ru">Практика</span><span data-l="en">Practice</span><span data-l="ua">Практика</span></span> <a href="../#section-parallel"><span data-l="ru">Дисциплина параллельной работы агентов</span><span data-l="en">Parallel-agent discipline</span><span data-l="ua">Дисципліна паралельної роботи агентів</span></a></p>
+<h1><span data-l="ru">Пустить работу без присмотра циклом свежих процессов</span><span data-l="en">Run unattended work as a loop of fresh processes</span><span data-l="ua">Пустити роботу без нагляду циклом свіжих процесів</span></h1>
+<p class="lead prose"><span data-l="ru">Агент не может сбросить собственный <a href="../glossary.html#term-context">контекст</a>, поэтому цикл внутри одной сессии тащит каждый завершённый элемент в следующий: тикет 1 всё ещё в контексте, пока идёт тикет 9, и с каждым элементом прогон становится медленнее и дороже. Сделайте сбросом границу процесса. Kit описывает эту схему и не поставляет скрипт-драйвер.</span><span data-l="en">An agent cannot reset its own <a href="../glossary.html#term-context">context</a>, so a loop that runs inside one session carries every finished item into the next: ticket 1 is still there while ticket 9 runs, and the run gets slower and more expensive with each item. Make the process boundary the reset. The kit describes this shape and ships no driver script.</span><span data-l="ua">Агент не може скинути власний <a href="../glossary.html#term-context">контекст</a>, тому цикл усередині однієї сесії тягне кожен завершений елемент у наступний: тікет 1 усе ще в контексті, поки йде тікет 9, і з кожним елементом прогін стає повільнішим і дорожчим. Зробіть скиданням межу процесу. Kit описує цю схему й не постачає скрипт-драйвер.</span></p>
+</header>
+<article class="fn" data-kind="practice">
+<div class="panels">
+<section class="panel" aria-labelledby="h-situation"><h2 id="h-situation"><span data-l="ru">Когда это нужно</span><span data-l="en">When to reach for it</span><span data-l="ua">Коли це потрібно</span></h2><p class="prose"><span data-l="ru">Очередь рабочих элементов, например тикетов, остаётся работать, пока никто не смотрит.</span><span data-l="en">A queue of work items, such as tickets, is left running while nobody watches.</span><span data-l="ua">Черга робочих елементів, наприклад тікетів, лишається працювати, поки ніхто не дивиться.</span></p></section>
+<section class="panel" aria-labelledby="h-requirements"><h2 id="h-requirements"><span data-l="ru">Требования</span><span data-l="en">Requirements</span><span data-l="ua">Вимоги</span></h2><dl class="req">
+<div><dt><span data-l="ru">Где доступно</span><span data-l="en">Available in</span><span data-l="ua">Де доступно</span></dt><dd><span data-l="ru">Каждая загрузка kit</span><span data-l="en">Every download of the kit</span><span data-l="ua">Кожне завантаження kit</span></dd></div>
+<div><dt><span data-l="ru">К чему обращается</span><span data-l="en">What it touches</span><span data-l="ua">До чого звертається</span></dt><dd><ul class="chips"><li class="pill"><span data-l="ru">Читает файлы проекта</span><span data-l="en">Reads the files of your project</span><span data-l="ua">Читає файли проєкту</span></li><li class="pill"><span data-l="ru">Правит файлы проекта</span><span data-l="en">Edits files in your project</span><span data-l="ua">Змінює файли проєкту</span></li><li class="pill"><span data-l="ru">Запускает команды (проверки, git)</span><span data-l="en">Runs commands (checks, git)</span><span data-l="ua">Запускає команди (перевірки, git)</span></li></ul></dd></div>
+<div><dt><span data-l="ru">Работает с</span><span data-l="en">Works with</span><span data-l="ua">Працює з</span></dt><dd><span data-l="ru">Любой агент, который читает и пишет ваши файлы</span><span data-l="en">Any agent that reads and writes your files</span><span data-l="ua">Будь-який агент, що читає й пише ваші файли</span></dd></div>
+<div><dt><span data-l="ru">Где выполняются шаги</span><span data-l="en">Where the steps happen</span><span data-l="ua">Де виконуються кроки</span></dt><dd><span data-l="ru">Чат вашего агента и ваши собственные файлы. Ни то ни другое не интерфейс этого сайта, поэтому шаги описаны текстом, а не скриншотами.</span><span data-l="en">Your agent's chat and your own files. Neither is an interface of this site, so the steps are text and not screenshots.</span><span data-l="ua">Чат вашого агента і ваші власні файли. Ні те, ні інше не є інтерфейсом цього сайту, тому кроки описано текстом, а не скриншотами.</span></dd></div>
+<div><dt><span data-l="ru">Где это лежит в kit</span><span data-l="en">Where it lives in the kit</span><span data-l="ua">Де це лежить у kit</span></dt><dd><code>docs/PARALLEL.md</code></dd></div>
+</dl></section>
+<div class="note warn" role="note"><div class="tag"><span data-l="ru">Прежде чем начать</span><span data-l="en">Before you start</span><span data-l="ua">Перш ніж почати</span></div><p><span data-l="ru">Драйвер, не отличающий «сбой» от «не пробовали», либо бесконечно перезапускает завершённую работу, либо теряет работу при первом падении. Состояние, лежащее только в контексте, теряется на каждой границе.</span><span data-l="en">A driver that cannot tell &quot;failed&quot; from &quot;not attempted&quot; either re-runs finished work forever or drops work on the first crash. State kept only in the context is lost at every boundary.</span><span data-l="ua">Драйвер, що не відрізняє «збій» від «не пробували», або нескінченно перезапускає завершену роботу, або губить роботу при першому падінні. Стан, що лежить лише в контексті, губиться на кожній межі.</span></p></div>
+<section class="panel wide" aria-labelledby="h-steps"><h2 id="h-steps"><span data-l="ru">Шаги</span><span data-l="en">Steps</span><span data-l="ua">Кроки</span></h2><ol class="steps">
+<li><span class="prose"><span data-l="ru">Вынесите драйвер за пределы сессии. Он берёт из очереди следующий рабочий элемент, запускает его в свежем <a href="../glossary.html#term-headless-process">headless-процессе</a> и повторяет, чем бы ни закончился запуск. Каждый элемент начинается с пустого контекста, и сброс нельзя забыть.</span><span data-l="en">Put the driver outside the session. It takes the next work item off the queue, runs it in a fresh <a href="../glossary.html#term-headless-process">headless process</a>, and repeats however that run ended. Every item starts on an empty context, and the reset cannot be forgotten.</span><span data-l="ua">Винесіть драйвер за межі сесії. Він бере з черги наступний робочий елемент, запускає його у свіжому <a href="../glossary.html#term-headless-process">headless-процесі</a> і повторює, чим би не закінчився запуск. Кожен елемент починається з порожнього контексту, і скидання не можна забути.</span></span></li>
+<li><span class="prose"><span data-l="ru">Держите всё состояние, нужное циклу, в файле: кэш пропусков (что уже пробовали и повторять нельзя), корзины отчёта (что удалось, что упало, что пропущено и почему) и позицию в очереди. Состояние в контексте не переживает границу, в этом и смысл её пересечения.</span><span data-l="en">Keep every piece of state the loop needs in a file: the skip cache (what was already attempted and must not be retried), the report buckets (what succeeded, what failed, what was skipped and why) and the queue position. State in the context does not survive the boundary, which is the point of crossing it.</span><span data-l="ua">Тримайте весь стан, потрібний циклу, у файлі: кеш пропусків (що вже пробували й повторювати не можна), кошики звіту (що вдалося, що впало, що пропущено і чому) та позицію в черзі. Стан у контексті не переживає межу, в цьому й сенс її перетину.</span></span></li>
+<li><span class="prose"><span data-l="ru">Научите драйвер различать «сбой» и «не пробовали» и записывайте исход каждого элемента до перехода дальше, а не после старта следующего.</span><span data-l="en">Make the driver distinguish &quot;failed&quot; from &quot;not attempted&quot;, and write each item's outcome before moving on, not after the next item starts.</span><span data-l="ua">Навчіть драйвер розрізняти «збій» і «не пробували» та записуйте результат кожного елемента до переходу далі, а не після старту наступного.</span></span></li>
+<li><span class="prose"><span data-l="ru">Повторяйте, как бы элемент ни завершился. Падение, лимит или отказ - всё равно конец этого элемента, а цикл, который останавливается на первом плохом элементе, ждёт человека, которого рядом нет.</span><span data-l="en">Repeat regardless of how an item exited. A crash, a limit or a refusal is still an end of that item, and a loop that stops at the first bad item waits for a human who is not there.</span><span data-l="ua">Повторюйте, як би елемент не завершився. Падіння, ліміт чи відмова - усе одно кінець цього елемента, а цикл, що зупиняється на першому поганому елементі, чекає на людину, якої поруч немає.</span></span></li>
+<li><span class="prose"><span data-l="ru">Используйте то, что даёт граница. Модель можно выбирать под каждый элемент, а не фиксировать на весь прогон, и можно запускать несколько экземпляров одновременно; очередь блокировок, описанная в <a href="budget-gate.html">бюджетном шлюзе</a>, не даёт им мешать друг другу.</span><span data-l="en">Use what the boundary buys. You can choose the model per item instead of fixing one for the whole run, and you can run several instances at once; the lock queue described in <a href="budget-gate.html">the budget gate</a> keeps them off each other.</span><span data-l="ua">Використовуйте те, що дає межа. Модель можна обирати під кожен елемент, а не фіксувати на весь прогін, і можна запускати кілька екземплярів одночасно; черга блокувань, описана в <a href="budget-gate.html">бюджетному шлюзі</a>, не дає їм заважати одне одному.</span></span></li>
+<li><span class="prose"><span data-l="ru">Выбор стека оставьте за собой: какой формат очереди, какая оболочка, какой вызов headless-режима. Интерактивный цикл оставьте для работы, за которой смотрит человек, а всё, что работает без присмотра, лучше отдавать драйверу.</span><span data-l="en">Leave the stack choices to yourself: which queue format, which shell, which headless invocation. Keep the interactive loop for work a human is watching, and prefer the driver for anything left running unattended.</span><span data-l="ua">Вибір стеку лишіть за собою: який формат черги, яка оболонка, який виклик headless-режиму. Інтерактивний цикл лишіть для роботи, за якою стежить людина, а все, що працює без нагляду, краще віддавати драйверові.</span></span></li>
+</ol></section>
+<div class="note outcome" role="note"><div class="tag"><span data-l="ru">Что вы должны увидеть</span><span data-l="en">What you should see</span><span data-l="ua">Що ви маєте побачити</span></div><p><span data-l="ru">Каждый элемент прошёл в своём процессе с пустым контекстом, а файлы показывают, что удалось, что упало, что пропущено и почему и где стоит очередь. Плохой элемент завершил свой запуск, и драйвер пошёл к следующему.</span><span data-l="en">Each item ran in its own process on an empty context, and the files show what succeeded, what failed, what was skipped and why, and where the queue stands. A bad item ended its own run and the driver went on to the next.</span><span data-l="ua">Кожен елемент пройшов у своєму процесі з порожнім контекстом, а файли показують, що вдалося, що впало, що пропущено і чому та де стоїть черга. Поганий елемент завершив свій запуск, і драйвер пішов до наступного.</span></p></div>
+<section class="panel" aria-labelledby="h-tips"><h2 id="h-tips"><span data-l="ru">Советы</span><span data-l="en">Tips</span><span data-l="ua">Поради</span></h2><ul class="tips">
+<li class="prose"><span data-l="ru">Самонакладываемое «остановлюсь на пороге» не гарантирует сброса: оно зависит от того, что кто-то заметит порог и кто-то потом перезапустит. Граница процесса не зависит ни от того, ни от другого.</span><span data-l="en">A self-imposed &quot;I will stop at a threshold&quot; cannot promise the reset, because it depends on somebody noticing the threshold and somebody restarting afterwards. The process boundary depends on neither.</span><span data-l="ua">Самонакладене «зупинюся на порозі» не гарантує скидання: воно залежить від того, що хтось помітить поріг і хтось потім перезапустить. Межа процесу не залежить ні від того, ні від іншого.</span></li>
+<li class="prose"><span data-l="ru">Нет headless-режима в вашей среде? Оставьте цикл внутри сессии и сделайте остановку явной: останавливайтесь на заданном пороге и возвращайте ручку возобновления, чтобы перезапуск человеком был нажатием клавиши, а не восстановлением по кусочкам.</span><span data-l="en">No headless mode in your runtime? Keep the in-session loop and make the halt explicit: stop at a stated threshold and hand back a resume handle, so the human's restart is a keystroke rather than a reconstruction.</span><span data-l="ua">Немає headless-режиму у вашому середовищі? Лишіть цикл усередині сесії й зробіть зупинку явною: зупиняйтеся на заданому порозі й повертайте ручку відновлення, щоб перезапуск людиною був натисканням клавіші, а не відновленням по шматках.</span></li>
+<li class="prose"><span data-l="ru">В Claude Code headless-запуск - это <code>claude -p</code>, и <code>CLAUDE.md</code> из kit называет его родным драйвером для <code>/backlog</code> без присмотра, навыка, который разбирает очередь тикетов. См. <a href="backlog.html">разобрать очередь тикетов без вашего участия</a>.</span><span data-l="en">On Claude Code a headless run is <code>claude -p</code>, and the kit's <code>CLAUDE.md</code> names it as the native driver for an unattended <code>/backlog</code>, the skill that drains a ticket queue. See <a href="backlog.html">drain the ticket queue unattended</a>.</span><span data-l="ua">У Claude Code headless-запуск - це <code>claude -p</code>, і <code>CLAUDE.md</code> з kit називає його рідним драйвером для <code>/backlog</code> без нагляду, навички, що розбирає чергу тікетів. Див. <a href="backlog.html">розібрати чергу тікетів без вашої участі</a>.</span></li>
+<li class="prose"><span data-l="ru">Обоснование цикла процессов по затратам, с единственным измерением за ним, лежит в <a href="budget-gate.html">бюджетном шлюзе</a>. Если несколько экземпляров пишут в одну рабочую папку, прочтите и <a href="parallel-writers.html">как запустить нескольких пишущих агентов, не потеряв работу</a>.</span><span data-l="en">The cost case for looping the process, with the one measurement behind it, is in <a href="budget-gate.html">the budget gate</a>. If several instances write to one workspace, read <a href="parallel-writers.html">how to run several writing agents without losing work</a> too.</span><span data-l="ua">Обґрунтування циклу процесів за витратами, з єдиним виміром за ним, лежить у <a href="budget-gate.html">бюджетному шлюзі</a>. Якщо кілька екземплярів пишуть в одну робочу теку, прочитайте й <a href="parallel-writers.html">як запустити кількох агентів, що пишуть, не втративши роботи</a>.</span></li>
+<li class="prose"><span data-l="ru">Третья часть того же документа, о читающих, которые распараллеливаются свободно, потому что стоят только токенов, - <a href="fan-out-readers.html">запустить независимые поиски параллельно и проверить результат</a>.</span><span data-l="en">The third part of the same document, on readers that fan out freely because they cost only tokens, is <a href="fan-out-readers.html">run independent lookups in parallel and check what comes back</a>.</span><span data-l="ua">Третя частина того самого документа, про тих, що лише читають і розпаралелюються вільно, бо коштують лише токенів, - <a href="fan-out-readers.html">запустити незалежні пошуки паралельно й перевірити результат</a>.</span></li>
+</ul></section>
+<section class="panel" aria-labelledby="h-related"><h2 id="h-related"><span data-l="ru">Связанные функции</span><span data-l="en">Related functions</span><span data-l="ua">Пов'язані функції</span></h2><ul class="fn-list">
+<li><a href="parallel-writers.html"><span data-l="ru">Запустить нескольких пишущих агентов, не потеряв работу</span><span data-l="en">Run several writing agents without losing work</span><span data-l="ua">Запустити кількох агентів, що пишуть, не втративши роботи</span></a><span class="fn-pitch"><span data-l="ru">Дайте каждому пишущему агенту свою рабочую копию или отдайте команды над всем деревом одному владельцу, чтобы stash, reset или checkout не стёрли молча чужие правки.</span><span data-l="en">Give each writing agent its own checkout, or give one owner the tree-wide commands, so no stash, reset or checkout silently erases another agent's edits.</span><span data-l="ua">Дайте кожному агентові, що пише, власну робочу копію або віддайте команди над усім деревом одному власникові, щоб stash, reset чи checkout не стерли мовчки чужі правки.</span></span></li>
+<li><a href="fan-out-readers.html"><span data-l="ru">Запустить независимые поиски параллельно и проверить результат</span><span data-l="en">Run independent lookups in parallel and check what comes back</span><span data-l="ua">Запустити незалежні пошуки паралельно й перевірити результат</span></a><span class="fn-pitch"><span data-l="ru">Запускайте независимые поиски и помощников, которые только читают, вместе, пройдя бюджетный шлюз, а то, что вернула волна, пусть перепроверит оркестратор.</span><span data-l="en">Start independent searches and read-only helpers together once the budget gate is passed, and let the orchestrator re-validate what the wave returns.</span><span data-l="ua">Запускайте незалежні пошуки й помічників, що лише читають, разом, пройшовши бюджетний шлюз, а те, що повернула хвиля, нехай перевірить оркестратор.</span></span></li>
+<li><a href="budget-gate.html"><span data-l="ru">Назначить бюджет перед параллельным запуском агентов</span><span data-l="en">Set a budget before you fan out</span><span data-l="ua">Призначити бюджет перед паралельним запуском агентів</span></a><span class="fn-pitch"><span data-l="ru">Оцените число агентов и примерную цену в токенах, держите потолок около 6-8 агентов и просите явное GO выше него.</span><span data-l="en">Estimate the agent count and the rough token cost, keep a ceiling of about 6-8 agents, and ask for an explicit GO above it.</span><span data-l="ua">Оцініть кількість агентів і приблизну ціну в токенах, тримайте стелю близько 6-8 агентів і просіть явне GO вище неї.</span></span></li>
+<li><a href="backlog.html"><span data-l="ru">Разобрать очередь тикетов без вашего участия и получить один отчёт в конце</span><span data-l="en">Drain the ticket queue unattended and get one report at the end</span><span data-l="ua">Розібрати чергу тікетів без вашої участі й отримати один звіт наприкінці</span></a><span class="fn-pitch"><span data-l="ru">Берёт тикет с наивысшим приоритетом из тех, что агент может двигать сам, прогоняет конвейер, повторяет, а всё, что требует человека, откладывает в один отчёт.</span><span data-l="en">Picks the highest-priority ticket the agent can move alone, runs the pipeline on it, repeats, and defers everything that needs a human to one report.</span><span data-l="ua">Бере тікет із найвищим пріоритетом серед тих, що агент може рухати сам, проганяє конвеєр, повторює, а все, що потребує людини, відкладає в один звіт.</span></span></li>
+</ul></section>
+<section class="panel wide" aria-labelledby="h-terms"><h2 id="h-terms"><span data-l="ru">Термины на этой странице</span><span data-l="en">Terms on this page</span><span data-l="ua">Терміни на цій сторінці</span></h2><ul class="chips">
+<li><a class="pill" href="../glossary.html#term-headless-process"><span data-l="ru">Headless-процесс</span><span data-l="en">Headless process</span><span data-l="ua">Headless-процес</span></a></li>
+<li><a class="pill" href="../glossary.html#term-context"><span data-l="ru">Контекст</span><span data-l="en">Context</span><span data-l="ua">Контекст</span></a></li>
+<li><a class="pill" href="../glossary.html#term-ticket"><span data-l="ru">Тикет</span><span data-l="en">Ticket</span><span data-l="ua">Тікет</span></a></li>
+</ul></section>
+</div>
+<nav class="pager" aria-label="In this section" data-aria="navSection"><a class="pager-prev" rel="prev" href="fan-out-readers.html"><span class="pager-dir"><span data-l="ru">Назад</span><span data-l="en">Previous</span><span data-l="ua">Назад</span></span><span><span data-l="ru">Запустить независимые поиски параллельно и проверить результат</span><span data-l="en">Run independent lookups in parallel and check what comes back</span><span data-l="ua">Запустити незалежні пошуки паралельно й перевірити результат</span></span></a></nav>
+</article>
+</main>
+<footer class="site-footer"><div class="container">
+  <div data-l="ru">
+    <strong>Universal Agent Kit</strong> - переносимый метод работы с ИИ-агентами.
+    <div class="cta">
+      <a class="btn btn-primary" href="../../universal-agent-kit.zip" download><svg class="icon" aria-hidden="true"><use href="#icon-action-download"/></svg>Скачать kit (.zip)</a>
+      <a class="btn btn-ghost" href="https://github.com/SerZhyAle/universal-agent-kit" target="_blank" rel="noopener">Исходный код</a>
+    </div>
+    <p class="muted">Kit - MIT · текст - CC BY 4.0 · выжимка из реального проекта, без привязки к стеку.</p>
+  </div>
+  <div data-l="en">
+    <strong>Universal Agent Kit</strong> - a portable method for working with AI agents.
+    <div class="cta">
+      <a class="btn btn-primary" href="../../universal-agent-kit.zip" download><svg class="icon" aria-hidden="true"><use href="#icon-action-download"/></svg>Download kit (.zip)</a>
+      <a class="btn btn-ghost" href="https://github.com/SerZhyAle/universal-agent-kit" target="_blank" rel="noopener">Source code</a>
+    </div>
+    <p class="muted">Kit is MIT · prose is CC BY 4.0 · distilled from a real project, stack-agnostic.</p>
+  </div>
+  <div data-l="ua">
+    <strong>Universal Agent Kit</strong> - переносний метод роботи з ШІ-агентами.
+    <div class="cta">
+      <a class="btn btn-primary" href="../../universal-agent-kit.zip" download><svg class="icon" aria-hidden="true"><use href="#icon-action-download"/></svg>Завантажити kit (.zip)</a>
+      <a class="btn btn-ghost" href="https://github.com/SerZhyAle/universal-agent-kit" target="_blank" rel="noopener">Вихідний код</a>
+    </div>
+    <p class="muted">Kit - MIT · текст - CC BY 4.0 · дистильовано з реального проєкту, без прив'язки до стеку.</p>
+  </div>
+  <section class="tools-family" aria-labelledby="more-tools-heading">
+    <h2 id="more-tools-heading"><span data-l="ru">Другие инструменты SZA</span><span data-l="en">More tools by SZA</span><span data-l="ua">Інші інструменти SZA</span></h2>
+    <nav class="tools-grid" aria-label="More tools by SZA" data-aria="navTools">
+        <a href="https://serzhyale.github.io/FastMediaSorter_mob_v2/" target="_blank" rel="noopener">Fast Media Sorter &amp; Organizer</a>
+        <a href="https://serzhyale.github.io/FastMediaSorter_Lite/" target="_blank" rel="noopener">Fast Media Sorter for Windows</a>
+        <a href="https://serzhyale.github.io/CyrFlip/" target="_blank" rel="noopener">CyrFlip</a>
+        <a href="https://serzhyale.github.io/doc-html-translate/" target="_blank" rel="noopener">doc-html-translate</a>
+        <a href="https://serzhyale.github.io/FileDO/" target="_blank" rel="noopener">FileDO</a>
+        <a href="https://serzhyale.github.io/StreamsPlayer/" target="_blank" rel="noopener">STREAMS Player</a>
+        <a href="https://serzhyale.github.io/OneClickRunner/" target="_blank" rel="noopener">OneClickRunner</a>
+        <a href="https://sza.od.ua" target="_blank" rel="noopener">SZA (hub)</a>
+    </nav>
+  </section>
+  <div class="footer-bottom">
+    <span>&copy; 2026 <a href="https://sza.od.ua" target="_blank" rel="noopener">Serhii Zhyhunenko</a></span>
+    <nav aria-label="Author links" data-aria="navAuthor"><a href="../../privacy.html"><span data-l="ru">Конфиденциальность</span><span data-l="en">Privacy</span><span data-l="ua">Конфіденційність</span></a> &middot; <a href="https://sza.od.ua" target="_blank" rel="noopener">sza.od.ua</a> &middot; <a href="https://github.com/SerZhyAle" target="_blank" rel="noopener">GitHub</a> &middot; <a href="mailto:sza@ukr.net">sza@ukr.net</a></nav>
+  </div>
+  <p class="provenance muted"><span data-l="ru">Собрано по опыту разработки из FastMediaSorter - Android-приложения, которое живёт на этом методе каждый день более года.</span><span data-l="en">Built from hands-on experience with FastMediaSorter - a shipping Android app run on this method every day for over a year.</span><span data-l="ua">Зібрано за досвідом розробки з FastMediaSorter - Android-застосунку, що живе на цьому методі щодня понад рік.</span></p>
+</div></footer>
+<button class="to-top" id="toTop" type="button" aria-label="Back to top" title="Back to top"><svg class="icon" aria-hidden="true"><use href="#icon-nav-scroll-top"/></svg></button>
+<dialog class="search-dialog" id="searchDialog" aria-labelledby="searchTitle">
+  <form method="dialog" class="search-form" id="searchForm">
+    <div class="search-head">
+      <h2 id="searchTitle"><span data-l="ru">Поиск по порталу</span><span data-l="en">Search the portal</span><span data-l="ua">Пошук по порталу</span></h2>
+      <button class="btn btn-ghost btn-sm" type="button" id="searchClose"><span data-l="ru">Закрыть</span><span data-l="en">Close</span><span data-l="ua">Закрити</span></button>
+    </div>
+    <input class="search-input" id="searchInput" type="search" autocomplete="off" spellcheck="false" aria-labelledby="searchTitle" placeholder="Search..">
+    <p class="search-status" id="searchStatus" role="status" aria-live="polite"></p>
+    <ul class="search-results" id="searchResults"></ul>
+  </form>
+</dialog>
+<script src="../../assets/portal.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,124 @@
+{
+  "id": "spec-dev",
+  "title": {
+    "en": "Implement a tactical plan one verified step at a time",
+    "ru": "Выполнить тактический план по одному проверенному шагу",
+    "ua": "Виконати тактичний план по одному перевіреному кроку"
+  },
+  "pitch": {
+    "en": "`/spec-dev` runs the plan step by step, checks each step before marking it done and hard-stops on the first failure or ambiguity instead of guessing forward.",
+    "ru": "`/spec-dev` идёт по плану шаг за шагом, проверяет каждый шаг до отметки о готовности и жёстко останавливается на первом сбое или неоднозначности, не угадывая.",
+    "ua": "`/spec-dev` іде за планом крок за кроком, перевіряє кожен крок до позначки про готовність і жорстко зупиняється на першому збої чи неоднозначності, не вгадуючи."
+  },
+  "lead": {
+    "en": "`/spec-dev` reads the `INDEX.md` and phase files of a [plan](term:plan) and follows each `Prompt for implementer:` in dependency order. A step is marked `[x] done` only when its check passes in this run. When every phase is done, the ticket moves to `Implemented`, or to `BlockNeedUserTest` if manual testing is part of the acceptance.",
+    "ru": "`/spec-dev` читает `INDEX.md` и файлы фаз [плана](term:plan) и идёт по каждому `Prompt for implementer:` в порядке зависимостей. Шаг получает отметку `[x] done` только если его проверка прошла в этом запуске. Когда все фазы выполнены, тикет переходит в `Implemented` или, если в приёмку входит ручное тестирование, в `BlockNeedUserTest`.",
+    "ua": "`/spec-dev` читає `INDEX.md` і файли фаз [плану](term:plan) та йде за кожним `Prompt for implementer:` у порядку залежностей. Крок отримує позначку `[x] done` лише якщо його перевірка пройшла в цьому запуску. Коли всі фази виконано, тікет переходить у `Implemented` або, якщо до приймання входить ручне тестування, у `BlockNeedUserTest`."
+  },
+  "situation": {
+    "en": "A ticket sits at `Tactical` or `In Progress` and you want it built or continued: 'spec-dev', 'implement this plan', 'continue the ticket'. A run that stopped picks up from the first step that is not done.",
+    "ru": "Тикет стоит на `Tactical` или `In Progress`, и его нужно собрать или продолжить: «spec-dev», «реализуй этот план», «продолжи тикет». Остановленный запуск продолжается с первого невыполненного шага.",
+    "ua": "Тікет стоїть на `Tactical` або `In Progress`, і його треба зібрати чи продовжити: «spec-dev», «реалізуй цей план», «продовж тікет». Зупинений запуск продовжується з першого невиконаного кроку."
+  },
+  "warning": {
+    "en": "It never guesses. On an ambiguous prompt, a failed step or phase check, a [read-only zone](term:read-only-zone), a [size budget](term:size-budget) violation, an unspecified schema or dependency-injection change, a missing symbol, an unmet dependency, an external-system touch, a localization gap or a missing external dependency, it stops and reports.",
+    "ru": "Он ничего не угадывает и останавливается с докладом на неоднозначной подсказке, проваленной проверке шага или фазы, [зоне только для чтения](term:read-only-zone), нарушении [бюджета размера](term:size-budget), недоописанной смене схемы или связок, отсутствующем символе, невыполненной зависимости, обращении к внешней системе, пробеле в локализации и отсутствии внешней зависимости.",
+    "ua": "Він нічого не вгадує і зупиняється з доповіддю на неоднозначній підказці, проваленій перевірці кроку чи фази, [зоні лише для читання](term:read-only-zone), порушенні [бюджету розміру](term:size-budget), недоописаній зміні схеми чи зв'язків, відсутньому символі, невиконаній залежності, зверненні до зовнішньої системи, прогалині в локалізації та відсутності зовнішньої залежності."
+  },
+  "steps": [
+    {
+      "en": "Run `/spec-dev T0042` to continue from the first step that is not done. Variants: `--phase NN` for all remaining steps of one phase, `--step NN.M` for a single step, `--dry-run` to print the plan and write nothing, `--prove-smoke` to run `/prove` after all phases and before the status flips.",
+      "ru": "Запустите `/spec-dev T0042`, чтобы продолжить с первого невыполненного шага. Варианты: `--phase NN` для всех оставшихся шагов одной фазы, `--step NN.M` для одного шага, `--dry-run`, чтобы напечатать план и ничего не записывать, `--prove-smoke`, чтобы после всех фаз и до смены статуса запустить `/prove`.",
+      "ua": "Запустіть `/spec-dev T0042`, щоб продовжити з першого невиконаного кроку. Варіанти: `--phase NN` для всіх решти кроків однієї фази, `--step NN.M` для одного кроку, `--dry-run`, щоб надрукувати план і нічого не записувати, `--prove-smoke`, щоб після всіх фаз і до зміни статусу запустити `/prove`."
+    },
+    {
+      "en": "It checks the status first. `Tactical` and `In Progress` proceed, and the first executed step moves `Tactical` to `In Progress`. `Draft` and `Approved` abort because there is no tactical folder: run `/spec-tech` first, after `/spec <ID>` for a `Draft`, which `/spec-tech` refuses. `Implemented` and `Verified` abort, the feature is closed. `BlockByOtherTask`, `BlockQuestions` and `BlockExternal` abort until resolved. `BlockNeedUserTest` stops with a note: you must confirm the manual result first.",
+      "ru": "Он проверяет статус. `Tactical` и `In Progress` идут дальше, первый выполненный шаг переводит `Tactical` в `In Progress`. `Draft` и `Approved` прерывают работу: тактического каталога нет, нужен `/spec-tech` (`Draft` сперва `/spec <ID>`: `/spec-tech` его отклоняет). `Implemented` и `Verified` прерывают: фича закрыта. `BlockByOtherTask`, `BlockQuestions` и `BlockExternal` прерывают, пока блокировка не снята. `BlockNeedUserTest` останавливает с заметкой: подтвердите результат ручной проверки.",
+      "ua": "Він перевіряє статус. `Tactical` і `In Progress` ідуть далі, перший виконаний крок переводить `Tactical` в `In Progress`. `Draft` і `Approved` переривають роботу: тактичного каталогу немає, потрібен `/spec-tech` (`Draft` спершу `/spec <ID>`: `/spec-tech` його відхиляє). `Implemented` і `Verified` переривають: фічу закрито. `BlockByOtherTask`, `BlockQuestions` і `BlockExternal` переривають, доки блокування не знято. `BlockNeedUserTest` зупиняє із нотаткою: підтвердьте результат ручної перевірки."
+    },
+    {
+      "en": "For `Partial` or `Broken`, run `/spec-fix` or apply the audit's action items, then re-read the status; if it is still broken, it lists the remaining FAILs and stops. Every pre-implementation blocker in `INDEX.md` must be ticked, otherwise the run aborts with the blocker text.",
+      "ru": "При `Partial` или `Broken` запустите `/spec-fix` или примените пункты действий аудита и перечитайте статус; если он всё ещё сломан, команда перечисляет оставшиеся FAIL и останавливается. Каждый блокер до реализации в `INDEX.md` должен быть отмечен, иначе запуск прерывается с текстом блокера.",
+      "ua": "За `Partial` або `Broken` запустіть `/spec-fix` чи застосуйте пункти дій аудиту й перечитайте статус; якщо він усе ще зламаний, команда перелічує решту FAIL і зупиняється. Кожен блокер до реалізації в `INDEX.md` має бути відмічений, інакше запуск переривається з текстом блокера."
+    },
+    {
+      "en": "Before each step it re-reads the phase file (a step no longer `[ ]` or `[~]` is skipped as pre-resolved), confirms the `Depends on:` step is `[x] done` and that every symbol the prompt names exists at the stated path. An unresolved placeholder aborts and asks for a spec update; if it needs your input, the status becomes `BlockQuestions`. A read-only zone aborts, and an over-budget file is first backed up to the [scratch](term:scratch) directory.",
+      "ru": "Перед каждым шагом он перечитывает файл фазы (шаг, который уже не `[ ]` и не `[~]`, пропускается как решённый заранее), убеждается, что шаг из `Depends on:` отмечен `[x] done` и что каждый символ из подсказки существует по указанному пути. Неразрешённый заполнитель прерывает работу и требует обновить спеку; если нужен ваш ответ, статус становится `BlockQuestions`. Зона только для чтения прерывает работу, а файл сверх бюджета сначала копируется в каталог [черновиков](term:scratch).",
+      "ua": "Перед кожним кроком він перечитує файл фази (крок, що вже не `[ ]` і не `[~]`, пропускається як вирішений заздалегідь), переконується, що крок із `Depends on:` відмічений `[x] done` і що кожен символ із підказки існує за вказаним шляхом. Нерозв'язаний заповнювач перериває роботу й вимагає оновити спеку; якщо потрібна ваша відповідь, статус стає `BlockQuestions`. Зона лише для читання перериває роботу, а файл понад бюджет спершу копіюється до каталогу [чернеток](term:scratch)."
+    },
+    {
+      "en": "It sets the step to `[~] in progress` and applies the edit scoped strictly to the prompt: no surrounding refactor, no extra comments, no unrelated import cleanup, no name the prompt does not state. Then it runs the step's `Verification:` predicates. All PASS makes the step `[x] done` with a Step Log line; any FAIL leaves it at `[~]`, appends the FAIL note and stops hard.",
+      "ru": "Он ставит шагу `[~] in progress` и вносит правку строго в рамках подсказки: без рефакторинга вокруг, без лишних комментариев, без чистки посторонних импортов, без имён, которых нет в подсказке. Затем запускает предикаты `Verification:` этого шага. Все PASS - шаг получает `[x] done` и строку в Step Log; любой FAIL оставляет `[~]`, дописывает заметку о провале и жёстко останавливает работу.",
+      "ua": "Він ставить кроку `[~] in progress` і вносить правку суворо в межах підказки: без рефакторингу довкола, без зайвих коментарів, без чистки сторонніх імпортів, без імен, яких немає в підказці. Потім запускає предикати `Verification:` цього кроку. Усі PASS - крок отримує `[x] done` і рядок у Step Log; будь-який FAIL лишає `[~]`, дописує нотатку про провал і жорстко зупиняє роботу."
+    },
+    {
+      "en": "When a phase's steps are done it runs each phase done criterion, including the narrowest meaningful check the phase names (a compile or type-check, a targeted test, or the build only when the phase touches packaging, resources or wiring). Exit 0 ticks the box; non-zero appends the output tail and stops. Only when every box is ticked is the phase marked Done in `INDEX.md`.",
+      "ru": "Когда шаги фазы выполнены, он проверяет каждый критерий готовности фазы, включая самую узкую осмысленную проверку, которую называет фаза (компиляция или проверка типов, точечный тест или полная сборка, только если фаза затрагивает упаковку, ресурсы или связки). Код 0 ставит отметку; ненулевой дописывает хвост вывода и останавливает работу. Только когда отмечены все пункты, фаза помечается в `INDEX.md` как Done.",
+      "ua": "Коли кроки фази виконано, він перевіряє кожен критерій готовності фази, зокрема найвужчу змістовну перевірку, яку називає фаза (компіляція чи перевірка типів, точковий тест або повна збірка, лише якщо фаза зачіпає пакування, ресурси чи зв'язки). Код 0 ставить позначку; ненульовий дописує хвіст виводу й зупиняє роботу. Лише коли відмічено всі пункти, фаза позначається в `INDEX.md` як Done."
+    },
+    {
+      "en": "If manual testing is part of the acceptance, the last in-scope phase gets the verification tags first: one at each changed-flow entry across all phases, as the final code edits, before the phase check, so one run validates code and tags. With `--prove-smoke`, `/prove --build` then runs once after all phases, and its verdict decides whether the status may flip (see the tips).",
+      "ru": "Если ручное тестирование входит в приёмку, последняя фаза в объёме сначала получает теги проверки: по одному на каждом входе изменённого потока во всех фазах, последними правками кода, до проверки фазы, чтобы один запуск проверил и код, и теги. С `--prove-smoke` после всех фаз один раз запускается `/prove --build`, и его вердикт решает, можно ли менять статус (см. советы).",
+      "ua": "Якщо ручне тестування входить до приймання, остання фаза в обсязі спершу отримує теги перевірки: по одному на кожному вході зміненого потоку в усіх фазах, останніми правками коду, до перевірки фази, щоб один запуск перевірив і код, і теги. З `--prove-smoke` після всіх фаз один раз запускається `/prove --build`, і його вердикт вирішує, чи можна змінювати статус (див. поради)."
+    },
+    {
+      "en": "The status becomes `Implemented` with a date or, when manual testing is part of the acceptance, `BlockNeedUserTest` with a note on what to verify and a `## Manual checks` section in the strategic spec, one `[ ]` line per thing a human must see. Then it runs `/spec-check`, unless the status went to `BlockNeedUserTest`: that stops and awaits the manual result, or runs `/prove` if a target is available.",
+      "ru": "Статус становится `Implemented` с датой или, если в приёмку входит ручное тестирование, `BlockNeedUserTest` с заметкой, что проверить, и разделом `## Manual checks` в стратегической спеке: по строке `[ ]` на всё, что должен увидеть человек. Затем запускается `/spec-check`, если только статус не стал `BlockNeedUserTest`: тогда работа останавливается и ждёт ручного результата либо запускает `/prove`, если есть цель.",
+      "ua": "Статус стає `Implemented` із датою або, якщо до приймання входить ручне тестування, `BlockNeedUserTest` із нотаткою, що перевірити, і розділом `## Manual checks` у стратегічній спеці: по рядку `[ ]` на все, що має побачити людина. Потім запускається `/spec-check`, хіба що статус став `BlockNeedUserTest`: тоді робота зупиняється й чекає на ручний результат або запускає `/prove`, якщо є ціль."
+    }
+  ],
+  "outcome": {
+    "en": "Every step of the plan is `[x] done` with a Step Log line, every phase is Done and the ticket stands at `Implemented`, or at `BlockNeedUserTest` with a note on what to test and a `## Manual checks` section. If the run stopped, the failing step is left at `[~]` and the reason is written down.",
+    "ru": "Каждый шаг плана отмечен `[x] done` и имеет строку в Step Log, каждая фаза Done, а тикет стоит на `Implemented` или на `BlockNeedUserTest` с заметкой, что проверить, и разделом `## Manual checks`. Если запуск остановился, провалившийся шаг остаётся на `[~]`, а причина записана.",
+    "ua": "Кожен крок плану позначено `[x] done` і має рядок у Step Log, кожна фаза Done, а тікет стоїть на `Implemented` або на `BlockNeedUserTest` із нотаткою, що перевірити, і розділом `## Manual checks`. Якщо запуск зупинився, провалений крок лишається на `[~]`, а причину записано."
+  },
+  "tips": [
+    {
+      "en": "`--prove-smoke` acts on the verdict of one `/prove --build` run after all phases. PASS proceeds. DEFECT or COULD NOT VERIFY cancels the status flip and leaves `In Progress`, since an unreached target proves nothing. NOT APPLICABLE proceeds and is recorded as no scenario in this configuration, not as a pass.",
+      "ru": "`--prove-smoke` действует по вердикту одного запуска `/prove --build` после всех фаз. PASS - идём дальше. DEFECT или COULD NOT VERIFY отменяют смену статуса и оставляют `In Progress`, потому что недостижимая цель ничего не доказывает. NOT APPLICABLE - идём дальше, но записывается, что в этой конфигурации сценария нет, а не что проверка пройдена.",
+      "ua": "`--prove-smoke` діє за вердиктом одного запуску `/prove --build` після всіх фаз. PASS - ідемо далі. DEFECT або COULD NOT VERIFY скасовують зміну статусу й лишають `In Progress`, бо недосяжна ціль нічого не доводить. NOT APPLICABLE - ідемо далі, але записується, що в цій конфігурації сценарію немає, а не що перевірку пройдено."
+    },
+    {
+      "en": "This skill never runs `git commit`, `push` or `rebase`: committing is the job of `/git`. Steps are sized to be independently committable, so you or `/git` can commit per step or per phase once the work is in.",
+      "ru": "Этот навык никогда не выполняет `git commit`, `push` и `rebase`: коммиты - работа `/git`. Шаги нарезаны так, чтобы их можно было коммитить независимо, поэтому вы или `/git` можете коммитить по шагу или по фазе, когда работа внесена.",
+      "ua": "Ця навичка ніколи не виконує `git commit`, `push` і `rebase`: коміти - робота `/git`. Кроки нарізано так, щоб їх можна було комітити незалежно, тож ви або `/git` можете комітити по кроку чи по фазі, коли роботу внесено."
+    },
+    {
+      "en": "Verification tags belong only to `BlockNeedUserTest`: never at `Implemented`, never per step, never after the final build. Removal is the job of `/spec-check` on the `Verified` transition.",
+      "ru": "Теги проверки относятся только к `BlockNeedUserTest`: никогда на `Implemented`, никогда по шагам, никогда после финальной сборки. Снимает их `/spec-check` при переходе в `Verified`.",
+      "ua": "Теги перевірки стосуються лише `BlockNeedUserTest`: ніколи на `Implemented`, ніколи по кроках, ніколи після фінальної збірки. Знімає їх `/spec-check` під час переходу у `Verified`."
+    },
+    {
+      "en": "When a step orphans code, resources or dependencies, the remnant is deleted in the same step. Before deleting anything with zero references, search the plan directory for active-ticket scaffolding so another ticket's in-flight work survives. A broken repo helper script that a step needs gets fixed, not worked around.",
+      "ru": "Если шаг оставляет без владельца код, ресурсы или зависимости, остаток удаляется в том же шаге. Перед удалением того, на что нет ссылок, поищите в каталоге планов заготовки активных тикетов, чтобы работа другого тикета не пропала. Сломанный вспомогательный скрипт репозитория, нужный шагу, чинят, а не обходят.",
+      "ua": "Якщо крок залишає без власника код, ресурси чи залежності, залишок видаляється в тому самому кроці. Перед видаленням того, на що немає посилань, пошукайте в каталозі планів заготовки активних тікетів, щоб робота іншого тікета не зникла. Зламаний допоміжний скрипт репозиторію, потрібний кроку, лагодять, а не обходять."
+    },
+    {
+      "en": "The Step Log is append-only: never overwritten, and never one batched update for several steps. A step is `[x]` only when every predicate returned PASS in the current run, not when it was intended to.",
+      "ru": "Step Log только дописывается: его не переписывают и не обновляют одной пачкой за несколько шагов. Шаг получает `[x]` только когда каждый предикат вернул PASS в текущем запуске, а не когда это было задумано.",
+      "ua": "Step Log лише дописується: його не переписують і не оновлюють однією пачкою за кілька кроків. Крок отримує `[x]` лише коли кожен предикат повернув PASS у поточному запуску, а не коли це було задумано."
+    },
+    {
+      "en": "A step's closure runs once for the whole step, not per file: add its files to the ticket's one changelog entry (if the project keeps one), regenerate the index or catalog once if a public interface changed, and run the narrowest meaningful check.",
+      "ru": "Завершение шага выполняется один раз на весь шаг, а не по файлам: добавьте его файлы в единственную запись журнала изменений тикета (если проект его ведёт), один раз перегенерируйте индекс или каталог, если изменился публичный интерфейс, и запустите самую узкую осмысленную проверку.",
+      "ua": "Завершення кроку виконується один раз на весь крок, а не по файлах: додайте його файли до єдиного запису журналу змін тікета (якщо проєкт його веде), один раз перегенеруйте індекс чи каталог, якщо змінився публічний інтерфейс, і запустіть найвужчу змістовну перевірку."
+    },
+    {
+      "en": "User-facing doc updates run after the build and never trigger a rebuild; [`/surfaces`](fn:surfaces) lists which ones a user-visible change owes.",
+      "ru": "Обновления документации для пользователя идут после сборки и никогда не вызывают пересборку; какие из них требует изменение, заметное пользователю, перечисляет [`/surfaces`](fn:surfaces).",
+      "ua": "Оновлення документації для користувача йдуть після збірки й ніколи не викликають перезбирання; які з них потребує зміна, помітна користувачеві, перелічує [`/surfaces`](fn:surfaces)."
+    },
+    {
+      "en": "A comment the edit warrants is written in `<ARTIFACT_LANGUAGE>`, explains why, and covers only non-obvious logic. If the project has several form-factor variants, the guard before each edit confirms that the step covers the counterpart of the variant it edits.",
+      "ru": "Комментарий, который правка действительно требует, пишется на языке `<ARTIFACT_LANGUAGE>`, объясняет зачем и касается только неочевидной логики. Если у проекта несколько вариантов форм-фактора, проверка перед каждой правкой убеждается, что шаг охватывает парный вариант того, что он правит.",
+      "ua": "Коментар, якого правка справді потребує, пишеться мовою `<ARTIFACT_LANGUAGE>`, пояснює навіщо і стосується лише неочевидної логіки. Якщо проєкт має кілька варіантів форм-фактора, перевірка перед кожною правкою пересвідчується, що крок охоплює парний варіант того, що він править."
+    }
+  ],
+  "related": ["spec-tech", "spec-check", "spec-fix", "prove", "spec-lifecycle"],
+  "terms": ["plan", "ticket", "status", "block-status", "read-only-zone", "size-budget", "scratch"],
+  "keywords": {
+    "en": ["implement the plan", "execute the plan", "continue the ticket", "step by step", "hard stop", "Tactical to Implemented", "verification per step", "--prove-smoke"],
+    "ru": ["реализовать план", "выполнить план", "продолжить тикет", "шаг за шагом", "жёсткая остановка", "от Tactical до Implemented", "проверка каждого шага", "--prove-smoke"],
+    "ua": ["реалізувати план", "виконати план", "продовжити тікет", "крок за кроком", "жорстка зупинка", "від Tactical до Implemented", "перевірка кожного кроку", "--prove-smoke"]
+  }
+}

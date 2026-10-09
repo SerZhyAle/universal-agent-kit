@@ -1,0 +1,10 @@
+{
+  "id": "research-index",
+  "term": { "en": "Research index (code index)", "ru": "Индекс для поиска (индекс кода)", "ua": "Індекс для пошуку (індекс коду)" },
+  "def": {
+    "en": "A list of a project's units - classes, modules and files, or tables and fields, or sections, terms and owners - with the location and a short role of each. The agent queries it before it greps. A generated index is regenerated after changes and never hand-edited; a declared register is checked in both directions: every record has a file, every file has a record.",
+    "ru": "Список единиц проекта - классов, модулей и файлов, либо таблиц и полей, либо разделов, терминов и владельцев - с местом и короткой ролью каждой. Агент обращается к нему до поиска по тексту. Сгенерированный индекс перегенерируют после изменений и не правят вручную; объявленный реестр проверяют в обе стороны: у каждой записи есть файл, у каждого файла есть запись.",
+    "ua": "Список одиниць проєкту - класів, модулів і файлів, або таблиць і полів, або розділів, термінів і власників - з місцем і короткою роллю кожної. Агент звертається до нього до пошуку по тексту. Згенерований індекс перегенеровують після змін і не правлять вручну; оголошений реєстр перевіряють в обидва боки: у кожного запису є файл, у кожного файлу є запис."
+  },
+  "see": ["memory", "context"]
+}

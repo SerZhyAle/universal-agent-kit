@@ -1,0 +1,10 @@
+{
+  "id": "spec",
+  "term": { "en": "Spec", "ru": "Спека", "ua": "Спека" },
+  "def": {
+    "en": "The strategic document of a ticket: the problem, goals, constraints, open questions, risks and done criteria, with no class names or file paths. Written by `/spec` (which can also expand an existing `Draft` stub in place), it is the contract that the finished work is audited against.",
+    "ru": "Стратегический документ тикета: проблема, цели, ограничения, открытые вопросы, риски и критерии готовности, без имён классов и путей к файлам. Его пишет `/spec` (он же может развернуть на месте готовую заглушку `Draft`), и именно против него аудируется готовая работа.",
+    "ua": "Стратегічний документ тікета: проблема, цілі, обмеження, відкриті питання, ризики та критерії готовності, без назв класів і шляхів до файлів. Його пише `/spec` (він же може розгорнути на місці наявну заглушку `Draft`), і саме проти нього аудитується готова робота."
+  },
+  "see": ["ticket", "plan"]
+}

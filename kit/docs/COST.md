@@ -18,7 +18,7 @@ long, so both look like the place to cut. Mined over the reference corpus, neith
   cached-input spend, nearly all of them long unattended pipeline runs that compacted repeatedly
   instead of resetting.
 
-Two consequences are worth stating out loud, because both contradict the reflex:
+Three consequences are worth stating out loud, because all three contradict the reflex:
 
 - **"Answer more briefly" is not a cost lever - but it is a latency lever.** Output is roughly a
   ninth of the bill, so brevity is a legibility decision and must be argued as one. It is, however,
@@ -30,6 +30,12 @@ Two consequences are worth stating out loud, because both contradict the reflex:
   preamble by 2.5% and moved the bill by 0.23%, two orders of magnitude below the corpus's own daily
   variance and therefore unmeasurable by construction. Write each directive at the length that makes
   it hold, and buy the savings from session boundaries instead (`Context hygiene`, below).
+- **Cutting the process is not a speed lever.** When agent work feels slow, the gates look like the
+  cause. Measured over the window 2026-08-14 to 2026-08-28: process machinery - the gates and the
+  bookkeeping around them - was **27.5% of tool calls and 16.8% of wall time**, so removing every
+  gate caps the speed gain near **1.2x**; spec prose was **3.3% of generated tokens**, so trimming
+  templates barely moves the clock. Process is not where the time goes - what the model writes is
+  (the first bullet). Keep a gate that earns its place, and buy speed with shorter turns.
 
 Culling artifacts is still worth doing, for the reader's sanity and the agent's signal-to-noise. Just
 not on the token argument.
@@ -54,9 +60,16 @@ Scope is a budget too. Give a subagent only the tools its job needs: a read-only
 investigator gets read/search, never edit or UI-automation; an implementer gets the editor,
 not the deploy keys. Beyond safety, unused capability costs real overhead - an attached tool
 server (MCP or similar) can spin up its own process and context for every agent that carries
-it, so a reader with automation tools enabled is pure waste. The kit's role briefs declare
-their tool lists in frontmatter; keep that discipline when you author new ones
-(see `AUTHORING.md`).
+it, so a reader with automation tools enabled is pure waste. A read-only role should declare
+its tool list in its frontmatter, as the kit's `solution-researcher` does - in Claude Code, a role
+brief with no list inherits every tool the session has. Keep that discipline when you author new
+ones (see `AUTHORING.md`).
+
+**Audit plugins, tool servers and connectors by measured use, not by how useful they sound.** Each
+installed one is paid on every session - its process, its startup, its descriptions in the preamble
+of every request. Count real invocations over a few weeks of transcripts, with the corrections in
+"Measure before you rule" below, and remove what nobody called. Do it for tidiness, not for the
+bill: next to session boundaries the saving is small.
 
 ## Context hygiene
 
@@ -66,6 +79,10 @@ their tool lists in frontmatter; keep that discipline when you author new ones
   (2026-08-05, one machine, one month): a **median request of 215k tokens against a 28.7k floor**,
   with **29% of requests past 300k**. The floor is what a task actually needed; the rest is history
   riding along.
+- **Report context as a magnitude - "about 400k tokens" - never as a fraction of a window.** The
+  reader cannot see your window, and on a large one a percentage reads small at exactly the moment
+  the replay cost peaks. Where something warns on it, band by whichever of size and fill is worse,
+  so a small window is not silently exempt.
 - The context window fills fast, and cost is accumulated context multiplied by turns - inside one
   unbroken block it is quadratic, because every turn re-reads everything before it. Between unrelated
   tasks, start fresh (compact / clear) rather than dragging a stale context forward. Argue this on
@@ -78,7 +95,10 @@ their tool lists in frontmatter; keep that discipline when you author new ones
   the queue, runs it in a **fresh headless process**, and repeats however that run ended - so every
   item starts on an empty context and the reset cannot be forgotten. That is the structural version
   of the rule above, and it is the shape `/backlog` should take once a run is genuinely unattended;
-  an in-session loop over N tickets carries ticket 1 into ticket 9. Measured on one machine over a
+  an in-session loop over N tickets carries ticket 1 into ticket 9. In Claude Code the fresh process
+  is a headless `claude -p` run with a non-interactive permission mode (for example
+  `--permission-mode dontAsk`, which denies whatever would have prompted), so an item cannot hang on
+  a question nobody is there to answer. Measured on one machine over a
   week, before such a driver existed: **83% of usage was spent above 150k tokens of carried
   context** - the shape an endless interactive loop produces by construction. (That threshold is
   that machine's window, not a recommendation; the transferable part is measuring where your own
@@ -93,6 +113,13 @@ their tool lists in frontmatter; keep that discipline when you author new ones
   stays short.
 
 ## Waiting is not free either - never fire-and-forget, never poll
+
+**Where the foreground ends: at your runtime's own foreground timeout.** A command that can outlive
+it runs in the background, because a foreground job that hits the timeout loses its output. A
+command that finishes inside it runs in the foreground: backgrounding it adds a turn plus the
+waiting below, and a fast check's verdict belongs in the turn that asked for it. Take the number
+from the runtime, never pick one of your own - a one-sided "background the slow ones" rule decays
+into backgrounding everything.
 
 Two opposite failures sit around a check you launched and cannot see finish, and they are the most
 expensive pair of habits in this whole document.
@@ -110,10 +137,8 @@ The shape that costs neither:
 
 - **Wait on a condition your runtime can actually signal** - a notification, a blocking wait, a
   completion event - rather than on a clock you re-read.
-- **Have the background work write its verdict where a reader can branch on it**: a marker file with
-  a closed set of outcome values, written with write-then-rename so a reader never catches it
-  half-written. Never in an exit code - a backgrounded task's exit code is the exit of its launch
-  line, so a refused run comes back green.
+- **Have the background work write its verdict where a reader can branch on it**, never in its exit
+  code - the rule and its marker-file shape are in `VALIDATION.md` "A green can lie".
 - **If you genuinely must poll, poll at the rate the thing actually changes.** A check that takes
   eight minutes deserves one look at eight minutes, not eight looks at one.
 - **And say what you are waiting for**, in one line, each time. A silent wait and a hung run look
@@ -215,15 +240,13 @@ file, which shell, which liveness API is a stack decision. The shape is the tran
   variable, a device that is not attached - all of it must fail the caller *before* it takes a place
   in the queue. Check it afterwards and a run that could never have succeeded holds the lock for its
   full timeout while everybody behind it waits for a result that was impossible from the start.
-- **A background waiter reports its verdict in a marker file, never in its exit code.** A
-  backgrounded task's exit code is the exit of the last command in its launch line, so a refused
-  build comes back looking green - the `VALIDATION.md` "A green can lie" failure, in its most
-  expensive form. Give the marker a closed set of outcome values the reader can branch on
-  exhaustively, and write it with write-then-rename so a reader never catches it half-written.
+- **A background waiter reports its verdict the way `VALIDATION.md` "A green can lie" prescribes**,
+  never in its exit code - a refused lock that comes back green is that failure in its most
+  expensive form.
 
 Every window, ceiling and grace period such a queue needs is a **tuning constant, not a
-measurement**: set it from your own contention and state it once, the way `COST.md` asks you to
-state the fan-out ceiling. The one number above is an observation, which is why it travels.
+measurement**: set it from your own contention and state it once, the way the fan-out gate above
+asks you to state its ceiling. The numbers above are observations, which is why they travel.
 
 One placement rule the queue depends on and cannot enforce: in a multi-worktree checkout the lock
 path must resolve from the **shared** git directory, or every worktree holds its own lock and
@@ -232,15 +255,25 @@ who owns whole-tree commands, how the work merges back - are in `PARALLEL.md`.
 
 ## Model-tier routing - per skill, and per spawn
 
-Route each skill to the cheapest model that still does its job well:
+Route each skill to the cheapest model that still does its job well. One question draws the line:
+**would a merely plausible answer be wrong here?** Yes - design, diagnosis, review - is judgement
+and goes to the strong tier; no - mechanical transformation, formatting, repetition - is procedure
+and goes to the cheap one. In the kit's terms:
 
 - **Mechanical leaf skills** - `/quick`, `/caveman-commit`, a status flip, a changelog line -
   run fine on a small, cheap model.
-- **Diagnosis, review, orchestration, and spec design** - `/spec`, `/spec-check`, `/review`, the
+- **Diagnosis, review, orchestration, and spec design** - `/spec`, `/spec-check`, `/critique`, the
   rd-lead orchestrator - stay on a strong model. A cheap model here costs more in wrong turns than
   it ever saves in tokens.
 - The routing is a dial, not a law: when a "mechanical" skill meets real ambiguity, it escalates
   rather than guessing cheaply.
+
+Per-skill routing is something you configure; the kit does not do it for you. **It ships its four
+agents pinned and its skills unpinned**, so every skill runs on whatever model the session runs. A
+skill's frontmatter can name a model where your runtime honours one (Claude Code documents a `model`
+field). Whatever you pin, **confirm it took effect from the session's own record of which model
+ran** - the transcript, not the frontmatter you wrote - because a pin that silently does not route
+looks identical to one that does.
 
 Then route the **spawn**, which is the half everyone skips. A harness's built-in
 general-purpose agent has no definition file, so it **cannot carry a model pin at all** - it takes
@@ -264,8 +297,7 @@ quote any tier number: a tier split is an *output* figure while cached input oft
 bill, so a tier saving is not a bill saving without both; and the honest re-measurement is a fresh
 mining pass taken after the rule has been live, not the same pass read again.
 
-This is the operational half of the "Any model" idea - the method does not change with model
-power, but *which* model you point at *which* skill does.
+The method does not change with model power; *which* model you point at *which* skill does.
 
 ## Verification is not free either
 
@@ -290,5 +322,6 @@ that tracks *value*, not *activity*.
   journal rule; they still pay.
 - One writer at a time, always? Skip the lock queue - there is nothing to serialize. Adopt it the
   first time two agents contend, not before.
-- Map the tiers to the models you actually have (frontier / mid / small-or-local), per the
-  "Any model" section of the method.
+- Map the tiers to the models you actually have (frontier / mid / small-or-local). The tier names
+  in the role briefs are Claude Code's; the split - strong for judgement, light for mechanics - is
+  the part that travels.

@@ -46,7 +46,7 @@ hook will do to them:
 
 | Verb | Event shape | What the caller experiences |
 | --- | --- | --- |
-| refuses | before a tool call | the call does not happen; a non-zero exit and the reason on the error stream |
+| refuses | before a tool call | the call does not happen; the runtime's blocking signal and the reason on the error stream |
 | rewrites | before a tool call | the call happens with corrected input, plus a notice saying what changed |
 | injects | at session start | context arrives that was never requested |
 | observes | after a tool call | the result stands; context may be attached to it |
@@ -71,11 +71,22 @@ The same instinct applies one level earlier: **prefer making a name work over gu
 missing interpreter or an unresolvable command is cheaper to put on `PATH` than to guard, because
 no hook can fix and retry a failed command - a guard can only refuse it before it starts.
 
+## The invariant lives in the script; the hook is a convenience
+
+A hook protects one runtime - the one that reads its registration. A teammate on another agent
+tool, a CI job, a person at the shell: none of them pass through it. A refusal inside the script or
+the gate itself reaches every caller. So when a rule must hold, make the script refuse, and let the
+hook only move that refusal earlier or correct the input on the way in. A rule that lives only in a
+hook holds only in the sessions that happen to load it.
+
 ## Contracts, by verdict
 
-**Refusing.** Non-zero exit blocks, zero allows, and the reason goes to the error stream where the
-caller reads it. **Fail open on any parse, path or IO error** - a schema change in your runtime
-must never make a tool unusable.
+**Refusing.** The runtime's blocking signal blocks, a clean exit allows, and the reason goes to the
+error stream where the caller reads it. The blocking signal is one specific exit code, not "any
+failure": learn which one before you write the guard, because a guard that exits with the wrong
+non-zero code lets every call through and looks exactly like a guard that never needed to fire
+(Claude Code's value is under `Claude Code specifics`, below). **Fail open on any parse, path or IO
+error** - a schema change in your runtime must never make a tool unusable.
 
 **Rewriting.** Two mechanics are easy to get wrong, and both are worth establishing by probing your
 runtime rather than guessing:
@@ -139,14 +150,14 @@ must-reach and must-skip cases (see below) and run them in the shell that actual
 
 ```sh
 #!/bin/sh
-# PreToolUse guard. Non-zero exit blocks the call; the reason goes to stderr.
+# PreToolUse guard. Only the runtime's blocking exit code blocks; the reason goes to stderr.
 input=$(cat) || exit 0                      # fail open: no input, no verdict
 case "$input" in *"$TRIGGER_SUBSTRING"*) ;; *) exit 0 ;; esac   # cheap pre-filter
 target=$(printf '%s' "$input" | jq -r '.tool_input.command // empty' 2>/dev/null) || exit 0
 [ -n "$target" ] || exit 0                  # fail open: field absent or renamed
 if is_forbidden "$target"; then
   echo "Blocked: <what is wrong> - do <the specific allowed alternative> instead." >&2
-  exit 2                                    # the only path that blocks
+  exit 2                                    # the blocking signal: the only path that blocks
 fi
 exit 0
 ```
@@ -193,6 +204,31 @@ Note what is *not* in any of them: a conditional escape hatch. Every bypass is u
 is the off switch - a guard that can only be disabled by knowing a trick gets disabled by other
 means, and then nobody knows it is off.
 
+## Claude Code specifics
+
+Everything else here is runtime-neutral. If your runtime is Claude Code, this is what the shapes
+map to, read 2026-10-09 in the current docs - check them, events and fields change:
+<https://code.claude.com/docs/en/hooks> and <https://code.claude.com/docs/en/permissions>.
+
+- **Exit 2 blocks; exit 1 does not.** This is the trap. Exit 2 stops the tool call and hands stderr
+  to the model as the reason. Exit 1, the conventional Unix failure, is a non-blocking error: the
+  call proceeds and stderr is shown to the user only. A guard written with `exit 1` never blocks,
+  and nothing says so. Exit 0 allows.
+- **JSON on stdout can carry the decision instead.** Exit 0 and print an object whose
+  `hookSpecificOutput` holds `permissionDecision` (`allow`, `deny` or `ask`) to refuse or to ask,
+  `updatedInput` to correct the input (the complete object, per the rewriting contract above), or
+  `additionalContext` to inform - the channel the model reads.
+- **A hook's allow never overrides a permission rule.** A matching deny rule still blocks and a
+  matching ask rule still prompts, whatever the hook returned. The reverse holds: a hook that
+  blocks stops the call before an allow rule is consulted.
+- **A hook can live in three places:** a settings file, a skill's or an agent's frontmatter, or a
+  plugin. Each is a registration, and each gets an inventory row.
+- **A Stop hook can refuse to let a turn end** until a check passes - the native place for a "done"
+  gate, and the refusing-the-end-of-a-turn contract above. It answers with `decision: "block"` and
+  a `reason` the model reads; the exit-zero and silence-means-allow rules still hold.
+- **Prompt-submit and session-start hooks speak in plain text:** their stdout on exit 0 is added to
+  what the model sees. Other events' stdout goes to a debug log.
+
 ## The hook inventory
 
 **Registering, removing or re-registering a hook requires editing an inventory in the same
@@ -204,8 +240,8 @@ The inventory is a **table** with the fixed verdict vocabulary above, one row pe
 which event, which verdict, what it does, and which rule it enforces. Write it before you write the
 second hook, not after the sixth.
 
-If you put a gate over that inventory, two limits keep it from crying wolf, and both were learned
-by shipping the versions without them:
+If you put a gate over that inventory, four limits keep it from crying wolf, and the first
+two were learned by shipping the versions without them:
 
 - **Find the table by its heading, not by a filename.** The first version hard-coded a path and
   reported a missing inventory against a repo that had a complete one.
@@ -237,23 +273,73 @@ that always exits zero cannot be asserted on its exit code at all - assert its o
 The rule the pre-filter must never break: **it may only skip calls the real check would have
 allowed.** The hook stays authoritative.
 
+## Verify the copy the runtime loads, not the source you edited
+
+A runtime may run a hook from an installed copy (a plugin cache, a settings file in a user profile)
+and may read its registrations only when a session starts. Editing the source changes nothing until
+that copy changes, and retiring a hand-wired registration "because the new copy has it now" silently
+disarms the guard while the copy lags behind. Prove it where it runs: in a fresh session, send a
+payload the hook must act on, and watch it act.
+
 ## Why a false PASS is the worst thing a hook can cause
 
-A gate that cannot run and is backgrounded still reports success, so a refused build comes back
-green. That is the `VALIDATION.md` "A green can lie" failure, reached through the enforcement layer
-rather than through the build - and the false green is what gets read and reported. The rule lives
-there; it is named here because a hook is a common way to arrive at it.
+A hook is a common way to reach the backgrounded false green that `VALIDATION.md` "A green can lie"
+describes, and the rule - with its fix - lives there.
 
-## The one already in this kit, deliberately not wired
+## Four recipes, by intent
 
-`.claude/settings.json` carries a `//hooks-example` key describing a prompt-submit nudge for the
-skill-routing ladder (`CLAUDE.md` section 4). It is **left as an example, not wired**, for two
-reasons that are worth keeping apart. The mechanical one: a hooks entry pointing at a script you
-have not written yet fails on every prompt - the preference order in miniature, since a broken guard
-costs more than the miss it prevents. The measured one: that hook's reach was zero on the project
-that built it (above), so it is shipped as a **worked example of the population question**, not as a
-recommendation to wire it. If your own work is entered by hand rather than by a driver, it may earn
-its place. Count first.
+Described, not shipped: the kit wires no hook, and each of these gets its inventory row the day you
+register it. Every window size and threshold is yours to set from your own measurement - a number
+copied from another project is a guess. A fifth, the routing nudge, is the worked example below.
+
+- **A fire-and-forget guard** (refuses, before a shell call). Refuse to background a short command
+  whose whole product is its verdict - a check, a gate - because a backgrounded verdict is read late
+  or never (`docs/COST.md` "Waiting is not free either"). Name those commands in a literal list, not
+  a heuristic: a guard that over-blocks gets switched off. Let the call through when the same line
+  also runs a genuinely long job. Pre-filter on the background flag, so a foreground call never
+  starts the interpreter.
+- **A large-file read window** (rewrites, before a file read). A read with no range, on a file past
+  your size threshold, becomes a read of a window plus a notice saying so - the preference order
+  above, since the correct input is knowable. A read carrying an explicit range always passes,
+  however large: reading a whole file on purpose is legitimate work.
+- **A context warning at prompt submit** (warns). Recover the last request's token total from the
+  tail of the session transcript and, past your threshold, print one line with the size as a
+  magnitude (`docs/COST.md` "Context hygiene"). Set the threshold above your median request, or it
+  fires on every other prompt and trains the reader to ignore it. It sees only the turns a person
+  types; an unattended run resets at the process boundary instead. Always exit 0.
+- **A session-start injection of the short rules page** (injects). Put the few rules that must
+  never break on one short page and inject it when a session starts, so one page serves every
+  project that opts in instead of being copied into each rules file. Fire only where a marker says
+  the project opted in, and keep the page short - it is billed on every request. Always exit 0.
+
+## The worked example - a prompt-submit nudge, deliberately not wired
+
+The kit wires no hook. The one it documents in full is a prompt-submit nudge for the skill-routing ladder in
+the rules file (`AGENTS.md`), and this section is its only home. It is **left as an example, not
+wired**, for two reasons that are worth keeping apart. The mechanical one: a hooks entry pointing at
+a script you have not written yet fails on every prompt - the preference order in miniature, since a
+broken guard costs more than the miss it prevents. The measured one: that hook's reach was zero on
+the project that built it (the population question, above), so it is a **worked example of the
+population question**, not a recommendation to wire it. If your own work is entered by hand rather
+than by a driver, it may earn its place. Count first.
+
+If it does, the Claude Code registration is one settings entry, pointing at a script you write:
+
+```json
+{
+  "hooks": {
+    "UserPromptSubmit": [
+      { "hooks": [ { "type": "command", "command": "${CLAUDE_PROJECT_DIR}/.claude/hooks/prompt-nudge.sh" } ] }
+    ]
+  }
+}
+```
+
+The script: match the prompt against a short, high-precision list of micro-task patterns, veto on a
+list of real-work patterns, drop anything past a length ceiling, print one line naming `/quick` and
+`/fix`, and **always exit 0**. Advisory only - a hook that refuses a prompt costs more on one false
+fire than it saves on many hits. The script and its inventory row land in the same change as the
+registration.
 
 ## Why this is a document, not a vibe
 

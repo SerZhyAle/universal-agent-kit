@@ -1,0 +1,114 @@
+{
+  "id": "implementer",
+  "title": {
+    "en": "Have a planned change built exactly as the plan says",
+    "ru": "Поручить запланированную работу исполнителю, который держится плана",
+    "ua": "Доручити заплановану роботу виконавцю, що тримається плану"
+  },
+  "pitch": {
+    "en": "A mid-tier maker executes a plan step, a fix with a known cause or tests in your project's structure, and reports each check as `expected | actual`.",
+    "ru": "Исполнитель среднего уровня выполняет шаг плана, исправление с известной причиной или тесты по структуре проекта и отчитывается: `expected | actual`.",
+    "ua": "Виконавець середнього рівня виконує крок плану, виправлення з відомою причиною чи тести за структурою проєкту й звітує: `expected | actual`."
+  },
+  "lead": {
+    "en": "`implementer` is a [mid-tier](term:tier) [role agent](term:role-agent) (`model: sonnet`) that executes a change someone else designed: a step of the tactical plan, a change with a clear plan, a defect with a known root cause, or tests. It writes the change the plan describes, no more and no less, and reports each step with the checks it ran.",
+    "ru": "`implementer` - [ролевой агент](term:role-agent) [среднего уровня](term:tier) (`model: sonnet`), который выполняет изменение, спроектированное кем-то другим: шаг тактического плана, изменение с ясным планом, дефект с известной первопричиной или тесты. Он пишет ровно то изменение, которое описывает план, ни больше ни меньше, и по каждому шагу сообщает, какие проверки запускал.",
+    "ua": "`implementer` - [рольовий агент](term:role-agent) [середнього рівня](term:tier) (`model: sonnet`), що виконує зміну, яку спроєктував хтось інший: крок тактичного плану, зміна з ясним планом, дефект із відомою першопричиною або тести. Він пише рівно ту зміну, яку описує план, ні більше ні менше, і за кожним кроком повідомляє, які перевірки запускав."
+  },
+  "situation": {
+    "en": "The decisions are already made: a step of the tactical plan, a change with a clear plan, a defect with a known root cause, or tests to add.",
+    "ru": "Решения уже приняты: шаг тактического плана, изменение с ясным планом, дефект с известной первопричиной или тесты, которые нужно добавить.",
+    "ua": "Рішення вже ухвалені: крок тактичного плану, зміна з ясним планом, дефект із відомою першопричиною або тести, які треба додати."
+  },
+  "warning": {
+    "en": "It stays inside the step's prompt: no surrounding refactor, no unrelated cleanup, no name the prompt does not state. A vague step does not get a creative reading, it gets a question, because the agent never guesses a path, a name or a value.",
+    "ru": "Он держится рамок промпта шага: никакого рефакторинга вокруг, никакой посторонней уборки, никаких имён, которых нет в промпте. Расплывчатый шаг не получает творческого прочтения, он получает вопрос: агент никогда не угадывает путь, имя или значение.",
+    "ua": "Він тримається рамок промпту кроку: жодного рефакторингу довкола, жодного стороннього прибирання, жодних імен, яких немає в промпті. Розпливчастий крок не отримує творчого прочитання, він отримує питання: агент ніколи не вгадує шлях, ім'я чи значення."
+  },
+  "steps": [
+    {
+      "en": "Hand it one step with its prompt: a step of the tactical plan, a plan or a defect with its known cause. First make sure the [placeholders](term:placeholder) in its file are filled in: project name, chat language, artifact language, work root, the check that proves a change, size budget, scratch directory, read-only zones, and for a project that compiles or runs also build, test, logging and architecture layers.",
+      "ru": "Передайте ему один шаг вместе с промптом: шаг тактического плана, план или дефект с известной причиной. Сначала убедитесь, что [заполнители](term:placeholder) в его файле заполнены: название проекта, язык чата, язык артефактов, рабочий корень, проверка, доказывающая изменение, лимит размера, каталог для черновиков, зоны только для чтения, а для проекта, который собирается или запускается, ещё и сборка, тесты, логирование и слои архитектуры.",
+      "ua": "Передайте йому один крок разом із промптом: крок тактичного плану, план або дефект із відомою причиною. Спершу переконайтеся, що [заповнювачі](term:placeholder) у його файлі заповнені: назва проєкту, мова чату, мова артефактів, робочий корінь, перевірка, що доводить зміну, ліміт розміру, каталог для чернеток, зони лише для читання, а для проєкту, який збирається чи запускається, ще й збірка, тести, логування та шари архітектури."
+    },
+    {
+      "en": "It locates what it needs through the index or a search before reading whole trees, checks what already exists so nothing is duplicated, and reads the current state first. Existing comments and notes count as requirements: it treats them as intent and does not override them silently.",
+      "ru": "Нужное он находит через индекс или поиск, прежде чем читать целые деревья, проверяет, что уже существует, чтобы ничего не дублировать, и сначала читает текущее состояние. Существующие комментарии и заметки считаются требованиями: он видит в них намерение и не отменяет молча.",
+      "ua": "Потрібне він знаходить через індекс або пошук, перш ніж читати цілі дерева, перевіряє, що вже існує, щоб нічого не дублювати, і спершу читає поточний стан. Наявні коментарі та нотатки вважаються вимогами: він бачить у них намір і не скасовує мовчки."
+    },
+    {
+      "en": "It works in small verifiable steps and runs the narrowest meaningful check after each non-trivial one. When the work is a step of the tactical plan, it scopes strictly to that step's prompt.",
+      "ru": "Он работает небольшими проверяемыми шагами и после каждого нетривиального запускает самую узкую осмысленную проверку. Если работа - шаг тактического плана, он строго ограничивается промптом этого шага.",
+      "ua": "Він працює невеликими перевірюваними кроками й після кожного нетривіального запускає найвужчу змістовну перевірку. Якщо робота - крок тактичного плану, він суворо обмежується промптом цього кроку."
+    },
+    {
+      "en": "It keeps to the project's rules: split along a real seam past the [size budget](term:size-budget), thin entry points, the project's naming, warnings your checks raise fixed in files it touches, and [anti-slop](term:anti-slop) code from the start. A file over the budget is backed up to the [scratch](term:scratch) directory first, nothing is written to the project root, and [read-only zones](term:read-only-zone) are never modified.",
+      "ru": "Он держится правил проекта: делит по настоящему шву после [лимита размера](term:size-budget), держит точки входа тонкими, следует именованию проекта, исправляет предупреждения ваших проверок в файлах, которых касается, и с самого начала пишет код без [мусора](term:anti-slop). Файл сверх лимита сначала копируется в каталог для [черновиков](term:scratch), в корень проекта ничего не пишется, а [зоны только для чтения](term:read-only-zone) не меняются никогда.",
+      "ua": "Він тримається правил проєкту: ділить за справжнім швом після [ліміту розміру](term:size-budget), тримає точки входу тонкими, дотримується іменування проєкту, виправляє попередження ваших перевірок у файлах, яких торкається, і з самого початку пише код без [сміття](term:anti-slop). Файл понад ліміт спершу копіюється в каталог для [чернеток](term:scratch), у корінь проєкту нічого не пишеться, а [зони лише для читання](term:read-only-zone) не змінюються ніколи."
+    },
+    {
+      "en": "On a [code-layer](term:code-layer) project it also logs only through the project's logger, keeps blocking I/O off the main or UI thread with the project's scoped concurrency, and treats any schema change as a version bump with a migration, never a destructive one in production.",
+      "ru": "В проекте со [слоем кода](term:code-layer) он дополнительно пишет логи только через логгер проекта, держит блокирующий ввод-вывод вне главного или UI-потока средствами структурной конкурентности проекта, а любое изменение схемы оформляет как повышение версии с миграцией, но не как разрушающую миграцию в продакшене.",
+      "ua": "У проєкті зі [шаром коду](term:code-layer) він додатково пише логи лише через логер проєкту, тримає блокувальне введення-виведення поза головним чи UI-потоком засобами структурованої конкурентності проєкту, а будь-яку зміну схеми оформлює як підвищення версії з міграцією, але не як руйнівну міграцію в продакшені."
+    },
+    {
+      "en": "If its fix fulfils something a shared contract always wanted, such as a lifecycle call, a required field or a template section, it sweeps every other site of that contract in the same ticket. A point fix on a shared contract is half a fix.",
+      "ru": "Если его исправление выполняет то, чего общий контракт всегда требовал (вызов жизненного цикла, обязательное поле, раздел шаблона), он проходит по всем остальным местам этого контракта в том же тикете. Точечное исправление общего контракта - это полдела.",
+      "ua": "Якщо його виправлення виконує те, чого спільний контракт завжди вимагав (виклик життєвого циклу, обов'язкове поле, розділ шаблону), він проходить по всіх інших місцях цього контракту в тому самому тікеті. Точкове виправлення спільного контракту - це півсправи."
+    },
+    {
+      "en": "If the ambiguity is about what the reader will perceive, such as placement, visibility or fallback, it does not guess: it escalates via `/ui-clarify` before implementing.",
+      "ru": "Если неоднозначность касается того, что увидит читатель (место, видимость, запасной вариант), он не угадывает: перед реализацией передаёт вопрос в `/ui-clarify`.",
+      "ua": "Якщо неоднозначність стосується того, що побачить читач (місце, видимість, запасний варіант), він не вгадує: перед реалізацією передає питання в `/ui-clarify`."
+    },
+    {
+      "en": "For every step it reports the files modified and the exact changes, the reason for any non-obvious decision, and the checks it ran with their result as `expected | actual`. A check that could not reach its subject is reported as \"could not verify\", never as a pass.",
+      "ru": "По каждому шагу он сообщает изменённые файлы и точные правки, причину любого неочевидного решения и запущенные проверки с результатом в виде `expected | actual`. Проверка, не дотянувшаяся до предмета, названа «could not verify», а не успехом.",
+      "ua": "За кожним кроком він повідомляє змінені файли й точні правки, причину будь-якого неочевидного рішення та запущені перевірки з результатом у вигляді `expected | actual`. Перевірка, що не дотягнулася до предмета, названа «could not verify», а не успіхом."
+    }
+  ],
+  "outcome": {
+    "en": "A report per step: the files modified with the exact changes, the reason for any non-obvious decision, and every check with its result as `expected | actual`. The change matches the plan and goes no further, and a check that could not run says so.",
+    "ru": "Отчёт по каждому шагу: изменённые файлы с точными правками, причина любого неочевидного решения и каждая проверка с результатом `expected | actual`. Изменение соответствует плану и не выходит за него, а проверка, которую не удалось выполнить, прямо об этом говорит.",
+    "ua": "Звіт за кожним кроком: змінені файли з точними правками, причина будь-якого неочевидного рішення та кожна перевірка з результатом `expected | actual`. Зміна відповідає плану й не виходить за нього, а перевірка, яку не вдалося виконати, прямо про це каже."
+  },
+  "tips": [
+    {
+      "en": "Prefer [rd-lead](fn:rd-lead) when the task also needs spec drafting, research or review judgement. The agent's own description says so.",
+      "ru": "Берите [rd-lead](fn:rd-lead), когда задаче нужны ещё и составление спеки, исследование или суждение на ревью. Так сказано в описании самого агента.",
+      "ua": "Беріть [rd-lead](fn:rd-lead), коли завданню потрібні ще й складання спеки, дослідження чи судження на рев'ю. Так сказано в описі самого агента."
+    },
+    {
+      "en": "Write the step so it states the files, names and values it needs: the agent asks instead of guessing, so a precise step is the fastest way through. Steps of the tactical plan are the input it is built for; see [the tactical plan step](fn:spec-tech).",
+      "ru": "Формулируйте шаг так, чтобы в нём были нужные файлы, имена и значения: агент спрашивает, а не угадывает, поэтому точный шаг - самый быстрый путь. Шаги тактического плана - тот вход, под который агент создан; см. [шаг с тактическим планом](fn:spec-tech).",
+      "ua": "Формулюйте крок так, щоб у ньому були потрібні файли, імена й значення: агент питає, а не вгадує, тому точний крок - найшвидший шлях. Кроки тактичного плану - той вхід, під який агент створений; див. [крок із тактичним планом](fn:spec-tech)."
+    },
+    {
+      "en": "A report is a claim. Run the check yourself, or let [rd-lead](fn:rd-lead) re-validate it, which is how that agent treats every returned report.",
+      "ru": "Отчёт - это утверждение. Запустите проверку сами или дайте [rd-lead](fn:rd-lead) перепроверить его: именно так этот агент относится к любому вернувшемуся отчёту.",
+      "ua": "Звіт - це твердження. Запустіть перевірку самі або дайте [rd-lead](fn:rd-lead) перевірити його: саме так цей агент ставиться до будь-якого повернутого звіту."
+    },
+    {
+      "en": "Several makers at once need isolation between their writes: see [parallel writers](fn:parallel-writers). The agent file has `isolation: worktree` as an optional, commented-out line (Claude Code) that gives each parallel writer a [worktree](term:worktree) of its own. It branches from the default branch, not from your HEAD, so uncommitted work is not in it.",
+      "ru": "Нескольким исполнителям одновременно нужна изоляция записей: см. [параллельные агенты, которые пишут](fn:parallel-writers). В файле агента есть необязательная закомментированная строка `isolation: worktree` (Claude Code): она даёт каждому писателю своё [рабочее дерево](term:worktree). Оно ответвляется от ветки по умолчанию, а не от вашего HEAD, так что несохранённой работы в нём нет.",
+      "ua": "Кільком виконавцям одночасно потрібна ізоляція записів: див. [паралельні агенти, що пишуть](fn:parallel-writers). У файлі агента є необов'язковий закоментований рядок `isolation: worktree` (Claude Code): він дає кожному, хто пише, своє [робоче дерево](term:worktree). Воно відгалужується від гілки за замовчуванням, а не від вашого HEAD, тож незбереженої роботи в ньому немає."
+    },
+    {
+      "en": "Chat runs in the language you set in the chat-language placeholder; files, code, docs, logs, commits and its code comments in the one you set in the artifact-language placeholder.",
+      "ru": "Чат идёт на языке из заполнителя языка чата; файлы, код, документы, логи, коммиты и комментарии в коде - на языке из заполнителя языка артефактов.",
+      "ua": "Чат іде мовою із заповнювача мови чату; файли, код, документи, логи, коміти й коментарі в коді - мовою із заповнювача мови артефактів."
+    },
+    {
+      "en": "On a project that is not code, the generic anti-slop list in `docs/PROJECT_SHAPES.md` replaces the code one, and the code-layer rules are deleted from the agent's file. See [project shapes](fn:project-shapes).",
+      "ru": "В проекте без кода вместо кодового списка действует общий список правил против мусора из `docs/PROJECT_SHAPES.md`, а правила слоя кода из файла агента удаляются. См. [формы проектов](fn:project-shapes).",
+      "ua": "У проєкті без коду замість кодового списку діє загальний список правил проти сміття з `docs/PROJECT_SHAPES.md`, а правила шару коду з файлу агента видаляються. Див. [форми проєктів](fn:project-shapes)."
+    }
+  ],
+  "related": ["rd-lead", "spec-tech", "spec-dev", "anti-slop", "ui-clarify"],
+  "terms": ["role-agent", "tier", "placeholder", "size-budget", "anti-slop", "scratch", "read-only-zone", "code-layer", "worktree"],
+  "keywords": {
+    "en": ["implementer agent", "execute a plan", "tactical plan step", "apply a fix", "write tests", "maker agent", "isolation worktree"],
+    "ru": ["агент-исполнитель", "выполнить план", "шаг тактического плана", "применить исправление", "написать тесты", "агент-мастер", "isolation worktree"],
+    "ua": ["агент-виконавець", "виконати план", "крок тактичного плану", "застосувати виправлення", "написати тести", "агент-майстер", "isolation worktree"]
+  }
+}

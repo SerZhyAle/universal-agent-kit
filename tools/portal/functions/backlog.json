@@ -1,0 +1,109 @@
+{
+  "id": "backlog",
+  "title": {
+    "en": "Drain the ticket queue unattended and get one report at the end",
+    "ru": "Разобрать очередь тикетов без вашего участия и получить один отчёт в конце",
+    "ua": "Розібрати чергу тікетів без вашої участі й отримати один звіт наприкінці"
+  },
+  "pitch": {
+    "en": "Picks the highest-priority ticket the agent can move alone, runs the pipeline on it, repeats, and defers everything that needs a human to one report.",
+    "ru": "Берёт тикет с наивысшим приоритетом из тех, что агент может двигать сам, прогоняет конвейер, повторяет, а всё, что требует человека, откладывает в один отчёт.",
+    "ua": "Бере тікет із найвищим пріоритетом серед тих, що агент може рухати сам, проганяє конвеєр, повторює, а все, що потребує людини, відкладає в один звіт."
+  },
+  "lead": {
+    "en": "`/backlog` is a zero-input driver that sits above `/spec-all`. It picks the highest-priority [eligible ticket](term:eligible-ticket), hands it to `/spec-all` and loops until nothing is left that the agent can move without a human. It never prompts you mid-loop; whatever needs a person is collected into one report at the end. It adds no status model of its own: it reads each ticket's `Priority` field and the [block states](term:block-status).",
+    "ru": "`/backlog` - драйвер без ввода, он стоит над `/spec-all`. Он берёт [подходящий тикет](term:eligible-ticket) с наивысшим приоритетом, передаёт его `/spec-all` и крутит цикл, пока не останется ничего, что агент может сдвинуть без человека. Посреди цикла он вас не отвлекает; всё, что требует человека, собирается в один отчёт в конце. Своей модели статусов он не вводит: читает поле `Priority` каждого тикета и [блокирующие состояния](term:block-status).",
+    "ua": "`/backlog` - драйвер без вводу, він стоїть над `/spec-all`. Він бере [придатний тікет](term:eligible-ticket) із найвищим пріоритетом, передає його `/spec-all` і крутить цикл, доки не лишиться нічого, що агент може зрушити без людини. Посеред циклу він вас не відволікає; усе, що потребує людини, збирається в один звіт наприкінці. Власної моделі статусів він не вводить: читає поле `Priority` кожного тікета та [блокувальні стани](term:block-status)."
+  },
+  "situation": {
+    "en": "A queue of tickets and an agent you can leave alone. For one specific ticket use [/spec-all](fn:spec-all), for a single new idea use [/spec](fn:spec); if the whole queue is already blocked on humans there is nothing to drain, so read the last report instead.",
+    "ru": "Очередь тикетов и агент, которого можно оставить одного. Для одного конкретного тикета есть [/spec-all](fn:spec-all), для одной новой идеи - [/spec](fn:spec); если вся очередь уже ждёт людей, разбирать нечего, прочитайте прошлый отчёт.",
+    "ua": "Черга тікетів і агент, якого можна лишити самого. Для одного конкретного тікета є [/spec-all](fn:spec-all), для однієї нової ідеї - [/spec](fn:spec); якщо вся черга вже чекає на людей, розбирати нічого, прочитайте попередній звіт."
+  },
+  "warning": {
+    "en": "A real run edits ticket files and code through `/spec-all` while nobody watches; `--dry-run` first shows the order it would take and changes nothing. Looped inside one session, the context grows with every ticket and the cost grows faster than the queue (`docs/COST.md`).",
+    "ru": "Настоящий прогон правит файлы тикетов и код через `/spec-all`, пока никто не смотрит; `--dry-run` сначала покажет порядок, который он выбрал бы, и ничего не изменит. Если крутить цикл в одной сессии, контекст растёт с каждым тикетом, а стоимость растёт быстрее очереди (`docs/COST.md`).",
+    "ua": "Справжній прогін править файли тікетів і код через `/spec-all`, поки ніхто не дивиться; `--dry-run` спершу покаже порядок, який він обрав би, і нічого не змінить. Якщо крутити цикл в одній сесії, контекст росте з кожним тікетом, а вартість росте швидше за чергу (`docs/COST.md`)."
+  },
+  "steps": [
+    {
+      "en": "Run `/backlog`, or `/backlog --dry-run` first to see what it would select and advance.",
+      "ru": "Запустите `/backlog` или сначала `/backlog --dry-run`, чтобы увидеть, что он выбрал бы и продвинул.",
+      "ua": "Запустіть `/backlog` або спершу `/backlog --dry-run`, щоб побачити, що він обрав би й просунув."
+    },
+    {
+      "en": "It builds the eligible set from every ticket in the plan directory. Eligible means a live pipeline stage (`Draft`, `Approved`, `Tactical`, `In Progress`, `Implemented`, `Partial`, `Broken`) and not in this run's skip-cache. `BlockQuestions`, `BlockNeedUserTest` and `BlockExternal` go to the report bucket; `BlockByOtherTask` is eligible only once its blocker has reached `Verified`.",
+      "ru": "Он собирает подходящее множество из всех тикетов в папке планов. Подходит живая стадия конвейера (`Draft`, `Approved`, `Tactical`, `In Progress`, `Implemented`, `Partial`, `Broken`), если тикета нет в кэше пропуска (skip-cache) этого прогона. `BlockQuestions`, `BlockNeedUserTest` и `BlockExternal` уходят в отчёт; `BlockByOtherTask` подходит, только когда его блокер дошёл до `Verified`.",
+      "ua": "Він збирає придатну множину з усіх тікетів у теці планів. Придатна жива стадія конвеєра (`Draft`, `Approved`, `Tactical`, `In Progress`, `Implemented`, `Partial`, `Broken`), якщо тікета немає в кеші пропуску (skip-cache) цього прогону. `BlockQuestions`, `BlockNeedUserTest` і `BlockExternal` ідуть до звіту; `BlockByOtherTask` придатний, лише коли його блокер дійшов до `Verified`."
+    },
+    {
+      "en": "A blocker is read from the header's `Blocked-by:` token and from nowhere else; ids mentioned in prose do not count. A missing token is a defect in the ticket: it is treated as `none`, the ticket is advanced, and the report says so. This exclusion is soft: it only decides what `/backlog` picks up, while `Carried-to:` is a hard gate that `/spec-check` enforces at closure.",
+      "ru": "Блокер читается из токена `Blocked-by:` в шапке тикета и больше ниоткуда; идентификаторы, упомянутые в тексте, не считаются. Отсутствие токена - дефект тикета: оно трактуется как `none`, тикет продвигается, а отчёт об этом сообщает. Это мягкое исключение: оно лишь решает, что `/backlog` берёт в работу, тогда как `Carried-to:` - жёсткий барьер, который `/spec-check` применяет при закрытии.",
+      "ua": "Блокер читається з токена `Blocked-by:` у шапці тікета й більше ні з чого; ідентифікатори, згадані в тексті, не рахуються. Відсутність токена - дефект тікета: її трактують як `none`, тікет просувається, а звіт про це повідомляє. Це м'яке виключення: воно лише вирішує, що `/backlog` бере в роботу, тоді як `Carried-to:` - жорсткий бар'єр, який `/spec-check` застосовує під час закриття."
+    },
+    {
+      "en": "It selects the highest `Priority`. Ties go to the furthest-along status (closer to `Verified` first, so work finishes before new work starts), then to the ID. It states the choice in one line: `ID (Priority P, status) - why now`.",
+      "ru": "Он выбирает наивысший `Priority`. Ничью решает самый продвинутый статус (ближе к `Verified` идёт первым, чтобы работа заканчивалась раньше, чем начнётся новая), затем идентификатор. Выбор он называет одной строкой: `ID (Priority P, status) - why now`.",
+      "ua": "Він обирає найвищий `Priority`. Нічию вирішує найпросунутіший статус (ближчий до `Verified` йде першим, щоб робота закінчувалась раніше, ніж почнеться нова), потім ідентифікатор. Вибір він називає одним рядком: `ID (Priority P, status) - why now`."
+    },
+    {
+      "en": "It hands the ticket to `/spec-all ID`, which re-enters the pipeline at the right stage; a `Draft` such as a `/park` stub goes in at `/spec ID`, which expands it in place. The per-ticket stops still hold: an unresolved UI decision, an open required question, an unchecked blocker, an ambiguity. When one fires, `/backlog` does not ask you; it records the resulting `Block*` state, with its one-line note on the status line, and moves on.",
+      "ru": "Он передаёт тикет в `/spec-all ID`, и тот входит в конвейер на нужной стадии; `Draft`, например заготовка от `/park`, входит на `/spec ID`, который раскрывает его на месте. Остановки на уровне тикета остаются в силе: нерешённый вопрос по интерфейсу, открытый обязательный вопрос, непроверенный блокер, неоднозначность. Когда одна из них срабатывает, `/backlog` вас не спрашивает: он фиксирует получившееся состояние `Block*` с короткой заметкой в строке статуса и идёт дальше.",
+      "ua": "Він передає тікет до `/spec-all ID`, і той входить у конвеєр на потрібній стадії; `Draft`, наприклад заготовка від `/park`, входить на `/spec ID`, який розгортає його на місці. Зупинки на рівні тікета лишаються чинними: невирішене питання щодо інтерфейсу, відкрите обов'язкове питання, неперевірений блокер, неоднозначність. Коли одна з них спрацьовує, `/backlog` вас не питає: він фіксує отриманий стан `Block*` з короткою приміткою в рядку статусу й іде далі."
+    },
+    {
+      "en": "If the ticket reached a human-gated `Block*` state, or could not be advanced at all, its ID goes into the run's skip-cache and is never selected again in this run, so the loop cannot spin on a ticket that will not move. A ticket that progressed, even by one stage, stays eligible.",
+      "ru": "Если тикет дошёл до `Block*`, ждущего человека, или вообще не сдвинулся, его идентификатор попадает в skip-cache прогона и больше в нём не выбирается, поэтому цикл не крутится вхолостую на тикете, который не движется. Тикет, который продвинулся хотя бы на одну стадию, остаётся подходящим.",
+      "ua": "Якщо тікет дійшов до `Block*`, що чекає на людину, або взагалі не зрушив, його ідентифікатор потрапляє до skip-cache прогону й більше в ньому не обирається, тож цикл не крутиться марно на тікеті, який не рухається. Тікет, що просунувся хоча б на одну стадію, лишається придатним."
+    },
+    {
+      "en": "It returns to the first step and stops when the eligible set is empty: each ticket has either reached `Verified` or sits in the skip-cache.",
+      "ru": "Он возвращается к первому шагу и останавливается, когда подходящих тикетов не осталось: каждый либо дошёл до `Verified`, либо лежит в skip-cache.",
+      "ua": "Він повертається до першого кроку й зупиняється, коли придатних тікетів не лишилося: кожен або дійшов до `Verified`, або лежить у skip-cache."
+    },
+    {
+      "en": "The only output you read is one report with three buckets. `Advanced`: each ticket with its start and end status and one line on what moved it. `Needs you`: every human-gated ticket, one actionable line each, grouped by reason (the decision for `BlockQuestions`, the hands-on check for `BlockNeedUserTest`, the dependency for `BlockExternal`). `Stuck`: what could not advance for a non-human reason, with the failing check.",
+      "ru": "Единственное, что вы читаете, - один отчёт из трёх разделов. `Advanced`: каждый тикет с начальным и конечным статусом и строкой о том, что его сдвинуло. `Needs you`: каждый тикет, ждущий человека, по одной строке с действием, сгруппированные по причине (решение для `BlockQuestions`, проверка руками для `BlockNeedUserTest`, зависимость для `BlockExternal`). `Stuck`: то, что не продвинулось по нечеловеческой причине, с упавшей проверкой.",
+      "ua": "Єдине, що ви читаєте, - один звіт із трьох розділів. `Advanced`: кожен тікет із початковим і кінцевим статусом та рядком про те, що його зрушило. `Needs you`: кожен тікет, що чекає на людину, по одному рядку з дією, згруповані за причиною (рішення для `BlockQuestions`, перевірка руками для `BlockNeedUserTest`, залежність для `BlockExternal`). `Stuck`: те, що не просунулося з нелюдської причини, з проваленою перевіркою."
+    }
+  ],
+  "outcome": {
+    "en": "Every ticket the agent could move has advanced as far as it can. You get one report in three buckets: `Advanced`, `Needs you` and `Stuck`. `Needs you` is your to-do list: each line names the decision, the hands-on check or the outside dependency that only you can supply.",
+    "ru": "Каждый тикет, который агент мог сдвинуть, продвинут настолько, насколько возможно. Вы получаете один отчёт из трёх разделов: `Advanced`, `Needs you` и `Stuck`. `Needs you` - ваш список дел: каждая строка называет решение, проверку руками или внешнюю зависимость, которую можете дать только вы.",
+    "ua": "Кожен тікет, який агент міг зрушити, просунуто настільки, наскільки можливо. Ви отримуєте один звіт із трьох розділів: `Advanced`, `Needs you` і `Stuck`. `Needs you` - ваш список справ: кожен рядок називає рішення, перевірку руками чи зовнішню залежність, які можете дати лише ви."
+  },
+  "tips": [
+    {
+      "en": "Prefer looping the process, not the session. Where your runtime has a [headless mode](term:headless-process), run selection, the pipeline and the record-keeping as a driver script outside the session: one fresh process per ticket, the skip-cache and the report buckets in a file. The in-session loop stays right for a short run you watch. See [the unattended loop](fn:unattended-loop).",
+      "ru": "Лучше крутить в цикле процесс, а не сессию. Если в вашей среде есть [headless-режим](term:headless-process), вынесите выбор, конвейер и учёт в скрипт-драйвер вне сессии: на каждый тикет свежий процесс, а skip-cache и разделы отчёта лежат в файле. Цикл внутри сессии остаётся верным для короткого прогона под вашим присмотром. См. [цикл без присмотра](fn:unattended-loop).",
+      "ua": "Краще крутити в циклі процес, а не сесію. Якщо у вашому середовищі є [headless-режим](term:headless-process), винесіть вибір, конвеєр і облік у скрипт-драйвер поза сесією: на кожен тікет свіжий процес, а skip-cache і розділи звіту лежать у файлі. Цикл усередині сесії лишається слушним для короткого прогону під вашим наглядом. Див. [цикл без нагляду](fn:unattended-loop)."
+    },
+    {
+      "en": "`--dry-run` loops the selection against a simulated skip-cache and prints the order it would take and the report buckets it would fill. It touches no ticket file and invokes no spec skill.",
+      "ru": "`--dry-run` прокручивает выбор на имитированном skip-cache и печатает порядок, который он выбрал бы, и разделы отчёта, которые заполнил бы. Файлов тикетов он не трогает и ни один спека-навык не вызывает.",
+      "ua": "`--dry-run` прокручує вибір на імітованому skip-cache й друкує порядок, який він обрав би, та розділи звіту, які заповнив би. Файлів тікетів він не торкається й жодної навички спеки не викликає."
+    },
+    {
+      "en": "To clear the `Needs you` list, sweep the `BlockNeedUserTest` tickets as one batch: run each recorded manual check, tick its line in the ticket's `## Manual checks` with what you saw, then re-audit with [/spec-check](fn:spec-check). The method is in [the spec lifecycle](fn:spec-lifecycle).",
+      "ru": "Чтобы опустошить `Needs you`, разберите тикеты `BlockNeedUserTest` одной партией: выполните каждую записанную ручную проверку, отметьте её пункт в `## Manual checks` тикета с тем, что вы увидели, затем проведите повторный аудит через [/spec-check](fn:spec-check). Порядок описан в [жизненном цикле спеки](fn:spec-lifecycle).",
+      "ua": "Щоб спорожнити `Needs you`, розберіть тікети `BlockNeedUserTest` одною партією: виконайте кожну записану ручну перевірку, позначте її пункт у `## Manual checks` тікета з тим, що ви побачили, потім проведіть повторний аудит через [/spec-check](fn:spec-check). Порядок описано в [життєвому циклі спеки](fn:spec-lifecycle)."
+    },
+    {
+      "en": "A ticket the audit cannot clear does not bounce between the audit and its fix-up. [/spec-fix](fn:spec-fix) stops when it fixed nothing and sets `BlockQuestions` where decision items remain, and `/spec-check` keeps that status, so the ticket reaches `Needs you`.",
+      "ru": "Тикет, который аудит не может закрыть, не мечется между аудитом и его исправлением. [/spec-fix](fn:spec-fix) останавливается, если ничего не исправил, и ставит `BlockQuestions`, когда остались пункты для решения, а `/spec-check` этот статус сохраняет, так что тикет попадает в `Needs you`.",
+      "ua": "Тікет, який аудит не може закрити, не мече між аудитом і його виправленням. [/spec-fix](fn:spec-fix) зупиняється, якщо нічого не виправив, і ставить `BlockQuestions`, коли лишилися пункти для рішення, а `/spec-check` цей статус зберігає, тож тікет потрапляє до `Needs you`."
+    },
+    {
+      "en": "The skill is marked `disable-model-invocation: true` in its frontmatter, so the agent does not start `/backlog` by itself: an unattended run begins only when you type the command.",
+      "ru": "В заголовке навыка стоит `disable-model-invocation: true`, поэтому агент не запускает `/backlog` сам: прогон без присмотра начинается, только когда вы набираете команду.",
+      "ua": "У заголовку навички стоїть `disable-model-invocation: true`, тому агент не запускає `/backlog` сам: прогін без нагляду починається, лише коли ви набираєте команду."
+    }
+  ],
+  "related": ["spec-all", "spec-lifecycle", "unattended-loop", "spec-check", "spec"],
+  "terms": ["backlog", "eligible-ticket", "block-status", "headless-process", "ticket", "status"],
+  "keywords": {
+    "en": ["backlog", "unattended run", "drain the queue", "priority", "end-of-run report", "skip-cache"],
+    "ru": ["бэклог", "прогон без присмотра", "разобрать очередь", "приоритет", "итоговый отчёт", "skip-cache"],
+    "ua": ["беклог", "прогін без нагляду", "розібрати чергу", "пріоритет", "підсумковий звіт", "skip-cache"]
+  }
+}

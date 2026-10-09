@@ -1,0 +1,99 @@
+{
+  "id": "doc-writer",
+  "title": {
+    "en": "Turn technical notes into clear, friendly docs and UI copy",
+    "ru": "Превратить технические заметки в понятные, дружелюбные доки и тексты интерфейса",
+    "ua": "Перетворити технічні нотатки на зрозумілі, дружні доки й тексти інтерфейсу"
+  },
+  "pitch": {
+    "en": "A mid-tier agent writes or rewrites docs, README, help, onboarding, release notes and interface strings in a friendly voice, with every technical fact kept.",
+    "ru": "Агент среднего уровня пишет и переписывает документацию, README, справку, онбординг, заметки к релизу и тексты интерфейса дружелюбно, сохраняя технические факты.",
+    "ua": "Агент середнього рівня пише чи переписує документацію, README, довідку, онбординг, нотатки до релізу та рядки інтерфейсу дружнім тоном, зберігаючи всі технічні факти."
+  },
+  "lead": {
+    "en": "`doc-writer` is a [mid-tier](term:tier) [role agent](term:role-agent) (`model: sonnet`) for documentation and user-facing copy. Give it a feature, a flow, a setting, an architecture note or a UI string, and it turns it into clear, warm, useful text: friendly, concise, confident, lightly witty where that helps. It does not invent behaviour; when the source is too vague, it asks.",
+    "ru": "`doc-writer` - [ролевой агент](term:role-agent) [среднего уровня](term:tier) (`model: sonnet`) для документации и текстов, которые видит пользователь. Дайте ему функциональность, сценарий, настройку, заметку об архитектуре или строку интерфейса, и он превратит это в ясный, тёплый, полезный текст: дружелюбный, сжатый, уверенный, с лёгкой иронией там, где она помогает. Поведение он не выдумывает; если источник слишком расплывчат, он спрашивает.",
+    "ua": "`doc-writer` - [рольовий агент](term:role-agent) [середнього рівня](term:tier) (`model: sonnet`) для документації та текстів, які бачить користувач. Дайте йому функціональність, сценарій, налаштування, нотатку про архітектуру чи рядок інтерфейсу, і він перетворить це на ясний, теплий, корисний текст: дружній, стислий, упевнений, з легкою іронією там, де вона допомагає. Поведінку він не вигадує; якщо джерело надто розпливчасте, він питає."
+  },
+  "situation": {
+    "en": "You need a doc written or rewritten, a feature or a structure explained in plain language, a README, help text, onboarding or release notes polished, or user-facing strings improved.",
+    "ru": "Нужно написать или переписать документ, объяснить функциональность или структуру простым языком, отполировать README, справку, онбординг или заметки к релизу либо улучшить строки, которые видит пользователь.",
+    "ua": "Потрібно написати чи переписати документ, пояснити функціональність або структуру простою мовою, відполірувати README, довідку, онбординг чи нотатки до релізу або покращити рядки, які бачить користувач."
+  },
+  "warning": {
+    "en": "The warmth has limits. A warning or a required action is never hidden behind a joke, existing text does not change meaning just to sound friendlier, and legal text, terms of service and machine-readable artifacts stay formal and neutral.",
+    "ru": "У тепла есть границы. Предупреждение или обязательное действие никогда не прячутся за шуткой, смысл существующего текста не меняется ради дружелюбия, а юридические тексты, условия использования и машиночитаемые артефакты остаются формальными и нейтральными.",
+    "ua": "У теплоти є межі. Попередження чи обов'язкова дія ніколи не ховаються за жартом, зміст наявного тексту не змінюється заради дружності, а юридичні тексти, умови користування та машиночитні артефакти лишаються формальними й нейтральними."
+  },
+  "steps": [
+    {
+      "en": "Hand it the source and the target: notes, code, an existing doc or a string, and the file or surface the text is for. First make sure the [placeholder](term:placeholder) for the project name in its file is filled in for your project.",
+      "ru": "Передайте ему источник и цель: заметки, код, существующий документ или строку и файл или поверхность, для которых нужен текст. Сначала убедитесь, что [заполнитель](term:placeholder) с названием проекта в файле агента заполнен под ваш проект.",
+      "ua": "Передайте йому джерело й мету: нотатки, код, наявний документ чи рядок та файл або поверхню, для яких потрібен текст. Спершу переконайтеся, що [заповнювач](term:placeholder) з назвою проєкту у файлі агента заповнений під ваш проєкт."
+    },
+    {
+      "en": "It identifies the audience first: end user, tester, maintainer or developer.",
+      "ru": "Сначала он определяет аудиторию: конечный пользователь, тестировщик, сопровождающий или разработчик.",
+      "ua": "Спершу він визначає аудиторію: кінцевий користувач, тестувальник, супровідник або розробник."
+    },
+    {
+      "en": "It reads the source and extracts the real meaning before rewriting. If the source is too vague, it asks you for the missing product decision instead of filling the gap with style.",
+      "ru": "Он читает источник и выделяет настоящий смысл, прежде чем переписывать. Если источник слишком расплывчат, он просит у вас недостающее продуктовое решение, а не заполняет пробел стилем.",
+      "ua": "Він читає джерело й виділяє справжній зміст, перш ніж переписувати. Якщо джерело надто розпливчасте, він просить у вас бракуюче продуктове рішення, а не заповнює прогалину стилем."
+    },
+    {
+      "en": "It rewrites for clarity first, tone second, humour last. Instructions stay actionable: what happened, why it matters, what to do next. Every technical fact the text genuinely needs, such as versions, flags and names, is preserved.",
+      "ru": "Он переписывает так: сначала ясность, потом тон, юмор в последнюю очередь. Инструкции остаются применимыми: что произошло, почему это важно, что делать дальше. Каждый технический факт, действительно нужный тексту, например версии, флаги и имена, сохраняется.",
+      "ua": "Він переписує так: спершу ясність, потім тон, гумор в останню чергу. Інструкції лишаються придатними до дії: що сталося, чому це важливо, що робити далі. Кожен технічний факт, справді потрібний тексту, наприклад версії, прапорці та імена, зберігається."
+    },
+    {
+      "en": "It follows the project's copy and tone policy for user-visible strings, matches the language of the target file unless you ask otherwise, keeps humour light and never at the user's expense, and does not invent product behaviour, architecture or implementation details.",
+      "ru": "Для строк, которые видит пользователь, он следует политике текстов и тона вашего проекта, пишет на языке целевого файла, если вы не попросили иначе, держит юмор лёгким и никогда не за счёт пользователя и не выдумывает поведение продукта, архитектуру или детали реализации.",
+      "ua": "Для рядків, які бачить користувач, він дотримується політики текстів і тону вашого проєкту, пише мовою цільового файлу, якщо ви не попросили інакше, тримає гумор легким і ніколи не коштом користувача та не вигадує поведінку продукту, архітектуру чи деталі реалізації."
+    },
+    {
+      "en": "For mirrored docs, such as several locales, it keeps the variants aligned. For user-facing strings it keeps the copy compact enough for the target surface.",
+      "ru": "Для зеркальных документов, например нескольких локалей, он держит варианты согласованными. Для строк интерфейса он делает текст достаточно компактным для целевой поверхности.",
+      "ua": "Для дзеркальних документів, наприклад кількох локалей, він тримає варіанти узгодженими. Для рядків інтерфейсу він робить текст достатньо компактним для цільової поверхні."
+    },
+    {
+      "en": "It reports the audience and goal of the text, the files changed or the exact draft if you asked for no file edit, any wording trade-off that materially affects meaning or tone, and any follow-up needed for mirrored docs, strings or layout fit.",
+      "ru": "Он сообщает аудиторию и цель текста, изменённые файлы или точный черновик, если правку файла вы не просили, любой компромисс в формулировках, существенно влияющий на смысл или тон, и всё, что нужно доделать в зеркальных документах, строках или вёрстке.",
+      "ua": "Він повідомляє аудиторію й мету тексту, змінені файли або точну чернетку, якщо правки файлу ви не просили, будь-який компроміс у формулюваннях, що суттєво впливає на зміст чи тон, і все, що треба доробити у дзеркальних документах, рядках або верстці."
+    }
+  ],
+  "outcome": {
+    "en": "Finished text in the target file, or the exact draft when you asked for no edit, plus a short note naming the audience, the goal, any wording trade-off that changes meaning or tone, and what is left to do in mirrored docs, strings or layout.",
+    "ru": "Готовый текст в целевом файле или точный черновик, если правку файла вы не просили, и короткая заметка: аудитория, цель, любой компромисс в формулировках, меняющий смысл или тон, и что осталось доделать в зеркальных документах, строках или вёрстке.",
+    "ua": "Готовий текст у цільовому файлі або точна чернетка, якщо правки файлу ви не просили, і коротка нотатка: аудиторія, мета, будь-який компроміс у формулюваннях, що змінює зміст чи тон, і що лишилося доробити у дзеркальних документах, рядках або верстці."
+  },
+  "tips": [
+    {
+      "en": "For mechanical sync of mirrored docs, the agent's own description points to a dedicated sync skill, if your project has one. Use this agent for the writing.",
+      "ru": "Для механической синхронизации зеркальных документов описание самого агента отсылает к отдельному навыку синхронизации, если он есть в вашем проекте. Этого агента берите для самого письма.",
+      "ua": "Для механічної синхронізації дзеркальних документів опис самого агента відсилає до окремої навички синхронізації, якщо вона є у вашому проєкті. Цього агента беріть для самого письма."
+    },
+    {
+      "en": "Name the audience yourself when you know it. The agent's first move is to identify one, and a sentence from you saves it the guess.",
+      "ru": "Назовите аудиторию сами, если знаете её. Первый шаг агента - определить её, и одно ваше предложение избавит его от догадки.",
+      "ua": "Назвіть аудиторію самі, якщо знаєте її. Перший крок агента - визначити її, і одне ваше речення позбавить його здогадки."
+    },
+    {
+      "en": "Read the wording trade-offs in its report: they mark the places where tone and meaning pulled against each other, and they are the ones worth a second look from you.",
+      "ru": "Прочитайте компромиссы в формулировках из его отчёта: они отмечают места, где тон и смысл тянули в разные стороны, и именно на них стоит взглянуть ещё раз.",
+      "ua": "Прочитайте компроміси у формулюваннях з його звіту: вони позначають місця, де тон і зміст тягнули в різні боки, і саме на них варто глянути ще раз."
+    },
+    {
+      "en": "If the docs are one part of a bigger feature that also needs code and review, start with [rd-lead](fn:rd-lead); its own description sends prose to this agent.",
+      "ru": "Если документация - часть большей функциональности, где нужны ещё код и ревью, начните с [rd-lead](fn:rd-lead): в его описании работа с текстом отдана этому агенту.",
+      "ua": "Якщо документація - частина більшої функціональності, де потрібні ще код і рев'ю, почніть із [rd-lead](fn:rd-lead): у його описі робота з текстом віддана цьому агентові."
+    }
+  ],
+  "related": ["rd-lead", "implementer", "solution-researcher"],
+  "terms": ["role-agent", "tier", "placeholder"],
+  "keywords": {
+    "en": ["documentation writer", "README", "release notes", "UI copy", "onboarding text", "rewrite docs"],
+    "ru": ["автор документации", "README", "заметки к релизу", "тексты интерфейса", "текст онбординга", "переписать документацию"],
+    "ua": ["автор документації", "README", "нотатки до релізу", "тексти інтерфейсу", "текст онбордингу", "переписати документацію"]
+  }
+}

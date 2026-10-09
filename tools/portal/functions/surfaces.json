@@ -1,0 +1,104 @@
+{
+  "id": "surfaces",
+  "title": {
+    "en": "Update every place a user meets a change, under one name",
+    "ru": "Обновить все места, где пользователь встречает изменение, под одним именем",
+    "ua": "Оновити всі місця, де користувач зустрічає зміну, під одним іменем"
+  },
+  "pitch": {
+    "en": "`/surfaces` lists every place a user meets a change before any edit, then makes each touched one say the same thing, under one name, in every authored locale.",
+    "ru": "`/surfaces` перечисляет все места, где пользователь встречает изменение, до правок, затем выравнивает каждое затронутое под одним именем в каждой авторской локали.",
+    "ua": "`/surfaces` перелічує всі місця, де користувач зустрічає зміну, до правок, потім вирівнює кожне зачеплене під одним іменем у кожній авторській локалі."
+  },
+  "lead": {
+    "en": "A user-visible change is not done until every place a user meets it says the same thing under the same name, in every authored locale, in the same change. `/surfaces` finds those places (each one a [surface](term:surface)), prints the table before editing anything, edits the rows marked touched, then greps the key noun across them and reports the counts.",
+    "ru": "Видимое пользователю изменение не готово, пока каждое место, где пользователь с ним встречается, не говорит одно и то же под одним именем, в каждой авторской локали и в том же изменении. `/surfaces` находит эти места (каждое - [поверхность](term:surface)), печатает таблицу до любых правок, правит строки, помеченные как затронутые, затем ищет по ним ключевое существительное и сообщает счётчики.",
+    "ua": "Видима користувачеві зміна не готова, доки кожне місце, де користувач із нею зустрічається, не каже те саме під одним іменем, у кожній авторській локалі й у тій самій зміні. `/surfaces` знаходить ці місця (кожне - [поверхня](term:surface)), друкує таблицю до будь-яких правок, править рядки, позначені як зачеплені, потім шукає по них ключовий іменник і повідомляє лічильники."
+  },
+  "situation": {
+    "en": "A new or renamed user-visible capability is built, or you ask 'did I forget anything', 'update the docs' or 'the README is out of date'. In a plan it belongs to the final docs-cleanup phase, after the build and before the ticket closes.",
+    "ru": "Построена новая или переименованная видимая пользователю возможность, либо вы спрашиваете «не забыл ли я что-нибудь», «обнови документацию» или «README устарел». В плане ему место в последней фазе docs-cleanup, после сборки и до закрытия тикета.",
+    "ua": "Збудовано нову або перейменовану видиму користувачеві можливість, або ви питаєте «чи не забув я щось», «онови документацію» чи «README застарів». У плані йому місце в останній фазі docs-cleanup, після збірки й до закриття тікета."
+  },
+  "warning": {
+    "en": "It edits sources only: it never publishes, deploys or submits a listing, and that irreversible step stays yours. It never edits a surface the table does not list, and a generated surface is changed in its source and regenerated, never by hand. A change nobody can see ends at once with `surfaces: not user-visible - <reason>`.",
+    "ru": "Он правит только источники: никогда не публикует, не выкладывает и не отправляет карточку, и этот необратимый шаг остаётся за вами. Поверхность, которой нет в таблице, он не правит, а сгенерированную меняет в её источнике и пересобирает, но не вручную. Изменение, которого никто не видит, сразу заканчивается строкой `surfaces: not user-visible - <reason>`.",
+    "ua": "Він править лише джерела: ніколи не публікує, не викладає й не подає картку, і цей незворотний крок лишається за вами. Поверхню, якої немає в таблиці, він не править, а згенеровану змінює в її джерелі й перегенеровує, але не вручну. Зміна, якої ніхто не бачить, одразу завершується рядком `surfaces: not user-visible - <reason>`."
+  },
+  "steps": [
+    {
+      "en": "Run `/surfaces` for the current diff, `/surfaces <ticket-id>` for the change of a [ticket](term:ticket) (the ticket is only read), or `/surfaces` followed by a one-line description of the change.",
+      "ru": "Запустите `/surfaces` для текущего diff, `/surfaces <ticket-id>` для изменения [тикета](term:ticket) (тикет только читается) или `/surfaces` с однострочным описанием изменения.",
+      "ua": "Запустіть `/surfaces` для поточного diff, `/surfaces <ticket-id>` для зміни [тікета](term:ticket) (тікет лише читається) або `/surfaces` з однорядковим описом зміни."
+    },
+    {
+      "en": "It first asks whether a user can see, do or be surprised by the change. If not, as with an internal refactor, a test or a build tweak, it reports `surfaces: not user-visible - <reason>` and stops.",
+      "ru": "Сначала он спрашивает, может ли пользователь увидеть это изменение, воспользоваться им или удивиться из-за него. Если нет, как при внутреннем рефакторинге, тесте или правке сборки, он сообщает `surfaces: not user-visible - <reason>` и останавливается.",
+      "ua": "Спершу він питає, чи може користувач побачити цю зміну, скористатися нею або здивуватися через неї. Якщо ні, як за внутрішнього рефакторингу, тесту чи правки збірки, він повідомляє `surfaces: not user-visible - <reason>` і зупиняється."
+    },
+    {
+      "en": "It lists every place a user meets the capability, found in the project and never assumed: UI strings (one row per authored locale), help and tooltips, the README and its translations, user docs, the site, the change log, store or package listings, screenshots, examples and samples, templates. It starts from the project's own surface manifest if there is one and extends it. The table is printed before any edit.",
+      "ru": "Он перечисляет все места, где пользователь встречает возможность; они находятся в проекте, а не предполагаются: строки интерфейса (по строке на авторскую локаль), справка и подсказки, README и его переводы, пользовательская документация, сайт, журнал изменений, карточки в магазинах и каталогах пакетов, скриншоты, примеры, шаблоны. Он идёт от собственного манифеста поверхностей проекта, если он есть, и расширяет его. Таблица печатается до любых правок.",
+      "ua": "Він перелічує всі місця, де користувач зустрічає можливість; вони знаходяться в проєкті, а не припускаються: рядки інтерфейсу (по рядку на авторську локаль), довідка й підказки, README та його переклади, користувацька документація, сайт, журнал змін, картки в магазинах і каталогах пакетів, знімки екрана, приклади, шаблони. Він іде від власного маніфесту поверхонь проєкту, якщо він є, і розширює його. Таблиця друкується до будь-яких правок."
+    },
+    {
+      "en": "The table has the columns Surface, Touched / not applicable and Reason. Every row marked not applicable names its reason, such as 'the site lists no features' or 'no screenshot shows this menu'. A row without one fails the check, because that is how a forgotten surface hides.",
+      "ru": "В таблице три столбца: Surface, Touched / not applicable и Reason. Каждая строка с пометкой «не применимо» называет причину, например «на сайте нет списка возможностей» или «ни один скриншот не показывает это меню». Строка без причины не проходит проверку: именно так прячется забытая поверхность.",
+      "ua": "У таблиці три стовпці: Surface, Touched / not applicable і Reason. Кожен рядок із позначкою «не застосовно» називає причину, наприклад «на сайті немає списку можливостей» або «жоден знімок екрана не показує це меню». Рядок без причини не проходить перевірку: саме так ховається забута поверхня."
+    },
+    {
+      "en": "It writes the change as a user would want it told, task first, in `<ARTIFACT_LANGUAGE>`: 'Invoices can be exported as PDF', not 'added a PDF renderer'. The key noun, the name of the thing, is the one name every surface uses, and each authored locale renders it with its own fixed term.",
+      "ru": "Он записывает изменение так, как пользователь хотел бы его услышать, сначала задача, на языке `<ARTIFACT_LANGUAGE>`: «Invoices can be exported as PDF», а не «added a PDF renderer». Ключевое существительное, название самой вещи, - единственное имя, которое используют все поверхности, а каждая авторская локаль передаёт его своим закреплённым термином.",
+      "ua": "Він записує зміну так, як користувач хотів би її почути, спершу завдання, мовою `<ARTIFACT_LANGUAGE>`: «Invoices can be exported as PDF», а не «added a PDF renderer». Ключовий іменник, назва самої речі, - єдине ім'я, яке використовують усі поверхні, а кожна авторська локаль передає його своїм закріпленим терміном."
+    },
+    {
+      "en": "It edits every row marked touched, each authored locale in the same edit. A generated surface is changed in its source and regenerated, never edited by hand.",
+      "ru": "Он правит каждую строку с пометкой «затронуто», каждую авторскую локаль в той же правке. Сгенерированная поверхность меняется в своём источнике и пересобирается, но не правится вручную.",
+      "ua": "Він править кожен рядок із позначкою «зачеплено», кожну авторську локаль у тій самій правці. Згенерована поверхня змінюється у своєму джерелі й перегенеровується, але не правиться вручну."
+    },
+    {
+      "en": "It greps the key noun, and any old name it replaces, across every touched surface in each locale's term, and reads the hits. Each surface must say the same thing under the same name. Every stale mention, such as an old name, a removed option or a screenshot of the old screen, is fixed or listed in the report.",
+      "ru": "Он ищет ключевое существительное и любое прежнее имя, которое оно заменяет, по всем затронутым поверхностям, в термине каждой локали, и читает найденное. Каждая поверхность должна говорить одно и то же под одним именем. Каждое устаревшее упоминание, например старое имя, убранный параметр или скриншот старого экрана, исправляется или попадает в отчёт.",
+      "ua": "Він шукає ключовий іменник і будь-яке попереднє ім'я, яке той замінює, по всіх зачеплених поверхнях, у терміні кожної локалі, і читає знайдене. Кожна поверхня має казати те саме під одним іменем. Кожна застаріла згадка, наприклад старе ім'я, прибраний параметр чи знімок старого екрана, виправляється або потрапляє до звіту."
+    },
+    {
+      "en": "It re-prints the table with the final state, then one line: `surfaces: <sentence>. Touched N, not applicable N, stale mentions fixed N, listed N. Noun: \"<noun>\".`",
+      "ru": "Он повторно печатает таблицу с итоговым состоянием, затем одну строку: `surfaces: <sentence>. Touched N, not applicable N, stale mentions fixed N, listed N. Noun: \"<noun>\".`",
+      "ua": "Він повторно друкує таблицю з підсумковим станом, потім один рядок: `surfaces: <sentence>. Touched N, not applicable N, stale mentions fixed N, listed N. Noun: \"<noun>\".`"
+    }
+  ],
+  "outcome": {
+    "en": "The final table and one report line. Every touched surface says the same thing under the same name in each authored locale, and the report names each locale still missing.",
+    "ru": "Итоговая таблица и одна строка отчёта. Каждая затронутая поверхность говорит одно и то же под одним именем в каждой авторской локали, а отчёт называет каждую локаль, которой ещё не хватает.",
+    "ua": "Підсумкова таблиця й один рядок звіту. Кожна зачеплена поверхня каже те саме під одним іменем у кожній авторській локалі, а звіт називає кожну локаль, якої ще бракує."
+  },
+  "tips": [
+    {
+      "en": "It sits after the build of a user-visible change and before the ticket closes. [/spec-tech](fn:spec-tech) routes the final docs-cleanup phase through it when the strategic spec's section 8 mandates a docs update, [/spec-dev](fn:spec-dev) runs doc updates after the build without a rebuild, and [/spec-check](fn:spec-check) never edits a user surface; its User docs row only checks the result.",
+      "ru": "Он стоит после сборки изменения и до закрытия тикета. [/spec-tech](fn:spec-tech) направляет через него последнюю фазу docs-cleanup, если раздел 8 стратегической спеки требует обновить документацию, [/spec-dev](fn:spec-dev) обновляет документацию после сборки без пересборки, а [/spec-check](fn:spec-check) пользовательские поверхности не правит: его строка User docs лишь проверяет результат.",
+      "ua": "Він стоїть після збірки зміни й до закриття тікета. [/spec-tech](fn:spec-tech) спрямовує через нього останню фазу docs-cleanup, якщо розділ 8 стратегічної спеки вимагає оновити документацію, [/spec-dev](fn:spec-dev) оновлює документацію після збірки без перезбирання, а [/spec-check](fn:spec-check) користувацьких поверхонь не править: його рядок User docs лише перевіряє результат."
+    },
+    {
+      "en": "This is the [rules file](term:rules-file)'s post-change rule as a procedure: a new user-visible capability reaches every surface and every authored locale in the same change. The reason it holds is in the [validation ladder](fn:validation-ladder).",
+      "ru": "Это правило [файла правил](term:rules-file) «после изменения» в виде процедуры: новая видимая пользователю возможность попадает на каждую поверхность и в каждую авторскую локаль в том же изменении. Почему оно работает, объясняет [лестница проверок](fn:validation-ladder).",
+      "ua": "Це правило [файлу правил](term:rules-file) «після зміни» у вигляді процедури: нова видима користувачеві можливість потрапляє на кожну поверхню й у кожну авторську локаль у тій самій зміні. Чому воно працює, пояснює [драбина перевірок](fn:validation-ladder)."
+    },
+    {
+      "en": "Locales nobody on the team writes by hand may fan out later, in one pass at a release boundary, where the project has one; `/surfaces` only names each one still missing. A site or a rolling library has no such boundary, and there the whole fan-out stays part of the one edit.",
+      "ru": "Локали, которые никто в команде не пишет вручную, могут расходиться позже, одним проходом на границе релиза, если она у проекта есть; `/surfaces` лишь называет каждую недостающую. У сайта или непрерывно публикуемой библиотеки такой границы нет, и там весь разворот остаётся частью одной правки.",
+      "ua": "Локалі, які ніхто в команді не пише вручну, можуть розходитися пізніше, одним проходом на межі релізу, якщо вона в проєкту є; `/surfaces` лише називає кожну відсутню. У сайту чи бібліотеки, що публікується безперервно, такої межі немає, і там увесь розворот лишається частиною однієї правки."
+    },
+    {
+      "en": "Drift is fixed only in the lines you touch; older drift is reported as a finding or parked with [/park](fn:park). A second name for the same thing is a defect, not a style choice, so [/ui-clarify](fn:ui-clarify) asks about a new synonym before the build and this command greps for the old name after it.",
+      "ru": "Расхождения исправляются только в строках, которых вы касаетесь; более старые попадают в отчёт как находка или откладываются через [/park](fn:park). Второе имя для той же вещи - дефект, а не вопрос стиля: [/ui-clarify](fn:ui-clarify) спрашивает о новом синониме до сборки, а эта команда ищет старое имя после неё.",
+      "ua": "Розбіжності виправляються лише в рядках, яких ви торкаєтеся; давніші потрапляють до звіту як знахідка або відкладаються через [/park](fn:park). Друге ім'я для тієї самої речі - дефект, а не питання стилю: [/ui-clarify](fn:ui-clarify) питає про новий синонім до збірки, а ця команда шукає старе ім'я після неї."
+    }
+  ],
+  "related": ["spec-tech", "spec-dev", "spec-check", "ui-clarify", "spec-lifecycle"],
+  "terms": ["surface", "rules-file", "ticket"],
+  "keywords": {
+    "en": ["surfaces", "ship together", "did I forget anything", "update the docs", "README out of date", "authored locales", "one name per concept", "docs-cleanup"],
+    "ru": ["surfaces", "поверхности изменения", "не забыл ли я что-нибудь", "обновить документацию", "README устарел", "авторские локали", "одно имя для понятия", "docs-cleanup"],
+    "ua": ["surfaces", "поверхні зміни", "чи не забув я щось", "оновити документацію", "README застарів", "авторські локалі", "одне ім'я для поняття", "docs-cleanup"]
+  }
+}

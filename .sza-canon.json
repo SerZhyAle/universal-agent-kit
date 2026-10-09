@@ -29,11 +29,11 @@
   "site": {
     "kind": "portfolio",
     "root": ".",
-    "pages": ["index.html"]
+    "pages": ["index.html", "privacy.html", "portal/index.html", "portal/overview.html", "portal/showcase.html", "portal/subjects.html", "portal/glossary.html"]
   },
 
   "privacy": {
-    "page": null,
+    "page": "privacy.html",
     "carveOut": "zero-data",
     "sensitiveAccess": false
   },

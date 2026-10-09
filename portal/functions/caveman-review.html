@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en" data-theme="dark" data-root="../../">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Review a diff with one terse line per finding - Universal Agent Kit</title>
+<meta name="description" content="`/caveman-review` reviews the current diff, or what you name, and prints findings first, one line each: file, line, a label (`bug`, `risk`, `nit`, `q`), problem and fix.">
+<link rel="canonical" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/caveman-review.html">
+<link rel="alternate" hreflang="en" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/caveman-review.html?lang=en">
+<link rel="alternate" hreflang="ru" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/caveman-review.html?lang=ru">
+<link rel="alternate" hreflang="uk" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/caveman-review.html?lang=uk">
+<link rel="alternate" hreflang="x-default" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/caveman-review.html">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%233fb950'/%3E%3Cpath d='M20 18h24M20 30h24M20 42h16' stroke='%2304130c' stroke-width='5' stroke-linecap='round' fill='none'/%3E%3C/svg%3E">
+<meta name="theme-color" content="#0a0f0a">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Universal Agent Kit">
+<meta property="og:url" content="https://serzhyale.github.io/universal-agent-kit/portal/functions/caveman-review.html">
+<meta property="og:title" content="Review a diff with one terse line per finding - Universal Agent Kit">
+<meta property="og:description" content="`/caveman-review` reviews the current diff, or what you name, and prints findings first, one line each: file, line, a label (`bug`, `risk`, `nit`, `q`), problem and fix.">
+<meta property="og:image" content="https://serzhyale.github.io/universal-agent-kit/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Review a diff with one terse line per finding - Universal Agent Kit">
+<meta name="twitter:description" content="`/caveman-review` reviews the current diff, or what you name, and prints findings first, one line each: file, line, a label (`bug`, `risk`, `nit`, `q`), problem and fix.">
+<meta name="twitter:image" content="https://serzhyale.github.io/universal-agent-kit/og-image.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Review a diff with one terse line per finding - Universal Agent Kit","description":"`/caveman-review` reviews the current diff, or what you name, and prints findings first, one line each: file, line, a label (`bug`, `risk`, `nit`, `q`), problem and fix.","url":"https://serzhyale.github.io/universal-agent-kit/portal/functions/caveman-review.html","inLanguage":["en","ru","uk"],"isPartOf":{"@type":"WebSite","name":"Universal Agent Kit","url":"https://serzhyale.github.io/universal-agent-kit/"}}</script>
+<script type="application/json" id="page-i18n">{"t":{"ru":"Получить ревью изменений: одна строка на замечание - Universal Agent Kit","en":"Review a diff with one terse line per finding - Universal Agent Kit","ua":"Отримати рев'ю змін: один рядок на зауваження - Universal Agent Kit"},"d":{"ru":"`/caveman-review` проверяет текущий diff или названную цель и выводит замечания по одной строке: файл, строка, метка (`bug`, `risk`, `nit`, `q`), проблема, исправление.","en":"`/caveman-review` reviews the current diff, or what you name, and prints findings first, one line each: file, line, a label (`bug`, `risk`, `nit`, `q`), problem and fix.","ua":"`/caveman-review` перевіряє поточний diff або названу ціль і виводить зауваження по одному рядку: файл, рядок, мітка (`bug`, `risk`, `nit`, `q`), проблема, виправлення."},"ui":{"langGroup":{"en":"Language","ru":"Язык","ua":"Мова"},"theme":{"en":"Theme","ru":"Тема","ua":"Тема"},"toLight":{"en":"Switch to light theme","ru":"Включить светлую тему","ua":"Увімкнути світлу тему"},"toDark":{"en":"Switch to dark theme","ru":"Включить тёмную тему","ua":"Увімкнути темну тему"},"toTop":{"en":"Back to top","ru":"Наверх","ua":"Нагору"},"menu":{"en":"Menu","ru":"Меню","ua":"Меню"},"navPortal":{"en":"Portal","ru":"Портал","ua":"Портал"},"navTools":{"en":"More tools by SZA","ru":"Другие инструменты SZA","ua":"Інші інструменти SZA"},"navAuthor":{"en":"Author links","ru":"Ссылки автора","ua":"Посилання автора"},"navSection":{"en":"In this section","ru":"В этом разделе","ua":"У цьому розділі"},"breadcrumb":{"en":"Breadcrumb","ru":"Путь по сайту","ua":"Шлях сайтом"},"searchTitle":{"en":"Search the portal","ru":"Поиск по порталу","ua":"Пошук по порталу"},"searchEmpty":{"en":"Nothing found for","ru":"Ничего не найдено по запросу","ua":"Нічого не знайдено за запитом"},"searchEmptyHelp":{"en":"Browse the subject index instead.","ru":"Откройте предметный указатель.","ua":"Відкрийте предметний покажчик."},"searchCount":{"en":"results","ru":"результатов","ua":"результатів"},"searchFail":{"en":"The search index could not be loaded.","ru":"Не удалось загрузить индекс поиска.","ua":"Не вдалося завантажити індекс пошуку."},"kind.command":{"en":"Slash command","ru":"Slash-команда","ua":"Slash-команда"},"kind.agent":{"en":"Role agent","ru":"Ролевой агент","ua":"Рольовий агент"},"kind.practice":{"en":"Practice","ru":"Практика","ua":"Практика"}}}</script>
+<script>
+/* PAGE-STYLE section 7 pre-paint resolver, on the portfolio's shared keys sza-lang / sza-theme.
+   Language priority: ?lang= in the URL (a shared link wins) > saved choice > browser.
+   The UA switch keys "ua"; the URL, lang and hreflang keep the ISO code "uk". The legacy
+   uak-* keys are read once so a returning reader keeps their choice. */
+(function(){
+  var l, t;
+  try{
+    var q = (location.search.match(/[?&]lang=(ru|en|uk|ua)\b/i) || [])[1];
+    if(q){ l = q.toLowerCase(); }
+    else { l = localStorage.getItem('sza-lang') || localStorage.getItem('uak-lang'); }
+    if(l === 'uk') l = 'ua';
+    if(l){ localStorage.setItem('sza-lang', l); }
+    t = localStorage.getItem('sza-theme') || localStorage.getItem('uak-theme');
+    if(t){ localStorage.setItem('sza-theme', t); }
+  }catch(e){}
+  if(l !== 'ru' && l !== 'en' && l !== 'ua'){ var nav=(navigator.language||'en').toLowerCase(); l = nav.indexOf('ru')===0 ? 'ru' : (nav.indexOf('uk')===0 ? 'ua' : 'en'); }
+  if(t !== 'light' && t !== 'dark'){ t = (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) ? 'light' : 'dark'; }
+  var d = document.documentElement;
+  d.setAttribute('data-lang', l); d.setAttribute('lang', l === 'ua' ? 'uk' : l); d.setAttribute('data-theme', t);
+})();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/sza-kit.css">
+<link rel="stylesheet" href="../../assets/site.css">
+<link rel="stylesheet" href="../../assets/portal.css">
+</head>
+<body>
+<a class="skip-link" href="#main"><span data-l="ru">Перейти к содержимому</span><span data-l="en">Skip to the content</span><span data-l="ua">Перейти до вмісту</span></a>
+<div class="bg-blobs" aria-hidden="true"><div class="blob blob-1"></div><div class="blob blob-2"></div><div class="blob blob-3"></div></div>
+<svg class="icon-sprite" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+  <symbol id="icon-action-download" viewBox="0 0 24 24"><g transform="translate(12 12) scale(.917 .917) translate(-12 -12)"><path d="M19.35,10.04C18.67,6.59 15.64,4 12,4 9.11,4 6.6,5.64 5.35,8.04 2.34,8.36 0,10.91 0,14c0,3.31 2.69,6 6,6h13c2.76,0 5,-2.24 5,-5 0,-2.64 -2.05,-4.78 -4.65,-4.96zM17,13l-5,5 -5,-5h3V9h4v4h3z"/></g></symbol>
+  <symbol id="icon-nav-scroll-top" viewBox="0 0 24 24"><path d="M8 11h3v10h2V11h3l-4-4-4 4zM4 3v2h16V3H4z"/></symbol>
+</svg>
+<header class="site-header portal-header">
+    <a class="brand" href="../../">Universal&nbsp;Agent&nbsp;Kit<span class="dot">.</span></a>
+    <button class="ctl nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="portalNav"><span data-l="ru">Меню</span><span data-l="en">Menu</span><span data-l="ua">Меню</span></button>
+    <nav class="portal-nav" id="portalNav" aria-label="Portal" data-aria="navPortal">
+      <a href="../"><span data-l="ru">Портал</span><span data-l="en">Portal</span><span data-l="ua">Портал</span></a>
+      <a href="../overview.html"><span data-l="ru">Обзор</span><span data-l="en">Overview</span><span data-l="ua">Огляд</span></a>
+      <a href="../showcase.html"><span data-l="ru">Витрина</span><span data-l="en">Showcase</span><span data-l="ua">Вітрина</span></a>
+      <a href="../subjects.html"><span data-l="ru">Предметный указатель</span><span data-l="en">Subject index</span><span data-l="ua">Предметний покажчик</span></a>
+      <a href="../glossary.html"><span data-l="ru">Глоссарий</span><span data-l="en">Glossary</span><span data-l="ua">Глосарій</span></a>
+    </nav>
+    <button class="ctl search-open" id="searchOpen" type="button" aria-haspopup="dialog" aria-controls="searchDialog"><span data-l="ru">Поиск</span><span data-l="en">Search</span><span data-l="ua">Пошук</span><kbd aria-hidden="true">/</kbd></button>
+    <span class="seg" role="group" aria-label="Language" id="langGroup" data-aria="langGroup">
+      <button id="lng-ru" type="button" data-set-lang="ru" aria-pressed="false" aria-label="Русский">RU</button>
+      <button id="lng-en" type="button" data-set-lang="en" aria-pressed="true" aria-label="English">EN</button>
+      <button id="lng-ua" type="button" data-set-lang="ua" aria-pressed="false" aria-label="Українська">UA</button>
+    </span>
+    <button class="theme-btn" id="themeBtn" type="button" title="Theme" aria-label="Theme" aria-pressed="false"><span data-l="ru">Тема</span><span data-l="en">Theme</span><span data-l="ua">Тема</span></button>
+    <a class="btn btn-primary btn-sm" href="../../universal-agent-kit.zip" download>
+      <svg class="icon" aria-hidden="true"><use href="#icon-action-download"/></svg><span data-l="ru">Скачать kit (.zip)</span><span data-l="en">Download kit (.zip)</span><span data-l="ua">Завантажити kit (.zip)</span>
+    </a>
+</header>
+<main id="main" class="page">
+<nav class="crumbs" aria-label="Breadcrumb" data-aria="breadcrumb"><ol><li><a href="../../"><span data-l="ru">Universal Agent Kit</span><span data-l="en">Universal Agent Kit</span><span data-l="ua">Universal Agent Kit</span></a></li><li><a href="../"><span data-l="ru">Портал</span><span data-l="en">Portal</span><span data-l="ua">Портал</span></a></li><li><a href="../#section-skills"><span data-l="ru">Навыки: сценарии как slash-команды</span><span data-l="en">Skills: workflows as slash commands</span><span data-l="ua">Навички: сценарії як slash-команди</span></a></li><li aria-current="page"><span data-l="ru">Получить ревью изменений: одна строка на замечание</span><span data-l="en">Review a diff with one terse line per finding</span><span data-l="ua">Отримати рев'ю змін: один рядок на зауваження</span></li></ol></nav>
+<header class="page-head">
+<p class="eyebrow"><span class="pill"><span data-l="ru">Slash-команда</span><span data-l="en">Slash command</span><span data-l="ua">Slash-команда</span></span> <a href="../#section-skills"><span data-l="ru">Навыки: сценарии как slash-команды</span><span data-l="en">Skills: workflows as slash commands</span><span data-l="ua">Навички: сценарії як slash-команди</span></a></p>
+<h1><span data-l="ru">Получить ревью изменений: одна строка на замечание</span><span data-l="en">Review a diff with one terse line per finding</span><span data-l="ua">Отримати рев'ю змін: один рядок на зауваження</span></h1>
+<p class="lead prose"><span data-l="ru"><code>/caveman-review</code> - прямой и быстрый проход по изменению. Он проверяет по обычной планке, сначала баги, риски, регрессии и недостающие тесты, и выводит замечания до любого резюме, по одной строке на замечание, пока это остаётся ясным. Для более полного прохода используйте <a href="critique.html">/critique</a>.</span><span data-l="en"><code>/caveman-review</code> is the blunt, fast pass over a change. It reviews at the normal bar, with bugs, risks, regressions and missing tests first, and prints findings before any summary, one line per finding where that stays clear. For the fuller pass, use <a href="critique.html">/critique</a>.</span><span data-l="ua"><code>/caveman-review</code> - прямий і швидкий прохід по зміні. Він перевіряє за звичайною планкою, спершу баги, ризики, регресії та бракуючі тести, і виводить зауваження перед будь-яким підсумком, по одному рядку на зауваження, поки це лишається ясним. Для повнішого проходу використовуйте <a href="critique.html">/critique</a>.</span></p>
+</header>
+<article class="fn" data-kind="command">
+<div class="panels">
+<section class="panel" aria-labelledby="h-situation"><h2 id="h-situation"><span data-l="ru">Когда это нужно</span><span data-l="en">When to reach for it</span><span data-l="ua">Коли це потрібно</span></h2><p class="prose"><span data-l="ru">Нужен прямой и быстрый взгляд на diff: замечания, а не развёрнутый отчёт, без вступлений и похвал для объёма.</span><span data-l="en">You want a blunt, fast look at a diff: findings and not a write-up, with no throat-clearing or praise padding.</span><span data-l="ua">Потрібен прямий і швидкий погляд на diff: зауваження, а не розгорнутий звіт, без вступів і похвал для об'єму.</span></p></section>
+<section class="panel" aria-labelledby="h-requirements"><h2 id="h-requirements"><span data-l="ru">Требования</span><span data-l="en">Requirements</span><span data-l="ua">Вимоги</span></h2><dl class="req">
+<div><dt><span data-l="ru">Где доступно</span><span data-l="en">Available in</span><span data-l="ua">Де доступно</span></dt><dd><span data-l="ru">Каждая загрузка kit</span><span data-l="en">Every download of the kit</span><span data-l="ua">Кожне завантаження kit</span></dd></div>
+<div><dt><span data-l="ru">К чему обращается</span><span data-l="en">What it touches</span><span data-l="ua">До чого звертається</span></dt><dd><ul class="chips"><li class="pill"><span data-l="ru">Читает файлы проекта</span><span data-l="en">Reads the files of your project</span><span data-l="ua">Читає файли проєкту</span></li><li class="pill"><span data-l="ru">Запускает команды (проверки, git)</span><span data-l="en">Runs commands (checks, git)</span><span data-l="ua">Запускає команди (перевірки, git)</span></li></ul></dd></div>
+<div><dt><span data-l="ru">Работает с</span><span data-l="en">Works with</span><span data-l="ua">Працює з</span></dt><dd><span data-l="ru">Сделано для Claude Code; другие агенты адаптируют</span><span data-l="en">Built for Claude Code; other agents adapt it</span><span data-l="ua">Зроблено для Claude Code; інші агенти адаптують</span></dd></div>
+<div><dt><span data-l="ru">Где выполняются шаги</span><span data-l="en">Where the steps happen</span><span data-l="ua">Де виконуються кроки</span></dt><dd><span data-l="ru">Чат вашего агента и ваши собственные файлы. Ни то ни другое не интерфейс этого сайта, поэтому шаги описаны текстом, а не скриншотами.</span><span data-l="en">Your agent's chat and your own files. Neither is an interface of this site, so the steps are text and not screenshots.</span><span data-l="ua">Чат вашого агента і ваші власні файли. Ні те, ні інше не є інтерфейсом цього сайту, тому кроки описано текстом, а не скриншотами.</span></dd></div>
+<div><dt><span data-l="ru">Где это лежит в kit</span><span data-l="en">Where it lives in the kit</span><span data-l="ua">Де це лежить у kit</span></dt><dd><code>.claude/skills/caveman-review/SKILL.md</code></dd></div>
+</dl></section>
+<div class="note warn" role="note"><div class="tag"><span data-l="ru">Прежде чем начать</span><span data-l="en">Before you start</span><span data-l="ua">Перш ніж почати</span></div><p><span data-l="ru">Краткость - это формат, а не сниженная планка. Если однострочный комментарий скрыл бы важный контекст безопасности, архитектуры или разрушительного риска, либо проблема связана с безопасностью или архитектурно нетривиальна, ревью переходит на короткий абзац вместо принудительного сжатия до одной строки.</span><span data-l="en">Terse is a format, not a lower bar. When a one-line comment would hide important security, architectural or destructive-risk context, or the issue is security-sensitive or architecturally non-trivial, the review switches to a short paragraph instead of forcing one-line compression.</span><span data-l="ua">Стислість - це формат, а не знижена планка. Якщо однорядковий коментар приховав би важливий контекст безпеки, архітектури чи руйнівного ризику, або проблема стосується безпеки чи архітектурно нетривіальна, рев'ю переходить на короткий абзац замість примусового стискання до одного рядка.</span></p></div>
+<section class="panel wide" aria-labelledby="h-steps"><h2 id="h-steps"><span data-l="ru">Шаги</span><span data-l="en">Steps</span><span data-l="ua">Кроки</span></h2><ol class="steps">
+<li><span class="prose"><span data-l="ru">Введите <code>/caveman-review</code>, чтобы проверить текущий diff или переданный вами контекст, либо назовите цель: <code>/caveman-review PaymentService</code> сфокусируется на одном файле или символе. Строка вызова: <code>/caveman-review [optional: file, diff, or topic]</code>.</span><span data-l="en">Type <code>/caveman-review</code> to review the current diff or the context you provide, or name a target: <code>/caveman-review PaymentService</code> focuses on one file or symbol. The usage line is <code>/caveman-review [optional: file, diff, or topic]</code>.</span><span data-l="ua">Введіть <code>/caveman-review</code>, щоб перевірити поточний diff або переданий вами контекст, або назвіть ціль: <code>/caveman-review PaymentService</code> зосередиться на одному файлі чи символі. Рядок виклику: <code>/caveman-review [optional: file, diff, or topic]</code>.</span></span></li>
+<li><span class="prose"><span data-l="ru">Агент проверяет по обычной планке: сначала баги, риски, регрессии и недостающие тесты.</span><span data-l="en">The agent reviews at the normal bar: bugs, risks, regressions and missing tests come first.</span><span data-l="ua">Агент перевіряє за звичайною планкою: спершу баги, ризики, регресії та бракуючі тести.</span></span></li>
+<li><span class="prose"><span data-l="ru">Он выводит замечания до любого резюме, по одной строке на замечание, пока ясность сохраняется. Строка начинается с файла и номера строки, затем идёт метка: <code>bug</code>, <code>risk</code> или <code>nit</code> с проблемой и исправлением либо <code>q</code> с вопросом. Например: <code>PaymentService.cs:L42: bug: refund runs twice on retry. Add an idempotency key.</code></span><span data-l="en">It prints findings before any summary, one line per finding when clarity is preserved. A line starts with the file and the line number, then a label: <code>bug</code>, <code>risk</code> or <code>nit</code> followed by the problem and a fix, or <code>q</code> followed by a question. For example: <code>PaymentService.cs:L42: bug: refund runs twice on retry. Add an idempotency key.</code></span><span data-l="ua">Він виводить зауваження перед будь-яким підсумком, по одному рядку на зауваження, поки ясність зберігається. Рядок починається з файлу й номера рядка, далі йде мітка: <code>bug</code>, <code>risk</code> або <code>nit</code> з проблемою та виправленням чи <code>q</code> із запитанням. Наприклад: <code>PaymentService.cs:L42: bug: refund runs twice on retry. Add an idempotency key.</code></span></span></li>
+<li><span class="prose"><span data-l="ru">Символы, имена файлов, номера строк, команды, API и тексты ошибок остаются точными. Совет без конкретного направления, например голое предложение провести рефакторинг, недопустим: каждое замечание применимо на практике и технически точно.</span><span data-l="en">Exact symbols, file names, line numbers, commands, APIs and error strings stay unchanged. Advice with no concrete direction, such as a bare suggestion to refactor, is not allowed: every finding is actionable and technically exact.</span><span data-l="ua">Символи, імена файлів, номери рядків, команди, API й тексти помилок лишаються точними. Порада без конкретного напрямку, наприклад голе пропонування зробити рефакторинг, неприпустима: кожне зауваження придатне до дії й технічно точне.</span></span></li>
+<li><span class="prose"><span data-l="ru">Если замечаний нет, ревью прямо об этом говорит и коротко называет оставшиеся пробелы в тестах или проверке.</span><span data-l="en">If there are no findings, the review says so explicitly and briefly names the residual test or validation gaps.</span><span data-l="ua">Якщо зауважень немає, рев'ю прямо про це каже й коротко називає залишкові прогалини в тестах чи перевірці.</span></span></li>
+</ol></section>
+<div class="note outcome" role="note"><div class="tag"><span data-l="ru">Что вы должны увидеть</span><span data-l="en">What you should see</span><span data-l="ua">Що ви маєте побачити</span></div><p><span data-l="ru">Замечания, поставленные раньше любого резюме, у каждого файл, строка, метка и конкретное исправление или вопрос; либо прямое заявление, что замечаний нет, и оставшиеся пробелы в тестах и проверке.</span><span data-l="en">Findings placed ahead of any summary, each with file, line, label and a concrete fix or question; or an explicit statement that there are no findings, plus the remaining test and validation gaps.</span><span data-l="ua">Зауваження, поставлені раніше за будь-який підсумок, у кожного файл, рядок, мітка й конкретне виправлення чи запитання; або пряма заява, що зауважень немає, і залишкові прогалини в тестах та перевірці.</span></p></div>
+<section class="panel" aria-labelledby="h-tips"><h2 id="h-tips"><span data-l="ru">Советы</span><span data-l="en">Tips</span><span data-l="ua">Поради</span></h2><ul class="tips">
+<li class="prose"><span data-l="ru"><a href="critique.html">/critique</a> - более полный проход, с замечаниями, сгруппированными по важности. Для краткого вывода по одной строке на замечание kit отсылает к этой команде.</span><span data-l="en"><a href="critique.html">/critique</a> is the fuller pass, with findings grouped by severity. For terse one-line-per-finding output the kit points to this command instead.</span><span data-l="ua"><a href="critique.html">/critique</a> - повніший прохід, із зауваженнями, згрупованими за важливістю. Для стислого виводу по одному рядку на зауваження kit відсилає до цієї команди.</span></li>
+<li class="prose"><span data-l="ru">Ревью пишется на языке чата, если только вы не попросите готовые к вставке комментарии для PR: они пишутся на языке, который ваш проект задал в <code>&lt;ARTIFACT_LANGUAGE&gt;</code> - <a href="../glossary.html#term-placeholder">плейсхолдере</a> файла правил.</span><span data-l="en">The review is written in the chat language, unless you ask for paste-ready PR comments: those go in the language your project set as <code>&lt;ARTIFACT_LANGUAGE&gt;</code>, a <a href="../glossary.html#term-placeholder">placeholder</a> of the rules file.</span><span data-l="ua">Рев'ю пишеться мовою чату, якщо тільки ви не попросите готові до вставки коментарі для PR: вони пишуться мовою, яку ваш проєкт задав у <code>&lt;ARTIFACT_LANGUAGE&gt;</code> - <a href="../glossary.html#term-placeholder">плейсхолдері</a> файлу правил.</span></li>
+<li class="prose"><span data-l="ru">Чтобы кратким был каждый ответ в чате, а не только ревью, включите <a href="caveman.html">/caveman</a>. Для сообщения коммита есть <a href="caveman-commit.html">/caveman-commit</a>.</span><span data-l="en">To make every reply in the chat terse, not only the review, use <a href="caveman.html">/caveman</a>. For a commit message there is <a href="caveman-commit.html">/caveman-commit</a>.</span><span data-l="ua">Щоб стислою була кожна відповідь у чаті, а не лише рев'ю, увімкніть <a href="caveman.html">/caveman</a>. Для повідомлення коміту є <a href="caveman-commit.html">/caveman-commit</a>.</span></li>
+</ul></section>
+<section class="panel" aria-labelledby="h-related"><h2 id="h-related"><span data-l="ru">Связанные функции</span><span data-l="en">Related functions</span><span data-l="ua">Пов'язані функції</span></h2><ul class="fn-list">
+<li><a href="critique.html"><span data-l="ru">Провести ревью изменения и получить замечания по серьёзности</span><span data-l="en">Critique a change and get findings by severity</span><span data-l="ua">Провести рев'ю зміни й отримати зауваження за серйозністю</span></a><span class="fn-pitch"><span data-l="ru">Сжатое ревью diff, документа, набора данных или договора: сначала замечания, самые серьёзные выше, у каждого место и конкретная правка.</span><span data-l="en">A terse review of a diff, a document, a dataset or a contract: findings first, highest severity on top, each with a place and a concrete fix.</span><span data-l="ua">Стисле рев'ю diff, документа, набору даних чи договору: спершу зауваження, найсерйозніші вгорі, у кожного місце й конкретна правка.</span></span></li>
+<li><a href="caveman.html"><span data-l="ru">Перевести весь чат на короткие ответы по делу</span><span data-l="en">Put the whole chat into brief, signal-only replies</span><span data-l="ua">Перевести весь чат на короткі відповіді по суті</span></a><span class="fn-pitch"><span data-l="ru"><code>/caveman</code> переводит текущий чат в сжатый режим трёх степеней, <code>lite</code>, <code>full</code> или <code>ultra</code>, и держит его, пока вы не скажете <code>stop caveman</code> или <code>normal mode</code>.</span><span data-l="en"><code>/caveman</code> switches the current chat into terse mode at three intensities, <code>lite</code>, <code>full</code> or <code>ultra</code>, and keeps it until you say <code>stop caveman</code> or <code>normal mode</code>.</span><span data-l="ua"><code>/caveman</code> переводить поточний чат у стислий режим трьох ступенів, <code>lite</code>, <code>full</code> або <code>ultra</code>, і тримає його, доки ви не скажете <code>stop caveman</code> чи <code>normal mode</code>.</span></span></li>
+<li><a href="caveman-commit.html"><span data-l="ru">Получить краткое сообщение коммита для вставки</span><span data-l="en">Get a terse Conventional Commit message to paste</span><span data-l="ua">Отримати стисле повідомлення коміту для вставки</span></a><span class="fn-pitch"><span data-l="ru"><code>/caveman-commit</code> пишет краткое сообщение коммита в формате Conventional Commits по вашему описанию или diff, блоком для вставки. <code>git commit</code> он не запускает.</span><span data-l="en"><code>/caveman-commit</code> writes a terse Conventional Commit message from your description or the current diff, as a code block to paste. It never runs <code>git commit</code>.</span><span data-l="ua"><code>/caveman-commit</code> пише стисле повідомлення коміту у форматі Conventional Commits за вашим описом або поточним diff, блоком коду для вставки. <code>git commit</code> він не запускає.</span></span></li>
+</ul></section>
+<section class="panel wide" aria-labelledby="h-terms"><h2 id="h-terms"><span data-l="ru">Термины на этой странице</span><span data-l="en">Terms on this page</span><span data-l="ua">Терміни на цій сторінці</span></h2><ul class="chips">
+<li><a class="pill" href="../glossary.html#term-terse-mode"><span data-l="ru">Режим краткости (caveman)</span><span data-l="en">Terse mode (caveman)</span><span data-l="ua">Режим стислості (caveman)</span></a></li>
+<li><a class="pill" href="../glossary.html#term-placeholder"><span data-l="ru">Плейсхолдер</span><span data-l="en">Placeholder</span><span data-l="ua">Плейсхолдер</span></a></li>
+</ul></section>
+</div>
+<nav class="pager" aria-label="In this section" data-aria="navSection"><a class="pager-prev" rel="prev" href="caveman-commit.html"><span class="pager-dir"><span data-l="ru">Назад</span><span data-l="en">Previous</span><span data-l="ua">Назад</span></span><span><span data-l="ru">Получить краткое сообщение коммита для вставки</span><span data-l="en">Get a terse Conventional Commit message to paste</span><span data-l="ua">Отримати стисле повідомлення коміту для вставки</span></span></a></nav>
+</article>
+</main>
+<footer class="site-footer"><div class="container">
+  <div data-l="ru">
+    <strong>Universal Agent Kit</strong> - переносимый метод работы с ИИ-агентами.
+    <div class="cta">
+      <a class="btn btn-primary" href="../../universal-agent-kit.zip" download><svg class="icon" aria-hidden="true"><use href="#icon-action-download"/></svg>Скачать kit (.zip)</a>
+      <a class="btn btn-ghost" href="https://github.com/SerZhyAle/universal-agent-kit" target="_blank" rel="noopener">Исходный код</a>
+    </div>
+    <p class="muted">Kit - MIT · текст - CC BY 4.0 · выжимка из реального проекта, без привязки к стеку.</p>
+  </div>
+  <div data-l="en">
+    <strong>Universal Agent Kit</strong> - a portable method for working with AI agents.
+    <div class="cta">
+      <a class="btn btn-primary" href="../../universal-agent-kit.zip" download><svg class="icon" aria-hidden="true"><use href="#icon-action-download"/></svg>Download kit (.zip)</a>
+      <a class="btn btn-ghost" href="https://github.com/SerZhyAle/universal-agent-kit" target="_blank" rel="noopener">Source code</a>
+    </div>
+    <p class="muted">Kit is MIT · prose is CC BY 4.0 · distilled from a real project, stack-agnostic.</p>
+  </div>
+  <div data-l="ua">
+    <strong>Universal Agent Kit</strong> - переносний метод роботи з ШІ-агентами.
+    <div class="cta">
+      <a class="btn btn-primary" href="../../universal-agent-kit.zip" download><svg class="icon" aria-hidden="true"><use href="#icon-action-download"/></svg>Завантажити kit (.zip)</a>
+      <a class="btn btn-ghost" href="https://github.com/SerZhyAle/universal-agent-kit" target="_blank" rel="noopener">Вихідний код</a>
+    </div>
+    <p class="muted">Kit - MIT · текст - CC BY 4.0 · дистильовано з реального проєкту, без прив'язки до стеку.</p>
+  </div>
+  <section class="tools-family" aria-labelledby="more-tools-heading">
+    <h2 id="more-tools-heading"><span data-l="ru">Другие инструменты SZA</span><span data-l="en">More tools by SZA</span><span data-l="ua">Інші інструменти SZA</span></h2>
+    <nav class="tools-grid" aria-label="More tools by SZA" data-aria="navTools">
+        <a href="https://serzhyale.github.io/FastMediaSorter_mob_v2/" target="_blank" rel="noopener">Fast Media Sorter &amp; Organizer</a>
+        <a href="https://serzhyale.github.io/FastMediaSorter_Lite/" target="_blank" rel="noopener">Fast Media Sorter for Windows</a>
+        <a href="https://serzhyale.github.io/CyrFlip/" target="_blank" rel="noopener">CyrFlip</a>
+        <a href="https://serzhyale.github.io/doc-html-translate/" target="_blank" rel="noopener">doc-html-translate</a>
+        <a href="https://serzhyale.github.io/FileDO/" target="_blank" rel="noopener">FileDO</a>
+        <a href="https://serzhyale.github.io/StreamsPlayer/" target="_blank" rel="noopener">STREAMS Player</a>
+        <a href="https://serzhyale.github.io/OneClickRunner/" target="_blank" rel="noopener">OneClickRunner</a>
+        <a href="https://sza.od.ua" target="_blank" rel="noopener">SZA (hub)</a>
+    </nav>
+  </section>
+  <div class="footer-bottom">
+    <span>&copy; 2026 <a href="https://sza.od.ua" target="_blank" rel="noopener">Serhii Zhyhunenko</a></span>
+    <nav aria-label="Author links" data-aria="navAuthor"><a href="../../privacy.html"><span data-l="ru">Конфиденциальность</span><span data-l="en">Privacy</span><span data-l="ua">Конфіденційність</span></a> &middot; <a href="https://sza.od.ua" target="_blank" rel="noopener">sza.od.ua</a> &middot; <a href="https://github.com/SerZhyAle" target="_blank" rel="noopener">GitHub</a> &middot; <a href="mailto:sza@ukr.net">sza@ukr.net</a></nav>
+  </div>
+  <p class="provenance muted"><span data-l="ru">Собрано по опыту разработки из FastMediaSorter - Android-приложения, которое живёт на этом методе каждый день более года.</span><span data-l="en">Built from hands-on experience with FastMediaSorter - a shipping Android app run on this method every day for over a year.</span><span data-l="ua">Зібрано за досвідом розробки з FastMediaSorter - Android-застосунку, що живе на цьому методі щодня понад рік.</span></p>
+</div></footer>
+<button class="to-top" id="toTop" type="button" aria-label="Back to top" title="Back to top"><svg class="icon" aria-hidden="true"><use href="#icon-nav-scroll-top"/></svg></button>
+<dialog class="search-dialog" id="searchDialog" aria-labelledby="searchTitle">
+  <form method="dialog" class="search-form" id="searchForm">
+    <div class="search-head">
+      <h2 id="searchTitle"><span data-l="ru">Поиск по порталу</span><span data-l="en">Search the portal</span><span data-l="ua">Пошук по порталу</span></h2>
+      <button class="btn btn-ghost btn-sm" type="button" id="searchClose"><span data-l="ru">Закрыть</span><span data-l="en">Close</span><span data-l="ua">Закрити</span></button>
+    </div>
+    <input class="search-input" id="searchInput" type="search" autocomplete="off" spellcheck="false" aria-labelledby="searchTitle" placeholder="Search..">
+    <p class="search-status" id="searchStatus" role="status" aria-live="polite"></p>
+    <ul class="search-results" id="searchResults"></ul>
+  </form>
+</dialog>
+<script src="../../assets/portal.js" defer></script>
+</body>
+</html>

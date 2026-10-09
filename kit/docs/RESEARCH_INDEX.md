@@ -60,6 +60,14 @@ Three rules keep an index trustworthy:
   because a miss looks exactly like a cheap call. Log the miss rate. Treat a high one as a defect in
   the index's coverage or in its query vocabulary, never as the caller's fault.
 
+**A declared register is checked in both directions.** Some indexes cannot be generated: a register
+of every document in a maintained area (`docs/`, say), each with its role and whether it is published,
+declares what no tool can derive. Checking that every record points at a file that exists is only
+half. The other half is **reverse coverage**: walk the area and fail on any file with no record and no
+named exclusion - without it the register describes only what it already knew, and a new file joins in
+silence. Register a file before anything links to it, and build the first register from the tree as it
+is, exclusions and their reasons included, never from the tree somebody remembers.
+
 **An index alone does not get used - pair it with a refusal.** Making the cheap path available does
 not close the expensive one. A pre-filter that narrowed oversized reads was measured being retried
 immediately at full width in ~32% of the reads it caught: the agent still wanted the whole file,
@@ -87,16 +95,11 @@ current; a stale inventory hides duplicates instead of preventing them.
 
 ## Work in parallel
 
-Independent lookups should run concurrently, not in sequence. A local symbol search and an
-external docs fetch answering the same question start in the same breath - never wait for one
-before kicking off the other. If your runtime has sub-agents, fan out: one reads the local code,
-another reads the framework docs, a third checks open issues. You spend wall-clock once instead
-of three times.
+Independent lookups run concurrently, not in sequence - how to fan readers out is in `PARALLEL.md`
+"Readers fan out freely".
 
-Research is the safe half of this: extra readers cost only tokens. The moment a wave contains
-**writers**, the rules change - a whole-tree VCS op one writer runs reverts every other writer's
-uncommitted edits, on disjoint files too. Isolation, checkout-per-writer, merge-back and the
-unattended driver are in `PARALLEL.md`; the budget gate and the lock queue are in `COST.md`.
+Research is the safe half of parallel work; the moment a wave contains **writers** the rules change,
+and why is in `PARALLEL.md` "Writers need a boundary" (the budget gate is in `COST.md`).
 
 ## Persist what you find
 

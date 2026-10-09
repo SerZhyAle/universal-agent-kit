@@ -1,0 +1,10 @@
+{
+  "id": "kit",
+  "term": { "en": "Kit", "ru": "Kit", "ua": "Kit" },
+  "def": {
+    "en": "The downloadable folder `universal-agent-kit/`: a rules template, skills, role agents, methodology documents and memory examples, all plain files. Nothing in it installs or runs; your agent reads it and adds only what fits your project.",
+    "ru": "Скачиваемая папка `universal-agent-kit/`: шаблон правил, навыки, ролевые агенты, методические документы и примеры памяти, всё обычными файлами. Ничего из этого не устанавливается и не запускается; ваш агент читает папку и добавляет только то, что подходит проекту.",
+    "ua": "Тека `universal-agent-kit/`, яку можна завантажити: шаблон правил, навички, рольові агенти, методичні документи та приклади пам'яті, усе звичайними файлами. Нічого з цього не встановлюється й не запускається; ваш агент читає теку й додає лише те, що підходить проєкту."
+  },
+  "see": ["agent", "skill"]
+}

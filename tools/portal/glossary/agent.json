@@ -1,0 +1,10 @@
+{
+  "id": "agent",
+  "term": { "en": "Agent", "ru": "Агент", "ua": "Агент" },
+  "def": {
+    "en": "An AI model that can read and write the files of your project and run commands, driven from a chat or a terminal. Claude Code, Codex, Gemini, Cursor and Cline are examples. The kit is written for any of them and built first for Claude Code.",
+    "ru": "ИИ-модель, которая умеет читать и писать файлы вашего проекта и запускать команды, управляемая из чата или терминала. Примеры: Claude Code, Codex, Gemini, Cursor, Cline. Kit написан для любого из них и в первую очередь собран для Claude Code.",
+    "ua": "ШІ-модель, що вміє читати й писати файли вашого проєкту та запускати команди, керована з чату або термінала. Приклади: Claude Code, Codex, Gemini, Cursor, Cline. Kit написано для будь-якого з них і насамперед зібрано для Claude Code."
+  },
+  "see": ["skill", "kit"]
+}

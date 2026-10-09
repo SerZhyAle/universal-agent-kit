@@ -1,0 +1,10 @@
+{
+  "id": "worktree",
+  "term": { "en": "Worktree", "ru": "Рабочее дерево (worktree)", "ua": "Робоче дерево (worktree)" },
+  "def": {
+    "en": "A linked git worktree: another working directory of the same repository with its own branch and a shared object store, so it is cheap to create and to throw away. One per writing agent keeps a tree-wide command of one from reverting another's uncommitted edits. Claude Code does it per subagent with `isolation: worktree`, branching from the default branch, not the current HEAD.",
+    "ru": "Связанное рабочее дерево git: ещё один рабочий каталог того же репозитория со своей веткой и общим хранилищем объектов, поэтому его дёшево создать и выбросить. По одному на каждого пишущего агента: команда над всем деревом у одного не откатит несохранённые правки другого. Claude Code делает это для субагента через `isolation: worktree`, ветвясь от ветки по умолчанию, а не от текущего HEAD.",
+    "ua": "Пов'язане робоче дерево git: ще одна робоча тека того самого репозиторію зі своєю гілкою та спільним сховищем об'єктів, тому його дешево створити й викинути. По одному на кожного агента, що пише: команда над усім деревом в одного не відкотить незбережені правки іншого. Claude Code робить це для субагента через `isolation: worktree`, відгалужуючись від гілки за замовчуванням, а не від поточного HEAD."
+  },
+  "see": ["advisory-lock", "fan-out"]
+}

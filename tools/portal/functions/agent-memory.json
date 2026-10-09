@@ -1,0 +1,109 @@
+{
+  "id": "agent-memory",
+  "title": {
+    "en": "Keep what the agent learns from one session to the next",
+    "ru": "Сохранить то, чему агент научился, до следующей сессии",
+    "ua": "Зберегти те, чого агент навчився, до наступної сесії"
+  },
+  "pitch": {
+    "en": "A folder of plain Markdown files the agent reads at the start and writes to as it learns, so the same correction is never needed twice.",
+    "ru": "Папка с обычными Markdown-файлами: агент читает её в начале сессии и пополняет по ходу работы, поэтому одну и ту же поправку не приходится повторять.",
+    "ua": "Тека зі звичайними Markdown-файлами: агент читає її на початку сесії й доповнює в ході роботи, тож одну й ту саму поправку не доводиться повторювати."
+  },
+  "lead": {
+    "en": "An AI assistant forgets everything between sessions: how you like to work, why a past decision went the way it did, which corrections you already gave. The kit's answer is a `memory/` directory of plain Markdown under version control: the committed, team-shared layer that sits beside the runtime's own per-user memory. A short index is read at the start of every session, and one small file per memory is opened only when it looks relevant.",
+    "ru": "Ассистент на базе ИИ забывает всё между сессиями: как вы любите работать, почему прошлое решение пошло именно так, какие поправки вы уже давали. Ответ kit - каталог `memory/` из обычного Markdown под версионным контролем: закоммиченный слой для всей команды, который работает рядом с личной памятью среды выполнения. Короткий индекс читается в начале каждой сессии, а файл отдельной записи открывается, только если выглядит уместным.",
+    "ua": "ШІ-асистент забуває все між сесіями: як ви любите працювати, чому минуле рішення пішло саме так, які поправки ви вже давали. Відповідь kit - тека `memory/` зі звичайного Markdown під контролем версій: закомічений шар для всієї команди, що працює поряд з особистою пам'яттю середовища виконання. Короткий індекс читається на початку кожної сесії, а файл окремого запису відкривається, лише коли виглядає доречним."
+  },
+  "situation": {
+    "en": "You give the agent the same correction again, explain your background again, or restate a constraint behind a decision that neither the files nor their history show.",
+    "ru": "Вы снова даёте агенту ту же поправку, снова рассказываете о себе или заново излагаете ограничение за решением, которого не видно ни в файлах, ни в их истории.",
+    "ua": "Ви знову даєте агентові ту саму поправку, знову розповідаєте про себе або заново викладаєте обмеження за рішенням, якого не видно ні у файлах, ні в їхній історії."
+  },
+  "warning": {
+    "en": "A memory is true only as of the day it was written. If an entry names a path or a flag, check that it exists before acting on it, and when memory and the repo disagree, trust the repo and fix or delete the entry. A memory that summarizes repo state is frozen in time: for the current state, read the live files.",
+    "ru": "Запись верна лишь на день, когда её написали. Если в записи названы путь или флаг, проверьте, что они существуют, прежде чем действовать, а при расхождении памяти с репозиторием верьте репозиторию и исправьте или удалите запись. Запись, пересказывающая состояние репозитория, застывает во времени: за текущим состоянием идите в живые файлы.",
+    "ua": "Запис правдивий лише на день, коли його написали. Якщо в записі названо шлях чи прапорець, перевірте, що вони існують, перш ніж діяти, а за розбіжності пам'яті з репозиторієм вірте репозиторієві й виправте або видаліть запис. Запис, що переказує стан репозиторію, застигає в часі: за поточним станом ідіть у живі файли."
+  },
+  "steps": [
+    {
+      "en": "Put a `memory/` directory in the project, under version control, and start from the kit's `memory/MEMORY.md`. That file is the index: one line per memory, a title linked to its file and a one-line hook, grouped by topic. It is loaded into the agent's [context](term:context) at the start of every session, so it stays short enough to be read whole, and it never holds memory content.",
+      "ru": "Заведите в проекте каталог `memory/` под версионным контролем и начните с `memory/MEMORY.md` из kit. Этот файл и есть индекс: одна строка на запись, заголовок со ссылкой на файл и однострочная подсказка, с группировкой по темам. Он загружается в [контекст](term:context) агента в начале каждой сессии, поэтому остаётся достаточно коротким, чтобы прочитать его целиком, и не содержит самих записей.",
+      "ua": "Заведіть у проєкті теку `memory/` під контролем версій і почніть із `memory/MEMORY.md` з kit. Цей файл і є індексом: один рядок на запис, заголовок із посиланням на файл та однорядкова підказка, згруповані за темами. Він завантажується в [контекст](term:context) агента на початку кожної сесії, тож лишається достатньо коротким, щоб прочитати його цілком, і не містить самих записів."
+    },
+    {
+      "en": "Make sure the agent reads it. Nothing loads a repo `memory/` folder on its own: the rules file has to import or name it. The kit's `CLAUDE.md` imports `@memory/MEMORY.md`, which covers Claude Code. If you are not on Claude Code, or your rules file does not import the index, add one line to the rules file (`AGENTS.md`): at the start of a session, read `memory/MEMORY.md` and open any entry that looks relevant. That line is the whole mechanism. See [the rules file](fn:rules-file).",
+      "ru": "Убедитесь, что агент его читает. Каталог `memory/` из репозитория сам ничто не загружает: файл правил должен его импортировать или назвать. `CLAUDE.md` из kit импортирует `@memory/MEMORY.md`, это закрывает Claude Code. Если вы не в Claude Code или ваш файл правил не импортирует индекс, добавьте в файл правил (`AGENTS.md`) одну строку: в начале сессии прочитать `memory/MEMORY.md` и открыть любую уместную запись. Эта строка и есть весь механизм. См. [файл правил](fn:rules-file).",
+      "ua": "Переконайтеся, що агент його читає. Теку `memory/` із репозиторію саму ніщо не завантажує: файл правил має її імпортувати або назвати. `CLAUDE.md` з kit імпортує `@memory/MEMORY.md`, це закриває Claude Code. Якщо ви не в Claude Code або ваш файл правил не імпортує індекс, додайте до файлу правил (`AGENTS.md`) один рядок: на початку сесії прочитати `memory/MEMORY.md` і відкрити будь-який доречний запис. Цей рядок і є весь механізм. Див. [файл правил](fn:rules-file)."
+    },
+    {
+      "en": "Split the work with the runtime's own memory. Claude Code keeps an auto memory per repository under the user's home, in `~/.claude/projects/<project>/memory/`: written by the model, machine-local, nothing in it committed or shared. Put project context and confirmed ways of working in the committed `memory/`, personal preferences in the per-user store, and never the same fact in both places: two copies agree only until the first edit.",
+      "ru": "Разделите работу с собственной памятью среды. Claude Code ведёт автопамять для каждого репозитория в домашнем каталоге пользователя, в `~/.claude/projects/<project>/memory/`: её пишет сама модель, она локальна для машины, ничего из неё не коммитится и не делится. Контекст проекта и подтверждённые приёмы работы кладите в закоммиченный `memory/`, личные предпочтения - в личное хранилище, а один и тот же факт не держите в обоих местах: две копии совпадают лишь до первой правки.",
+      "ua": "Розділіть роботу з власною пам'яттю середовища. Claude Code веде автопам'ять для кожного репозиторію в домашньому каталозі користувача, у `~/.claude/projects/<project>/memory/`: її пише сама модель, вона локальна для машини, нічого з неї не комітиться й не ділиться. Контекст проєкту та підтверджені прийоми роботи кладіть у закомічений `memory/`, особисті вподобання - в особисте сховище, а той самий факт не тримайте в обох місцях: дві копії збігаються лише до першої правки."
+    },
+    {
+      "en": "Give each memory one of four types. `user`: who the person is, used to pitch explanations; rare in a committed folder, since a fact about one person usually belongs in their per-user memory. `feedback`: how to work here, learned from corrections and from confirmations. `project`: ongoing context that the files and their history do not hold, with relative dates turned into absolute ones. `reference`: a pointer to information in an external system and why it matters.",
+      "ru": "Дайте каждой записи один из четырёх типов. `user`: кто этот человек, чтобы объяснять на нужном уровне; в закоммиченной папке встречается редко, потому что факт об одном человеке обычно относится к его личной памяти. `feedback`: как здесь работать, по итогам поправок и подтверждений. `project`: текущий контекст, которого нет ни в файлах, ни в их истории; относительные даты заменяются абсолютными. `reference`: указатель на сведения во внешней системе и пояснение, зачем он нужен.",
+      "ua": "Дайте кожному записові один із чотирьох типів. `user`: хто ця людина, щоб пояснювати на потрібному рівні; у закоміченій теці трапляється рідко, бо факт про одну людину зазвичай належить до її особистої пам'яті. `feedback`: як тут працювати, за підсумками поправок і підтверджень. `project`: поточний контекст, якого немає ні у файлах, ні в їхній історії; відносні дати замінюються абсолютними. `reference`: вказівник на відомості у зовнішній системі та пояснення, навіщо він потрібен."
+    },
+    {
+      "en": "Read the five files in `memory/examples/` for the shape of each type: `user_role.md`, `feedback_change_granularity.md`, `feedback_figures_carry_source.md`, `project_release_freeze.md` and `reference_issue_tracker.md`. Delete their lines from the index once you have real memories.",
+      "ru": "Посмотрите пять файлов в `memory/examples/`, чтобы увидеть форму каждого типа: `user_role.md`, `feedback_change_granularity.md`, `feedback_figures_carry_source.md`, `project_release_freeze.md` и `reference_issue_tracker.md`. Когда появятся настоящие записи, удалите их строки из индекса.",
+      "ua": "Перегляньте п'ять файлів у `memory/examples/`, щоб побачити форму кожного типу: `user_role.md`, `feedback_change_granularity.md`, `feedback_figures_carry_source.md`, `project_release_freeze.md` і `reference_issue_tracker.md`. Коли з'являться справжні записи, видаліть їхні рядки з індексу."
+    },
+    {
+      "en": "Write each memory as its own file named `<type>_<slug>.md`, for example `feedback_change_granularity.md`. Start with frontmatter: `name`, a one-line `description` that the agent scans to judge relevance, and `type`. For `feedback` and `project`, lead with the rule or fact, then **Why:** and **How to apply:**. Link related entries inline with `[[slug]]`; a link to a slug not yet written marks something worth writing later.",
+      "ru": "Каждую запись храните в отдельном файле с именем `<type>_<slug>.md`, например `feedback_change_granularity.md`. Начните с frontmatter: `name`, однострочное `description`, по которому агент судит об уместности, и `type`. Для `feedback` и `project` сначала правило или факт, затем **Why:** и **How to apply:**. Связанные записи связывайте в тексте как `[[slug]]`; ссылка на ещё ненаписанный слаг отмечает то, что стоит написать позже.",
+      "ua": "Кожен запис зберігайте в окремому файлі з іменем `<type>_<slug>.md`, наприклад `feedback_change_granularity.md`. Почніть із frontmatter: `name`, однорядковий `description`, за яким агент судить про доречність, і `type`. Для `feedback` і `project` спершу правило чи факт, потім **Why:** і **How to apply:**. Пов'язані записи пов'язуйте в тексті як `[[slug]]`; посилання на ще ненаписаний слаг позначає те, що варто написати згодом."
+    },
+    {
+      "en": "Add one pointer line to `MEMORY.md` under a topical heading, never the body, and check first whether an existing entry should be updated instead. Hold the index to a ceiling: Claude Code's own loader stops at 200 lines or 25KB and silently ignores the rest. Record the line count as a [ratchet](term:ratchet): a change may lower it, and one that would raise it pays with a prune, a merge or a dropped stale entry.",
+      "ru": "Добавьте в `MEMORY.md` одну строку-указатель под тематическим заголовком, но не само тело, и сначала проверьте, не стоит ли обновить существующую запись. Держите индекс в пределах потолка: собственный загрузчик Claude Code останавливается на 200 строках или 25KB и молча игнорирует остальное. Запишите число строк как [храповик](term:ratchet): изменение может его снизить, а то, что подняло бы его, оплачивается чисткой - слиянием или удалением устаревшей записи.",
+      "ua": "Додайте до `MEMORY.md` один рядок-вказівник під тематичним заголовком, але не саме тіло, і спершу перевірте, чи не варто оновити наявний запис. Тримайте індекс у межах стелі: власний завантажувач Claude Code зупиняється на 200 рядках або 25KB і мовчки ігнорує решту. Запишіть кількість рядків як [храповик](term:ratchet): зміна може її знизити, а те, що підняло б її, оплачується чищенням - злиттям або видаленням застарілого запису."
+    },
+    {
+      "en": "Apply the test before saving: will this still be true and useful three sessions from now, and could the agent not just read it off the repo? Do not save code patterns, architecture, file paths, who changed what and when, fix recipes, anything already in the rules file, or the state of a task in flight. These exclusions hold even when you ask for the save: ask what was surprising or non-obvious, and keep only that.",
+      "ru": "Перед сохранением примените проверку: будет ли это верно и полезно через три сессии и нельзя ли просто прочитать это в репозитории? Не сохраняйте шаблоны кода, архитектуру, пути к файлам, кто и когда что менял, рецепты исправлений, всё, что уже есть в файле правил, и состояние незавершённой задачи. Исключения действуют, даже когда вы сами просите сохранить: спросите, что было неожиданным или неочевидным, и оставьте только это.",
+      "ua": "Перед збереженням застосуйте перевірку: чи це буде правдиве й корисне через три сесії і чи не можна просто прочитати це в репозиторії? Не зберігайте шаблони коду, архітектуру, шляхи до файлів, хто і коли що змінював, рецепти виправлень, усе, що вже є у файлі правил, і стан незавершеної задачі. Винятки діють, навіть коли ви самі просите зберегти: спитайте, що було несподіваним чи неочевидним, і лишіть тільки це."
+    }
+  ],
+  "outcome": {
+    "en": "A `memory/` directory with a short, honest `MEMORY.md` index and one small file per durable fact. The next session starts by reading the index and opens only the entries that look relevant, so the same guidance is never needed twice.",
+    "ru": "Каталог `memory/` с коротким честным индексом `MEMORY.md` и маленьким файлом на каждый долговечный факт. Следующая сессия начинается с чтения индекса и открывает только уместные записи, поэтому одну и ту же подсказку не приходится давать дважды.",
+    "ua": "Тека `memory/` із коротким чесним індексом `MEMORY.md` і маленьким файлом на кожен довговічний факт. Наступна сесія починається з читання індексу й відкриває лише доречні записи, тож одну й ту саму підказку не доводиться давати двічі."
+  },
+  "tips": [
+    {
+      "en": "Save confirmations as well as corrections. A correction is loud and a confirmation is quiet, but without the quiet ones the agent drifts away from approaches you already blessed and grows over-cautious.",
+      "ru": "Сохраняйте не только поправки, но и подтверждения. Поправка звучит громко, подтверждение тихо, но без тихих агент уходит от подходов, которые вы уже одобрили, и становится излишне осторожным.",
+      "ua": "Зберігайте не лише поправки, а й підтвердження. Поправка звучить голосно, підтвердження тихо, але без тихих агент відходить від підходів, які ви вже схвалили, і стає надмірно обережним."
+    },
+    {
+      "en": "Expire an entry by liveness, not by age. A `project` entry exists because of a piece of work (a freeze, an incident, a ticket): delete it in the same change that closes that work. A three-month-old `feedback` entry can be the most valuable line in the index; a week-old `project` entry about a finished release is already noise. An entry that names a path or symbol that is gone is expired too.",
+      "ru": "Списывайте запись по живости, а не по возрасту. Запись `project` существует из-за какой-то работы, например заморозки, инцидента или тикета: удалите её в том же изменении, что закрывает эту работу. Трёхмесячная запись `feedback` может оказаться самой ценной строкой индекса, а недельная запись `project` о закончившемся релизе уже шум. Запись с путём или символом, которых больше нет, тоже списана.",
+      "ua": "Списуйте запис за живістю, а не за віком. Запис `project` існує через якусь роботу, наприклад заморозку, інцидент чи тікет: видаліть його в тій самій зміні, що закриває цю роботу. Тримісячний запис `feedback` може виявитися найціннішим рядком індексу, а тижневий запис `project` про завершений реліз уже шум. Запис зі шляхом чи символом, яких уже немає, теж списано."
+    },
+    {
+      "en": "Keep memory apart from a plan and a task list. Memory survives sessions; a plan aligns an approach before a non-trivial task; a task list tracks steps within one session. For work that spans an interruption, write a short handoff (goal, what changed, decisions, open blockers, the single next step) in a [scratch](term:scratch) file or the plan, never in `memory/`.",
+      "ru": "Не смешивайте память с планом и списком задач. Память переживает сессии; план согласует подход перед нетривиальной задачей; список задач отслеживает шаги внутри одной сессии. Для работы, которую прервут, напишите короткую передачу (цель, что изменилось, решения, открытые блокеры, единственный следующий шаг) в [черновой](term:scratch) файл или в план, но не в `memory/`.",
+      "ua": "Не змішуйте пам'ять із планом і списком завдань. Пам'ять переживає сесії; план узгоджує підхід перед нетривіальною задачею; список завдань відстежує кроки в межах однієї сесії. Для роботи, яку перервуть, напишіть коротку передачу (мета, що змінилося, рішення, відкриті блокери, єдиний наступний крок) у [чорновий](term:scratch) файл чи в план, але не в `memory/`."
+    },
+    {
+      "en": "Committed or per-user is decided per fact, not per project. The discipline is identical either way, only the home differs, and on a public repo anything you would not publish stays out of the committed folder. Claude Code's own memory changes over time; its [current documentation](https://code.claude.com/docs/en/memory) is the reference.",
+      "ru": "Хранить в репозитории или лично у пользователя, решается для каждого факта отдельно, а не для проекта. Дисциплина в обоих случаях одна, различается только место, а в публичном репозитории всё, что вы не стали бы публиковать, в закоммиченную папку не попадает. Собственная память Claude Code со временем меняется; справочник - её [актуальная документация](https://code.claude.com/docs/en/memory).",
+      "ua": "Зберігати в репозиторії чи особисто в користувача, вирішується для кожного факту окремо, а не для проєкту. Дисципліна в обох випадках одна, різниться лише місце, а в публічному репозиторії все, що ви не стали б публікувати, до закоміченої теки не потрапляє. Власна пам'ять Claude Code з часом змінюється; довідник - її [актуальна документація](https://code.claude.com/docs/en/memory)."
+    },
+    {
+      "en": "The four types are a default, not a law, and a fifth is allowed. Resist turning memory into a wiki: the index is read every session and must stay short. If several writing agents start crowding each other, give each its own subdirectory of `memory/` and point its role brief at that path.",
+      "ru": "Четыре типа - основа, а не закон, пятый добавить можно. Не превращайте память в вики: индекс читается в каждой сессии и должен оставаться коротким. Если несколько пишущих агентов начинают мешать друг другу, выделите каждому свой подкаталог в `memory/` и укажите путь в его ролевом брифе.",
+      "ua": "Чотири типи - основа, а не закон, п'ятий додати можна. Не перетворюйте пам'ять на вікі: індекс читається в кожній сесії й має лишатися коротким. Якщо кілька агентів, що пишуть, починають заважати одне одному, виділіть кожному власну підтеку в `memory/` і вкажіть шлях у його ролевому брифі."
+    }
+  ],
+  "related": ["rules-file", "research-index", "parallel-writers"],
+  "terms": ["memory", "context", "scratch", "ratchet"],
+  "keywords": {
+    "en": ["agent memory", "persistent memory", "MEMORY.md", "memory index", "memory types", "remember between sessions", "per-user memory"],
+    "ru": ["память агента", "постоянная память", "MEMORY.md", "индекс памяти", "типы памяти", "помнить между сессиями", "личная память"],
+    "ua": ["пам'ять агента", "постійна пам'ять", "MEMORY.md", "індекс пам'яті", "типи пам'яті", "пам'ятати між сесіями", "особиста пам'ять"]
+  }
+}

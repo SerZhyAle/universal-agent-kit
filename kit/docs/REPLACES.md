@@ -1,7 +1,7 @@
 # Placeholder Replacements Reference
 
-How to fill the `<PLACEHOLDER>` tokens in `CLAUDE.md`, the skills (slash commands), and the agents
-when importing the **Universal Agent Kit** into your project.
+How to fill the `<PLACEHOLDER>` tokens in the rules files (`AGENTS.md`, `CLAUDE.md`), the skills
+(`.claude/skills/`), and the agents when importing the **Universal Agent Kit** into your project.
 
 There are two tiers. **Fill tier 1 always.** Fill tier 2 only if your project compiles or runs -
 and if it does not, delete the rules that use those tokens rather than inventing values for them. A
@@ -15,20 +15,21 @@ propose a value for each from the actual project.
 
 ## Tier 1 - every project
 
-These ten apply to any project that has files, work items and checks.
+These eleven apply to any project that has files, work items and checks.
 
 | Token | What it is | Software | Data & analysis | Writing & docs | Legal & ops |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | `<PROJECT_NAME>` | The project's name. | `user-service` | `q3-churn-model` | `platform-handbook` | `acme-msa-2026` |
-| `<CHAT_LANGUAGE>` | The language the agent talks to you in. Artifacts stay English. | `English` | `English` | `Russian` | `English` |
+| `<CHAT_LANGUAGE>` | The language the agent talks to you in. | `English` | `English` | `Russian` | `English` |
+| `<ARTIFACT_LANGUAGE>` | The language of files, docs, logs and commits. | `English` | `English`, or the team's language | `Russian` (the manuscript's language) | `German` (legal: the jurisdiction's; ops: the team's) |
 | `<INDEX_DOC>` | The map the agent reads first. | `README.md` | `docs/DATA_DICTIONARY.md` | `SUMMARY.md` | `MATTER_INDEX.md` |
 | `<WORK_ROOT>` | Where the project's real material lives. | `src` | `pipelines` | `content` | `drafts` |
 | `<CHECK_CMD>` | The command that proves a change is sound. The one nobody may leave empty. | `npm test` | `make validate` (schema + row counts) | `npm run lint:docs` (links, headings, terms) | `pwsh tools/check-terms.ps1` |
 | `<PLAN_DIR>` | Where spec/plan files live. | `PLAN` | `PLAN` | `PLAN` | `PLAN` |
 | `<SCRATCH_DIR>` | Throwaway artifacts and backups, ignored by version control. | `tmp` | `.scratch` | `tmp` | `tmp` |
-| `<SIZE_BUDGET>` | Size past which a file gets split along a real seam. | `500` lines | `400` lines | `800` lines (one chapter) | `1200` lines (one agreement) |
+| `<SIZE_BUDGET>` | Line count past which a file gets split along a real seam. A bare number: the templates add the `~` and the unit. | `500` | `400` | `800` (one chapter) | `1200` (one agreement) |
 | `<READONLY_ZONES>` | Paths the agent must never modify. | `dist, node_modules` | `data/raw` | `locales/generated` | `executed, filed` |
-| `<ID>` | The ticket id scheme. | `T0042` | `AN-042` | `DOC-042` | `M-042` |
+| `<ID_SCHEME>` | The ticket id scheme, filled once. Not `<ID>` - see below. | `T0042` | `AN-042` | `DOC-042` | `M-042` |
 
 ### The ones worth a second thought
 
@@ -42,8 +43,11 @@ that must succeed). Point this at the cheapest real one you have, today, and imp
 **`<INDEX_DOC>`** - not just something to read, something to *maintain*. It is where the agent's
 research order starts, so a stale map costs a wrong turn on every task (`RESEARCH_INDEX.md`).
 
-**`<CHAT_LANGUAGE>`** - the conversational language only. Code, symbols, commit messages, file
-names and comments stay English regardless, so the project stays readable to anyone who joins it.
+**`<CHAT_LANGUAGE>`** and **`<ARTIFACT_LANGUAGE>`** - two settings, because talking and delivering
+are different jobs. The chat language is what the agent speaks to you. The artifact language is
+what it writes into files, docs, logs and commits: English by default for a code project, so the
+project stays readable to anyone who joins it; a lawyer, a translator or an analyst may deliver in
+the document's own language instead.
 
 **`<READONLY_ZONES>`** - vendored code, generated output, raw data, anything already executed or
 filed. Write `none` if there is nothing; an empty value reads as an unfinished merge.
@@ -56,8 +60,8 @@ your own review starts complaining.
 ## Tier 2 - the code layer
 
 Fill these if your project builds or runs. If it does not, delete the rules that reference them -
-`CLAUDE.md` section 7's code-layer bullet, section 6 (verification tags), the structural rules in
-`CODE_QUALITY.md`, and the stack lines in the `implementer` and `rd-lead` agents.
+the code-layer rules and the verification-tag rule in the rules file (`AGENTS.md`), the structural
+rules in `CODE_QUALITY.md`, and the stack lines in the `implementer` and `rd-lead` agents.
 
 | Token | What it is | Frontend / Node.js | Backend (Go / Python) | Mobile (Kotlin / Swift) | Systems (Rust / C++) |
 | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -82,29 +86,41 @@ what lets it pick a compile over a full build.
 
 These are **not** configuration. They are filled on the fly, per ticket, as you use the skills:
 
+* `<ID>` - one ticket's id under `<ID_SCHEME>` (`T0042`), filled each time a ticket is made, never at
+  merge time. A merge that writes a fixed id into the skills breaks every ticket after the first.
 * `<slug>` - a short hyphenated description of the ticket (`add-login-button`).
 * `<NN>` / `<NNNN>` - a sequence number for a phase or a research artifact (`01`, `0042`) - not the
   ticket id itself.
-* `<TS>` - a timestamp slug for scratch filenames (`20260702_1530`), used by `/verify` and
-  `/research`.
+* `<TS>` - a timestamp slug for scratch filenames (`20260702_1530`), used by `/prove`.
 * `<TODO>` - an action item or unfinished piece.
 * `<symbol>` - a name in the material: a class, a function, a column, a defined term.
 * `<path>` - a file or folder path.
 * `???` - an unresolved decision or check.
-* `$ARGUMENTS` - Claude Code injects whatever you typed after the slash command here. In other
+* `$ARGUMENTS` - Claude Code injects whatever you typed after the skill's name here. In other
   tools it is the text after your saved-prompt trigger - substitute your tool's equivalent.
 
 ---
 
 ## Coming from an earlier copy of the kit
 
-Two tokens were renamed when the kit stopped assuming its projects were codebases, and one is new:
+What was renamed, moved or added since earlier copies:
 
 | Was | Now | Why |
 | :--- | :--- | :--- |
 | `<SRC_ROOT>` | `<WORK_ROOT>` | The material is not always source. |
 | `<MAX_LOC>` | `<SIZE_BUDGET>` | Lines of code is one unit among several. |
 | - | `<CHECK_CMD>` | The generic proof step the four build tokens specialize. |
+| `<ID>` (the setting) | `<ID_SCHEME>` | One name was doing two jobs: the scheme, filled once, and one ticket's id, filled per ticket. |
+| "Artifacts: English", fixed | `<ARTIFACT_LANGUAGE>` | A contract or a manuscript is delivered in its own language. |
+| `/verify` | `/prove` | The old name shadowed a command the runtime ships. |
+| `/review` | `/critique` | The old name shadowed a command the runtime ships. |
+| `.claude/commands/<name>.md` | `.claude/skills/<name>/SKILL.md` | Skills are the runtime's current format, and the one other agent tools read too. |
 
-A find-and-replace over your filled-in copy covers the first two. The third has no old value to
-carry over: pick the cheapest check you already run by hand, and write it down.
+A find-and-replace over your filled-in copy covers `<WORK_ROOT>` and `<SIZE_BUDGET>`.
+`<CHECK_CMD>` has no old value to carry over: pick the cheapest check you already run by hand, and
+write it down. Rename `<ID>` to `<ID_SCHEME>` only where it names the setting - never globally, since
+the skills use `<ID>` per ticket; if an earlier merge wrote a fixed id such as `T0042` into the
+skills, put `<ID>` back. `<ARTIFACT_LANGUAGE>` is new: `English` keeps the old behaviour. For the
+two renamed skills and the folder move, copy `.claude/skills/` from the new kit, fill its
+placeholders, and delete the old `.claude/commands/` files - left in place, `/verify` and `/review`
+keep shadowing the runtime's own.

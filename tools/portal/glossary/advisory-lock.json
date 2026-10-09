@@ -1,0 +1,10 @@
+{
+  "id": "advisory-lock",
+  "term": { "en": "Advisory lock", "ru": "Рекомендательная блокировка (advisory lock)", "ua": "Рекомендаційне блокування (advisory lock)" },
+  "def": {
+    "en": "A lock that writers take by agreement just before an edit, so they queue instead of editing at once. In a git repository its path is resolved from the shared git directory, not from the working tree: a per-worktree lock serializes nothing, and gives no error while it does so.",
+    "ru": "Блокировка, которую пишущие берут по договорённости непосредственно перед правкой, чтобы стоять в очереди, а не править одновременно. В репозитории git путь к ней берут из общего каталога git, а не из рабочего дерева: блокировка на каждое дерево ничего не упорядочивает и при этом не выдаёт ошибки.",
+    "ua": "Блокування, яке ті, що пишуть, беруть за домовленістю безпосередньо перед правкою, щоб стояти в черзі, а не правити одночасно. У репозиторії git шлях до нього беруть зі спільної теки git, а не з робочого дерева: блокування на кожне дерево нічого не впорядковує й при цьому не видає помилки."
+  },
+  "see": ["worktree", "fan-out"]
+}

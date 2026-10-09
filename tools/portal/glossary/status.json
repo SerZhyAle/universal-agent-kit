@@ -1,0 +1,10 @@
+{
+  "id": "status",
+  "term": { "en": "Status", "ru": "Статус", "ua": "Статус" },
+  "def": {
+    "en": "The state of a ticket, kept as the first `Status:` line in its file: `Draft`, `Approved`, `Tactical`, `In Progress`, `Implemented`, `Verified`, or `Partial` and `Broken` after an audit. It is true because the work makes it true, never because a filename or a wish says so. `Archived` ends a cancelled ticket.",
+    "ru": "Состояние тикета, записанное первой строкой `Status:` в его файле: `Draft`, `Approved`, `Tactical`, `In Progress`, `Implemented`, `Verified`, а после аудита `Partial` и `Broken`. Он верен потому, что его делает верным работа, а не название файла или желание. `Archived` завершает отменённый тикет.",
+    "ua": "Стан тікета, записаний першим рядком `Status:` у його файлі: `Draft`, `Approved`, `Tactical`, `In Progress`, `Implemented`, `Verified`, а після аудиту `Partial` і `Broken`. Він правдивий тому, що його робить правдивим робота, а не назва файлу чи бажання. `Archived` завершує скасований тікет."
+  },
+  "see": ["ticket", "block-status"]
+}

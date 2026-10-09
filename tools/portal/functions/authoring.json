@@ -1,0 +1,114 @@
+{
+  "id": "authoring",
+  "title": {
+    "en": "Write a rule, skill or agent that changes behaviour",
+    "ru": "Написать правило, навык или агента, которые меняют поведение",
+    "ua": "Написати правило, навичку чи агента, що змінюють поведінку"
+  },
+  "pitch": {
+    "en": "Write a rule only after an agent has failed without it: capture the failure and its excuse, write the minimal rule, close the loopholes, make it a gate if it recurs.",
+    "ru": "Пишите правило, только когда агент сбился без него: зафиксируйте сбой и оправдание, напишите минимум, закройте лазейки, а при повторе сделайте гейт.",
+    "ua": "Пишіть правило лише після того, як агент збився без нього: зафіксуйте збій і виправдання, напишіть мінімальне правило, закрийте лазівки, а за повтору переведіть у гейт."
+  },
+  "lead": {
+    "en": "When you extend the kit with a new rule, command or gate, you are writing a directive that must change an agent's behaviour, not just read well. `docs/AUTHORING.md` is the discipline for that: test-driven development applied to instructions. See the agent fail, write the minimal rule that fixes that failure, and name the excuse it used.",
+    "ru": "Когда вы расширяете kit новым правилом, командой или гейтом, вы пишете указание, которое должно изменить поведение агента, а не просто хорошо читаться. `docs/AUTHORING.md` - дисциплина для этого: разработка через тесты, применённая к инструкциям. Увидьте, как агент сбивается, напишите минимальное правило против этого сбоя и назовите оправдание, которым он воспользовался.",
+    "ua": "Коли ви розширюєте kit новим правилом, командою чи гейтом, ви пишете вказівку, яка має змінити поведінку агента, а не просто добре читатися. `docs/AUTHORING.md` - дисципліна для цього: розробка через тести, застосована до інструкцій. Побачте, як агент збивається, напишіть мінімальне правило проти цього збою й назвіть виправдання, яким він скористався."
+  },
+  "situation": {
+    "en": "You are about to add a line to the rules file, write your own skill, define a new agent or wire in a new gate. Start the first time you write your own, not before: the kit's own rules were written this way.",
+    "ru": "Вы собираетесь добавить строку в файл правил, написать свой навык, описать нового агента или подключить новый гейт. Начинайте, когда впервые пишете своё, а не раньше: собственные правила kit писались именно так.",
+    "ua": "Ви збираєтеся додати рядок у файл правил, написати свою навичку, описати нового агента чи підключити новий гейт. Починайте, коли вперше пишете своє, а не раніше: власні правила kit писалися саме так."
+  },
+  "warning": {
+    "en": "Prose is the weakest form of a directive. In the kit's reference corpus, directives with a gate or an event hook behind them were followed about 99% of the time and rulebook prose 1-8%; the best prose case ever measured was 22%. If the failure is mechanically checkable, write the gate.",
+    "ru": "Проза - самая слабая форма указания. В эталонном корпусе kit правила с гейтом или событийным хуком за спиной выполнялись примерно в 99% случаев, а проза свода правил - в 1-8%; лучший замеренный случай для прозы - 22%. Если сбой можно проверить механически, пишите гейт.",
+    "ua": "Проза - найслабша форма вказівки. В еталонному корпусі kit правила з гейтом чи подієвим хуком за спиною виконувалися приблизно у 99% випадків, а проза зводу правил - в 1-8%; найкращий виміряний випадок для прози - 22%. Якщо збій можна перевірити механічно, пишіть гейт."
+  },
+  "steps": [
+    {
+      "en": "Observe. Capture the failure verbatim: the wrong action and the rationalization the agent used to justify it, such as 'the build looked fine', 'the diff was trivial' or 'tests probably pass'. The rationalization is the evidence that matters, because it is the exact loophole the rule must close.",
+      "ru": "Наблюдайте. Зафиксируйте сбой дословно: неверное действие и оправдание, которым агент его обосновал, например «сборка выглядела нормально», «диф был тривиальный» или «тесты, наверное, проходят». Оправдание - главное свидетельство: это ровно та лазейка, которую правило должно закрыть.",
+      "ua": "Спостерігайте. Зафіксуйте збій дослівно: хибну дію і виправдання, яким агент її обґрунтував, наприклад «збірка виглядала нормально», «діф був тривіальний» чи «тести, мабуть, проходять». Виправдання - головний доказ: це рівно та лазівка, яку правило має закрити."
+    },
+    {
+      "en": "Write the minimal rule: the shortest directive that would have prevented that specific failure. Do not generalise to failures you have not seen. Add those cases when they, too, are observed.",
+      "ru": "Напишите минимальное правило: самое короткое указание, которое предотвратило бы именно этот сбой. Не обобщайте на сбои, которых вы не видели. Добавьте такие случаи, когда их тоже заметите.",
+      "ua": "Напишіть мінімальне правило: найкоротшу вказівку, яка запобігла б саме цьому збою. Не узагальнюйте на збої, яких ви не бачили. Додайте такі випадки, коли їх теж помітите."
+    },
+    {
+      "en": "Close the loopholes. List the excuses that would let an agent wriggle out and counter each one. For a discipline rule that is tempting to skip, keep a [rationalization table](term:rationalization-table): the excuse actually used, then its counter. Keep only excuses a real run produced; invented ones bury the counters that matter.",
+      "ru": "Закройте лазейки. Перечислите оправдания, которыми агент мог бы выкрутиться, и ответьте на каждое. Для дисциплинарного правила, которое соблазнительно пропустить, ведите [таблицу оправданий](term:rationalization-table): оправдание, которым реально воспользовались, и ответ на него. Оставляйте только те оправдания, что породил настоящий запуск: выдуманные хоронят важные ответы.",
+      "ua": "Закрийте лазівки. Перелічіть виправдання, якими агент міг би викрутитися, і дайте відповідь на кожне. Для дисциплінарного правила, яке спокусливо пропустити, ведіть [таблицю виправдань](term:rationalization-table): виправдання, яким реально скористалися, і відповідь на нього. Лишайте тільки ті виправдання, що їх породив справжній запуск: вигадані ховають важливі відповіді."
+    },
+    {
+      "en": "Write the description as a trigger, not a summary. Start with 'Use when..' or 'Use to..' and name the intents, symptoms, error messages or file contexts that should pull the skill in. Do not pretell the process: an agent that can read the procedure in the description follows that and skips the body. Stay under roughly 500 characters.",
+      "ru": "Пишите описание как триггер, а не как пересказ. Начинайте с «Use when..» или «Use to..» и называйте намерения, симптомы, тексты ошибок или контексты файлов, которые должны подтянуть навык. Не пересказывайте процесс: агент, который читает процедуру в описании, следует ей и пропускает тело. Укладывайтесь примерно в 500 знаков.",
+      "ua": "Пишіть опис як тригер, а не як переказ. Починайте з «Use when..» або «Use to..» і називайте наміри, симптоми, тексти помилок чи контексти файлів, що мають підтягнути навичку. Не переказуйте процес: агент, який читає процедуру в описі, слідує їй і пропускає тіло. Вкладайтеся приблизно у 500 знаків."
+    },
+    {
+      "en": "Put the directive where it belongs. Behaviour that applies everywhere goes in the rules file, `AGENTS.md`, in one canonical copy. A mechanical, greppable, recurring check becomes a gate wired into your 'done' command, pre-commit hook or CI, and names its scope class: per-change closure or release/CI sweep. A named procedure is a skill: a folder with a `SKILL.md` or a saved prompt. A role is an agent, and its description says when to pick it over its neighbours.",
+      "ru": "Поместите указание туда, где ему место. Поведение, общее для всех случаев, идёт в файл правил `AGENTS.md`, в одной канонической копии. Механическая, находимая поиском, повторяющаяся проверка становится гейтом в вашей команде «готово», pre-commit хуке или CI и называет свой класс охвата: закрытие правки или прогон при релизе и в CI. Именованная процедура - навык: папка с `SKILL.md` или сохранённый промпт. Роль - агент, и его описание говорит, когда выбирать его, а не соседей.",
+      "ua": "Помістіть вказівку туди, де їй місце. Поведінка, спільна для всіх випадків, іде у файл правил `AGENTS.md`, в одній канонічній копії. Механічна, знаходна пошуком, повторювана перевірка стає гейтом у вашій команді «готово», pre-commit хуку чи CI і називає свій клас охоплення: закриття правки або прогін під час релізу й у CI. Іменована процедура - навичка: тека з `SKILL.md` або збережений промпт. Роль - агент, і його опис каже, коли обирати його, а не сусідів."
+    },
+    {
+      "en": "For an event hook, count first: how many occurrences will the event actually see over a real window? An event that carries a tenth of the decisions you want to influence gives an inert hook. Then pick the verdict, correct the input or refuse the call, and list the hook in the hook inventory in the same change that registers it.",
+      "ru": "Для событийного хука сначала посчитайте: сколько случаев событие реально увидит за настоящее окно времени? Событие, несущее десятую часть решений, на которые вы хотите повлиять, даёт мёртвый хук. Затем выберите вердикт - исправить вход или отказать вызову - и внесите хук в реестр хуков в той же правке, что его регистрирует.",
+      "ua": "Для подієвого хука спершу порахуйте: скільки випадків подія реально побачить за справжнє вікно часу? Подія, що несе десяту частину рішень, на які ви хочете вплинути, дає мертвий хук. Потім оберіть вердикт - виправити вхід чи відмовити виклику - і внесіть хук у реєстр хуків у тій самій правці, що його реєструє."
+    },
+    {
+      "en": "Promote the rule if it recurs. When the failure is mechanically detectable and keeps happening, turn the prose rule into an automated gate. On legacy code adopt it as a [ratchet](term:ratchet): the gate fails only on new violations. State the substance once, in the canonical rule or the skill body, and point to it from everywhere else.",
+      "ru": "Повысьте правило, если сбой повторяется. Когда сбой механически обнаруживается и не прекращается, превратите правило-прозу в автоматический гейт. На унаследованном коде вводите его как [храповик](term:ratchet): гейт падает только на новых нарушениях. Суть излагайте один раз, в каноническом правиле или теле навыка, а во всех остальных местах ссылайтесь на неё.",
+      "ua": "Підвищте правило, якщо збій повторюється. Коли збій механічно виявляється й не припиняється, перетворіть правило-прозу на автоматичний гейт. На успадкованому коді вводьте його як [храповик](term:ratchet): гейт падає лише на нових порушеннях. Суть викладайте один раз, у канонічному правилі чи тілі навички, а в усіх інших місцях посилайтеся на неї."
+    }
+  ],
+  "outcome": {
+    "en": "A directive that traces to one observed failure and names the excuse it closes, with a description that works as a trigger and a home that matches how it can be checked: rules file, gate, skill, agent or hook.",
+    "ru": "Указание, которое восходит к одному замеченному сбою и называет оправдание, которое закрывает, с описанием-триггером и местом, соответствующим тому, как его можно проверить: файл правил, гейт, навык, агент или хук.",
+    "ua": "Вказівка, що сходить до одного поміченого збою й називає виправдання, яке закриває, з описом-тригером і місцем, що відповідає тому, як її можна перевірити: файл правил, гейт, навичка, агент чи хук."
+  },
+  "tips": [
+    {
+      "en": "When not to add a rule: the failure was a genuine one-off; a rule or gate already covers it, so sharpen that one; it is checkable and would be ignored as prose, so write the gate directly; or you have not seen it fail yet. A rule with no red behind it is a guess wearing a uniform.",
+      "ru": "Когда правило не нужно: сбой был разовым; правило или гейт его уже покрывает, тогда заточите существующее; сбой проверяется механически, а проза игнорировалась бы, тогда пишите сразу гейт; или вы ещё не видели этот сбой. Правило без красного прогона за спиной - догадка в мундире.",
+      "ua": "Коли правило не потрібне: збій був разовим; правило чи гейт його вже покриває, тоді заточіть наявне; збій перевіряється механічно, а прозу ігнорували б, тоді пишіть одразу гейт; або ви ще не бачили цей збій. Правило без червоного прогону за спиною - здогад у мундирі."
+    },
+    {
+      "en": "A description that only restates the title is the common default and a real defect: an agent that reaches the skill list without the routing rulebook in focus cannot route itself. Fill the trigger line even if a routing section exists, and keep it to stable trigger phrases so the two do not drift.",
+      "ru": "Описание, которое лишь повторяет название, - частое умолчание и настоящий дефект: агент, добравшийся до списка навыков без свода маршрутизации в фокусе, не может выбрать сам. Заполняйте строку-триггер, даже если есть раздел маршрутизации, и держите её в устойчивых фразах-триггерах, чтобы они не разъехались.",
+      "ua": "Опис, що лише повторює назву, - поширене типове значення і справжній дефект: агент, який дістався списку навичок без зводу маршрутизації у фокусі, не може вибрати сам. Заповнюйте рядок-тригер, навіть якщо є розділ маршрутизації, і тримайте його в сталих фразах-тригерах, щоб вони не розійшлися."
+    },
+    {
+      "en": "If a directive cannot be checked mechanically, expect the low number and place it where it is read at the moment of the decision: a skill body, an agent brief, a hook's refusal message. A rulebook read once at session start is the wrong place.",
+      "ru": "Если указание нельзя проверить механически, ждите низкого результата и ставьте его там, где его читают в момент решения: в теле навыка, в описании агента, в сообщении об отказе хука. Свод правил, прочитанный один раз в начале сессии, - неподходящее место.",
+      "ua": "Якщо вказівку не можна перевірити механічно, чекайте низького результату й ставте її там, де її читають у момент рішення: в тілі навички, в описі агента, в повідомленні про відмову хука. Звід правил, прочитаний раз на початку сесії, - невдале місце."
+    },
+    {
+      "en": "Keep the rules file short enough to be read. Claude Code's own guidance is under 200 lines per rules file: a longer one costs context every turn and is followed less. One canonical copy also means `CLAUDE.md` imports `AGENTS.md` for Claude Code instead of repeating it.",
+      "ru": "Держите файл правил достаточно коротким, чтобы его читали. Собственная рекомендация Claude Code - меньше 200 строк на файл правил: более длинный стоит контекста в каждом ходе и выполняется хуже. Одна каноническая копия значит и то, что `CLAUDE.md` импортирует `AGENTS.md` для Claude Code, а не повторяет его.",
+      "ua": "Тримайте файл правил достатньо коротким, щоб його читали. Власна рекомендація Claude Code - менше 200 рядків на файл правил: довший коштує контексту в кожному ході й виконується гірше. Одна канонічна копія означає й те, що `CLAUDE.md` імпортує `AGENTS.md` для Claude Code, а не повторює його."
+    },
+    {
+      "en": "A skill loads on demand: only its description sits in context every turn, so a procedure that one kind of task needs belongs in a skill, not in the rules file. Once invoked, the whole body stays and is paid for on every later turn. Put the load-bearing rules at the top of `SKILL.md` and long material in `references/`, opened by name when a stated condition holds.",
+      "ru": "Навык загружается по требованию: в контексте каждый ход лежит только его описание, поэтому процедуру, нужную одному виду задач, держат в навыке, а не в файле правил. После вызова всё тело остаётся и оплачивается в каждом следующем ходе. Главные правила ставьте в начало `SKILL.md`, а длинный материал - в `references/`: его открывают по имени, когда выполнено названное условие.",
+      "ua": "Навичка завантажується на вимогу: у контексті в кожному ході лежить лише її опис, тому процедуру, потрібну одному виду задач, тримають у навичці, а не у файлі правил. Після виклику все тіло лишається й оплачується в кожному наступному ході. Головні правила ставте на початок `SKILL.md`, а довгий матеріал - у `references/`: його відкривають за іменем, коли виконано названу умову."
+    },
+    {
+      "en": "A row of the table, from the kit: the excuse 'The subagent reported the build passed.' gets the counter 'A self-report is not evidence. Re-run the command and read the exit code yourself.' Only excuses that were actually produced in a real run earn a row.",
+      "ru": "Строка таблицы из kit: оправдание «The subagent reported the build passed.» получает ответ «A self-report is not evidence. Re-run the command and read the exit code yourself.» Строки заслуживают только оправдания, которые реально прозвучали в настоящем запуске.",
+      "ua": "Рядок таблиці з kit: виправдання «The subagent reported the build passed.» отримує відповідь «A self-report is not evidence. Re-run the command and read the exit code yourself.» Рядків варті лише виправдання, які справді прозвучали в справжньому запуску."
+    },
+    {
+      "en": "A tool without frontmatter descriptions still needs the trigger rule for whatever one-liner indexes its saved prompts or modes: a Cursor command title, the first line of a Codex preamble.",
+      "ru": "Если в вашем инструменте нет описаний во frontmatter, правило триггера всё равно действует для строки, которая индексирует сохранённые промпты или режимы: названия команды Cursor, первой строки преамбулы Codex.",
+      "ua": "Якщо у вашому інструменті немає описів у frontmatter, правило тригера все одно діє для рядка, який індексує збережені промпти чи режими: назви команди Cursor, першого рядка преамбули Codex."
+    }
+  ],
+  "related": ["rules-file", "hooks", "anti-slop", "validation-ladder"],
+  "terms": ["rationalization-table", "rules-file", "skill", "agent", "hook", "gate", "ratchet"],
+  "keywords": {
+    "en": ["write a rule", "new skill", "new agent", "observed failure", "rationalization table", "skill description", "SDO description", "authoring"],
+    "ru": ["написать правило", "новый навык", "новый агент", "замеченный сбой", "таблица оправданий", "описание навыка", "описание SDO", "авторинг правил"],
+    "ua": ["написати правило", "нова навичка", "новий агент", "помічений збій", "таблиця виправдань", "опис навички", "опис SDO", "авторинг правил"]
+  }
+}

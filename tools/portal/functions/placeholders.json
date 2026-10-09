@@ -1,0 +1,119 @@
+{
+  "id": "placeholders",
+  "title": {
+    "en": "Fill the placeholders of the rules file for your project",
+    "ru": "Заполнить плейсхолдеры файла правил под свой проект",
+    "ua": "Заповнити плейсхолдери файлу правил під свій проєкт"
+  },
+  "pitch": {
+    "en": "Fill the eleven tier-1 tokens every project needs, the six code-layer tokens only if the project builds or runs, and delete the rules that have no subject.",
+    "ru": "Заполните одиннадцать токенов первого яруса, нужных любому проекту, шесть токенов слоя кода только если проект собирается или запускается, и удалите правила без предмета.",
+    "ua": "Заповніть одинадцять токенів першого ярусу, потрібних усім, шість токенів шару коду лише якщо проєкт збирається чи запускається, і видаліть правила без предмета."
+  },
+  "lead": {
+    "en": "After the kit is copied in, the `<PLACEHOLDER>` tokens in the rules files (`AGENTS.md`, `CLAUDE.md`), the skills and the agents are the part that is yours to fill. There are two tiers: fill tier 1 always, and tier 2 only if your project compiles or runs. If it does not, delete the rules that use the tier-2 tokens rather than invent values for them.",
+    "ru": "После копирования kit токены `<PLACEHOLDER>` в файлах правил (`AGENTS.md`, `CLAUDE.md`), навыках и агентах - та часть, которую заполняете вы. Ярусов два: первый заполняется всегда, второй - только если проект собирается или запускается. Если нет, правила с токенами второго яруса удаляются, а не заполняются выдуманными значениями.",
+    "ua": "Після копіювання kit токени `<PLACEHOLDER>` у файлах правил (`AGENTS.md`, `CLAUDE.md`), навичках і агентах - та частина, яку заповнюєте ви. Ярусів два: перший заповнюється завжди, другий - лише якщо проєкт збирається чи запускається. Якщо ні, правила з токенами другого ярусу видаляються, а не заповнюються вигаданими значеннями."
+  },
+  "situation": {
+    "en": "Right after copying the kit into a project, or when a merge plan with a table of proposed values is on your desk. Also when you upgrade from an earlier copy of the kit: see [move to a newer kit](fn:upgrade-kit).",
+    "ru": "Сразу после копирования kit в проект или когда перед вами план слияния с таблицей предложенных значений. Также при переходе с более ранней копии kit: см. [перевести проект на более новый kit](fn:upgrade-kit).",
+    "ua": "Одразу після копіювання kit у проєкт або коли перед вами план злиття з таблицею запропонованих значень. Також під час переходу з ранішої копії kit: див. [перевести проєкт на новіший kit](fn:upgrade-kit)."
+  },
+  "warning": {
+    "en": "A rule that points at a placeholder nobody filled is the fastest way to teach everyone to skim the rulebook. Do not leave one empty and do not invent a value to fill the gap: write `none` or `n/a` where the kit says so, and delete the rule when a token has no subject. And `<ID>` is not a setting: it is one ticket's id, filled per ticket, never at merge time.",
+    "ru": "Правило, указывающее на незаполненный плейсхолдер, - самый быстрый способ научить всех пролистывать свод правил. Не оставляйте токен пустым и не выдумывайте значение: где kit велит, пишите `none` или `n/a`, а правило без предмета удаляйте. И `<ID>` - не настройка: это идентификатор одного тикета, он заполняется по тикету и никогда при слиянии.",
+    "ua": "Правило, що вказує на незаповнений плейсхолдер, - найшвидший спосіб привчити всіх гортати звід правил. Не лишайте токен порожнім і не вигадуйте значення: де kit велить, пишіть `none` чи `n/a`, а правило без предмета видаляйте. І `<ID>` - не налаштування: це ідентифікатор одного тікета, він заповнюється за тікетом і ніколи під час злиття."
+  },
+  "steps": [
+    {
+      "en": "Ask your agent to grep the copied kit for `<` + `>` tokens and propose a value for each setting from the actual project. That is a good first move after copying the kit in. The per-ticket tokens from the last step turn up in that search too: leave them.",
+      "ru": "Попросите агента найти в скопированном kit все токены `<` + `>` и предложить для каждой настройки значение из реального проекта. Это хороший первый шаг после копирования kit. Токены из последнего шага, которые заполняются по тикету, в поиск тоже попадут: их не трогайте.",
+      "ua": "Попросіть агента знайти в скопійованому kit усі токени `<` + `>` і запропонувати для кожного налаштування значення з реального проєкту. Це хороший перший крок після копіювання kit. Токени з останнього кроку, що заповнюються за тікетом, у пошук теж потраплять: їх не чіпайте."
+    },
+    {
+      "en": "Tier 1, the project: `<PROJECT_NAME>` is its name, `<INDEX_DOC>` the map the agent reads first, `<WORK_ROOT>` where its real material lives. `<CHAT_LANGUAGE>` is the language the agent talks to you in. `<ARTIFACT_LANGUAGE>` is the language of files, docs, logs and commits: English by default for a code project, while a lawyer, a translator or an analyst may deliver in the document's own language.",
+      "ru": "Первый ярус, проект: `<PROJECT_NAME>` - его название, `<INDEX_DOC>` - карта, которую агент читает первой, `<WORK_ROOT>` - где лежит его настоящий материал. `<CHAT_LANGUAGE>` - язык, на котором агент говорит с вами. `<ARTIFACT_LANGUAGE>` - язык файлов, документов, логов и коммитов: по умолчанию английский для проекта с кодом, а юрист, переводчик или аналитик может сдавать работу на языке самого документа.",
+      "ua": "Перший ярус, проєкт: `<PROJECT_NAME>` - його назва, `<INDEX_DOC>` - мапа, яку агент читає першою, `<WORK_ROOT>` - де лежить його справжній матеріал. `<CHAT_LANGUAGE>` - мова, якою агент говорить із вами. `<ARTIFACT_LANGUAGE>` - мова файлів, документів, логів і комітів: за замовчуванням англійська для проєкту з кодом, а юрист, перекладач чи аналітик може здавати роботу мовою самого документа."
+    },
+    {
+      "en": "Tier 1, the proof: `<CHECK_CMD>` is the command that proves a change is sound, and the one placeholder nobody may leave empty. Point it at the cheapest real check you have today and improve it later.",
+      "ru": "Первый ярус, доказательство: `<CHECK_CMD>` - команда, которая доказывает, что правка не сломала работу, и единственный токен, который нельзя оставить пустым. Поставьте на неё самую дешёвую настоящую проверку из тех, что есть сегодня, и улучшайте потом.",
+      "ua": "Перший ярус, доказ: `<CHECK_CMD>` - команда, яка доводить, що правка не зламала роботу, і єдиний токен, який не можна лишати порожнім. Поставте на неї найдешевшу справжню перевірку з тих, що є сьогодні, і покращуйте потім."
+    },
+    {
+      "en": "Tier 1, working files: `<PLAN_DIR>` holds spec and plan files (default `PLAN/`). `<SCRATCH_DIR>` holds throwaway artifacts and backups, ignored by version control (default `tmp/`). `<READONLY_ZONES>` lists paths the agent never modifies, or `none`.",
+      "ru": "Первый ярус, рабочие файлы: `<PLAN_DIR>` - где лежат спеки и планы (по умолчанию `PLAN/`). `<SCRATCH_DIR>` - черновики и бэкапы вне контроля версий (по умолчанию `tmp/`). `<READONLY_ZONES>` - пути, которые агент не меняет никогда, или `none`.",
+      "ua": "Перший ярус, робочі файли: `<PLAN_DIR>` - де лежать спеки й плани (за замовчуванням `PLAN/`). `<SCRATCH_DIR>` - чернетки та бекапи поза контролем версій (за замовчуванням `tmp/`). `<READONLY_ZONES>` - шляхи, які агент не змінює ніколи, або `none`."
+    },
+    {
+      "en": "Tier 1, tickets and size: `<ID_SCHEME>` is the ticket id scheme, filled once, for example `T0042`. It is not `<ID>`, which is filled per ticket. `<SIZE_BUDGET>` is the line count past which a file is split along a real seam: a bare number such as `500`, because the templates already write the `~` in front of it.",
+      "ru": "Первый ярус, тикеты и размер: `<ID_SCHEME>` - схема идентификаторов тикетов, заполняется один раз, например `T0042`. Это не `<ID>`: тот заполняется по тикету. `<SIZE_BUDGET>` - число строк, после которого файл делится по осмысленному шву: голое число вроде `500`, потому что `~` перед ним шаблоны дописывают сами.",
+      "ua": "Перший ярус, тікети й розмір: `<ID_SCHEME>` - схема ідентифікаторів тікетів, заповнюється один раз, наприклад `T0042`. Це не `<ID>`: той заповнюється за тікетом. `<SIZE_BUDGET>` - кількість рядків, після якої файл ділиться за змістовним швом: голе число на кшталт `500`, бо `~` перед ним шаблони дописують самі."
+    },
+    {
+      "en": "Tier 2, the code layer, only if the project builds or runs: `<ARCH_LAYERS>`, `<BUILD_CMD>`, `<TEST_CMD>`, `<LINT_CMD>`, `<RUN_CMD>` and `<LOGGER>`. `<ARCH_LAYERS>` reads left to right as 'may depend on'; write `n/a` if the project has no layering. `<LOGGER>` must name a real facade, not a bare `console.log` or `print`.",
+      "ru": "Второй ярус, слой кода, только если проект собирается или запускается: `<ARCH_LAYERS>`, `<BUILD_CMD>`, `<TEST_CMD>`, `<LINT_CMD>`, `<RUN_CMD>` и `<LOGGER>`. `<ARCH_LAYERS>` читается слева направо как «может зависеть от»; если слоёв нет, пишите `n/a`. `<LOGGER>` должен называть настоящий фасад, а не голый `console.log` или `print`.",
+      "ua": "Другий ярус, шар коду, лише якщо проєкт збирається чи запускається: `<ARCH_LAYERS>`, `<BUILD_CMD>`, `<TEST_CMD>`, `<LINT_CMD>`, `<RUN_CMD>` і `<LOGGER>`. `<ARCH_LAYERS>` читається зліва направо як «може залежати від»; якщо шарів немає, пишіть `n/a`. `<LOGGER>` має називати справжній фасад, а не голий `console.log` чи `print`."
+    },
+    {
+      "en": "If the project does not build or run, delete instead of filling: the code-layer rules and the verification-tag rule in the rules file (`AGENTS.md`), the structural rules in `docs/CODE_QUALITY.md`, and the stack lines in the `implementer` and `rd-lead` agents.",
+      "ru": "Если проект не собирается и не запускается, не заполняйте, а удаляйте: правила слоя кода и правило о метках верификации в файле правил (`AGENTS.md`), структурные правила в `docs/CODE_QUALITY.md` и строки про стек в агентах `implementer` и `rd-lead`.",
+      "ua": "Якщо проєкт не збирається й не запускається, не заповнюйте, а видаляйте: правила шару коду та правило про мітки верифікації у файлі правил (`AGENTS.md`), структурні правила в `docs/CODE_QUALITY.md` і рядки про стек в агентах `implementer` та `rd-lead`."
+    },
+    {
+      "en": "Leave the transient tokens alone: `<ID>` (one ticket's id under `<ID_SCHEME>`), `<slug>`, `<NN>` or `<NNNN>`, `<TS>`, `<TODO>`, `<symbol>`, `<path>`, `???` and `$ARGUMENTS` are not configuration. They are filled on the fly, per ticket, as you use the skills. A fixed id written into the skills breaks every ticket after the first.",
+      "ru": "Временные токены не трогайте: `<ID>` (идентификатор одного тикета по схеме `<ID_SCHEME>`), `<slug>`, `<NN>` или `<NNNN>`, `<TS>`, `<TODO>`, `<symbol>`, `<path>`, `???` и `$ARGUMENTS` - не конфигурация. Они заполняются на лету, по тикету, по ходу работы с навыками. Фиксированный идентификатор, вписанный в навыки, ломает каждый тикет после первого.",
+      "ua": "Тимчасові токени не чіпайте: `<ID>` (ідентифікатор одного тікета за схемою `<ID_SCHEME>`), `<slug>`, `<NN>` або `<NNNN>`, `<TS>`, `<TODO>`, `<symbol>`, `<path>`, `???` і `$ARGUMENTS` - не конфігурація. Вони заповнюються на льоту, за тікетом, під час роботи з навичками. Фіксований ідентифікатор, вписаний у навички, ламає кожен тікет після першого."
+    }
+  ],
+  "outcome": {
+    "en": "Every tier-1 token holds a real value, with `none` where there is nothing to protect. The tier-2 tokens are filled only where the project builds or runs, and the rules for the rest are deleted. The per-ticket tokens such as `<ID>` are left as they are in the skills.",
+    "ru": "Каждый токен первого яруса несёт настоящее значение, а там, где защищать нечего, стоит `none`. Токены второго яруса заполнены только там, где проект собирается или запускается, а правила для остального удалены. Токены, заполняемые по тикету, вроде `<ID>`, остались в навыках как есть.",
+    "ua": "Кожен токен першого ярусу має справжнє значення, а там, де захищати нічого, стоїть `none`. Токени другого ярусу заповнено лише там, де проєкт збирається чи запускається, а правила для решти видалено. Токени, що заповнюються за тікетом, як-от `<ID>`, лишилися в навичках як є."
+  },
+  "tips": [
+    {
+      "en": "`<CHECK_CMD>` is the most valuable line in the file. If you think your project has nothing mechanical to run, read [fit the method to work that is not code](fn:project-shapes) first: it lists five shapes a check takes in work that never compiles, and most projects already run one by hand.",
+      "ru": "`<CHECK_CMD>` - самая ценная строка файла. Если вам кажется, что в проекте нет ничего механического, сначала прочитайте [как подогнать метод под работу, которая не код](fn:project-shapes): там пять форм, которые проверка принимает там, где ничего не компилируется, и большинство проектов уже запускает одну из них руками.",
+      "ua": "`<CHECK_CMD>` - найцінніший рядок файлу. Якщо вам здається, що в проєкті немає нічого механічного, спершу прочитайте [як підігнати метод під роботу, що не є кодом](fn:project-shapes): там п'ять форм, яких набуває перевірка там, де нічого не компілюється, і більшість проєктів уже запускає одну з них руками."
+    },
+    {
+      "en": "`<INDEX_DOC>` is something to maintain, not only to read: the agent's research order starts there, so a stale map costs a wrong turn on every task. `<SIZE_BUDGET>` is a heuristic for 'this file does too many things', not a law. Set it where your own review starts complaining.",
+      "ru": "`<INDEX_DOC>` - это не только то, что читают, но и то, что поддерживают: с него начинается порядок исследования агента, и устаревшая карта стоит неверного поворота в каждой задаче. `<SIZE_BUDGET>` - эвристика «файл делает слишком много», а не закон. Ставьте её там, где начинает ворчать ваше собственное ревью.",
+      "ua": "`<INDEX_DOC>` - це не лише те, що читають, а й те, що підтримують: з нього починається порядок дослідження агента, і застаріла мапа коштує хибного повороту в кожній задачі. `<SIZE_BUDGET>` - евристика «файл робить забагато», а не закон. Ставте її там, де починає буркотіти ваше власне рев'ю."
+    },
+    {
+      "en": "The four command tokens refine `<CHECK_CMD>`, they do not replace it. The kit's rules reach for the narrowest check that proves the change, so having all five filled is what lets an agent pick a compile over a full build.",
+      "ru": "Четыре командных токена уточняют `<CHECK_CMD>`, а не заменяют его. Правила kit берут самую узкую проверку, доказывающую именно эту правку, и заполненные пять токенов позволяют агенту выбрать компиляцию вместо полной сборки.",
+      "ua": "Чотири командні токени уточнюють `<CHECK_CMD>`, а не замінюють його. Правила kit беруть найвужчу перевірку, що доводить саме цю правку, і заповнені п'ять токенів дають агенту змогу обрати компіляцію замість повного складання."
+    },
+    {
+      "en": "Coming from an earlier copy: `<SRC_ROOT>` is now `<WORK_ROOT>` and `<MAX_LOC>` is now `<SIZE_BUDGET>`, and a find-and-replace over your filled copy covers both. `<CHECK_CMD>` has no old value: write down the cheapest check you already run by hand. `<ARTIFACT_LANGUAGE>` is new too: `English` keeps the old behaviour.",
+      "ru": "Если у вас более ранняя копия: `<SRC_ROOT>` теперь `<WORK_ROOT>`, а `<MAX_LOC>` теперь `<SIZE_BUDGET>`; автозамена по заполненной копии закрывает оба. У `<CHECK_CMD>` старого значения нет: запишите самую дешёвую проверку, которую вы и так делаете руками. `<ARTIFACT_LANGUAGE>` тоже новый: значение `English` сохраняет прежнее поведение.",
+      "ua": "Якщо у вас ранніша копія: `<SRC_ROOT>` тепер `<WORK_ROOT>`, а `<MAX_LOC>` тепер `<SIZE_BUDGET>`; автозаміна по заповненій копії закриває обидва. У `<CHECK_CMD>` старого значення немає: запишіть найдешевшу перевірку, яку ви й так робите руками. `<ARTIFACT_LANGUAGE>` теж новий: значення `English` зберігає колишню поведінку."
+    },
+    {
+      "en": "The setting `<ID>` became `<ID_SCHEME>`. Rename it only where it names the setting, never globally, since the skills use `<ID>` per ticket. If an earlier merge wrote a fixed id such as `T0042` into the skills, put `<ID>` back.",
+      "ru": "Настройка `<ID>` стала `<ID_SCHEME>`. Переименовывайте её только там, где она называет настройку, и никогда глобально, потому что навыки используют `<ID>` на каждый тикет. Если прежнее слияние вписало в навыки фиксированный идентификатор вроде `T0042`, верните туда `<ID>`.",
+      "ua": "Налаштування `<ID>` стало `<ID_SCHEME>`. Перейменовуйте його лише там, де воно називає налаштування, і ніколи глобально, бо навички використовують `<ID>` на кожен тікет. Якщо попереднє злиття вписало в навички фіксований ідентифікатор на кшталт `T0042`, поверніть туди `<ID>`."
+    },
+    {
+      "en": "The old skills `verify` and `review` are now `/prove` and `/critique`, because the old names shadowed commands the runtime ships, and `.claude/commands/` became `.claude/skills/`. Copy `.claude/skills/` from the new kit, fill its placeholders and delete the old `.claude/commands/` files, or the old names keep shadowing the runtime's own.",
+      "ru": "Старые навыки `verify` и `review` теперь `/prove` и `/critique`, потому что старые имена перекрывали команды самой среды, а `.claude/commands/` стал `.claude/skills/`. Скопируйте `.claude/skills/` из нового kit, заполните его плейсхолдеры и удалите старые файлы `.claude/commands/`, иначе старые имена продолжат перекрывать команды среды.",
+      "ua": "Старі навички `verify` і `review` тепер `/prove` та `/critique`, бо старі імена перекривали команди самого середовища, а `.claude/commands/` став `.claude/skills/`. Скопіюйте `.claude/skills/` із нового kit, заповніть його плейсхолдери й видаліть старі файли `.claude/commands/`, інакше старі імена й далі перекриватимуть команди середовища."
+    },
+    {
+      "en": "`docs/REPLACES.md` carries worked values per kind of project, for software, data and analysis, writing and docs, legal and ops, and per stack for the code layer. `docs/REPLACES_RU.md` is the Russian edition of the same document; skip it unless your team reads Russian.",
+      "ru": "В `docs/REPLACES.md` есть готовые значения по видам проектов (софт, данные и аналитика, тексты и документация, юридическое и операционное) и по стекам для слоя кода. `docs/REPLACES_RU.md` - русское издание того же документа; если команда читает по-английски, его можно не брать.",
+      "ua": "У `docs/REPLACES.md` є готові значення за видами проєктів (софт, дані й аналітика, тексти й документація, юридичне та операційне) і за стеками для шару коду. `docs/REPLACES_RU.md` - російське видання того самого документа; якщо команда читає англійською, його можна не брати."
+    }
+  ],
+  "related": ["project-shapes", "rules-file", "adopt-existing", "adopt-new", "validation-ladder"],
+  "terms": ["placeholder", "code-layer", "read-only-zone", "size-budget", "scratch", "ticket", "skill"],
+  "keywords": {
+    "en": ["placeholders", "CHECK_CMD", "tier 1", "tier 2", "REPLACES.md", "fill the tokens", "code layer", "ARTIFACT_LANGUAGE"],
+    "ru": ["плейсхолдеры", "CHECK_CMD", "первый ярус", "второй ярус", "REPLACES.md", "заполнить токены", "слой кода", "ARTIFACT_LANGUAGE"],
+    "ua": ["плейсхолдери", "CHECK_CMD", "перший ярус", "другий ярус", "REPLACES.md", "заповнити токени", "шар коду", "ARTIFACT_LANGUAGE"]
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "id": "hook",
+  "term": { "en": "Event hook", "ru": "Хук события", "ua": "Хук події" },
+  "def": {
+    "en": "A program your runtime runs on an event, such as before a tool call or at prompt submit, inside a call nobody is reading, and which returns a verdict: refuses, rewrites, injects, observes, warns, nudges or arms. In `docs/HOOKS.md` the word means this, not a place like a pre-commit hook. The kit wires none and only documents the shapes.",
+    "ru": "Программа, которую среда выполнения запускает по событию, например перед вызовом инструмента или при отправке запроса, внутри вызова, за которым никто не следит, и которая возвращает вердикт: refuses, rewrites, injects, observes, warns, nudges или arms. В `docs/HOOKS.md` слово означает именно это, а не место вроде pre-commit-хука. Kit не подключает ни одного хука и лишь описывает формы.",
+    "ua": "Програма, яку середовище виконання запускає за подією, наприклад перед викликом інструмента чи під час надсилання запиту, всередині виклику, за яким ніхто не стежить, і яка повертає вердикт: refuses, rewrites, injects, observes, warns, nudges або arms. У `docs/HOOKS.md` слово означає саме це, а не місце на кшталт pre-commit-хука. Kit не підключає жодного хука й лише описує форми."
+  },
+  "see": ["gate", "headless-process"]
+}

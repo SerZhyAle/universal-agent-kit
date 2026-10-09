@@ -1,0 +1,104 @@
+{
+  "id": "solution-researcher",
+  "title": {
+    "en": "Investigate how something works before you write a spec",
+    "ru": "Разобраться, как что-то устроено, прежде чем писать спеку",
+    "ua": "З'ясувати, як щось працює, перш ніж писати спеку"
+  },
+  "pitch": {
+    "en": "A read-only agent maps the files, patterns, constraints and risks of an area and returns an evidence-based report. It edits nothing.",
+    "ru": "Агент только для чтения собирает файлы, приёмы, ограничения и риски области и возвращает отчёт с доказательствами. Он ничего не правит.",
+    "ua": "Агент лише для читання збирає файли, прийоми, обмеження та ризики галузі й повертає звіт із доказами. Він нічого не правит."
+  },
+  "lead": {
+    "en": "`solution-researcher` is a [light-tier](term:tier) [role agent](term:role-agent) (`model: haiku`) whose only job is a structured report on how an area of your project works today. It reads code, data and documents, cites a real file path for every claim and never edits, creates or deletes anything. The report is shaped to feed a strategic [spec](term:spec).",
+    "ru": "`solution-researcher` - [ролевой агент](term:role-agent) [лёгкого уровня](term:tier) (`model: haiku`), чья единственная задача - структурированный отчёт о том, как сегодня устроена область вашего проекта. Он читает код, данные и документы, на каждое утверждение даёт реальный путь к файлу и ничего не правит, не создаёт и не удаляет. Отчёт устроен так, чтобы питать стратегическую [спеку](term:spec).",
+    "ua": "`solution-researcher` - [рольовий агент](term:role-agent) [легкого рівня](term:tier) (`model: haiku`), чиє єдине завдання - структурований звіт про те, як сьогодні влаштована галузь вашого проєкту. Він читає код, дані й документи, до кожного твердження дає реальний шлях до файлу й нічого не правит, не створює та не видаляє. Звіт побудований так, щоб живити стратегічну [спеку](term:spec)."
+  },
+  "situation": {
+    "en": "Before writing a spec: you need to know how something currently works, which files and names are involved in an area, what constraints apply, and where the risks and gaps are.",
+    "ru": "Перед написанием спеки: нужно понять, как что-то устроено сейчас, какие файлы и имена задействованы в области, какие есть ограничения и где риски и пробелы.",
+    "ua": "Перед написанням спеки: треба зрозуміти, як щось влаштовано зараз, які файли та імена задіяні в галузі, які є обмеження та де ризики й прогалини."
+  },
+  "warning": {
+    "en": "Read-only is enforced by the tool set, not only by the prompt: the agent ships with `tools: Read, Grep, Glob` and without `Bash`. If your code index is a CLI, grant a read-only `Bash(<index> query *)` and nothing that can write, move or delete.",
+    "ru": "Режим «только чтение» держится на наборе инструментов, а не только на промпте: агент поставляется с `tools: Read, Grep, Glob` и без `Bash`. Если ваш индекс кода - это CLI, выдайте только `Bash(<index> query *)` на чтение и ничего, что умеет писать, переносить или удалять.",
+    "ua": "Режим «лише читання» тримається на наборі інструментів, а не лише на промпті: агент постачається з `tools: Read, Grep, Glob` і без `Bash`. Якщо ваш індекс коду - це CLI, видайте лише `Bash(<index> query *)` на читання й нічого, що вміє писати, переносити чи видаляти."
+  },
+  "steps": [
+    {
+      "en": "Name the topic or area to investigate. First make sure the [placeholders](term:placeholder) in its file (project name, chat language, artifact language, read-only zones) are filled in for your project. It chats in the language you set for chat; the report and every code reference are in the language you set for artifacts.",
+      "ru": "Назовите тему или область для изучения. Сначала убедитесь, что [заполнители](term:placeholder) в файле агента (название проекта, язык чата, язык артефактов, зоны только для чтения) заполнены под ваш проект. В чате он говорит на языке, заданном для чата; отчёт и все ссылки на код - на языке, заданном для артефактов.",
+      "ua": "Назвіть тему чи галузь для вивчення. Спершу переконайтеся, що [заповнювачі](term:placeholder) у файлі агента (назва проєкту, мова чату, мова артефактів, зони лише для читання) заповнені під ваш проєкт. У чаті він говорить мовою, заданою для чату; звіт і всі посилання на код - мовою, заданою для артефактів."
+    },
+    {
+      "en": "It anchors the topic: it identifies the affected module or area and the likely surfaces, using the repo map or the architecture doc.",
+      "ru": "Он привязывает тему: определяет затронутый модуль или область и вероятные поверхности, опираясь на карту репозитория или документ об архитектуре.",
+      "ua": "Він прив'язує тему: визначає зачеплений модуль чи галузь і ймовірні поверхні, спираючись на карту репозиторію або документ про архітектуру."
+    },
+    {
+      "en": "It routes fast, reading in order and stopping as soon as a source answers: the repo map, then symbols located with grep or your code index before whole trees are read, then the relevant architecture, ops or stack doc, then the directly relevant implementation files.",
+      "ru": "Он быстро выбирает маршрут: читает по порядку и останавливается, как только источник ответил. Сначала карта репозитория, затем символы, найденные через grep или ваш индекс кода (до чтения целых деревьев), затем нужный документ об архитектуре, эксплуатации или стеке, затем непосредственно относящиеся файлы реализации.",
+      "ua": "Він швидко добирає маршрут: читає по порядку й зупиняється, щойно джерело відповіло. Спершу карта репозиторію, потім символи, знайдені через grep або ваш індекс коду (до читання цілих дерев), потім потрібний документ про архітектуру, експлуатацію чи стек, потім безпосередньо відповідні файли реалізації."
+    },
+    {
+      "en": "It fills the gaps the docs left with targeted searches: all call sites of the key symbol, existing feature flags for the area, existing error-handling patterns for similar operations, TODO and FIXME comments in the area, and the tests that already cover it.",
+      "ru": "Пробелы, оставленные документами, он закрывает точечным поиском: все места вызова ключевого символа, существующие флаги функций для области, существующие приёмы обработки ошибок в похожих операциях, комментарии TODO и FIXME в области и тесты, которые её уже покрывают.",
+      "ua": "Прогалини, залишені документами, він закриває точковим пошуком: усі місця виклику ключового символу, наявні прапорці функцій для галузі, наявні прийоми обробки помилок у схожих операціях, коментарі TODO і FIXME в галузі та тести, що її вже покривають."
+    },
+    {
+      "en": "It notes constraints from any platform or runtime API or version-gated behaviour the feature touches, and whether a compat shim is needed. It flags risks: files near the [size budget](term:size-budget) that will be touched, changed code with no tests, circular dependencies, concurrency hazards, I/O on the wrong thread, and timeout or retry gaps on the network.",
+      "ru": "Он фиксирует ограничения от любого API платформы или среды выполнения и поведения, зависящего от версии, которых касается функциональность, и нужен ли слой совместимости. И отмечает риски: файлы возле [лимита размера](term:size-budget), которые придётся менять, изменяемый код без тестов, циклические зависимости, риски параллелизма, ввод-вывод не в том потоке, дыры в таймаутах и повторах при работе с сетью.",
+      "ua": "Він фіксує обмеження від будь-якого API платформи чи середовища виконання та поведінки, залежної від версії, яких торкається функціональність, і чи потрібен шар сумісності. І позначає ризики: файли біля [ліміту розміру](term:size-budget), які доведеться змінювати, змінюваний код без тестів, циклічні залежності, ризики паралелізму, введення-виведення не в тому потоці, дірки в таймаутах і повторах під час роботи з мережею."
+    },
+    {
+      "en": "It returns one Markdown report, \"Research report:\" plus the topic, in nine sections: Affected scope; Current architecture - key files; Reusable patterns found in the codebase; Data flow (current); Constraints; Feature flags / config relevant to this area; Risks; Test coverage summary; Open questions for the spec author. A section is omitted only if it is genuinely not applicable, with the reason.",
+      "ru": "Он возвращает один Markdown-отчёт: «Research report:» и тема, девять разделов (их названия остаются английскими): Affected scope; Current architecture - key files; Reusable patterns found in the codebase; Data flow (current); Constraints; Feature flags / config relevant to this area; Risks; Test coverage summary; Open questions for the spec author. Раздел опускается, только если он действительно неприменим, и с указанием причины.",
+      "ua": "Він повертає один Markdown-звіт: «Research report:» і тема, дев'ять розділів (їхні назви лишаються англійськими): Affected scope; Current architecture - key files; Reusable patterns found in the codebase; Data flow (current); Constraints; Feature flags / config relevant to this area; Risks; Test coverage summary; Open questions for the spec author. Розділ пропускається, лише якщо він справді не застосовний, і з указанням причини."
+    },
+    {
+      "en": "You take the report to whoever writes the spec. Its last section lists numbered questions that need a product or architecture decision, because code alone cannot answer them. The agent proposes no implementation steps.",
+      "ru": "Вы несёте отчёт тому, кто пишет спеку. Его последний раздел перечисляет пронумерованные вопросы, требующие продуктового или архитектурного решения: из одного кода на них не ответить. Шагов реализации агент не предлагает.",
+      "ua": "Ви несете звіт тому, хто пише спеку. Його останній розділ перелічує пронумеровані питання, що потребують продуктового чи архітектурного рішення: з самого коду на них не відповісти. Кроків реалізації агент не пропонує."
+    }
+  ],
+  "outcome": {
+    "en": "One Markdown report in which every claim cites a real file path and, where useful, a line range, and in which nothing in your project has changed. Questions that code alone cannot answer are numbered at the end for the spec author.",
+    "ru": "Один Markdown-отчёт, где каждое утверждение опирается на реальный путь к файлу и, при необходимости, диапазон строк, а в вашем проекте ничего не изменилось. Вопросы, на которые из одного кода не ответить, пронумерованы в конце для автора спеки.",
+    "ua": "Один Markdown-звіт, де кожне твердження спирається на реальний шлях до файлу та, за потреби, діапазон рядків, а у вашому проєкті нічого не змінилося. Питання, на які з самого коду не відповісти, пронумеровано в кінці для автора спеки."
+  },
+  "tips": [
+    {
+      "en": "The report is built to feed a strategic spec: hand it to [the spec step](fn:spec) as the evidence. The agent itself writes no plan, because it never proposes implementation steps.",
+      "ru": "Отчёт создан, чтобы питать стратегическую спеку: передайте его [шагу со спекой](fn:spec) как доказательную базу. Сам агент плана не пишет: шагов реализации он не предлагает.",
+      "ua": "Звіт створений, щоб живити стратегічну спеку: передайте його [кроку зі спекою](fn:spec) як доказову базу. Сам агент плану не пише: кроків реалізації він не пропонує."
+    },
+    {
+      "en": "Check a sample before you rely on it: open two or three of the cited paths. The agent's own rule is not to write a finding it cannot cite to a real path, so a claim without a path is a defect in the report.",
+      "ru": "Прежде чем полагаться на отчёт, проверьте выборку: откройте два-три указанных пути. Правило самого агента - не писать находку, которую нельзя подкрепить реальным путём, так что утверждение без пути является дефектом отчёта.",
+      "ua": "Перш ніж покладатися на звіт, перевірте вибірку: відкрийте два-три вказані шляхи. Правило самого агента - не писати знахідку, яку не можна підкріпити реальним шляхом, тож твердження без шляху є дефектом звіту."
+    },
+    {
+      "en": "On a project that is not code, the questions stay and the headings change: \"current architecture\" becomes the current structure and who owns each part, \"test coverage\" becomes which parts have a check behind them and which do not.",
+      "ru": "В проекте без кода вопросы остаются, а заголовки меняются: «current architecture» превращается в текущую структуру и в то, кто чем владеет, а «test coverage» - в то, за какими частями стоит проверка, а за какими нет.",
+      "ua": "У проєкті без коду питання лишаються, а заголовки змінюються: «current architecture» перетворюється на поточну структуру й на те, хто чим володіє, а «test coverage» - на те, за якими частинами стоїть перевірка, а за якими ні."
+    },
+    {
+      "en": "Your [read-only zones](term:read-only-zone) are open to this agent: read-only means never modified, and they often hold exactly the raw material a finding must cite. It reads them and still edits nothing.",
+      "ru": "Ваши [зоны только для чтения](term:read-only-zone) этому агенту открыты: «только для чтения» значит «никогда не меняется», а в них часто лежит именно тот сырой материал, на который должна ссылаться находка. Он их читает и всё равно ничего не правит.",
+      "ua": "Ваші [зони лише для читання](term:read-only-zone) цьому агентові відкриті: «лише для читання» означає «ніколи не змінюється», а в них часто лежить саме той сирий матеріал, на який має посилатися знахідка. Він їх читає і все одно нічого не правит."
+    },
+    {
+      "en": "If the investigation is part of a larger job that will also build and review, start with [rd-lead](fn:rd-lead). For a research-first pass run from your own chat, see [research](fn:research).",
+      "ru": "Если исследование - часть большей работы, где потом будут сборка и ревью, начните с [rd-lead](fn:rd-lead). Для прохода «сначала исследуй», запускаемого из вашего чата, см. [research](fn:research).",
+      "ua": "Якщо дослідження - частина більшої роботи, де потім будуть збірка й рев'ю, почніть із [rd-lead](fn:rd-lead). Для проходу «спершу досліди», що запускається з вашого чату, див. [research](fn:research)."
+    }
+  ],
+  "related": ["rd-lead", "research", "spec", "research-index"],
+  "terms": ["role-agent", "tier", "spec", "size-budget", "placeholder", "read-only-zone"],
+  "keywords": {
+    "en": ["read-only researcher", "research report", "investigate code", "before a spec", "risks and constraints", "current architecture"],
+    "ru": ["исследователь только для чтения", "отчёт об исследовании", "изучить код", "перед спекой", "риски и ограничения", "текущая архитектура"],
+    "ua": ["дослідник лише для читання", "звіт про дослідження", "вивчити код", "перед спекою", "ризики та обмеження", "поточна архітектура"]
+  }
+}

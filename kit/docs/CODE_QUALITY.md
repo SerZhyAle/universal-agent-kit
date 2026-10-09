@@ -70,6 +70,14 @@ project is made of.
   personal preference.
 - **Scope of a change.** Fix the thing asked. No opportunistic refactor, no unrelated import
   cleanup, no drive-by reformatting - those drown the real diff and break `git blame`.
+- **An override that narrows a shared default disables the mechanism, silently.** Where this
+  project's config merges over a shared layer's defaults, widening a list adds cases the mechanism
+  then handles, while narrowing one removes cases it was counting on - and nothing goes red, because
+  a shorter list is a valid list. Measured 2026-09-20: a profile declared two of the six outcomes its
+  shared library counts as "this run made no progress", and **52 of 54** stalled runs carried one of
+  the four it had left out, so the idle counter never advanced and the queue re-issued one ticket
+  **five times in a row**. Any narrowing override carries a recorded reason, or it is a defect
+  waiting for a quiet week.
 
 ## Comment discipline (the one worth repeating)
 
@@ -140,22 +148,32 @@ these: a dataset another team loads and a template another office fills are the 
   version bump and a dated line saying what changed. Code ahead of its contract is a defect whatever
   the tests say. Never reshape silently, and keep a reader for every version that ever wrote a
   user's data.
+- **Breaking is judged by the oldest reader still in use, never by diff size.** Write down what the
+  oldest consumer still in use - another project, or an older install of this one - does when it
+  meets what the new writer emits. If the answer contains "wrong", "silently" or "partially", it is a
+  breaking change: a new major version, announced to the consumers before it ships.
+- **A reader tolerates what it does not know.** Match fields by name, never by position; ignore an
+  unknown field instead of failing; accept a newer minor version and skip its additions; refuse a
+  newer major version cleanly, with one message naming the contract - never a partial import, never a
+  guess. A reader that fails on an unknown field turns every harmless addition into a breaking change.
 - **Comply or amend.** A project that finds the contract wrong either amends it at the home or
   records a dated exception with an expiry date. There is no third option, and an exception past
-  its date is a violation, not a formality.
+  its date is a violation, not a formality. Finding the defect is what creates the obligation:
+  whoever finds it owes the amendment - a dated proposal to the owner, when the contract is another
+  project's - and a local workaround is the third option in disguise.
 - **Conformance runs against the home's copy.** Test vectors copied into the repo and edited locally
   prove only that the local copy agrees with itself.
 - **Unreachable home, unknown verdict.** If the check cannot reach the home from this machine, its
   answer is *could not verify*, never PASS (`VALIDATION.md`, the four answers).
 
-Adopted as canon 2026-09-22, after per-repo contract copies had been kept as "frozen" files - which
-is exactly what a copy stops being after the first local edit.
+This replaced, on 2026-09-22, the practice of keeping per-repo contract copies as "frozen" files -
+which is exactly what a copy stops being after the first local edit.
 
 ## Close the source, not just the detector
 
 A gate that catches a recurring defect is only half the loop: a detector stops a human once,
 but an agent re-emits the pattern every generation. When a check keeps flagging the same thing,
-add the matching DON'T to the always-loaded rulebook (`CLAUDE.md`) and reinforce it in the
+add the matching DON'T to the always-loaded rules file (`AGENTS.md`) and reinforce it in the
 code-generating skills - substance in the canonical rule, skills as short pointers - so the
 agent stops producing the defect, not merely flagging it after the fact.
 

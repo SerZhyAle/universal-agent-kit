@@ -1,0 +1,10 @@
+{
+  "id": "placeholder",
+  "term": { "en": "Placeholder", "ru": "Плейсхолдер", "ua": "Плейсхолдер" },
+  "def": {
+    "en": "A token in angle brackets, such as `<PROJECT_NAME>` or `<CHECK_CMD>`, that stands for a value only your project knows. The kit's rules file, skills and agents use them, and you fill them once. Tokens like `<ID>`, `<slug>` and `<TODO>` are not configuration: they are filled per ticket.",
+    "ru": "Токен в угловых скобках, например `<PROJECT_NAME>` или `<CHECK_CMD>`, который заменяет значение, известное только вашему проекту. Их используют файл правил, навыки и агенты kit, и вы заполняете их один раз. Токены вроде `<ID>`, `<slug>` и `<TODO>` - не конфигурация: они заполняются по ходу каждого тикета.",
+    "ua": "Токен у кутових дужках, наприклад `<PROJECT_NAME>` чи `<CHECK_CMD>`, що замінює значення, відоме лише вашому проєкту. Їх використовують файл правил, навички й агенти kit, і ви заповнюєте їх один раз. Токени на кшталт `<ID>`, `<slug>` та `<TODO>` - не конфігурація: вони заповнюються під час кожного тікета."
+  },
+  "see": ["code-layer", "rules-file"]
+}

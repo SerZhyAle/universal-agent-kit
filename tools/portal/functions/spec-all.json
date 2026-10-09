@@ -1,0 +1,94 @@
+{
+  "id": "spec-all",
+  "title": {
+    "en": "Take a feature from idea to a verified ticket with one command",
+    "ru": "Провести фичу от идеи до проверенного тикета одной командой",
+    "ua": "Провести фічу від ідеї до перевіреного тікета однією командою"
+  },
+  "pitch": {
+    "en": "Sizes the task, then runs research, spec, plan, build and audit in order, pausing only where a real decision is needed.",
+    "ru": "Оценивает размер задачи, затем по очереди запускает исследование, спеку, план, реализацию и аудит, останавливаясь только на настоящих решениях.",
+    "ua": "Оцінює розмір задачі, потім по черзі запускає дослідження, спеку, план, реалізацію й аудит, зупиняючись лише на справжніх рішеннях."
+  },
+  "lead": {
+    "en": "`/spec-all` drives one [ticket](term:ticket) through the whole pipeline: research, strategic spec, tactical plan, execution and audit. It does not re-implement the other skills, it calls them in order and pauses only at the stop conditions in the status gates table of `docs/SPEC_LIFECYCLE.md`. Given an existing ticket, it resumes from wherever its status sits; a `Draft` goes back in at `/spec ID`, which expands it in place.",
+    "ru": "`/spec-all` ведёт один [тикет](term:ticket) через весь конвейер: исследование, стратегическая спека, тактический план, исполнение и аудит. Он не переписывает другие навыки, а вызывает их по порядку и останавливается только на условиях остановки из таблицы status gates в `docs/SPEC_LIFECYCLE.md`. Если дать ему существующий тикет, он продолжит с того места, где тот стоит по статусу; `Draft` возвращается в конвейер на `/spec ID`, который раскрывает его на месте.",
+    "ua": "`/spec-all` веде один [тікет](term:ticket) через увесь конвеєр: дослідження, стратегічна спека, тактичний план, виконання й аудит. Він не переписує інші навички, а викликає їх по черзі й зупиняється лише на умовах зупинки з таблиці status gates у `docs/SPEC_LIFECYCLE.md`. Якщо дати йому наявний тікет, він продовжить із того місця, де той стоїть за статусом; `Draft` повертається в конвеєр на `/spec ID`, який розгортає його на місці."
+  },
+  "situation": {
+    "en": "A feature-sized idea you want driven from start to finish by one command instead of calling each skill by hand, or an existing ticket you want to resume.",
+    "ru": "Идея размером с фичу, которую нужно довести от начала до конца одной командой, а не вызывать каждый навык вручную, или существующий тикет, который нужно продолжить.",
+    "ua": "Ідея розміром із фічу, яку треба довести від початку до кінця однією командою, а не викликати кожну навичку вручну, або наявний тікет, який треба продовжити."
+  },
+  "warning": {
+    "en": "The run stops, and does not guess forward, at an unresolved UI decision, an open required research item, an unchecked pre-implementation blocker, or an ambiguity or failed check during execution. If acceptance includes a hands-on check, the ticket stays at `BlockNeedUserTest` until a human ticks every line of its `## Manual checks` and `/spec-check` re-audits.",
+    "ru": "Прогон останавливается, а не додумывает, на нерешённом вопросе по интерфейсу, открытом обязательном пункте исследования, непроверенном блокере перед реализацией, неоднозначности или упавшей проверке при исполнении. Если приёмка включает ручную проверку, тикет остаётся на `BlockNeedUserTest`, пока человек не отметит все пункты его `## Manual checks` и `/spec-check` не проведёт аудит заново.",
+    "ua": "Прогін зупиняється, а не здогадується, на невирішеному питанні про інтерфейс, відкритому обов'язковому пункті дослідження, неперевіреному блокері перед реалізацією, неоднозначності або проваленій перевірці під час виконання. Якщо приймання містить ручну перевірку, тікет лишається на `BlockNeedUserTest`, поки людина не позначить усі пункти `## Manual checks` і `/spec-check` не проведе аудит заново."
+  },
+  "steps": [
+    {
+      "en": "Type `/spec-all` followed by a one-line description of the idea, or resume a ticket with `/spec-all ID`. With an ID it reads the current [status](term:status) and re-enters at the right stage; it never restarts from research when the plan is already approved. A `Draft` (for example a `/park` stub) re-enters at `/spec ID`, which keeps its id and expands it in place.",
+      "ru": "Наберите `/spec-all` и однострочное описание идеи либо продолжите тикет командой `/spec-all ID`. С идентификатором он читает текущий [статус](term:status) и входит в конвейер на нужной стадии; если план уже утверждён, с исследования он не начинает. `Draft` (например, заготовка от `/park`) входит на `/spec ID`: тот сохраняет идентификатор и раскрывает тикет на месте.",
+      "ua": "Наберіть `/spec-all` і однорядковий опис ідеї або продовжте тікет командою `/spec-all ID`. З ідентифікатором він читає поточний [статус](term:status) і входить у конвеєр на потрібній стадії; якщо план уже затверджено, з дослідження він не починає. `Draft` (наприклад, заготовка від `/park`) входить на `/spec ID`: той зберігає ідентифікатор і розгортає тікет на місці."
+    },
+    {
+      "en": "It sizes the task before spending any ceremony and states the path in one line. A typo or one-constant change goes to `/quick`, a narrow well-understood bug to `/fix`, and no ticket is opened. A PRIMITIVE task (at most 3 files, no new public types, no schema, DI or route changes, deterministic) gets a three-section spec (Problem / Approach / Done criteria) and is implemented directly. Anything else is COMPLEX and runs the pipeline.",
+      "ru": "Перед любой церемонией он оценивает размер задачи и одной строкой называет выбранный путь. Опечатка или одна константа - в `/quick`, узкий понятный баг - в `/fix`, тикет не заводится. PRIMITIVE-задача (не больше 3 файлов, без новых публичных типов, без изменений схемы, DI и маршрутов, детерминированная) получает спеку из трёх разделов (Problem / Approach / Done criteria) и реализуется сразу. Всё остальное - COMPLEX и идёт по конвейеру.",
+      "ua": "Перед будь-якою церемонією він оцінює розмір задачі й одним рядком називає обраний шлях. Одруківка чи одна константа - до `/quick`, вузький зрозумілий баг - до `/fix`, тікет не заводиться. PRIMITIVE-задача (не більше 3 файлів, без нових публічних типів, без змін схеми, DI й маршрутів, детермінована) отримує спеку з трьох розділів (Problem / Approach / Done criteria) і реалізується одразу. Усе інше - COMPLEX і йде конвеєром."
+    },
+    {
+      "en": "`/research` gathers the evidence (files, symbols, constraints, external references) and persists it. If the change is user-facing and a placement, wording or fallback decision is unresolved, `/ui-clarify` runs next, and that one is a stop: unresolved UI ambiguity blocks the build, and the ticket records it as `BlockQuestions` with the unresolved list as its note on the status line.",
+      "ru": "`/research` собирает свидетельства (файлы, символы, ограничения, внешние источники) и сохраняет их. Если изменение видно пользователю, а решение о расположении, формулировке или запасном варианте не принято, следом идёт `/ui-clarify`, и это остановка: нерешённая неоднозначность интерфейса блокирует сборку, а тикет фиксирует её как `BlockQuestions` со списком нерешённого в заметке на строке статуса.",
+      "ua": "`/research` збирає свідчення (файли, символи, обмеження, зовнішні джерела) і зберігає їх. Якщо зміна видима користувачеві, а рішення про розташування, формулювання чи запасний варіант не ухвалено, далі йде `/ui-clarify`, і це зупинка: невирішена неоднозначність інтерфейсу блокує збірку, а тікет фіксує її як `BlockQuestions` зі списком невирішеного в примітці на рядку статусу."
+    },
+    {
+      "en": "`/spec` writes the strategic what and why, with no file paths and no signatures, records the `Approved` flip and chains to `/spec-tech`. It stops only if a required research item is still Open. To read the spec before anything is built, run `/spec` alone.",
+      "ru": "`/spec` пишет стратегическое что и зачем, без путей к файлам и сигнатур, записывает переход в `Approved` и передаёт ход `/spec-tech`. Останавливается он, только если обязательный пункт исследования всё ещё Open. Чтобы прочитать спеку до начала работ, запустите `/spec` отдельно.",
+      "ua": "`/spec` пише стратегічне що й навіщо, без шляхів до файлів і сигнатур, записує перехід у `Approved` і передає хід `/spec-tech`. Зупиняється він, лише якщо обов'язковий пункт дослідження досі Open. Щоб прочитати спеку до початку робіт, запустіть `/spec` окремо."
+    },
+    {
+      "en": "`/spec-tech` turns the spec into a phased, verifiable plan: every step ends in a static check, and no phase consumes what a later phase produces. It needs `Approved` or later and refuses a `Draft` instead of promoting it. It chains to `/spec-dev` unless an unchecked pre-implementation blocker remains. The plan's last phase is always docs-cleanup; if §8 of the spec requires user docs, [/surfaces](fn:surfaces) updates every surface there, before the audit.",
+      "ru": "`/spec-tech` превращает спеку в поэтапный проверяемый план: каждый шаг кончается статической проверкой, и ни одна фаза не использует то, что произведёт более поздняя. Ему нужен `Approved` или выше, а `Draft` он отклоняет, не повышая. Он передаёт ход `/spec-dev`, если не остался непроверенный блокер перед реализацией. Последняя фаза плана всегда docs-cleanup: если §8 спеки требует пользовательских документов, [/surfaces](fn:surfaces) обновляет там каждую поверхность до аудита.",
+      "ua": "`/spec-tech` перетворює спеку на поетапний перевірний план: кожен крок закінчується статичною перевіркою, і жодна фаза не використовує те, що вироблятиме пізніша. Йому потрібен `Approved` або вище, а `Draft` він відхиляє, не підвищуючи. Він передає хід `/spec-dev`, якщо не лишився неперевірений блокер перед реалізацією. Остання фаза плану завжди docs-cleanup: якщо §8 спеки вимагає користувацьких документів, [/surfaces](fn:surfaces) оновлює там кожну поверхню до аудиту."
+    },
+    {
+      "en": "`/spec-dev` executes one step at a time, runs each step's check before marking it done and hard-stops on the first ambiguity or failure. It moves the status from `Tactical` through `In Progress` to `Implemented`, or to `BlockNeedUserTest` when manual testing is part of acceptance, adding a `## Manual checks` section with a `[ ]` line per thing a human must see.",
+      "ru": "`/spec-dev` выполняет по одному шагу, запускает проверку шага до того, как отметить его готовым, и жёстко останавливается на первой неоднозначности или сбое. Он ведёт статус от `Tactical` через `In Progress` к `Implemented` или к `BlockNeedUserTest`, если ручная проверка входит в приёмку, и тогда добавляет раздел `## Manual checks` с пунктом `[ ]` на всё, что должен увидеть человек.",
+      "ua": "`/spec-dev` виконує по одному кроку, запускає перевірку кроку до того, як позначити його готовим, і жорстко зупиняється на першій неоднозначності чи збої. Він веде статус від `Tactical` через `In Progress` до `Implemented` або до `BlockNeedUserTest`, якщо ручна перевірка входить до приймання, і тоді додає розділ `## Manual checks` із пунктом `[ ]` на все, що має побачити людина."
+    },
+    {
+      "en": "`/spec-check` audits the build against reality and sets the final status: `Verified`, `Partial` or `Broken` (chaining to `/spec-fix`), or `BlockNeedUserTest` while a manual signal is open. For a hands-on check, do the manual test (or `/prove` it where the agent can reach the target), tick each `## Manual checks` line with what you saw, then run `/spec-check` again to reach `Verified`.",
+      "ru": "`/spec-check` сверяет сборку с реальностью и ставит итоговый статус: `Verified`, `Partial` или `Broken` (с передачей хода `/spec-fix`), либо `BlockNeedUserTest`, пока открыт ручной сигнал. Для проверки руками выполните ручной тест (или `/prove`, если агент может добраться до цели), отметьте каждый пункт `## Manual checks` с тем, что вы увидели, и снова запустите `/spec-check`, чтобы дойти до `Verified`.",
+      "ua": "`/spec-check` звіряє збірку з реальністю й ставить підсумковий статус: `Verified`, `Partial` або `Broken` (з передачею ходу `/spec-fix`), чи `BlockNeedUserTest`, поки відкритий ручний сигнал. Для перевірки руками виконайте ручний тест (або `/prove`, якщо агент може дістатися цілі), позначте кожен пункт `## Manual checks` із тим, що ви побачили, і знову запустіть `/spec-check`, щоб дійти до `Verified`."
+    }
+  ],
+  "outcome": {
+    "en": "One ticket file in the plan directory, with its tactical folder, whose status matches the files: `Verified`, or `BlockNeedUserTest` with open `## Manual checks` lines for you, or `Partial` / `Broken` with a `## Last Audit` block that says what is left. Every stage read and wrote that same file.",
+    "ru": "Один файл тикета в папке планов, вместе с его тактической папкой, со статусом, который совпадает с файлами: `Verified`, либо `BlockNeedUserTest` с открытыми для вас пунктами `## Manual checks`, либо `Partial` / `Broken` с блоком `## Last Audit`, где сказано, что осталось. Все стадии читали и писали этот же файл.",
+    "ua": "Один файл тікета в теці планів, разом із його тактичною текою, зі статусом, що збігається з файлами: `Verified`, або `BlockNeedUserTest` з відкритими для вас пунктами `## Manual checks`, або `Partial` / `Broken` з блоком `## Last Audit`, де сказано, що лишилося. Усі стадії читали й писали цей самий файл."
+  },
+  "tips": [
+    {
+      "en": "The default is momentum: no sign-off at every stage, and none skipped where a real stop is encoded. To review between stages, run the skills individually, or pass `--dry-run` to the ones that take it: `/spec-tech`, `/spec-dev` and `/spec-fix`.",
+      "ru": "По умолчанию работает инерция: подписи на каждой стадии нет, но и настоящая остановка не пропускается. Чтобы просмотреть результат между стадиями, запускайте навыки по отдельности или передайте `--dry-run` тем, что его принимают: `/spec-tech`, `/spec-dev` и `/spec-fix`.",
+      "ua": "Типово працює інерція: підпису на кожній стадії немає, але й справжня зупинка не пропускається. Щоб переглянути результат між стадіями, запускайте навички окремо або передайте `--dry-run` тим, що його приймають: `/spec-tech`, `/spec-dev` і `/spec-fix`."
+    },
+    {
+      "en": "The size gate is the [complexity ladder](term:ladder) applied: it keeps a small change from dragging a five-stage pipeline behind it. The full PRIMITIVE score in [the spec lifecycle](fn:spec-lifecycle) is longer than the summary above: it also wants no new files, no new surface a reader reaches and under about 100 lines of delta.",
+      "ru": "Проверка размера - это [лестница сложности](term:ladder) в действии: она не даёт мелкой правке тянуть за собой пятистадийный конвейер. Полная оценка PRIMITIVE в [жизненном цикле спеки](fn:spec-lifecycle) длиннее приведённого выше пересказа: она требует ещё и никаких новых файлов, никаких новых поверхностей для читателя и менее примерно 100 строк изменений.",
+      "ua": "Перевірка розміру - це [драбина складності](term:ladder) у дії: вона не дає дрібній правці тягти за собою п'ятистадійний конвеєр. Повна оцінка PRIMITIVE у [життєвому циклі спеки](fn:spec-lifecycle) довша за наведений вище переказ: вона вимагає ще й жодних нових файлів, жодних нових поверхонь для читача та менш ніж приблизно 100 рядків змін."
+    },
+    {
+      "en": "For a whole queue of tickets rather than one, [/backlog](fn:backlog) selects tickets and hands each one to `/spec-all`.",
+      "ru": "Для целой очереди тикетов, а не одного, [/backlog](fn:backlog) выбирает тикеты и передаёт каждый в `/spec-all`.",
+      "ua": "Для цілої черги тікетів, а не одного, [/backlog](fn:backlog) обирає тікети й передає кожен до `/spec-all`."
+    }
+  ],
+  "related": ["spec-lifecycle", "spec", "spec-dev", "spec-check", "backlog"],
+  "terms": ["ticket", "status", "ladder"],
+  "keywords": {
+    "en": ["full pipeline", "idea to done", "spec pipeline", "end to end", "resume a ticket"],
+    "ru": ["полный конвейер", "от идеи до готового", "конвейер спеки", "сквозной прогон", "продолжить тикет"],
+    "ua": ["повний конвеєр", "від ідеї до готового", "конвеєр спеки", "наскрізний прогін", "продовжити тікет"]
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "id": "skill",
+  "term": { "en": "Skill (slash command)", "ru": "Навык (slash-команда)", "ua": "Навичка (slash-команда)" },
+  "def": {
+    "en": "A workflow written down once as a folder with a `SKILL.md` in `.claude/skills/` and run by typing its name after a slash, such as `/quick` or `/spec`. The file tells the agent what to do, in what order, and when to refuse. The format is open, so several other agent tools load it too.",
+    "ru": "Сценарий, записанный один раз в виде папки с `SKILL.md` в `.claude/skills/` и запускаемый набором его имени после слеша, например `/quick` или `/spec`. Файл говорит агенту, что делать, в каком порядке и когда отказаться. Формат открытый, поэтому его загружают и другие агентские инструменты.",
+    "ua": "Сценарій, записаний один раз у вигляді теки з `SKILL.md` в `.claude/skills/` і запущений набором його імені після слеша, наприклад `/quick` або `/spec`. Файл каже агенту, що робити, в якому порядку і коли відмовитися. Формат відкритий, тому його завантажують і інші агентські інструменти."
+  },
+  "see": ["agent", "role-agent"]
+}

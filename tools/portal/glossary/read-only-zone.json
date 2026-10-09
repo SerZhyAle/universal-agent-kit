@@ -1,0 +1,10 @@
+{
+  "id": "read-only-zone",
+  "term": { "en": "Read-only zone", "ru": "Зона только для чтения", "ua": "Зона лише для читання" },
+  "def": {
+    "en": "Paths the agent must never modify, listed in `<READONLY_ZONES>` of the rules file; the kit suggests vendored or generated material, or `none`. Reading them is fine. A skill that meets one stops: `/spec-dev` aborts before the edit, and `/spec-fix` asks for explicit permission.",
+    "ru": "Пути, которые агент не должен изменять никогда, перечисленные в `<READONLY_ZONES>` файла правил; kit предлагает сюда стороннее или сгенерированное содержимое либо `none`. Читать их можно. Навык, наткнувшийся на такую зону, останавливается: `/spec-dev` прерывается до правки, а `/spec-fix` требует явного разрешения.",
+    "ua": "Шляхи, які агент ніколи не повинен змінювати, перелічені в `<READONLY_ZONES>` файлу правил; kit пропонує сюди сторонній або згенерований вміст чи `none`. Читати їх можна. Навичка, що натрапила на таку зону, зупиняється: `/spec-dev` перериває роботу до правки, а `/spec-fix` вимагає явного дозволу."
+  },
+  "see": ["rules-file", "size-budget", "scratch"]
+}

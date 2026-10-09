@@ -1,0 +1,109 @@
+{
+  "id": "adopt-new",
+  "title": {
+    "en": "Set up a new project on the kit's method",
+    "ru": "Поднять новый проект по методу kit",
+    "ua": "Підняти новий проєкт за методом kit"
+  },
+  "pitch": {
+    "en": "One prompt stands a fresh or near-empty project up on the method: a rules file, the skills and role briefs that fit, the working folders and a named check.",
+    "ru": "Один промпт поднимает новый или почти пустой проект по методу: файл правил, подходящие навыки и роли, рабочие папки и названная проверка.",
+    "ua": "Один промпт піднімає новий або майже порожній проєкт за методом: файл правил, відповідні навички й ролі, робочі теки та названа перевірка."
+  },
+  "lead": {
+    "en": "For a new or near-empty folder you run your agent's own project-init command, paste one prompt from the landing page and read the plan the agent shows. Only after you approve does it write a rules file, add the skills and role briefs that fit, create the working folders and name the command that proves a change is sound.",
+    "ru": "Для новой или почти пустой папки вы запускаете штатную команду агента для разбора проекта, вставляете один промпт с главной страницы и читаете план, который покажет агент. Только после вашего согласия он напишет файл правил, добавит подходящие навыки и роли, создаст рабочие папки и назовёт команду, которая доказывает, что правка не сломала работу.",
+    "ua": "Для нової або майже порожньої теки ви запускаєте штатну команду агента для розбору проєкту, вставляєте один промпт з головної сторінки й читаєте план, який покаже агент. Лише після вашої згоди він напише файл правил, додасть відповідні навички й ролі, створить робочі теки та назве команду, що доводить: правка не зламала роботу."
+  },
+  "situation": {
+    "en": "A new project, a near-empty folder or a personal local project without Git. A project that already has its own rules file and conventions goes the other way: [merge the kit into an existing project](fn:adopt-existing).",
+    "ru": "Новый проект, почти пустая папка или личный локальный проект без Git. Проект, у которого уже есть свой файл правил и свои соглашения, идёт другим путём: [влить kit в существующий проект](fn:adopt-existing).",
+    "ua": "Новий проєкт, майже порожня тека або особистий локальний проєкт без Git. Проєкт, у якого вже є власний файл правил і свої домовленості, йде іншим шляхом: [влити kit в наявний проєкт](fn:adopt-existing)."
+  },
+  "warning": {
+    "en": "Approving the plan lets the agent write into the project folder. In a folder without Git there is no history to roll back to, so copy the whole folder somewhere safe before you approve a big change: that copy is your restore point.",
+    "ru": "Согласие с планом разрешает агенту писать в папку проекта. В папке без Git откатиться некуда, поэтому перед большой правкой скопируйте всю папку в надёжное место: эта копия и есть ваша точка возврата.",
+    "ua": "Згода з планом дозволяє агенту писати в теку проєкту. У теці без Git відкотитися нікуди, тож перед великою правкою скопіюйте всю теку в надійне місце: ця копія і є вашою точкою повернення."
+  },
+  "steps": [
+    {
+      "en": "Open your agent in the project folder and let it map the project with its built-in codebase-init command: /init in Claude Code, or the equivalent in your tool. That gives the agent a rules file and a basic map of the project before the kit arrives.",
+      "ru": "Откройте агента в папке проекта и дайте ему разобрать проект штатной командой: /init в Claude Code или её аналог в вашем инструменте. Так у агента появятся файл правил и базовая карта проекта ещё до того, как придёт kit.",
+      "ua": "Відкрийте агента в теці проєкту й дайте йому розібрати проєкт штатною командою: /init у Claude Code або її аналог у вашому інструменті. Так в агента з'являться файл правил і базова мапа проєкту ще до того, як прийде kit."
+    },
+    {
+      "en": "On the landing page open the section 'How to adopt', part 'A · A new or near-empty project', and copy the prompt for a new project. The prompt is in English on every language version of the page.",
+      "ru": "На главной странице откройте раздел «Как внедрить», часть «A · Новый или почти пустой проект», и скопируйте промпт для нового проекта. На всех языковых версиях страницы он написан по-английски.",
+      "ua": "На головній сторінці відкрийте розділ «Як впровадити», частину «A · Новий або майже порожній проєкт», і скопіюйте промпт для нового проєкту. На всіх мовних версіях сторінки його написано англійською."
+    },
+    {
+      "en": "Paste it into the agent. It downloads `universal-agent-kit.zip` into a temp or scratch directory, unpacks it to a `universal-agent-kit/` folder and reads `universal-agent-kit/README.md` first, then `universal-agent-kit/docs/PROJECT_SHAPES.md`. If it cannot download files in its environment, it stops and asks you to place the archive in the workspace.",
+      "ru": "Вставьте его агенту. Он скачает `universal-agent-kit.zip` во временную или черновую папку, распакует в папку `universal-agent-kit/` и прочитает сначала `universal-agent-kit/README.md`, затем `universal-agent-kit/docs/PROJECT_SHAPES.md`. Если в его среде нельзя скачивать файлы, он остановится и попросит положить архив в рабочую папку.",
+      "ua": "Вставте його агенту. Він завантажить `universal-agent-kit.zip` у тимчасову або чернетку теку, розпакує в теку `universal-agent-kit/` і прочитає спершу `universal-agent-kit/README.md`, потім `universal-agent-kit/docs/PROJECT_SHAPES.md`. Якщо в його середовищі не можна завантажувати файли, він зупиниться й попросить покласти архів у робочу теку."
+    },
+    {
+      "en": "The prompt asks for four things: a rules file in the form your tool reads (for example `AGENTS.md`, `CLAUDE.md`, a Cursor rule or `GEMINI.md`); the skill files and role briefs that fit this kind of project; a plan directory, a scratch directory and a memory folder with its index; and the one command that proves a change is sound. For code it also picks the build, test, lint and run commands, or proposes a stack.",
+      "ru": "Промпт просит четыре вещи: файл правил в том виде, который читает ваш инструмент (например, `AGENTS.md`, `CLAUDE.md`, правило Cursor или `GEMINI.md`); файлы навыков и роли, подходящие такому проекту; папки для планов и черновиков и папку памяти с индексом; одну команду, которая доказывает, что правка не сломала работу. Для кода агент ещё выберет команды сборки, тестов, линтера и запуска или предложит стек.",
+      "ua": "Промпт просить чотири речі: файл правил у тому вигляді, який читає ваш інструмент (наприклад, `AGENTS.md`, `CLAUDE.md`, правило Cursor чи `GEMINI.md`); файли навичок і ролі, що пасують такому проєкту; теки для планів і чернеток та теку пам'яті з індексом; одну команду, яка доводить, що правка не зламала роботу. Для коду агент ще обере команди збірки, тестів, лінтера й запуску або запропонує стек."
+    },
+    {
+      "en": "The prompt ends by asking for the plan first and for nothing to be created until you approve. Read the plan and ask for changes. Look for the check command in it: `<CHECK_CMD>` is the one placeholder nobody may leave empty.",
+      "ru": "Промпт заканчивается просьбой сначала показать план и ничего не создавать до вашего согласия. Прочитайте план, попросите правки. Найдите в нём команду проверки: `<CHECK_CMD>` - единственный токен, который нельзя оставить пустым.",
+      "ua": "Промпт закінчується проханням спершу показати план і нічого не створювати до вашої згоди. Прочитайте план, попросіть правки. Знайдіть у ньому команду перевірки: `<CHECK_CMD>` - єдиний токен, який не можна лишати порожнім."
+    },
+    {
+      "en": "After you approve, the agent creates the files. The rules file fills in what already exists in the project and uses sensible defaults for the rest. Read what it chose for each placeholder and correct it; [fill the placeholders](fn:placeholders) says what each token should hold.",
+      "ru": "После вашего согласия агент создаёт файлы. Файл правил заполнен тем, что в проекте уже есть, а остальное закрыто разумными значениями по умолчанию. Прочитайте, что он выбрал для каждого плейсхолдера, и поправьте; что должен содержать каждый токен, описано в разделе [как заполнить плейсхолдеры](fn:placeholders).",
+      "ua": "Після вашої згоди агент створює файли. Файл правил заповнений тим, що в проєкті вже є, а решту закрито розумними значеннями за замовчуванням. Прочитайте, що він обрав для кожного плейсхолдера, і поправте; що має містити кожен токен, описано в розділі [як заповнити плейсхолдери](fn:placeholders)."
+    }
+  ],
+  "outcome": {
+    "en": "The project has a rules file for your tool, the skills and role briefs that fit it, a plan directory, a scratch directory, a memory folder with its index and a named check command, all created after you approved the plan.",
+    "ru": "В проекте есть файл правил для вашего инструмента, подходящие навыки и роли, папка планов, папка черновиков, папка памяти с индексом и названная команда проверки, и всё это создано после того, как вы утвердили план.",
+    "ua": "У проєкті є файл правил для вашого інструмента, відповідні навички й ролі, тека планів, тека чернеток, тека пам'яті з індексом і названа команда перевірки, і все це створено після того, як ви затвердили план."
+  },
+  "tips": [
+    {
+      "en": "Not ready for the full set? Take `AGENTS.md` (plus `CLAUDE.md` for Claude Code, minus its memory import line), the whole `docs/` folder, `.claude/skills/quick/` and `.claude/skills/fix/`. The docs cost nothing until a rule points at one, and taking them all keeps every pointer true. Add `/spec` when a task first carries real design decisions, `memory/` once re-explaining things hurts.",
+      "ru": "Не готовы ко всему? Возьмите `AGENTS.md` (и `CLAUDE.md` для Claude Code, без строки импорта памяти), всю `docs/`, `.claude/skills/quick/` и `.claude/skills/fix/`. Документы ничего не стоят, пока на них не сослалось правило, а когда взяты все, ссылки остаются верными. `/spec` добавьте, когда в задаче впервые появятся настоящие решения, `memory/` - когда пересказывать одно и то же станет больно.",
+      "ua": "Не готові до всього? Візьміть `AGENTS.md` (і `CLAUDE.md` для Claude Code, без рядка імпорту пам'яті), усю `docs/`, `.claude/skills/quick/` і `.claude/skills/fix/`. Документи нічого не коштують, доки на них не посилається правило, а коли взято всі, посилання лишаються слушними. `/spec` додайте, коли в задачі вперше з'являться справжні рішення, `memory/` - коли переказувати те саме стане боляче."
+    },
+    {
+      "en": "Then make the rules file name only what you shipped. Search `AGENTS.md` for `/` followed by a skill name and delete or reword every line that names a skill you did not take: the list in section 4, and the mentions of `/park`, `/ui-clarify`, `/surfaces`, `/prove` and `/spec` elsewhere. A rules file that routes to a skill that is not there sends the agent looking for it.",
+      "ru": "Затем сделайте так, чтобы файл правил называл только то, что вы взяли. Найдите в `AGENTS.md` `/` с именем навыка и удалите или перепишите каждую строку про навык, которого вы не брали: список в разделе 4 и упоминания `/park`, `/ui-clarify`, `/surfaces`, `/prove` и `/spec` в других местах. Файл правил, отсылающий к отсутствующему навыку, отправляет агента его искать.",
+      "ua": "Потім зробіть так, щоб файл правил називав лише те, що ви взяли. Знайдіть в `AGENTS.md` `/` з іменем навички й видаліть або перепишіть кожен рядок про навичку, якої ви не брали: список у розділі 4 та згадки `/park`, `/ui-clarify`, `/surfaces`, `/prove` і `/spec` в інших місцях. Файл правил, що відсилає до відсутньої навички, змушує агента її шукати."
+    },
+    {
+      "en": "No repository, a folder of documents? The kit works the same; only the safety net changes shape. Copy the whole folder somewhere safe first: that copy is your restore point, and comparing against it shows what changed since last time. Skip `/git`, delete the `git` lines from `.claude/settings.json` and read 'commit' in the rules as 'keep a dated copy'.",
+      "ru": "Нет репозитория, только папка документов? kit работает так же, меняется лишь страховка. Сначала скопируйте всю папку в надёжное место: эта копия - точка возврата, а сравнение с ней показывает, что изменилось с прошлого раза. `/git` пропустите, строки `git` из `.claude/settings.json` удалите, а слово «commit» в правилах читайте как «сохранить копию с датой».",
+      "ua": "Немає репозиторію, лише тека документів? Kit працює так само, змінюється лише страховка. Спершу скопіюйте всю теку в надійне місце: ця копія - точка повернення, а порівняння з нею показує, що змінилося від минулого разу. `/git` пропустіть, рядки `git` із `.claude/settings.json` видаліть, а слово «commit» у правилах читайте як «зберегти копію з датою»."
+    },
+    {
+      "en": "By hand in Claude Code: copy `.claude/skills/*` and `.claude/agents/*`, put `AGENTS.md` and `CLAUDE.md` at the repo root and fill the placeholders in `AGENTS.md`, and copy `docs/*` into a `docs/` folder there, because the rules cite `docs/<NAME>.md` literally. An existing `CLAUDE.md` only needs the two `@` import lines. `memory/` and a reviewed `.claude/settings.json` are optional.",
+      "ru": "Вручную в Claude Code: скопируйте `.claude/skills/*` и `.claude/agents/*`, положите `AGENTS.md` и `CLAUDE.md` в корень репозитория, заполните плейсхолдеры в `AGENTS.md`, а `docs/*` скопируйте в папку `docs/` там же: правила ссылаются на `docs/<NAME>.md` буквально. В уже имеющийся `CLAUDE.md` достаточно добавить две строки импорта `@`. `memory/` и проверенный `.claude/settings.json` необязательны.",
+      "ua": "Вручну в Claude Code: скопіюйте `.claude/skills/*` і `.claude/agents/*`, покладіть `AGENTS.md` і `CLAUDE.md` у корінь репозиторію, заповніть плейсхолдери в `AGENTS.md`, а `docs/*` скопіюйте в теку `docs/` там же: правила посилаються на `docs/<NAME>.md` буквально. До наявного `CLAUDE.md` досить додати два рядки імпорту `@`. `memory/` і перевірений `.claude/settings.json` необов'язкові."
+    },
+    {
+      "en": "Another tool? Most agent tools read `AGENTS.md` natively. The skills are in the open Agent Skills format: some tools load them straight from `.claude/skills/`, others from `.agents/skills/` (copy or link the folder). Only the agents stay an adaptation: custom agents, modes or system-prompt preambles. The table per tool, as of 2026-10, is in `kit/README.md`.",
+      "ru": "Другой инструмент? Большинство читают `AGENTS.md` нативно. Навыки лежат в открытом формате Agent Skills: одни инструменты берут их прямо из `.claude/skills/`, другие - из `.agents/skills/` (скопируйте папку или сделайте ссылку). Адаптацией остаются только агенты: свои агенты, режимы или преамбулы системного промпта. Таблица по инструментам, на 2026-10, - в `kit/README.md`.",
+      "ua": "Інший інструмент? Більшість читають `AGENTS.md` нативно. Навички лежать у відкритому форматі Agent Skills: одні інструменти беруть їх прямо з `.claude/skills/`, інші - з `.agents/skills/` (скопіюйте теку або зробіть посилання). Адаптацією лишаються тільки агенти: власні агенти, режими чи преамбули системного промпту. Таблиця за інструментами, на 2026-10, - у `kit/README.md`."
+    },
+    {
+      "en": "If the project is not code, the prompt still applies. Read [fit the method to work that is not code](fn:project-shapes) to see which rules to drop.",
+      "ru": "Если проект - не код, промпт всё равно подходит. Какие правила отбросить, читайте в разделе [как подогнать метод под работу, которая не код](fn:project-shapes).",
+      "ua": "Якщо проєкт - не код, промпт усе одно підходить. Які правила відкинути, читайте в розділі [як підігнати метод під роботу, що не є кодом](fn:project-shapes)."
+    },
+    {
+      "en": "To see a filled rules file and a finished ticket before you start, read the kit's `examples/`: reference only, never copied into a project. See [the worked example](fn:worked-example). A newer kit later? [Move the project to it](fn:upgrade-kit).",
+      "ru": "Чтобы увидеть заполненный файл правил и законченный тикет до начала, прочитайте `examples/` из kit: только для чтения, в проект не копируется. См. [рабочий пример](fn:worked-example). Позже вышел более новый kit? [Перевести проект на него](fn:upgrade-kit).",
+      "ua": "Щоб побачити заповнений файл правил і завершений тікет до початку, прочитайте `examples/` із kit: лише для читання, у проєкт не копіюється. Див. [робочий приклад](fn:worked-example). Згодом вийшов новіший kit? [Перевести проєкт на нього](fn:upgrade-kit)."
+    }
+  ],
+  "related": ["adopt-existing", "placeholders", "project-shapes", "rules-file", "agent-memory"],
+  "terms": ["kit", "rules-file", "placeholder", "scratch", "skill", "agent"],
+  "keywords": {
+    "en": ["new project", "start from scratch", "adopt the kit", "empty folder", "import guide", "minimal start", "setup prompt", "AGENTS.md"],
+    "ru": ["новый проект", "начать с нуля", "внедрить kit", "пустая папка", "гид по импорту", "минимальный старт", "промпт для запуска", "AGENTS.md"],
+    "ua": ["новий проєкт", "почати з нуля", "впровадити kit", "порожня тека", "гід з імпорту", "мінімальний старт", "промпт для запуску", "AGENTS.md"]
+  }
+}

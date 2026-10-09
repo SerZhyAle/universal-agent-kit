@@ -1,0 +1,109 @@
+{
+  "id": "upgrade-kit",
+  "title": {
+    "en": "Move an adopted project to a newer kit, or take the kit out again",
+    "ru": "Перевести проект на более новый kit или убрать kit обратно",
+    "ua": "Перевести проєкт на новіший kit або прибрати kit назад"
+  },
+  "pitch": {
+    "en": "Give your agent the newer `merge-prompt.txt` with `MODE: UPGRADE`: after your approval it applies only the difference. Or delete what the kit added, and nothing else.",
+    "ru": "Отдайте агенту новый `merge-prompt.txt` с `MODE: UPGRADE`: после вашего согласия он применит только разницу. Или удалите то, что добавил kit, и больше ничего.",
+    "ua": "Віддайте агенту новий `merge-prompt.txt` із `MODE: UPGRADE`: після вашої згоди він застосує лише різницю. Або видаліть те, що додав kit, і більше нічого."
+  },
+  "lead": {
+    "en": "A project that took the kit in carries a marker, the line `Adopted from universal-agent-kit <date>`, and an upgrade starts from it. You unzip the newer kit beside the older one and paste the newer [merge prompt](term:merge-prompt) with `MODE: UPGRADE` and the path of the older kit. The agent compares the two kits, shows you the difference and re-applies only that to your merged files. The page also lists what to delete if you want the kit out again.",
+    "ru": "У проекта, куда kit уже внесён, есть метка - строка `Adopted from universal-agent-kit <date>`, и обновление начинается с неё. Вы распаковываете новый kit рядом со старым и вставляете новый [промпт слияния](term:merge-prompt) с `MODE: UPGRADE` и путём к старому kit. Агент сравнивает два kit, показывает разницу и переносит в ваши файлы только её. Здесь же перечислено, что удалить, если kit нужно убрать из проекта.",
+    "ua": "У проєкту, куди kit уже внесено, є мітка - рядок `Adopted from universal-agent-kit <date>`, і оновлення починається з неї. Ви розпаковуєте новий kit поруч зі старим і вставляєте новий [промпт злиття](term:merge-prompt) з `MODE: UPGRADE` та шляхом до старого kit. Агент порівнює два kit, показує різницю й переносить у ваші файли лише її. Тут же перелічено, що видалити, якщо kit треба прибрати з проєкту."
+  },
+  "situation": {
+    "en": "You merged the kit into a project earlier and have now downloaded a newer one, or you have decided to take the kit out of the project.",
+    "ru": "Вы раньше внесли kit в проект и теперь скачали более новый либо решили убрать kit из проекта.",
+    "ua": "Ви раніше внесли kit у проєкт і тепер завантажили новіший або вирішили прибрати kit із проєкту."
+  },
+  "warning": {
+    "en": "An upgrade is only as good as its base. Keep the older kit folder until the upgrade is done: without it the agent can only run a fresh merge, in which every kit file you already have counts as a duplicate or a conflict, never as new. Removal deletes files, so delete only what is on the list, and nothing you edited into your own.",
+    "ru": "Обновление держится на базе сравнения. Не удаляйте старую папку kit, пока обновление не закончено: без неё агент может только провести новое слияние, где каждый уже имеющийся у вас файл kit считается дубликатом или конфликтом, а не новым. Удаление стирает файлы: удаляйте только то, что в списке, и ничего из того, что вы переписали под себя.",
+    "ua": "Оновлення тримається на базі порівняння. Не видаляйте стару теку kit, доки оновлення не завершено: без неї агент може лише провести нове злиття, де кожен наявний у вас файл kit вважається дублікатом або конфліктом, а не новим. Видалення стирає файли: видаляйте лише те, що в списку, і нічого з того, що ви переписали під себе."
+  },
+  "steps": [
+    {
+      "en": "Find your marker. The merge prompt wrote one line into your rules file: `Adopted from universal-agent-kit <date>`, the date taken from the kit's `VERSION`, a one-line build date that every downloaded kit carries. If you merged by hand, add that line yourself. An upgrade starts from it.",
+      "ru": "Найдите метку. Промпт слияния записал в файл правил одну строку: `Adopted from universal-agent-kit <date>`, где дата взята из `VERSION` kit - однострочной даты сборки, которая есть в каждом скачанном kit. Если вы вносили kit вручную, добавьте эту строку сами. Обновление начинается с неё.",
+      "ua": "Знайдіть мітку. Промпт злиття записав у файл правил один рядок: `Adopted from universal-agent-kit <date>`, де дату взято з `VERSION` kit - однорядкової дати збірки, яка є в кожному завантаженому kit. Якщо ви вносили kit вручну, додайте цей рядок самі. Оновлення починається з нього."
+    },
+    {
+      "en": "Unzip the newer kit beside the older one, the kit you merged from. Then paste the newer kit's `merge-prompt.txt` into your agent with `MODE: UPGRADE` and the path of the older copy. Without `MODE: UPGRADE` the prompt runs a fresh merge.",
+      "ru": "Распакуйте новый kit рядом со старым, тем, из которого вы вносили. Затем вставьте агенту `merge-prompt.txt` нового kit, дописав `MODE: UPGRADE` и путь к старой копии. Без `MODE: UPGRADE` промпт проводит новое слияние.",
+      "ua": "Розпакуйте новий kit поруч зі старим, тим, з якого ви вносили. Потім вставте агенту `merge-prompt.txt` нового kit, дописавши `MODE: UPGRADE` і шлях до старої копії. Без `MODE: UPGRADE` промпт проводить нове злиття."
+    },
+    {
+      "en": "The agent first reads the newer kit's `VERSION`, the older kit's `VERSION` and the `Adopted from` line in your rules file. If your line does not match the older kit's `VERSION`, it says so and stops: the comparison would be against the wrong base.",
+      "ru": "Агент сначала читает `VERSION` нового kit, `VERSION` старого kit и строку `Adopted from` в вашем файле правил. Если ваша строка не совпадает с `VERSION` старого kit, он говорит об этом и останавливается: сравнение шло бы от неверной базы.",
+      "ua": "Агент спершу читає `VERSION` нового kit, `VERSION` старого kit і рядок `Adopted from` у вашому файлі правил. Якщо ваш рядок не збігається з `VERSION` старого kit, він каже про це й зупиняється: порівняння йшло б від хибної бази."
+    },
+    {
+      "en": "Inventory, read-only. The agent compares the older kit with the newer one file by file: added, removed, renamed (the rename table is in `docs/REPLACES.md`) and changed. For each changed file it finds where that content lives in your project: the copied file, or the rule blocks merged into your rules file.",
+      "ru": "Инвентаризация, только чтение. Агент сравнивает старый и новый kit файл за файлом: добавлено, удалено, переименовано (таблица переименований лежит в `docs/REPLACES.md`), изменено. Для каждого изменённого файла он находит, где это содержимое живёт в вашем проекте: в скопированном файле или в блоках правил, влитых в ваш файл правил.",
+      "ua": "Інвентаризація, лише читання. Агент порівнює старий і новий kit файл за файлом: додано, видалено, перейменовано (таблиця перейменувань лежить у `docs/REPLACES.md`), змінено. Для кожного зміненого файлу він знаходить, де цей вміст живе у вашому проєкті: у скопійованому файлі чи в блоках правил, влитих у ваш файл правил."
+    },
+    {
+      "en": "Plan, then a stop. For each change the agent shows the hunk it would apply to your copy. Where you edited that part yourself, it shows both versions and you choose. A kit file that was removed: it proposes deleting your copy only if you never edited it. A renamed skill or placeholder gets a rename plan. Nothing is written until you approve.",
+      "ru": "План, затем остановка. По каждому изменению агент показывает правку, которую внесёт в вашу копию. Где вы правили это место сами, он показывает обе версии, и выбираете вы. Файл kit, который удалён: удалить вашу копию он предлагает, только если вы её не правили. Для переименованного навыка или плейсхолдера он даёт план переименования. Пока вы не согласились, ничего не пишется.",
+      "ua": "План, потім зупинка. За кожною зміною агент показує правку, яку внесе у вашу копію. Де ви правили це місце самі, він показує обидві версії, і обираєте ви. Файл kit, який вилучено: видалити вашу копію він пропонує, лише якщо ви її не правили. Для перейменованої навички чи плейсхолдера він дає план перейменування. Доки ви не погодилися, нічого не пишеться."
+    },
+    {
+      "en": "After you approve, the agent applies the plan under the same safety rules as a fresh merge: backups first, no commit. It runs the same self-check, then sets the `Adopted from` line to the date in the newer kit's `VERSION`, so the next upgrade starts from it.",
+      "ru": "После вашего согласия агент применяет план по тем же правилам безопасности, что и новое слияние: сначала резервные копии, коммита нет. Он проводит ту же самопроверку, затем ставит в строке `Adopted from` дату из `VERSION` нового kit, и следующее обновление начнётся уже с неё.",
+      "ua": "Після вашої згоди агент застосовує план за тими самими правилами безпеки, що й нове злиття: спершу резервні копії, коміту немає. Він проводить ту саму самоперевірку, потім ставить у рядку `Adopted from` дату з `VERSION` нового kit, і наступне оновлення почнеться вже з неї."
+    },
+    {
+      "en": "To take the kit out instead, delete what it added and nothing else: the kit's skill folders in `.claude/skills/`; `rd-lead.md`, `solution-researcher.md`, `implementer.md` and `doc-writer.md` in `.claude/agents/`; the twelve kit files in `docs/`, unless you have edited them into your own.",
+      "ru": "Чтобы убрать kit, удалите то, что он добавил, и больше ничего: папки навыков kit в `.claude/skills/`; `rd-lead.md`, `solution-researcher.md`, `implementer.md` и `doc-writer.md` в `.claude/agents/`; двенадцать файлов kit в `docs/`, если вы не переписали их под себя.",
+      "ua": "Щоб прибрати kit, видаліть те, що він додав, і більше нічого: теки навичок kit у `.claude/skills/`; `rd-lead.md`, `solution-researcher.md`, `implementer.md` і `doc-writer.md` у `.claude/agents/`; дванадцять файлів kit у `docs/`, якщо ви не переписали їх під себе."
+    },
+    {
+      "en": "Then take out the rules you merged into `AGENTS.md` (or your own rules file), the two `@` import lines in `CLAUDE.md`, the `Adopted from` line and the lines you took from `.claude/settings.json`. Remove `memory/` only if it still holds the example entries: real memories are yours. `<PLAN_DIR>/` and its tickets are your project's history, not the kit's: keep them.",
+      "ru": "Затем уберите правила, влитые в `AGENTS.md` (или в ваш файл правил), две строки импорта `@` в `CLAUDE.md`, строку `Adopted from` и строки, взятые из `.claude/settings.json`. `memory/` удаляйте, только если в ней остались одни примеры: настоящие записи ваши. `<PLAN_DIR>/` и её тикеты - история вашего проекта, а не kit: их оставьте.",
+      "ua": "Далі приберіть правила, влиті в `AGENTS.md` (або у ваш файл правил), два рядки імпорту `@` у `CLAUDE.md`, рядок `Adopted from` і рядки, взяті з `.claude/settings.json`. `memory/` видаляйте, лише якщо в ній лишилися самі приклади: справжні записи ваші. `<PLAN_DIR>/` та її тікети - історія вашого проєкту, а не kit: їх лишіть."
+    }
+  ],
+  "outcome": {
+    "en": "After an upgrade, only the differences you approved reached your files, each changed file has a backup, and the `Adopted from` line carries the newer kit's date. After a removal, what the kit added is gone; your edited files, real memories and the tickets in `<PLAN_DIR>/` stay.",
+    "ru": "После обновления в ваши файлы попала только утверждённая вами разница, у каждого изменённого файла есть копия, а строка `Adopted from` несёт дату нового kit. После удаления то, что добавил kit, исчезло; ваши переписанные файлы, настоящие записи памяти и тикеты в `<PLAN_DIR>/` остаются.",
+    "ua": "Після оновлення у ваші файли потрапила лише затверджена вами різниця, у кожного зміненого файлу є копія, а рядок `Adopted from` несе дату нового kit. Після видалення те, що додав kit, зникло; ваші переписані файли, справжні записи пам'яті й тікети в `<PLAN_DIR>/` лишаються."
+  },
+  "tips": [
+    {
+      "en": "No older copy to point at? The prompt then runs a fresh merge in which every kit file you already have counts as a duplicate or a conflict, never as new. How that plan reads is in [merge the kit into an existing project](fn:adopt-existing).",
+      "ru": "Нет старой копии, на которую можно указать? Тогда промпт проводит новое слияние, где каждый уже имеющийся у вас файл kit считается дубликатом или конфликтом, а не новым. Как читается такой план, описано в [как влить kit в существующий проект](fn:adopt-existing).",
+      "ua": "Немає старої копії, на яку можна вказати? Тоді промпт проводить нове злиття, де кожен наявний у вас файл kit вважається дублікатом або конфліктом, а не новим. Як читається такий план, описано в [як влити kit в наявний проєкт](fn:adopt-existing)."
+    },
+    {
+      "en": "Renames arrive as a plan, not as a find-and-replace. The table in `docs/REPLACES.md` records what moved, for example `<MAX_LOC>` became `<SIZE_BUDGET>` and the skill verify became `/prove`. Rename `<ID>` to `<ID_SCHEME>` only where it names the setting (see [fill the placeholders](fn:placeholders)).",
+      "ru": "Переименования приходят планом, а не автозаменой. Таблица в `docs/REPLACES.md` фиксирует, что переехало, например `<MAX_LOC>` стал `<SIZE_BUDGET>`, а навык verify стал `/prove`. `<ID>` переименовывайте в `<ID_SCHEME>` только там, где он называет настройку (см. [как заполнить плейсхолдеры](fn:placeholders)).",
+      "ua": "Перейменування приходять планом, а не автозаміною. Таблиця в `docs/REPLACES.md` фіксує, що переїхало, наприклад `<MAX_LOC>` став `<SIZE_BUDGET>`, а навичка verify стала `/prove`. `<ID>` перейменовуйте на `<ID_SCHEME>` лише там, де він називає налаштування (див. [як заповнити плейсхолдери](fn:placeholders))."
+    },
+    {
+      "en": "Your line and the older kit disagree? The agent stops instead of guessing. Point it at the kit you actually merged from.",
+      "ru": "Ваша строка и старый kit не сходятся? Агент остановится, а не станет гадать. Укажите ему тот kit, из которого вы действительно вносили.",
+      "ua": "Ваш рядок і старий kit не сходяться? Агент зупиниться, а не гадатиме. Вкажіть йому той kit, з якого ви справді вносили."
+    },
+    {
+      "en": "No repository? An upgrade uses the same safety rules as a fresh merge, so the backups it makes are your restore point instead of a branch. For a folder of documents, copy the whole folder somewhere safe first, as for the first merge.",
+      "ru": "Нет репозитория? Обновление идёт по тем же правилам безопасности, что и новое слияние, поэтому вместо ветки точкой возврата служат его резервные копии. Для папки с документами перед началом скопируйте всю папку в надёжное место, как перед первым слиянием.",
+      "ua": "Немає репозиторію? Оновлення йде за тими самими правилами безпеки, що й нове злиття, тому замість гілки точкою повернення правлять його резервні копії. Для теки з документами перед початком скопіюйте всю теку в надійне місце, як перед першим злиттям."
+    },
+    {
+      "en": "The kit's `examples/` folder is reference only and is never copied into a project, so it is not on the removal list.",
+      "ru": "Папка `examples/` в kit только для чтения и никогда не копируется в проект, поэтому в списке удаления её нет.",
+      "ua": "Тека `examples/` у kit лише для читання і ніколи не копіюється в проєкт, тому в списку видалення її немає."
+    }
+  ],
+  "related": ["adopt-existing", "adopt-new", "placeholders", "rules-file"],
+  "terms": ["merge-prompt", "kit", "rules-file", "placeholder", "skill", "agent"],
+  "keywords": {
+    "en": ["upgrade the kit", "newer kit", "MODE: UPGRADE", "remove the kit", "Adopted from", "VERSION", "uninstall", "merge-prompt.txt"],
+    "ru": ["обновить kit", "новая версия kit", "режим UPGRADE", "убрать kit", "Adopted from", "VERSION", "удалить kit", "merge-prompt.txt"],
+    "ua": ["оновити kit", "нова версія kit", "режим UPGRADE", "прибрати kit", "Adopted from", "VERSION", "видалити kit", "merge-prompt.txt"]
+  }
+}

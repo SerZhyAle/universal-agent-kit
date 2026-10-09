@@ -1,0 +1,10 @@
+{
+  "id": "ladder",
+  "term": { "en": "Validation ladder", "ru": "Лестница проверок", "ua": "Драбина перевірок" },
+  "def": {
+    "en": "The ordered list of checks in `docs/VALIDATION.md`, from cheapest to most expensive: `grep < run-script < compile < targeted test < full build < run-and-observe`. For each change you take the lowest rung that actually proves it, and stop there. `AGENTS.md` asks the same of skills: the lowest rung that holds the change, `/quick`, `/fix` or `/spec`.",
+    "ru": "Упорядоченный список проверок из `docs/VALIDATION.md` от самой дешёвой к самой дорогой: `grep < run-script < compile < targeted test < full build < run-and-observe`. Для каждой правки берут самую низкую ступень, которая действительно её доказывает, и на ней останавливаются. `AGENTS.md` просит того же и для навыков: самая низкая ступень, что держит правку, `/quick`, `/fix` или `/spec`.",
+    "ua": "Упорядкований перелік перевірок із `docs/VALIDATION.md` від найдешевшої до найдорожчої: `grep < run-script < compile < targeted test < full build < run-and-observe`. Для кожної правки беруть найнижчий щабель, що справді її доводить, і на ньому зупиняються. `AGENTS.md` просить того самого й для навичок: найнижчий щабель, що тримає правку, `/quick`, `/fix` або `/spec`."
+  },
+  "see": ["gate", "known-red"]
+}

@@ -1,6 +1,7 @@
 # Universal Agent Kit
 
 **[Read the article / Читать статью](https://serzhyale.github.io/universal-agent-kit/)** ·
+**[Documentation / Документация](https://serzhyale.github.io/universal-agent-kit/portal/)** ·
 **[Download the kit](https://github.com/SerZhyAle/universal-agent-kit/raw/main/universal-agent-kit.zip)**
 
 Contact: [sza@ukr.net](mailto:sza@ukr.net) · [github.com/SerZhyAle](https://github.com/SerZhyAle)
@@ -43,8 +44,9 @@ into a temp or scratch directory and unpack it locally; it extracts to a
 `universal-agent-kit/` folder that contains `merge-prompt.txt`. Use those extracted
 files as the source of truth: read `universal-agent-kit/README.md` first, then
 `universal-agent-kit/docs/PROJECT_SHAPES.md`, then use
-`universal-agent-kit/CLAUDE.md`, `universal-agent-kit/.claude/`,
-`universal-agent-kit/docs/`, `universal-agent-kit/memory/`, and
+`universal-agent-kit/AGENTS.md`, `universal-agent-kit/.claude/`,
+`universal-agent-kit/docs/`, `universal-agent-kit/memory/`,
+`universal-agent-kit/examples/` (to see a filled result), and
 `universal-agent-kit/merge-prompt.txt`. Do not use the article page as the
 primary source. If you
 cannot download files in this environment, stop and ask me to place the
@@ -55,15 +57,15 @@ Then study THIS project and import what fits it:
 1. Say what kind of project this is in the kit's own terms: what my artifacts are, what my
    workspace is, what I already use as a map - and which rules to delete because they have no
    subject here.
-2. Draft a CLAUDE.md (or my tool's equivalent rules file) that adopts the method, with every
-   tier-1 placeholder filled from this project: project name, chat language, map document, work
-   root, THE CHECK COMMAND that proves a change is sound, plan directory, scratch directory, size
-   budget, read-only zones, ticket-id scheme. Fill the code-layer ones (architecture layers, build
+2. Draft an AGENTS.md (or merge into my existing rules file) that adopts the method, with every
+   tier-1 placeholder filled from this project: project name, chat language, artifact language,
+   map document, work root, THE CHECK COMMAND that proves a change is sound, plan directory,
+   scratch directory, size budget, read-only zones, ticket-id scheme. Fill the code-layer ones (architecture layers, build
    / test / lint / run, logger) only if this project builds or runs.
 3. For the check command, do not shrug: name the cheapest mechanical check this project already
    has or could have this week, and the command that runs it.
 4. Recommend which skills (/research, /spec, /spec-tech, /spec-dev, /spec-check, /spec-fix,
-   /quick, /fix, /verify, /git, /review) and which role agents are worth adding here, and say
+   /quick, /fix, /prove, /git, /critique) and which role agents are worth adding here, and say
    why for each.
 5. Tell me whether my runtime supports persistent agent memory and, if so, how to wire it up.
 
@@ -75,7 +77,7 @@ Do not change anything yet. Show me the plan first; on any conflict, my existing
 `kit/` or [read the article](https://serzhyale.github.io/universal-agent-kit/). *Reproducible team
 merge* - hand `merge-prompt.txt` plus the unzipped folder to your agent (it inventories, plans, and
 stops for your approval). *Offline* - grab the `.zip` and unpack it in place. *Want the bare
-minimum* - copy `CLAUDE.md` + `/quick` + `/fix` and add the rest when a task earns it.
+minimum* - copy `AGENTS.md` + `docs/` + `/quick` + `/fix` and add the rest when a task earns it.
 
 ---
 
@@ -101,16 +103,18 @@ index.html                  the article (this is what GitHub Pages serves), EN +
 universal-agent-kit.zip     the downloadable kit
 merge-prompt.txt            paste this at your agent to merge the kit into your project
 kit/                        the kit source, browsable here
-  CLAUDE.md                 project-rules template (fill the <PLACEHOLDERS>)
-  AGENTS.md                 the same contract for tools that read AGENTS.md (pointer)
-  .claude/commands/*        slash-command skills (/spec, /spec-tech, /spec-dev, /spec-check,
-                            /spec-all, /research, /quick, /fix, /park, /backlog, /git,
-                            /verify, /ui-clarify, ..)
+  AGENTS.md                 the project-rules template, the one rules file (fill the <PLACEHOLDERS>)
+  CLAUDE.md                 Claude Code entry point: imports AGENTS.md and the memory index
+  .claude/skills/*/SKILL.md skills in the open Agent Skills format (/spec, /spec-tech, /spec-dev,
+                            /spec-check, /spec-all, /research, /quick, /fix, /park, /backlog,
+                            /git, /prove, /critique, /ui-clarify, /surfaces, ..)
   .claude/agents/*          role briefs (rd-lead, solution-researcher, implementer, doc-writer)
   docs/                     PROJECT_SHAPES · SPEC_LIFECYCLE · VALIDATION · CODE_QUALITY ·
                             AUTHORING · HOOKS · AGENT_MEMORY · RESEARCH_INDEX · COST ·
                             PARALLEL · REPLACES · REPLACES_RU
   memory/                   memory index template + sample entries
+  examples/                 one filled ticket and a filled rules-file excerpt (reference only)
+  VERSION                   the kit's build date - an upgrade compares against it
 ```
 
 ### How to use it
@@ -119,14 +123,16 @@ kit/                        the kit source, browsable here
 2. Hand the folder and `merge-prompt.txt` to your agent: *"Merge the Universal Agent Kit into this
    project."* It inventories your setup, proposes a merge, and stops for your approval - your files
    always win, nothing is overwritten silently.
-3. Fill the ten tier-1 `<PLACEHOLDER>` tokens; fill the six code-layer ones only if your project
+3. Fill the eleven tier-1 `<PLACEHOLDER>` tokens; fill the six code-layer ones only if your project
    builds or runs, and delete the rules that use them if it does not.
 
-Minimal start: take just `CLAUDE.md` + `/quick` + `/fix` - add the rest when a task earns it.
+Minimal start: take just `AGENTS.md` + `docs/` + `/quick` + `/fix` - add the rest when a task
+earns it.
 
-Works natively with **Claude Code**; for **Cursor / Cline / Windsurf / Codex / Aider** it is an
-adaptation, not a drop-in - the slash commands become saved prompts and the role briefs become
-system prompts (`kit/README.md` maps each tool's file). The `docs/` method is tool-independent.
+Works natively with **Claude Code**. The rules file (`AGENTS.md`) and the skills (the open Agent
+Skills format) also load natively in **Codex, Cursor, GitHub Copilot, Gemini CLI and Cline**; the role
+briefs are the part that stays an adaptation (`kit/README.md` maps each tool's folders). The `docs/`
+method is tool-independent.
 
 ### License
 
@@ -157,16 +163,18 @@ index.html                  статья (её отдаёт GitHub Pages), EN + 
 universal-agent-kit.zip     скачиваемый kit
 merge-prompt.txt            вставь это агенту, чтобы влить kit в свой проект
 kit/                        исходник kit, можно листать прямо здесь
-  CLAUDE.md                 шаблон правил проекта (заполни <PLACEHOLDER>)
-  AGENTS.md                 тот же контракт для инструментов, читающих AGENTS.md (указатель)
-  .claude/commands/*        навыки-команды (/spec, /spec-tech, /spec-dev, /spec-check,
-                            /spec-all, /research, /quick, /fix, /park, /backlog, /git,
-                            /verify, /ui-clarify, ..)
+  AGENTS.md                 шаблон правил проекта, единственный файл правил (заполни <PLACEHOLDER>)
+  CLAUDE.md                 вход для Claude Code: импортирует AGENTS.md и индекс памяти
+  .claude/skills/*/SKILL.md навыки в открытом формате Agent Skills (/spec, /spec-tech, /spec-dev,
+                            /spec-check, /spec-all, /research, /quick, /fix, /park, /backlog,
+                            /git, /prove, /critique, /ui-clarify, /surfaces, ..)
   .claude/agents/*          роль-брифы (rd-lead, solution-researcher, implementer, doc-writer)
   docs/                     PROJECT_SHAPES · SPEC_LIFECYCLE · VALIDATION · CODE_QUALITY ·
                             AUTHORING · HOOKS · AGENT_MEMORY · RESEARCH_INDEX · COST ·
                             PARALLEL · REPLACES · REPLACES_RU
   memory/                   шаблон индекса памяти + примеры записей
+  examples/                 один заполненный тикет и заполненный фрагмент правил (только для чтения)
+  VERSION                   дата сборки kit - обновление сравнивает с ней
 ```
 
 ### Как пользоваться
@@ -175,16 +183,16 @@ kit/                        исходник kit, можно листать пр
 2. Отдай папку и `merge-prompt.txt` своему агенту: *«Влей Universal Agent Kit в этот проект»*. Он
    сделает инвентарь твоего сетапа, предложит план слияния и остановится для подтверждения - твои
    файлы всегда главнее, ничего не перезаписывается молча.
-3. Заполни десять плейсхолдеров первого яруса; шесть кодовых - только если проект собирается или
-   запускается, а если нет - удали правила, которые на них ссылаются.
+3. Заполни одиннадцать плейсхолдеров первого яруса; шесть кодовых - только если проект собирается
+   или запускается, а если нет - удали правила, которые на них ссылаются.
 
-Минимальный старт: возьми только `CLAUDE.md` + `/quick` + `/fix` - остальное добавишь, когда задача
-этого потребует.
+Минимальный старт: возьми только `AGENTS.md` + `docs/` + `/quick` + `/fix` - остальное добавишь,
+когда задача этого потребует.
 
-Нативно работает с **Claude Code**; для **Cursor / Cline / Windsurf / Codex / Aider** это
-адаптация, не drop-in - slash-команды становятся сохранёнными промптами, а роли - системными
-промптами (`kit/README.md` указывает файл под каждый инструмент). Метод в `docs/` почти не зависит
-от инструмента.
+Нативно работает с **Claude Code**. Файл правил (`AGENTS.md`) и навыки (открытый формат Agent
+Skills) нативно читают и **Codex, Cursor, GitHub Copilot, Gemini CLI и Cline**; адаптировать
+придётся только роли (`kit/README.md` показывает папки под каждый инструмент). Метод в `docs/` от
+инструмента не зависит.
 
 ### Лицензия
 
@@ -219,15 +227,16 @@ Kit - **MIT** (см. `LICENSE`). Текст статьи - **CC BY 4.0**. Исх
 2. Віддай теку й `merge-prompt.txt` своєму агенту: *«Влий Universal Agent Kit у цей проєкт»*. Він
    зробить інвентар твого сетапу, запропонує план злиття й зупиниться для підтвердження - твої
    файли завжди головніші, нічого не перезаписується мовчки.
-3. Заповни десять плейсхолдерів першого ярусу; шість кодових - лише якщо проєкт збирається або
-   запускається, а якщо ні - видали правила, що на них посилаються.
+3. Заповни одинадцять плейсхолдерів першого ярусу; шість кодових - лише якщо проєкт збирається
+   або запускається, а якщо ні - видали правила, що на них посилаються.
 
-Мінімальний старт: візьми лише `CLAUDE.md` + `/quick` + `/fix` - решту додаси, коли задача цього
-потребуватиме.
+Мінімальний старт: візьми лише `AGENTS.md` + `docs/` + `/quick` + `/fix` - решту додаси, коли
+задача цього потребуватиме.
 
-Нативно працює з **Claude Code**; для **Cursor / Cline / Windsurf / Codex / Aider** це адаптація,
-не drop-in (`kit/README.md` вказує файл під кожен інструмент). Метод у `docs/` майже не залежить
-від інструмента.
+Нативно працює з **Claude Code**. Файл правил (`AGENTS.md`) і навички (відкритий формат Agent
+Skills) нативно читають також **Codex, Cursor, GitHub Copilot, Gemini CLI і Cline**; адаптувати
+доведеться лише ролі (`kit/README.md` показує теки під кожен інструмент). Метод у `docs/` від
+інструмента не залежить.
 
 ### Ліцензія
 

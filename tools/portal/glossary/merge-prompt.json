@@ -1,0 +1,10 @@
+{
+  "id": "merge-prompt",
+  "term": { "en": "Merge prompt (merge-prompt.txt)", "ru": "Промпт слияния (merge-prompt.txt)", "ua": "Промпт злиття (merge-prompt.txt)" },
+  "def": {
+    "en": "The prompt in `merge-prompt.txt` that you hand your agent together with the kit to bring the kit into an existing project, or with `MODE: UPGRADE` to move to a newer kit. The agent takes an inventory, shows a plan and waits for your approval before it writes anything. Your existing files are the source of truth: where they conflict with the kit, yours win.",
+    "ru": "Промпт из `merge-prompt.txt`, который вы отдаёте агенту вместе с kit, чтобы внести kit в существующий проект, или с `MODE: UPGRADE`, чтобы перейти на более новый kit. Агент проводит инвентаризацию, показывает план и ждёт вашего согласия, прежде чем что-либо записать. Источник истины - ваши файлы: где они расходятся с kit, побеждают ваши.",
+    "ua": "Промпт із `merge-prompt.txt`, який ви віддаєте агенту разом із kit, щоб внести kit в наявний проєкт, або з `MODE: UPGRADE`, щоб перейти на новіший kit. Агент проводить інвентаризацію, показує план і чекає вашої згоди, перш ніж щось записати. Джерело істини - ваші файли: де вони розходяться з kit, перемагають ваші."
+  },
+  "see": ["kit", "project-shape"]
+}

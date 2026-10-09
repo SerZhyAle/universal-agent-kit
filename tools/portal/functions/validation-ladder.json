@@ -1,0 +1,139 @@
+{
+  "id": "validation-ladder",
+  "title": {
+    "en": "Prove a change works before calling it done",
+    "ru": "Доказать, что правка работает, прежде чем объявлять её готовой",
+    "ua": "Довести, що правка працює, перш ніж оголошувати її готовою"
+  },
+  "pitch": {
+    "en": "Pick the lowest check that proves this change, write down expected and actual, and call the step done only after you have read the result.",
+    "ru": "Возьмите самую дешёвую проверку, которая доказывает именно эту правку, запишите ожидаемое и фактическое и называйте шаг готовым, только прочитав результат.",
+    "ua": "Візьміть найдешевшу перевірку, що доводить саме цю правку, запишіть очікуване й фактичне та називайте крок готовим, лише прочитавши результат."
+  },
+  "lead": {
+    "en": "`docs/VALIDATION.md` ranks checks from a grep to a run-and-observe, and asks every change to end with the weakest piece of evidence strong enough to prove it. You choose the rung, run the check in this run, record `expected` against `actual`, and only then say the step is done. \"Done\" stops being a feeling and becomes a line you can point at.",
+    "ru": "`docs/VALIDATION.md` выстраивает проверки от grep до запуска с наблюдением и требует, чтобы каждая правка заканчивалась самым слабым доказательством, которого хватает, чтобы её подтвердить. Вы выбираете ступень, запускаете проверку в этом прогоне, записываете `expected` рядом с `actual` и только потом говорите, что шаг готов. «Готово» перестаёт быть ощущением и становится строкой, на которую можно показать.",
+    "ua": "`docs/VALIDATION.md` вибудовує перевірки від grep до запуску зі спостереженням і вимагає, щоб кожна правка завершувалася найслабшим доказом, якого досить, щоб її підтвердити. Ви обираєте щабель, запускаєте перевірку в цьому прогоні, записуєте `expected` поруч з `actual` і лише тоді кажете, що крок готовий. «Готово» перестає бути відчуттям і стає рядком, на який можна показати."
+  },
+  "situation": {
+    "en": "Before you mark a step, a ticket or a task as done, and whenever you catch yourself writing \"should work\".",
+    "ru": "Перед тем как отметить шаг, тикет или задачу готовыми, и всякий раз, когда ловите себя на фразе «должно работать».",
+    "ua": "Перш ніж позначити крок, тікет чи завдання готовими, і щоразу, коли ловите себе на фразі «має працювати»."
+  },
+  "warning": {
+    "en": "A green can lie. When commands are chained, piped or backgrounded, the exit status often belongs to a trailing wrapper step, not to the build or test you care about. Read the specific verdict line of the operation that matters, or make it write its own result.",
+    "ru": "Зелёный бывает лживым. Когда команды сцеплены, пропущены через конвейер или запущены в фоне, код возврата часто принадлежит завершающей обёртке, а не сборке или тесту, которые вам важны. Читайте строку вердикта той операции, что имеет значение, или пусть она сама записывает свой результат.",
+    "ua": "Зелений буває брехливим. Коли команди зчеплені, пропущені через конвеєр або запущені у фоні, код завершення часто належить завершальній обгортці, а не збірці чи тесту, що вам важливі. Читайте рядок вердикту тієї операції, яка має значення, або нехай вона сама записує свій результат."
+  },
+  "steps": [
+    {
+      "en": "Name the kind of change. Doc or text: grep the file for what you claim you wrote. Script: run it, and it exits `0` or produces the expected artifact. Config or build file: the target build passes. Dataset, sheet or contract: the structural check first, then the reconciliation. Code: the narrowest meaningful check.",
+      "ru": "Назовите вид правки. Документ или текст: найдите grep'ом в файле то, что, по вашим словам, написали. Скрипт: запустите, и он завершится с `0` или выдаст ожидаемый артефакт. Конфигурация или файл сборки: целевая сборка проходит. Датасет, таблица или контракт: сначала структурная проверка, затем сверка. Код: самая узкая осмысленная проверка.",
+      "ua": "Назвіть вид правки. Документ чи текст: знайдіть grep'ом у файлі те, що, за вашими словами, написали. Скрипт: запустіть, і він завершиться з `0` або видасть очікуваний артефакт. Конфігурація чи файл збірки: цільова збірка проходить. Датасет, таблиця чи контракт: спершу структурна перевірка, потім звірка. Код: найвужча змістовна перевірка."
+    },
+    {
+      "en": "Take the lowest rung that proves this change and stop there: `grep < run-script < compile < targeted test < full build < run-and-observe`. Do not run the whole suite for a one-line rename, and do not claim a behaviour fix with only a compile. What a user sees is proved by running it and observing, in every input mode and layout class the product declares, or by recording a mode as not applicable.",
+      "ru": "Возьмите самую низкую ступень, которая доказывает эту правку, и остановитесь на ней: `grep < run-script < compile < targeted test < full build < run-and-observe`. Не гоняйте весь набор тестов ради переименования в одну строку и не заявляйте об исправлении поведения, имея только компиляцию. То, что видит пользователь, доказывается запуском и наблюдением во всех режимах ввода и классах раскладки, которые заявляет продукт, либо записью, что режим неприменим.",
+      "ua": "Візьміть найнижчий щабель, що доводить цю правку, і зупиніться на ньому: `grep < run-script < compile < targeted test < full build < run-and-observe`. Не ганяйте весь набір тестів заради перейменування в один рядок і не заявляйте про виправлення поведінки, маючи лише компіляцію. Те, що бачить користувач, доводиться запуском і спостереженням у всіх режимах вводу та класах розкладки, які заявляє продукт, або записом, що режим незастосовний."
+    },
+    {
+      "en": "Write down what you expect before you run, then what you got: `expected: exit 0, \"3 files written\"`, then `actual: exit 0, \"3 files written\"`, then the verdict PASS. Predicting first is what catches a check that exited `0` while printing the wrong thing. A check whose `actual` you did not read did not happen.",
+      "ru": "Запишите, что ожидаете, до запуска, а затем что получили: `expected: exit 0, \"3 files written\"`, потом `actual: exit 0, \"3 files written\"`, потом вердикт PASS. Предсказание заранее ловит проверку, которая вышла с `0`, напечатав не то. Проверка, чей `actual` вы не прочли, не состоялась.",
+      "ua": "Запишіть, що очікуєте, до запуску, а потім що отримали: `expected: exit 0, \"3 files written\"`, далі `actual: exit 0, \"3 files written\"`, далі вердикт PASS. Передбачення наперед ловить перевірку, що завершилася з `0`, надрукувавши не те. Перевірка, чий `actual` ви не прочитали, не відбулася."
+    },
+    {
+      "en": "Score the result with one of four answers. PASS. DEFECT: the check inspected the subject and found a failed expectation. COULD NOT VERIFY: the subject or the instrument was out of reach, so nothing was measured. NOT APPLICABLE: the selected configuration deliberately has no scenario to execute. Neither of the last two is a pass, and a check that cannot say them will report one of the first two instead.",
+      "ru": "Оцените результат одним из четырёх ответов. PASS. DEFECT: проверка осмотрела предмет и нашла невыполненное ожидание. COULD NOT VERIFY: предмет или инструмент были недоступны, так что ничего не измерено. NOT APPLICABLE: выбранная конфигурация намеренно не содержит сценария для выполнения. Ни один из последних двух не является пройденной проверкой, а проверка, которая не умеет их сказать, выдаст вместо них один из первых двух.",
+      "ua": "Оцініть результат однією з чотирьох відповідей. PASS. DEFECT: перевірка оглянула предмет і знайшла невиконане очікування. COULD NOT VERIFY: предмет або інструмент були недосяжні, тож нічого не виміряно. NOT APPLICABLE: обрана конфігурація навмисно не має сценарію для виконання. Жодна з двох останніх не є пройденою перевіркою, а перевірка, що не вміє їх сказати, видасть замість них одну з перших двох."
+    },
+    {
+      "en": "On a failure, stop. A failed check means the step is not done: record the blocker and stop, never auto-revert and never paper over it by moving on, because a human decides from the evidence. A COULD NOT VERIFY stops work exactly as a defect does and is never waived into a pass. An impossible reading means the instrument is broken, not the subject.",
+      "ru": "При провале остановитесь. Проваленная проверка означает, что шаг не готов: запишите блокер и остановитесь, ничего не откатывайте автоматически и не замазывайте провал переходом дальше, потому что решает человек, глядя на свидетельства. COULD NOT VERIFY останавливает работу так же, как дефект, и никогда не списывается в PASS. Невозможное показание значит, что сломан инструмент, а не предмет.",
+      "ua": "У разі провалу зупиніться. Провалена перевірка означає, що крок не готовий: запишіть блокер і зупиніться, нічого не відкочуйте автоматично й не замазуйте провал переходом далі, бо вирішує людина, дивлячись на свідчення. COULD NOT VERIFY зупиняє роботу так само, як дефект, і ніколи не списується в PASS. Неможливе показання означає, що зламано інструмент, а не предмет."
+    },
+    {
+      "en": "Count the human rung. When the top rung needs real hardware, a real account or a real pair of eyes, an audit with no failures but one unticked manual line is not \"verified\": it is \"needs a human test\", and that line holds the closing status back until a human ticks it. The kit wires this as the `BlockNeedUserTest` status. Keep it for what only a human can see: a change that a build or a targeted test settles closes there.",
+      "ru": "Учитывайте человеческую ступень. Когда верхняя ступень требует настоящего устройства, настоящей учётной записи или настоящих глаз, аудит без провалов, но с одной неотмеченной ручной строкой не «подтверждён», а «требует проверки человеком»: эта строка удерживает закрывающий статус, пока человек её не отметит. В kit это проведено статусом `BlockNeedUserTest`. Оставьте его для того, что видит только человек: правка, которую закрывают сборка или адресный тест, закрывается на них.",
+      "ua": "Враховуйте людський щабель. Коли верхній щабель потребує справжнього пристрою, справжнього облікового запису чи справжніх очей, аудит без провалів, але з одним невідміченим ручним рядком не «підтверджений», а «потребує перевірки людиною»: цей рядок утримує закривальний статус, доки людина його не відмітить. У kit це проведено статусом `BlockNeedUserTest`. Лишіть його для того, що бачить лише людина: правка, яку закривають збірка чи адресний тест, закривається на них."
+    },
+    {
+      "en": "Run the housekeeping before you call the step complete: the change log or dev log if the project keeps one (one entry per ticket; with none kept, that check is not applicable), user-facing docs for any new user-visible capability on every surface and in every authored locale, the code index if you changed code, and the ticket status. Bundle these into one routine.",
+      "ru": "Выполните сопутствующую работу, прежде чем назвать шаг завершённым: журнал изменений или журнал разработки, если проект его ведёт (одна запись на тикет; если журнала нет, эта проверка неприменима); пользовательскую документацию для любой новой видимой возможности на каждой поверхности и в каждой авторской локали; индекс кода, если вы меняли код; статус тикета. Соберите это в одну процедуру.",
+      "ua": "Виконайте супутню роботу, перш ніж назвати крок завершеним: журнал змін або журнал розробки, якщо проєкт його веде (один запис на тікет; якщо журналу немає, ця перевірка незастосовна); користувацьку документацію для будь-якої нової видимої можливості на кожній поверхні й у кожній авторській локалі; індекс коду, якщо ви змінювали код; статус тікета. Зберіть це в одну процедуру."
+    },
+    {
+      "en": "Put the checks behind one fail-closed \"done\" command. Bundle the checks that apply to the change kind; any one failing gate aborts the whole run non-zero. Scope each gate by kind and touched path so \"done\" stays cheap: a gate that always runs everything gets slow, then skipped. Where the runtime can refuse to end a turn until a command passes, as Claude Code's `Stop` hook can, wire \"done\" there. See [hooks](fn:hooks).",
+      "ru": "Соберите проверки за одной командой «готово», которая при любом сбое останавливает работу. Включите проверки, подходящие к виду правки: любой упавший гейт обрывает весь прогон с ненулевым кодом. Ограничьте каждый гейт видом правки и затронутыми путями, чтобы «готово» оставалось дешёвым: гейт, гоняющий всё всегда, тормозит, и его пропускают. Если среда умеет не давать завершить ход, пока команда не пройдёт, как хук `Stop` в Claude Code, подключите «готово» туда. См. [хуки](fn:hooks).",
+      "ua": "Зберіть перевірки за однією командою «готово», яка за будь-якого збою зупиняє роботу. Додайте перевірки, що пасують до виду правки: будь-який гейт, що впав, обриває весь прогін з ненульовим кодом. Обмежте кожен гейт видом правки й зачепленими шляхами, щоб «готово» лишалося дешевим: гейт, що ганяє все завжди, гальмує, і його оминають. Якщо середовище вміє не давати завершити хід, доки команда не пройде, як хук `Stop` у Claude Code, підключіть «готово» туди. Див. [хуки](fn:hooks)."
+    }
+  ],
+  "outcome": {
+    "en": "For every check you ran, an `expected` line and an `actual` line with a verdict of PASS, DEFECT, COULD NOT VERIFY or NOT APPLICABLE, read in this run. A failure or a COULD NOT VERIFY keeps the step open, and one unticked manual item keeps the closing status from reading \"verified\".",
+    "ru": "Для каждой запущенной проверки есть строка `expected` и строка `actual` с вердиктом PASS, DEFECT, COULD NOT VERIFY или NOT APPLICABLE, прочитанным в этом прогоне. Провал или COULD NOT VERIFY оставляют шаг открытым, а один неотмеченный ручной пункт не даёт закрывающему статусу стать «подтверждён».",
+    "ua": "Для кожної запущеної перевірки є рядок `expected` і рядок `actual` з вердиктом PASS, DEFECT, COULD NOT VERIFY або NOT APPLICABLE, прочитаним у цьому прогоні. Провал чи COULD NOT VERIFY лишають крок відкритим, а один невідмічений ручний пункт не дає закривальному статусу стати «підтверджений»."
+  },
+  "tips": [
+    {
+      "en": "One vocabulary, three places that speak it. `/prove` reports PASS, DEFECT, COULD NOT VERIFY or NOT APPLICABLE; `/spec-check` records PASS, WARN, FAIL, UNCHECKABLE, EXEMPT or MANUAL per check. The table in `docs/VALIDATION.md` maps one onto the other: DEFECT is FAIL, COULD NOT VERIFY is UNCHECKABLE, NOT APPLICABLE is EXEMPT. See [run it and observe](fn:prove).",
+      "ru": "Один словарь, три места, где на нём говорят. `/prove` сообщает PASS, DEFECT, COULD NOT VERIFY или NOT APPLICABLE; `/spec-check` записывает по каждой проверке PASS, WARN, FAIL, UNCHECKABLE, EXEMPT или MANUAL. Таблица в `docs/VALIDATION.md` сопоставляет одно с другим: DEFECT - это FAIL, COULD NOT VERIFY - UNCHECKABLE, NOT APPLICABLE - EXEMPT. См. [запуск и наблюдение](fn:prove).",
+      "ua": "Один словник, три місця, де ним говорять. `/prove` повідомляє PASS, DEFECT, COULD NOT VERIFY або NOT APPLICABLE; `/spec-check` записує за кожною перевіркою PASS, WARN, FAIL, UNCHECKABLE, EXEMPT або MANUAL. Таблиця в `docs/VALIDATION.md` зіставляє одне з іншим: DEFECT - це FAIL, COULD NOT VERIFY - UNCHECKABLE, NOT APPLICABLE - EXEMPT. Див. [запуск і спостереження](fn:prove)."
+    },
+    {
+      "en": "What a caller does with each verdict: proceed on PASS, on WARN (to `Partial`; `--strict` treats it as FAIL) and on EXEMPT (record why). Hard stop on FAIL and on UNCHECKABLE, and an UNCHECKABLE is never given a mechanical fix. MANUAL holds `BlockNeedUserTest` until the human ticks the line. A skill that handles only PASS and \"everything else\" has folded the last two answers into the second.",
+      "ru": "Что делает вызывающий: идёт дальше при PASS, WARN (к `Partial`; `--strict` считает его FAIL) и EXEMPT (с записью причины). Жёсткая остановка при FAIL и UNCHECKABLE, а для UNCHECKABLE никогда не делают механическое исправление. MANUAL держит `BlockNeedUserTest`, пока человек не отметит строку. Навык, различающий лишь PASS и «всё остальное», смешал последние два ответа со вторым.",
+      "ua": "Що робить виклик із кожним вердиктом: іде далі за PASS, за WARN (до `Partial`; `--strict` вважає його FAIL) і за EXEMPT (із записом причини). Жорстка зупинка за FAIL і UNCHECKABLE, а для UNCHECKABLE ніколи не роблять механічного виправлення. MANUAL тримає `BlockNeedUserTest`, доки людина не відмітить рядок. Навичка, що обробляє лише PASS і «все інше», звела останні дві відповіді в другу."
+    },
+    {
+      "en": "\"Should work\", \"probably passes\", \"seems fixed\", \"looks right\" and \"I think it compiles\" are a hard stop, not a hedge: the proving command has not been run and read yet. A subagent's \"build passed\" is its narration, not your evidence, so re-run it and read it yourself.",
+      "ru": "«Должно работать», «наверное, проходит», «вроде исправлено», «выглядит правильно» и «кажется, компилируется» - это жёсткая остановка, а не оговорка: доказывающую команду ещё не запустили и не прочли. «Сборка прошла» от субагента - его пересказ, а не ваше доказательство, так что перезапустите и прочтите сами.",
+      "ua": "«Має працювати», «мабуть, проходить», «ніби виправлено», «виглядає правильно» і «здається, компілюється» - це жорстка зупинка, а не застереження: доказову команду ще не запустили й не прочитали. «Збірка пройшла» від субагента - його переказ, а не ваш доказ, тож перезапустіть і прочитайте самі."
+    },
+    {
+      "en": "Never re-run a red check until it goes green: a retry removes the report of the flake, not the flake. A known flaky or known-broken check gets a row in a [known-red](term:known-red) ledger, with an owner and a ticket, and stays visible in every report, so an old red cannot hide a new regression.",
+      "ru": "Не перезапускайте красную проверку, пока она не позеленеет: повтор убирает сообщение о нестабильности, а не саму нестабильность. Заведомо нестабильной или сломанной проверке отводят строку в реестре [известных красных](term:known-red) с владельцем и тикетом; она остаётся видна в каждом отчёте, и старое красное не прячет новую регрессию.",
+      "ua": "Не перезапускайте червону перевірку, доки вона не позеленіє: повтор прибирає повідомлення про нестабільність, а не саму нестабільність. Завідомо нестабільній або зламаній перевірці відводять рядок у реєстрі [відомих червоних](term:known-red) з власником і тікетом; вона лишається видимою в кожному звіті, і старе червоне не ховає нову регресію."
+    },
+    {
+      "en": "On a tree with several writers, let the per-change close run the gates for the files this change touched, and run the strict full-project gate in CI or at release. Attribute a failure before you fix it: confirm it is inside your diff and re-read the live files, rather than chase a [red that was never yours](term:known-red).",
+      "ru": "На дереве с несколькими авторами пусть закрытие каждой правки гоняет гейты для затронутых ею файлов, а строгий гейт всего проекта запускается в CI или на релизе. Прежде чем чинить сбой, отнесите его к своим изменениям: убедитесь, что он внутри вашего диффа, и перечитайте живые файлы, а не гонитесь за [красным, которое никогда не было вашим](term:known-red).",
+      "ua": "На дереві з кількома авторами нехай закриття кожної правки ганяє гейти для зачеплених нею файлів, а суворий гейт усього проєкту запускається в CI або на релізі. Перш ніж лагодити збій, віднесіть його до своїх змін: переконайтеся, що він усередині вашого діфа, і перечитайте живі файли, а не ганяйтеся за [червоним, яке ніколи не було вашим](term:known-red)."
+    },
+    {
+      "en": "Place a gate by its subject. One about the whole tree or a shipped artifact belongs in the pre-release sweep when no user can meet the defect between releases, the finding names its own location and batch fixing costs no more. Keep it per-change if later work builds on the defect. Name the scope when you write the gate, and date every threshold with the command that regenerates it.",
+      "ru": "Размещайте гейт по его предмету. Гейту про всё дерево или поставляемый артефакт место в предрелизной проверке, если до релиза дефект не доходит до пользователя, находка сама называет своё место, а исправлять пакетом не дороже. Оставьте его на каждую правку, если на дефекте строится дальнейшая работа. Называйте область при создании гейта и датируйте каждый порог командой, которая его пересчитывает.",
+      "ua": "Розміщуйте гейт за його предметом. Гейтові про все дерево чи поставний артефакт місце в передрелізній перевірці, якщо до релізу дефект не доходить до користувача, знахідка сама називає своє місце, а виправляти пакетом не дорожче. Лишіть його на кожну правку, якщо на дефекті будується подальша робота. Називайте область під час створення гейта й датуйте кожен поріг командою, що його перераховує."
+    },
+    {
+      "en": "Before an irreversible step such as a release, a publication, a filing, a payment or a send, make the step itself refuse without a verdict that names what it judged. The absence of a verdict is not a pass. Wire the gate into the command that ships, not beside it, and generate, commit, then ship.",
+      "ru": "Перед необратимым шагом, будь то релиз, публикация, подача документа, платёж или отправка, пусть сам шаг отказывается идти без вердикта, который называет, что именно он оценил. Отсутствие вердикта - это не PASS. Встраивайте гейт в команду, которая выпускает, а не рядом с ней, и действуйте в порядке: сгенерировать, закоммитить, выпустить.",
+      "ua": "Перед незворотним кроком, чи то реліз, публікація, подання документа, платіж або надсилання, нехай сам крок відмовляється йти без вердикту, що називає, що саме він оцінив. Відсутність вердикту - це не PASS. Вбудовуйте гейт у команду, яка випускає, а не поруч із нею, і дійте в порядку: згенерувати, закомітити, випустити."
+    },
+    {
+      "en": "The closure must run the rung, not just ask for it. If an artifact class is proved only by a link, render or compile step that nothing else performs, the \"done\" command has to run that step. Otherwise the rung is a request, and a request is an ungated rule.",
+      "ru": "Закрытие должно выполнять ступень, а не просто просить о ней. Если класс артефактов доказывается только шагом компоновки, отрисовки или компиляции, которого больше никто не выполняет, команда «готово» обязана его запускать. Иначе ступень - это просьба, а просьба - правило без гейта.",
+      "ua": "Закриття має виконувати щабель, а не просто просити про нього. Якщо клас артефактів доводиться лише кроком компонування, відтворення чи компіляції, якого більше ніхто не виконує, команда «готово» зобов'язана його запускати. Інакше щабель - це прохання, а прохання - правило без гейта."
+    },
+    {
+      "en": "Force every answer once, and prove the red with a positive control. Give each gate a fixture that drives every answer it can give against a throwaway input, plus a known-bad input, such as the pre-fix build, that must turn it red. A gate never seen going red is not known to be able to.",
+      "ru": "Вызовите каждый ответ хотя бы раз и докажите красное контрольным примером. Дайте каждому гейту фикстуру, которая на одноразовом входе вызывает каждый его ответ, и заведомо плохой вход, например сборку до исправления, который обязан его покраснить. Гейт, которого не видели красным, не известен как способный краснеть.",
+      "ua": "Викличте кожну відповідь хоча б раз і доведіть червоне контрольним прикладом. Дайте кожному гейтові фікстуру, що на одноразовому вході викликає кожну його відповідь, і завідомо поганий вхід, наприклад збірку до виправлення, який мусить його почервоніти. Гейт, якого не бачили червоним, не відомий як здатний червоніти."
+    },
+    {
+      "en": "A green that does not name its subject proves nothing. The check prints the module, variant, file set or document it inspected, and a completion claim quotes that line with the exit code. Delete the previous output before the run, so a run that dies reads as COULD NOT VERIFY and not as the last run's pass.",
+      "ru": "Зелёный, не называющий свой предмет, ничего не доказывает. Проверка печатает модуль, вариант, набор файлов или документ, который осмотрела, а заявление о завершении цитирует эту строку вместе с кодом выхода. Удаляйте прежний вывод до запуска, чтобы прогон, оборвавшийся на полпути, читался как COULD NOT VERIFY, а не как PASS прошлого прогона.",
+      "ua": "Зелений, що не називає свій предмет, нічого не доводить. Перевірка друкує модуль, варіант, набір файлів чи документ, який оглянула, а заява про завершення цитує цей рядок разом із кодом виходу. Видаляйте попередній вивід до запуску, щоб прогін, який обірвався на півдорозі, читався як COULD NOT VERIFY, а не як PASS минулого прогону."
+    },
+    {
+      "en": "Surfaces must move together; the other declared locales need not. With a release boundary, the locales nobody on the team authors by hand fan out in one bulk pass there: refuse in the pre-release gate, and let the change itself only name what is missing. A site has no boundary, so its fan-out stays in the one edit. See [ship every surface together](fn:surfaces).",
+      "ru": "Поверхности должны двигаться вместе, остальные объявленные локали - нет. При границе релиза локали, которые команда вручную не пишет, расходятся одним пакетным проходом на ней: отказ ставят в предрелизный гейт, а само изменение лишь называет, чего не хватает. У сайта границы нет, и его раздача остаётся в одной правке. См. [как выпустить все поверхности вместе](fn:surfaces).",
+      "ua": "Поверхні мають рухатися разом, решта оголошених локалей - не зобов'язана. Якщо в проєкту є межа релізу, локалі, які команда вручну не пише, розходяться одним пакетним проходом на ній: відмову ставлять у передрелізний гейт, а сама зміна лише називає, чого бракує. У сайту межі немає, тому його роздача лишається в одній правці. Див. [як випустити всі поверхні разом](fn:surfaces)."
+    }
+  ],
+  "related": ["prove", "spec-check", "spec-lifecycle", "hooks", "surfaces"],
+  "terms": ["ladder", "gate", "known-red", "block-status"],
+  "keywords": {
+    "en": ["validation", "definition of done", "expected vs actual", "evidence", "verification", "checks", "false green"],
+    "ru": ["валидация", "критерий готовности", "ожидалось и получено", "доказательство", "проверка", "ложный зелёный"],
+    "ua": ["валідація", "критерій готовності", "очікувалось і отримано", "доказ", "перевірка", "хибний зелений"]
+  }
+}

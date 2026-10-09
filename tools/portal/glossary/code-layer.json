@@ -1,0 +1,10 @@
+{
+  "id": "code-layer",
+  "term": { "en": "Code layer", "ru": "Слой кода", "ua": "Шар коду" },
+  "def": {
+    "en": "The part of the rules file that only a project that compiles or runs needs: the placeholders `<ARCH_LAYERS>`, `<BUILD_CMD>`, `<TEST_CMD>`, `<LINT_CMD>`, `<RUN_CMD>` and `<LOGGER>`, and the rules that use them, such as the verification tags. If your project does not compile or run, delete those rules instead of filling them. The seven patterns of `docs/CODE_QUALITY.md` are the code layer too.",
+    "ru": "Часть файла правил, нужная только проекту, который компилируется или запускается: плейсхолдеры `<ARCH_LAYERS>`, `<BUILD_CMD>`, `<TEST_CMD>`, `<LINT_CMD>`, `<RUN_CMD>`, `<LOGGER>` и правила, которые на них опираются, например теги проверки. Если проект ничего не компилирует и не запускает, эти правила удаляют, а не заполняют. Семь шаблонов из `docs/CODE_QUALITY.md` - тоже слой кода.",
+    "ua": "Частина файлу правил, потрібна лише проєкту, що компілюється або запускається: плейсхолдери `<ARCH_LAYERS>`, `<BUILD_CMD>`, `<TEST_CMD>`, `<LINT_CMD>`, `<RUN_CMD>`, `<LOGGER>` і правила, які на них спираються, наприклад теги перевірки. Якщо проєкт нічого не компілює й не запускає, ці правила видаляють, а не заповнюють. Сім шаблонів із `docs/CODE_QUALITY.md` - теж шар коду."
+  },
+  "see": ["rules-file", "placeholder", "project-shape"]
+}

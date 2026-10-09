@@ -1,0 +1,114 @@
+{
+  "id": "spec-check",
+  "title": {
+    "en": "Audit a build against its spec and set the ticket status from reality",
+    "ru": "Проверить реализацию по спеке и выставить статус тикета по факту",
+    "ua": "Перевірити реалізацію за спекою й виставити статус тікета за фактом"
+  },
+  "pitch": {
+    "en": "Audits a ticket against what the files really contain and sets its status: Verified, Partial or Broken, or BlockNeedUserTest while a manual check is open.",
+    "ru": "Сверяет тикет с тем, что реально лежит в файлах, и выставляет статус: Verified, Partial или Broken, а пока открыта ручная проверка, BlockNeedUserTest.",
+    "ua": "Звіряє тікет із тим, що справді лежить у файлах, і виставляє статус: Verified, Partial чи Broken, а поки відкрита ручна перевірка, BlockNeedUserTest."
+  },
+  "lead": {
+    "en": "`/spec-check` audits a [spec](term:spec) against the actual state of the project: it runs static checks, scores the [ticket](term:ticket) and writes the `Status:` line. The findings go into a compact `## Last Audit` block at the bottom of the strategic spec and are overwritten on every run; no separate audit file is written. Human sign-off lives elsewhere, in a `## Manual checks` section that the audit reads and never overwrites.",
+    "ru": "`/spec-check` сверяет [спеку](term:spec) с фактическим состоянием проекта: запускает статические проверки, оценивает [тикет](term:ticket) и записывает строку `Status:`. Результаты попадают в компактный блок `## Last Audit` в конце стратегической спеки и перезаписываются при каждом запуске; отдельный файл аудита не создаётся. Подпись человека хранится в другом месте, в разделе `## Manual checks`: аудит его читает и никогда не перезаписывает.",
+    "ua": "`/spec-check` звіряє [спеку](term:spec) з фактичним станом проєкту: запускає статичні перевірки, оцінює [тікет](term:ticket) і записує рядок `Status:`. Результати потрапляють у компактний блок `## Last Audit` наприкінці стратегічної спеки й перезаписуються за кожного запуску; окремий файл аудиту не створюється. Підпис людини зберігається деінде, у розділі `## Manual checks`: аудит його читає й ніколи не перезаписує."
+  },
+  "situation": {
+    "en": "A ticket has reached `Implemented` or later and you want to know whether it is really done. Also the way out of `BlockNeedUserTest` once a human has ticked every line of `## Manual checks`.",
+    "ru": "Тикет дошёл до `Implemented` или дальше, и нужно понять, действительно ли он готов. А также выход из `BlockNeedUserTest`, когда человек отметил `[x]` все пункты раздела `## Manual checks`.",
+    "ua": "Тікет дійшов до `Implemented` або далі, і треба зрозуміти, чи він справді готовий. А також вихід із `BlockNeedUserTest`, коли людина відзначила `[x]` усі пункти розділу `## Manual checks`."
+  },
+  "warning": {
+    "en": "`Verified` is refused while any check is `FAIL`, `WARN` or `UNCHECKABLE`, a manual item is open, a tactical phase is `Broken`, or an open §6 item is neither `Resolved` nor in `Carried-to:`. The audit is static: it runs no build, ticks no manual box and edits only `Status:`, `## Last Audit`, the verification tags on leaving `BlockNeedUserTest`, and appends `## Manual checks` if missing.",
+    "ru": "`Verified` не выдаётся, пока хоть одна проверка `FAIL`, `WARN` или `UNCHECKABLE`, открыт ручной пункт, тактическая фаза `Broken` либо открытый пункт §6 не `Resolved` и не передан в `Carried-to:`. Аудит статический: без сборки и без ручных отметок, правит только `Status:`, `## Last Audit` и проверочные теги при выходе из `BlockNeedUserTest`, а `## Manual checks` добавляет при отсутствии.",
+    "ua": "`Verified` не видається, поки хоч одна перевірка `FAIL`, `WARN` чи `UNCHECKABLE`, відкритий ручний пункт, якась тактична фаза `Broken` або відкритий пункт §6 не `Resolved` і не переданий у `Carried-to:`. Аудит статичний: без збірки й без ручних позначок, правит лише `Status:`, `## Last Audit` і перевірочні теги при виході з `BlockNeedUserTest`, а `## Manual checks` додає, якщо його немає."
+  },
+  "steps": [
+    {
+      "en": "Name the ticket: `/spec-check ID-or-slug`. The agent reads the strategic spec and aborts if it is missing. If the ticket also has a tactical folder, the audit covers the strategic spec and every phase; `--strategic`, `--tactical` or `--phase NN` narrow it.",
+      "ru": "Назовите тикет: `/spec-check ID-or-slug`. Агент читает стратегическую спеку и прерывается, если её нет. Если у тикета есть ещё и тактическая папка, аудит охватывает стратегическую спеку и каждую фазу; сузить его можно флагами `--strategic`, `--tactical` или `--phase NN`.",
+      "ua": "Назвіть тікет: `/spec-check ID-or-slug`. Агент читає стратегічну спеку й зупиняється, якщо її немає. Якщо в тікета є ще й тактична тека, аудит охоплює стратегічну спеку та кожну фазу; звузити його можна прапорцями `--strategic`, `--tactical` або `--phase NN`."
+    },
+    {
+      "en": "It extracts what the spec promises. From the strategic spec: goals (§2), constraints (§3.2), research items (§6), the user-doc text (§8) and the criteria (§11). From the tactical plan: the phase overview, blockers and completion gate in `INDEX.md`, and each phase's files touched, step verification and done criteria.",
+      "ru": "Агент выделяет то, что обещает спека. Из стратегической: цели (§2), ограничения (§3.2), пункты исследования (§6), текст для пользовательской документации (§8) и критерии (§11). Из тактического плана: обзор фаз, блокеры и условие завершения в `INDEX.md`, а также файлы, проверки шагов и критерии готовности каждой фазы.",
+      "ua": "Агент виокремлює те, що обіцяє спека. Зі стратегічної: цілі (§2), обмеження (§3.2), пункти дослідження (§6), текст для користувацької документації (§8) і критерії (§11). Із тактичного плану: огляд фаз, блокери й умову завершення в `INDEX.md`, а також файли, перевірки кроків і критерії готовності кожної фази."
+    },
+    {
+      "en": "It runs the checks against the files and records each as `PASS`, `WARN`, `FAIL`, `MANUAL`, `UNCHECKABLE` or `EXEMPT`: file exists, symbol declared (the hit must be a declaration, not a comment), no forbidden call, user docs, open questions closed, manual checks and more. A grep miss is `FAIL`; a hit count that differs from the expected one is `WARN`; a check that cannot reach its subject is `UNCHECKABLE`. `--strict` treats `WARN` as `FAIL`; `--quick` skips the grep-heavy invariants.",
+      "ru": "Он прогоняет проверки по файлам и записывает для каждой `PASS`, `WARN`, `FAIL`, `MANUAL`, `UNCHECKABLE` или `EXEMPT`: файл существует, символ объявлен (совпадение должно быть объявлением, а не комментарием), запрещённого вызова нет, пользовательская документация, открытые вопросы закрыты, ручные проверки и др. Промах grep - `FAIL`, иное число совпадений - `WARN`, недостижимый предмет проверки - `UNCHECKABLE`. `--strict` приравнивает `WARN` к `FAIL`, `--quick` пропускает тяжёлые grep-инварианты.",
+      "ua": "Він проганяє перевірки за файлами й записує для кожної `PASS`, `WARN`, `FAIL`, `MANUAL`, `UNCHECKABLE` або `EXEMPT`: файл існує, символ оголошено (збіг має бути оголошенням, а не коментарем), забороненого виклику немає, користувацька документація, відкриті питання закрито, ручні перевірки та інші. Промах grep - `FAIL`, інша кількість збігів - `WARN`, недосяжний предмет перевірки - `UNCHECKABLE`. `--strict` прирівнює `WARN` до `FAIL`, `--quick` пропускає важкі grep-інваріанти."
+    },
+    {
+      "en": "It scores the ticket. `Verified`: every check is `PASS` or `EXEMPT` and no manual item is open. `BlockNeedUserTest`: no `FAIL`, `WARN` or `UNCHECKABLE`, but a manual or on-target item is open. `Partial`: no `FAIL` or `UNCHECKABLE`, at least one `WARN`. `Broken`: at least one `FAIL` or `UNCHECKABLE`, since a check that could not reach its subject proved nothing. When several fit, the worst wins: `Broken`, then `Partial`, then `BlockNeedUserTest`.",
+      "ru": "Он ставит оценку. `Verified`: все проверки `PASS` или `EXEMPT`, открытых ручных пунктов нет. `BlockNeedUserTest`: нет `FAIL`, `WARN` и `UNCHECKABLE`, но ручной пункт или проверка на целевой платформе открыты. `Partial`: нет `FAIL` и `UNCHECKABLE`, есть хотя бы один `WARN`. `Broken`: есть хотя бы один `FAIL` или `UNCHECKABLE`, ведь проверка, не добравшаяся до предмета, ничего не доказала. Если подходит несколько оценок, побеждает худшая: `Broken`, затем `Partial`, затем `BlockNeedUserTest`.",
+      "ua": "Він ставить оцінку. `Verified`: усі перевірки `PASS` або `EXEMPT`, відкритих ручних пунктів немає. `BlockNeedUserTest`: немає `FAIL`, `WARN` і `UNCHECKABLE`, але ручний пункт або перевірка на цільовій платформі відкриті. `Partial`: немає `FAIL` і `UNCHECKABLE`, є хоча б один `WARN`. `Broken`: є хоча б один `FAIL` або `UNCHECKABLE`, адже перевірка, що не дісталася предмета, нічого не довела. Коли підходить кілька оцінок, перемагає найгірша: `Broken`, потім `Partial`, потім `BlockNeedUserTest`."
+    },
+    {
+      "en": "It writes the `## Last Audit` block at the bottom of the strategic spec, over the previous one, in about 40 lines or fewer: `Date`, `Mode`, `Outcome` (naming the block status it kept, if any), `Counts` (open manual items are only counted here) and the `Action items`, each `FAIL`, `WARN` or `UNCHECKABLE` with a concrete fix or the access that would let the check run. With `Verified` or `BlockNeedUserTest` there are none, and that part is dropped.",
+      "ru": "Он записывает блок `## Last Audit` в конце стратегической спеки поверх прежнего, примерно в 40 строк или короче: `Date`, `Mode`, `Outcome` (с названием сохранённого блокирующего статуса, если он сохранён), `Counts` (открытые ручные пункты здесь только считаются) и `Action items`, каждый `FAIL`, `WARN` или `UNCHECKABLE` с конкретным исправлением или с доступом, который позволил бы выполнить проверку. При `Verified` и `BlockNeedUserTest` пунктов нет, и эта часть убирается.",
+      "ua": "Він записує блок `## Last Audit` наприкінці стратегічної спеки поверх попереднього, приблизно в 40 рядків або коротше: `Date`, `Mode`, `Outcome` (з назвою збереженого блокувального статусу, якщо він збережений), `Counts` (відкриті ручні пункти тут лише рахуються) і `Action items`, кожен `FAIL`, `WARN` чи `UNCHECKABLE` із конкретним виправленням або з доступом, що дозволив би виконати перевірку. За `Verified` і `BlockNeedUserTest` пунктів немає, і ця частина прибирається."
+    },
+    {
+      "en": "If a §11 criterion needs a human or a real run and the spec has no `## Manual checks` section yet (usually `/spec-dev` has already written it), it appends one with a `[ ]` line per such criterion. It never rewrites an existing section, never unticks a box and never ticks one. You tick `[x]` and add the date and what you saw. `Verified` needs every line ticked, or no section at all.",
+      "ru": "Если критерий из §11 требует человека или настоящего запуска, а раздела `## Manual checks` в спеке ещё нет (обычно его уже написал `/spec-dev`), агент добавляет его с пунктом `[ ]` на каждый такой критерий. Существующий раздел он не переписывает, отметок не снимает и сам не ставит. Отметку `[x]`, дату и то, что вы увидели, добавляете вы. Для `Verified` все пункты должны быть отмечены, либо раздела нет совсем.",
+      "ua": "Якщо критерій із §11 потребує людини чи справжнього запуску, а розділу `## Manual checks` у спеці ще немає (зазвичай його вже написав `/spec-dev`), агент додає його з пунктом `[ ]` на кожен такий критерій. Наявний розділ він не переписує, позначок не знімає й сам не ставить. Позначку `[x]`, дату й те, що ви побачили, додаєте ви. Для `Verified` усі пункти мають бути позначені, або розділу немає взагалі."
+    },
+    {
+      "en": "It sets the `Status:` line to the score (in full or strategic mode; a tactical-only run updates just `INDEX.md` and the audited phase rows). A `BlockQuestions` or `BlockExternal` status stays, note after ` - ` included, unless the score is `Verified`; the score goes into `## Last Audit`. Leaving `BlockNeedUserTest`, it deletes every verification tag that starts with the ticket id and adds those files to the ticket's changelog entry, where the project keeps one.",
+      "ru": "Он выставляет строку `Status:` по оценке (в полном и стратегическом режиме; запуск только по тактике обновляет лишь `INDEX.md` и проверенные строки фаз). Статус `BlockQuestions` или `BlockExternal` остаётся вместе с заметкой после ` - `, если оценка не `Verified`; оценка записывается в `## Last Audit`. При выходе из `BlockNeedUserTest` он удаляет все проверочные теги, начинающиеся с идентификатора тикета, и добавляет эти файлы в запись журнала изменений тикета, если журнал в проекте ведётся.",
+      "ua": "Він виставляє рядок `Status:` за оцінкою (у повному й стратегічному режимі; запуск лише за тактикою оновлює тільки `INDEX.md` і перевірені рядки фаз). Статус `BlockQuestions` або `BlockExternal` лишається разом із приміткою після ` - `, якщо оцінка не `Verified`; оцінка записується в `## Last Audit`. При виході з `BlockNeedUserTest` він видаляє всі перевірочні теги, що починаються з ідентифікатора тікета, і додає ці файли до запису журналу змін тікета, якщо проєкт веде такий журнал."
+    },
+    {
+      "en": "If the status this run set is `Partial` or `Broken`, it chains to `/spec-fix` on its own. On `Verified` it stops. On `BlockNeedUserTest` it stops and waits for the human signal: it does not chain and does not remove the tags. On a kept `BlockQuestions` or `BlockExternal` it stops too, since nothing mechanical is left to try. Once the item is closed, run `/spec-check` again.",
+      "ru": "Если статус, выставленный в этом прогоне, - `Partial` или `Broken`, он сам передаёт ход `/spec-fix`. На `Verified` останавливается. На `BlockNeedUserTest` останавливается и ждёт сигнала от человека: дальше не идёт и теги не удаляет. На сохранённых `BlockQuestions` или `BlockExternal` тоже останавливается: механического больше нечего пробовать. Когда пункт закрыт, запустите `/spec-check` снова.",
+      "ua": "Якщо статус, виставлений у цьому прогоні, - `Partial` або `Broken`, він сам передає хід `/spec-fix`. На `Verified` зупиняється. На `BlockNeedUserTest` зупиняється й чекає сигналу від людини: далі не йде й теги не видаляє. На збережених `BlockQuestions` або `BlockExternal` теж зупиняється: механічного вже нічого пробувати. Коли пункт закрито, запустіть `/spec-check` знову."
+    }
+  ],
+  "outcome": {
+    "en": "The `Status:` line reads `Verified`, `BlockNeedUserTest`, `Partial` or `Broken` (or still the `BlockQuestions` / `BlockExternal` it had), the `## Last Audit` block lists what is left, and the chat shows one line: `ID: score. PASS/WARN/FAIL: N/N/N. Tags removed: N. Top issues: [list].`",
+    "ru": "В строке `Status:` стоит `Verified`, `BlockNeedUserTest`, `Partial` или `Broken` (либо прежние `BlockQuestions` / `BlockExternal`), блок `## Last Audit` перечисляет, что осталось, а в чате одна строка: `ID: score. PASS/WARN/FAIL: N/N/N. Tags removed: N. Top issues: [list].`",
+    "ua": "У рядку `Status:` стоїть `Verified`, `BlockNeedUserTest`, `Partial` або `Broken` (чи колишні `BlockQuestions` / `BlockExternal`), блок `## Last Audit` перелічує, що лишилося, а в чаті один рядок: `ID: score. PASS/WARN/FAIL: N/N/N. Tags removed: N. Top issues: [list].`"
+  },
+  "tips": [
+    {
+      "en": "The open-questions check runs only when the audit actually changes the status. Re-auditing an already `Verified` ticket does not repeat it, and an `Archived` ticket is never gated. A primitive spec has no such section and is `EXEMPT`; an item that still carries the template's literal `Open / Resolved` line counts as unanswered, and the section is found by its heading text, not its number.",
+      "ru": "Проверка открытых вопросов срабатывает, только когда аудит действительно меняет статус. Повторный аудит уже `Verified` тикета её не повторяет, а `Archived` тикет не проверяется вовсе. У примитивной спеки такого раздела нет, и она `EXEMPT`; пункт с оставшейся шаблонной строкой `Open / Resolved` считается без ответа, а раздел ищется по тексту заголовка, не по номеру.",
+      "ua": "Перевірка відкритих питань спрацьовує, лише коли аудит справді змінює статус. Повторний аудит уже `Verified` тікета її не повторює, а `Archived` тікет не перевіряється взагалі. У примітивної спеки такого розділу немає, і вона `EXEMPT`; пункт із шаблонним рядком `Open / Resolved`, що лишився, вважається без відповіді, а розділ шукають за текстом заголовка, не за номером."
+    },
+    {
+      "en": "Before calling an artifact with zero references dead weight, the audit looks in the plan directory: it may be scaffolding of another active ticket. Each remnant it does find is a `WARN`, which keeps the ticket at `Partial`.",
+      "ru": "Прежде чем назвать артефакт без ссылок балластом, аудит смотрит в папку планов: это могут быть заготовки другого активного тикета. Каждый найденный остаток - `WARN`, и он удерживает тикет на `Partial`.",
+      "ua": "Перш ніж назвати артефакт без посилань баластом, аудит дивиться в теку планів: це можуть бути заготовки іншого активного тікета. Кожен знайдений залишок - `WARN`, і він утримує тікет на `Partial`."
+    },
+    {
+      "en": "Three checks read what a reader sees: message formulas (an error says what happened and one next step), one name per concept, and a persona pass that traces each new path as each kind of reader. Each gives a `WARN` per miss; a destructive action reachable past its confirmation is a `FAIL`. All three are `EXEMPT` on a ticket no reader can see.",
+      "ru": "Три проверки читают то, что видит читатель: формулы сообщений (ошибка говорит, что случилось, и один следующий шаг), одно имя на понятие и проход по персонам (persona pass): каждый новый путь глазами каждого вида читателя. Каждая даёт `WARN` за промах; деструктивное действие, до которого можно дойти мимо подтверждения, - `FAIL`. На тикете, который читатель не видит, все три `EXEMPT`.",
+      "ua": "Три перевірки читають те, що бачить читач: формули повідомлень (помилка каже, що сталося, і один наступний крок), одна назва на поняття та прохід за персонами (persona pass): кожен новий шлях очима кожного виду читача. Кожна дає `WARN` за промах; руйнівна дія, до якої можна дійти повз підтвердження, - `FAIL`. На тікеті, якого читач не бачить, усі три `EXEMPT`."
+    },
+    {
+      "en": "The audit never edits a user surface. A user-visible change runs [/surfaces](fn:surfaces) in the plan's docs-cleanup phase, and that is where the user docs get written. The `User docs` check only looks for the keyword that §8 of the spec promises, and is `EXEMPT` when §8 says `No changes`. See [surface](term:surface).",
+      "ru": "Аудит никогда не правит пользовательские поверхности. Видимое пользователю изменение запускает [/surfaces](fn:surfaces) в фазе docs-cleanup плана, и именно там пишется пользовательская документация. Проверка `User docs` лишь ищет ключевое слово, которое обещает §8 спеки, и `EXEMPT`, если в §8 сказано `No changes`. См. [поверхность](term:surface).",
+      "ua": "Аудит ніколи не правит користувацькі поверхні. Видима користувачеві зміна запускає [/surfaces](fn:surfaces) у фазі docs-cleanup плану, і саме там пишеться користувацька документація. Перевірка `User docs` лише шукає ключове слово, яке обіцяє §8 спеки, і `EXEMPT`, якщо в §8 сказано `No changes`. Див. [поверхню](term:surface)."
+    },
+    {
+      "en": "`## Manual checks` is written once and left alone because the `## Last Audit` block is rewritten on every run, so a box kept there would be wiped by the very re-audit meant to read it. [/prove](fn:prove) can supply the evidence; the tick stays with the human.",
+      "ru": "`## Manual checks` пишется один раз и больше не трогается: блок `## Last Audit` переписывается при каждом запуске, и отметка, оставленная в нём, была бы стёрта тем самым повторным аудитом, который должен её прочитать. Доказательство может дать [/prove](fn:prove), а отметку ставит человек.",
+      "ua": "`## Manual checks` пишеться один раз і далі не чіпається: блок `## Last Audit` переписується за кожного запуску, і позначку, залишену в ньому, стер би той самий повторний аудит, що мав її прочитати. Доказ може дати [/prove](fn:prove), а позначку ставить людина."
+    },
+    {
+      "en": "The action items in the block are exactly what [/spec-fix](fn:spec-fix) works from: each one names a failing check and a concrete fix. An `UNCHECKABLE` item is never mechanical, because what is missing is access, not an edit.",
+      "ru": "Пункты в блоке - это ровно то, с чем работает [/spec-fix](fn:spec-fix): каждый называет упавшую проверку и конкретное исправление. Пункт `UNCHECKABLE` никогда не бывает механическим: не хватает доступа, а не правки.",
+      "ua": "Пункти в блоці - це саме те, з чим працює [/spec-fix](fn:spec-fix): кожен називає провалену перевірку й конкретне виправлення. Пункт `UNCHECKABLE` ніколи не буває механічним: бракує доступу, а не правки."
+    }
+  ],
+  "related": ["spec-fix", "spec-dev", "surfaces", "spec-lifecycle", "prove"],
+  "terms": ["audit", "status", "block-status", "ticket", "spec", "surface"],
+  "keywords": {
+    "en": ["spec audit", "verify implementation", "ticket status", "Last Audit", "Manual checks", "Verified", "is it implemented"],
+    "ru": ["аудит спеки", "проверка реализации", "статус тикета", "Last Audit", "Manual checks", "Verified", "реализовано ли"],
+    "ua": ["аудит спеки", "перевірка реалізації", "статус тікета", "Last Audit", "Manual checks", "Verified", "чи реалізовано"]
+  }
+}

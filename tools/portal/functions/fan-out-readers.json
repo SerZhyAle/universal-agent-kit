@@ -1,0 +1,84 @@
+{
+  "id": "fan-out-readers",
+  "title": {
+    "en": "Run independent lookups in parallel and check what comes back",
+    "ru": "Запустить независимые поиски параллельно и проверить результат",
+    "ua": "Запустити незалежні пошуки паралельно й перевірити результат"
+  },
+  "pitch": {
+    "en": "Start independent searches and read-only helpers together once the budget gate is passed, and let the orchestrator re-validate what the wave returns.",
+    "ru": "Запускайте независимые поиски и помощников, которые только читают, вместе, пройдя бюджетный шлюз, а то, что вернула волна, пусть перепроверит оркестратор.",
+    "ua": "Запускайте незалежні пошуки й помічників, що лише читають, разом, пройшовши бюджетний шлюз, а те, що повернула хвиля, нехай перевірить оркестратор."
+  },
+  "lead": {
+    "en": "Readers fan out freely, because extra readers cost only tokens. A local symbol search and an external docs fetch answering one question start in the same breath, and with subagents each reads a different source. This page covers the budget gate that comes before a wave, keeping bulky evidence out of the main context, and trusting a child's report only after the orchestrator has checked it.",
+    "ru": "Читатели распараллеливаются свободно: лишние читатели стоят только токенов. Поиск по локальным символам и запрос внешней документации по одному вопросу стартуют одновременно, а при наличии субагентов каждый читает свой источник. Здесь: бюджетный шлюз перед волной, защита основного контекста от громоздких свидетельств и проверка отчёта дочернего агента оркестратором, прежде чем ему верить.",
+    "ua": "Читачі розпаралелюються вільно: зайві читачі коштують лише токенів. Пошук за локальними символами і запит зовнішньої документації за одним питанням стартують одночасно, а за наявності субагентів кожен читає своє джерело. Тут: бюджетний шлюз перед хвилею, захист основного контексту від громіздких свідчень і перевірка звіту дочірнього агента оркестратором, перш ніж йому вірити."
+  },
+  "situation": {
+    "en": "A question has several independent sources, such as local code, framework docs and open issues, or a verification pass would run over many findings, or bulky evidence is piling up in your context.",
+    "ru": "У вопроса несколько независимых источников, например локальный код, документация фреймворка и открытые issues, либо проверка пойдёт по множеству находок, либо громоздкие свидетельства копятся в вашем контексте.",
+    "ua": "У питання кілька незалежних джерел, наприклад локальний код, документація фреймворку й відкриті issues, або перевірка піде по безлічі знахідок, або громіздкі свідчення накопичуються у вашому контексті."
+  },
+  "warning": {
+    "en": "Fan-out is cheap to get wrong only while every helper is read-only. The moment a wave contains a writer, extra workers cost lost work, not tokens: read [how to run several writing agents without losing work](fn:parallel-writers) first.",
+    "ru": "Ошибиться в веере дёшево, только пока каждый помощник лишь читает. Как только в волне появляется пишущий, лишние работники стоят потерянной работы, а не токенов: сначала прочтите, [как запустить нескольких пишущих агентов, не потеряв работу](fn:parallel-writers).",
+    "ua": "Помилитися у віялі дешево, лише поки кожен помічник тільки читає. Щойно в хвилі з'являється той, хто пише, зайві працівники коштують втраченої роботи, а не токенів: спершу прочитайте, [як запустити кількох агентів, що пишуть, не втративши роботи](fn:parallel-writers)."
+  },
+  "steps": [
+    {
+      "en": "Pass the budget gate before every wave. It covers the count, the cost, the ceiling, an explicit GO above it, finding before verifying, and what to do with a wave a limit killed. All of it lives in [the budget gate page](fn:budget-gate), not here.",
+      "ru": "Перед каждой волной пройдите бюджетный шлюз. Он охватывает число, стоимость, потолок, явное GO выше потолка, порядок «сначала найти, потом проверить» и то, что делать с волной, которую убрал лимит. Всё это описано на странице [бюджетного шлюза](fn:budget-gate), а не здесь.",
+      "ua": "Перед кожною хвилею пройдіть бюджетний шлюз. Він охоплює кількість, вартість, стелю, явне GO вище за стелю, порядок «спершу знайти, потім перевірити» і те, що робити з хвилею, яку вбив ліміт. Усе це описано на сторінці [бюджетного шлюзу](fn:budget-gate), а не тут."
+    },
+    {
+      "en": "Start independent lookups in the same breath, never in sequence. A local symbol search and an external docs fetch that answer the same question do not wait for each other.",
+      "ru": "Запускайте независимые поиски одновременно, а не по очереди. Поиск по локальным символам и запрос внешней документации, отвечающие на один вопрос, не ждут друг друга.",
+      "ua": "Запускайте незалежні пошуки одночасно, а не по черзі. Пошук за локальними символами і запит зовнішньої документації, що відповідають на одне питання, не чекають одне одного."
+    },
+    {
+      "en": "If your runtime has subagents, give each one its own source: one reads the local code, another the framework docs, a third checks open issues. You spend wall-clock once instead of three times.",
+      "ru": "Если в вашей среде есть субагенты, дайте каждому свой источник: один читает локальный код, другой документацию фреймворка, третий смотрит открытые issues. Реальное время вы тратите один раз, а не три.",
+      "ua": "Якщо у вашому середовищі є субагенти, дайте кожному своє джерело: один читає локальний код, інший документацію фреймворку, третій дивиться відкриті issues. Реальний час ви витрачаєте один раз, а не тричі."
+    },
+    {
+      "en": "Keep bulky evidence out of the parent. Run each bulky-evidence item in a throwaway child that returns a compact verdict, so the artifacts stay in the child instead of piling up in the parent's [context](term:context). Isolation is a context-budget lever, not only a way to go parallel.",
+      "ru": "Не пускайте громоздкие свидетельства в родителя. Каждый такой элемент прогоняйте в одноразовом дочернем агенте, который возвращает короткий вердикт: артефакты остаются у него, а не копятся в [контексте](term:context) родителя. Изоляция - рычаг бюджета контекста, а не только способ распараллелить.",
+      "ua": "Не пускайте громіздкі свідчення в батьківський агент. Кожен такий елемент проганяйте в одноразовому дочірньому агентові, який повертає короткий вердикт: артефакти лишаються в нього, а не накопичуються в [контексті](term:context) батьківського. Ізоляція - важіль бюджету контексту, а не лише спосіб розпаралелити."
+    },
+    {
+      "en": "When the wave returns, let the [orchestrator](term:orchestrator) re-validate centrally. A child's report is a claim, not a verdict, in both directions: a reported failure is often a phantom from a stale incremental build, and a reported success such as \"compiles in isolation\" was never checked against the merged tree.",
+      "ru": "Когда волна вернулась, пусть [оркестратор](term:orchestrator) перепроверит результат централизованно. Отчёт дочернего агента - утверждение, а не вердикт, и в обе стороны: сообщённый сбой часто оказывается призраком устаревшей инкрементальной сборки, а сообщённый успех вроде «собирается изолированно» никто не проверял на слитом дереве.",
+      "ua": "Коли хвиля повернулася, нехай [оркестратор](term:orchestrator) централізовано перевірить результат. Звіт дочірнього агента - твердження, а не вердикт, і в обидва боки: повідомлений збій часто виявляється примарою застарілої інкрементальної збірки, а повідомлений успіх на кшталт «збирається ізольовано» ніхто не перевіряв на злитому дереві."
+    }
+  ],
+  "outcome": {
+    "en": "The budget gate was passed, the independent lookups ran together, bulky evidence stayed in throwaway children, and the orchestrator checked each child's report against the merged tree before believing it.",
+    "ru": "Бюджетный шлюз пройден, независимые поиски шли вместе, громоздкие свидетельства остались у одноразовых дочерних агентов, а оркестратор сверил отчёт каждого дочернего агента со слитым деревом, прежде чем ему поверить.",
+    "ua": "Бюджетний шлюз пройдено, незалежні пошуки йшли разом, громіздкі свідчення лишилися в одноразових дочірніх агентів, а оркестратор звірив звіт кожного дочірнього агента зі злитим деревом, перш ніж йому повірити."
+  },
+  "tips": [
+    {
+      "en": "A wave of readers that goes wrong produces a bill, which is why the budget gate comes first. Its find-before-verify staging also keeps you from paying twice for the same check.",
+      "ru": "Волна читателей, пошедшая не так, оборачивается счётом, поэтому бюджетный шлюз идёт первым. Его порядок «сначала найти, потом проверить» заодно не даёт платить дважды за одну и ту же проверку.",
+      "ua": "Хвиля читачів, що пішла не так, обертається рахунком, тому бюджетний шлюз іде першим. Його порядок «спершу знайти, потім перевірити» заодно не дає платити двічі за ту саму перевірку."
+    },
+    {
+      "en": "The delegation hazards in full (tail bias, non-resumable children, adversarial verification of a finding) are in the orchestrator's role brief, [rd-lead](fn:rd-lead).",
+      "ru": "Полный перечень опасностей [делегирования](term:delegation) (перекос в сторону хвоста, дочерние агенты, которых нельзя возобновить, состязательная проверка находки) лежит в ролевом брифе оркестратора, [rd-lead](fn:rd-lead).",
+      "ua": "Повний перелік небезпек [делегування](term:delegation) (перекіс у бік хвоста, дочірні агенти, яких не можна відновити, змагальна перевірка знахідки) лежить у ролевому брифі оркестратора, [rd-lead](fn:rd-lead)."
+    },
+    {
+      "en": "The research order points here for how to fan readers out: see [make the agent look things up instead of guessing](fn:research-index). For unattended runs, see [run unattended work as a loop of fresh processes](fn:unattended-loop).",
+      "ru": "Порядок поиска отсылает сюда за тем, как распараллелить читателей: см. [научить агента искать, а не угадывать](fn:research-index). Для работы без присмотра см. [пустить работу без присмотра циклом свежих процессов](fn:unattended-loop).",
+      "ua": "Порядок пошуку відсилає сюди за тим, як розпаралелити читачів: див. [навчити агента шукати, а не вгадувати](fn:research-index). Для роботи без нагляду див. [пустити роботу без нагляду циклом свіжих процесів](fn:unattended-loop)."
+    }
+  ],
+  "related": ["parallel-writers", "unattended-loop", "rd-lead", "budget-gate", "research-index"],
+  "terms": ["fan-out", "orchestrator", "delegation", "context"],
+  "keywords": {
+    "en": ["parallel research", "subagents", "fan out", "bulky evidence", "central re-validation", "concurrent lookups"],
+    "ru": ["параллельное исследование", "субагенты", "веер", "громоздкие свидетельства", "центральная перепроверка", "одновременные поиски"],
+    "ua": ["паралельне дослідження", "субагенти", "віяло", "громіздкі свідчення", "центральна перевірка", "одночасні пошуки"]
+  }
+}

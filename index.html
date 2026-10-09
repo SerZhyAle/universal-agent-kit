@@ -65,150 +65,10 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/sza-kit.css">
-<style>
-  /* Page layer on top of the shared PAGE-STYLE kit (assets/sza-kit.css, byte-identical to the reference).
-     Only what this Informational / Docs page needs beyond the kit lives here, in the kit's tokens
-     (PAGE-STYLE section 5 "Extending the kit"). The page itself spans the full viewport less the
-     kit's --gutter; the page layer sets no width cap anywhere. */
-  :root{
-    --pill-bg: color-mix(in srgb, var(--acc) 10%, transparent);
-  }
-  body{font-size:16px}
-  a:hover{text-decoration:underline}
-  code{background:var(--bg-3); padding:.08em .38em; border-radius:5px; font-size:.88em}
-
-  /* header: the kit's floating glass bar, allowed to wrap at 360px */
-  .site-header{flex-wrap:wrap}
-  .brand{font-size:15px}
-  .icon{width:16px; height:16px; fill:currentColor; flex:none}
-  .icon-sprite{display:none}
-  .feedback-copy-done{color:var(--acc)}   /* PAGE-STYLE 4.7: the copied word beside the action.copy glyph */
-  .icon-status-error,.feedback-status-error{color:var(--danger)}
-  .seg button{display:inline-flex; align-items:center; justify-content:center}
-  .btn{justify-content:center}
-  .to-top .icon{width:20px; height:20px}
-
-  main{padding:0 var(--gutter) 40px; position:relative; z-index:1}
-
-  /* ---------- hero ---------- */
-  .hero{padding:1.2rem 0 14px; border-bottom:1px solid var(--border); margin-bottom:4px}
-  .hero .kicker b{font-weight:800; color:var(--text)}
-  .hero .lead{color:var(--text-2)}
-  .hero .cta{display:flex; gap:10px; flex-wrap:wrap}
-  .hero .hero-note{font-size:14px; margin:12px 0 0}
-  .hero .kit-updated{font-size:13px; margin:6px 0 0}
-  .minimum-start{margin:16px 0 4px; padding:14px 16px; border:1px solid var(--border); border-left:3px solid var(--acc); border-radius:0 var(--radius-sm) var(--radius-sm) 0; background:var(--card); scroll-margin-top:90px}
-  .minimum-start h2{margin:0 0 5px; font-size:16px; line-height:1.35}
-  .minimum-start p{margin:0; font-size:14.5px; color:var(--text-2)}
-
-  /* the skill-run illustration inside a section (not the kit's one-line .demo strip) */
-  .demo-panel{margin:16px 0 4px}
-  .demo-cap{font-size:14px; margin:0 0 8px}
-  .demo-cap strong{color:var(--text)}
-  .demo-log{margin:0; font-size:12.5px; line-height:1.5}
-  .toolbar{display:flex; gap:10px; flex-wrap:wrap; margin:14px 0 2px}
-
-  /* before/after: the same assistant, week one, side by side */
-  .ba{display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--border);
-    border:1px solid var(--border); border-radius:var(--radius-sm); overflow:hidden; margin:16px 0 6px; font-size:13.5px}
-  .ba>div{background:var(--bg-2); padding:9px 13px; line-height:1.45}
-  .ba>.h{font-family:var(--font-heading); font-size:11.5px; font-weight:700; text-transform:uppercase; letter-spacing:.1em}
-  .ba>.h.l{color:var(--gold)}
-  .ba>.h.r{color:var(--ok)}
-  .ba>.l:not(.h){color:var(--muted)}
-
-  /* ---------- numbered collapsible sections (the table of contents) ---------- */
-  .sections{display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:14px; align-items:start; margin-top:16px}
-  @media(max-width:760px){ .sections{grid-template-columns:1fr} }
-  details.sec{padding:0; margin:0; overflow:hidden; scroll-margin-top:90px}
-  details.sec[open]{grid-column:1 / -1; box-shadow:var(--shadow)}
-  details.sec>summary{align-items:flex-start; gap:11px; padding:13px 16px; font-family:var(--font-body); font-weight:600; font-size:inherit}
-  details.sec>summary:hover .sectitle{color:var(--acc-strong)}
-  details.sec>*:not(summary){margin-bottom:0}
-  .secnum{font-size:13px; line-height:1.6; flex:none}
-  .sechead{display:flex; flex-direction:column; gap:2px; min-width:0}
-  .sectitle{margin:0; font-family:var(--font-heading); font-size:16px; font-weight:700; letter-spacing:-.01em; line-height:1.35}
-  .sectitle code{font-size:.9em; padding:.05em .35em}
-  .secteaser{color:var(--muted); font-weight:400; font-size:13px; line-height:1.42}
-  details.sec[open] .secteaser{display:none}
-  .secbody{padding:4px 18px 16px 18px}
-  .secbody h3{scroll-margin-top:90px}
-  details.sec[open] .secbody{border-top:1px solid var(--border); margin-top:2px; padding-top:12px}
-
-  h3{font-size:17px; margin:18px 0 4px}
-  p{margin:10px 0}
-  ul,ol{margin:10px 0; padding-left:22px}
-  li{margin:5px 0}
-  strong{color:var(--text)}
-  .muted{color:var(--muted)}
-
-  pre{
-    background:var(--code-bg); color:var(--code-ink); border:1px solid var(--border); border-radius:var(--radius-sm);
-    padding:14px 16px; overflow:auto; font-size:13px; line-height:1.5; margin:10px 0;
-  }
-  pre.diagram{color:color-mix(in srgb, var(--code-ink) 80%, transparent)}
-
-  .grid{grid-template-columns:repeat(auto-fit, minmax(230px,1fr)); gap:12px; margin:16px 0}
-  .card{padding:14px 16px; border-radius:var(--radius-sm)}
-  .card h3{margin:0 0 4px; font-size:15px}
-  .card p{margin:4px 0 0; font-size:14px; color:var(--muted)}
-  .card .num{font-family:var(--font-heading); font-size:12px; font-weight:700; color:var(--acc); letter-spacing:.1em}
-
-  .note{font-size:14.5px; margin:18px 0}
-  .note p{font-size:inherit; margin:.4em 0 0}
-
-  .pills{margin:14px 0}
-  .pill{font-family:var(--font-body); font-size:12.5px; font-weight:500; letter-spacing:0; color:var(--text-2)}
-  .pill b{color:var(--text); font-weight:700}
-
-  /* ---------- footer: kit form, plus the per-locale product line ---------- */
-  .site-footer{color:var(--muted); font-size:14px; position:relative; z-index:1}
-  .site-footer .cta{display:flex; gap:10px; flex-wrap:wrap; margin:14px 0}
-  .tools-family{margin:24px 0 0; padding-top:14px; border-top:1px solid var(--border)}
-  .tools-family h2{margin:0 0 10px; color:var(--text); font-size:15px}
-  .tools-grid a{display:flex; align-items:center; min-height:44px}
-  .tools-grid a:hover{text-decoration:none; color:var(--text)}
-  .footer-bottom{padding-top:14px; border-top:1px solid var(--border); margin-top:4px}
-  .provenance{font-size:13px; margin:14px 0 0}
-
-  pre:focus-visible{outline:2px solid var(--acc); outline-offset:2px}
-  .seg button:focus-visible{outline-offset:-2px}
-
-  .adopt-prompt{margin:16px 0 22px}
-  .adopt-prompt details{background:var(--bg-3); border:1px solid var(--border); border-radius:var(--radius-sm); padding:4px 14px 14px}
-  .adopt-prompt summary{cursor:pointer; font-weight:600; color:var(--acc-strong); list-style:none; display:flex; align-items:center; gap:8px; min-height:44px; padding:4px 2px}
-  .adopt-prompt summary::-webkit-details-marker{display:none}
-  .adopt-prompt .prompt-actions{display:flex; justify-content:flex-end; margin:2px 0 8px}
-  .adopt-prompt pre{margin:0; max-height:none}
-  .adopt-step{font-weight:700; color:var(--acc-strong)}
-  .adopt-prompt + p{margin-top:2px}
-
-  /* language switching (PAGE-STYLE section 6): the UA label keys "ua"; lang, hreflang and ?lang= keep ISO "uk" */
-  html[data-lang="ru"] [data-l]:not([data-l="ru"]){display:none}
-  html[data-lang="en"] [data-l]:not([data-l="en"]){display:none}
-  html[data-lang="ua"] [data-l]:not([data-l="ua"]){display:none}
-
-  /* Print: dark theme prints unreadable, and collapsed sections drop their content.
-     A beforeprint handler opens every collapsed section; these rules force readable ink on white. */
-  @media print{
-    .site-header, .bg-blobs, .to-top, .hero .cta, .site-footer .cta, .adopt-prompt .prompt-actions{display:none !important}
-    html, body{background:#fff !important; color:#111 !important}
-    .sections{display:block !important}
-    details.sec{grid-column:auto !important; break-inside:avoid; box-shadow:none !important; backdrop-filter:none !important;
-      background:#fff !important; border-color:#bbb !important; margin:0 0 10px}
-    .secteaser{display:none !important}
-    .card, .note, .minimum-start, pre{background:#fff !important; color:#111 !important; border-color:#bbb !important; box-shadow:none !important}
-    .ba{background:#bbb !important; border-color:#bbb !important}
-    .ba>div{background:#fff !important; color:#111 !important}
-    pre, pre.diagram{color:#111 !important}
-    strong, .sectitle{color:#111 !important}
-    .muted, .card p, .secteaser{color:#333 !important}
-    a{color:#111 !important; text-decoration:underline}
-    a[href^="http"]::after{content:" (" attr(href) ")"; font-size:.8em; color:#555}
-  }
-</style>
+<link rel="stylesheet" href="assets/site.css">
 </head>
 <body>
+<a class="skip-link" href="#main"><span data-l="ru">Перейти к содержимому</span><span data-l="en">Skip to the content</span><span data-l="ua">Перейти до вмісту</span></a>
 <div class="bg-blobs" aria-hidden="true"><div class="blob blob-1"></div><div class="blob blob-2"></div><div class="blob blob-3"></div></div>
 <!-- ICON-SET: action.download, action.copy, nav.scroll-top, status.error. The copied state is the localized
      word "Copied" beside the same action.copy glyph (ICON-SET 0.15 note on action.copy). Source glyphs are
@@ -221,6 +81,7 @@
 </svg>
 <header class="site-header">
     <span class="brand">Universal&nbsp;Agent&nbsp;Kit<span class="dot">.</span></span>
+    <nav class="header-nav" aria-label="Site" data-aria="navSite"><a class="header-link" href="portal/"><span data-l="ru">Документация</span><span data-l="en">Documentation</span><span data-l="ua">Документація</span></a></nav>
     <span class="seg" role="group" aria-label="Language" id="langGroup">
       <button id="lng-ru" type="button" onclick="setLang('ru')" aria-pressed="false" aria-label="Русский">RU</button>
       <button id="lng-en" type="button" onclick="setLang('en')" aria-pressed="true" aria-label="English">EN</button>
@@ -232,9 +93,9 @@
     </a>
 </header>
 
-<main>
+<main id="main">
   <noscript>
-    <p style="margin:14px 0 0;padding:11px 14px;border:1px solid var(--border);border-radius:10px;background:var(--bg-2);color:var(--muted);font-size:14px">
+    <p class="noscript-note">
       The language switch, theme, expand/collapse, and copy buttons need JavaScript - with it
       off they are inert, but you still get the full English article. Download the kit from the
       links in the header or footer, or in the <a href="https://github.com/SerZhyAle/universal-agent-kit">Source code repository</a>.
@@ -254,9 +115,9 @@
       <span data-l="ua">Дай своєму ШІ-агенту операційну систему</span>
     </h1>
     <p class="lead">
-      <span data-l="ru">Набор понятных правил, готовых промптов и заметок для ИИ-агента. Он помогает агенту не терять контекст, работать аккуратно и не затирать чужую работу, когда агентов несколько. И это не только про код: метод держится на файлах, а не на компиляторе, поэтому ложится и на аналитику, и на документацию, и на договоры, и на регламенты. Подходит и для личной папки на компьютере, и для проекта с Git - не зависит от языка, модели и инструмента.</span>
-      <span data-l="en">A set of clear rules, ready-made prompts, and notes for an AI agent. It helps the agent keep context, work carefully, and stay out of the other agents' way when there is more than one. And it is not only about code: the method rests on files, not on a compiler, so it fits analysis, documentation, contracts and procedures just as well. It works for a personal folder on your computer and for a Git project - regardless of language, model, or tool.</span>
-      <span data-l="ua">Набір зрозумілих правил, готових промптів і нотаток для ШІ-агента. Він допомагає агенту не губити контекст, працювати акуратно й не затирати чужу роботу, коли агентів декілька. І це не лише про код: метод тримається на файлах, а не на компіляторі, тому лягає і на аналітику, і на документацію, і на договори, і на регламенти. Підходить і для особистої папки на комп'ютері, і для проєкту з Git - незалежно від мови, моделі чи інструмента.</span>
+      <span data-l="ru">Набор понятных <a href="portal/#section-rules">правил</a>, <a href="portal/#section-skills">навыков</a>, <a href="portal/#section-agents">ролей</a>, <a href="portal/#section-lifecycle">жизненного цикла спеки</a>, <a href="portal/#section-memory">постоянной памяти</a> и <a href="portal/#section-parallel">дисциплины параллельной работы агентов</a> для работы с ИИ-агентом. Он помогает агенту не терять контекст, работать аккуратно и не затирать чужую работу, когда агентов несколько. И это не только про код: метод держится на файлах, а не на компиляторе, поэтому ложится и на аналитику, и на документацию, и на договоры, и на регламенты. Подходит и для личной папки на компьютере, и для проекта с Git - не зависит от языка, модели и инструмента.</span>
+      <span data-l="en">A set of clear <a href="portal/#section-rules">rules</a>, <a href="portal/#section-skills">skills</a>, <a href="portal/#section-agents">role agents</a>, a <a href="portal/#section-lifecycle">spec lifecycle</a>, <a href="portal/#section-memory">persistent memory</a>, and <a href="portal/#section-parallel">parallel-agent discipline</a> for working with an AI agent. It helps the agent keep context, work carefully, and stay out of the other agents' way when there is more than one. And it is not only about code: the method rests on files, not on a compiler, so it fits analysis, documentation, contracts and procedures just as well. It works for a personal folder on your computer and for a Git project - regardless of language, model, or tool.</span>
+      <span data-l="ua">Набір зрозумілих <a href="portal/#section-rules">правил</a>, <a href="portal/#section-skills">навичок</a>, <a href="portal/#section-agents">ролей</a>, <a href="portal/#section-lifecycle">життєвого циклу спеки</a>, <a href="portal/#section-memory">постійної пам'яті</a> та <a href="portal/#section-parallel">дисципліни паралельної роботи агентів</a> для роботи зі ШІ-агентом. Він допомагає агенту не губити контекст, працювати акуратно й не затирати чужу роботу, коли агентів декілька. І це не лише про код: метод тримається на файлах, а не на компіляторі, тому лягає і на аналітику, і на документацію, і на договори, і на регламенти. Підходить і для особистої папки на комп'ютері, і для проєкту з Git - незалежно від мови, моделі чи інструмента.</span>
     </p>
     <div class="cta">
       <a class="btn btn-primary" href="universal-agent-kit.zip" download>
@@ -284,9 +145,9 @@
   <section class="minimum-start" id="minimum-start" aria-labelledby="minimum-start-title">
     <h2 id="minimum-start-title"><span data-l="ru">Минимальный старт</span><span data-l="en">Minimum start</span><span data-l="ua">Мінімальний старт</span></h2>
     <p>
-      <span data-l="ru">Не готов к полному набору - возьми три файла: <code>CLAUDE.md</code> (переименуй в <code>AGENTS.md</code>, если твой инструмент читает его), <code>/quick</code> и <code>/fix</code>. Добавь <code>/spec</code> и жизненный цикл, когда впервые попадётся задача с настоящими проектными решениями, а <code>memory/</code> - когда надоест объяснять одно и то же.</span>
-      <span data-l="en">Not ready for the full set - take three files: <code>CLAUDE.md</code> (rename it to <code>AGENTS.md</code> if that's what your tool reads), <code>/quick</code>, and <code>/fix</code>. Add <code>/spec</code> and the lifecycle the first time a task carries real design decisions, and <code>memory/</code> once re-explaining things starts to hurt.</span>
-      <span data-l="ua">Не готовий до повного набору - візьми три файли: <code>CLAUDE.md</code> (перейменуй на <code>AGENTS.md</code>, якщо твій інструмент читає його), <code>/quick</code> і <code>/fix</code>. Додай <code>/spec</code> і життєвий цикл, щойно трапиться задача зі справжніми проєктними рішеннями, а <code>memory/</code> - коли набридне пояснювати те саме.</span>
+      <span data-l="ru">Не готов к полному набору - возьми <code>AGENTS.md</code> (и <code>CLAUDE.md</code>, если работаешь в Claude Code), всю папку <code>docs/</code>, <code>/quick</code> и <code>/fix</code>, а затем удали или перепиши в <code>AGENTS.md</code> каждую строку, где назван навык, который ты не взял. Добавь <code>/spec</code> и жизненный цикл, когда впервые попадётся задача с настоящими проектными решениями, а <code>memory/</code> - когда надоест объяснять одно и то же.</span>
+      <span data-l="en">Not ready for the full set - take <code>AGENTS.md</code> (and <code>CLAUDE.md</code> if you work in Claude Code), the whole <code>docs/</code> folder, <code>/quick</code> and <code>/fix</code>, then delete or reword every line of <code>AGENTS.md</code> that names a skill you did not take. Add <code>/spec</code> and the lifecycle the first time a task carries real design decisions, and <code>memory/</code> once re-explaining things starts to hurt.</span>
+      <span data-l="ua">Не готовий до повного набору - візьми <code>AGENTS.md</code> (і <code>CLAUDE.md</code>, якщо працюєш у Claude Code), усю теку <code>docs/</code>, <code>/quick</code> і <code>/fix</code>, а тоді видали або перепиши в <code>AGENTS.md</code> кожен рядок, де названо навичку, яку ти не взяв. Додай <code>/spec</code> і життєвий цикл, щойно трапиться задача зі справжніми проєктними рішеннями, а <code>memory/</code> - коли набридне пояснювати те саме.</span>
     </p>
   </section>
 
@@ -381,6 +242,7 @@
 
           <p><strong>И что стоит удалить, а не приспосабливать.</strong> Правило, оставленное «на всякий случай» в проекте, к которому оно неприменимо, - это шум, который приучает всех пролистывать. Если у вас ничто ничего не импортирует, удалите слои и направление зависимостей. Если ваши артефакты не оставляют следа выполнения, удалите метки верификации. Ступень «компиляция» просто исчезает, и лестница проверок начинается на одну выше. Полная таблица перевода, вместе с честными границами метода, лежит в ките: <code>docs/PROJECT_SHAPES.md</code>.</p>
           <p class="muted">Где метод честно не поможет: там, где механически не проверить вообще ничего, он вырождается в чек-лист с хорошими манерами - разделение «что» и «как», статус из реальности и запрет на слово «должно работать» остаются, но принуждения больше нет. Там, где артефакт - один сплошной документ с одним автором, тикет-машинерия это накладные расходы: возьмите правила, <code>/quick</code>, <code>/fix</code> и память. А там, где работа вообще не в файлах - разговор, переговоры, решение, которое нигде не записано, - методу сказать нечего. Запишите сначала; тогда это станет проектом.</p>
+          <p class="portal-link"><span class="muted">В портале:</span> <a href="portal/#section-adopt">Внедрение и адаптация</a></p>
         </div>
       </details>
 
@@ -388,9 +250,10 @@
         <summary><span class="secnum" aria-hidden="true">03</span><span class="sechead"><span class="sectitle" role="heading" aria-level="2">Главный файл правил</span><span class="secteaser">Короткая инструкция, с которой агент начинает работу</span></span></summary>
         <div class="secbody">
           <p>Это один короткий файл, который агент читает в начале работы. В нём: как с тобой общаться, где искать код, как проверять результат и когда спрашивать, а не угадывать. Остальные материалы могут ссылаться на него.</p>
-          <p>Главное - <strong>держать его коротким</strong>. Это не энциклопедия: подробности лежат в <code>docs/</code>, а здесь только нужные ориентиры и подсказка, какой готовый промпт выбрать для задачи. Имя файла зависит от инструмента - <code>CLAUDE.md</code>, <code>AGENTS.md</code>, правило Cursor или <code>GEMINI.md</code>, - но смысл один.</p>
+          <p>Главное - <strong>держать его коротким</strong>. Это не энциклопедия: подробности лежат в <code>docs/</code>, а здесь только нужные ориентиры и подсказка, какой готовый промпт выбрать для задачи. В kit'е это <code>AGENTS.md</code>: его читает большинство инструментов, а <code>CLAUDE.md</code> у Claude Code лишь подключает его. Где нужно своё имя - правило Cursor, <code>GEMINI.md</code> - суть та же.</p>
           <p>Плейсхолдеров в нём два яруса: <strong>десять</strong> нужны любому проекту (включая тот самый <code>&lt;CHECK_CMD&gt;</code> - команду, которая доказывает, что правка не сломана), и <strong>шесть</strong> - только тем, что собираются или запускаются. Если ваш не собирается, правила с этими шестью удаляются, а не заполняются наугад.</p>
           <div class="note"><div class="tag">Кейс</div><p>В исходном проекте <code>CLAUDE.md</code> - это ~12 разделов, включая матрицу флейворов и ритуалы PowerShell. Kit оставляет переносимый каркас и выкидывает проектную машинерию: ты заполняешь <code>&lt;PLACEHOLDER&gt;</code> под свой стек.</p></div>
+          <p class="portal-link"><span class="muted">В портале:</span> <a href="portal/#section-rules">Правила, по которым работает агент</a></p>
         </div>
       </details>
 
@@ -421,13 +284,14 @@ verdict: BlockNeedUserTest     (PASS 6 / WARN 1 / FAIL 0)
   behaviour is unproven until a human runs the export once.
   next -> /spec-fix drops the orphaned ExportHelper binding, then re-audits.</pre>
           </div>
-          <p>Под пайплайном - дешёвые пути: <code>/quick</code> (опечатка), <code>/fix</code> (узкий баг). Перед всем пользовательским - <code>/ui-clarify</code>. Для краткости - <code>/caveman</code>. Плюс <code>/git</code>, <code>/verify</code>, <code>/review</code>.</p>
+          <p>Под пайплайном - дешёвые пути: <code>/quick</code> (опечатка), <code>/fix</code> (узкий баг). Перед всем пользовательским - <code>/ui-clarify</code>. Для краткости - <code>/caveman</code>. Плюс <code>/git</code>, <code>/prove</code>, <code>/critique</code>.</p>
           <p>Рядом с пайплайном, но не внутри него, живут две дисциплины:</p>
           <ul>
             <li><strong>Паркуй, не гоняйся</strong> (<code>/park</code>). Наткнулся посреди задачи на реальную проблему вне рамок задачи - крупнее правки в одну строку, требует отдельного взгляда? Запиши её заглушкой, отсей дубликаты против уже заведённого, отчитайся одной строкой и вернись к задаче. Никогда не переключай активную задачу, чтобы гоняться за припаркованной находкой; тривиальное чини на месте, косметические придирки выбрасывай.</li>
             <li><strong>Разгребай бэклог</strong> (<code>/backlog</code>). Автопилот по бэклогу: бери тикет с наивысшим приоритетом из подходящих, гоняй пайплайн, повторяй - пока не останется ничего, что агент может продвинуть сам. Две защиты не дают ему сорваться: skip-кэш, чтобы непродвигаемый тикет не выбирался снова на следующем витке, и никаких вопросов посреди цикла - каждый требующий человека тикет попадает в один отчёт по итогу прогона.</li>
           </ul>
           <p>И правило для самих вопросов к человеку: <strong>отсортируй развилку, прежде чем выносить её.</strong> Если её решает внешняя конвенция - исследуй её и рекомендуй; если её решает архитектура - изложи это как производное следствие. Реальные вопросы оставь для продуктовых решений, вкуса без опоры и необратимых действий. «Лучше спросить, чем угадывать» не работает, когда исследование или код уже отвечают - вынести решённую развилку как выбор значит расписаться в том, что не проработал вопрос.</p>
+          <p class="portal-link"><span class="muted">В портале:</span> <a href="portal/#section-skills">Навыки: сценарии как slash-команды</a></p>
         </div>
       </details>
 
@@ -447,6 +311,7 @@ verdict: BlockNeedUserTest     (PASS 6 / WARN 1 / FAIL 0)
             <li><strong>У делегирования есть перекос к хвосту.</strong> Субагент тратит бюджет на тяжёлые ранние фазы и обрезает последнюю - доки, проводку, чистку, - а в отчёте пишет «готово». Проверь, что каждый артефакт существует и запускается.</li>
             <li><strong>Изоляция - ещё и рычаг бюджета:</strong> гоняй задачу с громоздкими доказательствами в одноразовом агенте, который возвращает один компактный вердикт, - артефакты остаются в дочернем.</li>
           </ul>
+          <p class="portal-link"><span class="muted">В портале:</span> <a href="portal/#section-agents">Ролевые агенты</a></p>
         </div>
       </details>
 
@@ -470,6 +335,7 @@ verdict: BlockNeedUserTest     (PASS 6 / WARN 1 / FAIL 0)
           <p>Статус - из реальности, и это бьёт уже на входе: тикет доходит до «ожидает теста» только когда его основное поведение уже работает от начала до конца. Скомпилированный каркас, который лишь логирует или показывает заглушку, - это веха, а не результат: не зови человека тестировать пустышку.</p>
           <p>У блок-статусов есть определённый выход, а не только вход: разблокируй тикет, застрявший на вопросе, решив то, что код уже определяет, спрашивая владельца только о настоящих суждениях (с исследованным дефолтом) и продвигая на один уровень. И жизненный цикл где-то кончается - мягкое удаление <em>Archived</em> убирает отменённый тикет из активного набора, но сохраняет его запись, так что ничто не удаляется жёстко.</p>
           <p class="muted">Защиты делятся по тому, что они проверяют: механический инвариант жёстко стопорит; суждение лишь информирует и оставляет go/no-go агенту - жёсткая блокировка на эвристике лишь плодит обходы. А деструктивный шаг, который план уже подстраховывает, - не повод выдумывать гейт подтверждения.</p>
+          <p class="portal-link"><span class="muted">В портале:</span> <a href="portal/#section-lifecycle">Жизненный цикл спеки</a></p>
         </div>
       </details>
 
@@ -485,6 +351,7 @@ reference  указатель во внешнюю систему и зачем  
           <p>Тонкость - <strong>сдержанность</strong>. Не храни то, что выводится из репозитория, git-истории или рецепты починки - это уже в коде и коммитах. И <strong>проверяй перед советом</strong>: память, называющая функцию или путь, - это утверждение «так было, когда записали». Перед действием - грепни, существует ли оно сейчас.</p>
           <p>Долговечная память - для фактов, которые стоит хранить; промежуточное состояние одной прерванной задачи - нет, держи их раздельно. Для задачи, которая переживает перерыв, обрамляй её: на каждой границе фазы пиши короткую передачу (цель, что изменилось, решения, открытые блокеры, единственный следующий шаг), а при возобновлении читай последнюю передачу, прежде чем что-то трогать.</p>
           <p>Одна оговорка, которую прячет слово «постоянный»: авторитет того, что сделано сейчас, - <strong>рабочее дерево</strong>, а не git-история. <code>git log</code>, <code>blame</code> и <code>diff</code> отвечают на «как мы сюда пришли» и активно вводят в заблуждение, когда один файл несёт сразу несколько задач. Возобновляй, читая живые файлы, потом правь трекеры - никогда не выводи текущее состояние из диффа.</p>
+          <p class="portal-link"><span class="muted">В портале:</span> <a href="portal/#section-memory">Постоянная память</a></p>
         </div>
       </details>
 
@@ -495,6 +362,7 @@ reference  указатель во внешнюю систему и зачем  
           <p>Одно правило под всем: <strong>если ты назвал путь, символ или API - ты их проверил.</strong> Для большого репозитория держат запрашиваемый индекс единиц кода: спрашиваешь индекс <em>до</em> грепа и регенерируешь его <em>после</em> правок. Устаревший индекс хуже отсутствующего.</p>
           <p>Две дешёвые защиты расширяют порядок. <strong>Держи инвентарь того, что проект уже умеет</strong> - запрашиваемый список возможностей - и просматривай его, прежде чем проектировать фичу, чтобы агент не пересобирал под новым именем то, что уже существует. И <strong>сама карта - артефакт, который ты ведёшь</strong>: указатель «фича → местоположение». Держи его в согласии со структурой, которую он описывает, и назначь ответственного за свежесть - та же дисциплина, что и у индекса кода.</p>
           <p>Одно уточнение к «проверяй, не угадывай»: <strong>имя - это не поведение.</strong> Прежде чем рассуждать, что флаг или константа <em>делает</em>, подтверди живое место чтения/вызова - комментарий или упоминание в доках это попадание, а не использование. Символы умирают, переименовываются по смыслу или вообще не подключаются.</p>
+          <p class="portal-link"><span class="muted">В портале:</span> <a href="portal/#section-memory">Постоянная память</a></p>
         </div>
       </details>
 
@@ -509,6 +377,7 @@ reference  указатель во внешнюю систему и зачем  
           <p><strong>У проверки четыре ответа, а не два.</strong> «Прошло» и «нашла дефект» очевидны; третий - <em>не смогла проверить</em>, четвёртый - <em>неприменимо в этой конфигурации</em>. Проверка, которая не умеет сказать последние два, скажет один из первых двух, и с этого момента она врёт. Отсюда два следствия. Первое: сначала проверяй прибор, а потом предмет - физически невозможное показание означает, что сломан измеритель, а не подопытный (на одном прогоне так родились 5 «дефектов» из 5 и 18 «недостижимых» пунктов из 28, все ложные). Второе: ложная находка стоит столько же, сколько пропущенная, но громче - когда ложных восемнадцать, настоящая становится одной строкой среди них, и отчёт перестают читать.</p>
           <p><strong>Перед необратимым шагом</strong> - релизом, публикацией, подачей, отправкой - письменный вердикт это <em>вход</em> этого шага, а не отчёт где-то рядом. Отсутствие вердикта не считается за «прошло», и ломается этот гейт ровно так: никто не нарушил правило, ничего не покраснело, а месяцы уехали непроверенными. Вердикт обязан называть, что именно он оценивал (вердикт от прошлого раза - ровно то, за чем тянется рука в спешке), и висеть на той команде, которая отгружает, а не на соседней: в одном проекте гейт существовал, работал и был описан, а в инструкции по релизу его имя встречалось <strong>ноль</strong> раз.</p>
           <p>Веди журнал на уровне <em>логического изменения</em>, а не тронутого файла: одна запись на изменение с пакетом его файлов, и любой индекс регенерируй раз на изменение, а не раз на правку. Предоставленный сам себе, агент пишет пофайловый шум, который хоронит сюжет.</p>
+          <p class="portal-link"><span class="muted">В портале:</span> <a href="portal/#section-rules">Правила, по которым работает агент</a></p>
         </div>
       </details>
 
@@ -530,6 +399,7 @@ reference  указатель во внешнюю систему и зачем  
           <p>Второе: <strong>детектор - лишь половина починки.</strong> Линтер останавливает человека один раз; агент переиздаёт тот же паттерн каждое поколение. Так что закрой источник - добавь соответствующий DON'T во всегда загруженный свод правил и подкрепи его в навыках, генерирующих код, чтобы агент перестал производить дефект, а не просто помечал его постфактум.</p>
           <p>И отдельно - <strong>то, что читает другой проект, живёт в одном месте и меняется первым.</strong> Формат файла, выгрузка, константы алгоритма, от которых зависит соседний проект, - это контракт между проектами. Он лежит в одном месте вне обоих, а каждый проект держит только указатель, не копию: копия расходится с оригиналом после первой же правки. Сначала контракт (новая версия и датированная запись), потом код; не согласен - исправь контракт или запиши исключение с датой окончания. Тихого дрейфа не бывает.</p>
           <p class="muted">Пользовательские доки - часть изменения, которое меняет поведение, а не довесок: то же изменение обновляет док, и проверка проваливается, когда поведение и его описание расходятся. Держи пополняемый (append-only) лог «что выпущено» отдельно от выверенной сводки, которую регенерируешь на релизе.</p>
+          <p class="portal-link"><span class="muted">В портале:</span> <a href="portal/#section-rules">Правила, по которым работает агент</a></p>
         </div>
       </details>
 
@@ -554,19 +424,20 @@ into a temp or scratch directory and unpack it locally; it extracts to a
 `universal-agent-kit/` folder that contains `merge-prompt.txt`. Use those extracted
 files as the source of truth: read `universal-agent-kit/README.md` first, then
 read `universal-agent-kit/docs/PROJECT_SHAPES.md` to see which rules apply to work
-like mine, then use `universal-agent-kit/CLAUDE.md`, `universal-agent-kit/.claude/`,
-`universal-agent-kit/docs/`, `universal-agent-kit/memory/`, and
+like mine, then use `universal-agent-kit/AGENTS.md`, `universal-agent-kit/.claude/`,
+`universal-agent-kit/docs/`, `universal-agent-kit/memory/`,
+`universal-agent-kit/examples/` (to see a filled result), and
 `universal-agent-kit/merge-prompt.txt`. Do not use the article page as the
 primary source. If you
 cannot download files in this environment, stop and ask me to place the
 archive in the workspace. Set this project up on the method from those files:
 
-1. Write the rules file my tool reads (CLAUDE.md / AGENTS.md / a Cursor rule /
-   GEMINI.md - whatever applies) adopting the kit's structure: communication,
+1. Write the rules file my tool reads (AGENTS.md; CLAUDE.md only imports it for
+   Claude Code / a Cursor rule / GEMINI.md - whatever applies) adopting the kit's structure: communication,
    research order, skill routing, the spec lifecycle, strict rules, anti-slop,
    post-change discipline. Fill in what already exists; use sensible defaults
    otherwise.
-2. Create the skill / command files and the role briefs from the kit that fit a
+2. Create the skill files and the role briefs from the kit that fit a
    project of this kind.
 3. Set up the plan directory, the scratch directory, and the memory folder with
    its index.
@@ -592,8 +463,9 @@ into a temp or scratch directory and unpack it locally; it extracts to a
 `universal-agent-kit/` folder that contains `merge-prompt.txt`. Use those extracted
 files as the source of truth: read `universal-agent-kit/README.md` first, then
 read `universal-agent-kit/docs/PROJECT_SHAPES.md` to see which rules apply to work
-like mine, then use `universal-agent-kit/CLAUDE.md`, `universal-agent-kit/.claude/`,
-`universal-agent-kit/docs/`, `universal-agent-kit/memory/`, and
+like mine, then use `universal-agent-kit/AGENTS.md`, `universal-agent-kit/.claude/`,
+`universal-agent-kit/docs/`, `universal-agent-kit/memory/`,
+`universal-agent-kit/examples/` (to see a filled result), and
 `universal-agent-kit/merge-prompt.txt`. Do not use the article page as the
 primary source. If you
 cannot download files in this environment, stop and ask me to place the
@@ -602,13 +474,14 @@ archive in the workspace.
 Then study THIS project folder and import what fits it. It may be a local personal
 project without Git; do not require Git or create a repository:
 
-1. Draft a CLAUDE.md (or my tool's equivalent rules file) that adopts the method, with every
-   tier-1 placeholder filled from this project: project name, chat language, map document, work
-   root, THE CHECK COMMAND that proves a change is sound, plan directory, scratch directory,
-   size budget, read-only zones, and a simple way to name tasks. Fill the code-layer ones
+1. Draft an AGENTS.md (or merge into my existing rules file) that adopts the method, with every
+   tier-1 placeholder filled from this project: project name, chat language, artifact language,
+   map document, work root, THE CHECK COMMAND that proves a change is sound, plan directory,
+   scratch directory, size budget, read-only zones, and a simple way to name tasks (the ticket-id
+   scheme). Fill the code-layer ones
    (architecture layers, build / test / lint / run, logger) only if this project builds or runs.
 2. Recommend which skills (/research, /spec, /spec-tech, /spec-dev, /spec-check, /spec-fix,
-   /quick, /fix, /verify, /review) and which role agents are worth adding here, and say why.
+   /quick, /fix, /prove, /critique) and which role agents are worth adding here, and say why.
    Consider /git only if this project already uses Git.
 3. Tell me whether my runtime supports persistent agent memory and, if so, how to wire it up.
 
@@ -621,11 +494,10 @@ Do not change anything yet. Show me the plan first; on any conflict, my existing
           <p>Скачай kit, отдай агенту папку вместе с <code>merge-prompt.txt</code> и скажи: «Добавь Universal Agent Kit в мой проект». Это работает и с обычной локальной папкой. Агент сначала составит <strong>список</strong>: что уже есть, что можно добавить и где возможен конфликт. Затем покажет <strong>план</strong> и остановится: ничего не перезаписывается молча. После твоего подтверждения он внесёт выбранные части и заполнит <code>&lt;PLACEHOLDER&gt;</code> по материалам проекта.</p>
 
           <h3>Любой инструмент</h3>
-          <p>Каждый агент читает свой файл правил - суть одна, отличается лишь имя:</p>
+          <p>Две из трёх частей теперь переезжают сами: файл правил - это <code>AGENTS.md</code>, который нативно читает большинство агентских инструментов, а навыки лежат в открытом формате Agent Skills (папка с <code>SKILL.md</code>). Адаптации требуют только агенты-роли. Каждый инструмент называет папки по-своему:</p>
           <ul>
-            <li><strong>Claude Code</strong> - <code>CLAUDE.md</code> + <code>.claude/commands/*</code> (готовые <code>/spec</code>, <code>/research</code>..) + <code>.claude/agents/*</code> как субагенты.</li>
-            <li><strong>Cursor</strong> - <code>.cursor/rules</code> (или <code>.cursorrules</code>); команды становятся сохранёнными промптами.</li>
-            <li><strong>Codex, Gemini CLI / Antigravity, Aider, Cline, Windsurf</strong> - <code>AGENTS.md</code> (указатель уже лежит в kit'е, правила - в <code>CLAUDE.md</code> рядом) / <code>GEMINI.md</code> / свой аналог; роли вставляются как системные промпты, навыки - как файлы-промпты, на которые ссылаешься.</li>
+            <li><strong>Claude Code</strong> - <code>CLAUDE.md</code> (подключает <code>AGENTS.md</code>) + <code>.claude/skills/*</code> (готовые <code>/spec</code>, <code>/research</code>..) + <code>.claude/agents/*</code> как субагенты.</li>
+            <li><strong>Codex, Cursor, Copilot, Gemini CLI, Cline, Windsurf</strong> - <code>AGENTS.md</code> как файл правил (у Gemini CLI - <code>GEMINI.md</code> или <code>AGENTS.md</code>, названный в настройках); навыки - в собственной папке навыков инструмента или в <code>.claude/skills/</code>, где инструмент её читает; роли вставляются как системные промпты, режимы или пресеты. Точные папки - в таблице <code>README.md</code> внутри kit'а.</li>
             <li>Методология в <code>docs/</code> вообще не зависит от инструмента - это просто Markdown.</li>
           </ul>
 
@@ -636,6 +508,7 @@ Do not change anything yet. Show me the plan first; on any conflict, my existing
             <li><strong>Средняя</strong>: золотая середина метода - спеки, мелкие проверяемые шаги и порядок исследования окупаются максимально.</li>
             <li><strong>Слабая, маленькая или локальная</strong>: опираешься на правила сильнее всего - крошечные шаги, проверка после каждого, короткий контекст, меньше автономии. Метод - это то, что вообще делает слабую модель пригодной для работы.</li>
           </ul>
+          <p class="portal-link"><span class="muted">В портале:</span> <a href="portal/#section-adopt">Внедрение и адаптация</a></p>
         </div>
       </details>
 
@@ -758,6 +631,7 @@ Do not change anything yet. Show me the plan first; on any conflict, my existing
 
           <p><strong>And what to delete rather than adapt.</strong> A rule kept "just in case" on a project it cannot apply to is noise, and noise trains everyone to skim. If nothing here imports anything, delete the layering and the dependency direction. If your artifacts leave no execution trace, delete the verification tags. The compile rung simply disappears and your ladder starts one rung higher. The full translation table, with the method's honest limits, ships in the kit: <code>docs/PROJECT_SHAPES.md</code>.</p>
           <p class="muted">Where it honestly will not help: where nothing at all can be checked mechanically it degrades into a checklist with good manners - the what/how split, status from reality and the ban on "should work" all survive, but the enforcement is gone. Where the artifact is one flowing document with one author, the ticket machinery is overhead: take the rules, <code>/quick</code>, <code>/fix</code> and the memory. And where the work is not files at all - a conversation, a negotiation, a decision nobody wrote down - the method has nothing to say. Write it down first; then it is a project.</p>
+          <p class="portal-link"><span class="muted">In the portal:</span> <a href="portal/#section-adopt">Adopt and adapt</a></p>
         </div>
       </details>
 
@@ -765,9 +639,10 @@ Do not change anything yet. Show me the plan first; on any conflict, my existing
         <summary><span class="secnum" aria-hidden="true">03</span><span class="sechead"><span class="sectitle" role="heading" aria-level="2">The main rules file</span><span class="secteaser">A short guide the agent reads before it starts</span></span></summary>
         <div class="secbody">
           <p>This is one short file the agent reads at the start of work. It says how to communicate with you, where to look for code, how to check results, and when to ask rather than guess. Other materials can point to it.</p>
-          <p>The important part is to <strong>keep it short</strong>. It is not an encyclopedia: details live in <code>docs/</code>, while this file has only the essentials and a hint about which ready-made prompt to use. Its name depends on the tool - <code>CLAUDE.md</code>, <code>AGENTS.md</code>, a Cursor rule, or <code>GEMINI.md</code> - but the purpose is the same.</p>
+          <p>The important part is to <strong>keep it short</strong>. It is not an encyclopedia: details live in <code>docs/</code>, while this file has only the essentials and a hint about which ready-made prompt to use. In the kit it is <code>AGENTS.md</code>, which most tools read; Claude Code's <code>CLAUDE.md</code> only imports it. Where a tool wants its own name - a Cursor rule, <code>GEMINI.md</code> - the purpose is the same.</p>
           <p>Its placeholders come in two tiers: <strong>ten</strong> that any project needs (including <code>&lt;CHECK_CMD&gt;</code> - the command that proves a change is sound), and <strong>six</strong> only for projects that build or run. If yours does not, the rules using those six get deleted rather than filled with guesses.</p>
           <div class="note"><div class="tag">Case study</div><p>In the source project <code>CLAUDE.md</code> is ~12 sections, including a build-flavor matrix and PowerShell rituals. The kit keeps the transferable skeleton and drops the project machinery: you fill the <code>&lt;PLACEHOLDER&gt;</code> tokens for your stack.</p></div>
+          <p class="portal-link"><span class="muted">In the portal:</span> <a href="portal/#section-rules">Rules the agent follows</a></p>
         </div>
       </details>
 
@@ -798,13 +673,14 @@ verdict: BlockNeedUserTest     (PASS 6 / WARN 1 / FAIL 0)
   behaviour is unproven until a human runs the export once.
   next -> /spec-fix drops the orphaned ExportHelper binding, then re-audits.</pre>
           </div>
-          <p>Below the pipeline sit the cheap paths: <code>/quick</code> (typo), <code>/fix</code> (narrow bug). Before anything user-facing, <code>/ui-clarify</code>. For brevity, <code>/caveman</code>. Plus <code>/git</code>, <code>/verify</code>, <code>/review</code>.</p>
+          <p>Below the pipeline sit the cheap paths: <code>/quick</code> (typo), <code>/fix</code> (narrow bug). Before anything user-facing, <code>/ui-clarify</code>. For brevity, <code>/caveman</code>. Plus <code>/git</code>, <code>/prove</code>, <code>/critique</code>.</p>
           <p>Two disciplines live beside the pipeline, not inside it:</p>
           <ul>
             <li><strong>Park, don't chase</strong> (<code>/park</code>). Hit a real but out-of-scope problem mid-task - bigger than a one-line fix, needs its own look? Record it as a stub, dedup against what's already filed, report it in one line, and return to the task. Never switch the active task to chase a parked finding; fix trivial things inline, drop cosmetic nitpicks.</li>
             <li><strong>Drain the backlog</strong> (<code>/backlog</code>). A zero-input driver: pick the highest-priority eligible ticket, run the pipeline, repeat - until nothing is left the agent can advance alone. Two guards keep it safe: a skip-cache so an un-advanceable ticket isn't re-picked next loop, and no mid-loop questions - every human-gated ticket lands in one end-of-run report.</li>
           </ul>
           <p>And a rule for the human questions themselves: <strong>triage a fork before surfacing it.</strong> If an external convention settles it, research that and recommend; if the architecture settles it, state it as a derived consequence. Reserve real questions for product scope, taste with no anchor, and irreversible actions. "Better to ask than guess" doesn't apply when research or the code already answers - surfacing a settled fork as a choice reads as not having done the homework.</p>
+          <p class="portal-link"><span class="muted">In the portal:</span> <a href="portal/#section-skills">Skills: workflows as slash commands</a></p>
         </div>
       </details>
 
@@ -824,6 +700,7 @@ verdict: BlockNeedUserTest     (PASS 6 / WARN 1 / FAIL 0)
             <li><strong>Delegation has a tail bias.</strong> A subagent spends its budget on the heavy early phases and truncates the last one - docs, wiring, cleanup - while its report says "done". Verify each deliverable exists and runs.</li>
             <li><strong>Isolation is also a budget lever:</strong> run a bulky-evidence task in a throwaway agent that returns one compact verdict, so the artifacts stay in the child.</li>
           </ul>
+          <p class="portal-link"><span class="muted">In the portal:</span> <a href="portal/#section-agents">Role agents</a></p>
         </div>
       </details>
 
@@ -847,6 +724,7 @@ plus explicit block states: BlockNeedUserTest, BlockQuestions, BlockExternal, ..
           <p>Status comes from reality, and that bites at entry too: a ticket reaches "awaiting test" only when its headline behaviour already works end-to-end. A compiled scaffold that only logs or shows a placeholder is a milestone, not a deliverable - don't invite a human to test a no-op.</p>
           <p>Block states get a defined exit, not just an entrance: clear a question-blocked ticket by settling what the code already determines, asking the owner only the genuine judgment calls (with a researched default), and advancing one level. And the lifecycle ends somewhere - an <em>Archived</em> soft-delete moves a cancelled ticket out of the active set but keeps its record, so nothing is ever hard-deleted.</p>
           <p class="muted">Guards split by what they check: a mechanical invariant hard-stops; a judgment call only informs and leaves go/no-go to the agent - hard-blocking on a heuristic just breeds bypasses. And a destructive step the plan already safeguards is no reason to invent a confirmation gate.</p>
+          <p class="portal-link"><span class="muted">In the portal:</span> <a href="portal/#section-lifecycle">Spec lifecycle</a></p>
         </div>
       </details>
 
@@ -862,6 +740,7 @@ reference  a pointer to an external system + purpose  → where to look</pre>
           <p>The hard part is <strong>restraint</strong>. Don't store what is derivable from the repo or from git history, or that is just a fix recipe - those already live in the code and commits. And <strong>verify before recommending</strong>: a memory naming a function or path is a claim that it was true <em>when written</em>. Before acting on it, grep whether it still exists.</p>
           <p>Durable memory is for facts worth keeping; the in-flight state of one interrupted task is not - keep them apart. For a task that spans a break, bookend it: at each phase boundary write a short handoff (goal, what changed, decisions, open blockers, the single next step), and on resume read the latest handoff before touching anything.</p>
           <p>One caveat the word "persist" hides: the <strong>working tree</strong>, not git history, is the authority for what's done now. <code>git log</code>, <code>blame</code>, and <code>diff</code> answer "how did we get here", and they actively mislead when one file carries several tasks at once. Resume by reading the live files, then correct the trackers - never infer present state from a diff.</p>
+          <p class="portal-link"><span class="muted">In the portal:</span> <a href="portal/#section-memory">Persistent memory</a></p>
         </div>
       </details>
 
@@ -872,6 +751,7 @@ reference  a pointer to an external system + purpose  → where to look</pre>
           <p>One rule under all of it: <strong>if you state a path, a symbol, or an API, you have verified it.</strong> For a large repo, keep a queryable index of code units: query the index <em>before</em> you grep and regenerate it <em>after</em> you change code. A stale index is worse than none.</p>
           <p>Two cheap guards extend the order. <strong>Keep an inventory of what the project already ships</strong> - a queryable list of capabilities - and scan it before designing a feature, so the agent doesn't rebuild under a new name something that already exists. And <strong>the map itself is an artifact you maintain</strong>: a feature-to-location lookup kept in step with the structure it describes, with someone owning its freshness - the same discipline the code index gets.</p>
           <p>One sharpening of "verify, don't guess": <strong>a name is not behaviour.</strong> Before reasoning about what a flag or constant <em>does</em>, confirm a live read/call site - a comment or a doc mention is a hit, not a usage. Symbols go dead, get renamed in meaning, or never get wired up.</p>
+          <p class="portal-link"><span class="muted">In the portal:</span> <a href="portal/#section-memory">Persistent memory</a></p>
         </div>
       </details>
 
@@ -886,6 +766,7 @@ doc       script         type change  logic           config/resources  user-vis
           <p><strong>A check has four answers, not two.</strong> Pass and found-a-defect are obvious; the third is <em>could not verify</em>, the fourth is <em>not applicable in this configuration</em>. A check with no way to say the last two will report one of the first two instead, and from then on it is lying. Two consequences. Validate the instrument before the subject: a physically impossible reading means the meter is broken, not that the subject failed - on one sweep that produced 5 "defects" out of 5 and 18 "unreachable" rows out of 28, every one of them false. And a false finding costs as much as a miss but is louder: once eighteen of them ship, a real defect is one row among them and nobody reads the report any more.</p>
           <p><strong>Before an irreversible step</strong> - a release, a publication, a filing, a send - the written verdict is that step's <em>input</em>, not a report filed beside it. The absence of a verdict is not a pass, and that is exactly how this gate fails: nobody breaks the rule, nothing ever goes red, and months ship unverified. The verdict must name what it judged (last time's verdict is precisely what a hurried hand reaches for) and must hang on the command that ships, not on a neighbouring one: in one project the gate existed, worked and was documented, while its own name appeared <strong>zero</strong> times in the release runbook.</p>
           <p>Journal at the grain of the <em>logical change</em>, not the touched file: one entry per change, batching its files, and regenerate any index once per change - not once per edit. Left alone, an agent writes per-file noise that buries the story.</p>
+          <p class="portal-link"><span class="muted">In the portal:</span> <a href="portal/#section-rules">Rules the agent follows</a></p>
         </div>
       </details>
 
@@ -907,6 +788,7 @@ doc       script         type change  logic           config/resources  user-vis
           <p>Second, <strong>a detector is only half the fix.</strong> A linter stops a human once; an agent re-emits the same pattern every generation. So close the source - add the matching DON'T to the always-loaded rulebook and reinforce it in the code-generating skills, so the agent stops producing the defect, not just flagging it after the fact.</p>
           <p>And separately, <strong>what another project reads has one home, and it changes first.</strong> A file format, an export, an algorithm's constants that a neighbouring project depends on - that is a contract between projects. It lives in one place outside both, and each project keeps a pointer, never a copy: a copy drifts from the original at the first local edit. The contract changes before the code (a new version and a dated note); disagree, and you either amend the contract or record an exception with an expiry date. Silent drift is not an option.</p>
           <p class="muted">User-facing docs are part of the change that alters behaviour, not a follow-up: the same change updates the doc, and a check fails when behaviour and its description drift. Keep an always-append "what shipped" log separate from the curated summary you regenerate at release.</p>
+          <p class="portal-link"><span class="muted">In the portal:</span> <a href="portal/#section-rules">Rules the agent follows</a></p>
         </div>
       </details>
 
@@ -931,19 +813,20 @@ into a temp or scratch directory and unpack it locally; it extracts to a
 `universal-agent-kit/` folder that contains `merge-prompt.txt`. Use those extracted
 files as the source of truth: read `universal-agent-kit/README.md` first, then
 read `universal-agent-kit/docs/PROJECT_SHAPES.md` to see which rules apply to work
-like mine, then use `universal-agent-kit/CLAUDE.md`, `universal-agent-kit/.claude/`,
-`universal-agent-kit/docs/`, `universal-agent-kit/memory/`, and
+like mine, then use `universal-agent-kit/AGENTS.md`, `universal-agent-kit/.claude/`,
+`universal-agent-kit/docs/`, `universal-agent-kit/memory/`,
+`universal-agent-kit/examples/` (to see a filled result), and
 `universal-agent-kit/merge-prompt.txt`. Do not use the article page as the
 primary source. If you
 cannot download files in this environment, stop and ask me to place the
 archive in the workspace. Set this project up on the method from those files:
 
-1. Write the rules file my tool reads (CLAUDE.md / AGENTS.md / a Cursor rule /
-   GEMINI.md - whatever applies) adopting the kit's structure: communication,
+1. Write the rules file my tool reads (AGENTS.md; CLAUDE.md only imports it for
+   Claude Code / a Cursor rule / GEMINI.md - whatever applies) adopting the kit's structure: communication,
    research order, skill routing, the spec lifecycle, strict rules, anti-slop,
    post-change discipline. Fill in what already exists; use sensible defaults
    otherwise.
-2. Create the skill / command files and the role briefs from the kit that fit a
+2. Create the skill files and the role briefs from the kit that fit a
    project of this kind.
 3. Set up the plan directory, the scratch directory, and the memory folder with
    its index.
@@ -969,8 +852,9 @@ into a temp or scratch directory and unpack it locally; it extracts to a
 `universal-agent-kit/` folder that contains `merge-prompt.txt`. Use those extracted
 files as the source of truth: read `universal-agent-kit/README.md` first, then
 read `universal-agent-kit/docs/PROJECT_SHAPES.md` to see which rules apply to work
-like mine, then use `universal-agent-kit/CLAUDE.md`, `universal-agent-kit/.claude/`,
-`universal-agent-kit/docs/`, `universal-agent-kit/memory/`, and
+like mine, then use `universal-agent-kit/AGENTS.md`, `universal-agent-kit/.claude/`,
+`universal-agent-kit/docs/`, `universal-agent-kit/memory/`,
+`universal-agent-kit/examples/` (to see a filled result), and
 `universal-agent-kit/merge-prompt.txt`. Do not use the article page as the
 primary source. If you
 cannot download files in this environment, stop and ask me to place the
@@ -979,13 +863,14 @@ archive in the workspace.
 Then study THIS project folder and import what fits it. It may be a local personal
 project without Git; do not require Git or create a repository:
 
-1. Draft a CLAUDE.md (or my tool's equivalent rules file) that adopts the method, with every
-   tier-1 placeholder filled from this project: project name, chat language, map document, work
-   root, THE CHECK COMMAND that proves a change is sound, plan directory, scratch directory,
-   size budget, read-only zones, and a simple way to name tasks. Fill the code-layer ones
+1. Draft an AGENTS.md (or merge into my existing rules file) that adopts the method, with every
+   tier-1 placeholder filled from this project: project name, chat language, artifact language,
+   map document, work root, THE CHECK COMMAND that proves a change is sound, plan directory,
+   scratch directory, size budget, read-only zones, and a simple way to name tasks (the ticket-id
+   scheme). Fill the code-layer ones
    (architecture layers, build / test / lint / run, logger) only if this project builds or runs.
 2. Recommend which skills (/research, /spec, /spec-tech, /spec-dev, /spec-check, /spec-fix,
-   /quick, /fix, /verify, /review) and which role agents are worth adding here, and say why.
+   /quick, /fix, /prove, /critique) and which role agents are worth adding here, and say why.
    Consider /git only if this project already uses Git.
 3. Tell me whether my runtime supports persistent agent memory and, if so, how to wire it up.
 
@@ -998,11 +883,10 @@ Do not change anything yet. Show me the plan first; on any conflict, my existing
           <p>Download the kit, give the agent its folder together with <code>merge-prompt.txt</code>, and say: "Add Universal Agent Kit to my project." This also works with an ordinary local folder. The agent first makes a <strong>list</strong> of what is already there, what it can add, and where conflicts may happen. It then shows a <strong>plan</strong> and stops: nothing is silently overwritten. After you approve, it adds the chosen parts and fills the <code>&lt;PLACEHOLDER&gt;</code>s from the project.</p>
 
           <h3>Any tool</h3>
-          <p>Every agent reads its own rules file - the idea is the same, only the name differs:</p>
+          <p>Two of the three pieces now travel on their own: the rules file is <code>AGENTS.md</code>, which most agent tools read natively, and the skills are in the open Agent Skills format (a folder with a <code>SKILL.md</code>). Only the role agents are an adaptation. Each tool names its folders its own way:</p>
           <ul>
-            <li><strong>Claude Code</strong> - <code>CLAUDE.md</code> + <code>.claude/commands/*</code> (ready-made <code>/spec</code>, <code>/research</code>..) + <code>.claude/agents/*</code> as subagents.</li>
-            <li><strong>Cursor</strong> - <code>.cursor/rules</code> (or <code>.cursorrules</code>); the commands become saved prompts.</li>
-            <li><strong>Codex, Gemini CLI / Antigravity, Aider, Cline, Windsurf</strong> - <code>AGENTS.md</code> (a pointer ships in the kit; the rules live in <code>CLAUDE.md</code> next to it) / <code>GEMINI.md</code> / their own equivalent; roles paste in as system prompts, skills as prompt files you point at.</li>
+            <li><strong>Claude Code</strong> - <code>CLAUDE.md</code> (imports <code>AGENTS.md</code>) + <code>.claude/skills/*</code> (ready-made <code>/spec</code>, <code>/research</code>..) + <code>.claude/agents/*</code> as subagents.</li>
+            <li><strong>Codex, Cursor, Copilot, Gemini CLI, Cline, Windsurf</strong> - <code>AGENTS.md</code> as the rules file (Gemini CLI: <code>GEMINI.md</code>, or <code>AGENTS.md</code> named in its settings); the skills in the tool's own skills folder, or in <code>.claude/skills/</code> where the tool reads it; roles paste in as system prompts, modes or presets. The exact folders are in the table of the <code>README.md</code> inside the kit.</li>
             <li>The methodology in <code>docs/</code> doesn't depend on the tool at all - it's just Markdown.</li>
           </ul>
 
@@ -1013,6 +897,7 @@ Do not change anything yet. Show me the plan first; on any conflict, my existing
             <li><strong>Regular</strong>: the method's sweet spot - specs, small verifiable steps, and the research order pay off the most.</li>
             <li><strong>Weak, small, or local</strong>: you lean on the rules hardest - tiny steps, a check after each, short context, less autonomy. The method is what makes a weak model usable at all.</li>
           </ul>
+          <p class="portal-link"><span class="muted">In the portal:</span> <a href="portal/#section-adopt">Adopt and adapt</a></p>
         </div>
       </details>
 
@@ -1135,6 +1020,7 @@ Do not change anything yet. Show me the plan first; on any conflict, my existing
 
           <p><strong>І що варто видалити, а не пристосовувати.</strong> Правило, лишене «про всяк випадок» у проєкті, до якого воно не застосовне, - це шум, який привчає всіх гортати. Якщо у вас ніщо нічого не імпортує, видаліть шари й напрям залежностей. Якщо ваші артефакти не лишають сліду виконання, видаліть мітки верифікації. Щабель «компіляція» просто зникає, і драбина перевірок починається на один вище. Повна таблиця перекладу, разом із чесними межами методу, лежить у кіті: <code>docs/PROJECT_SHAPES.md</code>.</p>
           <p class="muted">Де метод чесно не допоможе: там, де механічно не перевірити взагалі нічого, він вироджується в чек-лист із гарними манерами - поділ «що» і «як», статус із реальності й заборона на слово «має працювати» лишаються, але примусу більше немає. Там, де артефакт - один суцільний документ з одним автором, тикет-машинерія це накладні витрати: візьміть правила, <code>/quick</code>, <code>/fix</code> і пам'ять. А там, де робота взагалі не у файлах - розмова, перемовини, рішення, яке ніде не записане, - методу сказати нічого. Запишіть спершу; тоді це стане проєктом.</p>
+          <p class="portal-link"><span class="muted">У порталі:</span> <a href="portal/#section-adopt">Впровадження й адаптація</a></p>
         </div>
       </details>
 
@@ -1142,9 +1028,10 @@ Do not change anything yet. Show me the plan first; on any conflict, my existing
         <summary><span class="secnum" aria-hidden="true">03</span><span class="sechead"><span class="sectitle" role="heading" aria-level="2">Головний файл правил</span><span class="secteaser">Коротка інструкція, з якої агент починає роботу</span></span></summary>
         <div class="secbody">
           <p>Це один короткий файл, який агент читає на початку роботи. У ньому: як із тобою спілкуватися, де шукати код, як перевіряти результат і коли питати, а не вгадувати. Інші матеріали можуть на нього посилатися.</p>
-          <p>Головне - <strong>тримати його коротким</strong>. Це не енциклопедія: подробиці лежать у <code>docs/</code>, а тут лише потрібні орієнтири й підказка, який готовий промпт вибрати для задачі. Ім'я файлу залежить від інструмента - <code>CLAUDE.md</code>, <code>AGENTS.md</code>, правило Cursor або <code>GEMINI.md</code>, - але сенс один.</p>
+          <p>Головне - <strong>тримати його коротким</strong>. Це не енциклопедія: подробиці лежать у <code>docs/</code>, а тут лише потрібні орієнтири й підказка, який готовий промпт вибрати для задачі. У kit'і це <code>AGENTS.md</code>: його читає більшість інструментів, а <code>CLAUDE.md</code> у Claude Code лише підключає його. Де потрібне власне ім'я - правило Cursor, <code>GEMINI.md</code> - суть та сама.</p>
           <p>Плейсхолдерів у ньому два яруси: <strong>десять</strong> потрібні будь-якому проєкту (разом із тим самим <code>&lt;CHECK_CMD&gt;</code> - командою, яка доводить, що правка не зламана), і <strong>шість</strong> - лише тим, що збираються або запускаються. Якщо ваш не збирається, правила з цими шістьма видаляються, а не заповнюються навмання.</p>
           <div class="note"><div class="tag">Кейс</div><p>У вихідному проєкті <code>CLAUDE.md</code> - це ~12 розділів, включно з матрицею флейворів і ритуалами PowerShell. Kit лишає переносний каркас і викидає проєктну машинерію: ти заповнюєш <code>&lt;PLACEHOLDER&gt;</code> під свій стек.</p></div>
+          <p class="portal-link"><span class="muted">У порталі:</span> <a href="portal/#section-rules">Правила, за якими працює агент</a></p>
         </div>
       </details>
 
@@ -1175,13 +1062,14 @@ verdict: BlockNeedUserTest     (PASS 6 / WARN 1 / FAIL 0)
   behaviour is unproven until a human runs the export once.
   next -> /spec-fix drops the orphaned ExportHelper binding, then re-audits.</pre>
           </div>
-          <p>Під пайплайном - дешеві шляхи: <code>/quick</code> (одрук), <code>/fix</code> (вузький баг). Перед усім користувацьким - <code>/ui-clarify</code>. Для стислості - <code>/caveman</code>. Плюс <code>/git</code>, <code>/verify</code>, <code>/review</code>.</p>
+          <p>Під пайплайном - дешеві шляхи: <code>/quick</code> (одрук), <code>/fix</code> (вузький баг). Перед усім користувацьким - <code>/ui-clarify</code>. Для стислості - <code>/caveman</code>. Плюс <code>/git</code>, <code>/prove</code>, <code>/critique</code>.</p>
           <p>Поряд із пайплайном - а не всередині нього - живуть дві дисципліни:</p>
           <ul>
             <li><strong>Паркуй, а не женися</strong> (<code>/park</code>). Натрапив посеред задачі на реальну, але поза-обсягову проблему - більшу за однорядкову правку, що потребує окремого погляду? Запиши її заглушкою, відсій дублі проти вже заведеного, відзвітуй одним рядком і повернися до задачі. Ніколи не перемикай активну задачу, щоб гнатися за запаркованою знахідкою; дрібниці лагодь на місці, косметичні причіпки відкидай.</li>
             <li><strong>Вичерпуй беклог</strong> (<code>/backlog</code>). Драйвер без вхідних даних: бери придатний тикет із найвищим пріоритетом, ганяй пайплайн, повторюй - доки не лишиться нічого, що агент може просунути сам. Безпеку тримають два запобіжники: кеш пропусків, щоб непросувний тикет не вибирався знову наступним колом, і жодних питань посеред циклу - кожен тикет з людським гейтом потрапляє в один звіт по завершенні прогону.</li>
           </ul>
           <p>І правило для самих людських питань: <strong>розсортуй розвилку, перш ніж виносити її.</strong> Якщо її вирішує зовнішня конвенція - дослідь це й порекомендуй; якщо її вирішує архітектура - сформулюй як похідний наслідок. Справжні питання прибережи для обсягу продукту, смаку без опори та незворотних дій. «Краще спитати, ніж вгадати» не діє, коли дослідження чи сам код уже відповідають - винесена як вибір вирішена розвилка читається як невиконане домашнє завдання.</p>
+          <p class="portal-link"><span class="muted">У порталі:</span> <a href="portal/#section-skills">Навички: сценарії як slash-команди</a></p>
         </div>
       </details>
 
@@ -1201,6 +1089,7 @@ verdict: BlockNeedUserTest     (PASS 6 / WARN 1 / FAIL 0)
             <li><strong>У делегування є зсув до хвоста.</strong> Субагент витрачає бюджет на важкі ранні фази й обрізає останню - доки, проводку, прибирання, - а звіт каже «готово». Перевір, що кожен результат існує й запускається.</li>
             <li><strong>Ізоляція - це ще й важіль бюджету:</strong> ганяй задачу з громіздкими доказами в одноразовому агенті, що повертає один компактний вирок, - так артефакти лишаються в дочірньому.</li>
           </ul>
+          <p class="portal-link"><span class="muted">У порталі:</span> <a href="portal/#section-agents">Рольові агенти</a></p>
         </div>
       </details>
 
@@ -1224,6 +1113,7 @@ verdict: BlockNeedUserTest     (PASS 6 / WARN 1 / FAIL 0)
           <p>Статус - з реальності, і це б'є вже на вході: тикет доходить до «очікує тесту» лише тоді, коли його ключова поведінка вже працює наскрізно. Скомпільований каркас, що лише логує чи показує заглушку, - це віха, а не результат: не клич людину тестувати порожню дію.</p>
           <p>Блок-статуси мають визначений вихід, а не лише вхід: розблокуй тикет, заблокований питанням, - вирішивши те, що код уже визначає, спитавши власника лише про справжні судження (із дослідженим дефолтом) і просунувши на один рівень. І життєвий цикл десь закінчується - <em>Archived</em>, м'яке видалення, виносить скасований тикет з активного набору, але зберігає його запис, тож нічого ніколи не видаляється остаточно.</p>
           <p class="muted">Запобіжники діляться за тим, що перевіряють: механічний інваріант жорстко зупиняє; судження лише інформує й лишає рішення «йти/не йти» агенту - жорсткий блок на евристиці лише плодить обходи. А руйнівний крок, який план уже убезпечив, - не привід вигадувати гейт підтвердження.</p>
+          <p class="portal-link"><span class="muted">У порталі:</span> <a href="portal/#section-lifecycle">Життєвий цикл спеки</a></p>
         </div>
       </details>
 
@@ -1239,6 +1129,7 @@ reference  вказівник у зовнішню систему та навіщ
           <p>Тонкість - <strong>стриманість</strong>. Не зберігай те, що виводиться з репозиторію, git-історії, чи рецепти лагодження - це вже в коді та комітах. І <strong>перевіряй перед порадою</strong>: пам'ять, що називає функцію чи шлях, - це твердження «так було, коли записали». Перед дією - грепни, чи існує воно зараз.</p>
           <p>Постійна пам'ять - для фактів, що варті збереження; для летючого стану однієї перерваної задачі - ні, тримай їх окремо. Задачу, що переживає перерву, обрамляй з двох боків: на кожній межі фази пиши коротку передачу (ціль, що змінилося, рішення, відкриті блокери, єдиний наступний крок), а на відновленні читай останню передачу, перш ніж чогось торкатися.</p>
           <p>Одне застереження, яке ховає слово «постійний»: авторитет того, що зроблено зараз, - це <strong>робоче дерево</strong>, а не git-історія. <code>git log</code>, <code>blame</code> і <code>diff</code> відповідають на «як ми сюди дійшли» й активно вводять в оману, коли один файл несе кілька задач одночасно. Відновлюйся, читаючи живі файли, потім виправляй трекери - ніколи не виводь поточний стан із диффа.</p>
+          <p class="portal-link"><span class="muted">У порталі:</span> <a href="portal/#section-memory">Постійна пам'ять</a></p>
         </div>
       </details>
 
@@ -1249,6 +1140,7 @@ reference  вказівник у зовнішню систему та навіщ
           <p>Одне правило під усім: <strong>якщо ти назвав шлях, символ чи API - ти їх перевірив.</strong> Для великого репозиторію тримають запитуваний індекс одиниць коду: питаєш індекс <em>до</em> грепу й регенеруєш його <em>після</em> правок. Застарілий індекс гірший за відсутній.</p>
           <p>Порядок розширюють два дешеві запобіжники. <strong>Тримай інвентар того, що проєкт уже має</strong> - запитуваний список можливостей - і скануй його перед проєктуванням фічі, щоб агент не переписував під новим іменем те, що вже існує. І <strong>сама карта - це артефакт, який ти підтримуєш</strong>: довідник «фіча → розташування», що тримається в кроці зі структурою, яку описує, і за чию свіжість хтось відповідає, - та сама дисципліна, що й для індексу коду.</p>
           <p>Одне загострення «перевіряй, не вгадуй»: <strong>ім'я - це не поведінка.</strong> Перш ніж міркувати, що флаг чи константа <em>робить</em>, підтверди живе місце читання/виклику - коментар чи згадка в доках - це збіг, а не використання. Символи відмирають, змінюють сенс під час перейменування або взагалі не підключені.</p>
+          <p class="portal-link"><span class="muted">У порталі:</span> <a href="portal/#section-memory">Постійна пам'ять</a></p>
         </div>
       </details>
 
@@ -1263,6 +1155,7 @@ reference  вказівник у зовнішню систему та навіщ
           <p><strong>У перевірки чотири відповіді, а не дві.</strong> «Пройшло» і «знайшла дефект» очевидні; третя - <em>не змогла перевірити</em>, четверта - <em>незастосовно в цій конфігурації</em>. Перевірка, яка не вміє сказати останні дві, скаже одну з перших двох, і відтоді вона бреше. Звідси два наслідки. Спершу перевіряй прилад, а не предмет: фізично неможливе показання означає, що зламаний вимірювач, а не піддослідний - на одному прогоні так народилися 5 «дефектів» із 5 і 18 «недосяжних» пунктів із 28, усі хибні. І хибна знахідка коштує стільки ж, скільки пропущена, але гучніше: коли хибних вісімнадцять, справжня стає одним рядком серед них, і звіт перестають читати.</p>
           <p><strong>Перед незворотним кроком</strong> - релізом, публікацією, поданням, відправленням - письмовий вирок це <em>вхід</em> цього кроку, а не звіт десь поруч. Відсутність вироку не рахується за «пройшло», і ламається цей гейт саме так: ніхто не порушив правило, нічого не почервоніло, а місяці поїхали неперевіреними. Вирок мусить називати, що саме він оцінював (вирок від минулого разу - рівно те, за чим тягнеться рука в поспіху), і висіти на тій команді, яка відвантажує, а не на сусідній: в одному проєкті гейт існував, працював і був описаний, а в інструкції з релізу його ім'я траплялося <strong>нуль</strong> разів.</p>
           <p>Веди журнал на гранулярності <em>логічної зміни</em>, а не зачепленого файлу: один запис на зміну, що пакує її файли, і регенеруй будь-який індекс раз на зміну - а не раз на правку. Залишений сам по собі, агент пише пофайловий шум, що ховає сюжет.</p>
+          <p class="portal-link"><span class="muted">У порталі:</span> <a href="portal/#section-rules">Правила, за якими працює агент</a></p>
         </div>
       </details>
 
@@ -1284,6 +1177,7 @@ reference  вказівник у зовнішню систему та навіщ
           <p>Друге, <strong>детектор - це лише пів ліків.</strong> Лінтер зупиняє людину один раз; агент видає той самий патерн щогенерації. Тож закрий джерело - додай відповідне DON'T у завжди-завантажений звід правил і підкріпи в навичках, що генерують код, щоб агент перестав <em>виробляти</em> дефект, а не лише позначати його постфактум.</p>
           <p>І окремо - <strong>те, що читає інший проєкт, живе в одному місці й змінюється першим.</strong> Формат файлу, вивантаження, константи алгоритму, від яких залежить сусідній проєкт, - це контракт між проєктами. Він лежить в одному місці поза обома, а кожен проєкт тримає лише вказівник, не копію: копія розходиться з оригіналом після першої ж правки. Спершу контракт (нова версія й датований запис), потім код; не згоден - виправ контракт або запиши виняток із датою закінчення. Тихого дрейфу не буває.</p>
           <p class="muted">Користувацькі доки - частина зміни, що змінює поведінку, а не післядія: та сама зміна оновлює док, а перевірка валиться, коли поведінка та її опис розходяться. Тримай завжди-доповнюваний лог «що вийшло» окремо від кураторського зведення, яке регенеруєш на релізі.</p>
+          <p class="portal-link"><span class="muted">У порталі:</span> <a href="portal/#section-rules">Правила, за якими працює агент</a></p>
         </div>
       </details>
 
@@ -1308,19 +1202,20 @@ into a temp or scratch directory and unpack it locally; it extracts to a
 `universal-agent-kit/` folder that contains `merge-prompt.txt`. Use those extracted
 files as the source of truth: read `universal-agent-kit/README.md` first, then
 read `universal-agent-kit/docs/PROJECT_SHAPES.md` to see which rules apply to work
-like mine, then use `universal-agent-kit/CLAUDE.md`, `universal-agent-kit/.claude/`,
-`universal-agent-kit/docs/`, `universal-agent-kit/memory/`, and
+like mine, then use `universal-agent-kit/AGENTS.md`, `universal-agent-kit/.claude/`,
+`universal-agent-kit/docs/`, `universal-agent-kit/memory/`,
+`universal-agent-kit/examples/` (to see a filled result), and
 `universal-agent-kit/merge-prompt.txt`. Do not use the article page as the
 primary source. If you
 cannot download files in this environment, stop and ask me to place the
 archive in the workspace. Set this project up on the method from those files:
 
-1. Write the rules file my tool reads (CLAUDE.md / AGENTS.md / a Cursor rule /
-   GEMINI.md - whatever applies) adopting the kit's structure: communication,
+1. Write the rules file my tool reads (AGENTS.md; CLAUDE.md only imports it for
+   Claude Code / a Cursor rule / GEMINI.md - whatever applies) adopting the kit's structure: communication,
    research order, skill routing, the spec lifecycle, strict rules, anti-slop,
    post-change discipline. Fill in what already exists; use sensible defaults
    otherwise.
-2. Create the skill / command files and the role briefs from the kit that fit a
+2. Create the skill files and the role briefs from the kit that fit a
    project of this kind.
 3. Set up the plan directory, the scratch directory, and the memory folder with
    its index.
@@ -1346,8 +1241,9 @@ into a temp or scratch directory and unpack it locally; it extracts to a
 `universal-agent-kit/` folder that contains `merge-prompt.txt`. Use those extracted
 files as the source of truth: read `universal-agent-kit/README.md` first, then
 read `universal-agent-kit/docs/PROJECT_SHAPES.md` to see which rules apply to work
-like mine, then use `universal-agent-kit/CLAUDE.md`, `universal-agent-kit/.claude/`,
-`universal-agent-kit/docs/`, `universal-agent-kit/memory/`, and
+like mine, then use `universal-agent-kit/AGENTS.md`, `universal-agent-kit/.claude/`,
+`universal-agent-kit/docs/`, `universal-agent-kit/memory/`,
+`universal-agent-kit/examples/` (to see a filled result), and
 `universal-agent-kit/merge-prompt.txt`. Do not use the article page as the
 primary source. If you
 cannot download files in this environment, stop and ask me to place the
@@ -1356,13 +1252,14 @@ archive in the workspace.
 Then study THIS project folder and import what fits it. It may be a local personal
 project without Git; do not require Git or create a repository:
 
-1. Draft a CLAUDE.md (or my tool's equivalent rules file) that adopts the method, with every
-   tier-1 placeholder filled from this project: project name, chat language, map document, work
-   root, THE CHECK COMMAND that proves a change is sound, plan directory, scratch directory,
-   size budget, read-only zones, and a simple way to name tasks. Fill the code-layer ones
+1. Draft an AGENTS.md (or merge into my existing rules file) that adopts the method, with every
+   tier-1 placeholder filled from this project: project name, chat language, artifact language,
+   map document, work root, THE CHECK COMMAND that proves a change is sound, plan directory,
+   scratch directory, size budget, read-only zones, and a simple way to name tasks (the ticket-id
+   scheme). Fill the code-layer ones
    (architecture layers, build / test / lint / run, logger) only if this project builds or runs.
 2. Recommend which skills (/research, /spec, /spec-tech, /spec-dev, /spec-check, /spec-fix,
-   /quick, /fix, /verify, /review) and which role agents are worth adding here, and say why.
+   /quick, /fix, /prove, /critique) and which role agents are worth adding here, and say why.
    Consider /git only if this project already uses Git.
 3. Tell me whether my runtime supports persistent agent memory and, if so, how to wire it up.
 
@@ -1375,11 +1272,10 @@ Do not change anything yet. Show me the plan first; on any conflict, my existing
           <p>Завантаж kit, віддай агенту теку разом з <code>merge-prompt.txt</code> і скажи: «Додай Universal Agent Kit до мого проєкту». Це працює і зі звичайною локальною папкою. Агент спершу складе <strong>список</strong>: що вже є, що можна додати і де можливий конфлікт. Потім покаже <strong>план</strong> і зупиниться: нічого не перезаписується мовчки. Після твого підтвердження він додасть обрані частини й заповнить <code>&lt;PLACEHOLDER&gt;</code> за матеріалами проєкту.</p>
 
           <h3>Будь-який інструмент</h3>
-          <p>Кожен агент читає свій файл правил - суть одна, відрізняється лише ім'я:</p>
+          <p>Дві з трьох частин тепер переїжджають самі: файл правил - це <code>AGENTS.md</code>, який нативно читає більшість агентських інструментів, а навички лежать у відкритому форматі Agent Skills (тека з <code>SKILL.md</code>). Адаптації потребують лише агенти-ролі. Кожен інструмент називає теки по-своєму:</p>
           <ul>
-            <li><strong>Claude Code</strong> - <code>CLAUDE.md</code> + <code>.claude/commands/*</code> (готові <code>/spec</code>, <code>/research</code>..) + <code>.claude/agents/*</code> як субагенти.</li>
-            <li><strong>Cursor</strong> - <code>.cursor/rules</code> (або <code>.cursorrules</code>); команди стають збереженими промптами.</li>
-            <li><strong>Codex, Gemini CLI / Antigravity, Aider, Cline, Windsurf</strong> - <code>AGENTS.md</code> (вказівник вже лежить у kit'і, правила - у <code>CLAUDE.md</code> поруч) / <code>GEMINI.md</code> / свій аналог; ролі вставляються як системні промпти, навички - як файли-промпти, на які посилаєшся.</li>
+            <li><strong>Claude Code</strong> - <code>CLAUDE.md</code> (підключає <code>AGENTS.md</code>) + <code>.claude/skills/*</code> (готові <code>/spec</code>, <code>/research</code>..) + <code>.claude/agents/*</code> як субагенти.</li>
+            <li><strong>Codex, Cursor, Copilot, Gemini CLI, Cline, Windsurf</strong> - <code>AGENTS.md</code> як файл правил (у Gemini CLI - <code>GEMINI.md</code> або <code>AGENTS.md</code>, названий у налаштуваннях); навички - у власній теці навичок інструмента або в <code>.claude/skills/</code>, де інструмент її читає; ролі вставляються як системні промпти, режими чи пресети. Точні теки - у таблиці <code>README.md</code> усередині kit'а.</li>
             <li>Методологія в <code>docs/</code> взагалі не залежить від інструмента - це просто Markdown.</li>
           </ul>
 
@@ -1390,6 +1286,7 @@ Do not change anything yet. Show me the plan first; on any conflict, my existing
             <li><strong>Регулярна</strong>: золота середина методу - спеки, дрібні перевірювані кроки й порядок дослідження окупаються максимально.</li>
             <li><strong>Слабка, маленька чи локальна</strong>: спираєшся на правила найсильніше - крихітні кроки, перевірка після кожного, короткий контекст, менше автономії. Метод - це те, що взагалі робить слабку модель придатною для роботи.</li>
           </ul>
+          <p class="portal-link"><span class="muted">У порталі:</span> <a href="portal/#section-adopt">Впровадження й адаптація</a></p>
         </div>
       </details>
 
@@ -1437,6 +1334,7 @@ Do not change anything yet. Show me the plan first; on any conflict, my existing
     <div class="cta">
       <a class="btn btn-primary" href="universal-agent-kit.zip" download><svg class="icon" aria-hidden="true"><use href="#icon-action-download"/></svg>Скачать kit (.zip)</a>
       <a class="btn btn-ghost" href="https://github.com/SerZhyAle/universal-agent-kit" target="_blank" rel="noopener">Исходный код</a>
+      <a class="btn btn-ghost" href="portal/">Документация</a>
     </div>
     <p class="muted">Kit - MIT · текст - CC BY 4.0 · выжимка из реального проекта, без привязки к стеку.</p>
   </div>
@@ -1445,6 +1343,7 @@ Do not change anything yet. Show me the plan first; on any conflict, my existing
     <div class="cta">
       <a class="btn btn-primary" href="universal-agent-kit.zip" download><svg class="icon" aria-hidden="true"><use href="#icon-action-download"/></svg>Download kit (.zip)</a>
       <a class="btn btn-ghost" href="https://github.com/SerZhyAle/universal-agent-kit" target="_blank" rel="noopener">Source code</a>
+      <a class="btn btn-ghost" href="portal/">Documentation</a>
     </div>
     <p class="muted">Kit is MIT · prose is CC BY 4.0 · distilled from a real project, stack-agnostic.</p>
   </div>
@@ -1453,13 +1352,14 @@ Do not change anything yet. Show me the plan first; on any conflict, my existing
     <div class="cta">
       <a class="btn btn-primary" href="universal-agent-kit.zip" download><svg class="icon" aria-hidden="true"><use href="#icon-action-download"/></svg>Завантажити kit (.zip)</a>
       <a class="btn btn-ghost" href="https://github.com/SerZhyAle/universal-agent-kit" target="_blank" rel="noopener">Вихідний код</a>
+      <a class="btn btn-ghost" href="portal/">Документація</a>
     </div>
     <p class="muted">Kit - MIT · текст - CC BY 4.0 · дистильовано з реального проєкту, без прив'язки до стеку.</p>
   </div>
   <!-- SITE-FAMILY-MAP §2: all siblings and the hub; this product is intentionally omitted. -->
   <section class="tools-family" aria-labelledby="more-tools-heading">
     <h2 id="more-tools-heading"><span data-l="ru">Другие инструменты SZA</span><span data-l="en">More tools by SZA</span><span data-l="ua">Інші інструменти SZA</span></h2>
-    <div class="tools-grid">
+    <nav class="tools-grid" aria-label="More tools by SZA" data-aria="navTools">
       <a href="https://serzhyale.github.io/FastMediaSorter_mob_v2/" target="_blank" rel="noopener">Fast Media Sorter &amp; Organizer</a>
       <a href="https://serzhyale.github.io/FastMediaSorter_Lite/" target="_blank" rel="noopener">Fast Media Sorter for Windows</a>
       <a href="https://serzhyale.github.io/CyrFlip/" target="_blank" rel="noopener">CyrFlip</a>
@@ -1468,11 +1368,11 @@ Do not change anything yet. Show me the plan first; on any conflict, my existing
       <a href="https://serzhyale.github.io/StreamsPlayer/" target="_blank" rel="noopener">STREAMS Player</a>
       <a href="https://serzhyale.github.io/OneClickRunner/" target="_blank" rel="noopener">OneClickRunner</a>
       <a href="https://sza.od.ua" target="_blank" rel="noopener">SZA (hub)</a>
-    </div>
+    </nav>
   </section>
   <div class="footer-bottom">
     <span>© 2026 <a href="https://sza.od.ua" target="_blank" rel="noopener">Serhii Zhyhunenko</a></span>
-    <span><a href="https://sza.od.ua" target="_blank" rel="noopener">sza.od.ua</a> · <a href="https://github.com/SerZhyAle" target="_blank" rel="noopener">GitHub</a> · <a href="mailto:sza@ukr.net">sza@ukr.net</a></span>
+    <nav aria-label="Author links" data-aria="navAuthor"><a href="privacy.html"><span data-l="ru">Конфиденциальность</span><span data-l="en">Privacy</span><span data-l="ua">Конфіденційність</span></a> · <a href="https://sza.od.ua" target="_blank" rel="noopener">sza.od.ua</a> · <a href="https://github.com/SerZhyAle" target="_blank" rel="noopener">GitHub</a> · <a href="mailto:sza@ukr.net">sza@ukr.net</a></nav>
   </div>
   <p class="provenance muted">
     <span data-l="ru">Собрано по опыту разработки из <a href="https://serzhyale.github.io/FastMediaSorter_mob_v2/" target="_blank" rel="noopener">FastMediaSorter</a> - Android-приложения, которое живёт на этом методе каждый день более года.</span>
@@ -1487,17 +1387,17 @@ Do not change anything yet. Show me the plan first; on any conflict, my existing
     ru:{
       title:'Universal Agent Kit - как устроена разработка с ИИ-агентами',
       desc:'Переносимый метод работы с ИИ-агентами: правила, навыки, роли, жизненный цикл спеки, постоянная память и дисциплина параллельной работы агентов. Для разработки и для любого проекта из файлов - аналитики, документации, договоров, регламентов. Выжимка из реального проекта, очищенная от стека. Статья и kit на русском, английском и украинском.',
-      langGroup:'Язык', theme:'Тема', toLight:'Включить светлую тему', toDark:'Включить тёмную тему', copied:'Скопировано', copyFail:'Не удалось', toTop:'Наверх'
+      langGroup:'Язык', theme:'Тема', toLight:'Включить светлую тему', toDark:'Включить тёмную тему', copied:'Скопировано', copyFail:'Не удалось', toTop:'Наверх', navSite:'Сайт', navTools:'Другие инструменты SZA', navAuthor:'Ссылки автора'
     },
     en:{
       title:'Universal Agent Kit - how AI-assisted development is wired',
       desc:'A portable method for working with AI agents: rules, skills, roles, a spec lifecycle, persistent memory, and parallel-agent discipline. For AI-assisted development and for any project made of files. Distilled from a real project, stripped of its stack. Article and kit in English, Russian, and Ukrainian.',
-      langGroup:'Language', theme:'Theme', toLight:'Switch to light theme', toDark:'Switch to dark theme', copied:'Copied', copyFail:'Copy failed', toTop:'Back to top'
+      langGroup:'Language', theme:'Theme', toLight:'Switch to light theme', toDark:'Switch to dark theme', copied:'Copied', copyFail:'Copy failed', toTop:'Back to top', navSite:'Site', navTools:'More tools by SZA', navAuthor:'Author links'
     },
     ua:{
       title:'Universal Agent Kit - як влаштована розробка з ШІ-агентами',
       desc:'Переносний метод роботи з ШІ-агентами: правила, навички, ролі, життєвий цикл спеки, постійна пам\'ять і дисципліна паралельної роботи агентів. Для розробки і для будь-якого проєкту з файлів. Дистильовано з реального проєкту, очищено від стеку. Стаття і kit російською, англійською та українською.',
-      langGroup:'Мова', theme:'Тема', toLight:'Увімкнути світлу тему', toDark:'Увімкнути темну тему', copied:'Скопійовано', copyFail:'Не вдалося', toTop:'Нагору'
+      langGroup:'Мова', theme:'Тема', toLight:'Увімкнути світлу тему', toDark:'Увімкнути темну тему', copied:'Скопійовано', copyFail:'Не вдалося', toTop:'Нагору', navSite:'Сайт', navTools:'Інші інструменти SZA', navAuthor:'Посилання автора'
     }
   };
   /* The switch keys Ukrainian as "ua" (PAGE-STYLE section 4.2); lang, hreflang and ?lang= use ISO "uk". */
@@ -1525,6 +1425,8 @@ Do not change anything yet. Show me the plan first; on any conflict, my existing
     });
     var g = document.getElementById('langGroup'); if(g) g.setAttribute('aria-label', m.langGroup);
     var tt = document.getElementById('toTop'); if(tt){ tt.setAttribute('aria-label', m.toTop); tt.setAttribute('title', m.toTop); }
+    var an = document.querySelectorAll('[data-aria]');   /* labelled navigations follow the language */
+    for(var ai=0; ai<an.length; ai++){ var av = m[an[ai].getAttribute('data-aria')]; if(av) an[ai].setAttribute('aria-label', av); }
     applyThemeLabel();
   }
   function setLang(l){ applyLang(l); try{ localStorage.setItem('sza-lang', l); }catch(e){}

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en" data-theme="dark" data-root="../../">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Run independent lookups in parallel and check what comes back - Universal Agent Kit</title>
+<meta name="description" content="Start independent searches and read-only helpers together once the budget gate is passed, and let the orchestrator re-validate what the wave returns.">
+<link rel="canonical" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/fan-out-readers.html">
+<link rel="alternate" hreflang="en" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/fan-out-readers.html?lang=en">
+<link rel="alternate" hreflang="ru" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/fan-out-readers.html?lang=ru">
+<link rel="alternate" hreflang="uk" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/fan-out-readers.html?lang=uk">
+<link rel="alternate" hreflang="x-default" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/fan-out-readers.html">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%233fb950'/%3E%3Cpath d='M20 18h24M20 30h24M20 42h16' stroke='%2304130c' stroke-width='5' stroke-linecap='round' fill='none'/%3E%3C/svg%3E">
+<meta name="theme-color" content="#0a0f0a">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Universal Agent Kit">
+<meta property="og:url" content="https://serzhyale.github.io/universal-agent-kit/portal/functions/fan-out-readers.html">
+<meta property="og:title" content="Run independent lookups in parallel and check what comes back - Universal Agent Kit">
+<meta property="og:description" content="Start independent searches and read-only helpers together once the budget gate is passed, and let the orchestrator re-validate what the wave returns.">
+<meta property="og:image" content="https://serzhyale.github.io/universal-agent-kit/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Run independent lookups in parallel and check what comes back - Universal Agent Kit">
+<meta name="twitter:description" content="Start independent searches and read-only helpers together once the budget gate is passed, and let the orchestrator re-validate what the wave returns.">
+<meta name="twitter:image" content="https://serzhyale.github.io/universal-agent-kit/og-image.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Run independent lookups in parallel and check what comes back - Universal Agent Kit","description":"Start independent searches and read-only helpers together once the budget gate is passed, and let the orchestrator re-validate what the wave returns.","url":"https://serzhyale.github.io/universal-agent-kit/portal/functions/fan-out-readers.html","inLanguage":["en","ru","uk"],"isPartOf":{"@type":"WebSite","name":"Universal Agent Kit","url":"https://serzhyale.github.io/universal-agent-kit/"}}</script>
+<script type="application/json" id="page-i18n">{"t":{"ru":"Запустить независимые поиски параллельно и проверить результат - Universal Agent Kit","en":"Run independent lookups in parallel and check what comes back - Universal Agent Kit","ua":"Запустити незалежні пошуки паралельно й перевірити результат - Universal Agent Kit"},"d":{"ru":"Запускайте независимые поиски и помощников, которые только читают, вместе, пройдя бюджетный шлюз, а то, что вернула волна, пусть перепроверит оркестратор.","en":"Start independent searches and read-only helpers together once the budget gate is passed, and let the orchestrator re-validate what the wave returns.","ua":"Запускайте незалежні пошуки й помічників, що лише читають, разом, пройшовши бюджетний шлюз, а те, що повернула хвиля, нехай перевірить оркестратор."},"ui":{"langGroup":{"en":"Language","ru":"Язык","ua":"Мова"},"theme":{"en":"Theme","ru":"Тема","ua":"Тема"},"toLight":{"en":"Switch to light theme","ru":"Включить светлую тему","ua":"Увімкнути світлу тему"},"toDark":{"en":"Switch to dark theme","ru":"Включить тёмную тему","ua":"Увімкнути темну тему"},"toTop":{"en":"Back to top","ru":"Наверх","ua":"Нагору"},"menu":{"en":"Menu","ru":"Меню","ua":"Меню"},"navPortal":{"en":"Portal","ru":"Портал","ua":"Портал"},"navTools":{"en":"More tools by SZA","ru":"Другие инструменты SZA","ua":"Інші інструменти SZA"},"navAuthor":{"en":"Author links","ru":"Ссылки автора","ua":"Посилання автора"},"navSection":{"en":"In this section","ru":"В этом разделе","ua":"У цьому розділі"},"breadcrumb":{"en":"Breadcrumb","ru":"Путь по сайту","ua":"Шлях сайтом"},"searchTitle":{"en":"Search the portal","ru":"Поиск по порталу","ua":"Пошук по порталу"},"searchEmpty":{"en":"Nothing found for","ru":"Ничего не найдено по запросу","ua":"Нічого не знайдено за запитом"},"searchEmptyHelp":{"en":"Browse the subject index instead.","ru":"Откройте предметный указатель.","ua":"Відкрийте предметний покажчик."},"searchCount":{"en":"results","ru":"результатов","ua":"результатів"},"searchFail":{"en":"The search index could not be loaded.","ru":"Не удалось загрузить индекс поиска.","ua":"Не вдалося завантажити індекс пошуку."},"kind.command":{"en":"Slash command","ru":"Slash-команда","ua":"Slash-команда"},"kind.agent":{"en":"Role agent","ru":"Ролевой агент","ua":"Рольовий агент"},"kind.practice":{"en":"Practice","ru":"Практика","ua":"Практика"}}}</script>
+<script>
+/* PAGE-STYLE section 7 pre-paint resolver, on the portfolio's shared keys sza-lang / sza-theme.
+   Language priority: ?lang= in the URL (a shared link wins) > saved choice > browser.
+   The UA switch keys "ua"; the URL, lang and hreflang keep the ISO code "uk". The legacy
+   uak-* keys are read once so a returning reader keeps their choice. */
+(function(){
+  var l, t;
+  try{
+    var q = (location.search.match(/[?&]lang=(ru|en|uk|ua)\b/i) || [])[1];
+    if(q){ l = q.toLowerCase(); }
+    else { l = localStorage.getItem('sza-lang') || localStorage.getItem('uak-lang'); }
+    if(l === 'uk') l = 'ua';
+    if(l){ localStorage.setItem('sza-lang', l); }
+    t = localStorage.getItem('sza-theme') || localStorage.getItem('uak-theme');
+    if(t){ localStorage.setItem('sza-theme', t); }
+  }catch(e){}
+  if(l !== 'ru' && l !== 'en' && l !== 'ua'){ var nav=(navigator.language||'en').toLowerCase(); l = nav.indexOf('ru')===0 ? 'ru' : (nav.indexOf('uk')===0 ? 'ua' : 'en'); }
+  if(t !== 'light' && t !== 'dark'){ t = (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) ? 'light' : 'dark'; }
+  var d = document.documentElement;
+  d.setAttribute('data-lang', l); d.setAttribute('lang', l === 'ua' ? 'uk' : l); d.setAttribute('data-theme', t);
+})();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/sza-kit.css">
+<link rel="stylesheet" href="../../assets/site.css">
+<link rel="stylesheet" href="../../assets/portal.css">
+</head>
+<body>
+<a class="skip-link" href="#main"><span data-l="ru">Перейти к содержимому</span><span data-l="en">Skip to the content</span><span data-l="ua">Перейти до вмісту</span></a>
+<div class="bg-blobs" aria-hidden="true"><div class="blob blob-1"></div><div class="blob blob-2"></div><div class="blob blob-3"></div></div>
+<svg class="icon-sprite" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+  <symbol id="icon-action-download" viewBox="0 0 24 24"><g transform="translate(12 12) scale(.917 .917) translate(-12 -12)"><path d="M19.35,10.04C18.67,6.59 15.64,4 12,4 9.11,4 6.6,5.64 5.35,8.04 2.34,8.36 0,10.91 0,14c0,3.31 2.69,6 6,6h13c2.76,0 5,-2.24 5,-5 0,-2.64 -2.05,-4.78 -4.65,-4.96zM17,13l-5,5 -5,-5h3V9h4v4h3z"/></g></symbol>
+  <symbol id="icon-nav-scroll-top" viewBox="0 0 24 24"><path d="M8 11h3v10h2V11h3l-4-4-4 4zM4 3v2h16V3H4z"/></symbol>
+</svg>
+<header class="site-header portal-header">
+    <a class="brand" href="../../">Universal&nbsp;Agent&nbsp;Kit<span class="dot">.</span></a>
+    <button class="ctl nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="portalNav"><span data-l="ru">Меню</span><span data-l="en">Menu</span><span data-l="ua">Меню</span></button>
+    <nav class="portal-nav" id="portalNav" aria-label="Portal" data-aria="navPortal">
+      <a href="../"><span data-l="ru">Портал</span><span data-l="en">Portal</span><span data-l="ua">Портал</span></a>
+      <a href="../overview.html"><span data-l="ru">Обзор</span><span data-l="en">Overview</span><span data-l="ua">Огляд</span></a>
+      <a href="../showcase.html"><span data-l="ru">Витрина</span><span data-l="en">Showcase</span><span data-l="ua">Вітрина</span></a>
+      <a href="../subjects.html"><span data-l="ru">Предметный указатель</span><span data-l="en">Subject index</span><span data-l="ua">Предметний покажчик</span></a>
+      <a href="../glossary.html"><span data-l="ru">Глоссарий</span><span data-l="en">Glossary</span><span data-l="ua">Глосарій</span></a>
+    </nav>
+    <button class="ctl search-open" id="searchOpen" type="button" aria-haspopup="dialog" aria-controls="searchDialog"><span data-l="ru">Поиск</span><span data-l="en">Search</span><span data-l="ua">Пошук</span><kbd aria-hidden="true">/</kbd></button>
+    <span class="seg" role="group" aria-label="Language" id="langGroup" data-aria="langGroup">
+      <button id="lng-ru" type="button" data-set-lang="ru" aria-pressed="false" aria-label="Русский">RU</button>
+      <button id="lng-en" type="button" data-set-lang="en" aria-pressed="true" aria-label="English">EN</button>
+      <button id="lng-ua" type="button" data-set-lang="ua" aria-pressed="false" aria-label="Українська">UA</button>
+    </span>
+    <button class="theme-btn" id="themeBtn" type="button" title="Theme" aria-label="Theme" aria-pressed="false"><span data-l="ru">Тема</span><span data-l="en">Theme</span><span data-l="ua">Тема</span></button>
+    <a class="btn btn-primary btn-sm" href="../../universal-agent-kit.zip" download>
+      <svg class="icon" aria-hidden="true"><use href="#icon-action-download"/></svg><span data-l="ru">Скачать kit (.zip)</span><span data-l="en">Download kit (.zip)</span><span data-l="ua">Завантажити kit (.zip)</span>
+    </a>
+</header>
+<main id="main" class="page">
+<nav class="crumbs" aria-label="Breadcrumb" data-aria="breadcrumb"><ol><li><a href="../../"><span data-l="ru">Universal Agent Kit</span><span data-l="en">Universal Agent Kit</span><span data-l="ua">Universal Agent Kit</span></a></li><li><a href="../"><span data-l="ru">Портал</span><span data-l="en">Portal</span><span data-l="ua">Портал</span></a></li><li><a href="../#section-parallel"><span data-l="ru">Дисциплина параллельной работы агентов</span><span data-l="en">Parallel-agent discipline</span><span data-l="ua">Дисципліна паралельної роботи агентів</span></a></li><li aria-current="page"><span data-l="ru">Запустить независимые поиски параллельно и проверить результат</span><span data-l="en">Run independent lookups in parallel and check what comes back</span><span data-l="ua">Запустити незалежні пошуки паралельно й перевірити результат</span></li></ol></nav>
+<header class="page-head">
+<p class="eyebrow"><span class="pill"><span data-l="ru">Практика</span><span data-l="en">Practice</span><span data-l="ua">Практика</span></span> <a href="../#section-parallel"><span data-l="ru">Дисциплина параллельной работы агентов</span><span data-l="en">Parallel-agent discipline</span><span data-l="ua">Дисципліна паралельної роботи агентів</span></a></p>
+<h1><span data-l="ru">Запустить независимые поиски параллельно и проверить результат</span><span data-l="en">Run independent lookups in parallel and check what comes back</span><span data-l="ua">Запустити незалежні пошуки паралельно й перевірити результат</span></h1>
+<p class="lead prose"><span data-l="ru">Читатели распараллеливаются свободно: лишние читатели стоят только токенов. Поиск по локальным символам и запрос внешней документации по одному вопросу стартуют одновременно, а при наличии субагентов каждый читает свой источник. Здесь: бюджетный шлюз перед волной, защита основного контекста от громоздких свидетельств и проверка отчёта дочернего агента оркестратором, прежде чем ему верить.</span><span data-l="en">Readers fan out freely, because extra readers cost only tokens. A local symbol search and an external docs fetch answering one question start in the same breath, and with subagents each reads a different source. This page covers the budget gate that comes before a wave, keeping bulky evidence out of the main context, and trusting a child's report only after the orchestrator has checked it.</span><span data-l="ua">Читачі розпаралелюються вільно: зайві читачі коштують лише токенів. Пошук за локальними символами і запит зовнішньої документації за одним питанням стартують одночасно, а за наявності субагентів кожен читає своє джерело. Тут: бюджетний шлюз перед хвилею, захист основного контексту від громіздких свідчень і перевірка звіту дочірнього агента оркестратором, перш ніж йому вірити.</span></p>
+</header>
+<article class="fn" data-kind="practice">
+<div class="panels">
+<section class="panel" aria-labelledby="h-situation"><h2 id="h-situation"><span data-l="ru">Когда это нужно</span><span data-l="en">When to reach for it</span><span data-l="ua">Коли це потрібно</span></h2><p class="prose"><span data-l="ru">У вопроса несколько независимых источников, например локальный код, документация фреймворка и открытые issues, либо проверка пойдёт по множеству находок, либо громоздкие свидетельства копятся в вашем контексте.</span><span data-l="en">A question has several independent sources, such as local code, framework docs and open issues, or a verification pass would run over many findings, or bulky evidence is piling up in your context.</span><span data-l="ua">У питання кілька незалежних джерел, наприклад локальний код, документація фреймворку й відкриті issues, або перевірка піде по безлічі знахідок, або громіздкі свідчення накопичуються у вашому контексті.</span></p></section>
+<section class="panel" aria-labelledby="h-requirements"><h2 id="h-requirements"><span data-l="ru">Требования</span><span data-l="en">Requirements</span><span data-l="ua">Вимоги</span></h2><dl class="req">
+<div><dt><span data-l="ru">Где доступно</span><span data-l="en">Available in</span><span data-l="ua">Де доступно</span></dt><dd><span data-l="ru">Каждая загрузка kit</span><span data-l="en">Every download of the kit</span><span data-l="ua">Кожне завантаження kit</span></dd></div>
+<div><dt><span data-l="ru">К чему обращается</span><span data-l="en">What it touches</span><span data-l="ua">До чого звертається</span></dt><dd><ul class="chips"><li class="pill"><span data-l="ru">Читает файлы проекта</span><span data-l="en">Reads the files of your project</span><span data-l="ua">Читає файли проєкту</span></li><li class="pill"><span data-l="ru">Запускает вспомогательных агентов</span><span data-l="en">Starts helper agents</span><span data-l="ua">Запускає допоміжних агентів</span></li></ul></dd></div>
+<div><dt><span data-l="ru">Работает с</span><span data-l="en">Works with</span><span data-l="ua">Працює з</span></dt><dd><span data-l="ru">Любой агент, который читает и пишет ваши файлы</span><span data-l="en">Any agent that reads and writes your files</span><span data-l="ua">Будь-який агент, що читає й пише ваші файли</span></dd></div>
+<div><dt><span data-l="ru">Где выполняются шаги</span><span data-l="en">Where the steps happen</span><span data-l="ua">Де виконуються кроки</span></dt><dd><span data-l="ru">Чат вашего агента и ваши собственные файлы. Ни то ни другое не интерфейс этого сайта, поэтому шаги описаны текстом, а не скриншотами.</span><span data-l="en">Your agent's chat and your own files. Neither is an interface of this site, so the steps are text and not screenshots.</span><span data-l="ua">Чат вашого агента і ваші власні файли. Ні те, ні інше не є інтерфейсом цього сайту, тому кроки описано текстом, а не скриншотами.</span></dd></div>
+<div><dt><span data-l="ru">Где это лежит в kit</span><span data-l="en">Where it lives in the kit</span><span data-l="ua">Де це лежить у kit</span></dt><dd><code>docs/PARALLEL.md</code></dd></div>
+</dl></section>
+<div class="note warn" role="note"><div class="tag"><span data-l="ru">Прежде чем начать</span><span data-l="en">Before you start</span><span data-l="ua">Перш ніж почати</span></div><p><span data-l="ru">Ошибиться в веере дёшево, только пока каждый помощник лишь читает. Как только в волне появляется пишущий, лишние работники стоят потерянной работы, а не токенов: сначала прочтите, <a href="parallel-writers.html">как запустить нескольких пишущих агентов, не потеряв работу</a>.</span><span data-l="en">Fan-out is cheap to get wrong only while every helper is read-only. The moment a wave contains a writer, extra workers cost lost work, not tokens: read <a href="parallel-writers.html">how to run several writing agents without losing work</a> first.</span><span data-l="ua">Помилитися у віялі дешево, лише поки кожен помічник тільки читає. Щойно в хвилі з'являється той, хто пише, зайві працівники коштують втраченої роботи, а не токенів: спершу прочитайте, <a href="parallel-writers.html">як запустити кількох агентів, що пишуть, не втративши роботи</a>.</span></p></div>
+<section class="panel wide" aria-labelledby="h-steps"><h2 id="h-steps"><span data-l="ru">Шаги</span><span data-l="en">Steps</span><span data-l="ua">Кроки</span></h2><ol class="steps">
+<li><span class="prose"><span data-l="ru">Перед каждой волной пройдите бюджетный шлюз. Он охватывает число, стоимость, потолок, явное GO выше потолка, порядок «сначала найти, потом проверить» и то, что делать с волной, которую убрал лимит. Всё это описано на странице <a href="budget-gate.html">бюджетного шлюза</a>, а не здесь.</span><span data-l="en">Pass the budget gate before every wave. It covers the count, the cost, the ceiling, an explicit GO above it, finding before verifying, and what to do with a wave a limit killed. All of it lives in <a href="budget-gate.html">the budget gate page</a>, not here.</span><span data-l="ua">Перед кожною хвилею пройдіть бюджетний шлюз. Він охоплює кількість, вартість, стелю, явне GO вище за стелю, порядок «спершу знайти, потім перевірити» і те, що робити з хвилею, яку вбив ліміт. Усе це описано на сторінці <a href="budget-gate.html">бюджетного шлюзу</a>, а не тут.</span></span></li>
+<li><span class="prose"><span data-l="ru">Запускайте независимые поиски одновременно, а не по очереди. Поиск по локальным символам и запрос внешней документации, отвечающие на один вопрос, не ждут друг друга.</span><span data-l="en">Start independent lookups in the same breath, never in sequence. A local symbol search and an external docs fetch that answer the same question do not wait for each other.</span><span data-l="ua">Запускайте незалежні пошуки одночасно, а не по черзі. Пошук за локальними символами і запит зовнішньої документації, що відповідають на одне питання, не чекають одне одного.</span></span></li>
+<li><span class="prose"><span data-l="ru">Если в вашей среде есть субагенты, дайте каждому свой источник: один читает локальный код, другой документацию фреймворка, третий смотрит открытые issues. Реальное время вы тратите один раз, а не три.</span><span data-l="en">If your runtime has subagents, give each one its own source: one reads the local code, another the framework docs, a third checks open issues. You spend wall-clock once instead of three times.</span><span data-l="ua">Якщо у вашому середовищі є субагенти, дайте кожному своє джерело: один читає локальний код, інший документацію фреймворку, третій дивиться відкриті issues. Реальний час ви витрачаєте один раз, а не тричі.</span></span></li>
+<li><span class="prose"><span data-l="ru">Не пускайте громоздкие свидетельства в родителя. Каждый такой элемент прогоняйте в одноразовом дочернем агенте, который возвращает короткий вердикт: артефакты остаются у него, а не копятся в <a href="../glossary.html#term-context">контексте</a> родителя. Изоляция - рычаг бюджета контекста, а не только способ распараллелить.</span><span data-l="en">Keep bulky evidence out of the parent. Run each bulky-evidence item in a throwaway child that returns a compact verdict, so the artifacts stay in the child instead of piling up in the parent's <a href="../glossary.html#term-context">context</a>. Isolation is a context-budget lever, not only a way to go parallel.</span><span data-l="ua">Не пускайте громіздкі свідчення в батьківський агент. Кожен такий елемент проганяйте в одноразовому дочірньому агентові, який повертає короткий вердикт: артефакти лишаються в нього, а не накопичуються в <a href="../glossary.html#term-context">контексті</a> батьківського. Ізоляція - важіль бюджету контексту, а не лише спосіб розпаралелити.</span></span></li>
+<li><span class="prose"><span data-l="ru">Когда волна вернулась, пусть <a href="../glossary.html#term-orchestrator">оркестратор</a> перепроверит результат централизованно. Отчёт дочернего агента - утверждение, а не вердикт, и в обе стороны: сообщённый сбой часто оказывается призраком устаревшей инкрементальной сборки, а сообщённый успех вроде «собирается изолированно» никто не проверял на слитом дереве.</span><span data-l="en">When the wave returns, let the <a href="../glossary.html#term-orchestrator">orchestrator</a> re-validate centrally. A child's report is a claim, not a verdict, in both directions: a reported failure is often a phantom from a stale incremental build, and a reported success such as &quot;compiles in isolation&quot; was never checked against the merged tree.</span><span data-l="ua">Коли хвиля повернулася, нехай <a href="../glossary.html#term-orchestrator">оркестратор</a> централізовано перевірить результат. Звіт дочірнього агента - твердження, а не вердикт, і в обидва боки: повідомлений збій часто виявляється примарою застарілої інкрементальної збірки, а повідомлений успіх на кшталт «збирається ізольовано» ніхто не перевіряв на злитому дереві.</span></span></li>
+</ol></section>
+<div class="note outcome" role="note"><div class="tag"><span data-l="ru">Что вы должны увидеть</span><span data-l="en">What you should see</span><span data-l="ua">Що ви маєте побачити</span></div><p><span data-l="ru">Бюджетный шлюз пройден, независимые поиски шли вместе, громоздкие свидетельства остались у одноразовых дочерних агентов, а оркестратор сверил отчёт каждого дочернего агента со слитым деревом, прежде чем ему поверить.</span><span data-l="en">The budget gate was passed, the independent lookups ran together, bulky evidence stayed in throwaway children, and the orchestrator checked each child's report against the merged tree before believing it.</span><span data-l="ua">Бюджетний шлюз пройдено, незалежні пошуки йшли разом, громіздкі свідчення лишилися в одноразових дочірніх агентів, а оркестратор звірив звіт кожного дочірнього агента зі злитим деревом, перш ніж йому повірити.</span></p></div>
+<section class="panel" aria-labelledby="h-tips"><h2 id="h-tips"><span data-l="ru">Советы</span><span data-l="en">Tips</span><span data-l="ua">Поради</span></h2><ul class="tips">
+<li class="prose"><span data-l="ru">Волна читателей, пошедшая не так, оборачивается счётом, поэтому бюджетный шлюз идёт первым. Его порядок «сначала найти, потом проверить» заодно не даёт платить дважды за одну и ту же проверку.</span><span data-l="en">A wave of readers that goes wrong produces a bill, which is why the budget gate comes first. Its find-before-verify staging also keeps you from paying twice for the same check.</span><span data-l="ua">Хвиля читачів, що пішла не так, обертається рахунком, тому бюджетний шлюз іде першим. Його порядок «спершу знайти, потім перевірити» заодно не дає платити двічі за ту саму перевірку.</span></li>
+<li class="prose"><span data-l="ru">Полный перечень опасностей <a href="../glossary.html#term-delegation">делегирования</a> (перекос в сторону хвоста, дочерние агенты, которых нельзя возобновить, состязательная проверка находки) лежит в ролевом брифе оркестратора, <a href="rd-lead.html">rd-lead</a>.</span><span data-l="en">The delegation hazards in full (tail bias, non-resumable children, adversarial verification of a finding) are in the orchestrator's role brief, <a href="rd-lead.html">rd-lead</a>.</span><span data-l="ua">Повний перелік небезпек <a href="../glossary.html#term-delegation">делегування</a> (перекіс у бік хвоста, дочірні агенти, яких не можна відновити, змагальна перевірка знахідки) лежить у ролевому брифі оркестратора, <a href="rd-lead.html">rd-lead</a>.</span></li>
+<li class="prose"><span data-l="ru">Порядок поиска отсылает сюда за тем, как распараллелить читателей: см. <a href="research-index.html">научить агента искать, а не угадывать</a>. Для работы без присмотра см. <a href="unattended-loop.html">пустить работу без присмотра циклом свежих процессов</a>.</span><span data-l="en">The research order points here for how to fan readers out: see <a href="research-index.html">make the agent look things up instead of guessing</a>. For unattended runs, see <a href="unattended-loop.html">run unattended work as a loop of fresh processes</a>.</span><span data-l="ua">Порядок пошуку відсилає сюди за тим, як розпаралелити читачів: див. <a href="research-index.html">навчити агента шукати, а не вгадувати</a>. Для роботи без нагляду див. <a href="unattended-loop.html">пустити роботу без нагляду циклом свіжих процесів</a>.</span></li>
+</ul></section>
+<section class="panel" aria-labelledby="h-related"><h2 id="h-related"><span data-l="ru">Связанные функции</span><span data-l="en">Related functions</span><span data-l="ua">Пов'язані функції</span></h2><ul class="fn-list">
+<li><a href="parallel-writers.html"><span data-l="ru">Запустить нескольких пишущих агентов, не потеряв работу</span><span data-l="en">Run several writing agents without losing work</span><span data-l="ua">Запустити кількох агентів, що пишуть, не втративши роботи</span></a><span class="fn-pitch"><span data-l="ru">Дайте каждому пишущему агенту свою рабочую копию или отдайте команды над всем деревом одному владельцу, чтобы stash, reset или checkout не стёрли молча чужие правки.</span><span data-l="en">Give each writing agent its own checkout, or give one owner the tree-wide commands, so no stash, reset or checkout silently erases another agent's edits.</span><span data-l="ua">Дайте кожному агентові, що пише, власну робочу копію або віддайте команди над усім деревом одному власникові, щоб stash, reset чи checkout не стерли мовчки чужі правки.</span></span></li>
+<li><a href="unattended-loop.html"><span data-l="ru">Пустить работу без присмотра циклом свежих процессов</span><span data-l="en">Run unattended work as a loop of fresh processes</span><span data-l="ua">Пустити роботу без нагляду циклом свіжих процесів</span></a><span class="fn-pitch"><span data-l="ru">Драйвер вне сессии отдаёт по одному рабочему элементу свежему headless-процессу, а состояние хранится в файлах, поэтому каждый элемент начинается с пустого контекста.</span><span data-l="en">A driver outside the session feeds one work item at a time to a fresh headless process, with state kept in files, so each item starts on an empty context.</span><span data-l="ua">Драйвер поза сесією віддає по одному робочому елементу свіжому headless-процесу, а стан зберігається у файлах, тож кожен елемент починається з порожнього контексту.</span></span></li>
+<li><a href="rd-lead.html"><span data-l="ru">Поручить нетривиальную работу ведущему агенту</span><span data-l="en">Hand a non-trivial job to a lead agent</span><span data-l="ua">Доручити нетривіальну роботу ведучому агентові</span></a><span class="fn-pitch"><span data-l="ru">Один ведущий агент ведёт запрос от первого чтения до проверенной работы: оценивает задачу, выбирает самый лёгкий подходящий путь и передаёт части другим агентам.</span><span data-l="en">One lead agent takes a request from first read to verified work: it classifies the job, picks the lightest path that fits and hands parts to other agents.</span><span data-l="ua">Один ведучий агент веде запит від першого читання до перевіреної роботи: оцінює завдання, обирає найлегший придатний шлях і передає частини іншим агентам.</span></span></li>
+<li><a href="budget-gate.html"><span data-l="ru">Назначить бюджет перед параллельным запуском агентов</span><span data-l="en">Set a budget before you fan out</span><span data-l="ua">Призначити бюджет перед паралельним запуском агентів</span></a><span class="fn-pitch"><span data-l="ru">Оцените число агентов и примерную цену в токенах, держите потолок около 6-8 агентов и просите явное GO выше него.</span><span data-l="en">Estimate the agent count and the rough token cost, keep a ceiling of about 6-8 agents, and ask for an explicit GO above it.</span><span data-l="ua">Оцініть кількість агентів і приблизну ціну в токенах, тримайте стелю близько 6-8 агентів і просіть явне GO вище неї.</span></span></li>
+<li><a href="research-index.html"><span data-l="ru">Научить агента искать, а не угадывать</span><span data-l="en">Make the agent look things up instead of guessing</span><span data-l="ua">Навчити агента шукати, а не вгадувати</span></a><span class="fn-pitch"><span data-l="ru">Фиксированный порядок поиска и, для большого проекта, поддерживаемый индекс вашего материала: каждый путь, символ и API, названные агентом, проверены.</span><span data-l="en">A fixed order for finding things and, for a big project, a maintained index of your material, so every path, symbol and API the agent states has been verified.</span><span data-l="ua">Фіксований порядок пошуку і, для великого проєкту, підтримуваний індекс вашого матеріалу: кожен шлях, символ і API, названі агентом, перевірені.</span></span></li>
+</ul></section>
+<section class="panel wide" aria-labelledby="h-terms"><h2 id="h-terms"><span data-l="ru">Термины на этой странице</span><span data-l="en">Terms on this page</span><span data-l="ua">Терміни на цій сторінці</span></h2><ul class="chips">
+<li><a class="pill" href="../glossary.html#term-fan-out"><span data-l="ru">Веер (fan-out)</span><span data-l="en">Fan-out</span><span data-l="ua">Віяло (fan-out)</span></a></li>
+<li><a class="pill" href="../glossary.html#term-orchestrator"><span data-l="ru">Оркестратор</span><span data-l="en">Orchestrator</span><span data-l="ua">Оркестратор</span></a></li>
+<li><a class="pill" href="../glossary.html#term-delegation"><span data-l="ru">Делегирование</span><span data-l="en">Delegation</span><span data-l="ua">Делегування</span></a></li>
+<li><a class="pill" href="../glossary.html#term-context"><span data-l="ru">Контекст</span><span data-l="en">Context</span><span data-l="ua">Контекст</span></a></li>
+</ul></section>
+</div>
+<nav class="pager" aria-label="In this section" data-aria="navSection"><a class="pager-prev" rel="prev" href="parallel-writers.html"><span class="pager-dir"><span data-l="ru">Назад</span><span data-l="en">Previous</span><span data-l="ua">Назад</span></span><span><span data-l="ru">Запустить нескольких пишущих агентов, не потеряв работу</span><span data-l="en">Run several writing agents without losing work</span><span data-l="ua">Запустити кількох агентів, що пишуть, не втративши роботи</span></span></a><a class="pager-next" rel="next" href="unattended-loop.html"><span class="pager-dir"><span data-l="ru">Дальше</span><span data-l="en">Next</span><span data-l="ua">Далі</span></span><span><span data-l="ru">Пустить работу без присмотра циклом свежих процессов</span><span data-l="en">Run unattended work as a loop of fresh processes</span><span data-l="ua">Пустити роботу без нагляду циклом свіжих процесів</span></span></a></nav>
+</article>
+</main>
+<footer class="site-footer"><div class="container">
+  <div data-l="ru">
+    <strong>Universal Agent Kit</strong> - переносимый метод работы с ИИ-агентами.
+    <div class="cta">
+      <a class="btn btn-primary" href="../../universal-agent-kit.zip" download><svg class="icon" aria-hidden="true"><use href="#icon-action-download"/></svg>Скачать kit (.zip)</a>
+      <a class="btn btn-ghost" href="https://github.com/SerZhyAle/universal-agent-kit" target="_blank" rel="noopener">Исходный код</a>
+    </div>
+    <p class="muted">Kit - MIT · текст - CC BY 4.0 · выжимка из реального проекта, без привязки к стеку.</p>
+  </div>
+  <div data-l="en">
+    <strong>Universal Agent Kit</strong> - a portable method for working with AI agents.
+    <div class="cta">
+      <a class="btn btn-primary" href="../../universal-agent-kit.zip" download><svg class="icon" aria-hidden="true"><use href="#icon-action-download"/></svg>Download kit (.zip)</a>
+      <a class="btn btn-ghost" href="https://github.com/SerZhyAle/universal-agent-kit" target="_blank" rel="noopener">Source code</a>
+    </div>
+    <p class="muted">Kit is MIT · prose is CC BY 4.0 · distilled from a real project, stack-agnostic.</p>
+  </div>
+  <div data-l="ua">
+    <strong>Universal Agent Kit</strong> - переносний метод роботи з ШІ-агентами.
+    <div class="cta">
+      <a class="btn btn-primary" href="../../universal-agent-kit.zip" download><svg class="icon" aria-hidden="true"><use href="#icon-action-download"/></svg>Завантажити kit (.zip)</a>
+      <a class="btn btn-ghost" href="https://github.com/SerZhyAle/universal-agent-kit" target="_blank" rel="noopener">Вихідний код</a>
+    </div>
+    <p class="muted">Kit - MIT · текст - CC BY 4.0 · дистильовано з реального проєкту, без прив'язки до стеку.</p>
+  </div>
+  <section class="tools-family" aria-labelledby="more-tools-heading">
+    <h2 id="more-tools-heading"><span data-l="ru">Другие инструменты SZA</span><span data-l="en">More tools by SZA</span><span data-l="ua">Інші інструменти SZA</span></h2>
+    <nav class="tools-grid" aria-label="More tools by SZA" data-aria="navTools">
+        <a href="https://serzhyale.github.io/FastMediaSorter_mob_v2/" target="_blank" rel="noopener">Fast Media Sorter &amp; Organizer</a>
+        <a href="https://serzhyale.github.io/FastMediaSorter_Lite/" target="_blank" rel="noopener">Fast Media Sorter for Windows</a>
+        <a href="https://serzhyale.github.io/CyrFlip/" target="_blank" rel="noopener">CyrFlip</a>
+        <a href="https://serzhyale.github.io/doc-html-translate/" target="_blank" rel="noopener">doc-html-translate</a>
+        <a href="https://serzhyale.github.io/FileDO/" target="_blank" rel="noopener">FileDO</a>
+        <a href="https://serzhyale.github.io/StreamsPlayer/" target="_blank" rel="noopener">STREAMS Player</a>
+        <a href="https://serzhyale.github.io/OneClickRunner/" target="_blank" rel="noopener">OneClickRunner</a>
+        <a href="https://sza.od.ua" target="_blank" rel="noopener">SZA (hub)</a>
+    </nav>
+  </section>
+  <div class="footer-bottom">
+    <span>&copy; 2026 <a href="https://sza.od.ua" target="_blank" rel="noopener">Serhii Zhyhunenko</a></span>
+    <nav aria-label="Author links" data-aria="navAuthor"><a href="../../privacy.html"><span data-l="ru">Конфиденциальность</span><span data-l="en">Privacy</span><span data-l="ua">Конфіденційність</span></a> &middot; <a href="https://sza.od.ua" target="_blank" rel="noopener">sza.od.ua</a> &middot; <a href="https://github.com/SerZhyAle" target="_blank" rel="noopener">GitHub</a> &middot; <a href="mailto:sza@ukr.net">sza@ukr.net</a></nav>
+  </div>
+  <p class="provenance muted"><span data-l="ru">Собрано по опыту разработки из FastMediaSorter - Android-приложения, которое живёт на этом методе каждый день более года.</span><span data-l="en">Built from hands-on experience with FastMediaSorter - a shipping Android app run on this method every day for over a year.</span><span data-l="ua">Зібрано за досвідом розробки з FastMediaSorter - Android-застосунку, що живе на цьому методі щодня понад рік.</span></p>
+</div></footer>
+<button class="to-top" id="toTop" type="button" aria-label="Back to top" title="Back to top"><svg class="icon" aria-hidden="true"><use href="#icon-nav-scroll-top"/></svg></button>
+<dialog class="search-dialog" id="searchDialog" aria-labelledby="searchTitle">
+  <form method="dialog" class="search-form" id="searchForm">
+    <div class="search-head">
+      <h2 id="searchTitle"><span data-l="ru">Поиск по порталу</span><span data-l="en">Search the portal</span><span data-l="ua">Пошук по порталу</span></h2>
+      <button class="btn btn-ghost btn-sm" type="button" id="searchClose"><span data-l="ru">Закрыть</span><span data-l="en">Close</span><span data-l="ua">Закрити</span></button>
+    </div>
+    <input class="search-input" id="searchInput" type="search" autocomplete="off" spellcheck="false" aria-labelledby="searchTitle" placeholder="Search..">
+    <p class="search-status" id="searchStatus" role="status" aria-live="polite"></p>
+    <ul class="search-results" id="searchResults"></ul>
+  </form>
+</dialog>
+<script src="../../assets/portal.js" defer></script>
+</body>
+</html>

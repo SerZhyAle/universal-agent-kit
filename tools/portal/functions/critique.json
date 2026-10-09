@@ -1,0 +1,89 @@
+{
+  "id": "critique",
+  "title": {
+    "en": "Critique a change and get findings by severity",
+    "ru": "Провести ревью изменения и получить замечания по серьёзности",
+    "ua": "Провести рев'ю зміни й отримати зауваження за серйозністю"
+  },
+  "pitch": {
+    "en": "A terse review of a diff, a document, a dataset or a contract: findings first, highest severity on top, each with a place and a concrete fix.",
+    "ru": "Сжатое ревью diff, документа, набора данных или договора: сначала замечания, самые серьёзные выше, у каждого место и конкретная правка.",
+    "ua": "Стисле рев'ю diff, документа, набору даних чи договору: спершу зауваження, найсерйозніші вгорі, у кожного місце й конкретна правка."
+  },
+  "lead": {
+    "en": "`/critique` reads the change and enough surrounding code to judge it, checks six dimensions in order and reports findings from `bug` down to `q`. It works on code and, with the dimensions mapped, on a document, a dataset or a contract. It closes with the single most important thing to address before merge. The default scope is the current diff or recently changed files, not the whole repository.",
+    "ru": "`/critique` читает изменение и достаточно окружающего кода, чтобы его оценить, проверяет шесть измерений по порядку и выдаёт замечания от `bug` до `q`. Он работает с кодом и, если переосмыслить измерения, с документом, набором данных или договором. В конце он называет единственное самое важное, что нужно решить до слияния. По умолчанию область - текущий diff или недавно изменённые файлы, а не весь репозиторий.",
+    "ua": "`/critique` читає зміну й достатньо навколишнього коду, щоб її оцінити, перевіряє шість вимірів за порядком і видає зауваження від `bug` до `q`. Він працює з кодом і, якщо переосмислити виміри, з документом, набором даних чи договором. Наприкінці він називає єдине найважливіше, що треба розв'язати до злиття. За замовчуванням область - поточний diff або нещодавно змінені файли, а не весь репозиторій."
+  },
+  "situation": {
+    "en": "A pre-merge pass, or whenever you want someone to look over your change. For one terse line per finding use `/caveman-review`; `/critique` is the fuller pass.",
+    "ru": "Проход перед слиянием или любой случай, когда нужно, чтобы кто-то посмотрел вашу правку. Для одной короткой строки на замечание есть `/caveman-review`, а `/critique` - более полный проход.",
+    "ua": "Прохід перед злиттям або будь-який випадок, коли потрібно, щоб хтось подивився вашу правку. Для одного короткого рядка на зауваження є `/caveman-review`, а `/critique` - повніший прохід."
+  },
+  "warning": {
+    "en": "A false finding costs as much as a miss and is louder: after a handful of them, a real defect is one row among false ones and the review stops being read. So the agent confirms or refutes its own high-severity findings first, and when it cannot reach the thing it is judging, the finding is \"could not verify\", not a defect.",
+    "ru": "Ложное замечание стоит столько же, сколько пропуск, и звучит громче: после нескольких таких настоящий дефект оказывается одной строкой среди ложных, и ревью перестают читать. Поэтому агент сначала подтверждает или опровергает собственные замечания высокой серьёзности, а если до оцениваемого не добраться, это замечание «could not verify», а не дефект.",
+    "ua": "Хибне зауваження коштує стільки ж, скільки пропуск, і звучить гучніше: після кількох таких справжній дефект стає одним рядком серед хибних, і рев'ю перестають читати. Тому агент спершу підтверджує або спростовує власні зауваження високої серйозності, а якщо до оцінюваного не дістатися, це зауваження «could not verify», а не дефект."
+  },
+  "steps": [
+    {
+      "en": "Run `/critique` for the current diff, or scope it: `/critique src/payments/` for a path, `/critique correctness only` to restrict the dimensions. The argument can also be a file, a diff, a PR or a topic.",
+      "ru": "Запустите `/critique` для текущего diff или сузьте область: `/critique src/payments/` для пути, `/critique correctness only`, чтобы ограничить измерения. Аргументом может быть также файл, diff, PR или тема.",
+      "ua": "Запустіть `/critique` для поточного diff або звузьте область: `/critique src/payments/` для шляху, `/critique correctness only`, щоб обмежити виміри. Аргументом може бути також файл, diff, PR чи тема."
+    },
+    {
+      "en": "The agent identifies the changed surface and reads the diff plus enough surrounding code to judge it. Lines are not reviewed in isolation.",
+      "ru": "Агент определяет изменённую поверхность и читает diff и достаточно окружающего кода, чтобы оценить его. Строки в отрыве от окружения он не рецензирует.",
+      "ua": "Агент визначає змінену поверхню й читає diff та достатньо навколишнього коду, щоб його оцінити. Рядки поза оточенням він не рецензує."
+    },
+    {
+      "en": "It checks, in order, correctness (logic bugs, off-by-one, wrong conditionals, races, null handling, error paths, resource leaks, broken invariants) and security and data safety (injection, unvalidated input, secrets in code, unsafe deserialization, destructive operations without guards, migration safety).",
+      "ru": "Он проверяет по порядку корректность (ошибки логики, сдвиг на единицу, неверные условия, гонки, обработка null, пути ошибок, утечки ресурсов, нарушенные инварианты) и безопасность данных (инъекции, непроверенный ввод, секреты в коде, небезопасная десериализация, разрушительные операции без защиты, безопасность миграций).",
+      "ua": "Він перевіряє за порядком коректність (помилки логіки, зсув на одиницю, хибні умови, гонки, обробка null, шляхи помилок, витоки ресурсів, порушені інваріанти) та безпеку даних (ін'єкції, неперевірений ввід, секрети в коді, небезпечна десеріалізація, руйнівні операції без захисту, безпека міграцій)."
+    },
+    {
+      "en": "Then architecture for the [code layer](term:code-layer) (dependency direction, thin entry points, logic in the right layer), tests (coverage for the new path and its failure modes, weak assertions), [anti-slop](term:anti-slop) (the seven greppable patterns in `docs/CODE_QUALITY.md`) and clarity (naming, dead code, comments that say why, the [file-size budget](term:size-budget)).",
+      "ru": "Затем архитектура для [слоя кода](term:code-layer) (направление зависимостей, тонкие точки входа, логика в нужном слое), тесты (покрытие нового пути и его сбоев, слабые проверки), [антимусор](term:anti-slop) (семь ищущихся по grep шаблонов в `docs/CODE_QUALITY.md`) и ясность (имена, мёртвый код, комментарии, объясняющие почему, [бюджет размера файла](term:size-budget)).",
+      "ua": "Потім архітектура для [шару коду](term:code-layer) (напрям залежностей, тонкі точки входу, логіка в потрібному шарі), тести (покриття нового шляху та його збоїв, слабкі перевірки), [антисміття](term:anti-slop) (сім шаблонів, що шукаються за grep, у `docs/CODE_QUALITY.md`) і ясність (імена, мертвий код, коментарі, що пояснюють чому, [бюджет розміру файлу](term:size-budget))."
+    },
+    {
+      "en": "Each finding is checked against the code, never an invented line number or symbol, and written as `severity` · `file:line` · the problem · a concrete fix. Severities, highest first: `bug` > `risk` > `arch` > `test` > `nit` > `q`.",
+      "ru": "Каждое замечание сверяется с кодом, номера строк и символы не выдумываются, и записывается как `severity` · `file:line` · проблема · конкретная правка. Серьёзность от высшей к низшей: `bug` > `risk` > `arch` > `test` > `nit` > `q`.",
+      "ua": "Кожне зауваження звіряється з кодом, номери рядків і символи не вигадуються, і записується як `severity` · `file:line` · проблема · конкретна правка. Серйозність від вищої до нижчої: `bug` > `risk` > `arch` > `test` > `nit` > `q`."
+    },
+    {
+      "en": "Before reporting, it confirms or refutes its own high-severity findings. If it finds nothing material, it says so and names the residual risks, such as an untested path or an uncovered edge case, instead of padding.",
+      "ru": "Перед отчётом он подтверждает или опровергает собственные замечания высокой серьёзности. Если существенного нет, он так и говорит и называет остаточные риски, например непротестированный путь или непокрытый крайний случай, вместо того чтобы раздувать отчёт.",
+      "ua": "Перед звітом він підтверджує або спростовує власні зауваження високої серйозності. Якщо суттєвого немає, він так і каже та називає залишкові ризики, наприклад непротестований шлях чи непокритий крайній випадок, замість того щоб роздувати звіт."
+    }
+  ],
+  "outcome": {
+    "en": "Findings grouped by severity, highest first; a short line on what is solid, only if it carries information (for example, that a migration is reversible and guarded); and one closing line with the single most important thing to address before merge.",
+    "ru": "Замечания, сгруппированные по серьёзности, самые серьёзные первыми; короткая строка о том, что в порядке, только если она несёт информацию (например, что миграция обратима и защищена); и одна итоговая строка с единственным самым важным, что нужно решить до слияния.",
+    "ua": "Зауваження, згруповані за серйозністю, найсерйозніші першими; короткий рядок про те, що в порядку, лише якщо він несе інформацію (наприклад, що міграція зворотна й захищена); і один підсумковий рядок із єдиним найважливішим, що треба розв'язати до злиття."
+  },
+  "tips": [
+    {
+      "en": "For a document, a dataset or a contract the dimensions map one for one: correctness is do the claims hold and the numbers reconcile; security, what leaks or cannot be undone; architecture, does it belong where it was put; tests, what would catch an error next time; anti-slop, the generic list in `docs/PROJECT_SHAPES.md`. See [project shapes](fn:project-shapes).",
+      "ru": "Для документа, набора данных или договора измерения отображаются один в один: корректность - держатся ли утверждения и сходятся ли цифры; безопасность - что утекает или необратимо; архитектура - на своём ли месте это лежит; тесты - что поймает ошибку в следующий раз; антимусор - общий список в `docs/PROJECT_SHAPES.md`. См. [формы проектов](fn:project-shapes).",
+      "ua": "Для документа, набору даних чи договору виміри відображаються один в один: коректність - чи тримаються твердження й чи сходяться цифри; безпека - що витікає або незворотне; архітектура - чи на своєму місці це лежить; тести - що впіймає помилку наступного разу; антисміття - загальний перелік у `docs/PROJECT_SHAPES.md`. Див. [форми проєктів](fn:project-shapes)."
+    },
+    {
+      "en": "The seven patterns behind the anti-slop dimension are greppable, so you can scan a diff for them yourself. See [keep generated code from rotting](fn:anti-slop).",
+      "ru": "Семь шаблонов, на которых держится измерение «против мусора», ищутся по grep, так что вы можете сами просмотреть diff на их наличие. См. [как не дать сгенерированному коду гнить](fn:anti-slop).",
+      "ua": "Сім шаблонів, на яких тримається вимір «проти сміття», шукаються за grep, тож ви можете самі переглянути diff на їхню наявність. Див. [як не дати згенерованому коду гнити](fn:anti-slop)."
+    },
+    {
+      "en": "The command is named `/critique` and not review on purpose: in Claude Code the review command is an alias of the built-in code-review command, and a project skill never replaces an alias. Use either; they differ in scope, and this one is stack-neutral and graded by severity.",
+      "ru": "Команда названа `/critique`, а не review, намеренно: в Claude Code команда review - псевдоним встроенной команды code-review, а навык проекта псевдоним не заменяет. Пользуйтесь любой: они различаются областью, а эта не зависит от стека и градуирует замечания по серьёзности.",
+      "ua": "Команду названо `/critique`, а не review, навмисно: у Claude Code команда review - псевдонім вбудованої команди code-review, а навичка проєкту псевдонім не замінює. Користуйтеся будь-якою: вони різняться областю, а ця не залежить від стеку й градуює зауваження за серйозністю."
+    }
+  ],
+  "related": ["caveman-review", "anti-slop", "project-shapes", "validation-ladder", "prove"],
+  "terms": ["anti-slop", "code-layer", "size-budget"],
+  "keywords": {
+    "en": ["critique", "review", "code review", "review a diff", "severity", "pre-merge review", "findings"],
+    "ru": ["ревью", "код-ревью", "ревью изменений", "ревью документа или данных", "серьёзность замечаний", "ревью перед слиянием", "review", "critique"],
+    "ua": ["рев'ю", "код-рев'ю", "рев'ю змін", "рев'ю документа чи даних", "серйозність зауважень", "рев'ю перед злиттям", "review", "critique"]
+  }
+}

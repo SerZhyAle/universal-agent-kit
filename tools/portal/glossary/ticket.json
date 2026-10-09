@@ -1,0 +1,10 @@
+{
+  "id": "ticket",
+  "term": { "en": "Ticket", "ru": "Тикет", "ua": "Тікет" },
+  "def": {
+    "en": "One piece of work kept as a Markdown file in your plan directory, with a status line that records where it stands and two header tokens, `Blocked-by` and `Carried-to`. The file is the record: an external tracker id can be linked to it, but the discipline lives in the document, not the tool. A check only a human can make goes in its `## Manual checks` section.",
+    "ru": "Единица работы, которая ведётся одним Markdown-файлом в вашем каталоге планов, со строкой статуса, где записано, на каком она этапе, и двумя токенами шапки, `Blocked-by` и `Carried-to`. Файл и есть запись: можно привязать идентификатор из внешнего трекера, но дисциплина живёт в документе, а не в инструменте. Проверка, доступная только человеку, идёт в раздел `## Manual checks`.",
+    "ua": "Одиниця роботи, що ведеться одним Markdown-файлом у вашому каталозі планів, із рядком статусу, де записано, на якому вона етапі, та двома токенами шапки, `Blocked-by` і `Carried-to`. Файл і є записом: можна прив'язати ідентифікатор із зовнішнього трекера, але дисципліна живе в документі, а не в інструменті. Перевірка, доступна лише людині, йде в розділ `## Manual checks`."
+  },
+  "see": ["spec", "plan", "status"]
+}

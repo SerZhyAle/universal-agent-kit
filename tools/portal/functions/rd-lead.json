@@ -1,0 +1,114 @@
+{
+  "id": "rd-lead",
+  "title": {
+    "en": "Hand a non-trivial job to a lead agent",
+    "ru": "Поручить нетривиальную работу ведущему агенту",
+    "ua": "Доручити нетривіальну роботу ведучому агентові"
+  },
+  "pitch": {
+    "en": "One lead agent takes a request from first read to verified work: it classifies the job, picks the lightest path that fits and hands parts to other agents.",
+    "ru": "Один ведущий агент ведёт запрос от первого чтения до проверенной работы: оценивает задачу, выбирает самый лёгкий подходящий путь и передаёт части другим агентам.",
+    "ua": "Один ведучий агент веде запит від першого читання до перевіреної роботи: оцінює завдання, обирає найлегший придатний шлях і передає частини іншим агентам."
+  },
+  "lead": {
+    "en": "`rd-lead` is the kit's lead and [orchestrator](term:orchestrator): a [strong-tier](term:tier) [role agent](term:role-agent) (`model: opus`) for work that spans research, planning, doing and review, code or not. It classifies the request, runs the matching skills, delegates to the other agents and re-checks what they return. You get verified, clean work, not a promise that it is done.",
+    "ru": "`rd-lead` - ведущий агент и [оркестратор](term:orchestrator) в kit: [ролевой агент](term:role-agent) [сильного уровня](term:tier) (`model: opus`) для работы, которая охватывает исследование, планирование, выполнение и ревью, будь то код или нет. Он классифицирует запрос, запускает подходящие навыки, передаёт части другим агентам и сам перепроверяет то, что они вернули. Вы получаете проверенную чистую работу, а не обещание, что всё готово.",
+    "ua": "`rd-lead` - ведучий агент і [оркестратор](term:orchestrator) у kit: [рольовий агент](term:role-agent) [сильного рівня](term:tier) (`model: opus`) для роботи, що охоплює дослідження, планування, виконання та рев'ю, чи то код, чи ні. Він класифікує запит, запускає відповідні навички, передає частини іншим агентам і сам перевіряє те, що вони повернули. Ви отримуєте перевірену чисту роботу, а не обіцянку, що все готово."
+  },
+  "situation": {
+    "en": "Non-trivial work that crosses research, planning, doing and review: a feature, a restructuring, a report, a contract revision, a ticket's whole lifecycle or a review.",
+    "ru": "Нетривиальная работа, которая проходит через исследование, планирование, выполнение и ревью: функциональность, реструктуризация, отчёт, пересмотр контракта, весь жизненный цикл тикета или ревью.",
+    "ua": "Нетривіальна робота, що проходить крізь дослідження, планування, виконання та рев'ю: функціональність, реструктуризація, звіт, перегляд контракту, весь життєвий цикл тікета або рев'ю."
+  },
+  "warning": {
+    "en": "Parallel readers are safe, parallel writers are not: disjoint files are not isolation, and one writer's whole-tree version-control command can revert the others' uncommitted work. `rd-lead` owns those commands, and build and index ones, between waves, or gives each writer its own checkout. If files keep reverting, re-read from disk first. See [parallel writers](fn:parallel-writers).",
+    "ru": "Параллельные читатели безопасны, пишущие - нет: непересекающиеся файлы - не изоляция, а команда контроля версий над всем деревом у одного писателя может откатить чужие несохранённые правки. `rd-lead` берёт на себя такие команды, сборку и индекс между волнами либо даёт каждому писателю свой checkout. Если файлы откатились, сначала перечитайте диск. См. [параллельную запись](fn:parallel-writers).",
+    "ua": "Паралельні читачі безпечні, ті, що пишуть, - ні: непересічні файли - не ізоляція, а команда контролю версій над усім деревом в одного з них може відкотити чужі незбережені правки. `rd-lead` бере на себе такі команди, збірку та індекс між хвилями або дає кожному, хто пише, власний checkout. Якщо файли відкотилися, спершу перечитайте диск. Див. [паралельний запис](fn:parallel-writers)."
+  },
+  "steps": [
+    {
+      "en": "First make sure the [placeholders](term:placeholder) in its file (project name, chat language, artifact language, logger, architecture layers, size budget, plan directory, scratch directory, read-only zones) are filled in for your project.",
+      "ru": "Сначала убедитесь, что [заполнители](term:placeholder) в файле агента (название проекта, язык чата, язык артефактов, логгер, слои архитектуры, лимит размера, каталог планов, каталог для черновиков, зоны только для чтения) заполнены под ваш проект.",
+      "ua": "Спершу переконайтеся, що [заповнювачі](term:placeholder) у файлі агента (назва проєкту, мова чату, мова артефактів, логер, шари архітектури, ліміт розміру, каталог планів, каталог для чернеток, зони лише для читання) заповнені під ваш проєкт."
+    },
+    {
+      "en": "Choose how to use it. It is a selectable subagent. To make it the whole session's agent, start Claude Code with `claude --agent rd-lead`: that replaces Claude Code's default system prompt with its brief and runs every turn on the strong tier. It is an opt-in, which is why the kit's `settings.json` does not set it.",
+      "ru": "Выберите, как его использовать. Он доступен как субагент на выбор. Чтобы сделать его агентом всей сессии, запустите Claude Code как `claude --agent rd-lead`: это заменяет системный промпт Claude Code по умолчанию его инструкцией, и каждый ход идёт на сильном уровне. Включается только по вашему решению, поэтому `settings.json` из kit его не задаёт.",
+      "ua": "Оберіть, як його використовувати. Він доступний як субагент на вибір. Щоб зробити його агентом усієї сесії, запустіть Claude Code як `claude --agent rd-lead`: це замінює типовий системний промпт Claude Code його інструкцією, і кожен хід іде на сильному рівні. Вмикається лише з вашого рішення, тому `settings.json` із kit його не задає."
+    },
+    {
+      "en": "Describe the job as you would to a colleague: a feature, a restructuring, a report, a [ticket](term:ticket) to advance or a change to review. It classifies the request first: a trivial edit goes to `/quick`, a narrow and well-understood bug to `/fix`, and anything with design decisions or new abstractions into the spec pipeline. It does not ask permission to read, search, build or check.",
+      "ru": "Опишите задачу так, как поставили бы её коллеге: функциональность, реструктуризация, отчёт, [тикет](term:ticket), который надо продвинуть, или изменение на ревью. Сначала он классифицирует запрос: мелкая правка уходит в `/quick`, узкий и понятный баг - в `/fix`, а всё, где есть дизайн-решения или новые абстракции, - в конвейер спек. Разрешения читать, искать, собирать и проверять он не спрашивает.",
+      "ua": "Опишіть завдання так, як поставили б його колезі: функціональність, реструктуризація, звіт, [тікет](term:ticket), який треба просунути, або зміна на рев'ю. Спершу він класифікує запит: дрібна правка йде в `/quick`, вузький і зрозумілий баг - у `/fix`, а все, де є дизайн-рішення чи нові абстракції, - у конвеєр спек. Дозволу читати, шукати, збирати й перевіряти він не питає."
+    },
+    {
+      "en": "It researches before it acts: the repo map first, then the spec or plan, then a symbol search with grep or your code index, then the code itself. When the cause or the landscape is unclear it runs `/research` and saves the findings for ticket-bound work. It never guesses a path, a symbol or an API.",
+      "ru": "Он исследует, прежде чем действовать: сначала карта репозитория, затем спека или план, затем поиск символов через grep или ваш индекс кода, и только потом сам код. Если причина или картина неясны, он запускает `/research` и сохраняет находки для работы по тикету. Путь, символ или API он не выдумывает.",
+      "ua": "Він досліджує, перш ніж діяти: спершу карта репозиторію, потім спека чи план, потім пошук символів через grep або ваш індекс коду, і лише тоді сам код. Якщо причина чи картина неясні, він запускає `/research` і зберігає знахідки для роботи за тікетом. Шлях, символ чи API він не вигадує."
+    },
+    {
+      "en": "Before building anything a user perceives, it resolves the ambiguity with `/ui-clarify`. It brings you only the decisions that change behaviour, data or structure; unclear placement, visibility or fallback is raised with you, not guessed.",
+      "ru": "Прежде чем строить то, что увидит пользователь, он снимает неоднозначность через `/ui-clarify`. К вам он выносит только решения, меняющие поведение, данные или структуру; неясное место, видимость или запасной вариант он обсуждает с вами, а не угадывает.",
+      "ua": "Перш ніж будувати те, що побачить користувач, він знімає неоднозначність через `/ui-clarify`. До вас він виносить лише рішення, що змінюють поведінку, дані чи структуру; незрозуміле місце, видимість чи запасний варіант він обговорює з вами, а не вгадує."
+    },
+    {
+      "en": "For features and substantial changes it works the pipeline `/spec`, `/spec-tech`, `/spec-dev`, `/spec-check`: strategic decisions (problem, goals, constraints) first, tactical ones (files, signatures, order) after. Every planned step ends in a static check, never in a vague \"works correctly\".",
+      "ru": "Для функциональности и существенных изменений он проходит конвейер `/spec`, `/spec-tech`, `/spec-dev`, `/spec-check`: сначала стратегические решения (проблема, цели, ограничения), потом тактические (файлы, сигнатуры, порядок). Каждый шаг плана заканчивается статической проверкой, а не расплывчатым «работает правильно».",
+      "ua": "Для функціональності та суттєвих змін він проходить конвеєр `/spec`, `/spec-tech`, `/spec-dev`, `/spec-check`: спершу стратегічні рішення (проблема, цілі, обмеження), потім тактичні (файли, сигнатури, порядок). Кожен крок плану завершується статичною перевіркою, а не розпливчастим «працює правильно»."
+    },
+    {
+      "en": "It [delegates](term:delegation) where that pays, to [solution-researcher](fn:solution-researcher), [implementer](fn:implementer) and [doc-writer](fn:doc-writer). Before a [fan-out](term:fan-out) wave it estimates agent count and cost, keeps a small ceiling, asks for an explicit GO above it and finds first, verifies second. A returned report is a claim: it re-validates from its own clean state and finishes any truncated trailing phase itself.",
+      "ru": "Он [передаёт работу](term:delegation) там, где это окупается, агентам [solution-researcher](fn:solution-researcher), [implementer](fn:implementer) и [doc-writer](fn:doc-writer). Перед волной [веерного запуска](term:fan-out) он оценивает число агентов и стоимость, держит малый потолок, просит явного «добро» сверх него, сначала ищет и лишь потом проверяет. Вернувшийся отчёт - лишь утверждение: он перепроверяет его из собственного чистого состояния и сам доделывает последнюю фазу, если её обрезали.",
+      "ua": "Він [передає роботу](term:delegation) там, де це окупається, агентам [solution-researcher](fn:solution-researcher), [implementer](fn:implementer) та [doc-writer](fn:doc-writer). Перед хвилею [віяльного запуску](term:fan-out) він оцінює кількість агентів і вартість, тримає малу стелю, просить явного «добро» понад нею, спершу шукає й лише потім перевіряє. Повернутий звіт - лише твердження: він перевіряє його з власного чистого стану й сам доробляє останню фазу, якщо її обрізали."
+    },
+    {
+      "en": "It reviews its own and incoming changes with `/critique`: correctness, error paths and resource safety first, then security, layer discipline, test coverage, [anti-slop](fn:anti-slop) patterns and comment quality. Where behaviour matters it runs `/prove`. A check ends as pass, defect, could not verify or not applicable, and the last two are never reported as the first two.",
+      "ru": "Свои и входящие изменения он смотрит через `/critique`: сначала корректность, пути ошибок и безопасность ресурсов, затем безопасность, дисциплина слоёв, покрытие тестами, приёмы из [правил против мусора](fn:anti-slop) и качество комментариев. Там, где важно поведение, он запускает `/prove`. Проверка заканчивается как pass, defect, could not verify или not applicable, и последние два результата никогда не выдаются за первые два.",
+      "ua": "Свої та вхідні зміни він дивиться через `/critique`: спершу коректність, шляхи помилок і безпека ресурсів, далі безпека, дисципліна шарів, покриття тестами, прийоми з [правил проти сміття](fn:anti-slop) та якість коментарів. Там, де важлива поведінка, він запускає `/prove`. Перевірка закінчується як pass, defect, could not verify або not applicable, і останні два результати ніколи не видають за перші два."
+    }
+  ],
+  "outcome": {
+    "en": "The request is carried to verified work by the lightest path that fits. Each claimed deliverable has been checked by the agent itself, every check is reported as pass, defect, could not verify or not applicable, and you were asked only about decisions that change behaviour, data or structure.",
+    "ru": "Запрос доведён до проверенной работы самым лёгким подходящим путём. Каждый заявленный результат агент проверил сам, каждая проверка названа как pass, defect, could not verify или not applicable, а спрашивали вас только о решениях, которые меняют поведение, данные или структуру.",
+    "ua": "Запит доведено до перевіреної роботи найлегшим придатним шляхом. Кожен заявлений результат агент перевірив сам, кожну перевірку названо як pass, defect, could not verify або not applicable, а питали вас лише про рішення, що змінюють поведінку, дані чи структуру."
+  },
+  "tips": [
+    {
+      "en": "Prefer a narrower agent when the task is purely investigative ([solution-researcher](fn:solution-researcher)), a fully specified change ([implementer](fn:implementer)) or prose ([doc-writer](fn:doc-writer)). The agent's own description says so.",
+      "ru": "Берите более узкого агента, если задача чисто исследовательская ([solution-researcher](fn:solution-researcher)), это полностью описанное изменение ([implementer](fn:implementer)) или текст ([doc-writer](fn:doc-writer)). Так сказано в описании самого агента.",
+      "ua": "Беріть вужчого агента, якщо завдання суто дослідницьке ([solution-researcher](fn:solution-researcher)), це повністю описана зміна ([implementer](fn:implementer)) або текст ([doc-writer](fn:doc-writer)). Так сказано в описі самого агента."
+    },
+    {
+      "en": "Small work does not need this agent: `/quick` covers a trivial edit and `/fix` a narrow bug, and `/spec` only pays when real design decisions exist. `rd-lead` itself picks the cheaper route first.",
+      "ru": "Для мелкой работы этот агент не нужен: `/quick` закрывает мелкую правку, `/fix` - узкий баг, а `/spec` окупается только при настоящих дизайн-решениях. Сам `rd-lead` сначала выбирает более дешёвый путь.",
+      "ua": "Для дрібної роботи цей агент не потрібен: `/quick` закриває дрібну правку, `/fix` - вузький баг, а `/spec` окупається лише за справжніх дизайн-рішень. Сам `rd-lead` спершу обирає дешевший шлях."
+    },
+    {
+      "en": "Bulky evidence goes to a throwaway subagent that returns only a compact verdict, so the artifacts stay out of the lead's context. Before acting on a finding it hands a skeptic the verbatim claim, and on a split vote it reads the material itself. Cost rules: [cost and fan-out](fn:budget-gate).",
+      "ru": "Объёмные доказательства уходят одноразовому субагенту, который возвращает только короткий вердикт, так что артефакты не оседают в контексте ведущего. Прежде чем действовать по находке, он отдаёт скептику её дословную формулировку, а при расколе голосов читает материал сам. Правила расходов: [стоимость и веерный запуск](fn:budget-gate).",
+      "ua": "Об'ємні докази йдуть одноразовому субагентові, який повертає лише короткий вердикт, тож артефакти не осідають у контексті ведучого. Перш ніж діяти за знахідкою, він віддає скептикові її дослівне формулювання, а за розколу голосів читає матеріал сам. Правила витрат: [вартість і віяльний запуск](fn:budget-gate)."
+    },
+    {
+      "en": "It never fires off a check and forgets its verdict, and it never polls for one. It waits on a condition the runtime can signal, or has the work write its verdict to a marker file, and says in one line what it is waiting for.",
+      "ru": "Он не запускает проверку, забывая про её вердикт, и не опрашивает её по кругу. Он ждёт условия, о котором может просигналить среда выполнения, либо просит работу записать вердикт в файл-маркер и одной строкой говорит, чего ждёт.",
+      "ua": "Він не запускає перевірку, забуваючи про її вердикт, і не опитує її по колу. Він чекає на умову, про яку може просигналити середовище виконання, або просить роботу записати вердикт у файл-маркер і одним рядком каже, чого чекає."
+    },
+    {
+      "en": "Chat runs in the language you set in the chat-language placeholder; files, code, docs, logs and commits in the one you set in the artifact-language placeholder. On ticket work it reads the `**Status:**` header and never infers status from the filename.",
+      "ru": "Чат идёт на языке, который вы задали в заполнителе языка чата; файлы, код, документы, логи и коммиты - на языке из заполнителя языка артефактов. В работе по тикету он читает заголовок `**Status:**` и никогда не выводит статус из имени файла.",
+      "ua": "Чат іде мовою, яку ви задали в заповнювачі мови чату; файли, код, документи, логи й коміти - мовою із заповнювача мови артефактів. У роботі за тікетом він читає заголовок `**Status:**` і ніколи не виводить статус з імені файлу."
+    },
+    {
+      "en": "If your runtime supports persistent agent memory, it records only what is non-obvious and durable, never what the repo or `git log` already shows. See [agent memory](fn:agent-memory).",
+      "ru": "Если ваша среда поддерживает постоянную память агента, он записывает только неочевидное и долговечное, но не то, что и так видно в репозитории или в `git log`. См. [память агента](fn:agent-memory).",
+      "ua": "Якщо ваше середовище підтримує постійну пам'ять агента, він записує лише неочевидне й довговічне, але не те, що й так видно в репозиторії чи в `git log`. Див. [пам'ять агента](fn:agent-memory)."
+    }
+  ],
+  "related": ["solution-researcher", "implementer", "doc-writer", "spec-lifecycle", "parallel-writers"],
+  "terms": ["role-agent", "orchestrator", "delegation", "tier", "fan-out", "ticket", "placeholder"],
+  "keywords": {
+    "en": ["lead agent", "orchestrator agent", "non-trivial task", "feature work", "restructuring", "code review", "session agent", "rd-lead"],
+    "ru": ["ведущий агент", "агент-оркестратор", "нетривиальная задача", "новая функциональность", "реструктуризация", "ревью кода", "агент сессии", "rd-lead"],
+    "ua": ["ведучий агент", "агент-оркестратор", "нетривіальне завдання", "нова функціональність", "реструктуризація", "рев'ю коду", "агент сесії", "rd-lead"]
+  }
+}

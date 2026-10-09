@@ -1,0 +1,99 @@
+{
+  "id": "unattended-loop",
+  "title": {
+    "en": "Run unattended work as a loop of fresh processes",
+    "ru": "Пустить работу без присмотра циклом свежих процессов",
+    "ua": "Пустити роботу без нагляду циклом свіжих процесів"
+  },
+  "pitch": {
+    "en": "A driver outside the session feeds one work item at a time to a fresh headless process, with state kept in files, so each item starts on an empty context.",
+    "ru": "Драйвер вне сессии отдаёт по одному рабочему элементу свежему headless-процессу, а состояние хранится в файлах, поэтому каждый элемент начинается с пустого контекста.",
+    "ua": "Драйвер поза сесією віддає по одному робочому елементу свіжому headless-процесу, а стан зберігається у файлах, тож кожен елемент починається з порожнього контексту."
+  },
+  "lead": {
+    "en": "An agent cannot reset its own [context](term:context), so a loop that runs inside one session carries every finished item into the next: ticket 1 is still there while ticket 9 runs, and the run gets slower and more expensive with each item. Make the process boundary the reset. The kit describes this shape and ships no driver script.",
+    "ru": "Агент не может сбросить собственный [контекст](term:context), поэтому цикл внутри одной сессии тащит каждый завершённый элемент в следующий: тикет 1 всё ещё в контексте, пока идёт тикет 9, и с каждым элементом прогон становится медленнее и дороже. Сделайте сбросом границу процесса. Kit описывает эту схему и не поставляет скрипт-драйвер.",
+    "ua": "Агент не може скинути власний [контекст](term:context), тому цикл усередині однієї сесії тягне кожен завершений елемент у наступний: тікет 1 усе ще в контексті, поки йде тікет 9, і з кожним елементом прогін стає повільнішим і дорожчим. Зробіть скиданням межу процесу. Kit описує цю схему й не постачає скрипт-драйвер."
+  },
+  "situation": {
+    "en": "A queue of work items, such as tickets, is left running while nobody watches.",
+    "ru": "Очередь рабочих элементов, например тикетов, остаётся работать, пока никто не смотрит.",
+    "ua": "Черга робочих елементів, наприклад тікетів, лишається працювати, поки ніхто не дивиться."
+  },
+  "warning": {
+    "en": "A driver that cannot tell \"failed\" from \"not attempted\" either re-runs finished work forever or drops work on the first crash. State kept only in the context is lost at every boundary.",
+    "ru": "Драйвер, не отличающий «сбой» от «не пробовали», либо бесконечно перезапускает завершённую работу, либо теряет работу при первом падении. Состояние, лежащее только в контексте, теряется на каждой границе.",
+    "ua": "Драйвер, що не відрізняє «збій» від «не пробували», або нескінченно перезапускає завершену роботу, або губить роботу при першому падінні. Стан, що лежить лише в контексті, губиться на кожній межі."
+  },
+  "steps": [
+    {
+      "en": "Put the driver outside the session. It takes the next work item off the queue, runs it in a fresh [headless process](term:headless-process), and repeats however that run ended. Every item starts on an empty context, and the reset cannot be forgotten.",
+      "ru": "Вынесите драйвер за пределы сессии. Он берёт из очереди следующий рабочий элемент, запускает его в свежем [headless-процессе](term:headless-process) и повторяет, чем бы ни закончился запуск. Каждый элемент начинается с пустого контекста, и сброс нельзя забыть.",
+      "ua": "Винесіть драйвер за межі сесії. Він бере з черги наступний робочий елемент, запускає його у свіжому [headless-процесі](term:headless-process) і повторює, чим би не закінчився запуск. Кожен елемент починається з порожнього контексту, і скидання не можна забути."
+    },
+    {
+      "en": "Keep every piece of state the loop needs in a file: the skip cache (what was already attempted and must not be retried), the report buckets (what succeeded, what failed, what was skipped and why) and the queue position. State in the context does not survive the boundary, which is the point of crossing it.",
+      "ru": "Держите всё состояние, нужное циклу, в файле: кэш пропусков (что уже пробовали и повторять нельзя), корзины отчёта (что удалось, что упало, что пропущено и почему) и позицию в очереди. Состояние в контексте не переживает границу, в этом и смысл её пересечения.",
+      "ua": "Тримайте весь стан, потрібний циклу, у файлі: кеш пропусків (що вже пробували й повторювати не можна), кошики звіту (що вдалося, що впало, що пропущено і чому) та позицію в черзі. Стан у контексті не переживає межу, в цьому й сенс її перетину."
+    },
+    {
+      "en": "Make the driver distinguish \"failed\" from \"not attempted\", and write each item's outcome before moving on, not after the next item starts.",
+      "ru": "Научите драйвер различать «сбой» и «не пробовали» и записывайте исход каждого элемента до перехода дальше, а не после старта следующего.",
+      "ua": "Навчіть драйвер розрізняти «збій» і «не пробували» та записуйте результат кожного елемента до переходу далі, а не після старту наступного."
+    },
+    {
+      "en": "Repeat regardless of how an item exited. A crash, a limit or a refusal is still an end of that item, and a loop that stops at the first bad item waits for a human who is not there.",
+      "ru": "Повторяйте, как бы элемент ни завершился. Падение, лимит или отказ - всё равно конец этого элемента, а цикл, который останавливается на первом плохом элементе, ждёт человека, которого рядом нет.",
+      "ua": "Повторюйте, як би елемент не завершився. Падіння, ліміт чи відмова - усе одно кінець цього елемента, а цикл, що зупиняється на першому поганому елементі, чекає на людину, якої поруч немає."
+    },
+    {
+      "en": "Use what the boundary buys. You can choose the model per item instead of fixing one for the whole run, and you can run several instances at once; the lock queue described in [the budget gate](fn:budget-gate) keeps them off each other.",
+      "ru": "Используйте то, что даёт граница. Модель можно выбирать под каждый элемент, а не фиксировать на весь прогон, и можно запускать несколько экземпляров одновременно; очередь блокировок, описанная в [бюджетном шлюзе](fn:budget-gate), не даёт им мешать друг другу.",
+      "ua": "Використовуйте те, що дає межа. Модель можна обирати під кожен елемент, а не фіксувати на весь прогін, і можна запускати кілька екземплярів одночасно; черга блокувань, описана в [бюджетному шлюзі](fn:budget-gate), не дає їм заважати одне одному."
+    },
+    {
+      "en": "Leave the stack choices to yourself: which queue format, which shell, which headless invocation. Keep the interactive loop for work a human is watching, and prefer the driver for anything left running unattended.",
+      "ru": "Выбор стека оставьте за собой: какой формат очереди, какая оболочка, какой вызов headless-режима. Интерактивный цикл оставьте для работы, за которой смотрит человек, а всё, что работает без присмотра, лучше отдавать драйверу.",
+      "ua": "Вибір стеку лишіть за собою: який формат черги, яка оболонка, який виклик headless-режиму. Інтерактивний цикл лишіть для роботи, за якою стежить людина, а все, що працює без нагляду, краще віддавати драйверові."
+    }
+  ],
+  "outcome": {
+    "en": "Each item ran in its own process on an empty context, and the files show what succeeded, what failed, what was skipped and why, and where the queue stands. A bad item ended its own run and the driver went on to the next.",
+    "ru": "Каждый элемент прошёл в своём процессе с пустым контекстом, а файлы показывают, что удалось, что упало, что пропущено и почему и где стоит очередь. Плохой элемент завершил свой запуск, и драйвер пошёл к следующему.",
+    "ua": "Кожен елемент пройшов у своєму процесі з порожнім контекстом, а файли показують, що вдалося, що впало, що пропущено і чому та де стоїть черга. Поганий елемент завершив свій запуск, і драйвер пішов до наступного."
+  },
+  "tips": [
+    {
+      "en": "A self-imposed \"I will stop at a threshold\" cannot promise the reset, because it depends on somebody noticing the threshold and somebody restarting afterwards. The process boundary depends on neither.",
+      "ru": "Самонакладываемое «остановлюсь на пороге» не гарантирует сброса: оно зависит от того, что кто-то заметит порог и кто-то потом перезапустит. Граница процесса не зависит ни от того, ни от другого.",
+      "ua": "Самонакладене «зупинюся на порозі» не гарантує скидання: воно залежить від того, що хтось помітить поріг і хтось потім перезапустить. Межа процесу не залежить ні від того, ні від іншого."
+    },
+    {
+      "en": "No headless mode in your runtime? Keep the in-session loop and make the halt explicit: stop at a stated threshold and hand back a resume handle, so the human's restart is a keystroke rather than a reconstruction.",
+      "ru": "Нет headless-режима в вашей среде? Оставьте цикл внутри сессии и сделайте остановку явной: останавливайтесь на заданном пороге и возвращайте ручку возобновления, чтобы перезапуск человеком был нажатием клавиши, а не восстановлением по кусочкам.",
+      "ua": "Немає headless-режиму у вашому середовищі? Лишіть цикл усередині сесії й зробіть зупинку явною: зупиняйтеся на заданому порозі й повертайте ручку відновлення, щоб перезапуск людиною був натисканням клавіші, а не відновленням по шматках."
+    },
+    {
+      "en": "On Claude Code a headless run is `claude -p`, and the kit's `CLAUDE.md` names it as the native driver for an unattended `/backlog`, the skill that drains a ticket queue. See [drain the ticket queue unattended](fn:backlog).",
+      "ru": "В Claude Code headless-запуск - это `claude -p`, и `CLAUDE.md` из kit называет его родным драйвером для `/backlog` без присмотра, навыка, который разбирает очередь тикетов. См. [разобрать очередь тикетов без вашего участия](fn:backlog).",
+      "ua": "У Claude Code headless-запуск - це `claude -p`, і `CLAUDE.md` з kit називає його рідним драйвером для `/backlog` без нагляду, навички, що розбирає чергу тікетів. Див. [розібрати чергу тікетів без вашої участі](fn:backlog)."
+    },
+    {
+      "en": "The cost case for looping the process, with the one measurement behind it, is in [the budget gate](fn:budget-gate). If several instances write to one workspace, read [how to run several writing agents without losing work](fn:parallel-writers) too.",
+      "ru": "Обоснование цикла процессов по затратам, с единственным измерением за ним, лежит в [бюджетном шлюзе](fn:budget-gate). Если несколько экземпляров пишут в одну рабочую папку, прочтите и [как запустить нескольких пишущих агентов, не потеряв работу](fn:parallel-writers).",
+      "ua": "Обґрунтування циклу процесів за витратами, з єдиним виміром за ним, лежить у [бюджетному шлюзі](fn:budget-gate). Якщо кілька екземплярів пишуть в одну робочу теку, прочитайте й [як запустити кількох агентів, що пишуть, не втративши роботи](fn:parallel-writers)."
+    },
+    {
+      "en": "The third part of the same document, on readers that fan out freely because they cost only tokens, is [run independent lookups in parallel and check what comes back](fn:fan-out-readers).",
+      "ru": "Третья часть того же документа, о читающих, которые распараллеливаются свободно, потому что стоят только токенов, - [запустить независимые поиски параллельно и проверить результат](fn:fan-out-readers).",
+      "ua": "Третя частина того самого документа, про тих, що лише читають і розпаралелюються вільно, бо коштують лише токенів, - [запустити незалежні пошуки паралельно й перевірити результат](fn:fan-out-readers)."
+    }
+  ],
+  "related": ["parallel-writers", "fan-out-readers", "budget-gate", "backlog"],
+  "terms": ["headless-process", "context", "ticket"],
+  "keywords": {
+    "en": ["unattended run", "driver loop", "headless", "fresh process per item", "skip cache", "failed vs not attempted"],
+    "ru": ["работа без присмотра", "цикл-драйвер", "headless", "свежий процесс на элемент", "кэш пропусков", "сбой и не пробовали"],
+    "ua": ["робота без нагляду", "цикл-драйвер", "headless", "свіжий процес на елемент", "кеш пропусків", "збій і не пробували"]
+  }
+}

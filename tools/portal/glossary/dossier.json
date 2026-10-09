@@ -1,0 +1,10 @@
+{
+  "id": "dossier",
+  "term": { "en": "Dossier", "ru": "Досье", "ua": "Досьє" },
+  "def": {
+    "en": "A rough Markdown file, `research_<topic-slug>.md` in [scratch](term:scratch), that `/research` writes before broad reading: the docs to read first, matching files and symbols, existing specs and plans, suggested next reads. It only stops repeated greps; a ticket-bound run saves its durable findings in a separate file.",
+    "ru": "Черновой Markdown-файл `research_<topic-slug>.md` в [scratch](term:scratch), который `/research` пишет до широкого чтения: что читать первым, подходящие файлы и символы, существующие спеки и планы, следующие чтения. Он лишь избавляет от повторных поисков; долговечные выводы запуска по тикету сохраняются в отдельном файле.",
+    "ua": "Чорновий Markdown-файл `research_<topic-slug>.md` у [scratch](term:scratch), який `/research` пише до широкого читання: що читати першим, відповідні файли й символи, наявні спеки та плани, наступні читання. Він лише позбавляє повторних пошуків; довговічні висновки запуску за тікетом зберігаються в окремому файлі."
+  },
+  "see": ["scratch"]
+}

@@ -2,7 +2,7 @@
 
 # SPECIFICATION - Contract synchronization - universal-agent-kit, round 2026-10-07
 
-Parent: [SPECIFICATION_CONTRACTS_SYNC.md](SPECIFICATION_CONTRACTS_SYNC.md). Opened 2026-10-07, on the portfolio
+Parent: [SPECIFICATION_CONTRACTS_SYNC.md](DONE/SPECIFICATION_CONTRACTS_SYNC.md). Opened 2026-10-07, on the portfolio
 owner's order, by the canon session; owner of the work: the session that owns this repository. Phase: open -
 nothing synchronized yet. Acceptance: the "Definition of done" section below, in full.
 

@@ -1,0 +1,84 @@
+{
+  "id": "caveman-review",
+  "title": {
+    "en": "Review a diff with one terse line per finding",
+    "ru": "Получить ревью изменений: одна строка на замечание",
+    "ua": "Отримати рев'ю змін: один рядок на зауваження"
+  },
+  "pitch": {
+    "en": "`/caveman-review` reviews the current diff, or what you name, and prints findings first, one line each: file, line, a label (`bug`, `risk`, `nit`, `q`), problem and fix.",
+    "ru": "`/caveman-review` проверяет текущий diff или названную цель и выводит замечания по одной строке: файл, строка, метка (`bug`, `risk`, `nit`, `q`), проблема, исправление.",
+    "ua": "`/caveman-review` перевіряє поточний diff або названу ціль і виводить зауваження по одному рядку: файл, рядок, мітка (`bug`, `risk`, `nit`, `q`), проблема, виправлення."
+  },
+  "lead": {
+    "en": "`/caveman-review` is the blunt, fast pass over a change. It reviews at the normal bar, with bugs, risks, regressions and missing tests first, and prints findings before any summary, one line per finding where that stays clear. For the fuller pass, use [/critique](fn:critique).",
+    "ru": "`/caveman-review` - прямой и быстрый проход по изменению. Он проверяет по обычной планке, сначала баги, риски, регрессии и недостающие тесты, и выводит замечания до любого резюме, по одной строке на замечание, пока это остаётся ясным. Для более полного прохода используйте [/critique](fn:critique).",
+    "ua": "`/caveman-review` - прямий і швидкий прохід по зміні. Він перевіряє за звичайною планкою, спершу баги, ризики, регресії та бракуючі тести, і виводить зауваження перед будь-яким підсумком, по одному рядку на зауваження, поки це лишається ясним. Для повнішого проходу використовуйте [/critique](fn:critique)."
+  },
+  "situation": {
+    "en": "You want a blunt, fast look at a diff: findings and not a write-up, with no throat-clearing or praise padding.",
+    "ru": "Нужен прямой и быстрый взгляд на diff: замечания, а не развёрнутый отчёт, без вступлений и похвал для объёма.",
+    "ua": "Потрібен прямий і швидкий погляд на diff: зауваження, а не розгорнутий звіт, без вступів і похвал для об'єму."
+  },
+  "warning": {
+    "en": "Terse is a format, not a lower bar. When a one-line comment would hide important security, architectural or destructive-risk context, or the issue is security-sensitive or architecturally non-trivial, the review switches to a short paragraph instead of forcing one-line compression.",
+    "ru": "Краткость - это формат, а не сниженная планка. Если однострочный комментарий скрыл бы важный контекст безопасности, архитектуры или разрушительного риска, либо проблема связана с безопасностью или архитектурно нетривиальна, ревью переходит на короткий абзац вместо принудительного сжатия до одной строки.",
+    "ua": "Стислість - це формат, а не знижена планка. Якщо однорядковий коментар приховав би важливий контекст безпеки, архітектури чи руйнівного ризику, або проблема стосується безпеки чи архітектурно нетривіальна, рев'ю переходить на короткий абзац замість примусового стискання до одного рядка."
+  },
+  "steps": [
+    {
+      "en": "Type `/caveman-review` to review the current diff or the context you provide, or name a target: `/caveman-review PaymentService` focuses on one file or symbol. The usage line is `/caveman-review [optional: file, diff, or topic]`.",
+      "ru": "Введите `/caveman-review`, чтобы проверить текущий diff или переданный вами контекст, либо назовите цель: `/caveman-review PaymentService` сфокусируется на одном файле или символе. Строка вызова: `/caveman-review [optional: file, diff, or topic]`.",
+      "ua": "Введіть `/caveman-review`, щоб перевірити поточний diff або переданий вами контекст, або назвіть ціль: `/caveman-review PaymentService` зосередиться на одному файлі чи символі. Рядок виклику: `/caveman-review [optional: file, diff, or topic]`."
+    },
+    {
+      "en": "The agent reviews at the normal bar: bugs, risks, regressions and missing tests come first.",
+      "ru": "Агент проверяет по обычной планке: сначала баги, риски, регрессии и недостающие тесты.",
+      "ua": "Агент перевіряє за звичайною планкою: спершу баги, ризики, регресії та бракуючі тести."
+    },
+    {
+      "en": "It prints findings before any summary, one line per finding when clarity is preserved. A line starts with the file and the line number, then a label: `bug`, `risk` or `nit` followed by the problem and a fix, or `q` followed by a question. For example: `PaymentService.cs:L42: bug: refund runs twice on retry. Add an idempotency key.`",
+      "ru": "Он выводит замечания до любого резюме, по одной строке на замечание, пока ясность сохраняется. Строка начинается с файла и номера строки, затем идёт метка: `bug`, `risk` или `nit` с проблемой и исправлением либо `q` с вопросом. Например: `PaymentService.cs:L42: bug: refund runs twice on retry. Add an idempotency key.`",
+      "ua": "Він виводить зауваження перед будь-яким підсумком, по одному рядку на зауваження, поки ясність зберігається. Рядок починається з файлу й номера рядка, далі йде мітка: `bug`, `risk` або `nit` з проблемою та виправленням чи `q` із запитанням. Наприклад: `PaymentService.cs:L42: bug: refund runs twice on retry. Add an idempotency key.`"
+    },
+    {
+      "en": "Exact symbols, file names, line numbers, commands, APIs and error strings stay unchanged. Advice with no concrete direction, such as a bare suggestion to refactor, is not allowed: every finding is actionable and technically exact.",
+      "ru": "Символы, имена файлов, номера строк, команды, API и тексты ошибок остаются точными. Совет без конкретного направления, например голое предложение провести рефакторинг, недопустим: каждое замечание применимо на практике и технически точно.",
+      "ua": "Символи, імена файлів, номери рядків, команди, API й тексти помилок лишаються точними. Порада без конкретного напрямку, наприклад голе пропонування зробити рефакторинг, неприпустима: кожне зауваження придатне до дії й технічно точне."
+    },
+    {
+      "en": "If there are no findings, the review says so explicitly and briefly names the residual test or validation gaps.",
+      "ru": "Если замечаний нет, ревью прямо об этом говорит и коротко называет оставшиеся пробелы в тестах или проверке.",
+      "ua": "Якщо зауважень немає, рев'ю прямо про це каже й коротко називає залишкові прогалини в тестах чи перевірці."
+    }
+  ],
+  "outcome": {
+    "en": "Findings placed ahead of any summary, each with file, line, label and a concrete fix or question; or an explicit statement that there are no findings, plus the remaining test and validation gaps.",
+    "ru": "Замечания, поставленные раньше любого резюме, у каждого файл, строка, метка и конкретное исправление или вопрос; либо прямое заявление, что замечаний нет, и оставшиеся пробелы в тестах и проверке.",
+    "ua": "Зауваження, поставлені раніше за будь-який підсумок, у кожного файл, рядок, мітка й конкретне виправлення чи запитання; або пряма заява, що зауважень немає, і залишкові прогалини в тестах та перевірці."
+  },
+  "tips": [
+    {
+      "en": "[/critique](fn:critique) is the fuller pass, with findings grouped by severity. For terse one-line-per-finding output the kit points to this command instead.",
+      "ru": "[/critique](fn:critique) - более полный проход, с замечаниями, сгруппированными по важности. Для краткого вывода по одной строке на замечание kit отсылает к этой команде.",
+      "ua": "[/critique](fn:critique) - повніший прохід, із зауваженнями, згрупованими за важливістю. Для стислого виводу по одному рядку на зауваження kit відсилає до цієї команди."
+    },
+    {
+      "en": "The review is written in the chat language, unless you ask for paste-ready PR comments: those go in the language your project set as `<ARTIFACT_LANGUAGE>`, a [placeholder](term:placeholder) of the rules file.",
+      "ru": "Ревью пишется на языке чата, если только вы не попросите готовые к вставке комментарии для PR: они пишутся на языке, который ваш проект задал в `<ARTIFACT_LANGUAGE>` - [плейсхолдере](term:placeholder) файла правил.",
+      "ua": "Рев'ю пишеться мовою чату, якщо тільки ви не попросите готові до вставки коментарі для PR: вони пишуться мовою, яку ваш проєкт задав у `<ARTIFACT_LANGUAGE>` - [плейсхолдері](term:placeholder) файлу правил."
+    },
+    {
+      "en": "To make every reply in the chat terse, not only the review, use [/caveman](fn:caveman). For a commit message there is [/caveman-commit](fn:caveman-commit).",
+      "ru": "Чтобы кратким был каждый ответ в чате, а не только ревью, включите [/caveman](fn:caveman). Для сообщения коммита есть [/caveman-commit](fn:caveman-commit).",
+      "ua": "Щоб стислою була кожна відповідь у чаті, а не лише рев'ю, увімкніть [/caveman](fn:caveman). Для повідомлення коміту є [/caveman-commit](fn:caveman-commit)."
+    }
+  ],
+  "related": ["critique", "caveman", "caveman-commit"],
+  "terms": ["terse-mode", "placeholder"],
+  "keywords": {
+    "en": ["caveman review", "terse code review", "one line per finding", "review a diff", "blunt review", "pre-merge pass"],
+    "ru": ["caveman review", "краткое ревью", "одна строка на замечание", "ревью diff", "быстрое ревью", "проверка перед слиянием"],
+    "ua": ["caveman review", "стисле рев'ю", "один рядок на зауваження", "рев'ю diff", "швидке рев'ю", "перевірка перед злиттям"]
+  }
+}

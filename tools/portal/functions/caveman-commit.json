@@ -1,0 +1,99 @@
+{
+  "id": "caveman-commit",
+  "title": {
+    "en": "Get a terse Conventional Commit message to paste",
+    "ru": "Получить краткое сообщение коммита для вставки",
+    "ua": "Отримати стисле повідомлення коміту для вставки"
+  },
+  "pitch": {
+    "en": "`/caveman-commit` writes a terse Conventional Commit message from your description or the current diff, as a code block to paste. It never runs `git commit`.",
+    "ru": "`/caveman-commit` пишет краткое сообщение коммита в формате Conventional Commits по вашему описанию или diff, блоком для вставки. `git commit` он не запускает.",
+    "ua": "`/caveman-commit` пише стисле повідомлення коміту у форматі Conventional Commits за вашим описом або поточним diff, блоком коду для вставки. `git commit` він не запускає."
+  },
+  "lead": {
+    "en": "`/caveman-commit` generates one commit message: a subject in [Conventional Commits](term:conventional-commit) format, kept short, and a body only when the reason is not obvious. It works from your description or, when you give none, from the current `git diff` and `git status`. It generates the message and nothing else.",
+    "ru": "`/caveman-commit` формирует одно сообщение коммита: заголовок в формате [Conventional Commits](term:conventional-commit), короткий, и тело только тогда, когда причина неочевидна. Он опирается на ваше описание, а если описания нет, на текущие `git diff` и `git status`. Он создаёт сообщение и больше ничего.",
+    "ua": "`/caveman-commit` формує одне повідомлення коміту: заголовок у форматі [Conventional Commits](term:conventional-commit), короткий, і тіло лише тоді, коли причина неочевидна. Він спирається на ваш опис, а якщо опису немає, на поточні `git diff` і `git status`. Він створює повідомлення і більше нічого."
+  },
+  "situation": {
+    "en": "The change is already understood and you want a quick commit message without noise.",
+    "ru": "Изменение вам уже понятно, и нужно быстро получить сообщение коммита без лишнего шума.",
+    "ua": "Зміна вам уже зрозуміла, і потрібно швидко отримати повідомлення коміту без зайвого шуму."
+  },
+  "warning": {
+    "en": "The command generates the message only. It does not run `git commit`, stage files or amend history, so committing stays with you.",
+    "ru": "Команда только формирует сообщение. Она не запускает `git commit`, не добавляет файлы в индекс и не изменяет историю, так что сам коммит остаётся за вами.",
+    "ua": "Команда лише формує повідомлення. Вона не запускає `git commit`, не додає файли до індексу й не змінює історію, тож сам коміт лишається за вами."
+  },
+  "steps": [
+    {
+      "en": "Type `/caveman-commit` to infer the message from the current diff, or add context: `/caveman-commit fix retry on network thumbnail`. The usage line is `/caveman-commit [optional: context]`.",
+      "ru": "Введите `/caveman-commit`, чтобы сообщение вывелось из текущего diff, или добавьте контекст: `/caveman-commit fix retry on network thumbnail`. Строка вызова: `/caveman-commit [optional: context]`.",
+      "ua": "Введіть `/caveman-commit`, щоб повідомлення вивелося з поточного diff, або додайте контекст: `/caveman-commit fix retry on network thumbnail`. Рядок виклику: `/caveman-commit [optional: context]`."
+    },
+    {
+      "en": "If you described the change, the agent uses your description. If you did not, it inspects the current `git diff` and `git status` to infer the message.",
+      "ru": "Если вы описали изменение, агент берёт ваше описание. Если нет, он изучает текущие `git diff` и `git status` и выводит сообщение из них.",
+      "ua": "Якщо ви описали зміну, агент бере ваш опис. Якщо ні, він вивчає поточні `git diff` і `git status` та виводить повідомлення з них."
+    },
+    {
+      "en": "It writes the subject in Conventional Commits format, `type(scope): imperative summary`, with the scope optional. It prefers the types `feat`, `fix`, `refactor`, `perf`, `docs`, `test`, `chore`, `build`, `ci`, `style` and `revert`.",
+      "ru": "Он пишет заголовок в формате Conventional Commits, `type(scope): imperative summary`, область (scope) необязательна. Предпочтение отдаётся типам `feat`, `fix`, `refactor`, `perf`, `docs`, `test`, `chore`, `build`, `ci`, `style` и `revert`.",
+      "ua": "Він пише заголовок у форматі Conventional Commits, `type(scope): imperative summary`, область (scope) необов'язкова. Перевага віддається типам `feat`, `fix`, `refactor`, `perf`, `docs`, `test`, `chore`, `build`, `ci`, `style` і `revert`."
+    },
+    {
+      "en": "The subject names the user-visible change, not the mechanism: `fix(export): keep page breaks in PDF invoices`, not `fix(export): flush stream before close`.",
+      "ru": "Заголовок называет видимое пользователю изменение, а не механизм: `fix(export): keep page breaks in PDF invoices`, а не `fix(export): flush stream before close`.",
+      "ua": "Заголовок називає видиму користувачеві зміну, а не механізм: `fix(export): keep page breaks in PDF invoices`, а не `fix(export): flush stream before close`."
+    },
+    {
+      "en": "It keeps the subject terse: a target of 50 characters or fewer, a hard cap of 72, no trailing period.",
+      "ru": "Он держит заголовок кратким: ориентир 50 символов и меньше, жёсткий предел 72, точки в конце нет.",
+      "ua": "Він тримає заголовок стислим: орієнтир 50 символів і менше, жорстка межа 72, крапки в кінці немає."
+    },
+    {
+      "en": "It adds a body only when the why is not obvious from the subject, and always for breaking changes, security fixes, data migrations and reverts, even if that costs more words. Body lines are concise and wrapped near 72 characters.",
+      "ru": "Тело он добавляет только тогда, когда причина неочевидна из заголовка, и всегда для критических изменений совместимости, исправлений безопасности, миграций данных и откатов, даже если это стоит лишних слов. Строки тела короткие, перенос около 72 символов.",
+      "ua": "Тіло він додає лише тоді, коли причина неочевидна із заголовка, і завжди для змін, що ламають сумісність, виправлень безпеки, міграцій даних та відкатів, навіть якщо це коштує зайвих слів. Рядки тіла стислі, перенесення близько 72 символів."
+    },
+    {
+      "en": "Attribution, such as a co-author line or a tool trailer, is a team choice that the project's [rules file](term:rules-file) states, and the agent follows it. If the file says nothing, it asks you once, writes your answer into the rules file and follows it. It never adds or strips attribution silently.",
+      "ru": "Указание авторства, например строка соавтора или трейлер инструмента, - выбор команды, который фиксирует [файл правил](term:rules-file) проекта, и агент ему следует. Если файл молчит, агент спрашивает вас один раз, записывает ответ в файл правил и следует ему. Авторство он никогда не добавляет и не убирает молча.",
+      "ua": "Зазначення авторства, наприклад рядок співавтора чи трейлер інструмента, - вибір команди, який фіксує [файл правил](term:rules-file) проєкту, і агент його дотримується. Якщо файл мовчить, агент питає вас один раз, записує відповідь у файл правил і дотримується її. Авторство він ніколи не додає й не прибирає мовчки."
+    },
+    {
+      "en": "It leaves out filler phrases and prints the message as a fenced code block, ready to paste. The obvious diff is not explained.",
+      "ru": "Он не добавляет пустых фраз и выводит сообщение блоком кода, готовым к вставке. Очевидный diff не пересказывается.",
+      "ua": "Він не додає порожніх фраз і виводить повідомлення блоком коду, готовим до вставки. Очевидний diff не переказується."
+    }
+  ],
+  "outcome": {
+    "en": "A fenced code block holding one commit message, for example `fix(thumbnail): retry on network error`, plus a body for the cases that need one. Nothing is staged and nothing is committed.",
+    "ru": "Блок кода с одним сообщением коммита, например `fix(thumbnail): retry on network error`, и телом для тех случаев, где оно нужно. Ничего не добавлено в индекс и ничего не закоммичено.",
+    "ua": "Блок коду з одним повідомленням коміту, наприклад `fix(thumbnail): retry on network error`, і тілом для тих випадків, де воно потрібне. Нічого не додано до індексу й нічого не закомічено."
+  },
+  "tips": [
+    {
+      "en": "The message is written in the language your project set as `<ARTIFACT_LANGUAGE>`, a [placeholder](term:placeholder) of the rules file, whatever language the chat is in.",
+      "ru": "Сообщение пишется на языке, который ваш проект задал в `<ARTIFACT_LANGUAGE>` - [плейсхолдере](term:placeholder) файла правил, - на каком бы языке ни шёл чат.",
+      "ua": "Повідомлення пишеться мовою, яку ваш проєкт задав у `<ARTIFACT_LANGUAGE>` - [плейсхолдері](term:placeholder) файлу правил, - якою б мовою не йшов чат."
+    },
+    {
+      "en": "To split a messy working tree into several commits first, use [the git guide](fn:git), then ask for a message for each group.",
+      "ru": "Если сначала нужно разбить неразобранное рабочее дерево на несколько коммитов, воспользуйтесь [руководством по git](fn:git), а затем попросите сообщение для каждой группы.",
+      "ua": "Якщо спершу потрібно розбити неперебране робоче дерево на кілька комітів, скористайтеся [посібником із git](fn:git), а потім попросіть повідомлення для кожної групи."
+    },
+    {
+      "en": "This is not the chat-wide mode. [/caveman](fn:caveman) makes the whole chat terse, [/caveman-review](fn:caveman-review) does the same for a review, and this command only writes the commit message.",
+      "ru": "Это не режим всего чата. [/caveman](fn:caveman) делает кратким весь чат, [/caveman-review](fn:caveman-review) делает то же для ревью, а эта команда пишет только сообщение коммита.",
+      "ua": "Це не режим усього чату. [/caveman](fn:caveman) робить стислим увесь чат, [/caveman-review](fn:caveman-review) робить те саме для рев'ю, а ця команда пише лише повідомлення коміту."
+    }
+  ],
+  "related": ["git", "caveman", "caveman-review"],
+  "terms": ["conventional-commit", "terse-mode", "placeholder", "rules-file"],
+  "keywords": {
+    "en": ["caveman commit", "commit message", "conventional commits", "terse commit", "commit subject", "commit body", "commit attribution"],
+    "ru": ["caveman commit", "сообщение коммита", "conventional commits", "краткий коммит", "заголовок коммита", "тело коммита", "авторство коммита"],
+    "ua": ["caveman commit", "повідомлення коміту", "conventional commits", "стислий коміт", "заголовок коміту", "тіло коміту", "авторство коміту"]
+  }
+}

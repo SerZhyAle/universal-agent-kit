@@ -1,3 +1,10 @@
 # The shared stylesheet is a byte-identical copy of the PAGE-STYLE reference; its hash is the
 # conformance check, so line endings must never be converted on checkout or commit.
 assets/sza-kit.css -text
+
+# The generated portal files are byte-stable: tools/build-portal.ps1 -Check compares them with the bytes it renders (LF).
+portal/** text eol=lf
+privacy.html text eol=lf
+404.html text eol=lf
+assets/search-index.json text eol=lf
+sitemap.xml text eol=lf

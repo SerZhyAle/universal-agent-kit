@@ -1,25 +1,51 @@
 # Persistent Agent Memory - a method, not a feature
 
-An AI assistant forgets everything between sessions. The codebase, the spec files, and git
-history persist - but *how you like to work*, *why a past decision went the way it did*, and
+An AI assistant forgets everything between sessions. The files, the spec files, and their
+history (version control, or your dated copies) persist - but *how you like to work*, *why a past decision went the way it did*, and
 *which corrections you already gave* do not. Re-teaching that every session is the single
 biggest hidden tax on working with an agent.
 
 The fix is a small, file-based memory the agent reads at the start of a session and writes to
 as it learns. It is plain Markdown in a `memory/` directory under version control, so the
-whole team shares one growing brain. No runtime feature is required: if your agent has native
-memory, use it; if not, point the agent at this folder and tell it to read the index first.
+whole team shares one growing brain. No runtime feature is required: point the agent at this
+folder and tell it to read the index first. If your runtime also keeps a memory of its own, the
+two split the work (next section).
 
 The discipline is what makes it work - **write the right things, skip the derivable ones, and
 keep an index honest.** This document is that discipline.
+
+## Two layers - the runtime's memory and this folder
+
+Claude Code now ships this method built in. Its auto memory is per repository and kept under the
+user's home, in `~/.claude/projects/<project>/memory/`: a `MEMORY.md` index plus one topic file per
+memory, written by the model itself, typed with the same four types as below. The index's first 200
+lines or 25KB load at every session start; topic files are read on demand. It is machine-local -
+nothing in it is committed or shared. Current docs, which change: <https://code.claude.com/docs/en/memory>.
+
+So the two are layers, not rivals:
+
+- **This repo's `memory/` is the committed, team-shared layer** - project context and confirmed
+  ways of working that every contributor and every agent should start from.
+- **Personal working preferences go to the runtime's own per-user memory** - how *you* like
+  answers pitched, your shortcuts, your machine.
+- **Never the same fact in both places.** Two copies agree only until the first edit, and after
+  that the agent has to guess which one is current.
+
+Nothing loads a repo `memory/` folder on its own: the rules file has to import or name it. The
+kit's `CLAUDE.md` imports `@memory/MEMORY.md` for Claude Code; every other tool needs the read
+instruction under "Adapting it", below, in its own rules file.
 
 ## The index and the entries
 
 Two kinds of file:
 
 - **`MEMORY.md`** - the *index*. One line per memory: `- [Title](file.md) - one-line hook`.
-  It is always loaded into the agent's context, so it stays short (a couple hundred lines at
-  most). It is a table of contents, never a place to write memory content.
+  It is read at the start of every session, so it stays short enough to be read every session.
+  Claude Code's loader for its own index stops at 200 lines or 25KB, and anything past that is
+  silently not read - a fair ceiling for this one too. Hold the budget with a ratchet: record the
+  line count; a change may lower it, and a change that would raise it pays for the new line with a
+  deliberate prune (merge or drop a stale entry), so the count never goes up. It is a table of
+  contents, never a place to write memory content.
 - **`<type>_<slug>.md`** - one *entry* per file, with frontmatter and a body. The agent reads
   the index, decides which entries are relevant, and opens only those.
 
@@ -34,15 +60,17 @@ to use it*.
 1. **`user`** - who the person is: their role, goals, expertise, what they already know.
    Use it to pitch explanations at the right level. *Save when* you learn a durable fact about
    them ("ten years of backend, first time in this frontend"). *Use it* to tailor depth and
-   analogy - never to judge.
+   analogy - never to judge. In a committed folder these are rare: a fact about one person
+   usually belongs in that person's per-user memory (above).
 
 2. **`feedback`** - how to work *here*, learned from corrections **and** confirmations.
-   Corrections are loud ("no, don't do that"); confirmations are quiet ("yeah, that bundled PR
-   was the right call") and just as important - without them the agent drifts away from
+   Corrections are loud ("no, don't do that"); confirmations are quiet ("yeah, one bundled
+   change was the right call", "yes, one summary table per quarter was the right call") and just as
+   important - without them the agent drifts away from
    approaches you already blessed and grows over-cautious. *Save when* you correct or confirm a
    non-obvious approach. *Use it* so the same guidance is never needed twice.
 
-3. **`project`** - ongoing context not derivable from code or git: who is doing what, why, by
+3. **`project`** - ongoing context the files and their history do not hold: who is doing what, why, by
    when; an incident; a constraint behind a decision. These decay fast - keep them current and
    convert relative dates to absolute ones when saving ("Thursday" → `2026-03-05`).
 
@@ -68,14 +96,16 @@ fine - it marks something worth writing later.
 The hard part of memory is restraint. Do **not** save:
 
 - Code patterns, conventions, architecture, file paths, project structure - re-derivable by
-  reading the repo. (Those belong in `CLAUDE.md` or the code itself.)
-- Git history or who-changed-what - `git log` / `git blame` are authoritative.
-- Debugging solutions or fix recipes - the fix is in the code; the context is in the commit.
-- Anything already written in `CLAUDE.md`.
+  reading the repo. (Those belong in the rules file, `AGENTS.md`, or the material itself.)
+- Who changed what and when - the history is authoritative (`git log` / `git blame`, or the
+  dated copies of a folder without version control).
+- Fix recipes - the fix is in the material; the context is in the commit or the ticket.
+- Anything already written in the rules file.
 - Ephemeral task state - that belongs in a plan or a task list, not memory.
 
-These exclusions hold **even when asked to save**. If asked to remember a PR list or an
-activity summary, ask what was *surprising* or *non-obvious* about it, and keep only that.
+These exclusions hold **even when asked to save**. If asked to remember a list of this week's
+changes, a list of documents filed this month, or an activity summary, ask what was *surprising* or *non-obvious*
+about it, and keep only that.
 
 The test: *will this still be true and useful three sessions from now, and could I not just
 read it off the repo?* If no to either, don't save it.
@@ -112,8 +142,15 @@ is not "X exists now." When a remembered fact conflicts with what you observe in
 today, trust the repo and fix or delete the stale entry.
 
 Memories that summarize repo state (an architecture snapshot, an activity log) are frozen in
-time. For *current* state, read the live code / working tree - not a recalled snapshot, and
-not `git log` (which answers how you got here, not what is true now).
+time. For *current* state, read the live files - not a recalled snapshot, and not the history
+(which answers how you got here, not what is true now).
+
+**Expire by liveness, not by age.** A `project` entry usually exists because of a piece of work - a
+freeze, an incident, a ticket. When that work closes, the entry has no subject: delete it then, in the
+same change that closes the work, rather than on a calendar. Age says nothing - a three-month-old
+`feedback` entry can be the most valuable line in the index, and a week-old `project` entry about a
+finished release is already noise. An entry that names a path or a symbol which no longer exists is
+expired too; the check that finds it is the one in the paragraph above.
 
 ## Memory vs plan vs tasks
 
@@ -137,16 +174,16 @@ scratch/handoff file or the plan itself, never `memory/`).
 
 ## Adapting it
 
-- **Committed vs per-user is a per-project choice.** Committing `memory/` makes the memory
-  project-scoped and team-shared through git - the default this document assumes. A runtime
-  with its own per-user store keeps the memory local to one person instead. The discipline is
-  identical either way - only the home differs. Prefer per-user when the entries are personal
-  working preferences rather than project context, or when the repo is public.
+- **Committed vs per-user is decided per fact.** Committing `memory/` makes an entry
+  project-scoped and team-shared through git; the runtime's per-user store keeps it local to one
+  person. The discipline is identical either way - only the home differs. Project context goes in
+  the committed folder; personal working preferences go per-user; and when the repo is public,
+  anything you would not publish stays out of the committed folder.
 - The four types are a strong default, not a law. If your team needs a fifth, add it - but
-  resist turning memory into a wiki; the index is always-loaded and must stay short.
-- No runtime memory feature? Keep `memory/` in the repo and add a line to `CLAUDE.md`: "At the
-  start of a session, read `memory/MEMORY.md` and open any entry that looks relevant." That is
-  the whole mechanism.
+  resist turning memory into a wiki; the index is read every session and must stay short.
+- Not on Claude Code, or your rules file does not import the index? Keep `memory/` in the repo
+  and add a line to the rules file (`AGENTS.md`): "At the start of a session, read
+  `memory/MEMORY.md` and open any entry that looks relevant." That is the whole mechanism.
 - Per-agent memory (optional): the default is one shared `memory/` - usually right, since it is
   the project's single brain. Only if several writing agents start crowding each other, give each
   its own `memory/<agent>/` and point each role brief at that path; otherwise keep the shared index.

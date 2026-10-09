@@ -1,0 +1,104 @@
+{
+  "id": "prove",
+  "title": {
+    "en": "Run a change and see whether it actually works",
+    "ru": "Запустить изменение и проверить, что оно правда работает",
+    "ua": "Запустити зміну й перевірити, що вона справді працює"
+  },
+  "pitch": {
+    "en": "Run the thing and observe it: the check ends in one line, PASS, DEFECT, COULD NOT VERIFY or NOT APPLICABLE, with the path to its evidence.",
+    "ru": "Запустить и посмотреть: проверка заканчивается одной строкой, PASS, DEFECT, COULD NOT VERIFY или NOT APPLICABLE, с путём к свидетельствам.",
+    "ua": "Запустити й подивитися: перевірка закінчується одним рядком, PASS, DEFECT, COULD NOT VERIFY або NOT APPLICABLE, зі шляхом до свідчень."
+  },
+  "lead": {
+    "en": "`/prove` does not trust the cheap check: it runs the target, walks a short scenario, captures the output and reports exactly one verdict. The target can be an app, a document, a dataset or a procedure. It is heavier than reading the diff and lighter than a full QA pass, and it edits no specs, plans or statuses.",
+    "ru": "`/prove` не полагается на дешёвую проверку: он запускает цель, проходит короткий сценарий, снимает вывод и сообщает ровно один вердикт. Целью может быть приложение, документ, набор данных или процедура. Это тяжелее, чем читать diff, и легче полноценного прогона QA; спеки, планы и статусы он не правит.",
+    "ua": "`/prove` не покладається на дешеву перевірку: він запускає ціль, проходить короткий сценарій, знімає вивід і повідомляє рівно один вердикт. Ціллю може бути застосунок, документ, набір даних чи процедура. Це важче, ніж читати diff, і легше за повноцінний прогін QA; спеки, плани та статуси він не править."
+  },
+  "situation": {
+    "en": "After `/quick`, `/fix` or `/spec-dev`, to catch a trivial breakage early, or whenever a claim about behaviour needs proof by running it.",
+    "ru": "После `/quick`, `/fix` или `/spec-dev`, чтобы рано поймать тривиальную поломку, или когда утверждение о поведении нужно подтвердить запуском.",
+    "ua": "Після `/quick`, `/fix` або `/spec-dev`, щоб рано впіймати тривіальну поломку, або коли твердження про поведінку треба підтвердити запуском."
+  },
+  "warning": {
+    "en": "Only PASS is a pass. `COULD NOT VERIFY` means the target or the instrument was out of reach, and `NOT APPLICABLE` means the requested configuration has no executable scenario, as with `--dry-run`; neither proves anything. `DEFECT` is used only after the target was inspected and an expectation failed, and the next step is `/fix` or `/spec-fix`.",
+    "ru": "Прохождением считается только PASS. `COULD NOT VERIFY` значит, что цель или инструмент были недоступны, а `NOT APPLICABLE` - что в заданной конфигурации нет исполняемого сценария, как при `--dry-run`; ни то ни другое ничего не доказывает. `DEFECT` ставится только после осмотра цели и найденного невыполненного ожидания, а дальше идут `/fix` или `/spec-fix`.",
+    "ua": "Проходженням вважається лише PASS. `COULD NOT VERIFY` означає, що ціль або інструмент були недоступні, а `NOT APPLICABLE` - що в заданій конфігурації немає виконуваного сценарію, як при `--dry-run`; ні те, ні інше нічого не доводить. `DEFECT` ставиться лише після огляду цілі та знайденого невиконаного очікування, а далі йдуть `/fix` або `/spec-fix`."
+  },
+  "steps": [
+    {
+      "en": "Pick the form. `/prove` alone is a default smoke: start the target (with `<RUN_CMD>` where there is one), run the basic happy path, scan logs for errors. `/prove <free text>` takes your text as the scenario. `/prove <ticket-id>` reads the ticket's acceptance criteria as hints and does not edit the ticket. `--build` rebuilds first (the default is to skip the build); `--dry-run` writes the scenario and runs nothing.",
+      "ru": "Выберите форму вызова. `/prove` без аргументов - дымовой прогон по умолчанию: запустить цель (через `<RUN_CMD>`, если он есть), пройти основной сценарий, просмотреть логи на ошибки. `/prove <free text>` берёт ваш текст как сценарий. `/prove <ticket-id>` читает критерии приёмки тикета как подсказки и тикет не правит. `--build` пересобирает перед запуском (по умолчанию сборка пропускается); `--dry-run` пишет сценарий и ничего не запускает.",
+      "ua": "Виберіть форму виклику. `/prove` без аргументів - димовий прогін за замовчуванням: запустити ціль (через `<RUN_CMD>`, якщо він є), пройти основний сценарій, переглянути логи на помилки. `/prove <free text>` бере ваш текст як сценарій. `/prove <ticket-id>` читає критерії приймання тікета як підказки й тікет не править. `--build` перезбирає перед запуском (за замовчуванням збірка пропускається); `--dry-run` пише сценарій і нічого не запускає."
+    },
+    {
+      "en": "The agent confirms the run target is reachable: server up, device online, binary present. If not, it reports `COULD NOT VERIFY` with the blocker and stops. It does not fake a pass.",
+      "ru": "Агент проверяет, что цель запуска доступна: сервер поднят, устройство в сети, бинарник на месте. Если нет, он сообщает `COULD NOT VERIFY` с причиной и останавливается. Изображать успех он не станет.",
+      "ua": "Агент перевіряє, що ціль запуску доступна: сервер піднято, пристрій у мережі, бінарник на місці. Якщо ні, він повідомляє `COULD NOT VERIFY` з причиною й зупиняється. Вдавати успіх він не стане."
+    },
+    {
+      "en": "With `--build` only, it runs the project's build command, or whatever its produce step is: a render, an export, a pipeline run. On failure it saves the tail of the output to `<SCRATCH_DIR>/prove_<TS>.md`, reports `DEFECT` and aborts.",
+      "ru": "Только с `--build`: он выполняет команду сборки проекта или то, что у проекта служит шагом получения результата - рендер, экспорт, прогон конвейера. При сбое он сохраняет хвост вывода в `<SCRATCH_DIR>/prove_<TS>.md`, сообщает `DEFECT` и прерывается.",
+      "ua": "Лише з `--build`: він виконує команду збірки проєкту або те, що в проєкті править за крок отримання результату - рендер, експорт, прогін конвеєра. У разі збою він зберігає хвіст виводу в `<SCRATCH_DIR>/prove_<TS>.md`, повідомляє `DEFECT` і перривається."
+    },
+    {
+      "en": "It writes `<SCRATCH_DIR>/prove_<TS>.md`: a header (target, version, environment) and an ordered scenario of 1 to 5 steps, each with a goal, an action, the expected observable result and optionally an expected log line. Sources, in priority: your text, the ticket's acceptance criteria, the default smoke.",
+      "ru": "Он пишет `<SCRATCH_DIR>/prove_<TS>.md`: заголовок (цель, версия, окружение) и упорядоченный сценарий из 1-5 шагов, у каждого цель, действие, ожидаемый наблюдаемый результат и по желанию ожидаемая строка лога. Источники по приоритету: ваш текст, критерии приёмки тикета, дымовой прогон.",
+      "ua": "Він пише `<SCRATCH_DIR>/prove_<TS>.md`: заголовок (ціль, версія, середовище) і впорядкований сценарій із 1-5 кроків, у кожного ціль, дія, очікуваний спостережуваний результат і за бажання очікуваний рядок логу. Джерела за пріоритетом: ваш текст, критерії приймання тікета, димовий прогін."
+    },
+    {
+      "en": "With `--dry-run` it stops after the scenario and reports `NOT APPLICABLE - dry run requested; no scenario was executed`, plus the path of the file.",
+      "ru": "С `--dry-run` он останавливается после сценария и сообщает `NOT APPLICABLE - dry run requested; no scenario was executed` и путь к файлу.",
+      "ua": "З `--dry-run` він зупиняється після сценарію й повідомляє `NOT APPLICABLE - dry run requested; no scenario was executed` та шлях до файлу."
+    },
+    {
+      "en": "Otherwise it starts log and stdout capture, records the start time and runs each step: perform the action, capture evidence (screenshot, response or stdout), check the expected result, append a row to the run-log table. On a crash or fatal error it captures the stack, records `DEFECT` and stops the run.",
+      "ru": "Иначе он включает перехват логов и stdout, запоминает время старта и выполняет шаги: действие, свидетельство (снимок экрана, ответ или stdout), сверка с ожидаемым, строка в таблицу журнала прогона. При падении или фатальной ошибке он снимает стек, записывает `DEFECT` и останавливает прогон.",
+      "ua": "Інакше він вмикає перехоплення логів і stdout, запам'ятовує час старту й виконує кроки: дія, свідчення (знімок екрана, відповідь або stdout), звірка з очікуваним, рядок до таблиці журналу прогону. У разі падіння чи фатальної помилки він знімає стек, записує `DEFECT` і зупиняє прогін."
+    },
+    {
+      "en": "It scans the captured logs for error-level lines and exceptions. For a ticket awaiting manual test it also greps for the ticket's verification tag (`<ID>:`): each hit means that code path was exercised. A findings section is appended: counts per level and the top errors with references.",
+      "ru": "Он просматривает перехваченные логи на строки уровня error и исключения. Для тикета, ожидающего ручной проверки, он ещё ищет проверочную метку тикета (`<ID>:`): каждое попадание значит, что этот путь кода исполнялся. Добавляется раздел находок: счётчики по уровням и главные ошибки со ссылками.",
+      "ua": "Він переглядає перехоплені логи на рядки рівня error та винятки. Для тікета, що чекає ручної перевірки, він ще шукає перевірну мітку тікета (`<ID>:`): кожне влучання означає, що цей шлях коду виконувався. Додається розділ знахідок: лічильники за рівнями та головні помилки з посиланнями."
+    },
+    {
+      "en": "It ends with one line naming the target and exactly one verdict, such as `prove: <target>, PASS N/N, log errors N, crashes K. Scenario: <SCRATCH_DIR>/prove_<TS>.md`. The other three read `DEFECT - <failed expectation>`, `COULD NOT VERIFY - <blocker>` and `NOT APPLICABLE - <configuration reason>`.",
+      "ru": "Он заканчивает одной строкой с целью и ровно одним вердиктом, например `prove: <target>, PASS N/N, log errors N, crashes K. Scenario: <SCRATCH_DIR>/prove_<TS>.md`. Остальные три выглядят так: `DEFECT - <failed expectation>`, `COULD NOT VERIFY - <blocker>` и `NOT APPLICABLE - <configuration reason>`.",
+      "ua": "Він закінчує одним рядком із ціллю та рівно одним вердиктом, наприклад `prove: <target>, PASS N/N, log errors N, crashes K. Scenario: <SCRATCH_DIR>/prove_<TS>.md`. Решта три виглядають так: `DEFECT - <failed expectation>`, `COULD NOT VERIFY - <blocker>` і `NOT APPLICABLE - <configuration reason>`."
+    }
+  ],
+  "outcome": {
+    "en": "A scenario file `prove_<TS>.md` in the [scratch](term:scratch) directory with the run log and the findings, and one closing line with the target, the verdict and the path of that file. Specs, plans and statuses are untouched and nothing is committed.",
+    "ru": "Файл сценария `prove_<TS>.md` в каталоге [scratch](term:scratch) с журналом прогона и находками и одна итоговая строка: цель, вердикт и путь к этому файлу. Спеки, планы и статусы не тронуты, ничего не закоммичено.",
+    "ua": "Файл сценарію `prove_<TS>.md` у каталозі [scratch](term:scratch) із журналом прогону та знахідками й один підсумковий рядок: ціль, вердикт і шлях до цього файлу. Спеки, плани та статуси не зачеплені, нічого не закомічено."
+  },
+  "tips": [
+    {
+      "en": "The kit fixes the method, the driver is yours. A web app is driven in a browser or through endpoints, a CLI is run with representative arguments, a service is started and probed, a mobile app is launched on a device or emulator, a document is rendered and read as a stranger would, a dataset is run on a sample and reconciled with its source, a procedure is followed by someone from the text alone.",
+      "ru": "Метод задан, драйвер ваш. Веб-приложение гоняют в браузере или через запросы, CLI запускают с типичными аргументами, сервис поднимают и опрашивают, мобильное приложение запускают на устройстве или эмуляторе, документ рендерят и читают глазами постороннего, набор данных прогоняют на выборке и сверяют цифры с источником, процедуру выполняет по одному тексту другой человек.",
+      "ua": "Метод задано, драйвер ваш. Вебзастосунок ганяють у браузері чи через запити, CLI запускають із типовими аргументами, сервіс піднімають і опитують, мобільний застосунок запускають на пристрої чи емуляторі, документ рендерять і читають очима стороннього, набір даних проганяють на вибірці й звіряють цифри з джерелом, процедуру виконує за самим текстом інша людина."
+    },
+    {
+      "en": "For a ticket that waits on a human, a PASS is evidence for the human to tick a line of its `## Manual checks` section; `/prove` never ticks it. How a caller reads each verdict, and how each maps to `/spec-check`, is one table in `docs/VALIDATION.md`. See [the validation ladder](fn:validation-ladder).",
+      "ru": "Для тикета, который ждёт человека, PASS - свидетельство, по которому человек сам отмечает строку раздела `## Manual checks`; `/prove` её не отмечает никогда. Как вызывающий читает каждый вердикт и чему он соответствует в `/spec-check` - одна таблица в `docs/VALIDATION.md`. См. [лестницу проверок](fn:validation-ladder).",
+      "ua": "Для тікета, що чекає на людину, PASS - свідчення, за яким людина сама відмічає рядок розділу `## Manual checks`; `/prove` його не відмічає ніколи. Як той, хто викликає, читає кожен вердикт і чому він відповідає в `/spec-check` - одна таблиця в `docs/VALIDATION.md`. Див. [драбину перевірок](fn:validation-ladder)."
+    },
+    {
+      "en": "The agent does not read a huge log whole: it tails or filters it by level and quotes line numbers. It also finds UI elements anew before each interaction, so no coordinates are hardcoded.",
+      "ru": "Огромный лог агент целиком не читает: он берёт хвост или фильтрует по уровню и называет номера строк. Элементы интерфейса он находит заново перед каждым действием, поэтому координаты не зашиты.",
+      "ua": "Величезний лог агент цілком не читає: він бере хвіст або фільтрує за рівнем і називає номери рядків. Елементи інтерфейсу він знаходить заново перед кожною дією, тому координати не зашиті."
+    },
+    {
+      "en": "The command is named `/prove` and not verify on purpose: Claude Code ships its own verify command, and a project skill with the same name would replace it. This one is the stack-neutral check with four verdicts; use both.",
+      "ru": "Команда названа `/prove`, а не verify, намеренно: в Claude Code есть собственная команда verify, и навык проекта с тем же именем её заменил бы. Эта - независимая от стека проверка с четырьмя вердиктами; пользуйтесь обеими.",
+      "ua": "Команду названо `/prove`, а не verify, навмисно: у Claude Code є власна команда verify, і навичка проєкту з тією самою назвою її замінила б. Ця - незалежна від стеку перевірка з чотирма вердиктами; користуйтеся обома."
+    }
+  ],
+  "related": ["quick", "fix", "spec-dev", "spec-fix", "validation-ladder"],
+  "terms": ["scratch", "ticket"],
+  "keywords": {
+    "en": ["prove", "verify", "smoke test", "run and observe", "does it work", "verdict"],
+    "ru": ["доказать запуском", "verify", "проверка запуском", "дымовой тест", "работает ли это", "вердикт", "сценарий проверки"],
+    "ua": ["довести запуском", "verify", "перевірка запуском", "димовий тест", "чи це працює", "вердикт", "сценарій перевірки"]
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "id": "tier",
+  "term": { "en": "Tier (model tier)", "ru": "Уровень модели", "ua": "Рівень моделі" },
+  "def": {
+    "en": "The rank of model an agent runs on: strong (`opus`), mid (`sonnet`) or light (`haiku`), set in the `model:` line of each role agent so a spawn never silently takes the most expensive model. The names are Claude Code's; on another runtime you map them to its own. A spec's `**Tier:**` label is a different thing: a size hint for triage.",
+    "ru": "Ранг модели, на которой работает агент: сильный (`opus`), средний (`sonnet`) или лёгкий (`haiku`). Он задаётся строкой `model:` в каждом ролевом агенте, чтобы запуск не брал молча самую дорогую модель. Названия - из Claude Code; в другой среде их сопоставляют со своими. Метка `**Tier:**` в спеке - другое: подсказка о размере задачи.",
+    "ua": "Ранг моделі, на якій працює агент: сильний (`opus`), середній (`sonnet`) або легкий (`haiku`). Він задається рядком `model:` у кожному рольовому агентові, щоб запуск не брав мовчки найдорожчу модель. Назви - з Claude Code; в іншому середовищі їх зіставляють зі своїми. Мітка `**Tier:**` у спеці - інше: підказка про розмір завдання."
+  },
+  "see": ["role-agent", "delegation"]
+}

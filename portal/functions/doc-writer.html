@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en" data-theme="dark" data-root="../../">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Turn technical notes into clear, friendly docs and UI copy - Universal Agent Kit</title>
+<meta name="description" content="A mid-tier agent writes or rewrites docs, README, help, onboarding, release notes and interface strings in a friendly voice, with every technical fact kept.">
+<link rel="canonical" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/doc-writer.html">
+<link rel="alternate" hreflang="en" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/doc-writer.html?lang=en">
+<link rel="alternate" hreflang="ru" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/doc-writer.html?lang=ru">
+<link rel="alternate" hreflang="uk" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/doc-writer.html?lang=uk">
+<link rel="alternate" hreflang="x-default" href="https://serzhyale.github.io/universal-agent-kit/portal/functions/doc-writer.html">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%233fb950'/%3E%3Cpath d='M20 18h24M20 30h24M20 42h16' stroke='%2304130c' stroke-width='5' stroke-linecap='round' fill='none'/%3E%3C/svg%3E">
+<meta name="theme-color" content="#0a0f0a">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Universal Agent Kit">
+<meta property="og:url" content="https://serzhyale.github.io/universal-agent-kit/portal/functions/doc-writer.html">
+<meta property="og:title" content="Turn technical notes into clear, friendly docs and UI copy - Universal Agent Kit">
+<meta property="og:description" content="A mid-tier agent writes or rewrites docs, README, help, onboarding, release notes and interface strings in a friendly voice, with every technical fact kept.">
+<meta property="og:image" content="https://serzhyale.github.io/universal-agent-kit/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Turn technical notes into clear, friendly docs and UI copy - Universal Agent Kit">
+<meta name="twitter:description" content="A mid-tier agent writes or rewrites docs, README, help, onboarding, release notes and interface strings in a friendly voice, with every technical fact kept.">
+<meta name="twitter:image" content="https://serzhyale.github.io/universal-agent-kit/og-image.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Turn technical notes into clear, friendly docs and UI copy - Universal Agent Kit","description":"A mid-tier agent writes or rewrites docs, README, help, onboarding, release notes and interface strings in a friendly voice, with every technical fact kept.","url":"https://serzhyale.github.io/universal-agent-kit/portal/functions/doc-writer.html","inLanguage":["en","ru","uk"],"isPartOf":{"@type":"WebSite","name":"Universal Agent Kit","url":"https://serzhyale.github.io/universal-agent-kit/"}}</script>
+<script type="application/json" id="page-i18n">{"t":{"ru":"Превратить технические заметки в понятные, дружелюбные доки и тексты интерфейса - Universal Agent Kit","en":"Turn technical notes into clear, friendly docs and UI copy - Universal Agent Kit","ua":"Перетворити технічні нотатки на зрозумілі, дружні доки й тексти інтерфейсу - Universal Agent Kit"},"d":{"ru":"Агент среднего уровня пишет и переписывает документацию, README, справку, онбординг, заметки к релизу и тексты интерфейса дружелюбно, сохраняя технические факты.","en":"A mid-tier agent writes or rewrites docs, README, help, onboarding, release notes and interface strings in a friendly voice, with every technical fact kept.","ua":"Агент середнього рівня пише чи переписує документацію, README, довідку, онбординг, нотатки до релізу та рядки інтерфейсу дружнім тоном, зберігаючи всі технічні факти."},"ui":{"langGroup":{"en":"Language","ru":"Язык","ua":"Мова"},"theme":{"en":"Theme","ru":"Тема","ua":"Тема"},"toLight":{"en":"Switch to light theme","ru":"Включить светлую тему","ua":"Увімкнути світлу тему"},"toDark":{"en":"Switch to dark theme","ru":"Включить тёмную тему","ua":"Увімкнути темну тему"},"toTop":{"en":"Back to top","ru":"Наверх","ua":"Нагору"},"menu":{"en":"Menu","ru":"Меню","ua":"Меню"},"navPortal":{"en":"Portal","ru":"Портал","ua":"Портал"},"navTools":{"en":"More tools by SZA","ru":"Другие инструменты SZA","ua":"Інші інструменти SZA"},"navAuthor":{"en":"Author links","ru":"Ссылки автора","ua":"Посилання автора"},"navSection":{"en":"In this section","ru":"В этом разделе","ua":"У цьому розділі"},"breadcrumb":{"en":"Breadcrumb","ru":"Путь по сайту","ua":"Шлях сайтом"},"searchTitle":{"en":"Search the portal","ru":"Поиск по порталу","ua":"Пошук по порталу"},"searchEmpty":{"en":"Nothing found for","ru":"Ничего не найдено по запросу","ua":"Нічого не знайдено за запитом"},"searchEmptyHelp":{"en":"Browse the subject index instead.","ru":"Откройте предметный указатель.","ua":"Відкрийте предметний покажчик."},"searchCount":{"en":"results","ru":"результатов","ua":"результатів"},"searchFail":{"en":"The search index could not be loaded.","ru":"Не удалось загрузить индекс поиска.","ua":"Не вдалося завантажити індекс пошуку."},"kind.command":{"en":"Slash command","ru":"Slash-команда","ua":"Slash-команда"},"kind.agent":{"en":"Role agent","ru":"Ролевой агент","ua":"Рольовий агент"},"kind.practice":{"en":"Practice","ru":"Практика","ua":"Практика"}}}</script>
+<script>
+/* PAGE-STYLE section 7 pre-paint resolver, on the portfolio's shared keys sza-lang / sza-theme.
+   Language priority: ?lang= in the URL (a shared link wins) > saved choice > browser.
+   The UA switch keys "ua"; the URL, lang and hreflang keep the ISO code "uk". The legacy
+   uak-* keys are read once so a returning reader keeps their choice. */
+(function(){
+  var l, t;
+  try{
+    var q = (location.search.match(/[?&]lang=(ru|en|uk|ua)\b/i) || [])[1];
+    if(q){ l = q.toLowerCase(); }
+    else { l = localStorage.getItem('sza-lang') || localStorage.getItem('uak-lang'); }
+    if(l === 'uk') l = 'ua';
+    if(l){ localStorage.setItem('sza-lang', l); }
+    t = localStorage.getItem('sza-theme') || localStorage.getItem('uak-theme');
+    if(t){ localStorage.setItem('sza-theme', t); }
+  }catch(e){}
+  if(l !== 'ru' && l !== 'en' && l !== 'ua'){ var nav=(navigator.language||'en').toLowerCase(); l = nav.indexOf('ru')===0 ? 'ru' : (nav.indexOf('uk')===0 ? 'ua' : 'en'); }
+  if(t !== 'light' && t !== 'dark'){ t = (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) ? 'light' : 'dark'; }
+  var d = document.documentElement;
+  d.setAttribute('data-lang', l); d.setAttribute('lang', l === 'ua' ? 'uk' : l); d.setAttribute('data-theme', t);
+})();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/sza-kit.css">
+<link rel="stylesheet" href="../../assets/site.css">
+<link rel="stylesheet" href="../../assets/portal.css">
+</head>
+<body>
+<a class="skip-link" href="#main"><span data-l="ru">Перейти к содержимому</span><span data-l="en">Skip to the content</span><span data-l="ua">Перейти до вмісту</span></a>
+<div class="bg-blobs" aria-hidden="true"><div class="blob blob-1"></div><div class="blob blob-2"></div><div class="blob blob-3"></div></div>
+<svg class="icon-sprite" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+  <symbol id="icon-action-download" viewBox="0 0 24 24"><g transform="translate(12 12) scale(.917 .917) translate(-12 -12)"><path d="M19.35,10.04C18.67,6.59 15.64,4 12,4 9.11,4 6.6,5.64 5.35,8.04 2.34,8.36 0,10.91 0,14c0,3.31 2.69,6 6,6h13c2.76,0 5,-2.24 5,-5 0,-2.64 -2.05,-4.78 -4.65,-4.96zM17,13l-5,5 -5,-5h3V9h4v4h3z"/></g></symbol>
+  <symbol id="icon-nav-scroll-top" viewBox="0 0 24 24"><path d="M8 11h3v10h2V11h3l-4-4-4 4zM4 3v2h16V3H4z"/></symbol>
+</svg>
+<header class="site-header portal-header">
+    <a class="brand" href="../../">Universal&nbsp;Agent&nbsp;Kit<span class="dot">.</span></a>
+    <button class="ctl nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="portalNav"><span data-l="ru">Меню</span><span data-l="en">Menu</span><span data-l="ua">Меню</span></button>
+    <nav class="portal-nav" id="portalNav" aria-label="Portal" data-aria="navPortal">
+      <a href="../"><span data-l="ru">Портал</span><span data-l="en">Portal</span><span data-l="ua">Портал</span></a>
+      <a href="../overview.html"><span data-l="ru">Обзор</span><span data-l="en">Overview</span><span data-l="ua">Огляд</span></a>
+      <a href="../showcase.html"><span data-l="ru">Витрина</span><span data-l="en">Showcase</span><span data-l="ua">Вітрина</span></a>
+      <a href="../subjects.html"><span data-l="ru">Предметный указатель</span><span data-l="en">Subject index</span><span data-l="ua">Предметний покажчик</span></a>
+      <a href="../glossary.html"><span data-l="ru">Глоссарий</span><span data-l="en">Glossary</span><span data-l="ua">Глосарій</span></a>
+    </nav>
+    <button class="ctl search-open" id="searchOpen" type="button" aria-haspopup="dialog" aria-controls="searchDialog"><span data-l="ru">Поиск</span><span data-l="en">Search</span><span data-l="ua">Пошук</span><kbd aria-hidden="true">/</kbd></button>
+    <span class="seg" role="group" aria-label="Language" id="langGroup" data-aria="langGroup">
+      <button id="lng-ru" type="button" data-set-lang="ru" aria-pressed="false" aria-label="Русский">RU</button>
+      <button id="lng-en" type="button" data-set-lang="en" aria-pressed="true" aria-label="English">EN</button>
+      <button id="lng-ua" type="button" data-set-lang="ua" aria-pressed="false" aria-label="Українська">UA</button>
+    </span>
+    <button class="theme-btn" id="themeBtn" type="button" title="Theme" aria-label="Theme" aria-pressed="false"><span data-l="ru">Тема</span><span data-l="en">Theme</span><span data-l="ua">Тема</span></button>
+    <a class="btn btn-primary btn-sm" href="../../universal-agent-kit.zip" download>
+      <svg class="icon" aria-hidden="true"><use href="#icon-action-download"/></svg><span data-l="ru">Скачать kit (.zip)</span><span data-l="en">Download kit (.zip)</span><span data-l="ua">Завантажити kit (.zip)</span>
+    </a>
+</header>
+<main id="main" class="page">
+<nav class="crumbs" aria-label="Breadcrumb" data-aria="breadcrumb"><ol><li><a href="../../"><span data-l="ru">Universal Agent Kit</span><span data-l="en">Universal Agent Kit</span><span data-l="ua">Universal Agent Kit</span></a></li><li><a href="../"><span data-l="ru">Портал</span><span data-l="en">Portal</span><span data-l="ua">Портал</span></a></li><li><a href="../#section-agents"><span data-l="ru">Ролевые агенты</span><span data-l="en">Role agents</span><span data-l="ua">Рольові агенти</span></a></li><li aria-current="page"><span data-l="ru">Превратить технические заметки в понятные, дружелюбные доки и тексты интерфейса</span><span data-l="en">Turn technical notes into clear, friendly docs and UI copy</span><span data-l="ua">Перетворити технічні нотатки на зрозумілі, дружні доки й тексти інтерфейсу</span></li></ol></nav>
+<header class="page-head">
+<p class="eyebrow"><span class="pill"><span data-l="ru">Ролевой агент</span><span data-l="en">Role agent</span><span data-l="ua">Рольовий агент</span></span> <a href="../#section-agents"><span data-l="ru">Ролевые агенты</span><span data-l="en">Role agents</span><span data-l="ua">Рольові агенти</span></a></p>
+<h1><span data-l="ru">Превратить технические заметки в понятные, дружелюбные доки и тексты интерфейса</span><span data-l="en">Turn technical notes into clear, friendly docs and UI copy</span><span data-l="ua">Перетворити технічні нотатки на зрозумілі, дружні доки й тексти інтерфейсу</span></h1>
+<p class="lead prose"><span data-l="ru"><code>doc-writer</code> - <a href="../glossary.html#term-role-agent">ролевой агент</a> <a href="../glossary.html#term-tier">среднего уровня</a> (<code>model: sonnet</code>) для документации и текстов, которые видит пользователь. Дайте ему функциональность, сценарий, настройку, заметку об архитектуре или строку интерфейса, и он превратит это в ясный, тёплый, полезный текст: дружелюбный, сжатый, уверенный, с лёгкой иронией там, где она помогает. Поведение он не выдумывает; если источник слишком расплывчат, он спрашивает.</span><span data-l="en"><code>doc-writer</code> is a <a href="../glossary.html#term-tier">mid-tier</a> <a href="../glossary.html#term-role-agent">role agent</a> (<code>model: sonnet</code>) for documentation and user-facing copy. Give it a feature, a flow, a setting, an architecture note or a UI string, and it turns it into clear, warm, useful text: friendly, concise, confident, lightly witty where that helps. It does not invent behaviour; when the source is too vague, it asks.</span><span data-l="ua"><code>doc-writer</code> - <a href="../glossary.html#term-role-agent">рольовий агент</a> <a href="../glossary.html#term-tier">середнього рівня</a> (<code>model: sonnet</code>) для документації та текстів, які бачить користувач. Дайте йому функціональність, сценарій, налаштування, нотатку про архітектуру чи рядок інтерфейсу, і він перетворить це на ясний, теплий, корисний текст: дружній, стислий, упевнений, з легкою іронією там, де вона допомагає. Поведінку він не вигадує; якщо джерело надто розпливчасте, він питає.</span></p>
+</header>
+<article class="fn" data-kind="agent">
+<div class="panels">
+<section class="panel" aria-labelledby="h-situation"><h2 id="h-situation"><span data-l="ru">Когда это нужно</span><span data-l="en">When to reach for it</span><span data-l="ua">Коли це потрібно</span></h2><p class="prose"><span data-l="ru">Нужно написать или переписать документ, объяснить функциональность или структуру простым языком, отполировать README, справку, онбординг или заметки к релизу либо улучшить строки, которые видит пользователь.</span><span data-l="en">You need a doc written or rewritten, a feature or a structure explained in plain language, a README, help text, onboarding or release notes polished, or user-facing strings improved.</span><span data-l="ua">Потрібно написати чи переписати документ, пояснити функціональність або структуру простою мовою, відполірувати README, довідку, онбординг чи нотатки до релізу або покращити рядки, які бачить користувач.</span></p></section>
+<section class="panel" aria-labelledby="h-requirements"><h2 id="h-requirements"><span data-l="ru">Требования</span><span data-l="en">Requirements</span><span data-l="ua">Вимоги</span></h2><dl class="req">
+<div><dt><span data-l="ru">Где доступно</span><span data-l="en">Available in</span><span data-l="ua">Де доступно</span></dt><dd><span data-l="ru">Каждая загрузка kit</span><span data-l="en">Every download of the kit</span><span data-l="ua">Кожне завантаження kit</span></dd></div>
+<div><dt><span data-l="ru">К чему обращается</span><span data-l="en">What it touches</span><span data-l="ua">До чого звертається</span></dt><dd><ul class="chips"><li class="pill"><span data-l="ru">Читает файлы проекта</span><span data-l="en">Reads the files of your project</span><span data-l="ua">Читає файли проєкту</span></li><li class="pill"><span data-l="ru">Правит файлы проекта</span><span data-l="en">Edits files in your project</span><span data-l="ua">Змінює файли проєкту</span></li></ul></dd></div>
+<div><dt><span data-l="ru">Работает с</span><span data-l="en">Works with</span><span data-l="ua">Працює з</span></dt><dd><span data-l="ru">Сделано для Claude Code; другие агенты адаптируют</span><span data-l="en">Built for Claude Code; other agents adapt it</span><span data-l="ua">Зроблено для Claude Code; інші агенти адаптують</span></dd></div>
+<div><dt><span data-l="ru">Где выполняются шаги</span><span data-l="en">Where the steps happen</span><span data-l="ua">Де виконуються кроки</span></dt><dd><span data-l="ru">Чат вашего агента и ваши собственные файлы. Ни то ни другое не интерфейс этого сайта, поэтому шаги описаны текстом, а не скриншотами.</span><span data-l="en">Your agent's chat and your own files. Neither is an interface of this site, so the steps are text and not screenshots.</span><span data-l="ua">Чат вашого агента і ваші власні файли. Ні те, ні інше не є інтерфейсом цього сайту, тому кроки описано текстом, а не скриншотами.</span></dd></div>
+<div><dt><span data-l="ru">Где это лежит в kit</span><span data-l="en">Where it lives in the kit</span><span data-l="ua">Де це лежить у kit</span></dt><dd><code>.claude/agents/doc-writer.md</code></dd></div>
+</dl></section>
+<div class="note warn" role="note"><div class="tag"><span data-l="ru">Прежде чем начать</span><span data-l="en">Before you start</span><span data-l="ua">Перш ніж почати</span></div><p><span data-l="ru">У тепла есть границы. Предупреждение или обязательное действие никогда не прячутся за шуткой, смысл существующего текста не меняется ради дружелюбия, а юридические тексты, условия использования и машиночитаемые артефакты остаются формальными и нейтральными.</span><span data-l="en">The warmth has limits. A warning or a required action is never hidden behind a joke, existing text does not change meaning just to sound friendlier, and legal text, terms of service and machine-readable artifacts stay formal and neutral.</span><span data-l="ua">У теплоти є межі. Попередження чи обов'язкова дія ніколи не ховаються за жартом, зміст наявного тексту не змінюється заради дружності, а юридичні тексти, умови користування та машиночитні артефакти лишаються формальними й нейтральними.</span></p></div>
+<section class="panel wide" aria-labelledby="h-steps"><h2 id="h-steps"><span data-l="ru">Шаги</span><span data-l="en">Steps</span><span data-l="ua">Кроки</span></h2><ol class="steps">
+<li><span class="prose"><span data-l="ru">Передайте ему источник и цель: заметки, код, существующий документ или строку и файл или поверхность, для которых нужен текст. Сначала убедитесь, что <a href="../glossary.html#term-placeholder">заполнитель</a> с названием проекта в файле агента заполнен под ваш проект.</span><span data-l="en">Hand it the source and the target: notes, code, an existing doc or a string, and the file or surface the text is for. First make sure the <a href="../glossary.html#term-placeholder">placeholder</a> for the project name in its file is filled in for your project.</span><span data-l="ua">Передайте йому джерело й мету: нотатки, код, наявний документ чи рядок та файл або поверхню, для яких потрібен текст. Спершу переконайтеся, що <a href="../glossary.html#term-placeholder">заповнювач</a> з назвою проєкту у файлі агента заповнений під ваш проєкт.</span></span></li>
+<li><span class="prose"><span data-l="ru">Сначала он определяет аудиторию: конечный пользователь, тестировщик, сопровождающий или разработчик.</span><span data-l="en">It identifies the audience first: end user, tester, maintainer or developer.</span><span data-l="ua">Спершу він визначає аудиторію: кінцевий користувач, тестувальник, супровідник або розробник.</span></span></li>
+<li><span class="prose"><span data-l="ru">Он читает источник и выделяет настоящий смысл, прежде чем переписывать. Если источник слишком расплывчат, он просит у вас недостающее продуктовое решение, а не заполняет пробел стилем.</span><span data-l="en">It reads the source and extracts the real meaning before rewriting. If the source is too vague, it asks you for the missing product decision instead of filling the gap with style.</span><span data-l="ua">Він читає джерело й виділяє справжній зміст, перш ніж переписувати. Якщо джерело надто розпливчасте, він просить у вас бракуюче продуктове рішення, а не заповнює прогалину стилем.</span></span></li>
+<li><span class="prose"><span data-l="ru">Он переписывает так: сначала ясность, потом тон, юмор в последнюю очередь. Инструкции остаются применимыми: что произошло, почему это важно, что делать дальше. Каждый технический факт, действительно нужный тексту, например версии, флаги и имена, сохраняется.</span><span data-l="en">It rewrites for clarity first, tone second, humour last. Instructions stay actionable: what happened, why it matters, what to do next. Every technical fact the text genuinely needs, such as versions, flags and names, is preserved.</span><span data-l="ua">Він переписує так: спершу ясність, потім тон, гумор в останню чергу. Інструкції лишаються придатними до дії: що сталося, чому це важливо, що робити далі. Кожен технічний факт, справді потрібний тексту, наприклад версії, прапорці та імена, зберігається.</span></span></li>
+<li><span class="prose"><span data-l="ru">Для строк, которые видит пользователь, он следует политике текстов и тона вашего проекта, пишет на языке целевого файла, если вы не попросили иначе, держит юмор лёгким и никогда не за счёт пользователя и не выдумывает поведение продукта, архитектуру или детали реализации.</span><span data-l="en">It follows the project's copy and tone policy for user-visible strings, matches the language of the target file unless you ask otherwise, keeps humour light and never at the user's expense, and does not invent product behaviour, architecture or implementation details.</span><span data-l="ua">Для рядків, які бачить користувач, він дотримується політики текстів і тону вашого проєкту, пише мовою цільового файлу, якщо ви не попросили інакше, тримає гумор легким і ніколи не коштом користувача та не вигадує поведінку продукту, архітектуру чи деталі реалізації.</span></span></li>
+<li><span class="prose"><span data-l="ru">Для зеркальных документов, например нескольких локалей, он держит варианты согласованными. Для строк интерфейса он делает текст достаточно компактным для целевой поверхности.</span><span data-l="en">For mirrored docs, such as several locales, it keeps the variants aligned. For user-facing strings it keeps the copy compact enough for the target surface.</span><span data-l="ua">Для дзеркальних документів, наприклад кількох локалей, він тримає варіанти узгодженими. Для рядків інтерфейсу він робить текст достатньо компактним для цільової поверхні.</span></span></li>
+<li><span class="prose"><span data-l="ru">Он сообщает аудиторию и цель текста, изменённые файлы или точный черновик, если правку файла вы не просили, любой компромисс в формулировках, существенно влияющий на смысл или тон, и всё, что нужно доделать в зеркальных документах, строках или вёрстке.</span><span data-l="en">It reports the audience and goal of the text, the files changed or the exact draft if you asked for no file edit, any wording trade-off that materially affects meaning or tone, and any follow-up needed for mirrored docs, strings or layout fit.</span><span data-l="ua">Він повідомляє аудиторію й мету тексту, змінені файли або точну чернетку, якщо правки файлу ви не просили, будь-який компроміс у формулюваннях, що суттєво впливає на зміст чи тон, і все, що треба доробити у дзеркальних документах, рядках або верстці.</span></span></li>
+</ol></section>
+<div class="note outcome" role="note"><div class="tag"><span data-l="ru">Что вы должны увидеть</span><span data-l="en">What you should see</span><span data-l="ua">Що ви маєте побачити</span></div><p><span data-l="ru">Готовый текст в целевом файле или точный черновик, если правку файла вы не просили, и короткая заметка: аудитория, цель, любой компромисс в формулировках, меняющий смысл или тон, и что осталось доделать в зеркальных документах, строках или вёрстке.</span><span data-l="en">Finished text in the target file, or the exact draft when you asked for no edit, plus a short note naming the audience, the goal, any wording trade-off that changes meaning or tone, and what is left to do in mirrored docs, strings or layout.</span><span data-l="ua">Готовий текст у цільовому файлі або точна чернетка, якщо правки файлу ви не просили, і коротка нотатка: аудиторія, мета, будь-який компроміс у формулюваннях, що змінює зміст чи тон, і що лишилося доробити у дзеркальних документах, рядках або верстці.</span></p></div>
+<section class="panel" aria-labelledby="h-tips"><h2 id="h-tips"><span data-l="ru">Советы</span><span data-l="en">Tips</span><span data-l="ua">Поради</span></h2><ul class="tips">
+<li class="prose"><span data-l="ru">Для механической синхронизации зеркальных документов описание самого агента отсылает к отдельному навыку синхронизации, если он есть в вашем проекте. Этого агента берите для самого письма.</span><span data-l="en">For mechanical sync of mirrored docs, the agent's own description points to a dedicated sync skill, if your project has one. Use this agent for the writing.</span><span data-l="ua">Для механічної синхронізації дзеркальних документів опис самого агента відсилає до окремої навички синхронізації, якщо вона є у вашому проєкті. Цього агента беріть для самого письма.</span></li>
+<li class="prose"><span data-l="ru">Назовите аудиторию сами, если знаете её. Первый шаг агента - определить её, и одно ваше предложение избавит его от догадки.</span><span data-l="en">Name the audience yourself when you know it. The agent's first move is to identify one, and a sentence from you saves it the guess.</span><span data-l="ua">Назвіть аудиторію самі, якщо знаєте її. Перший крок агента - визначити її, і одне ваше речення позбавить його здогадки.</span></li>
+<li class="prose"><span data-l="ru">Прочитайте компромиссы в формулировках из его отчёта: они отмечают места, где тон и смысл тянули в разные стороны, и именно на них стоит взглянуть ещё раз.</span><span data-l="en">Read the wording trade-offs in its report: they mark the places where tone and meaning pulled against each other, and they are the ones worth a second look from you.</span><span data-l="ua">Прочитайте компроміси у формулюваннях з його звіту: вони позначають місця, де тон і зміст тягнули в різні боки, і саме на них варто глянути ще раз.</span></li>
+<li class="prose"><span data-l="ru">Если документация - часть большей функциональности, где нужны ещё код и ревью, начните с <a href="rd-lead.html">rd-lead</a>: в его описании работа с текстом отдана этому агенту.</span><span data-l="en">If the docs are one part of a bigger feature that also needs code and review, start with <a href="rd-lead.html">rd-lead</a>; its own description sends prose to this agent.</span><span data-l="ua">Якщо документація - частина більшої функціональності, де потрібні ще код і рев'ю, почніть із <a href="rd-lead.html">rd-lead</a>: у його описі робота з текстом віддана цьому агентові.</span></li>
+</ul></section>
+<section class="panel" aria-labelledby="h-related"><h2 id="h-related"><span data-l="ru">Связанные функции</span><span data-l="en">Related functions</span><span data-l="ua">Пов'язані функції</span></h2><ul class="fn-list">
+<li><a href="rd-lead.html"><span data-l="ru">Поручить нетривиальную работу ведущему агенту</span><span data-l="en">Hand a non-trivial job to a lead agent</span><span data-l="ua">Доручити нетривіальну роботу ведучому агентові</span></a><span class="fn-pitch"><span data-l="ru">Один ведущий агент ведёт запрос от первого чтения до проверенной работы: оценивает задачу, выбирает самый лёгкий подходящий путь и передаёт части другим агентам.</span><span data-l="en">One lead agent takes a request from first read to verified work: it classifies the job, picks the lightest path that fits and hands parts to other agents.</span><span data-l="ua">Один ведучий агент веде запит від першого читання до перевіреної роботи: оцінює завдання, обирає найлегший придатний шлях і передає частини іншим агентам.</span></span></li>
+<li><a href="implementer.html"><span data-l="ru">Поручить запланированную работу исполнителю, который держится плана</span><span data-l="en">Have a planned change built exactly as the plan says</span><span data-l="ua">Доручити заплановану роботу виконавцю, що тримається плану</span></a><span class="fn-pitch"><span data-l="ru">Исполнитель среднего уровня выполняет шаг плана, исправление с известной причиной или тесты по структуре проекта и отчитывается: <code>expected | actual</code>.</span><span data-l="en">A mid-tier maker executes a plan step, a fix with a known cause or tests in your project's structure, and reports each check as <code>expected | actual</code>.</span><span data-l="ua">Виконавець середнього рівня виконує крок плану, виправлення з відомою причиною чи тести за структурою проєкту й звітує: <code>expected | actual</code>.</span></span></li>
+<li><a href="solution-researcher.html"><span data-l="ru">Разобраться, как что-то устроено, прежде чем писать спеку</span><span data-l="en">Investigate how something works before you write a spec</span><span data-l="ua">З'ясувати, як щось працює, перш ніж писати спеку</span></a><span class="fn-pitch"><span data-l="ru">Агент только для чтения собирает файлы, приёмы, ограничения и риски области и возвращает отчёт с доказательствами. Он ничего не правит.</span><span data-l="en">A read-only agent maps the files, patterns, constraints and risks of an area and returns an evidence-based report. It edits nothing.</span><span data-l="ua">Агент лише для читання збирає файли, прийоми, обмеження та ризики галузі й повертає звіт із доказами. Він нічого не правит.</span></span></li>
+</ul></section>
+<section class="panel wide" aria-labelledby="h-terms"><h2 id="h-terms"><span data-l="ru">Термины на этой странице</span><span data-l="en">Terms on this page</span><span data-l="ua">Терміни на цій сторінці</span></h2><ul class="chips">
+<li><a class="pill" href="../glossary.html#term-role-agent"><span data-l="ru">Ролевой агент</span><span data-l="en">Role agent</span><span data-l="ua">Рольовий агент</span></a></li>
+<li><a class="pill" href="../glossary.html#term-tier"><span data-l="ru">Уровень модели</span><span data-l="en">Tier (model tier)</span><span data-l="ua">Рівень моделі</span></a></li>
+<li><a class="pill" href="../glossary.html#term-placeholder"><span data-l="ru">Плейсхолдер</span><span data-l="en">Placeholder</span><span data-l="ua">Плейсхолдер</span></a></li>
+</ul></section>
+</div>
+<nav class="pager" aria-label="In this section" data-aria="navSection"><a class="pager-prev" rel="prev" href="implementer.html"><span class="pager-dir"><span data-l="ru">Назад</span><span data-l="en">Previous</span><span data-l="ua">Назад</span></span><span><span data-l="ru">Поручить запланированную работу исполнителю, который держится плана</span><span data-l="en">Have a planned change built exactly as the plan says</span><span data-l="ua">Доручити заплановану роботу виконавцю, що тримається плану</span></span></a></nav>
+</article>
+</main>
+<footer class="site-footer"><div class="container">
+  <div data-l="ru">
+    <strong>Universal Agent Kit</strong> - переносимый метод работы с ИИ-агентами.
+    <div class="cta">
+      <a class="btn btn-primary" href="../../universal-agent-kit.zip" download><svg class="icon" aria-hidden="true"><use href="#icon-action-download"/></svg>Скачать kit (.zip)</a>
+      <a class="btn btn-ghost" href="https://github.com/SerZhyAle/universal-agent-kit" target="_blank" rel="noopener">Исходный код</a>
+    </div>
+    <p class="muted">Kit - MIT · текст - CC BY 4.0 · выжимка из реального проекта, без привязки к стеку.</p>
+  </div>
+  <div data-l="en">
+    <strong>Universal Agent Kit</strong> - a portable method for working with AI agents.
+    <div class="cta">
+      <a class="btn btn-primary" href="../../universal-agent-kit.zip" download><svg class="icon" aria-hidden="true"><use href="#icon-action-download"/></svg>Download kit (.zip)</a>
+      <a class="btn btn-ghost" href="https://github.com/SerZhyAle/universal-agent-kit" target="_blank" rel="noopener">Source code</a>
+    </div>
+    <p class="muted">Kit is MIT · prose is CC BY 4.0 · distilled from a real project, stack-agnostic.</p>
+  </div>
+  <div data-l="ua">
+    <strong>Universal Agent Kit</strong> - переносний метод роботи з ШІ-агентами.
+    <div class="cta">
+      <a class="btn btn-primary" href="../../universal-agent-kit.zip" download><svg class="icon" aria-hidden="true"><use href="#icon-action-download"/></svg>Завантажити kit (.zip)</a>
+      <a class="btn btn-ghost" href="https://github.com/SerZhyAle/universal-agent-kit" target="_blank" rel="noopener">Вихідний код</a>
+    </div>
+    <p class="muted">Kit - MIT · текст - CC BY 4.0 · дистильовано з реального проєкту, без прив'язки до стеку.</p>
+  </div>
+  <section class="tools-family" aria-labelledby="more-tools-heading">
+    <h2 id="more-tools-heading"><span data-l="ru">Другие инструменты SZA</span><span data-l="en">More tools by SZA</span><span data-l="ua">Інші інструменти SZA</span></h2>
+    <nav class="tools-grid" aria-label="More tools by SZA" data-aria="navTools">
+        <a href="https://serzhyale.github.io/FastMediaSorter_mob_v2/" target="_blank" rel="noopener">Fast Media Sorter &amp; Organizer</a>
+        <a href="https://serzhyale.github.io/FastMediaSorter_Lite/" target="_blank" rel="noopener">Fast Media Sorter for Windows</a>
+        <a href="https://serzhyale.github.io/CyrFlip/" target="_blank" rel="noopener">CyrFlip</a>
+        <a href="https://serzhyale.github.io/doc-html-translate/" target="_blank" rel="noopener">doc-html-translate</a>
+        <a href="https://serzhyale.github.io/FileDO/" target="_blank" rel="noopener">FileDO</a>
+        <a href="https://serzhyale.github.io/StreamsPlayer/" target="_blank" rel="noopener">STREAMS Player</a>
+        <a href="https://serzhyale.github.io/OneClickRunner/" target="_blank" rel="noopener">OneClickRunner</a>
+        <a href="https://sza.od.ua" target="_blank" rel="noopener">SZA (hub)</a>
+    </nav>
+  </section>
+  <div class="footer-bottom">
+    <span>&copy; 2026 <a href="https://sza.od.ua" target="_blank" rel="noopener">Serhii Zhyhunenko</a></span>
+    <nav aria-label="Author links" data-aria="navAuthor"><a href="../../privacy.html"><span data-l="ru">Конфиденциальность</span><span data-l="en">Privacy</span><span data-l="ua">Конфіденційність</span></a> &middot; <a href="https://sza.od.ua" target="_blank" rel="noopener">sza.od.ua</a> &middot; <a href="https://github.com/SerZhyAle" target="_blank" rel="noopener">GitHub</a> &middot; <a href="mailto:sza@ukr.net">sza@ukr.net</a></nav>
+  </div>
+  <p class="provenance muted"><span data-l="ru">Собрано по опыту разработки из FastMediaSorter - Android-приложения, которое живёт на этом методе каждый день более года.</span><span data-l="en">Built from hands-on experience with FastMediaSorter - a shipping Android app run on this method every day for over a year.</span><span data-l="ua">Зібрано за досвідом розробки з FastMediaSorter - Android-застосунку, що живе на цьому методі щодня понад рік.</span></p>
+</div></footer>
+<button class="to-top" id="toTop" type="button" aria-label="Back to top" title="Back to top"><svg class="icon" aria-hidden="true"><use href="#icon-nav-scroll-top"/></svg></button>
+<dialog class="search-dialog" id="searchDialog" aria-labelledby="searchTitle">
+  <form method="dialog" class="search-form" id="searchForm">
+    <div class="search-head">
+      <h2 id="searchTitle"><span data-l="ru">Поиск по порталу</span><span data-l="en">Search the portal</span><span data-l="ua">Пошук по порталу</span></h2>
+      <button class="btn btn-ghost btn-sm" type="button" id="searchClose"><span data-l="ru">Закрыть</span><span data-l="en">Close</span><span data-l="ua">Закрити</span></button>
+    </div>
+    <input class="search-input" id="searchInput" type="search" autocomplete="off" spellcheck="false" aria-labelledby="searchTitle" placeholder="Search..">
+    <p class="search-status" id="searchStatus" role="status" aria-live="polite"></p>
+    <ul class="search-results" id="searchResults"></ul>
+  </form>
+</dialog>
+<script src="../../assets/portal.js" defer></script>
+</body>
+</html>

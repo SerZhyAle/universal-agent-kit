@@ -1,0 +1,114 @@
+{
+  "id": "parallel-writers",
+  "title": {
+    "en": "Run several writing agents without losing work",
+    "ru": "Запустить нескольких пишущих агентов, не потеряв работу",
+    "ua": "Запустити кількох агентів, що пишуть, не втративши роботи"
+  },
+  "pitch": {
+    "en": "Give each writing agent its own checkout, or give one owner the tree-wide commands, so no stash, reset or checkout silently erases another agent's edits.",
+    "ru": "Дайте каждому пишущему агенту свою рабочую копию или отдайте команды над всем деревом одному владельцу, чтобы stash, reset или checkout не стёрли молча чужие правки.",
+    "ua": "Дайте кожному агентові, що пише, власну робочу копію або віддайте команди над усім деревом одному власникові, щоб stash, reset чи checkout не стерли мовчки чужі правки."
+  },
+  "lead": {
+    "en": "Extra readers cost tokens; extra writers cost work. A wave of writers that goes wrong leaves a tree nobody can account for, and disjoint files are no protection: one whole-tree version-control operation by one writer reverts every other writer's uncommitted edits. This page covers the writer boundary, one checkout per writer, the lock path that must stay shared, how the work comes home, and the file lists and central re-check that keep each writer inside its own boundary.",
+    "ru": "Лишние читатели стоят токенов, лишние пишущие стоят работы. Волна пишущих, пошедшая не так, оставляет дерево, за которое никто не может отчитаться, а разные файлы не защищают: одна операция над всем деревом у одного пишущего откатывает несохранённые правки всех остальных. Здесь: граница для пишущих, отдельная рабочая копия на каждого, путь блокировки, который должен остаться общим, возвращение работы, а также списки файлов и центральная перепроверка, которые держат каждого в своей границе.",
+    "ua": "Зайві читачі коштують токенів, зайві автори коштують роботи. Хвиля агентів, що пишуть, яка пішла не так, лишає дерево, за яке ніхто не може відзвітувати, а різні файли не захищають: одна операція над усім деревом в одного відкочує незбережені правки всіх інших. Тут: межа для тих, що пишуть, окрема робоча копія на кожного, шлях блокування, що має лишитися спільним, повернення роботи, а також списки файлів і центральна перевірка, які тримають кожного у своїй межі."
+  },
+  "situation": {
+    "en": "Two or more agents, or an agent and a human, are about to edit the same workspace at the same time, or your own files keep reverting without an error.",
+    "ru": "Два агента или больше, либо агент и человек, собираются править одну рабочую папку одновременно, либо ваши файлы то и дело откатываются без всякой ошибки.",
+    "ua": "Два агенти чи більше, або агент і людина, збираються правити одну робочу теку одночасно, або ваші файли раз у раз відкочуються без жодної помилки."
+  },
+  "warning": {
+    "en": "The victim sees no error, only its own finished work missing. \"Something keeps reverting my files\" is almost always a concurrent agent's tree operation, so re-read from disk before redoing anything. And /rewind will not undo a wave: it restores edits Claude Code's own file tools made this session, not shell-made changes and usually not a subagent's. Undoing a wave is a version-control job.",
+    "ru": "Жертва не видит ошибки, а видит лишь пропажу своей законченной работы. «Файлы то и дело откатываются» - почти всегда операция над деревом у параллельного агента, поэтому перед переделкой перечитайте файл с диска. А /rewind волну не отменит: он возвращает правки файловых инструментов Claude Code за сессию, но не изменения оболочки и обычно не правки субагента. Отмена волны - дело контроля версий.",
+    "ua": "Постраждалий не бачить помилки, лише зникнення своєї завершеної роботи. «Файли раз у раз відкочуються» - це майже завжди операція над деревом у паралельного агента, тож перед переробкою перечитайте файл із диска. А /rewind хвилю не скасує: він повертає правки файлових інструментів Claude Code за сесію, але не зміни оболонки й зазвичай не правки субагента. Хвилю скасовує лише контроль версій."
+  },
+  "steps": [
+    {
+      "en": "Know the operations that break the boundary. In a git repository they are stash, checkout, reset, restore and clean. Run by one writer on the whole tree, any of them reverts every other writer's uncommitted edits, even on files it never touched. \"They are editing different files\" is necessary and nowhere near sufficient.",
+      "ru": "Знайте операции, которые ломают границу. В репозитории git это stash, checkout, reset, restore и clean. Запущенная одним пишущим над всем деревом, любая из них откатывает несохранённые правки всех остальных, даже в файлах, которых он не касался. «Они правят разные файлы» необходимо, но совершенно недостаточно.",
+      "ua": "Знайте операції, що ламають межу. У репозиторії git це stash, checkout, reset, restore і clean. Запущена одним агентом над усім деревом, будь-яка з них відкочує незбережені правки всіх інших, навіть у файлах, яких він не торкався. «Вони правлять різні файли» потрібно, але далеко не достатньо."
+    },
+    {
+      "en": "Pick one of two ways out, explicitly. Either the [orchestrator](term:orchestrator) owns version-control, build and index commands and runs them only between waves, and parallel writers are forbidden them outright: cheapest, and enough for a small wave on one tree. Or each writer gets its own checkout, which is required once a writer needs its own branch, its own build, or a run longer than the orchestrator wants to hold the tree still.",
+      "ru": "Выберите один из двух выходов явно. Либо [оркестратор](term:orchestrator) владеет командами контроля версий, сборки и индекса и запускает их только между волнами, а параллельным пишущим они запрещены совсем: это дешевле всего и достаточно для небольшой волны на одном дереве. Либо у каждого пишущего своя рабочая копия: она обязательна, как только пишущему нужна своя ветка, своя сборка или запуск дольше, чем оркестратор готов держать дерево неподвижным.",
+      "ua": "Виберіть один із двох виходів явно. Або [оркестратор](term:orchestrator) володіє командами контролю версій, збірки та індексу й запускає їх лише між хвилями, а паралельним агентам, що пишуть, вони заборонені взагалі: це найдешевше й достатньо для невеликої хвилі на одному дереві. Або в кожного своя робоча копія: вона обов'язкова, щойно агентові потрібна своя гілка, своя збірка чи запуск довший, ніж оркестратор готовий тримати дерево нерухомим."
+    },
+    {
+      "en": "In a git repository, a linked [worktree](term:worktree) is usually the right checkout per writer: it shares the object store, so it is cheap to create and discard, and each writer gets its own working tree and branch. A full clone isolates more, at the cost of a copy. On Claude Code, `isolation: worktree` in a subagent's frontmatter does this per spawn; the worktree branches from the default branch, not the session's current HEAD, so uncommitted work and your feature branch are not in it.",
+      "ru": "В репозитории git для каждого пишущего обычно подходит связанное [рабочее дерево](term:worktree): оно делит хранилище объектов, поэтому его дёшево создать и выбросить, а у каждого свои рабочее дерево и ветка. Полный клон изолирует сильнее, ценой копии. В Claude Code `isolation: worktree` во frontmatter субагента делает это для каждого запуска, но дерево ветвится от ветки по умолчанию, а не от текущего HEAD сессии, поэтому незакоммиченной работы и вашей feature-ветки в нём нет.",
+      "ua": "У репозиторії git для кожного, хто пише, зазвичай підходить пов'язане [робоче дерево](term:worktree): воно ділить сховище об'єктів, тож його дешево створити й викинути, а в кожного власні робоче дерево та гілка. Повний клон ізолює сильніше, ціною копії. У Claude Code `isolation: worktree` у frontmatter субагента робить це для кожного запуску, але дерево відгалужується від гілки за замовчуванням, а не від поточного HEAD сесії, тож незакомічної роботи й вашої feature-гілки в ньому немає."
+    },
+    {
+      "en": "Do not share single-instance resources the build touches: one output directory, one device or emulator, one port, one generated catalog. Two worktrees pointed at one output directory are one writer wearing two hats, and they will interleave halfway through a build.",
+      "ru": "Не делите ресурсы в единственном экземпляре, которых касается сборка: один выходной каталог, одно устройство или эмулятор, один порт, один генерируемый каталог. Два рабочих дерева с одним выходным каталогом - это один пишущий в двух шапках, и посреди сборки они перемешаются.",
+      "ua": "Не діліть ресурси в єдиному екземплярі, яких торкається збірка: один вихідний каталог, один пристрій чи емулятор, один порт, один генерований каталог. Два робочі дерева з одним вихідним каталогом - це один агент у двох шапках, і посеред збірки вони перемішаються."
+    },
+    {
+      "en": "Keep one thing shared: the [advisory lock](term:advisory-lock) path. If your workspace is a git repository, resolve it from the shared git directory, not from the working tree. A per-worktree lock serializes nothing and gives no error: every caller takes its lock, believes it is the exclusive owner, and all proceed at once.",
+      "ru": "Одно должно остаться общим: путь [рекомендательной блокировки](term:advisory-lock). Если рабочая папка - репозиторий git, берите его из общего каталога git, а не из рабочего дерева. Блокировка на каждое дерево ничего не упорядочивает и не выдаёт ошибки: каждый вызывающий успешно берёт свою блокировку, считает себя единственным владельцем, и все идут одновременно.",
+      "ua": "Одне має лишитися спільним: шлях [рекомендаційного блокування](term:advisory-lock). Якщо робоча тека - репозиторій git, беріть його зі спільної теки git, а не з робочого дерева. Блокування на кожне дерево нічого не впорядковує й не видає помилки: кожен, хто викликає, успішно бере своє блокування, вважає себе єдиним власником, і всі йдуть одночасно."
+    },
+    {
+      "en": "Decide before the wave starts how each writer's work comes home: its own branch and commit, a patch handed to the orchestrator, or a direct merge into a shared integration branch. The kit does not choose for you, so record the decision and name who carries it out. A writer that reports success and leaves its work uncommitted in a worktree has produced an orphan: the central re-validation runs on a tree without the change, and the wave scores green.",
+      "ru": "До начала волны решите, как работа каждого пишущего возвращается домой: своя ветка и свой коммит, патч, переданный оркестратору, или прямое слияние в общую интеграционную ветку. Kit не выбирает за вас, поэтому запишите решение и назовите того, кто его выполняет. Пишущий, который отчитался об успехе и оставил работу незакоммиченной в рабочем дереве, породил сироту: центральная перепроверка идёт по дереву без этого изменения, и волна получает зелёный результат.",
+      "ua": "До початку хвилі вирішіть, як робота кожного, хто пише, повертається додому: своя гілка й свій коміт, патч, переданий оркестраторові, або пряме злиття в спільну інтеграційну гілку. Kit не вибирає за вас, тож запишіть рішення й назвіть того, хто його виконує. Агент, що відзвітував про успіх і лишив роботу незакоміченою в робочому дереві, породив сироту: центральна перевірка йде по дереву без цієї зміни, і хвиля отримує зелений результат."
+    },
+    {
+      "en": "Give each writer its exact file list, in its own prompt: not a folder, not \"the phase 2 files\", never a pointer into lines of one shared list. A writer left to work out its own scope reads the neighbour's lines, edits past its boundary, and the overlap shows up only as missing work.",
+      "ru": "Дайте каждому пишущему точный список его файлов в его собственном промпте: не папку, не «файлы фазы 2» и никогда не указатель на строки одного общего списка. Пишущий, которому приходится самому выяснять свои границы, читает чужие строки, правит за своей границей, а пересечение проявляется лишь как пропавшая работа.",
+      "ua": "Дайте кожному, хто пише, точний список його файлів у його власному промпті: не теку, не «файли фази 2» і ніколи не вказівник на рядки одного спільного списку. Той, хто пише й мусить сам з'ясовувати свої межі, читає чужі рядки, править за своєю межею, а перетин проявляється лише як зникла робота."
+    },
+    {
+      "en": "When the wave returns, the orchestrator re-runs the checker over each writer's file set, so a failure lands on the writer that owns the file. A changed file that is on nobody's list is itself a finding. A child's report is a claim, not a verdict: see [run independent lookups in parallel and check what comes back](fn:fan-out-readers).",
+      "ru": "Когда волна вернулась, оркестратор заново запускает проверку по набору файлов каждого пишущего, чтобы сбой попал к тому, кому принадлежит файл. Изменённый файл, которого нет ни в чьём списке, - уже находка. Отчёт дочернего агента - утверждение, а не вердикт: см. [запустить независимые поиски параллельно и проверить результат](fn:fan-out-readers).",
+      "ua": "Коли хвиля повернулася, оркестратор заново запускає перевірку по набору файлів кожного, хто пише, щоб збій потрапив до того, кому належить файл. Змінений файл, якого немає в нічийому списку, - уже знахідка. Звіт дочірнього агента - твердження, а не вердикт: див. [запустити незалежні пошуки паралельно й перевірити результат](fn:fan-out-readers)."
+    }
+  ],
+  "outcome": {
+    "en": "Each writer works where another's tree-wide command cannot reach it, on its own exact file list, with one lock path for all of them. Every writer's output has a named owner who brings it home, so nothing is left as an orphan in a worktree, and a failure after the wave lands on the writer whose file it is.",
+    "ru": "Каждый пишущий работает там, куда не дотянется чужая команда над всем деревом, по своему точному списку файлов, а путь блокировки у всех один. У результата каждого пишущего есть названный владелец, который возвращает его домой, так что в рабочих деревьях не остаётся сирот, а сбой после волны попадает к тому, чей это файл.",
+    "ua": "Кожен, хто пише, працює там, куди не дотягнеться чужа команда над усім деревом, за своїм точним списком файлів, а шлях блокування в усіх один. У результату кожного є названий власник, який повертає його додому, тож у робочих деревах не лишається сиріт, а збій після хвилі потрапляє до того, чий це файл."
+  },
+  "tips": [
+    {
+      "en": "How much a fan-out may spend is a separate question from how agents avoid each other. The budget gate precedes every wave, and the cost side, including the lock rules (queue rather than refuse, take the lock right before the edit, judge staleness by liveness), lives in [the budget gate](fn:budget-gate).",
+      "ru": "Сколько может потратить веер - отдельный вопрос от того, как агентам не мешать друг другу. Бюджетный шлюз стоит перед каждой волной, а сторона затрат, включая правила блокировки (вставать в очередь, а не отказывать, брать блокировку прямо перед правкой, судить о протухании по живости), описана в [бюджетном шлюзе](fn:budget-gate).",
+      "ua": "Скільки може витратити віяло - окреме питання від того, як агентам не заважати одне одному. Бюджетний шлюз стоїть перед кожною хвилею, а сторона витрат, зокрема правила блокування (ставати в чергу, а не відмовляти, брати блокування просто перед правкою, судити про застарілість за живістю), описана в [бюджетному шлюзі](fn:budget-gate)."
+    },
+    {
+      "en": "If a writer cannot commit its own output, the orchestrator's between-wave step must collect it, and that step is part of the wave definition.",
+      "ru": "Если пишущий не может закоммитить свой результат, его должен собрать шаг оркестратора между волнами, и этот шаг входит в определение волны.",
+      "ua": "Якщо той, хто пише, не може закомітити свій результат, його має зібрати крок оркестратора між хвилями, і цей крок входить у визначення хвилі."
+    },
+    {
+      "en": "Nothing here is specific to code. Two agents rewriting one contract bundle lose work the same way as two rewriting one module, and the version-control operation that takes it away does not ask what the files contained.",
+      "ru": "Ничто здесь не привязано к коду. Два агента, переписывающие один пакет договоров, теряют работу так же, как два, переписывающие один модуль, а операция контроля версий, которая её отнимает, не спрашивает, что было в файлах.",
+      "ua": "Ніщо тут не прив'язане до коду. Два агенти, що переписують один пакет договорів, втрачають роботу так само, як два, що переписують один модуль, а операція контролю версій, яка її забирає, не питає, що було у файлах."
+    },
+    {
+      "en": "No subagents in your runtime? The hazard still applies the moment you run two sessions against one checkout, and the fix is the same: one checkout each, or one owner for tree-wide commands.",
+      "ru": "В вашей среде нет субагентов? Опасность остаётся, как только вы запускаете две сессии на одной рабочей копии, и лекарство то же: по копии на каждого или один владелец команд над всем деревом.",
+      "ua": "У вашому середовищі немає субагентів? Небезпека лишається, щойно ви запускаєте дві сесії на одній робочій копії, і ліки ті самі: по копії на кожного або один власник команд над усім деревом."
+    },
+    {
+      "en": "One agent, always? Read this page anyway. The whole-tree revert also happens between one agent and a human working in the same tree, and it looks identical from both sides.",
+      "ru": "Всегда один агент? Всё равно прочтите эту страницу. Откат всего дерева случается и между одним агентом и человеком, работающими в одном дереве, и с обеих сторон он выглядит одинаково.",
+      "ua": "Завжди один агент? Усе одно прочитайте цю сторінку. Відкат усього дерева трапляється й між одним агентом і людиною, що працюють в одному дереві, і з обох боків він виглядає однаково."
+    },
+    {
+      "en": "The same document has two other parts: [run independent lookups in parallel and check what comes back](fn:fan-out-readers) for readers, which cost only tokens, and [run unattended work as a loop of fresh processes](fn:unattended-loop) for runs nobody watches.",
+      "ru": "В том же документе есть ещё две части: [запустить независимые поиски параллельно и проверить результат](fn:fan-out-readers) для читающих, которые стоят только токенов, и [пустить работу без присмотра циклом свежих процессов](fn:unattended-loop) для прогонов, за которыми никто не следит.",
+      "ua": "У тому самому документі є ще дві частини: [запустити незалежні пошуки паралельно й перевірити результат](fn:fan-out-readers) для тих, що лише читають і коштують лише токенів, та [пустити роботу без нагляду циклом свіжих процесів](fn:unattended-loop) для прогонів, за якими ніхто не стежить."
+    }
+  ],
+  "related": ["fan-out-readers", "unattended-loop", "budget-gate", "rd-lead"],
+  "terms": ["worktree", "advisory-lock", "orchestrator", "fan-out"],
+  "keywords": {
+    "en": ["parallel agents", "several writers", "git worktree", "stash reset checkout", "files keep reverting", "merge back", "lock path", "file list per writer"],
+    "ru": ["параллельные агенты", "несколько пишущих", "git worktree", "stash reset checkout", "файлы откатываются", "слияние обратно", "путь блокировки", "список файлов на каждого"],
+    "ua": ["паралельні агенти", "кілька агентів, що пишуть", "git worktree", "stash reset checkout", "файли відкочуються", "злиття назад", "шлях блокування", "список файлів на кожного"]
+  }
+}

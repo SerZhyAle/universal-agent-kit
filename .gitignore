@@ -24,3 +24,8 @@ _uak_build/
 
 # Scratch, logs and backups live under one tree and never at the repo root.
 temp/
+
+# docs/ is local working material, not a published surface (owner decision 2026-10-09):
+# the repo ships kit/, the site and the render targets. Files already tracked stay
+# tracked until removed by hand.
+docs/

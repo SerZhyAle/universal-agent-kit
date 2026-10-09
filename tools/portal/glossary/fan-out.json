@@ -1,0 +1,10 @@
+{
+  "id": "fan-out",
+  "term": { "en": "Fan-out", "ru": "Веер (fan-out)", "ua": "Віяло (fan-out)" },
+  "def": {
+    "en": "Starting several independent pieces of work in the same breath instead of one after another, usually as subagents: one reads the local code, another the docs, a third the open issues. Safe for readers, which cost only tokens. Writers need a boundary first.",
+    "ru": "Одновременный запуск нескольких независимых частей работы вместо цепочки, обычно через субагентов: один читает локальный код, другой документацию, третий открытые issues. Для читающих это безопасно, они стоят только токенов. Пишущим сначала нужна граница.",
+    "ua": "Одночасний запуск кількох незалежних частин роботи замість ланцюжка, зазвичай через субагентів: один читає локальний код, інший документацію, третій відкриті issues. Для тих, що лише читають, це безпечно, вони коштують лише токенів. Тим, що пишуть, спершу потрібна межа."
+  },
+  "see": ["context", "worktree"]
+}

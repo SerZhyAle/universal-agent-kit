@@ -1,0 +1,10 @@
+{
+  "id": "role-agent",
+  "term": { "en": "Role agent", "ru": "Ролевой агент", "ua": "Рольовий агент" },
+  "def": {
+    "en": "A subagent defined once as a Markdown file in `.claude/agents/`: a name, a description that says when to use it, a model [tier](term:tier), sometimes a tool list, and a brief for how it works. The kit ships four: `rd-lead`, `solution-researcher`, `implementer` and `doc-writer`. A [skill](term:skill) is a workflow you run; a role agent is a worker you hand a job to.",
+    "ru": "Субагент, описанный один раз в Markdown-файле в `.claude/agents/`: имя, описание, говорящее, когда его брать, [уровень](term:tier) модели, иногда список инструментов и инструкция, как он работает. В kit их четыре: `rd-lead`, `solution-researcher`, `implementer` и `doc-writer`. [Навык](term:skill) - это сценарий, который вы запускаете; ролевой агент - исполнитель, которому вы передаёте задачу.",
+    "ua": "Субагент, описаний один раз у Markdown-файлі в `.claude/agents/`: ім'я, опис, що каже, коли його брати, [рівень](term:tier) моделі, інколи перелік інструментів та інструкція, як він працює. У kit їх чотири: `rd-lead`, `solution-researcher`, `implementer` і `doc-writer`. [Навичка](term:skill) - це сценарій, який ви запускаєте; рольовий агент - виконавець, якому ви передаєте завдання."
+  },
+  "see": ["tier", "delegation", "skill"]
+}

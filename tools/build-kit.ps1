@@ -6,10 +6,12 @@
     The zip and the date on the page are render targets of kit/: this script is the one way to
     produce both, so the download and the date the site shows cannot disagree.
 
-    1. Stages kit/* and merge-prompt.txt under universal-agent-kit/ (the frozen extraction root)
+    1. Writes the date to kit/VERSION (one line, yyyy-MM-dd, LF, no BOM), so the zip and every copy
+       merged from it can say which kit it came from.
+    2. Stages kit/* and merge-prompt.txt under universal-agent-kit/ (the frozen extraction root)
        and zips the stage without the stage folder itself in the entry paths.
-    2. Verifies every archive entry byte-for-byte (SHA-256) against its source file.
-    3. Stamps the date into index.html (every time.kit-date, JSON-LD dateModified) and sitemap.xml.
+    3. Verifies every archive entry byte-for-byte (SHA-256) against its source file.
+    4. Stamps the date into index.html (every time.kit-date, JSON-LD dateModified) and sitemap.xml.
 
     Exits 0 after verifying and stamping a release. Exits 1 when the generated archive differs from its
     source. Exits 2 when a required input cannot be read or a required stamp location is absent; those
@@ -83,7 +85,8 @@ try {
         exit 2
     }
 
-    # --- 2. stage and zip ---------------------------------------------------------------------
+    # --- 2. write the kit's own build date, then stage and zip -------------------------------
+    [System.IO.File]::WriteAllText((Join-Path $kit 'VERSION'), "$Date`n", $utf8)
     if (Test-Path $stage) { [System.IO.Directory]::Delete($stage, $true) }
     $inner = Join-Path $stage $anchor
     New-Item -ItemType Directory -Path $inner -Force | Out-Null
@@ -121,7 +124,7 @@ try {
     Set-Stamp $sitemap $mapPattern "`${1}$Date`${2}"
 
     Write-Host "zip:     $entries entries (sources: $sourceCount), $mismatches mismatch(es)"
-    Write-Host "stamped: $Date - $timeHits time.kit-date, $ldHits dateModified, $mapHits lastmod"
+    Write-Host "stamped: $Date - kit/VERSION, $timeHits time.kit-date, $ldHits dateModified, $mapHits lastmod"
 
     if ($mismatches -gt 0 -or $entries -ne $sourceCount) {
         Write-Host 'build-kit: DEFECT - generated archive differs from its source'

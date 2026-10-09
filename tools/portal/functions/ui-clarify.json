@@ -1,0 +1,104 @@
+{
+  "id": "ui-clarify",
+  "title": {
+    "en": "Settle what the user will see before you build it",
+    "ru": "Решить, что увидит пользователь, до начала разработки",
+    "ua": "Вирішити, що побачить користувач, до початку розробки"
+  },
+  "pitch": {
+    "en": "`/ui-clarify` blocks implementation until placement, visibility, wording, failure behaviour and each reader's path are explicit, and ends in `BLOCKED` or `READY`.",
+    "ru": "`/ui-clarify` не пускает к реализации, пока не определены место, видимость, формулировки, сбои и путь каждого читателя, и завершается `BLOCKED` или `READY`.",
+    "ua": "`/ui-clarify` не пускає до реалізації, доки не визначено місце, видимість, формулювання, збої та шлях кожного читача, і завершується `BLOCKED` або `READY`."
+  },
+  "lead": {
+    "en": "Run `/ui-clarify` before you build anything a user perceives: a screen, a CLI flag and its help text, an API response shape, an error message, an email template. The agent reads the request and the code, works through five passes for ambiguity, asks only what it needs and ends with a Clarification Status: `BLOCKED` with the open questions, or `READY` with the approved decisions.",
+    "ru": "Запускайте `/ui-clarify` перед работой над всем, что воспринимает пользователь: экраном, флагом CLI и его справкой, формой ответа API, сообщением об ошибке, шаблоном письма. Агент читает запрос и код, проходит пять кругов поиска неясностей, задаёт только нужные вопросы и завершает работу блоком Clarification Status: `BLOCKED` с открытыми вопросами или `READY` с утверждёнными решениями.",
+    "ua": "Запускайте `/ui-clarify` перед роботою над усім, що сприймає користувач: екраном, прапорцем CLI та його довідкою, формою відповіді API, повідомленням про помилку, шаблоном листа. Агент читає запит і код, проходить п'ять кіл пошуку непевностей, ставить лише потрібні запитання й завершує роботу блоком Clarification Status: `BLOCKED` із відкритими питаннями або `READY` зі схваленими рішеннями."
+  },
+  "situation": {
+    "en": "A user-visible change whose placement, wording, visibility or fallback is still open, or a request that leaves a choice between two or more options. If your product has no user-facing surface, the kit says this command rarely fires.",
+    "ru": "Изменение, видимое пользователю, где место, формулировка, видимость или запасное поведение ещё не решены, либо запрос, оставляющий выбор между двумя и более вариантами. Если у вашего продукта нет пользовательской поверхности, по словам kit, эта команда срабатывает редко.",
+    "ua": "Зміна, видима користувачеві, де місце, формулювання, видимість або запасна поведінка ще не вирішені, або запит, що лишає вибір між двома й більше варіантами. Якщо у вашого продукту немає користувацької поверхні, за словами kit, ця команда спрацьовує рідко."
+  },
+  "warning": {
+    "en": "Nothing is implemented while an important item is unresolved. Non-committal wording about two or more options counts as unresolved unless you approve one option or explicitly delegate the choice, and the agent does not assume freedom when the choice changes discoverability, placement or behaviour under a different form factor.",
+    "ru": "Пока важный пункт не решён, ничего не реализуется. Уклончивая формулировка о двух и более вариантах считается нерешённой, пока вы не одобрите один вариант или явно не передадите выбор агенту. Свободу выбора агент не домысливает, если выбор меняет заметность, место или поведение на другом форм-факторе.",
+    "ua": "Доки важливий пункт не вирішено, нічого не реалізується. Ухильне формулювання про два й більше варіантів вважається невирішеним, доки ви не схвалите один варіант або явно не передасте вибір агентові. Свободу вибору агент не домислює, якщо вибір змінює помітність, місце чи поведінку на іншому форм-факторі."
+  },
+  "steps": [
+    {
+      "en": "Describe the task in a few words, for example `/ui-clarify add a --format flag to the export command`.",
+      "ru": "Опишите задачу несколькими словами, например `/ui-clarify add a --format flag to the export command`.",
+      "ua": "Опишіть завдання кількома словами, наприклад `/ui-clarify add a --format flag to the export command`."
+    },
+    {
+      "en": "The agent reads the request or spec, the relevant views, handlers, templates and strings, the architecture doc if canonical patterns are affected, and your copy and tone policy if the wording is affected.",
+      "ru": "Агент читает запрос или спеку, нужные экраны, обработчики, шаблоны и строки, документ об архитектуре, если затронуты канонические шаблоны, и вашу политику текстов и тона, если затронуты формулировки.",
+      "ua": "Агент читає запит або спеку, потрібні екрани, обробники, шаблони й рядки, документ про архітектуру, якщо зачеплено канонічні шаблони, і вашу політику текстів і тону, якщо зачеплено формулювання."
+    },
+    {
+      "en": "It builds one decision table across five passes. The first four: placement and presentation across form factors; visibility and priority; interaction and wording; state, failure UX and accessibility. Together they cover where it appears, when it is shown, hidden or disabled, the exact label and help text, empty, loading and error states, retry behaviour and accessibility.",
+      "ru": "Он строит одну таблицу решений в пять проходов. Первые четыре: место и подача на разных форм-факторах; видимость и приоритет; взаимодействие и формулировки; состояния, поведение при сбое и доступность. Вместе они охватывают, где это появляется, когда показано, скрыто или отключено, точную подпись и подсказку, пустое состояние, загрузку и ошибку, повторные попытки и доступность.",
+      "ua": "Він будує одну таблицю рішень у п'ять проходів. Перші чотири: місце й подача на різних форм-факторах; видимість і пріоритет; взаємодія та формулювання; стани, поведінка під час збою та доступність. Разом вони охоплюють, де це з'являється, коли показано, приховано чи вимкнено, точний підпис і підказку, порожній стан, завантаження й помилку, повторні спроби та доступність."
+    },
+    {
+      "en": "Every message the change adds or edits takes the shape of its kind, and its exact proposed text goes in the table; a message off its shape stays unresolved. An error says what happened plus one next step, never a raw code as the headline. An empty state gives the reason and an invitation to act. A destructive confirmation says what will happen and whether it can be undone.",
+      "ru": "Каждое сообщение, которое изменение добавляет или правит, принимает форму своего вида, а его точный предлагаемый текст попадает в таблицу; сообщение не по форме остаётся нерешённым. Ошибка говорит, что случилось, и называет один следующий шаг, а сырой код в заголовке недопустим. Пустое состояние даёт причину и приглашение к действию. Подтверждение разрушительного действия говорит, что произойдёт и можно ли это отменить.",
+      "ua": "Кожне повідомлення, яке зміна додає чи правит, набуває форми свого виду, а його точний запропонований текст потрапляє до таблиці; повідомлення не за формою лишається невирішеним. Помилка каже, що сталося, і називає один наступний крок, а сирий код у заголовку неприпустимий. Порожній стан дає причину й запрошення до дії. Підтвердження руйнівної дії каже, що станеться і чи можна це скасувати."
+    },
+    {
+      "en": "The fifth pass walks the change once as each kind of reader it serves: a first-time user, a returning one, someone on assistive tech or the narrowest form factor, a script or operator running it unattended, whichever apply. Each must reach the result with no dead end. For a destructive action it inverts: the reader must be stopped or warned, not helped through, and a force flag such as `--force` or `-y` skips the prompt, never the safety checks behind it.",
+      "ru": "Пятый проход один раз проходит изменение глазами каждого вида читателя, которому оно служит: нового пользователя, вернувшегося, работающего со вспомогательными технологиями или на самом узком форм-факторе, скрипта или оператора без присмотра, какие применимы. Каждый должен дойти до результата без тупика. Для разрушительного действия условие переворачивается: читателя надо остановить или предупредить, а не провести, и флаг `--force` или `-y` пропускает запрос, но не проверки безопасности за ним.",
+      "ua": "П'ятий прохід один раз проходить зміну очима кожного виду читача, якому вона служить: нового користувача, того, хто повернувся, того, хто працює з допоміжними технологіями чи на найвужчому форм-факторі, скрипта або оператора без нагляду, залежно від того, що застосовне. Кожен має дійти до результату без глухого кута. Для руйнівної дії умова перевертається: читача треба зупинити або попередити, а не провести, і прапорець `--force` чи `-y` пропускає запит, але не перевірки безпеки за ним."
+    },
+    {
+      "en": "It separates the decisions you made explicitly from implicit assumptions and marks every unresolved item as blocking. It asks only the questions needed to unblock; where a choice can be delegated, it offers 2 or 3 concrete options with trade-offs instead of an open question.",
+      "ru": "Он отделяет решения, которые вы принимали явно, от неявных допущений и помечает каждый нерешённый пункт как блокирующий. Он задаёт только те вопросы, без которых нельзя двигаться дальше; если выбор можно передать агенту, он предлагает 2-3 конкретных варианта с компромиссами вместо открытого вопроса.",
+      "ua": "Він відокремлює рішення, які ви ухвалили явно, від неявних припущень і позначає кожен невирішений пункт як блокувальний. Він ставить лише ті запитання, без яких не можна рухатися далі; якщо вибір можна передати агентові, він пропонує 2-3 конкретні варіанти з компромісами замість відкритого запитання."
+    },
+    {
+      "en": "It ends with one outcome. `BLOCKED` lists what is Confirmed, the Unresolved questions as a numbered list, and 1 to 3 sentences on why implementation is blocked. `READY` lists the Approved Decisions (placement, visibility, wording, fallback, error behaviour), the Delegated Assumptions (only items you explicitly let the agent choose) and the Persona pass, one line per reader.",
+      "ru": "Работа заканчивается одним из двух исходов. `BLOCKED` перечисляет, что Confirmed, вопросы Unresolved нумерованным списком и 1-3 предложения о том, почему реализация заблокирована. `READY` перечисляет Approved Decisions (место, видимость, формулировки, запасное поведение, поведение при ошибке), Delegated Assumptions (только то, что вы явно позволили выбрать агенту) и Persona pass, по строке на каждого читателя.",
+      "ua": "Робота завершується одним із двох наслідків. `BLOCKED` перелічує, що Confirmed, питання Unresolved нумерованим списком і 1-3 речення про те, чому реалізацію заблоковано. `READY` перелічує Approved Decisions (місце, видимість, формулювання, запасну поведінку, поведінку під час помилки), Delegated Assumptions (лише те, що ви явно дозволили обрати агентові) і Persona pass, по рядку на кожного читача."
+    },
+    {
+      "en": "When it runs for a [ticket](term:ticket), `BLOCKED` also lands in the ticket: its status becomes the [block status](term:block-status) `BlockQuestions`, with the unresolved list as its one-line note. [/spec-all](fn:spec-all) stops there and [/backlog](fn:backlog) reports the ticket under \"Needs you\" instead of selecting it again. Run standalone, the block lives in the chat only.",
+      "ru": "Когда команда работает над [тикетом](term:ticket), `BLOCKED` попадает и в сам тикет: его статус становится [статусом блокировки](term:block-status) `BlockQuestions`, а список нерешённого - его заметкой в одну строку. [/spec-all](fn:spec-all) на этом останавливается, а [/backlog](fn:backlog) показывает тикет в разделе «Needs you» и не выбирает его снова. Если команда запущена отдельно, блок остаётся только в чате.",
+      "ua": "Коли команда працює над [тікетом](term:ticket), `BLOCKED` потрапляє й до самого тікета: його статус стає [статусом блокування](term:block-status) `BlockQuestions`, а перелік невирішеного - його нотаткою в один рядок. [/spec-all](fn:spec-all) на цьому зупиняється, а [/backlog](fn:backlog) показує тікет у розділі «Needs you» і не обирає його знову. Якщо команду запущено окремо, блок лишається лише в чаті."
+    }
+  ],
+  "outcome": {
+    "en": "A `Clarification Status` block. `READY` with approved decisions means building may start; `BLOCKED` with numbered questions means it may not, until you answer them.",
+    "ru": "Блок `Clarification Status`. `READY` с утверждёнными решениями означает, что строить можно; `BLOCKED` с нумерованными вопросами означает, что нельзя, пока вы на них не ответите.",
+    "ua": "Блок `Clarification Status`. `READY` зі схваленими рішеннями означає, що будувати можна; `BLOCKED` із нумерованими питаннями означає, що не можна, доки ви на них не відповісте."
+  },
+  "tips": [
+    {
+      "en": "Say outright which option you approve, or that the agent may choose. Items you delegate are recorded under Delegated Assumptions; anything vaguer stays unresolved.",
+      "ru": "Говорите прямо, какой вариант вы одобряете или что выбор за агентом. Делегированное записывается в Delegated Assumptions, всё более расплывчатое остаётся нерешённым.",
+      "ua": "Кажіть прямо, який варіант ви схвалюєте або що вибір за агентом. Делеговане записується в Delegated Assumptions, усе розмитіше лишається невирішеним."
+    },
+    {
+      "en": "One name per concept: a thing keeps the name it already has on every screen, help page and doc. A new synonym is a decision to ask about, not a wording detail. After the build, [/surfaces](fn:surfaces) checks the same rule across every surface that mentions the thing.",
+      "ru": "Одно имя на понятие: вещь сохраняет то имя, которое уже есть у неё на каждом экране, в справке и документации. Новый синоним - вопрос, который нужно задать, а не мелочь формулировки. После сборки [/surfaces](fn:surfaces) проверяет то же правило по всем поверхностям, где эта вещь упоминается.",
+      "ua": "Одне ім'я на поняття: річ зберігає те ім'я, яке вже має на кожному екрані, у довідці й документації. Новий синонім - питання, яке треба поставити, а не дрібниця формулювання. Після збірки [/surfaces](fn:surfaces) перевіряє те саме правило по всіх поверхнях, де ця річ згадується."
+    },
+    {
+      "en": "In the full pipeline, [/spec-all](fn:spec-all) calls `/ui-clarify` only when the change is user-facing and a placement, wording or fallback decision is unresolved. It is a real stop there: unresolved UI ambiguity blocks the build.",
+      "ru": "В полном конвейере [/spec-all](fn:spec-all) вызывает `/ui-clarify` только если изменение видно пользователю и решение о месте, формулировке или запасном поведении не принято. Там это настоящая остановка: неразрешённая неясность в интерфейсе блокирует сборку.",
+      "ua": "У повному конвеєрі [/spec-all](fn:spec-all) викликає `/ui-clarify` лише якщо зміна видима користувачеві й рішення про місце, формулювання чи запасну поведінку не ухвалено. Там це справжня зупинка: нерозв'язана непевність в інтерфейсі блокує збірку."
+    },
+    {
+      "en": "[/quick](fn:quick) refuses any change to user-facing behaviour, visibility or states, and sends work that needs UX decisions to `/ui-clarify` plus `/spec`.",
+      "ru": "[/quick](fn:quick) отказывается от любого изменения поведения, видимости или состояний для пользователя и отправляет работу, где нужны решения по UX, к `/ui-clarify` и `/spec`.",
+      "ua": "[/quick](fn:quick) відмовляється від будь-якої зміни поведінки, видимості чи станів для користувача й відправляє роботу, де потрібні рішення щодо UX, до `/ui-clarify` та `/spec`."
+    }
+  ],
+  "related": ["spec", "spec-all", "backlog", "quick", "surfaces"],
+  "terms": ["user-facing-decision", "ticket", "block-status"],
+  "keywords": {
+    "en": ["ui clarify", "user-facing decision", "clarification gate", "placement and wording", "ambiguity", "persona pass", "error message wording", "BlockQuestions"],
+    "ru": ["уточнение интерфейса", "решение для пользователя", "ворота уточнения", "место и формулировки", "неясность", "persona pass", "текст ошибки", "BlockQuestions"],
+    "ua": ["уточнення інтерфейсу", "рішення для користувача", "ворота уточнення", "місце й формулювання", "непевність", "persona pass", "текст помилки", "BlockQuestions"]
+  }
+}

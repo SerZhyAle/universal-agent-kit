@@ -1,0 +1,10 @@
+{
+  "id": "surface",
+  "term": { "en": "Surface", "ru": "Поверхность (surface)", "ua": "Поверхня (surface)" },
+  "def": {
+    "en": "A place where a user meets a capability, and so a file or page that must change together with a user-visible change: UI strings, help text, the README and its translations, user docs, the site, the change log, store listings, screenshots, examples, templates. `/surfaces` lists them in a table before any edit and checks every touched one in every authored locale, the ones the team writes by hand.",
+    "ru": "Место, где пользователь встречает возможность, а значит файл или страница, которые должны меняться вместе с видимым пользователю изменением: строки интерфейса, справка, README и его переводы, пользовательская документация, сайт, журнал изменений, карточки в магазинах, скриншоты, примеры, шаблоны. `/surfaces` перечисляет их в таблице до правок и проверяет каждую затронутую в каждой авторской локали (пишется вручную).",
+    "ua": "Місце, де користувач зустрічає можливість, а отже файл чи сторінка, що мають змінюватися разом із видимою користувачеві зміною: рядки інтерфейсу, довідка, README та його переклади, користувацька документація, сайт, журнал змін, картки в магазинах, знімки екрана, приклади, шаблони. `/surfaces` перелічує їх у таблиці до правок і перевіряє кожну зачеплену в кожній авторській локалі, тобто в тих, що команда пише вручну."
+  },
+  "see": ["user-facing-decision"]
+}

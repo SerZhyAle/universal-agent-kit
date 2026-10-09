@@ -1,0 +1,72 @@
+---
+name: spec-fix
+description: "Use to apply the mechanical action items from a spec audit and then re-audit. Triggers: 'spec-fix', 'fix the audit findings', after /spec-check reports Partial or Broken."
+argument-hint: "<ID-or-slug> [--dry-run]"
+---
+
+# Specification Audit Fix-up
+
+Apply the **mechanical** action items from the latest `/spec-check` audit, then re-audit. This
+is the repair half of the audit loop: `/spec-check` writes a `## Last Audit` block with concrete
+FAIL/WARN action items, and this skill closes the ones that need no human decision.
+
+## Usage
+
+```text
+/spec-fix <ID-or-slug>
+/spec-fix <ID-or-slug> --dry-run     # list what would change, write nothing
+```
+
+## Status gate
+
+Follows the canonical gate table in `docs/SPEC_LIFECYCLE.md`.
+
+- `Partial` / `Broken` → proceed.
+- `Verified` → nothing to fix; report and stop.
+- Anything else → abort: run `/spec-check` first to produce action items.
+
+## Process
+
+**1 - Read the audit.** Open `<PLAN_DIR>/<ID>_<slug>.md`, read the `## Last Audit` block. If it
+is missing or stale (no prior `/spec-check` this cycle), abort and ask to run `/spec-check`.
+
+**2 - Classify each action item.**
+- **Mechanical** - deterministic, fully specified by the item: a missing changelog entry, a
+  stale `<ID>:` verification tag to delete, a dead-weight remnant the change should have removed,
+  a user-doc keyword the spec mandates but is absent, a renamed/missing symbol the item names
+  exactly, a keep-rule for a deleted symbol.
+- **Needs a decision** - anything requiring a design choice, a new name, a schema/DI shape, or
+  user input. These are **not** fixed here. Every `UNCHECKABLE` item belongs here too: what it
+  lacks is access to the subject, and no edit supplies that.
+
+**3 - Apply mechanical fixes**, one per action item, with `/spec-dev`'s edit discipline: scope
+strictly to the item, no surrounding refactor, no invented names, anti-slop applies
+(`docs/CODE_QUALITY.md`). Run each item's check (file exists / symbol present / keyword greps /
+zero forbidden hits) before considering it closed.
+
+**4 - Leave the rest.** List every "needs a decision" item verbatim and stop short of guessing.
+If an item blocks all progress, set `BlockQuestions` with a one-line note.
+
+**5 - Re-audit, only if something moved.** Fixed at least one item → auto-chain to `/spec-check
+<ID>` so the status is recomputed from reality - never set `Verified` from this skill. The re-audit
+decides the new status and removes any verification tags on a flip out of `BlockNeedUserTest`.
+**Fixed nothing → stop, do not chain.** Re-auditing an unchanged workspace returns the same
+action items and hands them straight back here, which is a loop with nobody watching under
+`/backlog`. If decision items remain, set `BlockQuestions` listing them; `/spec-check` keeps that
+status until the owner answers.
+
+**Chat output:** `<ID>: fixed N/M action items. Left for you: [decision items]. -> Running /spec-check..`
+(or `-> stopped, nothing mechanical left` when N is 0)
+
+## Hard stops
+
+- An action item is ambiguous or under-specified → leave it, do not guess.
+- A "fix" would require a design decision, a new public name, or user input → leave it, set
+  `BlockQuestions` if it blocks the rest.
+- A read-only zone or external-system touch → stop and require explicit permission.
+
+## Constraints
+
+- Never invent a fix the audit did not name; never set `Verified` (that is `/spec-check`'s job).
+- Idempotent: a second run with the audit already satisfied is a no-op.
+- Add every file this fix modified to the ticket's one changelog entry (none where the project keeps no change log); the re-audit handles tag removal and the status flip.

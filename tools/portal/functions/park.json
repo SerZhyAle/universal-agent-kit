@@ -1,0 +1,84 @@
+{
+  "id": "park",
+  "title": {
+    "en": "Park an out-of-scope finding and keep working",
+    "ru": "Отложить находку вне задачи и продолжить работу",
+    "ua": "Відкласти знахідку поза задачею й продовжити роботу"
+  },
+  "pitch": {
+    "en": "A real problem found mid-task becomes a minimal Draft stub in one line, and you go straight back to what you were doing.",
+    "ru": "Настоящая проблема, замеченная по ходу дела, становится минимальной заготовкой со статусом Draft за одну строку, и вы сразу возвращаетесь к своему делу.",
+    "ua": "Справжню проблему, помічену по ходу діла, перетворено на мінімальну заготовку зі статусом Draft за один рядок, і ви одразу повертаєтеся до своєї справи."
+  },
+  "lead": {
+    "en": "`/park` records a finding that is real but not yours right now, so it is not lost, and returns you to the original task. It never fixes anything and never switches the active task. The stub is a live ticket: `/backlog` can pick it up later and `/spec <ID>` can flesh it out in place.",
+    "ru": "`/park` записывает находку, которая настоящая, но сейчас не ваша, чтобы она не потерялась, и возвращает вас к исходной задаче. Он ничего не чинит и никогда не переключает активную задачу. Заготовка - живой тикет: `/backlog` потом подберёт его, а `/spec <ID>` развернёт на месте.",
+    "ua": "`/park` записує знахідку, що справжня, але зараз не ваша, щоб вона не загубилася, і повертає вас до початкової задачі. Він нічого не лагодить і ніколи не перемикає активну задачу. Заготовка - живий тікет: `/backlog` потім підбере його, а `/spec <ID>` розгорне на місці."
+  },
+  "situation": {
+    "en": "At any stage - research, implementation, audit, review, test, log analysis - the moment a finding is out of scope for the active task, is more than a one-line inline fix, and needs its own investigation.",
+    "ru": "На любом этапе - исследование, реализация, аудит, ревью, тест, разбор логов - в тот момент, когда находка вне задачи, это больше однострочной правки на месте и для неё нужно отдельное расследование.",
+    "ua": "На будь-якому етапі - дослідження, реалізація, аудит, рев'ю, тест, розбір логів - у той момент, коли знахідка поза задачею, це більше за однорядкову правку на місці й для неї потрібне окреме розслідування."
+  },
+  "warning": {
+    "en": "Do not park what does not need it. A trivial out-of-scope fix (one token, one obvious line) is made inline. A cosmetic nitpick with no behaviour cost is dropped. A finding in scope for the active task is just work. In a read-only role that cannot record items (audit or review with no write access), list the candidates back to your caller instead.",
+    "ru": "Не откладывайте то, что этого не требует. Тривиальную правку вне задачи (один токен, одна очевидная строка) вносят на месте. Косметическую придирку без цены для поведения отбрасывают. Находка в рамках текущей задачи - обычная работа. В роли только на чтение, которая не может записывать (аудит или ревью без доступа на запись), верните список кандидатов вызывающему.",
+    "ua": "Не відкладайте те, що цього не потребує. Тривіальну правку поза задачею (один токен, один очевидний рядок) вносять на місці. Косметичну прискіпливість без ціни для поведінки відкидають. Знахідка в межах поточної задачі - звичайна робота. У ролі лише для читання, яка не може записувати (аудит чи рев'ю без доступу на запис), поверніть список кандидатів тому, хто викликав."
+  },
+  "steps": [
+    {
+      "en": "Describe the symptom in one line and, if useful, where you found it: `/park retry loop in sync_client never backs off - found while auditing the cache layer`.",
+      "ru": "Опишите симптом одной строкой и, если нужно, где нашли: `/park retry loop in sync_client never backs off - found while auditing the cache layer`.",
+      "ua": "Опишіть симптом одним рядком і, якщо потрібно, де знайшли: `/park retry loop in sync_client never backs off - found while auditing the cache layer`."
+    },
+    {
+      "en": "The agent confirms the finding is out of scope. If it belongs to the active task, it is handled there; a one-line inline fix is applied; a cosmetic nitpick is dropped. Only a real, out-of-scope finding that needs its own investigation is parked.",
+      "ru": "Агент подтверждает, что находка вне задачи. Если она относится к текущей задаче, её решают там; однострочную правку на месте вносят; косметическую придирку отбрасывают. Откладывается только настоящая находка вне задачи, которой нужно отдельное расследование.",
+      "ua": "Агент підтверджує, що знахідка поза задачею. Якщо вона стосується поточної задачі, її вирішують там; однорядкову правку на місці вносять; косметичну прискіпливість відкидають. Відкладається лише справжня знахідка поза задачею, якій потрібне окреме розслідування."
+    },
+    {
+      "en": "It searches the existing parked items and the tracker in the plan directory (`<PLAN_DIR>/`) by symptom. If a match exists, it reports `parked: <existing-id> (already tracked)` and stops. A batch review that surfaces several findings yields one stub per distinct problem, not one per mention.",
+      "ru": "Он ищет по симптому среди уже отложенных записей и в трекере в каталоге планов (`<PLAN_DIR>/`). Если совпадение есть, он сообщает `parked: <existing-id> (already tracked)` и останавливается. Пакетное ревью с несколькими находками даёт по одной заготовке на каждую отдельную проблему, а не на каждое упоминание.",
+      "ua": "Він шукає за симптомом серед уже відкладених записів і в трекері в каталозі планів (`<PLAN_DIR>/`). Якщо збіг є, він повідомляє `parked: <existing-id> (already tracked)` і зупиняється. Пакетне рев'ю з кількома знахідками дає по одній заготовці на кожну окрему проблему, а не на кожну згадку."
+    },
+    {
+      "en": "It writes the stub as an ordinary [ticket](term:ticket) file, `<PLAN_DIR>/<ID>_<slug>.md`, with the id allocated by the project's id scheme exactly as `/spec` allocates one. A note in a tracker or in a shared `PARKED.md` is invisible to `/backlog` and to id allocation, so it would be lost or collide. If you keep a tracker, link its item from the file.",
+      "ru": "Он записывает заготовку как обычный файл [тикета](term:ticket), `<PLAN_DIR>/<ID>_<slug>.md`, а идентификатор выдаёт по схеме идентификаторов проекта ровно так, как это делает `/spec`. Заметка в трекере или в общем `PARKED.md` невидима для `/backlog` и для выдачи идентификаторов, поэтому она потеряется или столкнётся с другой. Если вы ведёте трекер, привяжите его запись ссылкой из файла.",
+      "ua": "Він записує заготовку як звичайний файл [тікета](term:ticket), `<PLAN_DIR>/<ID>_<slug>.md`, а ідентифікатор видає за схемою ідентифікаторів проєкту точно так, як це робить `/spec`. Нотатка в трекері чи в спільному `PARKED.md` невидима для `/backlog` і для видачі ідентифікаторів, тож вона загубиться або зіткнеться з іншою. Якщо ви ведете трекер, прив'яжіть його запис посиланням із файлу."
+    },
+    {
+      "en": "The file holds the least that makes the finding re-findable: a stable `<ID>`, the status `Draft`, a default `Priority` (for example 40), `Blocked-by: none` and `Carried-to: none` (mandatory on every ticket, a stub included, or `/backlog` reports a defective ticket), a one-line symptom, and where it was found (file or flow, and the task you were on). No investigation, no root cause, no fix sketch.",
+      "ru": "В файле минимум, по которому находку можно найти снова: стабильный `<ID>`, статус `Draft`, приоритет `Priority` по умолчанию (например, 40), `Blocked-by: none` и `Carried-to: none` (обязательны в каждом тикете, и в заготовке тоже, иначе `/backlog` сообщит о дефектном тикете), симптом в одну строку и где нашли (файл или поток, и задача, над которой вы работали). Ни расследования, ни первопричины, ни наброска правки.",
+      "ua": "У файлі мінімум, за яким знахідку можна знайти знову: стабільний `<ID>`, статус `Draft`, пріоритет `Priority` за замовчуванням (наприклад, 40), `Blocked-by: none` і `Carried-to: none` (обов'язкові в кожному тікеті, і в заготовці теж, інакше `/backlog` повідомить про дефектний тікет), симптом в один рядок і де знайшли (файл чи потік, і задача, над якою ви працювали). Ні розслідування, ні першопричини, ні начерку правки."
+    },
+    {
+      "en": "It reports one line, `parked: <id>`, and immediately resumes the original task. Switching the active task to chase a parked finding is not allowed.",
+      "ru": "Он отчитывается одной строкой, `parked: <id>`, и тут же возвращается к исходной задаче. Переключать активную задачу, чтобы гнаться за отложенной находкой, нельзя.",
+      "ua": "Він звітує одним рядком, `parked: <id>`, і одразу повертається до початкової задачі. Перемикати активну задачу, щоб гнатися за відкладеною знахідкою, не можна."
+    }
+  ],
+  "outcome": {
+    "en": "One line in the chat, `parked: <id>`, a ticket file `<PLAN_DIR>/<ID>_<slug>.md` with the status `Draft`, and your original task carried on from where you left it.",
+    "ru": "Одна строка в чате, `parked: <id>`, файл тикета `<PLAN_DIR>/<ID>_<slug>.md` со статусом `Draft` и ваша исходная задача, продолженная с того места, где вы остановились.",
+    "ua": "Один рядок у чаті, `parked: <id>`, файл тікета `<PLAN_DIR>/<ID>_<slug>.md` зі статусом `Draft` і ваша початкова задача, продовжена з того місця, де ви зупинилися."
+  },
+  "tips": [
+    {
+      "en": "The stub carries no root cause and no fix sketch, so the symptom line and the place where you saw it are all the next reader gets. Write them so that someone who was not there can re-find the problem.",
+      "ru": "В заготовке нет ни первопричины, ни наброска правки, поэтому строка симптома и место, где вы это увидели, - всё, что получит следующий читатель. Пишите их так, чтобы тот, кого рядом не было, мог снова найти проблему.",
+      "ua": "У заготовці немає ні першопричини, ні начерку правки, тому рядок симптому і місце, де ви це побачили, - усе, що отримає наступний читач. Пишіть їх так, щоб той, кого поруч не було, міг знову знайти проблему."
+    },
+    {
+      "en": "To turn the stub into a spec later, run `/spec <ID>`: it keeps the id, slug, priority and header tokens, reads the symptom as the problem statement and works on the same file. It never allocates a second id for a ticket that already has one. See [turn a feature description into a spec](fn:spec).",
+      "ru": "Чтобы позже превратить заготовку в спеку, запустите `/spec <ID>`: он сохраняет идентификатор, слаг, приоритет и токены шапки, читает симптом как постановку проблемы и работает с тем же файлом. Второй идентификатор для тикета, у которого он уже есть, не выдаётся. См. [как превратить описание в спеку](fn:spec).",
+      "ua": "Щоб пізніше перетворити заготовку на спеку, запустіть `/spec <ID>`: він зберігає ідентифікатор, слаг, пріоритет і токени шапки, читає симптом як постановку проблеми й працює з тим самим файлом. Другий ідентифікатор для тікета, що вже має його, не видається. Див. [як перетворити опис на спеку](fn:spec)."
+    }
+  ],
+  "related": ["backlog", "spec", "quick", "fix"],
+  "terms": ["park", "ticket", "status", "backlog"],
+  "keywords": {
+    "en": ["park", "out-of-scope finding", "stub", "capture a finding", "side issue"],
+    "ru": ["отложить находку", "вне задачи", "заготовка тикета", "побочная проблема", "парковка"],
+    "ua": ["відкласти знахідку", "поза задачею", "заготовка тікета", "побічна проблема", "паркування"]
+  }
+}

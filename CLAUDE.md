@@ -24,8 +24,10 @@ specification in [docs/specifications/](docs/specifications/SPECIFICATION_CONTRA
 
 - **The site consumes** `PAGE-CONTENT` 1.4 (documentation / method page), `PAGE-STYLE` 1.6 (Informational /
   Docs, the shared stylesheet byte-identical in `assets/`), `SITE-FAMILY-MAP` 1.4 (footer family grid), and
-  the opted-in iconography drafts `ICON-SET` 0.29, `ICON-RENDER` 0.18, `ICON-EXTERNAL` 0.12. It creates no
-  vocabulary, style or map of its own.
+  the opted-in iconography drafts `ICON-SET` 0.29, `ICON-RENDER` 0.18, `ICON-EXTERNAL` 0.12. It also opted in
+  (2026-10-09, owner decision) to the product-site drafts `SITE-STRUCTURE` 0.1, `SITE-EXPERIENCE` 0.3 and
+  `SITE-REPRESENTATION` 0.1 at the declared **portal** tier - the page set beyond the landing is held by
+  dated registry exceptions with successor tickets. It creates no vocabulary, style or map of its own.
 - **The repository produces** `REPO-STAMP` 0.12 (`.sza-canon.json`, written only by the adoption skill) and
   **consumes** `REPO-LAYOUT` 0.11 and `RULE-DELIVERY` 0.12. `HARNESS-PROFILE` 0.11 is **not bound**: this
   repository never runs the packaged harness, so it keeps no `.sza-profile.json`, and the contract's rule 7

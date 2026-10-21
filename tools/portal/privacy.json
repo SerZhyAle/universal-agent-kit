@@ -62,14 +62,14 @@
       "title": { "en": "What stays in your browser", "ru": "Что остаётся в вашем браузере", "ua": "Що залишається у вашому браузері" },
       "body": [
         {
-          "en": "Two small values are kept in your browser's local storage so that your choices survive a reload. They never leave your browser.",
-          "ru": "Два небольших значения хранятся в локальном хранилище вашего браузера, чтобы ваш выбор пережил перезагрузку. Они никогда не покидают браузер.",
-          "ua": "Два невеликі значення зберігаються в локальному сховищі вашого браузера, щоб ваш вибір пережив перезавантаження. Вони ніколи не залишають браузер."
+          "en": "Up to four small values are kept in your browser's local storage so that your choices survive a reload: your language, your theme, the input and size of the interface, and which sections of the page you opened or closed. They never leave your browser.",
+          "ru": "В локальном хранилище вашего браузера хранятся до четырёх небольших значений, чтобы ваш выбор пережил перезагрузку: язык, тема, ввод и размер интерфейса, а также разделы страницы, которые вы открыли или закрыли. Они никогда не покидают браузер.",
+          "ua": "У локальному сховищі вашого браузера зберігаються до чотирьох невеликих значень, щоб ваш вибір пережив перезавантаження: мова, тема, введення й розмір інтерфейсу, а також розділи сторінки, які ви відкрили чи закрили. Вони ніколи не залишають браузер."
         },
         {
-          "en": "The same two keys are used by the author's other sites under the same address, so a choice made on one is the choice on the others. An older pair of keys, `uak-lang` and `uak-theme`, is read once if it is present and is never written again. Clearing the site data in your browser removes all of it.",
-          "ru": "Те же два ключа используют другие сайты автора по тому же адресу, поэтому выбор на одном остаётся выбором на остальных. Прежняя пара ключей, `uak-lang` и `uak-theme`, один раз читается, если есть, и больше не записывается. Очистка данных сайта в браузере удаляет всё это.",
-          "ua": "Ті самі два ключі використовують інші сайти автора за тією самою адресою, тому вибір на одному лишається вибором на решті. Попередня пара ключів, `uak-lang` і `uak-theme`, один раз читається, якщо є, і більше не записується. Очищення даних сайту в браузері видаляє все це."
+          "en": "The language and theme keys are shared with the author's other sites under the same address, so a choice made on one is the choice on the others; the interface and sections keys are used by this site only. An older pair of keys, `uak-lang` and `uak-theme`, is read once if it is present and is never written again. Clearing the site data in your browser removes all of it.",
+          "ru": "Ключи языка и темы общие с другими сайтами автора по тому же адресу, поэтому выбор на одном остаётся выбором на остальных; ключи интерфейса и разделов использует только этот сайт. Прежняя пара ключей, `uak-lang` и `uak-theme`, один раз читается, если есть, и больше не записывается. Очистка данных сайта в браузере удаляет всё это.",
+          "ua": "Ключі мови й теми спільні з іншими сайтами автора за тією самою адресою, тому вибір на одному лишається вибором на решті; ключі інтерфейсу й розділів використовує лише цей сайт. Попередня пара ключів, `uak-lang` і `uak-theme`, один раз читається, якщо є, і більше не записується. Очищення даних сайту в браузері видаляє все це."
         }
       ]
     },
@@ -156,6 +156,16 @@
       "key": "sza-theme",
       "purpose": { "en": "Your theme choice.", "ru": "Выбранная вами тема.", "ua": "Обрана вами тема." },
       "values": "dark, light"
+    },
+    {
+      "key": "uak-ui",
+      "purpose": { "en": "Your choice of input profile and interface size.", "ru": "Выбранные вами ввод и размер интерфейса.", "ua": "Обрані вами введення й розмір інтерфейсу." },
+      "values": "input: pointer, touch; size: compact, large, xlarge"
+    },
+    {
+      "key": "uak-groups",
+      "purpose": { "en": "The sections of the landing page you opened or closed.", "ru": "Разделы главной страницы, которые вы открыли или закрыли.", "ua": "Розділи головної сторінки, які ви відкрили чи закрили." },
+      "values": "section number: 1 open, 0 closed"
     }
   ]
 }

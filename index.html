@@ -37,24 +37,39 @@
 </script>
 <script>
 /* PAGE-STYLE section 7 pre-paint resolver, on the portfolio's shared keys sza-lang / sza-theme.
-   Language priority: ?lang= in the URL (a shared link wins) > saved choice > browser.
+   Language priority: ?lang= in the URL (a shared link wins; the legacy ?l= is read only when no valid ?lang= is
+   present) > saved choice > browser. A query selects only a locale the page ships: ru, en or uk.
    The UA switch keys "ua"; the URL and lang keep the ISO code "uk". The legacy
    uak-* keys are read once so a returning reader keeps their choice. */
 (function(){
   var l, t;
   try{
-    var q = (location.search.match(/[?&]lang=(ru|en|uk|ua)\b/i) || [])[1];
+    var q = (location.search.match(/[?&]lang=(ru|en|uk|ua)\b/i) || location.search.match(/[?&]l=(ru|en|uk|ua)\b/i) || [])[1];
     if(q){ l = q.toLowerCase(); }
     else { l = localStorage.getItem('sza-lang') || localStorage.getItem('uak-lang'); }
     if(l === 'uk') l = 'ua';
-    if(l){ localStorage.setItem('sza-lang', l); }
+    /* The two keys are a wire between repositories (PAGE-STYLE section 7): a writer stores only ru, en or ua and
+       only dark or light, so a stray value in a legacy key is never copied into the shared one. */
+    if(l === 'ru' || l === 'en' || l === 'ua'){ localStorage.setItem('sza-lang', l); }
     t = localStorage.getItem('sza-theme') || localStorage.getItem('uak-theme');
-    if(t){ localStorage.setItem('sza-theme', t); }
+    if(t === 'light' || t === 'dark'){ localStorage.setItem('sza-theme', t); }
   }catch(e){}
   if(l !== 'ru' && l !== 'en' && l !== 'ua'){ var nav=(navigator.language||'en').toLowerCase(); l = nav.indexOf('ru')===0 ? 'ru' : (nav.indexOf('uk')===0 ? 'ua' : 'en'); }
   if(t !== 'light' && t !== 'dark'){ t = (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) ? 'light' : 'dark'; }
   var d = document.documentElement;
   d.setAttribute('data-lang', l); d.setAttribute('lang', l === 'ua' ? 'uk' : l); d.setAttribute('data-theme', t);
+  /* UI-SIZING: the input profile and the interface size are written once, here, from the saved choice (uak-ui) or
+     the primary pointer, and no rule or script re-evaluates them on an input event. A fine primary pointer is the
+     pointer profile; a coarse or unknown one is the touch profile. */
+  var ui = 'auto', sz = 'standard';
+  try{
+    var su = JSON.parse(localStorage.getItem('uak-ui') || '{}');
+    if(su.input === 'pointer' || su.input === 'touch'){ ui = su.input; }
+    if(su.size === 'compact' || su.size === 'large' || su.size === 'xlarge'){ sz = su.size; }
+  }catch(e){}
+  var fine = !!(window.matchMedia && window.matchMedia('(pointer: fine)').matches);
+  d.setAttribute('data-ui-choice', ui); d.setAttribute('data-ui-profile', ui === 'auto' ? (fine ? 'pointer' : 'touch') : ui);
+  if(sz !== 'standard'){ d.setAttribute('data-ui-size', sz); }
 })();
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -66,14 +81,17 @@
 <body>
 <a class="skip-link" href="#main"><span data-l="ru">Перейти к содержимому</span><span data-l="en">Skip to the content</span><span data-l="ua">Перейти до вмісту</span></a>
 <div class="bg-blobs" aria-hidden="true"><div class="blob blob-1"></div><div class="blob blob-2"></div><div class="blob blob-3"></div></div>
-<!-- ICON-SET: action.download, action.copy, nav.scroll-top, status.error. The copied state is the localized
+<!-- ICON-SET: the kit draws action.copy, app.theme, nav.scroll-top, nav.open-external and nav.go-to itself (.gi-*); the
+     page inlines the meanings it does not carry from the catalog files: action.download, action.search, nav.expand,
+     nav.collapse, status.error. The copied state is the localized
      word "Copied" beside the same action.copy glyph (ICON-SET 0.15 note on action.copy). Source glyphs are
      Material Icons (Apache-2.0). -->
 <svg class="icon-sprite" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
   <symbol id="icon-action-download" viewBox="0 0 24 24"><g transform="translate(12 12) scale(.917 .917) translate(-12 -12)"><path d="M19.35,10.04C18.67,6.59 15.64,4 12,4 9.11,4 6.6,5.64 5.35,8.04 2.34,8.36 0,10.91 0,14c0,3.31 2.69,6 6,6h13c2.76,0 5,-2.24 5,-5 0,-2.64 -2.05,-4.78 -4.65,-4.96zM17,13l-5,5 -5,-5h3V9h4v4h3z"/></g></symbol>
-  <symbol id="icon-action-copy" viewBox="0 0 24 24"><path d="M16,1L4,1C2.9,1 2,1.9 2,3L2,17L4,17L4,3L16,3L16,1ZM19,5L8,5C6.9,5 6,5.9 6,7L6,21C6,22.1 6.9,23 8,23L19,23C20.1,23 21,22.1 21,21L21,7C21,5.9 20.1,5 19,5ZM19,21L8,21L8,7L19,7L19,21Z"/></symbol>
-  <symbol id="icon-nav-scroll-top" viewBox="0 0 24 24"><path d="M8 11h3v10h2V11h3l-4-4-4 4zM4 3v2h16V3H4z"/></symbol>
   <symbol id="icon-status-error" viewBox="0 0 24 24"><path d="M11 15h2v2h-2zm0-8h2v6h-2zm.99-5C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"/></symbol>
+  <symbol id="icon-action-search" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></symbol>
+  <symbol id="icon-nav-expand" viewBox="0 0 24 24"><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"/></symbol>
+  <symbol id="icon-nav-collapse" viewBox="0 0 24 24"><path d="M12 8l-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14z"/></symbol>
 </svg>
 <header class="site-header">
     <span class="brand">Universal&nbsp;Agent&nbsp;Kit<span class="dot">.</span></span>
@@ -83,8 +101,8 @@
       <button id="lng-en" type="button" onclick="setLang('en')" aria-pressed="true" aria-label="English">EN</button>
       <button id="lng-ua" type="button" onclick="setLang('ua')" aria-pressed="false" aria-label="Українська">UA</button>
     </span>
-    <button class="theme-btn" id="themeBtn" type="button" onclick="toggleTheme()" title="Theme" aria-label="Theme" aria-pressed="false"><span data-l="ru">Тема</span><span data-l="en">Theme</span><span data-l="ua">Тема</span></button>
-    <a class="btn btn-primary btn-sm" href="universal-agent-kit.zip" download>
+    <button class="theme-btn" id="themeBtn" type="button" onclick="toggleTheme()" title="Theme" aria-label="Theme" aria-pressed="false"><span class="gi gi-theme" aria-hidden="true"></span><span data-l="ru">Тема</span><span data-l="en">Theme</span><span data-l="ua">Тема</span></button>
+    <a class="btn btn-primary" href="universal-agent-kit.zip" download>
       <svg class="icon" aria-hidden="true"><use href="#icon-action-download"/></svg><span data-l="ru">Скачать kit (.zip)</span><span data-l="en">Download kit (.zip)</span><span data-l="ua">Завантажити kit (.zip)</span>
     </a>
 </header>
@@ -115,7 +133,7 @@
       <span data-l="en">A set of clear <a href="portal/#section-rules">rules</a>, <a href="portal/#section-skills">skills</a>, <a href="portal/#section-agents">role agents</a>, a <a href="portal/#section-lifecycle">spec lifecycle</a>, <a href="portal/#section-memory">persistent memory</a>, and <a href="portal/#section-parallel">parallel-agent discipline</a> for working with an AI agent. It helps the agent keep context, work carefully, and stay out of the other agents' way when there is more than one. And it is not only about code: the method rests on files, not on a compiler, so it fits analysis, documentation, contracts and procedures just as well. It works for a personal folder on your computer and for a Git project - regardless of language, model, or tool.</span>
       <span data-l="ua">Набір зрозумілих <a href="portal/#section-rules">правил</a>, <a href="portal/#section-skills">навичок</a>, <a href="portal/#section-agents">ролей</a>, <a href="portal/#section-lifecycle">життєвого циклу спеки</a>, <a href="portal/#section-memory">постійної пам'яті</a> та <a href="portal/#section-parallel">дисципліни паралельної роботи агентів</a> для роботи зі ШІ-агентом. Він допомагає агенту не губити контекст, працювати акуратно й не затирати чужу роботу, коли агентів декілька. І це не лише про код: метод тримається на файлах, а не на компіляторі, тому лягає і на аналітику, і на документацію, і на договори, і на регламенти. Підходить і для особистої папки на комп'ютері, і для проєкту з Git - незалежно від мови, моделі чи інструмента.</span>
     </p>
-    <div class="cta">
+    <div class="cta btn-row">
       <a class="btn btn-primary" href="universal-agent-kit.zip" download>
         <svg class="icon" aria-hidden="true"><use href="#icon-action-download"/></svg><span data-l="ru">Скачать kit (.zip)</span><span data-l="en">Download kit (.zip)</span><span data-l="ua">Завантажити kit (.zip)</span>
       </a>
@@ -147,12 +165,12 @@
     </p>
   </section>
 
-  <div class="toolbar">
+  <div class="toolbar btn-row">
     <button class="btn btn-ghost" type="button" onclick="setAll(true)">
-      <span data-l="ru">Развернуть все разделы</span><span data-l="en">Expand all sections</span><span data-l="ua">Розгорнути всі розділи</span>
+      <svg class="icon" aria-hidden="true"><use href="#icon-nav-expand"/></svg><span data-l="ru">Развернуть все разделы</span><span data-l="en">Expand all sections</span><span data-l="ua">Розгорнути всі розділи</span>
     </button>
     <button class="btn btn-ghost" type="button" onclick="setAll(false)">
-      <span data-l="ru">Свернуть всё</span><span data-l="en">Collapse all</span><span data-l="ua">Згорнути все</span>
+      <svg class="icon" aria-hidden="true"><use href="#icon-nav-collapse"/></svg><span data-l="ru">Свернуть всё</span><span data-l="en">Collapse all</span><span data-l="ua">Згорнути все</span>
     </button>
   </div>
 
@@ -408,8 +426,8 @@ reference  указатель во внешнюю систему и зачем  
           <div class="adopt-prompt">
             <details>
               <summary>Промпт для нового проекта (на английском)</summary>
-              <div class="prompt-actions">
-                <button class="btn btn-ghost" type="button" onclick="copyPrompt(this)" aria-label="Копировать"><svg class="icon" aria-hidden="true"><use href="#icon-action-copy"/></svg>Копировать</button>
+              <div class="prompt-actions btn-row">
+                <button class="btn btn-ghost copy" type="button" onclick="copyPrompt(this)" aria-label="Копировать"><span class="gi gi-copy" aria-hidden="true"></span><span class="cl"><span class="cl-idle">Копировать</span></span></button>
               </div>
               <pre>This is a fresh or mostly empty project folder. It may be a personal local
 project without Git. First run your codebase-init
@@ -450,8 +468,8 @@ Show me the plan first; create nothing until I approve.</pre>
           <div class="adopt-prompt">
             <details>
               <summary>Промпт для существующего проекта (на английском)</summary>
-              <div class="prompt-actions">
-                <button class="btn btn-ghost" type="button" onclick="copyPrompt(this)" aria-label="Копировать"><svg class="icon" aria-hidden="true"><use href="#icon-action-copy"/></svg>Копировать</button>
+              <div class="prompt-actions btn-row">
+                <button class="btn btn-ghost copy" type="button" onclick="copyPrompt(this)" aria-label="Копировать"><span class="gi gi-copy" aria-hidden="true"></span><span class="cl"><span class="cl-idle">Копировать</span></span></button>
               </div>
               <pre>Download
 https://github.com/SerZhyAle/universal-agent-kit/raw/main/universal-agent-kit.zip
@@ -797,8 +815,8 @@ doc       script         type change  logic           config/resources  user-vis
           <div class="adopt-prompt">
             <details>
               <summary>Prompt for a new project (English)</summary>
-              <div class="prompt-actions">
-                <button class="btn btn-ghost" type="button" onclick="copyPrompt(this)" aria-label="Copy"><svg class="icon" aria-hidden="true"><use href="#icon-action-copy"/></svg>Copy</button>
+              <div class="prompt-actions btn-row">
+                <button class="btn btn-ghost copy" type="button" onclick="copyPrompt(this)" aria-label="Copy"><span class="gi gi-copy" aria-hidden="true"></span><span class="cl"><span class="cl-idle">Copy</span></span></button>
               </div>
               <pre>This is a fresh or mostly empty project folder. It may be a personal local
 project without Git. First run your codebase-init
@@ -839,8 +857,8 @@ Show me the plan first; create nothing until I approve.</pre>
           <div class="adopt-prompt">
             <details>
               <summary>Prompt for an existing project (English)</summary>
-              <div class="prompt-actions">
-                <button class="btn btn-ghost" type="button" onclick="copyPrompt(this)" aria-label="Copy"><svg class="icon" aria-hidden="true"><use href="#icon-action-copy"/></svg>Copy</button>
+              <div class="prompt-actions btn-row">
+                <button class="btn btn-ghost copy" type="button" onclick="copyPrompt(this)" aria-label="Copy"><span class="gi gi-copy" aria-hidden="true"></span><span class="cl"><span class="cl-idle">Copy</span></span></button>
               </div>
               <pre>Download
 https://github.com/SerZhyAle/universal-agent-kit/raw/main/universal-agent-kit.zip
@@ -1186,8 +1204,8 @@ reference  вказівник у зовнішню систему та навіщ
           <div class="adopt-prompt">
             <details>
               <summary>Промпт для нового проєкту (англійською)</summary>
-              <div class="prompt-actions">
-                <button class="btn btn-ghost" type="button" onclick="copyPrompt(this)" aria-label="Копіювати"><svg class="icon" aria-hidden="true"><use href="#icon-action-copy"/></svg>Копіювати</button>
+              <div class="prompt-actions btn-row">
+                <button class="btn btn-ghost copy" type="button" onclick="copyPrompt(this)" aria-label="Копіювати"><span class="gi gi-copy" aria-hidden="true"></span><span class="cl"><span class="cl-idle">Копіювати</span></span></button>
               </div>
               <pre>This is a fresh or mostly empty project folder. It may be a personal local
 project without Git. First run your codebase-init
@@ -1228,8 +1246,8 @@ Show me the plan first; create nothing until I approve.</pre>
           <div class="adopt-prompt">
             <details>
               <summary>Промпт для наявного проєкту (англійською)</summary>
-              <div class="prompt-actions">
-                <button class="btn btn-ghost" type="button" onclick="copyPrompt(this)" aria-label="Копіювати"><svg class="icon" aria-hidden="true"><use href="#icon-action-copy"/></svg>Копіювати</button>
+              <div class="prompt-actions btn-row">
+                <button class="btn btn-ghost copy" type="button" onclick="copyPrompt(this)" aria-label="Копіювати"><span class="gi gi-copy" aria-hidden="true"></span><span class="cl"><span class="cl-idle">Копіювати</span></span></button>
               </div>
               <pre>Download
 https://github.com/SerZhyAle/universal-agent-kit/raw/main/universal-agent-kit.zip
@@ -1327,31 +1345,54 @@ Do not change anything yet. Show me the plan first; on any conflict, my existing
 <footer class="site-footer"><div class="container">
   <div data-l="ru">
     <strong>Universal Agent Kit</strong> - переносимый метод работы с ИИ-агентами.
-    <div class="cta">
+    <div class="cta btn-row">
       <a class="btn btn-primary" href="universal-agent-kit.zip" download><svg class="icon" aria-hidden="true"><use href="#icon-action-download"/></svg>Скачать kit (.zip)</a>
-      <a class="btn btn-ghost" href="https://github.com/SerZhyAle/universal-agent-kit" target="_blank" rel="noopener">Исходный код</a>
-      <a class="btn btn-ghost" href="portal/">Документация</a>
+      <a class="btn btn-ghost" href="https://github.com/SerZhyAle/universal-agent-kit" target="_blank" rel="noopener">Исходный код<span class="gi gi-external gi-mirror" aria-hidden="true"></span><span class="sr">, откроется в новом окне</span></a>
+      <a class="btn btn-ghost" href="portal/">Документация<span class="gi gi-go gi-mirror" aria-hidden="true"></span></a>
     </div>
     <p class="muted">Kit - MIT · текст - CC BY 4.0 · выжимка из реального проекта, без привязки к стеку.</p>
   </div>
   <div data-l="en">
     <strong>Universal Agent Kit</strong> - a portable method for working with AI agents.
-    <div class="cta">
+    <div class="cta btn-row">
       <a class="btn btn-primary" href="universal-agent-kit.zip" download><svg class="icon" aria-hidden="true"><use href="#icon-action-download"/></svg>Download kit (.zip)</a>
-      <a class="btn btn-ghost" href="https://github.com/SerZhyAle/universal-agent-kit" target="_blank" rel="noopener">Source code</a>
-      <a class="btn btn-ghost" href="portal/">Documentation</a>
+      <a class="btn btn-ghost" href="https://github.com/SerZhyAle/universal-agent-kit" target="_blank" rel="noopener">Source code<span class="gi gi-external gi-mirror" aria-hidden="true"></span><span class="sr">, opens in a new window</span></a>
+      <a class="btn btn-ghost" href="portal/">Documentation<span class="gi gi-go gi-mirror" aria-hidden="true"></span></a>
     </div>
     <p class="muted">Kit is MIT · prose is CC BY 4.0 · distilled from a real project, stack-agnostic.</p>
   </div>
   <div data-l="ua">
     <strong>Universal Agent Kit</strong> - переносний метод роботи з ШІ-агентами.
-    <div class="cta">
+    <div class="cta btn-row">
       <a class="btn btn-primary" href="universal-agent-kit.zip" download><svg class="icon" aria-hidden="true"><use href="#icon-action-download"/></svg>Завантажити kit (.zip)</a>
-      <a class="btn btn-ghost" href="https://github.com/SerZhyAle/universal-agent-kit" target="_blank" rel="noopener">Вихідний код</a>
-      <a class="btn btn-ghost" href="portal/">Документація</a>
+      <a class="btn btn-ghost" href="https://github.com/SerZhyAle/universal-agent-kit" target="_blank" rel="noopener">Вихідний код<span class="gi gi-external gi-mirror" aria-hidden="true"></span><span class="sr">, відкриється в новому вікні</span></a>
+      <a class="btn btn-ghost" href="portal/">Документація<span class="gi gi-go gi-mirror" aria-hidden="true"></span></a>
     </div>
     <p class="muted">Kit - MIT · текст - CC BY 4.0 · дистильовано з реального проєкту, без прив'язки до стеку.</p>
   </div>
+  <!-- UI-SIZING: the explicit, stable choice of input profile and interface size (assets/ui-prefs.js writes data-ui-*). -->
+  <section class="ui-prefs" aria-labelledby="ui-prefs-heading">
+    <h2 id="ui-prefs-heading"><span data-l="ru">Интерфейс</span><span data-l="en">Interface</span><span data-l="ua">Інтерфейс</span></h2>
+    <div class="ui-prefs-row">
+      <div class="ui-prefs-field">
+        <span class="ui-prefs-label" id="uiInputLabel"><span data-l="ru">Ввод</span><span data-l="en">Input</span><span data-l="ua">Введення</span></span>
+        <div class="btn-row" role="group" aria-labelledby="uiInputLabel">
+          <button type="button" class="btn" data-ui-input="auto" aria-pressed="false"><span data-l="ru">Авто</span><span data-l="en">Auto</span><span data-l="ua">Авто</span></button>
+          <button type="button" class="btn" data-ui-input="pointer" aria-pressed="false"><span data-l="ru">Мышь</span><span data-l="en">Mouse</span><span data-l="ua">Миша</span></button>
+          <button type="button" class="btn" data-ui-input="touch" aria-pressed="false"><span data-l="ru">Касание</span><span data-l="en">Touch</span><span data-l="ua">Дотик</span></button>
+        </div>
+      </div>
+      <div class="ui-prefs-field">
+        <span class="ui-prefs-label" id="uiSizeLabel"><span data-l="ru">Размер</span><span data-l="en">Size</span><span data-l="ua">Розмір</span></span>
+        <div class="btn-row" role="group" aria-labelledby="uiSizeLabel">
+          <button type="button" class="btn" data-ui-size-set="compact" aria-pressed="false"><span data-l="ru">Компактный</span><span data-l="en">Compact</span><span data-l="ua">Компактний</span></button>
+          <button type="button" class="btn" data-ui-size-set="standard" aria-pressed="false"><span data-l="ru">Обычный</span><span data-l="en">Standard</span><span data-l="ua">Звичайний</span></button>
+          <button type="button" class="btn" data-ui-size-set="large" aria-pressed="false"><span data-l="ru">Крупный</span><span data-l="en">Large</span><span data-l="ua">Великий</span></button>
+          <button type="button" class="btn" data-ui-size-set="xlarge" aria-pressed="false"><span data-l="ru">Очень крупный</span><span data-l="en">Extra large</span><span data-l="ua">Дуже великий</span></button>
+        </div>
+      </div>
+    </div>
+  </section>
   <!-- SITE-FAMILY-MAP §2: all siblings and the hub; this product is intentionally omitted. -->
   <section class="tools-family" aria-labelledby="more-tools-heading">
     <h2 id="more-tools-heading"><span data-l="ru">Другие инструменты SZA</span><span data-l="en">More tools by SZA</span><span data-l="ua">Інші інструменти SZA</span></h2>
@@ -1376,8 +1417,9 @@ Do not change anything yet. Show me the plan first; on any conflict, my existing
     <span data-l="ua">Зібрано за досвідом розробки з <a href="https://serzhyale.github.io/FastMediaSorter_mob_v2/" target="_blank" rel="noopener">FastMediaSorter</a> - Android-застосунку, що живе на цьому методі щодня понад рік.</span>
   </p>
 </div></footer>
-<button class="to-top" id="toTop" type="button" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top" title="Back to top"><svg class="icon" aria-hidden="true"><use href="#icon-nav-scroll-top"/></svg></button>
+<button class="to-top" id="toTop" type="button" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top" title="Back to top"><span class="gi gi-top" aria-hidden="true"></span><span class="to-top-label" aria-hidden="true"><span data-l="ru">Наверх</span><span data-l="en">Back to top</span><span data-l="ua">Нагору</span></span></button>
 
+<script src="assets/ui-prefs.js" defer></script>
 <script>
   var I18N = {
     ru:{
@@ -1428,17 +1470,50 @@ Do not change anything yet. Show me the plan first; on any conflict, my existing
   function setLang(l){ applyLang(l); try{ localStorage.setItem('sza-lang', l); }catch(e){}
     /* Keep ?lang= in the URL in sync with the active language, so a copied link
        carries the reader's language. */
-    try{ var u = new URL(location.href); u.searchParams.set('lang', isoLang(l)); history.replaceState(null, '', u); }catch(e){} }
+    try{ var u = new URL(location.href); u.searchParams.set('lang', isoLang(l)); u.searchParams.delete('l'); history.replaceState(null, '', u); }catch(e){} }
   function toggleTheme(){
     var d = document.documentElement, t = d.getAttribute('data-theme')==='dark' ? 'light' : 'dark';
     d.setAttribute('data-theme', t);
     try{ localStorage.setItem('sza-theme', t); }catch(e){}
     applyThemeLabel();
   }
-  /* Expand / collapse every section card (only the .sec details, not nested ones). */
+  /* COLLAPSIBLE-GROUP section 4 rule 7: a visitor's own open and close choices are remembered by the stable section
+     number (the same number in all three language articles), restored before first paint, and written only from an
+     intentional toggle - never from the hash, the print handler or a restore. A missing or unknown number is ignored. */
+  var GKEY = 'uak-groups', userToggled = null;
+  function gnum(det){ var n = det.querySelector('.secnum'); return n ? 'sec-' + n.textContent.replace(/\D/g,'') : ''; }
+  function gread(){ try{ var o = JSON.parse(localStorage.getItem(GKEY) || '{}'); return (o && typeof o === 'object') ? o : {}; }catch(e){ return {}; } }
+  function gwrite(m){ try{ if(Object.keys(m).length){ localStorage.setItem(GKEY, JSON.stringify(m)); } else { localStorage.removeItem(GKEY); } }catch(e){} }
+  function gset(num, open){
+    var all = document.querySelectorAll('details.sec');
+    for(var i=0;i<all.length;i++){ if(gnum(all[i]) === num){ if(open){ all[i].setAttribute('open',''); } else { all[i].removeAttribute('open'); } } }
+  }
+  function grestore(){
+    var m = gread();
+    for(var k in m){ if(Object.prototype.hasOwnProperty.call(m, k) && /^sec-\d+$/.test(k) && (m[k] === 0 || m[k] === 1)){ gset(k, m[k] === 1); } }
+  }
+  document.addEventListener('click', function(e){
+    var s = e.target.closest ? e.target.closest('details.sec > summary') : null;
+    userToggled = s ? s.parentNode : null;
+  }, true);
+  document.addEventListener('toggle', function(e){
+    var d = e.target;
+    if(d !== userToggled || !d.matches || !d.matches('details.sec')) return;
+    userToggled = null;
+    var n = gnum(d); if(!n) return;
+    var m = gread(); m[n] = d.open ? 1 : 0; gwrite(m); gset(n, d.open);
+  }, true);
+  /* Expand / collapse every section card (only the .sec details, not nested ones). Before a focused control is hidden
+     with its body, focus moves to that section's header (COLLAPSIBLE-GROUP section 4 rule 5). */
   function setAll(open){
-    var s = document.querySelectorAll('details.sec');
-    for(var i=0;i<s.length;i++){ if(open){ s[i].setAttribute('open',''); } else { s[i].removeAttribute('open'); } }
+    var s = document.querySelectorAll('details.sec'), m = gread();
+    for(var i=0;i<s.length;i++){
+      if(open){ s[i].setAttribute('open',''); } else { s[i].removeAttribute('open'); }
+      var n = gnum(s[i]); if(n){ m[n] = open ? 1 : 0; }
+    }
+    var a = document.activeElement, host = a && a.closest ? a.closest('details.sec') : null;
+    if(host && !host.open){ var sm = host.querySelector('summary'); if(sm){ sm.focus(); } }
+    gwrite(m);
   }
   /* Open the section a hash points at (the section itself, or the one containing the target),
      switching language first if the target lives in a non-active language article, and
@@ -1466,20 +1541,38 @@ Do not change anything yet. Show me the plan first; on any conflict, my existing
     }
     el.scrollIntoView({block:'start'});
   }
+  /* BUTTONS section 3 rule 3 and section 4 rule 8: the copy button is one node with one name and its focus kept through
+     its states, and it reserves the width of its widest state so a neighbour never moves. The kit's .copy draws the
+     idle and copied words in one grid cell; the failed word joins them here (assets/site.css) and the words come from
+     I18N in the language of the article the button lives in. */
+  function initCopyButtons(){
+    var bs = document.querySelectorAll('button.copy');
+    for(var i=0;i<bs.length;i++){
+      var b = bs[i], cl = b.querySelector('.cl'); if(!cl || cl.querySelector('.cl-done')) continue;
+      var host = b.closest('[data-l]'), lang = host ? host.getAttribute('data-l') : 'en', m = I18N[lang]||I18N.en;
+      var done = document.createElement('span'); done.className = 'cl-done'; done.textContent = m.copied;
+      var fail = document.createElement('span'); fail.className = 'cl-fail';
+      fail.innerHTML = '<svg class="icon" aria-hidden="true"><use href="#icon-status-error"/></svg>';
+      fail.appendChild(document.createTextNode(m.copyFail));
+      cl.appendChild(done); cl.appendChild(fail);
+      b.dataset.origLabel = b.getAttribute('aria-label') || cl.querySelector('.cl-idle').textContent;
+    }
+  }
   function copyPrompt(btn){
     var box = btn.closest('.adopt-prompt'); if(!box) return;
+    if(btn.getAttribute('aria-disabled') === 'true') return;   /* a result is showing: a repeat press does nothing */
     var pre = box.querySelector('pre'); var txt = pre ? pre.innerText : '';
-    var l = document.documentElement.getAttribute('data-lang')||'en', m = I18N[l]||I18N.en;
-    function flash(icon, word, cls){
-      if(btn.dataset.orig === undefined){ btn.dataset.orig = btn.innerHTML; btn.dataset.origLabel = btn.getAttribute('aria-label') || ''; }
-      btn.setAttribute('aria-label', word);
-      btn.innerHTML = '<svg class="icon ' + icon + '" aria-hidden="true"><use href="#' + icon + '"/></svg><span class="' + cls + '">' + word + '</span>';
-      setTimeout(function(){ btn.innerHTML = btn.dataset.orig; btn.setAttribute('aria-label', btn.dataset.origLabel); btn.removeAttribute('disabled'); }, 1600);
-    }
-    /* PAGE-STYLE 4.7 (1.4) + the ICON-SET note on action.copy: the done state is the localized word
-       for "Copied" beside the same copy glyph - never a status glyph, never a check. */
-    function done(){ btn.setAttribute('disabled',''); flash('icon-action-copy', m.copied, 'feedback-copy-done'); }
-    function fail(){ flash('icon-status-error', m.copyFail, 'feedback-status-error'); }   /* both clipboard paths failed - don't lie */
+    var host = btn.closest('[data-l]'), l = host ? host.getAttribute('data-l') : (document.documentElement.getAttribute('data-lang')||'en'), m = I18N[l]||I18N.en;
+    function flash(cls, word, hold){
+      clearTimeout(btn._t);
+      btn.classList.remove('done', 'failed'); btn.classList.add(cls); btn.setAttribute('aria-label', word);
+      if(hold){ btn.setAttribute('aria-disabled', 'true'); }
+      btn._t = setTimeout(function(){ btn.classList.remove('done', 'failed'); btn.setAttribute('aria-label', btn.dataset.origLabel); btn.removeAttribute('aria-disabled'); }, 1600);
+    }    /* PAGE-STYLE 4.7 (1.4) + the ICON-SET note on action.copy: the done state is the localized word
+       for "Copied" beside the same copy glyph - never a status glyph, never a check. aria-disabled, not disabled:
+       a disabled button drops the keyboard focus the visitor is standing on. */
+    function done(){ flash('done', m.copied, true); }
+    function fail(){ flash('failed', m.copyFail, false); }   /* both clipboard paths failed - don't lie */
     function fallback(){
       try{ var ta=document.createElement('textarea'); ta.value=txt; ta.style.position='fixed'; ta.style.left='-9999px';
         document.body.appendChild(ta); ta.focus(); ta.select();
@@ -1527,6 +1620,8 @@ Do not change anything yet. Show me the plan first; on any conflict, my existing
       try{ kd[k].textContent = new Date(kd[k].getAttribute('datetime') + 'T00:00:00Z').toLocaleDateString(
         {ru:'ru-RU', ua:'uk-UA'}[kl] || 'en-GB', {year:'numeric', month:'long', day:'numeric', timeZone:'UTC'}); }catch(e){}
     }
+    initCopyButtons();
+    grestore();
     openFromHash();
     syncToTop();
   })();

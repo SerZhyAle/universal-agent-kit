@@ -46,7 +46,7 @@
   function setLang(l) {
     applyLang(l);
     try { localStorage.setItem('sza-lang', l); } catch (e) {}
-    try { var u = new URL(location.href); u.searchParams.set('lang', iso(l)); history.replaceState(null, '', u); } catch (e) {}
+    try { var u = new URL(location.href); u.searchParams.set('lang', iso(l)); u.searchParams.delete('l'); history.replaceState(null, '', u); } catch (e) {}
   }
   function toggleTheme() {
     var t = doc.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';

@@ -22,21 +22,35 @@ have that drive. A pointer would go in `docs/contracts/`; the contract text itse
 What this repository touches, each with a pointer in [docs/contracts/](docs/contracts/README.md) and a
 specification in [docs/specifications/](docs/specifications/DONE/SPECIFICATION_CONTRACTS_SYNC.md):
 
-- **The site consumes** `PAGE-CONTENT` 1.4 (documentation / method page), `PAGE-STYLE` 1.6 (Informational /
-  Docs, the shared stylesheet byte-identical in `assets/`), `SITE-FAMILY-MAP` 1.4 (footer family grid), and
-  the opted-in iconography drafts `ICON-SET` 0.29, `ICON-RENDER` 0.18, `ICON-EXTERNAL` 0.12. It also opted in
-  (2026-10-09, owner decision) to the product-site drafts `SITE-STRUCTURE` 0.1, `SITE-EXPERIENCE` 0.3 and
-  `SITE-REPRESENTATION` 0.1 at the declared **portal** tier: the page set is published (`portal/**`,
-  `privacy.html`, `404.html`), the positioning source is [POSITIONING.md](POSITIONING.md), and what is still
-  open is a dated registry exception. It creates no vocabulary, style or map of its own. The child-page
-  footer is the hub's open question (ask 2 of its multi-page proposal): until it answers, every page carries
-  the footer of `SITE-FAMILY-MAP` rule 1 as that text stands.
+- **The site consumes** `PAGE-CONTENT` 1.5 (documentation / method page), `PAGE-STYLE` 3.4 (Informational /
+  Docs, the shared stylesheet byte-identical in `assets/`, the locale query `?lang=` with the legacy `?l=` read as
+  well), `SITE-FAMILY-MAP` 1.8 (footer family grid), the unified UI contracts `BUTTONS` 2.0, `UI-SIZING` 1.1 and
+  `COLLAPSIBLE-GROUP` 1.1 (partial: measured in Chromium only, plan and deadline in
+  [SPECIFICATION_UNIFIED_UI_CONTRACTS.md](docs/specifications/SPECIFICATION_UNIFIED_UI_CONTRACTS.md); the browser
+  check is `python -I tools/ui-check/run.py --catalog <catalog root>`), and
+  the opted-in iconography drafts `ICON-SET` 0.36, `ICON-RENDER` 0.24 (partial, as `UI-SIZING` is), `ICON-EXTERNAL`
+  0.12. It also opted in (2026-10-09, owner decision) to the product-site drafts `SITE-STRUCTURE` 0.3,
+  `SITE-EXPERIENCE` 0.4 and `SITE-REPRESENTATION` 0.1 at the declared **portal** tier: the page set is published
+  (`portal/**`, `privacy.html`, `404.html`), the positioning source is [POSITIONING.md](POSITIONING.md), and what is
+  still open is a dated registry exception. It creates no vocabulary, style or map of its own. The child-page
+  footer was settled by the amendment of 2026-10-17 (item 2): a landing keeps the sibling grid and the contact,
+  a child page needs the contact line and the hub link and may drop the grid. Every page here keeps all three on
+  purpose, so a visitor on a function page can leave for a sibling.
 - **The repository produces** `REPO-STAMP` 0.12 (`.sza-canon.json`, written only by the adoption skill) and
-  **consumes** `REPO-LAYOUT` 0.11 and `RULE-DELIVERY` 0.12. `HARNESS-PROFILE` 0.11 is **not bound**: this
+  **consumes** `REPO-LAYOUT` 0.11 and `RULE-DELIVERY` 0.12. `HARNESS-PROFILE` 0.12 is **not bound**: this
   repository never runs the packaged harness, so it keeps no `.sza-profile.json`, and the contract's rule 7
   reads that as a different fact from "the defaults apply" - declared so in its pointer and the registry row.
+- **The kit is to carry guidance for** `CONTEXT-HELP` 0.1 (F1, a `?` button and a help page or layer for each
+  window of an application): the contract names this repository in its consumers line for what the kit carries,
+  not for surfaces, because no application window is drawn here. The verdict for the site's pages is "not
+  applicable" and the pointer says why. `kit/` does not restate the convention yet: that is slice B of
+  [SPECIFICATION_IN_APP_HELP.md](docs/specifications/SPECIFICATION_IN_APP_HELP.md) (Draft), whose change also
+  lists the `kit/` files in the pointer, so a later change of the contract finds them.
+- **Read, not adopted:** `DOC-EXTERNAL-QUALITY` 0.12 and `DOC-INTERNAL-QUALITY` 0.10 (drafts; no owner decision
+  has opted this repository in, and each pointer says what an opt-in would meet).
 - **Declared not applicable:** `INSTALL-TRUST` (the zip installs and executes nothing), `WAVE-PARTICLES`,
-  the desktop-app contracts, and every format this repository neither reads nor writes. The automated-checks
+  `BOOLEAN-OPTION` and `SETTINGS-NAVIGATION` (no boolean option and no settings surface is drawn; each pointer says
+  why), the desktop-app contracts, and every format this repository neither reads nor writes. The automated-checks
   drafts are not bound; the build check aligns with them voluntarily.
 
 `kit/` is method - how we develop - which the catalog keeps out by name, and the canon owns instead.

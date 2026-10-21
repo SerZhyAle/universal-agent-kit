@@ -345,7 +345,7 @@ function Test-Origins {
     $loaded = @{}
     $files = New-Object System.Collections.Generic.List[string]
     foreach ($pg in (Get-Pages)) { $files.Add($pg) }
-    foreach ($f in 'assets/site.css', 'assets/portal.css', 'assets/portal.js') { $files.Add($f) }
+    foreach ($f in 'assets/site.css', 'assets/portal.css', 'assets/portal.js', 'assets/ui-prefs.js') { $files.Add($f) }
     foreach ($f in $files) {
         $t = Read-Text $f
         $hits = New-Object System.Collections.Generic.List[string]

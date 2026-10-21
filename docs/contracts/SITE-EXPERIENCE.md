@@ -1,7 +1,6 @@
 # `SITE-EXPERIENCE` pointer
 
-- Version: 0.3 (draft; opted in 2026-10-09; the spec that opened this work read 0.1 - rules 20 and the picker
-  form of rule 10 arrived as 0.2 and 0.3 before this row was written)
+- Version: 0.4 (draft; opted in 2026-10-09); read in full on 2026-10-21
 - Role: consumer; every rule binds at the declared portal tier
 - Home: `product-site/SITE-EXPERIENCE.md` in the shared contracts catalog; its conformance artifact is the
   run-list `SITE-CHECKLIST.md`, read off the rendered site
@@ -19,7 +18,13 @@ announcements (rules 11, 12). The declared third-party origins are `fonts.google
 and `fonts.gstatic.com` (the font files) - nothing else is contacted at load, no analytics, no advertising -
 named on `privacy.html` with purpose and what each receives, and compared both ways with what the pages load
 (rule 14; `origins`). Contrast, focus order, reduced motion and the network panel are read in a browser, not
-from the source, and recorded per run in the adoption row: the accent-filled controls of the kit itself
-(`.btn-primary`, the active `.seg` button) measure 4.11:1 in the light theme and are the kit's to fix. Staying
-conformant: keep the resolver text the kit's, keep layout in the stylesheets, declare every origin in
+from the source, and recorded per run in the adoption row.
+
+Rule 17 still says "touch targets are 44 px", which `PAGE-STYLE` 3.3 and `UI-SIZING` 1.1 have superseded for
+buttons: the site draws the profile targets of the revised kit (32 px with a pointer, 48 px with touch) and keeps
+the 4.5 : 1 text and 3 : 1 component contrast of the same rule. That difference is a registry exception pending
+the owner's answer to the proposal filed by another product for exactly this sentence, and the permanent variant
+is recorded in `SPECIFICATION_UNIFIED_UI_CONTRACTS.md`. The 0.4 additions (the Support page and a static
+release-history page) are conditional and owed nothing here, for the reasons the `SITE-STRUCTURE` pointer gives.
+Staying conformant: keep the resolver text the kit's, keep layout in the stylesheets, declare every origin in
 `tools/portal/privacy.json` and re-run the browser half of the run-list when the page set or a layer changes.

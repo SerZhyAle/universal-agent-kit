@@ -129,10 +129,12 @@ kit/                        the kit source, browsable here
 Minimal start: take just `AGENTS.md` + `docs/` + `/quick` + `/fix` - add the rest when a task
 earns it.
 
-Works natively with **Claude Code**. The rules file (`AGENTS.md`) and the skills (the open Agent
-Skills format) also load natively in **Codex, Cursor, GitHub Copilot, Gemini CLI and Cline**; the role
-briefs are the part that stays an adaptation (`kit/README.md` maps each tool's folders). The `docs/`
-method is tool-independent.
+Works natively with **Claude Code**. The rules file (`AGENTS.md`) is read natively by **Codex, Cursor,
+GitHub Copilot and Cline** (Gemini CLI: once its settings name it). The skills (the open Agent Skills
+format) load from `.claude/skills/` as they are in **Cursor, GitHub Copilot and Cline**; **Codex and
+Gemini CLI** read `.agents/skills/`, so copy or link the folder there. The role briefs are the part
+that stays an adaptation (`kit/README.md` maps each tool's folders). The `docs/` method is
+tool-independent.
 
 ### License
 
@@ -190,10 +192,12 @@ kit/                        исходник kit, можно листать пр
 Минимальный старт: возьми только `AGENTS.md` + `docs/` + `/quick` + `/fix` - остальное добавишь,
 когда задача этого потребует.
 
-Нативно работает с **Claude Code**. Файл правил (`AGENTS.md`) и навыки (открытый формат Agent
-Skills) нативно читают и **Codex, Cursor, GitHub Copilot, Gemini CLI и Cline**; адаптировать
-придётся только роли (`kit/README.md` показывает папки под каждый инструмент). Метод в `docs/` от
-инструмента не зависит.
+Нативно работает с **Claude Code**. Файл правил (`AGENTS.md`) нативно читают **Codex, Cursor,
+GitHub Copilot и Cline** (в Gemini CLI - после указания файла в настройках). Навыки (открытый формат
+Agent Skills) из `.claude/skills/` читаются как есть в **Cursor, GitHub Copilot и Cline**; **Codex и
+Gemini CLI** ищут их в `.agents/skills/` - скопируй или залинкуй туда папку. Адаптировать придётся
+только роли (`kit/README.md` показывает папки под каждый инструмент). Метод в `docs/` от инструмента
+не зависит.
 
 ### Лицензия
 
@@ -235,10 +239,12 @@ Kit - **MIT** (см. [LICENSE](LICENSE)). Текст статьи - **CC BY 4.0*
 Мінімальний старт: візьми лише `AGENTS.md` + `docs/` + `/quick` + `/fix` - решту додаси, коли
 задача цього потребуватиме.
 
-Нативно працює з **Claude Code**. Файл правил (`AGENTS.md`) і навички (відкритий формат Agent
-Skills) нативно читають також **Codex, Cursor, GitHub Copilot, Gemini CLI і Cline**; адаптувати
-доведеться лише ролі (`kit/README.md` показує теки під кожен інструмент). Метод у `docs/` від
-інструмента не залежить.
+Нативно працює з **Claude Code**. Файл правил (`AGENTS.md`) нативно читають **Codex, Cursor,
+GitHub Copilot і Cline** (у Gemini CLI - після вказівки файлу в налаштуваннях). Навички (відкритий
+формат Agent Skills) з `.claude/skills/` читаються як є в **Cursor, GitHub Copilot і Cline**; **Codex
+і Gemini CLI** шукають їх у `.agents/skills/` - скопіюй або залінкуй туди теку. Адаптувати доведеться
+лише ролі (`kit/README.md` показує теки під кожен інструмент). Метод у `docs/` від інструмента не
+залежить.
 
 ### Ліцензія
 

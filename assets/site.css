@@ -6,20 +6,16 @@
   :root{
     --pill-bg: color-mix(in srgb, var(--acc) 10%, transparent);
   }
-  body{font-size:16px}
   a:hover{text-decoration:underline}
   code{background:var(--bg-3); padding:.08em .38em; border-radius:5px; font-size:.88em}
 
   /* header: the kit's floating glass bar, allowed to wrap at 360px */
   .site-header{flex-wrap:wrap}
-  .brand{font-size:15px}
-  .icon{width:16px; height:16px; fill:currentColor; flex:none}
+  .brand{font-size:0.9375rem}
+  .icon{width:var(--ui-glyph); height:var(--ui-glyph); fill:currentColor; flex:none}
   .icon-sprite{display:none}
   .feedback-copy-done{color:var(--acc)}   /* PAGE-STYLE 4.7: the copied word beside the action.copy glyph */
   .icon-status-error,.feedback-status-error{color:var(--danger)}
-  .seg button{display:inline-flex; align-items:center; justify-content:center}
-  .btn{justify-content:center}
-  .to-top .icon{width:20px; height:20px}
 
   main{padding:0 var(--gutter) 40px; position:relative; z-index:1}
 
@@ -27,48 +23,48 @@
   .hero{padding:1.2rem 0 14px; border-bottom:1px solid var(--border); margin-bottom:4px}
   .hero .kicker b{font-weight:800; color:var(--text)}
   .hero .lead{color:var(--text-2)}
-  .hero .cta{display:flex; gap:10px; flex-wrap:wrap}
-  .hero .hero-note{font-size:14px; margin:12px 0 0}
-  .hero .kit-updated{font-size:13px; margin:6px 0 0}
+  .hero .hero-note{font-size:0.875rem; margin:12px 0 0}
+  .hero .kit-updated{font-size:0.8125rem; margin:6px 0 0}
   .minimum-start{margin:16px 0 4px; padding:14px 16px; border:1px solid var(--border); border-left:3px solid var(--acc); border-radius:0 var(--radius-sm) var(--radius-sm) 0; background:var(--card); scroll-margin-top:90px}
-  .minimum-start h2{margin:0 0 5px; font-size:16px; line-height:1.35}
-  .minimum-start p{margin:0; font-size:14.5px; color:var(--text-2)}
+  .minimum-start h2{margin:0 0 5px; font-size:1rem; line-height:1.35}
+  .minimum-start p{margin:0; font-size:0.9063rem; color:var(--text-2)}
 
   /* the skill-run illustration inside a section (not the kit's one-line .demo strip) */
   .demo-panel{margin:16px 0 4px}
-  .demo-cap{font-size:14px; margin:0 0 8px}
+  .demo-cap{font-size:0.875rem; margin:0 0 8px}
   .demo-cap strong{color:var(--text)}
-  .demo-log{margin:0; font-size:12.5px; line-height:1.5}
-  .toolbar{display:flex; gap:10px; flex-wrap:wrap; margin:14px 0 2px}
+  .demo-log{margin:0; font-size:0.7813rem; line-height:1.5}
+  .toolbar{margin:14px 0 var(--ui-gap)}
 
   /* before/after: the same assistant, week one, side by side */
   .ba{display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--border);
-    border:1px solid var(--border); border-radius:var(--radius-sm); overflow:hidden; margin:16px 0 6px; font-size:13.5px}
+    border:1px solid var(--border); border-radius:var(--radius-sm); overflow:hidden; margin:16px 0 6px; font-size:0.8438rem}
   .ba>div{background:var(--bg-2); padding:9px 13px; line-height:1.45}
-  .ba>.h{font-family:var(--font-heading); font-size:11.5px; font-weight:700; text-transform:uppercase; letter-spacing:.1em}
+  .ba>.h{font-family:var(--font-heading); font-size:0.7188rem; font-weight:700; text-transform:uppercase; letter-spacing:.1em}
   .ba>.h.l{color:var(--gold)}
   .ba>.h.r{color:var(--ok)}
   .ba>.l:not(.h){color:var(--muted)}
 
-  /* ---------- numbered collapsible sections (the table of contents) ---------- */
-  .sections{display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:14px; align-items:start; margin-top:16px}
-  @media(max-width:760px){ .sections{grid-template-columns:1fr} }
-  details.sec{padding:0; margin:0; overflow:hidden; scroll-margin-top:90px}
-  details.sec[open]{grid-column:1 / -1; box-shadow:var(--shadow)}
-  details.sec>summary{align-items:flex-start; gap:11px; padding:13px 16px; font-family:var(--font-body); font-weight:600; font-size:inherit}
+  /* ---------- numbered collapsible sections (the table of contents) ----------
+     COLLAPSIBLE-GROUP 1.1: one full-width header per topic, in order, no packing of collapsed headers (the design record in
+     docs/specifications/SPECIFICATION_UNIFIED_UI_CONTRACTS.md says why). The kit draws the header face, the state triangle,
+     the profile target and the in-flow body; this layer adds the teaser line and the body padding. */
+  .sections{margin-top:16px}
+  details.sec{scroll-margin-top:90px}
+  details.sec[open]{box-shadow:var(--shadow)}
   details.sec>summary:hover .sectitle{color:var(--acc-strong)}
-  details.sec>*:not(summary){margin-bottom:0}
-  .secnum{font-size:13px; line-height:1.6; flex:none}
+  details.sec>.secbody{margin:0}
+  .secnum{font-size:0.8125rem; line-height:1.6; flex:none}
   .sechead{display:flex; flex-direction:column; gap:2px; min-width:0}
-  .sectitle{margin:0; font-family:var(--font-heading); font-size:16px; font-weight:700; letter-spacing:-.01em; line-height:1.35}
+  .sectitle{margin:0; font-family:var(--font-heading); font-size:1rem; font-weight:700; letter-spacing:-.01em; line-height:1.35}
   .sectitle code{font-size:.9em; padding:.05em .35em}
-  .secteaser{color:var(--muted); font-weight:400; font-size:13px; line-height:1.42}
+  .secteaser{color:var(--muted); font-weight:400; font-size:0.8125rem; line-height:1.42}
   details.sec[open] .secteaser{display:none}
   .secbody{padding:4px 18px 16px 18px}
   .secbody h3{scroll-margin-top:90px}
   details.sec[open] .secbody{border-top:1px solid var(--border); margin-top:2px; padding-top:12px}
 
-  h3{font-size:17px; margin:18px 0 4px}
+  h3{font-size:1.0625rem; margin:18px 0 4px}
   p{margin:10px 0}
   ul,ol{margin:10px 0; padding-left:22px}
   li{margin:5px 0}
@@ -77,42 +73,57 @@
 
   pre{
     background:var(--code-bg); color:var(--code-ink); border:1px solid var(--border); border-radius:var(--radius-sm);
-    padding:14px 16px; overflow:auto; font-size:13px; line-height:1.5; margin:10px 0;
+    padding:14px 16px; overflow:auto; font-size:0.8125rem; line-height:1.5; margin:10px 0;
   }
   pre.diagram{color:color-mix(in srgb, var(--code-ink) 80%, transparent)}
 
   .grid{grid-template-columns:repeat(auto-fit, minmax(230px,1fr)); gap:12px; margin:16px 0}
   .card{padding:14px 16px; border-radius:var(--radius-sm)}
-  .card h3{margin:0 0 4px; font-size:15px}
-  .card p{margin:4px 0 0; font-size:14px; color:var(--muted)}
-  .card .num{font-family:var(--font-heading); font-size:12px; font-weight:700; color:var(--acc); letter-spacing:.1em}
+  .card h3{margin:0 0 4px; font-size:0.9375rem}
+  .card p{margin:4px 0 0; font-size:0.875rem; color:var(--muted)}
+  .card .num{font-family:var(--font-heading); font-size:0.75rem; font-weight:700; color:var(--acc); letter-spacing:.1em}
 
-  .note{font-size:14.5px; margin:18px 0}
+  .note{font-size:0.9063rem; margin:18px 0}
   .note p{font-size:inherit; margin:.4em 0 0}
 
   .pills{margin:14px 0}
-  .pill{font-family:var(--font-body); font-size:12.5px; font-weight:500; letter-spacing:0; color:var(--text-2)}
+  .pill{font-family:var(--font-body); font-size:0.7813rem; font-weight:500; letter-spacing:0; color:var(--text-2)}
   .pill b{color:var(--text); font-weight:700}
 
   /* ---------- footer: kit form, plus the per-locale product line ---------- */
-  .site-footer{color:var(--muted); font-size:14px; position:relative; z-index:1}
-  .site-footer .cta{display:flex; gap:10px; flex-wrap:wrap; margin:14px 0}
+  .site-footer{color:var(--muted); font-size:0.875rem; position:relative; z-index:1}
+  .site-footer .cta{margin:14px 0}
+  .ui-prefs{margin:24px 0 0; padding-top:14px; border-top:1px solid var(--border)}
+  .ui-prefs h2{margin:0 0 10px; color:var(--text); font-size:0.9375rem}
+  .ui-prefs-row{display:flex; flex-wrap:wrap; gap:var(--ui-gap) var(--ui-gap-group)}
+  .ui-prefs-field{display:flex; flex-wrap:wrap; align-items:center; gap:var(--ui-gap)}
+  .ui-prefs-label{color:var(--text-2); font-size:0.875rem}
   .tools-family{margin:24px 0 0; padding-top:14px; border-top:1px solid var(--border)}
-  .tools-family h2{margin:0 0 10px; color:var(--text); font-size:15px}
-  .tools-grid a{display:flex; align-items:center; min-height:44px}
+  .tools-family h2{margin:0 0 10px; color:var(--text); font-size:0.9375rem}
+  .tools-grid a{display:flex; align-items:center}
   .tools-grid a:hover{text-decoration:none; color:var(--text)}
   .footer-bottom{padding-top:14px; border-top:1px solid var(--border); margin-top:4px}
-  .provenance{font-size:13px; margin:14px 0 0}
+  .provenance{font-size:0.8125rem; margin:14px 0 0}
 
   pre:focus-visible{outline:2px solid var(--acc); outline-offset:2px}
-  .seg button:focus-visible{outline-offset:-2px}
 
   .adopt-prompt{margin:16px 0 22px}
-  .adopt-prompt details{background:var(--bg-3); border:1px solid var(--border); border-radius:var(--radius-sm); padding:4px 14px 14px}
-  .adopt-prompt summary{cursor:pointer; font-weight:600; color:var(--acc-strong); list-style:none; display:flex; align-items:center; gap:8px; min-height:44px; padding:4px 2px}
-  .adopt-prompt summary::-webkit-details-marker{display:none}
-  .adopt-prompt .prompt-actions{display:flex; justify-content:flex-end; margin:2px 0 8px}
-  .adopt-prompt pre{margin:0; max-height:none}
+  .adopt-prompt details{background:var(--bg-3); border:1px solid var(--border); border-radius:var(--radius-sm); overflow:clip}
+  .adopt-prompt>details>summary{list-style:none; cursor:pointer; display:flex; align-items:center; gap:var(--ui-gap);
+    min-height:var(--ui-target); padding:calc(6px*var(--ui-scale)) var(--ui-pad-x); background:var(--grp-head); color:var(--acc-strong);
+    font-family:var(--font-heading); font-weight:700; font-size:calc(1.02rem*var(--ui-scale)); line-height:1.35}
+  .adopt-prompt>details>summary::-webkit-details-marker{display:none}
+  .adopt-prompt>details>summary::before{content:""; flex:none; width:var(--ui-glyph); height:var(--ui-glyph); background-color:currentColor; forced-color-adjust:none;
+    -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M8 5v14l11-7z'/%3E%3C/svg%3E") center/contain no-repeat;
+    mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M8 5v14l11-7z'/%3E%3C/svg%3E") center/contain no-repeat}
+  .adopt-prompt>details[open]>summary::before{transform:rotate(90deg)}
+  [dir="rtl"] .adopt-prompt>details:not([open])>summary::before{transform:scaleX(-1)}
+  .adopt-prompt>details>summary:hover{background:var(--grp-head-hover)}
+  .adopt-prompt>details>summary:active{background:var(--grp-head-press)}
+  .adopt-prompt>details>summary:focus-visible{outline-offset:-3px; border-radius:0}
+  .adopt-prompt details[open]>summary{border-bottom:1px solid var(--border)}
+  .adopt-prompt .prompt-actions{justify-content:flex-end; margin:var(--ui-gap) 14px}
+  .adopt-prompt pre{margin:0 14px 14px; max-height:none}
   .adopt-step{font-weight:700; color:var(--acc-strong)}
   .adopt-prompt + p{margin-top:2px}
 
@@ -124,7 +135,7 @@
   /* Print: dark theme prints unreadable, and collapsed sections drop their content.
      A beforeprint handler opens every collapsed section; these rules force readable ink on white. */
   @media print{
-    .site-header, .bg-blobs, .to-top, .hero .cta, .site-footer .cta, .adopt-prompt .prompt-actions{display:none !important}
+    .site-header, .bg-blobs, .to-top, .hero .cta, .site-footer .cta, .adopt-prompt .prompt-actions, .ui-prefs{display:none !important}
     html, body{background:#fff !important; color:#111 !important}
     .sections{display:block !important}
     details.sec{grid-column:auto !important; break-inside:avoid; box-shadow:none !important; backdrop-filter:none !important;
@@ -140,26 +151,44 @@
     a[href^="http"]::after{content:" (" attr(href) ")"; font-size:.8em; color:#555}
   }
 
-  /* skip link (SITE-EXPERIENCE 15): the first focusable element of every page, visible only while focused */
-  .skip-link{position:absolute; left:var(--gutter); top:-120px; z-index:100; padding:.7rem 1.1rem; border-radius:var(--radius-sm);
-    background:var(--acc); color:var(--acc-ink); font-weight:700; text-decoration:none}
-  .skip-link:focus{top:8px; color:var(--acc-ink); text-decoration:none}
+  /* skip link (SITE-EXPERIENCE 15): the first focusable element of every page, visible only while focused;
+     its neutral face and its corner use the kit's control roles and radius token */
+  .skip-link{position:absolute; left:var(--gutter); top:-120px; z-index:100; padding:.7rem 1.1rem; font-weight:700; text-decoration:none;
+    color:var(--text); background:var(--ctl-face); border:1px solid var(--ctl-border-hover); border-radius:var(--ui-radius)}
+  .skip-link:focus{top:8px; color:var(--text); text-decoration:none}
 
   /* the fallback for visitors without JavaScript (SITE-EXPERIENCE 4: layout and colour live here, not in a style attribute) */
-  .noscript-note{margin:14px 0 0; padding:11px 14px; border:1px solid var(--border); border-radius:10px; background:var(--bg-2); color:var(--muted); font-size:14px}
+  .noscript-note{margin:14px 0 0; padding:11px 14px; border:1px solid var(--border); border-radius:10px; background:var(--bg-2); color:var(--muted); font-size:0.875rem}
 
   /* the labelled navigations of the landing (SITE-EXPERIENCE 16) and the link from a section to its portal section */
   .header-nav{display:flex; align-items:center}
-  .header-link{display:inline-flex; align-items:center; min-height:44px; padding:0 8px; color:var(--text-2); font-weight:600; font-size:14px}
+  .header-link{display:inline-flex; align-items:center; min-height:44px; padding:0 8px; color:var(--text-2); font-weight:600; font-size:0.875rem}
   .header-link:hover{color:var(--text)}
   .footer-bottom nav a{display:inline-flex; align-items:center; min-height:44px}
-  .portal-link{margin:14px 0 0; font-size:14px}
+  .portal-link{margin:14px 0 0; font-size:0.875rem}
 
-  /* Light-theme contrast (SITE-EXPERIENCE 17): white text on the kit's --acc measures 4.11:1, below 4.5:1 for text.
-     The kit's own --acc-strong (about 5.4:1 behind white) is used behind white text instead, until the kit revision
-     asked for in the catalog's 2026-10-07 contrast proposal lands; a dated registry exception records this override. */
-  html[data-theme="light"] .btn-primary,
-  html[data-theme="light"] .seg button[aria-pressed="true"],
-  html[data-theme="light"] .seg button.on,
-  html[data-theme="light"] .skip-link{background:var(--acc-strong)}
-  html[data-theme="light"] .btn-primary:hover{background:var(--acc-strong); filter:brightness(.92)}
+  /* ---------- UI contracts (BUTTONS 2.0, UI-SIZING 1.1): what the kit does not draw for this site ---------- */
+  /* the header strip keeps its one primary command at every width: the kit hides the header button below 481 px, but
+     here the button is the primary Download command, and BUTTONS section 4 rule 3 keeps a primary action visible */
+  .site-header .btn:not(.nav-toggle){display:inline-flex}
+  /* the failed word joins the kit's idle and copied words in the one grid cell of .copy .cl */
+  .copy .cl>.cl-fail{visibility:hidden; display:inline-flex; align-items:center; justify-content:center; gap:var(--ui-gap); color:var(--danger-face)}
+  .copy.failed .cl>.cl-idle{visibility:hidden}
+  .copy.failed .cl>.cl-fail{visibility:visible}
+  .copy.done .cl>.cl-done{color:var(--acc-strong)}
+  /* back to top is the kit's icon-only command; on touch its caption is shown as the naming route that does not run it */
+  .to-top-label{position:absolute; width:1px; height:1px; margin:-1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap}
+  html[data-ui-profile="touch"] .to-top{padding:0 var(--ui-pad-x)}
+  html[data-ui-profile="touch"] .to-top-label{position:static; width:auto; height:auto; margin:0; overflow:visible; clip:auto; white-space:normal}
+  @media (pointer:coarse){
+    html:not([data-ui-profile]) .to-top{padding:0 var(--ui-pad-x)}
+    html:not([data-ui-profile]) .to-top-label{position:static; width:auto; height:auto; margin:0; overflow:visible; clip:auto; white-space:normal}
+  }
+  /* a disclosure button names its state with the ICON-SET expand and collapse glyphs, which change with aria-expanded */
+  .btn .marker-collapse{display:none}
+  .btn[aria-expanded="true"] .marker-expand{display:none}
+  .btn[aria-expanded="true"] .marker-collapse{display:inline-block}
+  @media (forced-colors:active){
+    .adopt-prompt>details>summary{background:ButtonFace; color:ButtonText; border-bottom:1px solid ButtonText}
+    .adopt-prompt>details>summary::before{background-color:ButtonText}
+  }

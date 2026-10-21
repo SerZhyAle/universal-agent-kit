@@ -145,16 +145,16 @@ $($script:PrePaint)
 <a class="skip-link" href="#main">$(UT 'skip')</a>
 <div class="bg-blobs" aria-hidden="true"><div class="blob blob-1"></div><div class="blob blob-2"></div><div class="blob blob-3"></div></div>
 <svg class="icon-sprite" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
-  $($script:SymDownload)
-  $($script:SymTop)
+  $($script:Sprite)
 </svg>
 $(Header $p)
 <main id="main" class="page">
 $($p.Main)
 </main>
 $(Footer $p)
-<button class="to-top" id="toTop" type="button" aria-label="Back to top" title="Back to top"><svg class="icon" aria-hidden="true"><use href="#icon-nav-scroll-top"/></svg></button>
+<button class="to-top" id="toTop" type="button" aria-label="Back to top" title="Back to top"><span class="gi gi-top" aria-hidden="true"></span><span class="to-top-label" aria-hidden="true">$(UT 'toTop')</span></button>
 $(SearchDialog)
+<script src="${r}assets/ui-prefs.js" defer></script>
 <script src="${r}assets/portal.js" defer></script>
 </body>
 </html>
@@ -175,18 +175,18 @@ function Header([hashtable]$p) {
     return @"
 <header class="site-header portal-header">
     <a class="brand" href="$(Rel $f '')">Universal&nbsp;Agent&nbsp;Kit<span class="dot">.</span></a>
-    <button class="ctl nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="portalNav">$(UT 'menu')</button>
+    <button class="btn btn-ghost nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="portalNav">$(UT 'menu')<svg class="icon marker marker-expand" aria-hidden="true"><use href="#icon-nav-expand"/></svg><svg class="icon marker marker-collapse" aria-hidden="true"><use href="#icon-nav-collapse"/></svg></button>
     <nav class="portal-nav" id="portalNav" aria-label="Portal" data-aria="navPortal">
       $links
     </nav>
-    <button class="ctl search-open" id="searchOpen" type="button" aria-haspopup="dialog" aria-controls="searchDialog">$(UT 'search')<kbd aria-hidden="true">/</kbd></button>
+    <button class="btn btn-ghost search-open" id="searchOpen" type="button" aria-haspopup="dialog" aria-controls="searchDialog"><svg class="icon" aria-hidden="true"><use href="#icon-action-search"/></svg>$(UT 'search')<kbd aria-hidden="true">/</kbd></button>
     <span class="seg" role="group" aria-label="Language" id="langGroup" data-aria="langGroup">
       <button id="lng-ru" type="button" data-set-lang="ru" aria-pressed="false" aria-label="Русский">RU</button>
       <button id="lng-en" type="button" data-set-lang="en" aria-pressed="true" aria-label="English">EN</button>
       <button id="lng-ua" type="button" data-set-lang="ua" aria-pressed="false" aria-label="Українська">UA</button>
     </span>
-    <button class="theme-btn" id="themeBtn" type="button" title="Theme" aria-label="Theme" aria-pressed="false">$(UT 'theme')</button>
-    <a class="btn btn-primary btn-sm" href="$(Rel $f 'universal-agent-kit.zip')" download>
+    <button class="theme-btn" id="themeBtn" type="button" title="Theme" aria-label="Theme" aria-pressed="false"><span class="gi gi-theme" aria-hidden="true"></span>$(UT 'theme')</button>
+    <a class="btn btn-primary" href="$(Rel $f 'universal-agent-kit.zip')" download>
       <svg class="icon" aria-hidden="true"><use href="#icon-action-download"/></svg>$(UT 'download')
     </a>
 </header>
@@ -199,7 +199,7 @@ function SearchDialog {
   <form method="dialog" class="search-form" id="searchForm">
     <div class="search-head">
       <h2 id="searchTitle">$(UT 'searchTitle')</h2>
-      <button class="btn btn-ghost btn-sm" type="button" id="searchClose">$(UT 'searchClose')</button>
+      <button class="btn btn-ghost" type="button" id="searchClose">$(UT 'searchClose')</button>
     </div>
     <input class="search-input" id="searchInput" type="search" autocomplete="off" spellcheck="false" aria-labelledby="searchTitle" placeholder="Search..">
     <p class="search-status" id="searchStatus" role="status" aria-live="polite"></p>
@@ -226,9 +226,9 @@ function Footer([hashtable]$p) {
         $l = $_
         '  <div data-l="' + $l + '">' + "`n" +
         '    <strong>Universal Agent Kit</strong> - ' + (Inl (Pl (U 'footerTag') $l)) + "`n" +
-        '    <div class="cta">' + "`n" +
+        '    <div class="cta btn-row">' + "`n" +
         '      <a class="btn btn-primary" href="' + (Rel $f 'universal-agent-kit.zip') + '" download><svg class="icon" aria-hidden="true"><use href="#icon-action-download"/></svg>' + (Inl (Pl (U 'download') $l)) + '</a>' + "`n" +
-        '      <a class="btn btn-ghost" href="https://github.com/SerZhyAle/universal-agent-kit" target="_blank" rel="noopener">' + (Inl (Pl (U 'sourceCode') $l)) + '</a>' + "`n" +
+        '      <a class="btn btn-ghost" href="https://github.com/SerZhyAle/universal-agent-kit" target="_blank" rel="noopener">' + (Inl (Pl (U 'sourceCode') $l)) + '<span class="gi gi-external gi-mirror" aria-hidden="true"></span><span class="sr">' + (Inl (Pl (U 'newWindow') $l)) + '</span></a>' + "`n" +
         '    </div>' + "`n" +
         '    <p class="muted">' + (Inl (Pl (U 'footerLicense') $l)) + '</p>' + "`n" +
         '  </div>'
@@ -236,7 +236,28 @@ function Footer([hashtable]$p) {
     return @"
 <footer class="site-footer"><div class="container">
 $blocks
-  <section class="tools-family" aria-labelledby="more-tools-heading">
+  <section class="ui-prefs" aria-labelledby="ui-prefs-heading">
+    <h2 id="ui-prefs-heading">$(UT 'uiTitle')</h2>
+    <div class="ui-prefs-row">
+      <div class="ui-prefs-field">
+        <span class="ui-prefs-label" id="uiInputLabel">$(UT 'uiInput')</span>
+        <div class="btn-row" role="group" aria-labelledby="uiInputLabel">
+          <button type="button" class="btn" data-ui-input="auto" aria-pressed="false">$(UT 'uiAuto')</button>
+          <button type="button" class="btn" data-ui-input="pointer" aria-pressed="false">$(UT 'uiMouse')</button>
+          <button type="button" class="btn" data-ui-input="touch" aria-pressed="false">$(UT 'uiTouch')</button>
+        </div>
+      </div>
+      <div class="ui-prefs-field">
+        <span class="ui-prefs-label" id="uiSizeLabel">$(UT 'uiSize')</span>
+        <div class="btn-row" role="group" aria-labelledby="uiSizeLabel">
+          <button type="button" class="btn" data-ui-size-set="compact" aria-pressed="false">$(UT 'uiCompact')</button>
+          <button type="button" class="btn" data-ui-size-set="standard" aria-pressed="false">$(UT 'uiStandard')</button>
+          <button type="button" class="btn" data-ui-size-set="large" aria-pressed="false">$(UT 'uiLarge')</button>
+          <button type="button" class="btn" data-ui-size-set="xlarge" aria-pressed="false">$(UT 'uiXLarge')</button>
+        </div>
+      </div>
+    </div>
+  </section>  <section class="tools-family" aria-labelledby="more-tools-heading">
     <h2 id="more-tools-heading">$(UT 'navTools')</h2>
     <nav class="tools-grid" aria-label="More tools by SZA" data-aria="navTools">
         $grid
@@ -641,8 +662,7 @@ function Build-Sitemap([string]$lastmod, [string[]]$paths) {
 function Build-Site($Model, [string]$lastmod) {
     $script:M = $Model
     $script:PrePaint = Get-PrePaint
-    $script:SymDownload = Get-Symbol 'icon-action-download'
-    $script:SymTop = Get-Symbol 'icon-nav-scroll-top'
+    $script:Sprite = ((@('icon-action-download', 'icon-action-search', 'icon-nav-expand', 'icon-nav-collapse') | ForEach-Object { Get-Symbol $_ }) -join "`n  ")
     $pages = New-Object System.Collections.Generic.List[hashtable]
     $pages.Add((Build-HomePage))
     $pages.Add((Build-OverviewPage))

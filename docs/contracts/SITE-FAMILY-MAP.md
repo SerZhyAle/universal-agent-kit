@@ -1,6 +1,6 @@
 # `SITE-FAMILY-MAP` pointer
 
-- Version: 1.8 (active); read in full on 2026-10-21
+- Version: 1.11 (active); read in full at 1.8 on 2026-10-21, the 1.9-1.11 document log read on 2026-11-10
 - Role: consumer
 - Home: `product-web-pages/SITE-FAMILY-MAP.md` in the shared contracts catalog
 
@@ -16,3 +16,9 @@ Contextual cross-links are body copy only, never a
 README "Related project" section (rule 4). The page and `README.md` state the one contact identity from rule 3.
 Conformance evidence is the section 5 URL check over the nine map URLs and the three filled help-index cells,
 the footer comparison on every page, and the registry row.
+
+The 1.9 and 1.10 corrections rename the Windows row's `Tool` cell to *Fast Media Sorter & Sharing for Windows*
+and its `Type` cell to *Windows media and file manager*; the generator's footer label was updated on
+2026-11-10 and the pages carry it at the next portal build, an interim the map's own 1.9 sentence allows (a
+sibling footer that still shows the old label links the right page and misstates only the label). The 1.11
+hub-card channels are additive; this footer keeps the hub's one link, which conforms.

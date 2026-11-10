@@ -7,6 +7,16 @@ not a heavier one.
 
 ## The ladder
 
+**The 5-second line.** Between releases run only checks taking 5 seconds or less; running the full
+suite after every step makes people wait, even when it is the only complete proof. `<CHECK_CMD>`
+names the fast check; if none exists, start with a structural, grep, link or schema check.
+`<RELEASE_CMD>` runs the full build and every test tier before or during a release. The full build,
+run-and-observe and any check or suite over 5 seconds are **release tier**: they run at the release,
+or when the owner - the person the agent works for - names that run. Record each skipped rung as
+`NOT APPLICABLE - release tier`, never as a pass, list its command as a `RELEASE` item in the closing
+audit, and say what remains unproved until the release. This paragraph is the rule's one home; the
+rules file, the skills and the agents point here.
+
 Match the evidence to the kind of change. Climbing higher than necessary wastes time; climbing
 lower than necessary ships a defect.
 
@@ -18,10 +28,10 @@ unchanged.
 
 - **Doc / text only** → grep the file for the content you claim you wrote. If the words are
   there, the change is real.
-- **Script** → run it; it exits `0` (or produces the expected artifact). A script you wrote and
-  did not run is a guess.
-- **Config / build files** → the target build passes. Config that "looks right" but breaks the
-  build is the most common self-inflicted wound.
+- **Script** → run it when within the allowed tier; it exits `0` (or produces the expected
+  artifact). A script you wrote and did not run is a guess.
+- **Config / build files** → the target build passes at release or on an owner-named run. Config
+  that "looks right" but breaks the build is the most common self-inflicted wound.
 - **A structured artifact** - a dataset, a sheet, a register, a form, a contract - → the structural
   check first (it parses, every required field is present, every cross-reference resolves), then
   the reconciliation (the total here equals the total there, the cited source says what it is
@@ -29,19 +39,21 @@ unchanged.
   number reaches a reader.
 - **Code** → the *narrowest meaningful* check:
   - a compile / type-check for a pure symbol or signature change,
-  - a targeted test for changed logic,
+  - a targeted test for changed logic when it takes 5 seconds or less; otherwise at release,
   - a full build or run only when packaging, resources, or end-to-end behaviour actually need
-    proof.
+    proof, at release or when the owner names the run.
   Do not run the whole suite to validate a one-line rename; do not claim a behaviour fix with
   only a compile.
-- **User-visible behaviour** → run it and observe. Compiling is not behaving. Observe it in every
-  input mode the product declares - touch, keyboard, pointer, controller, a screen reader - and in
-  every layout class it claims (narrow, wide, rotated), or record a mode as not applicable. A flow
-  that works by touch has proved nothing about the keyboard: each control must be reachable, in a
-  predictable order, and say what it does to assistive technology.
+- **User-visible behaviour** → at release or on an owner-named run, run it and observe. Compiling
+  is not behaving. Observe it in every input mode the product declares - touch, keyboard, pointer,
+  controller, a screen reader - and in every layout class it claims (narrow, wide, rotated), or
+  record a mode as not applicable. A flow that works by touch has proved nothing about the keyboard:
+  each control must be reachable, in a predictable order, and say what it does to assistive
+  technology.
 
 The rule of thumb: **grep < run-script < compile < targeted test < full build < run-and-observe.**
-Pick the lowest rung that actually proves *this* change, and stop there.
+Pick the lowest rung that actually proves *this* change, subject to the 5-second line. If proof is
+deferred, do not claim it passed.
 
 ### The top rung is often a human, and a human check has not happened yet
 
@@ -66,8 +78,9 @@ that produced it, not drained ticket by ticket.
 The fixed set is **PASS**, **DEFECT**, **COULD NOT VERIFY**, and **NOT APPLICABLE**. DEFECT means the
 check inspected the subject and found a failed expectation. COULD NOT VERIFY means the subject or
 instrument was out of reach, so nothing was measured. NOT APPLICABLE means the selected configuration
-deliberately has no scenario to execute; it is not a pass. A check with no way to say the last two will
-report one of the first two instead, and from then on its output is fiction with a green tick on it.
+deliberately has no scenario to execute, or the rung is deferred as release tier; it is not a pass. A
+check with no way to say the last two will report one of the first two instead, and from then on its
+output is fiction with a green tick on it.
 
 Two rules follow, both measured on one release sweep (2026-09-20):
 
@@ -108,6 +121,7 @@ through this table rather than through its own guess:
 | inspected, an expectation failed | `DEFECT` | `FAIL` | hard stop |
 | the subject or instrument was out of reach | `COULD NOT VERIFY` | `UNCHECKABLE` | hard stop, exactly as for a defect - and never a mechanical fix |
 | no scenario exists in this configuration | `NOT APPLICABLE` | `EXEMPT` | proceed, and record why |
+| the rung waits for the release | `NOT APPLICABLE - release tier` | `EXEMPT - release tier` | proceed, and list the command as a `RELEASE` item |
 | only a human can observe it | - | `MANUAL` | `BlockNeedUserTest` until the human ticks it |
 
 A skill that handles only `PASS` and "everything else" has quietly folded the third and fourth rows
@@ -188,9 +202,11 @@ gets slow, then gets skipped, which defeats fail-closed. Where the runtime can r
 until a command passes (Claude Code's `Stop` hook, `docs/HOOKS.md`), that is the natural place to
 wire the "done" command: the claim of completion and the check of it become one event.
 
-**The closure RUNS the rung; it does not merely ask for it.** When a change set carries an artifact
-class whose only proof is a link, render, or compile step that nothing else in the routine performs,
-the "done" command must run that step, selected by artifact class. Otherwise the matching rung of
+**The closure RUNS the allowed rung; it does not merely ask for it.** Defer any rung over 5 seconds,
+full build or run-and-observe to release or an owner-named run, with a `RELEASE` item. When a change
+set carries an artifact class whose only proof is a link, render, or compile step that nothing else
+in the routine performs, the "done" command must run that step, selected by artifact class.
+Otherwise the matching rung of
 the ladder above is a *request*, and a request is an ungated rule - which `AUTHORING.md` measures at
 1-8% compliance. The observed failure: nothing in one project's closure routine linked its
 resources, and its compile-only check compiled code without linking any, so a broken user-facing
@@ -284,7 +300,7 @@ the whole tree:
 - **Per-change closure runs the diff-scoped gates** - the checks for the files this change touched
   - so a sibling's unfinished work does not fail your close, and yours does not pass on their
   green.
-- **CI / release runs the strict full-project gate.** Whole-tree health is proven there, once, not
+- **Release CI runs the strict full-project gate.** Whole-tree health is proven there, once, not
   on every per-change close - a close that always rebuilds the world gets slow, then gets skipped.
 - **Attribute a failure before you fix it.** On a multi-writer tree a red check may belong to a
   sibling's in-flight edit, not yours. Confirm the failure is inside your diff first; the working
@@ -308,7 +324,7 @@ Move a gate to the **release scope** (a pre-release sweep) when all four hold:
 - the finding names its own location, so no attribution is needed;
 - batch fixing costs no more than per-change fixing.
 
-Keep it **per-change** when any one holds:
+Keep it **per-change** when it takes 5 seconds or less and any one holds:
 
 - later work builds on the defect - compilation, resource linking, a migration, a cross-module
   contract;
@@ -320,8 +336,8 @@ Two corollaries. **A relocation is a script with an exit code, never a line of p
 rule in prose changes its force, not its stage, at the compliance rates `AUTHORING.md` records. And
 **age is not the test**: "we were burned by this long ago" describes no gate in a repo whose gates
 are all months old. A new gate names its scope class at birth, and unnamed means per-change - which
-is exactly how the imbalance builds. A project with no release boundary substitutes "CI-only" for
-the release scope and applies the same four-part test.
+is exactly how the imbalance builds. A project with no release boundary defines its publish action
+as the release; branch CI obeys the same 5-second limit.
 
 ### Retiring a gate: demonstrated redundancy, never silence
 
@@ -396,6 +412,6 @@ a full build, and a migration does not get waved through on a compile. Make the 
   your validator, your reconciliation query. If a rung has no command yet, that is the next thing
   worth an hour (`PROJECT_SHAPES.md`, "We have no checks" is almost always false).
 - If your CI already gates merges, the local ladder is your *fast feedback* before CI - it should
-  be a subset you can run in seconds-to-a-minute, not a duplicate of the full pipeline.
+  run only checks of 5 seconds or less; full CI runs at release.
 - Drop the journal if your tasks are small; keep it the moment a task spans more than a handful of
   steps or more than one session.

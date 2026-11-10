@@ -63,7 +63,9 @@ capability.
    (one bullet per file) and `## Done criteria` (one observable check per file). Set
    `Status: In Progress`.
 2. Implement directly, then run the narrowest meaningful check from `docs/VALIDATION.md`
-   (`<CHECK_CMD>`, or a compile / type-check or a targeted test where the project has them). A
+   (`<CHECK_CMD>`, or a compile / type-check or a targeted test where the project has them) that
+   takes 5 seconds or less. A slower rung waits for the release: record it as
+   `NOT APPLICABLE - release tier` and list its command as a `RELEASE` item ("The ladder" there). A
    primitive still proves itself - do not set `Implemented` over a red or unrun check.
 3. If acceptance includes manual testing, insert the verification tags
    (`docs/SPEC_LIFECYCLE.md`, "Verification tags"), add a `## Manual checks` section with one
@@ -119,7 +121,8 @@ or what the blocker is and what resolves it.
 
 ## Template
 
-The strategic template lives in [`references/TEMPLATE.md`](references/TEMPLATE.md). Read it before step 5; a PRIMITIVE spec uses only its header block plus the three sections named in step 2.5.
+The strategic template lives in [`references/TEMPLATE.md`](references/TEMPLATE.md). Read it before
+step 5; a PRIMITIVE spec uses only its header block plus the three sections named in step 2.5.
 
 ## Constraints
 

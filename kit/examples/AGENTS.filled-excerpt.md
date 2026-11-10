@@ -31,14 +31,15 @@
 
 ## 7. Structure & checks
 - **Work root**: `src`. **Scratch**: `tmp` (kept out of version control, if any).
-- **The check that proves a change**: `npm test` - the one placeholder nobody may leave empty. "We
-  have no checks" is almost always false (`docs/PROJECT_SHAPES.md`). A check command you did not
-  find is never invented: ask once, then write the answer here.
+- **Fast check (5 seconds or less)**: `npm run check:fast` - the one placeholder nobody may leave
+  empty. "We have no checks" is almost always false (`docs/PROJECT_SHAPES.md`). A check command you
+  did not find is never invented: ask once, then write the answer here.
+- **Release command**: `npm run release:check` - the full build and every test tier.
 - **Code layer**: build `npm run build`, test `npm test`, lint `npm run lint`, run `npm run dev`.
   Structure `page -> widget -> api` - respect the dependency direction. Logging via `logger.info`
   only.
-- A slow check runs in the background, but one exclusive resource (a device, an output directory, a
-  licence seat, a lock) serializes: never two runs that contend for it.
+- A slow check is release tier and runs in the background; one exclusive resource (a device, an
+  output directory, a licence seat, a lock) serializes: never two runs that contend for it.
 
 ## 8. Strict rules
 1. No writes to the project root. Scratch and backups go to `tmp/`.

@@ -142,7 +142,7 @@
 
   function syncToTop() { var b = document.getElementById('toTop'); if (b) b.classList.toggle('show', window.scrollY > 600); }
   window.addEventListener('scroll', syncToTop, { passive: true });
-  on('toTop', 'click', function () { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+  on('toTop', 'click', function () { window.scrollTo({ top: 0, behavior: 'auto' }); });
 
   /* a #hash into another language's block is not needed here: structure and ids are single, only the text is per language */
   applyLang(cur());

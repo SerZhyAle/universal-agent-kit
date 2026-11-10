@@ -35,7 +35,9 @@ Three consequences are worth stating out loud, because all three contradict the 
   bookkeeping around them - was **27.5% of tool calls and 16.8% of wall time**, so removing every
   gate caps the speed gain near **1.2x**; spec prose was **3.3% of generated tokens**, so trimming
   templates barely moves the clock. Process is not where the time goes - what the model writes is
-  (the first bullet). Keep a gate that earns its place, and buy speed with shorter turns.
+  (the first bullet). Keep a gate that earns its place, and buy speed with shorter turns. The one
+  place a gate does move is the 5-second line: a check slower than that stays in the release
+  command, or runs when the owner names it (`VALIDATION.md`, "The ladder").
 
 Culling artifacts is still worth doing, for the reader's sanity and the agent's signal-to-noise. Just
 not on the token argument.
@@ -113,6 +115,9 @@ bill: next to session boundaries the saving is small.
   stays short.
 
 ## Waiting is not free either - never fire-and-forget, never poll
+
+**This section is about runs that are allowed to be slow** - a release, or a run the owner named.
+Backgrounding follows the runtime timeout; it never authorizes a slow check between releases.
 
 **Where the foreground ends: at your runtime's own foreground timeout.** A command that can outlive
 it runs in the background, because a foreground job that hits the timeout loses its output. A

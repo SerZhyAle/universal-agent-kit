@@ -17,6 +17,8 @@ lightly witty without becoming noisy or vague.
   explanations as long as they stay precise.
 - Never cold, bureaucratic, or terminal-like; never nerdy to sound smart.
 - Focus on what the user can do next, not on showing off implementation detail.
+- For a window's help: what the element does and why the user would want it, never its label restated
+  ("The Save button saves"); no "click here"; no joke where data can be lost.
 - Follow the project's copy/tone policy (if any) for user-visible strings. Exceptions: legal
   text, terms of service, machine-readable artifacts - keep those formal and neutral.
 

@@ -15,8 +15,8 @@ The value here is not the tooling - it is the **working method**: research befor
 several agents at once without losing each other's work, and keep the assistant terse and honest.
 
 **Two tiers.** Everything applies to any project; the parts that need a build are marked **code
-layer** and are a minority. If your project compiles, you fill seventeen placeholders. If it does
-not, you fill eleven and delete the rest - which is a supported path, not a degraded one.
+layer** and are a minority. If your project compiles, you fill eighteen placeholders. If it does
+not, you fill twelve and delete the rest - which is a supported path, not a degraded one.
 
 ---
 
@@ -45,7 +45,8 @@ universal-agent-kit/
       fix/                  <- narrow defect fix, no ceremony
       git/                  <- branch model, commit grouping, what-not-to-commit
       prove/                <- run it, observe, report one of four verdicts
-      ui-clarify/           <- resolve reader-facing ambiguity before building
+      ui-clarify/           <- resolve reader-facing ambiguity before building; the help of each
+                               window an application draws (convention in references/)
       surfaces/             <- every place a user-visible change shows, checked in one table
       critique/             <- terse, actionable review of a change
       caveman/              <- brevity mode for the whole chat
@@ -77,9 +78,9 @@ universal-agent-kit/
 ```
 
 Every file is plain Markdown except `.claude/settings.json` (a small permission template for Claude
-Code), `merge-prompt.txt` and the one-line `VERSION`. Nothing here runs on its own, calls an API, or hard-codes a language or
-a framework. Where the source project wired in a specific tool, the kit states the *intent* and lets
-your agent pick the equivalent.
+Code), `merge-prompt.txt` and the one-line `VERSION`. Nothing here runs on its own, calls an API, or
+hard-codes a language or a framework. Where the source project wired in a specific tool, the kit
+states the *intent* and lets your agent pick the equivalent.
 
 ---
 
@@ -150,8 +151,8 @@ docs):
 | Windsurf | `AGENTS.md`, or its workspace rules folder | saved workflows | Cascade presets |
 | Aider | `CONVENTIONS.md` loaded via `--read` | prompt files / aliases | single agent - fold into rules |
 
-Some tools cap a rules file's size (one at 12,000 characters per file); the kit's `AGENTS.md` fits,
-but watch it as you add rules. The mental model carries even where the file layout does not: one
+Some tools cap a rules file's size (one at 12,000 characters per file); the kit's `AGENTS.md` fits
+with little to spare, so delete the rules that do not apply before you add your own. The mental model carries even where the file layout does not: one
 always-loaded rules file, a set of named procedures you invoke, and a few role briefs.
 
 ---
@@ -169,10 +170,11 @@ Full reference with worked values per kind of project: `docs/REPLACES.md`.
 - `<INDEX_DOC>` - the map the agent reads first (`README.md`, an architecture doc, a data
   dictionary, a table of contents, a matter index).
 - `<WORK_ROOT>` - where the project's real material lives.
-- `<CHECK_CMD>` - **the command that proves a change is sound.** The one placeholder nobody may
-  leave empty. If you are sure your project has none, read `docs/PROJECT_SHAPES.md` first - the
-  five shapes a check takes in work that never compiles are listed there, and most projects already
-  run one by hand.
+- `<CHECK_CMD>` - **the fast check for a change, taking 5 seconds or less.** The one placeholder
+  nobody may leave empty. If you are sure your project has none, read `docs/PROJECT_SHAPES.md` first -
+  the five shapes a check takes in work that never compiles are listed there, and most projects
+  already run one by hand.
+- `<RELEASE_CMD>` - the release command: full build and every test tier, before or during release.
 - `<PLAN_DIR>` - where spec/plan files live (default `PLAN/`).
 - `<SCRATCH_DIR>` - throwaway artifacts and backups, ignored by version control (default `tmp/`).
 - `<SIZE_BUDGET>` - the file-size budget in lines past which you split along a real seam - a bare
@@ -181,11 +183,12 @@ Full reference with worked values per kind of project: `docs/REPLACES.md`.
 - `<ID_SCHEME>` - the ticket id scheme (e.g. `T0042`, `JIRA-123`, a date-slug).
 
 **Tier 2 - the code layer** (fill if your project builds or runs; otherwise delete the rules that
-use them): `<ARCH_LAYERS>`, `<BUILD_CMD>`, `<TEST_CMD>`, `<LINT_CMD>`, `<RUN_CMD>`, `<LOGGER>`.
+use them; build and test commands over 5 seconds run at release): `<ARCH_LAYERS>`, `<BUILD_CMD>`,
+`<TEST_CMD>`, `<LINT_CMD>`, `<RUN_CMD>`, `<LOGGER>`.
 
 Template tokens like `<ID>`, `<slug>`, `<NN>`, `<TS>`, `<TODO>`, `<symbol>`, and `<path>` are *not*
 config - they are filled per ticket as you use the skills (`<ID>` is one ticket's id, minted by
-`<ID_SCHEME>`). So "no placeholder left" means none of the seventeen names above, not no `<` at all.
+`<ID_SCHEME>`). So "no placeholder left" means none of the eighteen names above, not no `<` at all.
 
 ---
 

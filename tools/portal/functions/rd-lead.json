@@ -102,6 +102,11 @@
       "en": "If your runtime supports persistent agent memory, it records only what is non-obvious and durable, never what the repo or `git log` already shows. See [agent memory](fn:agent-memory).",
       "ru": "Если ваша среда поддерживает постоянную память агента, он записывает только неочевидное и долговечное, но не то, что и так видно в репозитории или в `git log`. См. [память агента](fn:agent-memory).",
       "ua": "Якщо ваше середовище підтримує постійну пам'ять агента, він записує лише неочевидне й довговічне, але не те, що й так видно в репозиторії чи в `git log`. Див. [пам'ять агента](fn:agent-memory)."
+    },
+    {
+      "en": "Between releases it runs only checks of 5 seconds or less. A full build, a run-and-observe or a slower check waits for the release or for a run you name, is recorded as `NOT APPLICABLE - release tier`, and its command becomes a `RELEASE` item in the closing audit. See [the validation ladder](fn:validation-ladder).",
+      "ru": "Между релизами он запускает только проверки до 5 секунд. Полная сборка, запуск с наблюдением и более долгая проверка ждут релиза или прогона, который вы назовёте сами, записываются как `NOT APPLICABLE - release tier`, а их команда становится пунктом `RELEASE` в итоговом аудите. См. [лестницу проверок](fn:validation-ladder).",
+      "ua": "Між релізами він запускає лише перевірки до 5 секунд. Повна збірка, запуск зі спостереженням і довша перевірка чекають релізу або прогону, який ви назвете самі, записуються як `NOT APPLICABLE - release tier`, а їхня команда стає пунктом `RELEASE` у підсумковому аудиті. Див. [драбину перевірок](fn:validation-ladder)."
     }
   ],
   "related": ["solution-researcher", "implementer", "doc-writer", "spec-lifecycle", "parallel-writers"],

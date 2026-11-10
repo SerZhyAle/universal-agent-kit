@@ -60,24 +60,26 @@ are ticked - if any unchecked, abort with the blocker text.
    `[~]`, append the FAIL note, **hard stop**.
 10. **Post-change closure** - once for the step's change, batching all its files (not per
     file): add them to the ticket's one changelog entry (if the project keeps one), regenerate
-    the index/catalog once if a public interface changed, run the narrowest meaningful check.
+    the index/catalog once if a public interface changed, run the narrowest meaningful check that
+    takes 5 seconds or less (`docs/VALIDATION.md`, "The ladder").
 
 After all planned steps in a phase:
 - **Final-phase verification tags (before the phase check).** If this is the last in-scope phase
   and acceptance includes manual testing, insert the verification tags now - one at each
-  changed-flow entry across all phases (`docs/SPEC_LIFECYCLE.md`, "Verification tags"). Tags are the last code edits,
-  inserted **before** the phase check below so one run validates code + tags.
-- **Phase done criteria:** run each checkbox. For the phase's verification rung, run the
-  narrowest meaningful check the phase names (per `docs/VALIDATION.md`) - a compile / type-check,
-  a targeted test, or `<BUILD_CMD>` only when the phase touches packaging, resources, or wiring; in a
-  project with no build, `<CHECK_CMD>` is that rung.
-  Exit 0 → tick; non-zero → append the output tail and hard stop.
+  changed-flow entry across all phases (`docs/SPEC_LIFECYCLE.md`, "Verification tags"). Tags are
+  the last code edits, inserted **before** the phase check below so one run validates code + tags.
+- **Phase done criteria:** run each applicable fast checkbox. For any slow check already named in
+  an existing plan, record `NOT APPLICABLE - release tier` and its command as a `RELEASE` item;
+  do not claim it passed. For the phase's verification rung, run the narrowest meaningful check
+  the phase names (per `docs/VALIDATION.md`) - a compile / type-check, a targeted test within
+  5 seconds or `<CHECK_CMD>`; `<BUILD_CMD>` is release tier, including when the phase touches
+  packaging, resources, or wiring. Exit 0 → tick; non-zero → append the output tail and hard stop.
 - All ticked → flip the phase to ✅ Done, update the INDEX row + counter. Any unticked →
   leave 🚧, update the step counter only, hard stop.
 
 After all phases:
-- **Optional smoke (only `--prove-smoke`).** Run `/prove --build` once and act on its verdict
-  (`docs/VALIDATION.md`, "One vocabulary"): PASS → proceed. DEFECT or COULD NOT VERIFY → abort
+- **Optional smoke (only `--prove-smoke`, at release or on an owner-named run).** Run
+  `/prove --build` once and act on its verdict (`docs/VALIDATION.md`, "One vocabulary"): PASS → proceed. DEFECT or COULD NOT VERIFY → abort
   the status flip, leave `In Progress`, log the verdict line - an unreached target proves nothing,
   so it stops the flip exactly as a defect does. NOT APPLICABLE → proceed and record that the
   smoke had no scenario in this configuration; it is not a pass.
@@ -86,10 +88,10 @@ After all phases:
   section to the strategic spec with one `[ ]` line per thing a human must see (the template is
   in `/spec-check`), flip status to `BlockNeedUserTest`, and add every tagged file to the ticket's
   changelog entry.
-- User-facing doc updates run **after** the build, never trigger a rebuild; `/surfaces` lists
-  which ones a user-visible change owes.
+- User-facing doc updates run with the source change; at release they follow the build without
+  triggering a rebuild; `/surfaces` lists which ones a user-visible change owes.
 - **Auto-chain to `/spec-check`** unless the status went to `BlockNeedUserTest` (then stop
-  and await the manual result, or run `/prove` if a target is available).
+  and await the manual result, or run `/prove` at release or when the owner names the run).
 
 **Chat output:** `<ID>: N steps done. Cursor: <next step>. [stop reason]. -> Running /spec-check..`
 

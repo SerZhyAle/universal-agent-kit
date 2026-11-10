@@ -83,7 +83,7 @@ The service returns the whole filtered user list as one CSV file, to admins only
 
 ## Phase done criteria
 - [x] Every `Step 01.*` is `[x] done`.
-- [x] Narrowest meaningful check for this phase passes: `npm test`, the three new cases included.
+- [x] Narrowest meaningful check for this phase passes: `npm run check:fast` (5 seconds or less). The full test suite is a `RELEASE` item: `npm test`.
 - [x] Grep for `TODO(phase-01)` returns zero hits.
 - [x] The ticket's one changelog entry lists every file in "Files touched".
 
@@ -99,4 +99,4 @@ Revert phase commit(s). The route is additive; no stored data changed.
 - 2026-04-14 Step 01.1 - expected: 3 predicates PASS | actual: 3 PASS.
 - 2026-04-14 Step 01.2 - expected: 3 predicates PASS | actual: 3 PASS.
 - 2026-04-14 Step 01.3 - expected: 3 predicates PASS | actual: 3 PASS.
-- 2026-04-14 Phase check `npm test` - expected: exit 0 | actual: exit 0.
+- 2026-04-14 Phase check `npm run check:fast` - expected: exit 0 | actual: exit 0.

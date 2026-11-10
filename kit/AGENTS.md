@@ -1,9 +1,9 @@
 # AGENTS.md - rules for the AI agent in `<PROJECT_NAME>`
 
 > The project's one rules file (`CLAUDE.md` imports it for Claude Code). Fill every placeholder
-> (list and worked values: `docs/REPLACES.md`); the **code layer** ones (`<ARCH_LAYERS>`, `<BUILD_CMD>`,
-> `<TEST_CMD>`, `<LINT_CMD>`, `<RUN_CMD>`, `<LOGGER>`) only if the project builds or runs - otherwise
-> delete the rules that use them. Delete any rule that does not apply; why each exists is in its doc.
+> (list and worked values: `docs/REPLACES.md`); the **code layer** ones (section 7 names them) only
+> if the project builds or runs - otherwise delete the rules that use them. Delete any rule that
+> does not apply; why each exists is in its doc.
 
 ## 1. Communication
 - **Chat**: `<CHAT_LANGUAGE>`. **Artifacts** - files, code, docs, logs, commits: `<ARTIFACT_LANGUAGE>`.
@@ -49,9 +49,9 @@ Stop as soon as a source answers: (1) the map, `<INDEX_DOC>`; (2) the ticket und
   `/caveman-commit` - brevity; `/surfaces` - every place a user-visible change shows, in one table.
 
 Take the lowest rung that holds the change - `/quick`, `/fix`, `/spec` - and say which rung and what
-forced it up. Delete the lines for skills you did not copy. This list routes nothing by itself: the
-cheapest tier goes unchosen unless something picks it at the moment of decision, and a routing hook
-helps only the population that passes through its event - count that first (`docs/HOOKS.md`).
+forced it up. Delete the lines for skills you did not copy. This list routes nothing by itself:
+something must pick the cheapest tier at the moment of decision, and a routing hook helps only
+whoever passes through its event - count that first (`docs/HOOKS.md`).
 
 ## 5. Tickets
 - One ticket = one file `<PLAN_DIR>/<ID>_<slug>.md`, `<ID>` allocated by `<ID_SCHEME>`. Its status
@@ -76,13 +76,14 @@ can grep (`docs/SPEC_LIFECYCLE.md`, "Verification tags").
 
 ## 7. Structure & checks
 - **Work root**: `<WORK_ROOT>`. **Scratch**: `<SCRATCH_DIR>` (kept out of version control, if any).
-- **The check that proves a change**: `<CHECK_CMD>` - the one placeholder nobody may leave empty. "We
+- **Fast check (5 seconds or less)**: `<CHECK_CMD>` - the one placeholder nobody may leave empty. "We
   have no checks" is almost always false (`docs/PROJECT_SHAPES.md`). A check command you did not
   find is never invented: ask once, then write the answer here.
+- **Release command**: `<RELEASE_CMD>` - the full build and every test tier.
 - **Code layer**: build `<BUILD_CMD>`, test `<TEST_CMD>`, lint `<LINT_CMD>`, run `<RUN_CMD>`.
   Structure `<ARCH_LAYERS>` - respect the dependency direction. Logging via `<LOGGER>` only.
-- A slow check runs in the background, but one exclusive resource (a device, an output directory, a
-  licence seat, a lock) serializes: never two runs that contend for it.
+- A slow check is release tier and runs in the background; one exclusive resource (a device, an
+  output directory, a licence seat, a lock) serializes: never two runs that contend for it.
 
 ## 8. Strict rules
 1. No writes to the project root. Scratch and backups go to `<SCRATCH_DIR>/`.
@@ -96,7 +97,9 @@ can grep (`docs/SPEC_LIFECYCLE.md`, "Verification tags").
 8. Read existing comments, notes and instructions in the area first; treat them as intent.
 9. Comments explain **why**, never what, in `<ARTIFACT_LANGUAGE>`; only for non-obvious logic,
    handled edge cases, workarounds, invariants. Remove stale ones.
-10. Resolve reader-facing ambiguity before building (`/ui-clarify`).
+10. Resolve reader-facing ambiguity before building (`/ui-clarify`). Every new window or screen of an
+    application also gets F1, a `?` button in its top-right corner and a row in the help map, asked for
+    or not: read `.claude/skills/ui-clarify/references/WINDOW_HELP.md` before building it.
 11. **An override that narrows a shared default disables the mechanism silently** - a shorter list is
     a valid list, so nothing goes red. Every narrowing override carries a recorded reason
     (`docs/CODE_QUALITY.md`, "Structural rules").
@@ -130,7 +133,9 @@ Forbidden, and a reviewer flags them (full lists: `docs/PROJECT_SHAPES.md`, `doc
   "needs a human pass", not "verified".
 - New user-visible capability → every surface and every **authored** locale in the same change
   (`/surfaces`); the rest of the declared locales fan out at a release boundary where one exists.
-- Re-run the narrowest meaningful check before declaring done; the ladder is in `docs/VALIDATION.md`.
+- Between releases run only checks of 5 seconds or less: the full suite after every step makes
+  people wait, complete proof or not. A deferred check is a `RELEASE` item, never a pass
+  (`docs/VALIDATION.md`).
 - **Before anything irreversible** - a release, a publication, a filing, a send - take a written
   verdict that names what it judged; no verdict is not a pass. Generate, commit (or copy), then ship.
 

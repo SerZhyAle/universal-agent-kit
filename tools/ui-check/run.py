@@ -6,14 +6,22 @@ shapes of BOOLEAN-OPTION 2.0 and SETTINGS-NAVIGATION 2.0) measured in a real Chr
 Playwright is not a dependency of the site and is not installed by this repository: --deps names a folder that holds
 the `playwright` package (the previous browser acceptance used temp/contract-browser-deps), --chromium a Chromium
 executable (default: the newest one under %LOCALAPPDATA%/ms-playwright). The script serves the repository root on a
-loopback port, writes results.json and the screenshots under --out (generated evidence, never committed or hand-edited),
-prints one line per failed check and exits 1 on any failure, 0 on none.
+loopback port, writes results.json and the screenshots under --out (generated evidence, never committed or hand-edited).
+Exit 0 / PASS means no check failed; 1 / FAIL means a finding or an abort after checks start; 2 / COULD NOT VERIFY
+means an instrument or required input could not be prepared before the first check. An unreachable control mid-run
+remains a finding. Invalid command-line arguments also exit 2 with argparse's usage message, not a check verdict.
+
+Beyond the geometry matrix it measures the shared page edge of header, heading and footer (PAGE-STYLE 3.6; the right-to-left
+mirror is an emulation), the real web fonts and the origins a visit contacts, the skip link and the header Tab order, and
+reduced motion as the engine's own media feature, and scroll versus tap through the engine's touch pipeline (a synthetic
+finger, not a physical one). --offline records the font checks as skipped instead of passed.
 
 The geometry rule it enforces is the contract's, not a snapshot: a control is at least the token target of its profile
 and size, is as wide as its content (never wider), shares its row's height, overlaps no other control, and never
 overflows the viewport or clips its caption. Contrast is computed from the real computed colours of the real states.
 """
 import argparse
+import contextlib
 import functools
 import http.server
 import json
@@ -32,17 +40,42 @@ ap.add_argument('--out', default='temp/ui-check')
 ap.add_argument('--quick', action='store_true', help='baseline scenarios only')
 ap.add_argument('--catalog', default='', help='the shared contracts catalog root: adds the static checks of the kit bytes and of every inline glyph')
 ap.add_argument('--inject-css', default='', help='CSS added to every page: the instrument self-test, a violation it must catch')
+ap.add_argument('--offline', action='store_true', help='the machine has no network: the checks that need the real web fonts and the font origins are recorded as skipped, never as passed')
 args = ap.parse_args()
 
 root = pathlib.Path(__file__).resolve().parents[2]
-sys.path.insert(0, str((root / args.deps).resolve()))
-from playwright.sync_api import sync_playwright  # noqa: E402
-
 out = (root / args.out)
 if args.inject_css:                 # a self-test run never overwrites the evidence of a real run
     out = out / 'selftest'
-out.mkdir(parents=True, exist_ok=True)
-(out / 'shots').mkdir(exist_ok=True)
+
+
+def could_not_verify(blocker):
+    """Record the blocker when writable; always report it on stderr and return exit 2."""
+    message = f'ui-check: COULD NOT VERIFY: {blocker}'
+    try:
+        out.mkdir(parents=True, exist_ok=True)
+        (out / 'results.json').write_text(json.dumps({'verdict': 'COULD NOT VERIFY', 'blocker': str(blocker),
+                                                       'checks': 0, 'results': []}, indent=1), encoding='utf-8')
+    except OSError as e:
+        message += f' (could not write results: {e})'
+    print(message, file=sys.stderr)
+    raise SystemExit(2)
+
+
+try:
+    out.mkdir(parents=True, exist_ok=True)
+    (out / 'shots').mkdir(exist_ok=True)
+    # Clear any previous verdict before setup; a crash must not leave a stale PASS for this run.
+    (out / 'results.json').write_text(json.dumps({'verdict': 'COULD NOT VERIFY', 'blocker': 'run incomplete',
+                                                  'checks': 0, 'results': []}, indent=1), encoding='utf-8')
+except OSError as e:
+    could_not_verify(f'output directory {out}: {e}')
+
+sys.path.insert(0, str((root / args.deps).resolve()))
+try:
+    from playwright.sync_api import sync_playwright  # noqa: E402
+except Exception as e:
+    could_not_verify(f'Playwright unavailable: {e}')
 
 # ---------------------------------------------------------------------------------------------------------------------
 # the contract, as numbers (assets/sza-kit.css declares the same tokens)
@@ -63,7 +96,10 @@ failures = []
 def _aborted(et, ev, tb):
     """A scenario that cannot run (an unreachable control, a timeout) is a finding: report it and still exit non-zero."""
     failures.append(f'the run was aborted: {et.__name__}: {str(ev).splitlines()[0][:240]}')
-    (out / 'results.json').write_text(json.dumps({'checks': len(results), 'failed': len(failures), 'results': results, 'aborted': True}, indent=1), encoding='utf-8')
+    try:
+        (out / 'results.json').write_text(json.dumps({'verdict': 'FAIL', 'checks': len(results), 'failed': len(failures), 'results': results, 'aborted': True}, indent=1), encoding='utf-8')
+    except OSError as e:
+        print(f'ui-check: could not write aborted results: {e}', file=sys.stderr)
     for f in failures:
         print('FAIL', f)
     print(f'ui-check: {len(results)} checks, {len(failures)} failed -> FAIL (aborted)')
@@ -251,17 +287,54 @@ def _shape(node):
     return (node.tag.split('}')[-1], sorted(attrs.items()), [_shape(c) for c in node])
 
 
-if args.catalog:
-    cat = pathlib.Path(args.catalog)
-    ref = (cat / 'product-web-pages/reference/sza-kit.css').read_bytes()
-    check(ref == (root / 'assets/sza-kit.css').read_bytes(), 'kit: assets/sza-kit.css is byte-identical to the catalog reference')
-    pages = [root / 'index.html', root / 'privacy.html', root / '404.html', *sorted((root / 'portal').rglob('*.html'))]
-    for f in pages:
-        html = f.read_text(encoding='utf-8')
+PAGES = {
+    'landing': 'index.html',
+    'portal': 'portal/index.html',
+    'function': 'portal/functions/spec.html',
+    'privacy': 'privacy.html',
+    'glossary': 'portal/glossary.html',
+    'subjects': 'portal/subjects.html',
+}
+
+
+def prepare_inputs():
+    """Read the page set and catalog before any check can report a verdict."""
+    try:
+        for page in PAGES.values():
+            (root / page).read_bytes()
+        if not args.catalog:
+            return None
+        cat = pathlib.Path(args.catalog)
+        ref = (cat / 'product-web-pages/reference/sza-kit.css').read_bytes()
+        kit = (root / 'assets/sza-kit.css').read_bytes()
+        def on_error(error):
+            raise error
+        portal_pages = [pathlib.Path(directory) / name
+                        for directory, _, names in os.walk(root / 'portal', onerror=on_error)
+                        for name in names if name.endswith('.html')]
+        pages = [root / 'index.html', root / 'privacy.html', root / '404.html', *sorted(portal_pages)]
+        html_pages = [(f, f.read_text(encoding='utf-8')) for f in pages]
+        icons = {}
+        for _, html in html_pages:
+            for mm in re.finditer(r'<symbol id="icon-([^"]+)" viewBox="0 0 24 24">(.*?)</symbol>', html, re.S):
+                meaning = mm[1].replace('-', '.', 1)
+                if meaning not in icons:
+                    icons[meaning] = ET.fromstring((cat / f'iconography/glyphs/{meaning}.svg').read_text(encoding='utf-8'))
+        return ref, kit, html_pages, icons
+    except (OSError, UnicodeError, ET.ParseError) as e:
+        could_not_verify(f'page set or catalog cannot be read: {e}')
+
+
+def check_catalog(inputs):
+    if inputs is None:
+        return
+    ref, kit, pages, icons = inputs
+    check(ref == kit, 'kit: assets/sza-kit.css is byte-identical to the catalog reference')
+    for f, html in pages:
         check('assets/ui-contracts.css' not in html, f'{f.relative_to(root)}: no retired adapter link')
         for mm in re.finditer(r'<symbol id="icon-([^"]+)" viewBox="0 0 24 24">(.*?)</symbol>', html, re.S):
             meaning = mm[1].replace('-', '.', 1)
-            svg = ET.fromstring((cat / f'iconography/glyphs/{meaning}.svg').read_text(encoding='utf-8'))
+            svg = icons[meaning]
             inline = ET.fromstring('<svg>' + mm[2] + '</svg>')
             check([_shape(c) for c in svg] == [_shape(c) for c in inline], f'{f.relative_to(root)}: inline glyph {meaning} equals the catalog file')
 
@@ -279,24 +352,18 @@ class Server(http.server.ThreadingHTTPServer):
         pass
 
 
-server = Server(('127.0.0.1', 0), functools.partial(Quiet, directory=str(root)))
-threading.Thread(target=server.serve_forever, daemon=True).start()
+inputs = prepare_inputs()
+try:
+    server = Server(('127.0.0.1', 0), functools.partial(Quiet, directory=str(root)))
+    threading.Thread(target=server.serve_forever, daemon=True).start()
+except (OSError, RuntimeError) as e:
+    could_not_verify(f'local page server could not start: {e}')
 BASE_URL = f'http://127.0.0.1:{server.server_port}/'
 
 chromium = args.chromium
 if not chromium:
     cands = sorted((pathlib.Path(os.environ.get('LOCALAPPDATA', '')) / 'ms-playwright').glob('chromium-*/chrome-win64/chrome.exe'))
     chromium = str(cands[-1]) if cands else None
-
-PAGES = {
-    'landing': 'index.html',
-    'portal': 'portal/index.html',
-    'function': 'portal/functions/spec.html',
-    'privacy': 'privacy.html',
-    'glossary': 'portal/glossary.html',
-    'subjects': 'portal/subjects.html',
-}
-
 
 def open_page(ctx, key, lang='en', theme='dark', profile=None, size=None, text=None):
     page = ctx.new_page()
@@ -305,6 +372,7 @@ def open_page(ctx, key, lang='en', theme='dark', profile=None, size=None, text=N
       window.__clip = 0; try { Object.defineProperty(navigator, 'clipboard', {value: {writeText: () => { window.__clip++; return Promise.resolve(); }}, configurable: true}); } catch (e) {}
     """ % (json.dumps(lang), json.dumps(theme)))
     page.goto(BASE_URL + PAGES[key], wait_until='load')
+    page.evaluate("document.fonts.ready.then(() => 1)")           # measure with the web fonts, not a fallback face
     page.add_script_tag(content=JS_HELPERS)
     if text:
         page.add_style_tag(content=f'html{{font-size:{text}%}}')
@@ -322,12 +390,24 @@ def shot(page, name):
     page.screenshot(path=str(out / 'shots' / (name + '.png')), full_page=False)
 
 
-with sync_playwright() as pw:
+try:
+    pw = sync_playwright().start()
     browser = pw.chromium.launch(executable_path=chromium, headless=True)
     desktop = browser.new_context(viewport={'width': 1280, 'height': 800})
     touch = browser.new_context(viewport={'width': 360, 'height': 740}, device_scale_factor=2, is_mobile=True, has_touch=True)
     desktop.set_default_timeout(8000)
     touch.set_default_timeout(8000)
+except Exception as e:
+    if 'pw' in globals():
+        try:
+            pw.stop()
+        except Exception:
+            pass
+    could_not_verify(f'Chromium could not start or create contexts: {e}')
+
+with contextlib.ExitStack() as stack:
+    stack.callback(pw.stop)
+    check_catalog(inputs)
 
     # ------------------------------------------------------------------ 1. the profile is chosen once, from the pointer
     p = open_page(desktop, 'landing')
@@ -580,10 +660,203 @@ with sync_playwright() as pw:
     check(ring[0] != 'none' and ring[1] >= 2, 'focus: a focused control has a visible ring independent of its fill', ring)
     page.close()
 
+    # ------------------------------------------------------------------ 9. page edges and the header (PAGE-STYLE 3.6, SITE-EXPERIENCE rule 20)
+    # The header brand text, the heading and the footer content start on one inline-start edge (the gutter), at every
+    # interface size and width, and the mirror holds under dir=rtl. No right-to-left locale ships, so the mirror is an
+    # emulation (the dir attribute is set after load): it proves the kit's logical properties, not a translated page.
+    EDGES_JS = """(dir) => {
+      const root = document.documentElement;
+      if (dir) root.setAttribute('dir', dir);
+      const rtl = root.getAttribute('dir') === 'rtl';
+      const vw = root.clientWidth;
+      const edge = b => rtl ? vw - b.right : b.left;
+      const brand = document.querySelector('.site-header .brand');
+      const h1 = document.querySelector('main h1');
+      const fc = document.querySelector('.site-footer .container');
+      if (!brand || !h1 || !fc) return {missing: [!brand && 'brand', !h1 && 'h1', !fc && 'footer'].filter(Boolean)};
+      const cs = getComputedStyle(fc), fr = fc.getBoundingClientRect();
+      const prim = document.querySelector('.site-header .btn-primary');
+      const pr = prim ? prim.getBoundingClientRect() : null;
+      return {mainW: document.querySelector('main').getBoundingClientRect().width, vw,
+              brand: edge(brand.getBoundingClientRect()), h1: edge(h1.getBoundingClientRect()),
+              footer: rtl ? vw - (fr.right - parseFloat(cs.paddingRight)) : fr.left + parseFloat(cs.paddingLeft),
+              overflow: root.scrollWidth - vw,
+              primary: pr ? {in: pr.left >= -.5 && pr.right <= vw + .5, w: pr.width, h: pr.height} : null};
+    }"""
+    edge_views = ((1920, 1080), (360, 740)) if args.quick else ((2560, 1300), (1920, 1080), (1280, 800), (360, 740))
+    for (vw_, vh_) in edge_views:
+        ctx = browser.new_context(viewport={'width': vw_, 'height': vh_})
+        ctx.set_default_timeout(8000)
+        for pg in PAGES:
+            for d in (None, 'rtl'):
+                page = open_page(ctx, pg, profile='touch' if vw_ < 500 else 'pointer')
+                r = page.evaluate(EDGES_JS, d)
+                tag = f'edges[{pg}/{vw_}/{d or "ltr"}]'
+                if r.get('missing'):
+                    check(False, f'{tag}: header brand, heading and footer all exist', r['missing'])
+                else:
+                    check(abs(r['brand'] - r['h1']) <= 1 and abs(r['brand'] - r['footer']) <= 1,
+                          f'{tag}: header brand, heading and footer share one inline-start edge', f"brand {r['brand']:.1f}, h1 {r['h1']:.1f}, footer {r['footer']:.1f}")
+                    check(r['overflow'] <= 1, f'{tag}: no horizontal overflow', r['overflow'])
+                    if vw_ >= 1920:                                  # SITE-EXPERIENCE rule 20: no width cap, no centred column
+                        check(r['mainW'] >= r['vw'] - 80, f'{tag}: main is at least the viewport width minus 80 px', f"{r['mainW']:.0f} of {r['vw']}")
+                    check(r['primary'] and r['primary']['in'] and r['primary']['w'] > 0 and r['primary']['h'] > 0, f'{tag}: the header primary command is inside the viewport', r['primary'])
+                page.close()
+        ctx.close()
+    for pg in ('landing', 'portal'):                                # the brand offset follows the interface scale
+        for prof, ctx, width in (('pointer', desktop, 1280), ('touch', touch, 360)):
+            for size in ('compact', 'huge'):
+                for d in (None, 'rtl'):
+                    page = open_page(ctx, pg, profile=prof, size=size)
+                    r = page.evaluate(EDGES_JS, d)
+                    check(not r.get('missing') and abs(r['brand'] - r['h1']) <= 1 and abs(r['brand'] - r['footer']) <= 1,
+                          f'edges[{pg}/{prof}/{size}/{d or "ltr"}]: the shared edge holds at this interface size', r)
+                    page.close()
+
+    # ------------------------------------------------------------------ 10. the real web fonts and the origins a visit contacts
+    DECLARED = {'127.0.0.1', 'fonts.googleapis.com', 'fonts.gstatic.com'}      # the site itself and the two origins the privacy page names
+    for pg in PAGES:
+        page = desktop.new_page()
+        seen, failed = [], []
+        page.on('request', lambda rq: seen.append(rq.url))
+        page.on('requestfailed', lambda rq: failed.append(rq.url))
+        page.goto(BASE_URL + PAGES[pg], wait_until='load')
+        loaded = page.evaluate("document.fonts.ready.then(() => [...document.fonts].filter(f => f.status === 'loaded').map(f => f.family.replace(/\"/g, '')))")
+        hosts = sorted({u.split('/')[2].split(':')[0] for u in seen if u.startswith('http')})
+        check(set(hosts) <= DECLARED, f'network[{pg}]: every origin contacted is declared on the privacy page', hosts)
+        if args.offline:
+            results.append({'name': f'fonts[{pg}]: skipped (--offline), not passed', 'ok': True, 'detail': 'skipped'})
+        else:
+            check(not [u for u in failed if 'fonts.g' in u], f'network[{pg}]: the font requests did not fail', [u for u in failed if 'fonts.g' in u][:3])
+            check('Outfit' in loaded and 'Plus Jakarta Sans' in loaded, f'fonts[{pg}]: Outfit and Plus Jakarta Sans are loaded (the measurements are not on a fallback face)', sorted(set(loaded)))
+        page.close()
+    for lang in ('ru', 'en', 'ua'):                                  # the privacy page names every origin in each language
+        page = open_page(desktop, 'privacy', lang=lang)
+        txt = page.evaluate("document.body.innerText")
+        check('fonts.googleapis.com' in txt and 'fonts.gstatic.com' in txt, f'network[privacy/{lang}]: both font origins are named on the page', lang)
+        page.close()
+    page = open_page(desktop, 'portal', profile='pointer')           # search: no third party, nothing per keystroke
+    page.locator('#searchOpen').click(); page.wait_for_timeout(250)
+    typed = []
+    page.on('request', lambda rq: typed.append(rq.url))
+    page.locator('#searchInput').press_sequentially('ticket lifecycle', delay=25); page.wait_for_timeout(150)
+    check(not typed, 'network[search]: typing a query makes no request', typed[:3])
+    page.close()
+
+    # ------------------------------------------------------------------ 11. keyboard: skip link and focus order
+    def tab_stops(page, n):
+        stops = []
+        for _ in range(n):
+            page.keyboard.press('Tab')
+            stops.append(page.evaluate("""(() => { const a = document.activeElement; if (!a || a === document.body) return null;
+                const r = a.getBoundingClientRect(); const cs = getComputedStyle(a);
+                return {id: a.id, cls: String(a.className), top: r.top + scrollY, left: r.left, w: r.width, h: r.height,
+                        shown: cs.visibility !== 'hidden' && cs.display !== 'none', header: !!a.closest('.site-header'), main: !!a.closest('main')}; })()"""))
+        return stops
+
+    for pg in PAGES:
+        for prof, ctx, width in (('pointer', desktop, 1280), ('touch', touch, 360)):
+            page = open_page(ctx, pg, profile=prof)
+            first = tab_stops(page, 1)[0]
+            check(first and 'skip-link' in first['cls'], f'keyboard[{pg}/{width}]: the first Tab stop is the skip link', first and first['cls'])
+            vis = page.evaluate("(() => { const r = document.activeElement.getBoundingClientRect(); return r.width > 0 && r.height > 0 && r.top >= -1 && r.left >= -1 && r.right <= document.documentElement.clientWidth + 1; })()")
+            check(vis, f'keyboard[{pg}/{width}]: the focused skip link is visible inside the viewport')
+            page.keyboard.press('Enter'); page.wait_for_timeout(80)
+            check(page.evaluate("location.hash") == '#main', f'keyboard[{pg}/{width}]: the skip link goes to #main')
+            nxt = tab_stops(page, 1)[0]
+            check(nxt and nxt['main'], f'keyboard[{pg}/{width}]: after the skip link the next Tab stop is inside main', nxt and nxt['cls'])
+            page.close()
+            page = open_page(ctx, pg, profile=prof)                  # the header stops follow the reading order of the rows
+            stops = [s for s in tab_stops(page, 14) if s]
+            head = [s for s in stops if s['header'] and 'skip-link' not in s['cls']]
+            keyed = []
+            ri, last = 0, None
+            for s in head:
+                if last is not None and abs(s['top'] - last['top']) > 10:
+                    ri += 1
+                keyed.append((ri, s['left']))
+                last = s
+            check(keyed == sorted(keyed), f'keyboard[{pg}/{width}]: the header Tab order follows its visual rows', keyed)
+            check(all(s['shown'] and s['w'] > 0 and s['h'] > 0 for s in stops), f'keyboard[{pg}/{width}]: every early Tab stop is rendered and has a size')
+            page.close()
+
+    # ------------------------------------------------------------------ 12. reduced motion as the engine's own media feature
+    rm = browser.new_context(viewport={'width': 1280, 'height': 800}, reduced_motion='reduce')
+    rm.set_default_timeout(8000)
+    for pg in ('landing', 'portal'):
+        page = open_page(rm, pg, profile='pointer')
+        check(page.evaluate("matchMedia('(prefers-reduced-motion: reduce)').matches"), f'motion[{pg}]: the engine reports prefers-reduced-motion: reduce')
+        page.locator('#themeBtn').click(); page.wait_for_timeout(300)
+        running = page.evaluate("document.getAnimations().filter(a => a.playState === 'running' && a.effect && a.effect.getComputedTiming().iterations === Infinity).length")
+        check(running == 0, f'motion[{pg}]: no infinite animation runs', running)
+        check(page.evaluate("getComputedStyle(document.documentElement).scrollBehavior") == 'auto', f'motion[{pg}]: smooth scrolling is off')
+        page.close()
+    for pg in ('landing', 'portal'):                                 # an explicit behavior:'smooth' would override the kit's reduced-motion rule
+        page = open_page(rm, pg, profile='pointer')
+        page.evaluate("window.scrollTo({top: 1400, behavior: 'instant'})"); page.wait_for_timeout(250)
+        page.locator('#toTop').click(); page.wait_for_timeout(60)
+        check(page.evaluate("scrollY") <= 1, f'motion[{pg}]: back to top jumps at once under reduced motion', page.evaluate("scrollY"))
+        page.close()
+    rm.close()
+    for pg in ('landing', 'portal'):                                 # and it stays smooth when motion is allowed
+        page = open_page(desktop, pg, profile='pointer')
+        page.evaluate("window.scrollTo({top: 1400, behavior: 'instant'})"); page.wait_for_timeout(250)
+        page.locator('#toTop').click(); page.wait_for_timeout(40)
+        y = page.evaluate("scrollY")
+        check(1 < y < 1400, f'motion[{pg}]: back to top is smooth when motion is allowed', y)
+        page.close()
+
+    # ------------------------------------------------------------------ 13. touch: a scroll that starts on a control does not activate it
+    # The finger goes through the engine's own input pipeline (Input.dispatchTouchEvent: start, a run of moves, end), so the
+    # browser's scroll-versus-tap recognition decides, not this script. It is still a synthetic finger, not a physical one.
+    # (Input.synthesizeScrollGesture with a touch source does not scroll in headless Chromium, which a probe showed.)
+    def swipe_from(page, x, y, dy):
+        cdp = touch.new_cdp_session(page)
+        steps = 8
+        cdp.send('Input.dispatchTouchEvent', {'type': 'touchStart', 'touchPoints': [{'x': x, 'y': y}]})
+        for i in range(1, steps + 1):
+            cdp.send('Input.dispatchTouchEvent', {'type': 'touchMove', 'touchPoints': [{'x': x, 'y': y - i * dy / steps}]})
+            page.wait_for_timeout(16)
+        cdp.send('Input.dispatchTouchEvent', {'type': 'touchEnd', 'touchPoints': []})
+        cdp.detach()
+        page.wait_for_timeout(450)
+
+    def centre_on(page, locator):
+        locator.scroll_into_view_if_needed()
+        locator.evaluate("e => window.scrollBy({top: e.getBoundingClientRect().top - window.innerHeight / 2, behavior: 'instant'})")
+        page.wait_for_timeout(120)
+        return locator.evaluate("e => { const r = e.getBoundingClientRect(); return [r.left + r.width / 2, r.top + r.height / 2]; }")
+
+    page = open_page(touch, 'landing', profile='touch')
+    sec = page.locator('article[data-l="en"] details.sec').nth(3)
+    summ = sec.locator('> summary')
+    sec.evaluate('d => { d.open = false; }')                         # no reload: a reload would drop the injected self-test CSS
+    x, y = centre_on(page, summ)
+    y0 = page.evaluate("scrollY")
+    swipe_from(page, x, y, 220)
+    check(abs(page.evaluate("scrollY") - y0) > 20, 'touch: a swipe that starts on a group header scrolls the page', f"{y0} -> {page.evaluate('scrollY')}")
+    check(not sec.evaluate('d => d.open'), 'touch: that swipe did not toggle the group')
+    x, y = centre_on(page, summ)
+    page.touchscreen.tap(x, y); page.wait_for_timeout(120)
+    check(sec.evaluate('d => d.open'), 'touch: a tap on the same header toggles it')
+    page.close()
+    page = open_page(touch, 'landing', profile='touch')
+    btn = page.locator('article[data-l="en"] button.copy').first
+    btn.evaluate("b => { for (let n = b.parentElement; n; n = n.parentElement) if (n.tagName === 'DETAILS') n.open = true; }")
+    x, y = centre_on(page, btn)
+    y0 = page.evaluate("scrollY")
+    swipe_from(page, x, y, 220)
+    check(abs(page.evaluate("scrollY") - y0) > 20, 'touch: a swipe that starts on a copy button scrolls the page', f"{y0} -> {page.evaluate('scrollY')}")
+    check(page.evaluate("window.__clip") == 0, 'touch: that swipe copied nothing', page.evaluate("window.__clip"))
+    x, y = centre_on(page, btn)
+    page.touchscreen.tap(x, y); page.wait_for_timeout(150)
+    check(page.evaluate("window.__clip") == 1, 'touch: a tap on the same button copies once', page.evaluate("window.__clip"))
+    page.close()
+
     browser.close()
 
 server.shutdown()
-(out / 'results.json').write_text(json.dumps({'when': time.strftime('%Y-%m-%d %H:%M:%S'), 'chromium': chromium,
+(out / 'results.json').write_text(json.dumps({'verdict': 'FAIL' if failures else 'PASS', 'when': time.strftime('%Y-%m-%d %H:%M:%S'), 'chromium': chromium,
                                               'checks': len(results), 'failed': len(failures), 'results': results}, indent=1), encoding='utf-8')
 for f in failures:
     print('FAIL', f)

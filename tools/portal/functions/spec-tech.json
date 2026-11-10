@@ -79,9 +79,9 @@
       "ua": "Кожна перевірка статична: файл існує, символ оголошено, значення збігається, команда завершується з кодом 0. Ніколи «працює правильно». Один крок - одна атомарна одиниця, яку можна закомітити окремо і яка не ламає збірку."
     },
     {
-      "en": "A phase's done criterion names the actual narrowest check, the lowest sufficient rung of the [validation ladder](fn:validation-ladder); the full build is for a phase that touches packaging, resources or wiring.",
-      "ru": "Критерий готовности фазы называет конкретную самую узкую проверку, самую нижнюю достаточную ступень [лестницы проверок](fn:validation-ladder); полная сборка нужна только фазе, затрагивающей упаковку, ресурсы или связки.",
-      "ua": "Критерій готовності фази називає конкретну найвужчу перевірку, найнижчий достатній щабель [драбини перевірок](fn:validation-ladder); повна збірка потрібна лише фазі, що зачіпає пакування, ресурси чи зв'язки."
+      "en": "A phase's done criterion names the actual narrowest check, the lowest sufficient rung of the [validation ladder](fn:validation-ladder) that takes 5 seconds or less. The build and slower tests wait for the release, each listed as a `RELEASE` item.",
+      "ru": "Критерий готовности фазы называет конкретную самую узкую проверку, самую нижнюю достаточную ступень [лестницы проверок](fn:validation-ladder) не дольше 5 секунд. Сборка и более долгие тесты ждут релиза, каждый отдельным пунктом `RELEASE`.",
+      "ua": "Критерій готовності фази називає конкретну найвужчу перевірку, найнижчий достатній щабель [драбини перевірок](fn:validation-ladder) не довше 5 секунд. Збірка й довші тести чекають релізу, кожен окремим пунктом `RELEASE`."
     },
     {
       "en": "A file over about the [size budget](term:size-budget) needs a backup step before the edit, and a file heading past the budget is refused: split it first. If the project has several form factors (portrait and landscape, light and dark, locale variants), a step that edits one variant must cover its counterpart or note its absence.",

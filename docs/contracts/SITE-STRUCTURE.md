@@ -1,6 +1,6 @@
 # `SITE-STRUCTURE` pointer
 
-- Version: 0.3 (draft; opted in 2026-10-09); read in full on 2026-10-21 with section 8 (the 0.2 amendment)
+- Version: 0.4 (draft; opted in 2026-10-09); 0.3 read in full on 2026-10-21, the 0.4 amendment read on 2026-11-10
 - Role: consumer, site at the **portal** tier (owner decision D2, 2026-10-09)
 - Home: `product-site/SITE-STRUCTURE.md` in the shared contracts catalog; its conformance artifact is the
   run-list `SITE-CHECKLIST.md`, read off the rendered site
@@ -22,8 +22,13 @@ item A). The address scheme is one permanent address per page (`portal/<page>.ht
 after the release that carries them (item D); the addresses outside surfaces hold are listed in
 `tools/site-held-addresses.jsonl` and resolved against the page set by `tools/check-site.ps1 -Dimension
 held-addresses` (rule 8). No internal link carries a language query, so the language a visitor chose is kept
-from page to page (item B); the site has no program, so the English fallback of a program resolver (item C) and
-the link from a setup screen (item E) have nothing to bind; no page marks anything "not available yet" (item F).
+from page to page (item B); the site has no program, so items C and E owe nothing
+(amendment of 2026-10-29, item G, answering the reading this repository filed); no page marks anything
+"not available yet" (item F, and item H of the same amendment bans a roadmap outright, which binds nothing
+extra here). On a site with no tagged releases the release of item D is the first commit the host serves a page
+from, and an anchor is an `id` a page's text, navigation or an outside surface links (amendment item F), so the
+anchor comparison against the last published commit stays the check. The portal-footer bullet of section 6 was
+corrected by item E to point at the settled 2026-10-17 item 2.
 Reach, the sitemap, landmarks and the not-found page are held by the same script (`page-set`). Staying
 conformant: keep the tier declaration true, publish every new page group in the core three, leave a forwarder at
 any retired address and never rename a published anchor, change a capability's page in the same change as the

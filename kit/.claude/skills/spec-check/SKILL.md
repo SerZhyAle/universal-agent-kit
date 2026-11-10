@@ -50,6 +50,10 @@ and their checks prove, not from a filename or a hope. Auto-detects strategic vs
 `EXEMPT`. How these map onto `/prove`'s four verdicts is one table in `docs/VALIDATION.md`
 ("One vocabulary"). Mechanics:
 
+Between releases, record a deferred slow rung as `EXEMPT - release tier` (the `/prove` verdict
+is `NOT APPLICABLE - release tier`), never as PASS. Add a `RELEASE` item naming its command to
+the audit and report that its evidence remains outstanding. Keep genuinely manual checks open.
+
 | Check | How |
 | --- | --- |
 | File exists | glob the exact path |
@@ -131,6 +135,8 @@ await the human signal - do not chain, do not remove tags. On a kept `BlockQuest
 **Mode:** full | strategic | tactical | phase-<NN>
 **Outcome:** Verified | BlockNeedUserTest | Partial | Broken (status kept: <block>, if step 6 kept one)
 **Counts:** PASS N · WARN N · FAIL N · UNCHECKABLE N · MANUAL open N · EXEMPT N
+
+**RELEASE:** <each deferred command and the evidence still owed, or none>
 
 ### Action items
 1. **[FAIL §3.2.2 - Step 02.3]** <one line> - <concrete fix>.

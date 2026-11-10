@@ -81,14 +81,15 @@ STEP 1 - INVENTORY (read-only)
   CONFLICT (below), never an overwrite.
 - Propose a concrete value, derived from THIS project, for each setting placeholder. Tier 1,
   always: <PROJECT_NAME>, <CHAT_LANGUAGE>, <ARTIFACT_LANGUAGE>, <INDEX_DOC>, <WORK_ROOT>,
-  <CHECK_CMD>, <PLAN_DIR>, <SCRATCH_DIR>, <SIZE_BUDGET> (a bare number of lines),
+  <CHECK_CMD>, <RELEASE_CMD>, <PLAN_DIR>, <SCRATCH_DIR>, <SIZE_BUDGET> (a bare number of lines),
   <READONLY_ZONES>, <ID_SCHEME>. Tier 2, the code layer, only if this project builds or runs:
   <ARCH_LAYERS>, <BUILD_CMD>, <TEST_CMD>, <LINT_CMD>, <RUN_CMD>, <LOGGER>. Mark any you cannot
   resolve. Do NOT fill per-ticket tokens - <ID>, <slug>, <NN>, <TS>, <TODO>, <path>, <symbol> -
   they are filled each time a skill runs (KIT/docs/REPLACES.md).
 - <CHECK_CMD> gets its own answer, not a shrug. Name the cheapest mechanical check this project
-  already has or could have this week - a build, a test, a render, a link check, a schema
+  already has or could have this week, taking 5 seconds or less - a grep, a link check, a schema
   validation, a reconciliation between two totals, a sweep that every cross-reference resolves.
+  Name <RELEASE_CMD> for the full build and every test tier before or during release.
   If you genuinely find none, say so explicitly and propose the one that would be cheapest to
   build, with the command it would run. Never invent a command and present it as found: ask me
   once, and the rules file records my answer.
@@ -133,7 +134,7 @@ STEP 3 - APPLY (only after I approve)
 - SELF-CHECK before you report, and paste its result:
   a. No setting placeholder is left in the files you wrote, except the ones I left unresolved.
      Search for each by name: <PROJECT_NAME>, <CHAT_LANGUAGE>, <ARTIFACT_LANGUAGE>, <INDEX_DOC>,
-     <WORK_ROOT>, <CHECK_CMD>, <PLAN_DIR>, <SCRATCH_DIR>, <SIZE_BUDGET>, <READONLY_ZONES>,
+     <WORK_ROOT>, <CHECK_CMD>, <RELEASE_CMD>, <PLAN_DIR>, <SCRATCH_DIR>, <SIZE_BUDGET>, <READONLY_ZONES>,
      <ID_SCHEME>, <ARCH_LAYERS>, <BUILD_CMD>, <TEST_CMD>, <LINT_CMD>, <RUN_CMD>, <LOGGER>.
      Per-ticket tokens (<ID>, <slug>, <NN>, <TS>, ..) are expected inside skills and templates.
   b. Every docs/<NAME>.md that the merged rules file, skills and agents cite exists.

@@ -47,9 +47,10 @@ grows past a handful of files or starts needing new types, stop and escalate to 
 - Anti-slop applies (`docs/CODE_QUALITY.md`).
 - A handled edge case or non-obvious cause earns one *why* comment in `<ARTIFACT_LANGUAGE>` - nothing more.
 
-**Step 4 - Validate locally.** Run the narrowest meaningful check that proves the fix:
-a targeted test if one exists (add/adjust one if cheap and the project tests), else compile
-+ a manual run of the path. Record `expected | actual`.
+**Step 4 - Validate locally.** Run the narrowest meaningful check that proves the fix: a targeted
+test or a compile taking 5 seconds or less, otherwise `<CHECK_CMD>`. A slow test or a manual run
+waits for the release or an owner-named run: record it as `NOT APPLICABLE - release tier` and list
+its command as a `RELEASE` item (`docs/VALIDATION.md`, "The ladder"). Record `expected | actual`.
 
 **Step 5 - Report.** Root cause (1 line), fix (1 line), validation (1 line). If you found
 adjacent bugs, list them as follow-ups - do **not** fix them in this pass.

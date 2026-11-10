@@ -117,6 +117,11 @@
       "en": "Several agents on one tree need a lock that queues instead of refusing; one writer at a time needs none. The kit ships no lock script, so adopt the pattern the first time two agents contend, not before. See [parallel writers](fn:parallel-writers).",
       "ru": "Нескольким агентам на одном дереве нужна блокировка, которая ставит в очередь, а не отказывает; одному пишущему за раз она не нужна. Kit не поставляет скрипта блокировки, так что вводите шаблон в тот раз, когда два агента впервые столкнутся, а не раньше. См. [параллельные пишущие агенты](fn:parallel-writers).",
       "ua": "Кільком агентам на одному дереві потрібне блокування, яке ставить у чергу, а не відмовляє; одному пишучому за раз воно не потрібне. Kit не постачає скрипта блокування, тож вводьте шаблон того разу, коли два агенти вперше зіткнуться, а не раніше. Див. [паралельні пишучі агенти](fn:parallel-writers)."
+    },
+    {
+      "en": "The rules about waiting and backgrounding are for runs that are allowed to be slow: a release, or a run you name. Between releases only checks of 5 seconds or less run, and backgrounding a slow check does not make it allowed. See [the validation ladder](fn:validation-ladder).",
+      "ru": "Правила про ожидание и фоновый запуск относятся к прогонам, которым разрешено быть медленными: к релизу или к прогону, который вы назвали сами. Между релизами идут только проверки до 5 секунд, и перевод медленной проверки в фон разрешённой её не делает. См. [лестницу проверок](fn:validation-ladder).",
+      "ua": "Правила про очікування й фоновий запуск стосуються прогонів, яким дозволено бути повільними: релізу або прогону, який ви назвали самі. Між релізами йдуть лише перевірки до 5 секунд, і переведення повільної перевірки у фон дозволеною її не робить. Див. [драбину перевірок](fn:validation-ladder)."
     }
   ],
   "related": ["rd-lead", "parallel-writers", "fan-out-readers", "unattended-loop", "backlog"],

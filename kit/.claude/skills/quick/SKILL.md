@@ -54,8 +54,9 @@ for resource files. No deep audits.
 - Anti-slop still applies (`docs/CODE_QUALITY.md`): no trivial comments, no hardcoded
   values where a token exists, no broad swallowing catches - even in a one-liner.
 
-**Step 4 - Minimal validation.** Run the narrowest meaningful check for the file type
-(compile for code, lint/format for config, none for a pure-text typo). Record
+**Step 4 - Minimal validation.** Run the narrowest meaningful check for the file type that takes
+5 seconds or less (compile for code, lint/format for config, none for a pure-text typo); a slower
+one is deferred as a `RELEASE` item (`docs/VALIDATION.md`, "The ladder"). Record
 `expected | actual`.
 
 **Step 5 - Do NOT run** the heavy machinery: no spec, no user-doc updates, no full build,

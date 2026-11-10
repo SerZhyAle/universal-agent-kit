@@ -10,30 +10,23 @@ This repository publishes the Universal Agent Kit and its GitHub Pages article. 
 
 ## Build, Test, and Development Commands
 
-Run the release check after changing `kit/` or `merge-prompt.txt`:
+Between releases run `pwsh -NoProfile -File tools/check-fast.ps1` and inspect the diff and
+untracked files. The check covers tracked staged and unstaged diff whitespace; it does not prove
+behavior. Record every deferred slow rung as a `RELEASE` item naming its command, and report
+"not built, not tested until the release". Between releases checks stop at 5 seconds because
+full suites after every step make people wait (TESTING_AND_QA section 2, via `CLAUDE.md`).
 
-```powershell
-pwsh -NoProfile -File tools/build-kit.ps1
-```
+The release is the push of `main`. Before publishing, review changed portal sources and accept
+their reviewed capability digests, then run `pwsh -NoProfile -File tools/check-release.ps1 -Catalog
+<catalog-root>`. This builds the kit, generates the portal, runs its `-Validate` and `-Check`, the
+site and compliance gates, and the browser check; also perform and record the rendered checklist.
+Review and commit generated files before the push. Use `-Date yyyy-MM-dd` for a deliberate date.
 
-It recreates `universal-agent-kit.zip`, verifies each archive entry against `kit/` using SHA-256, and updates the kit date in `index.html` and `sitemap.xml`. Supply `-Date yyyy-MM-dd` for a deliberate release date. There is no application runtime or unit-test suite; this script is the primary mechanical validation.
-
-After changing `kit/`, the portal sources or the site, also run the offline site gates (every payload file of `kit/` must stay covered by the portal inventory):
-
-```powershell
-pwsh -NoProfile -File tools/build-portal.ps1 -Validate
-pwsh -NoProfile -File tools/check-site.ps1
-```
-
-Before committing, also run the configured compliance gate when the shared canon plugin is available:
-
-```powershell
-$sza = ((Get-Content "$HOME/.claude/plugins/installed_plugins.json" -Raw | ConvertFrom-Json).plugins.'sza@sza-unified-rules' |
-    Sort-Object lastUpdated -Descending | Select-Object -First 1).installPath
-pwsh -NoProfile -File "$sza/tools/check-compliance.ps1"
-```
-
-`CLAUDE_PLUGIN_ROOT` is set only for the plugin's own hooks, not in a tool shell, so the plugin root is resolved from the install record.
+Measured 2026-11-10: `check-fast.ps1`, 0.398 s, exit 0, direct call timed with
+`Diagnostics.Stopwatch` including startup. All other checks have no recorded time and are release
+tier until measured at release: kit and portal builds, portal validation and freshness, site gate,
+browser check, compliance gate, OG-card build and promotion metrics. An owner may name a specific
+run outside a release.
 
 ## Content Style & Naming
 
@@ -41,8 +34,8 @@ Use concise English Markdown with meaningful headings and relative links. Keep k
 
 ## Generated Artifacts and Validation
 
-Never hand-edit `universal-agent-kit.zip`, the displayed kit-update date, JSON-LD `dateModified`, or `sitemap.xml` dates. Change the source, then run the build script and review its `PASS` result plus `git diff`. A change to `kit/` is a product change: consult `kit/docs/AUTHORING.md` when introducing rules, commands, or role briefs.
+Never hand-edit `universal-agent-kit.zip`, the displayed kit-update date, JSON-LD `dateModified`, or `sitemap.xml` dates. Change the source and inspect the diff; rebuild and review the `PASS` result at publish. A change to `kit/` is a product change: consult `kit/docs/AUTHORING.md` when introducing rules, commands, or role briefs.
 
 ## Commits & Pull Requests
 
-Use concise, imperative subjects. Existing history uses optional scoped prefixes such as `kit: ...` and `chore: ...`; follow that pattern where it clarifies scope. Keep generated files in the same commit as their source changes. Pull requests should explain the user-facing or methodology change, list validation run, link relevant issues or specifications, and include screenshots for visible `index.html` changes.
+Use concise, imperative subjects. Existing history uses optional scoped prefixes such as `kit: ...` and `chore: ...`; follow that pattern where it clarifies scope. Between releases a source commit may leave generated files stale with a `RELEASE` item; regenerate and commit them before publishing. Whether such a commit may sit on `main` awaits the owner’s decision. Pull requests should explain the user-facing or methodology change, list validation run, link relevant issues or specifications, and include screenshots for visible `index.html` changes.

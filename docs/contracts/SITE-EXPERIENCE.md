@@ -1,6 +1,6 @@
 # `SITE-EXPERIENCE` pointer
 
-- Version: 0.4 (draft; opted in 2026-10-09); read in full on 2026-10-21
+- Version: 0.5 (draft; opted in 2026-10-09); 0.4 read in full on 2026-10-21, the 0.5 amendment read on 2026-11-10
 - Role: consumer; every rule binds at the declared portal tier
 - Home: `product-site/SITE-EXPERIENCE.md` in the shared contracts catalog; its conformance artifact is the
   run-list `SITE-CHECKLIST.md`, read off the rendered site
@@ -20,11 +20,14 @@ named on `privacy.html` with purpose and what each receives, and compared both w
 (rule 14; `origins`). Contrast, focus order, reduced motion and the network panel are read in a browser, not
 from the source, and recorded per run in the adoption row.
 
-Rule 17 still says "touch targets are 44 px", which `PAGE-STYLE` 3.3 and `UI-SIZING` 1.1 have superseded for
-buttons: the site draws the profile targets of the revised kit (32 px with a pointer, 48 px with touch) and keeps
-the 4.5 : 1 text and 3 : 1 component contrast of the same rule. That difference is a registry exception pending
-the owner's answer to the proposal filed by another product for exactly this sentence, and the permanent variant
-is recorded in `SPECIFICATION_UNIFIED_UI_CONTRACTS.md`. The 0.4 additions (the Support page and a static
-release-history page) are conditional and owed nothing here, for the reasons the `SITE-STRUCTURE` pointer gives.
+Rule 17 was answered by the owner's amendment of 2026-10-29 (0.5, item A): a button and every component
+`UI-SIZING` covers follows `BUTTONS` and `UI-SIZING` (this site serves the kit byte-identical at the 3.6
+revision of 2026-11-10, so its buttons draw 32 px with a pointer, 48 px with touch, and the declared compact
+24 and 36), and a text link or any uncovered control holds the `ICON-RENDER` web floor - which this site's
+uncovered controls exceed by keeping 44 px under every pointer. The former rule-17 exception closed on
+2026-11-10 with the owner's acceptance; the profile targets are measured per profile and size by
+`tools/ui-check/run.py` (16353 checks, 0 failed, on the working tree of 2026-11-10). The 0.4 additions (the
+Support page and a static release-history page) are conditional and owed nothing here, for the reasons the
+`SITE-STRUCTURE` pointer gives.
 Staying conformant: keep the resolver text the kit's, keep layout in the stylesheets, declare every origin in
 `tools/portal/privacy.json` and re-run the browser half of the run-list when the page set or a layer changes.

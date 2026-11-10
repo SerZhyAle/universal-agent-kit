@@ -15,7 +15,7 @@ propose a value for each from the actual project.
 
 ## Tier 1 - every project
 
-These eleven apply to any project that has files, work items and checks.
+These twelve apply to any project that has files, work items and checks.
 
 | Token | What it is | Software | Data & analysis | Writing & docs | Legal & ops |
 | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -24,7 +24,8 @@ These eleven apply to any project that has files, work items and checks.
 | `<ARTIFACT_LANGUAGE>` | The language of files, docs, logs and commits. | `English` | `English`, or the team's language | `Russian` (the manuscript's language) | `German` (legal: the jurisdiction's; ops: the team's) |
 | `<INDEX_DOC>` | The map the agent reads first. | `README.md` | `docs/DATA_DICTIONARY.md` | `SUMMARY.md` | `MATTER_INDEX.md` |
 | `<WORK_ROOT>` | Where the project's real material lives. | `src` | `pipelines` | `content` | `drafts` |
-| `<CHECK_CMD>` | The command that proves a change is sound. The one nobody may leave empty. | `npm test` | `make validate` (schema + row counts) | `npm run lint:docs` (links, headings, terms) | `pwsh tools/check-terms.ps1` |
+| `<CHECK_CMD>` | The fast check for a change, 5 seconds or less. The one nobody may leave empty. | `npm run check:fast` | `make validate` (schema + row counts) | `npm run lint:docs` (links, headings, terms) | `pwsh tools/check-terms.ps1` |
+| `<RELEASE_CMD>` | Release command: full build and every test tier. | `npm run release:check` | `make release-check` | `make release-check` | `pwsh tools/release-check.ps1` |
 | `<PLAN_DIR>` | Where spec/plan files live. | `PLAN` | `PLAN` | `PLAN` | `PLAN` |
 | `<SCRATCH_DIR>` | Throwaway artifacts and backups, ignored by version control. | `tmp` | `.scratch` | `tmp` | `tmp` |
 | `<SIZE_BUDGET>` | Line count past which a file gets split along a real seam. A bare number: the templates add the `~` and the unit. | `500` | `400` | `800` (one chapter) | `1200` (one agreement) |
@@ -38,7 +39,9 @@ change is not broken?", and it is the placeholder people skip because they belie
 has nothing mechanical in it. That belief is usually false: `PROJECT_SHAPES.md` lists the five
 shapes a check takes in work that never compiles (a total that must match another total, a name
 that must exist elsewhere, a structure that must hold, a reference that must resolve, a rendering
-that must succeed). Point this at the cheapest real one you have, today, and improve it later.
+that must succeed). Point this at a real structural, grep, link or schema check taking 5 seconds or
+less; improve it later. `<RELEASE_CMD>` retains the full build and every test tier, including slow
+checks.
 
 **`<INDEX_DOC>`** - not just something to read, something to *maintain*. It is where the agent's
 research order starts, so a stale map costs a wrong turn on every task (`RESEARCH_INDEX.md`).
@@ -76,9 +79,8 @@ rules in `CODE_QUALITY.md`, and the stack lines in the `implementer` and `rd-lea
 rule bans. `<ARCH_LAYERS>` reads left-to-right as "may depend on": `A -> B` means A imports B and
 never the reverse. Where a project genuinely has no layering, write `n/a` rather than inventing one.
 
-The four command tokens are refinements of `<CHECK_CMD>`, not replacements for it: the kit's rules
-reach for the narrowest one that proves the change (`VALIDATION.md`), so having all five filled is
-what lets it pick a compile over a full build.
+The four code-layer tokens name individual commands. Between releases use them only when the
+check takes 5 seconds or less; the full build and slower checks belong in `<RELEASE_CMD>`.
 
 ---
 
@@ -109,7 +111,8 @@ What was renamed, moved or added since earlier copies:
 | :--- | :--- | :--- |
 | `<SRC_ROOT>` | `<WORK_ROOT>` | The material is not always source. |
 | `<MAX_LOC>` | `<SIZE_BUDGET>` | Lines of code is one unit among several. |
-| - | `<CHECK_CMD>` | The generic proof step the four build tokens specialize. |
+| - | `<CHECK_CMD>` | The fast per-change check. |
+| - | `<RELEASE_CMD>` | The full build and every test tier at release. |
 | `<ID>` (the setting) | `<ID_SCHEME>` | One name was doing two jobs: the scheme, filled once, and one ticket's id, filled per ticket. |
 | "Artifacts: English", fixed | `<ARTIFACT_LANGUAGE>` | A contract or a manuscript is delivered in its own language. |
 | `/verify` | `/prove` | The old name shadowed a command the runtime ships. |

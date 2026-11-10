@@ -11,8 +11,8 @@ The staleness ladder judges age from `canon.reconciledOn` when the stamp carries
 `canon.adoptedOn` otherwise (rule 5); where neither is present and parseable the age is unknown and read as
 past the 180-day window.
 
-The installed plugin `2026.1002.3` has not delivered that unknown-age reading: the isolated probe documented
-in the synchronization specification reports `WARN SZA-CANON03`, exit 0. Use of that reader is recorded in
-REGISTRY section 3 until 2026-12-31, with
-`PROPOSAL-2026-10-09-universal-agent-kit-stamp-reader.md` asking its owner for delivery. The current stamp's
-valid dates and equal digest pass the gate; that result does not prove the missing-date branch conforms.
+The installed plugin `2026.1109.1` has delivered that unknown-age reading: the probes of 2026-11-10,
+documented in the closing audit of `S0001_contract-sync-20261017.md`, FAIL `SZA-CANON03` at error, exit 1,
+on an absent or unparseable date, and the registry exception of the older reader closed that day. The
+current stamp's valid dates and equal digest still pass the gate; the stamp is behind canon 2026.11.09.1 by
+the normal post-bump staleness until the adoption skill re-stamps it.

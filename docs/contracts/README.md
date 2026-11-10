@@ -20,13 +20,14 @@ conformance requires.
 | [`ICON-SET.md`](ICON-SET.md) | 0.36 | consumer, opted in | every page's glyphs |
 | [`ICON-RENDER.md`](ICON-RENDER.md) | 0.24 | consumer, opted in, partial | every page's glyphs |
 | [`ICON-EXTERNAL.md`](ICON-EXTERNAL.md) | 0.12 | consumer, opted in | `index.html` imagery |
-| [`CONTEXT-HELP.md`](CONTEXT-HELP.md) | 0.1 | guidance only; the site's pages not applicable | `kit/` text for projects that have a user interface (not yet written) |
+| [`CONTEXT-HELP.md`](CONTEXT-HELP.md) | 0.2 | guidance only; the site's pages and its search dialog are not surfaces (item H) | `kit/` text for projects that have a user interface, written 2026-11-10 (`ui-clarify/references/WINDOW_HELP.md` and six more files, listed in the pointer) |
 | [`DOC-EXTERNAL-QUALITY.md`](DOC-EXTERNAL-QUALITY.md) | 0.12 | read, not adopted | the portal, through the site contracts that cite it |
 | [`DOC-INTERNAL-QUALITY.md`](DOC-INTERNAL-QUALITY.md) | 0.10 | read, not adopted | `docs/specifications/`, `docs/contracts/`, `PLAN/` |
 | [`REPO-STAMP.md`](REPO-STAMP.md) | 0.12 | producer | `.sza-canon.json` |
 | [`REPO-LAYOUT.md`](REPO-LAYOUT.md) | 0.11 | consumer | root files, `docs/` |
 | [`RULE-DELIVERY.md`](RULE-DELIVERY.md) | 0.12 | consumer | the `sza` plugin |
 | [`HARNESS-PROFILE.md`](HARNESS-PROFILE.md) | 0.12 | not bound | none - declared not bound (rule 7) |
+| [`TEST-LAB.md`](TEST-LAB.md) | 0.1 | reporter only | the equipment and test-practice inventory of 2026-11-10, filed in the catalog |
 
 `HARNESS-PROFILE` is not bound: this repository never runs the shipped harness, so it has no
 `.sza-profile.json` for that reason, which rule 7 of the contract reads as a different fact from "the

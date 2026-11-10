@@ -17,7 +17,7 @@ structure and conventions. You write the change the plan describes - no more, no
 
 ## The project
 
-- Work root: `<WORK_ROOT>`. The check that proves a change: `<CHECK_CMD>`.
+- Work root: `<WORK_ROOT>`. Fast check (5 seconds or less): `<CHECK_CMD>`.
 - **Code layer** (delete if the project does not compile or run): Build `<BUILD_CMD>`, Test
   `<TEST_CMD>`, Logging `<LOGGER>`, Architecture `<ARCH_LAYERS>` - respect the dependency direction
   strictly.
@@ -53,6 +53,10 @@ structure and conventions. You write the change the plan describes - no more, no
 2. Check what already exists before building something new - avoid duplication.
 3. Understand the current state before changing it.
 4. Work in small, verifiable steps; run the narrowest meaningful check after each non-trivial one.
+   Between releases that is a check of 5 seconds or less: a full build, a run-and-observe or a
+   slower check waits for the release or an owner-named run, is recorded as
+   `NOT APPLICABLE - release tier`, and its command is listed as a `RELEASE` item
+   (`docs/VALIDATION.md`, "The ladder").
 5. When executing a tactical-spec step, scope strictly to its prompt: no surrounding refactor, no
    unrelated cleanup, no name not stated in the prompt.
 6. If the fix you are making pays something a shared contract always wanted - a lifecycle call, a

@@ -6,9 +6,9 @@
     "ua": "Заповнити плейсхолдери файлу правил під свій проєкт"
   },
   "pitch": {
-    "en": "Fill the eleven tier-1 tokens every project needs, the six code-layer tokens only if the project builds or runs, and delete the rules that have no subject.",
-    "ru": "Заполните одиннадцать токенов первого яруса, нужных любому проекту, шесть токенов слоя кода только если проект собирается или запускается, и удалите правила без предмета.",
-    "ua": "Заповніть одинадцять токенів першого ярусу, потрібних усім, шість токенів шару коду лише якщо проєкт збирається чи запускається, і видаліть правила без предмета."
+    "en": "Fill the twelve tier-1 tokens every project needs, the six code-layer tokens only if the project builds or runs, and delete the rules that have no subject.",
+    "ru": "Заполните двенадцать токенов первого яруса, нужных любому проекту, шесть токенов слоя кода только если проект собирается или запускается, и удалите правила без предмета.",
+    "ua": "Заповніть дванадцять токенів першого ярусу, потрібних усім, шість токенів шару коду лише якщо проєкт збирається чи запускається, і видаліть правила без предмета."
   },
   "lead": {
     "en": "After the kit is copied in, the `<PLACEHOLDER>` tokens in the rules files (`AGENTS.md`, `CLAUDE.md`), the skills and the agents are the part that is yours to fill. There are two tiers: fill tier 1 always, and tier 2 only if your project compiles or runs. If it does not, delete the rules that use the tier-2 tokens rather than invent values for them.",
@@ -37,9 +37,9 @@
       "ua": "Перший ярус, проєкт: `<PROJECT_NAME>` - його назва, `<INDEX_DOC>` - мапа, яку агент читає першою, `<WORK_ROOT>` - де лежить його справжній матеріал. `<CHAT_LANGUAGE>` - мова, якою агент говорить із вами. `<ARTIFACT_LANGUAGE>` - мова файлів, документів, логів і комітів: за замовчуванням англійська для проєкту з кодом, а юрист, перекладач чи аналітик може здавати роботу мовою самого документа."
     },
     {
-      "en": "Tier 1, the proof: `<CHECK_CMD>` is the command that proves a change is sound, and the one placeholder nobody may leave empty. Point it at the cheapest real check you have today and improve it later.",
-      "ru": "Первый ярус, доказательство: `<CHECK_CMD>` - команда, которая доказывает, что правка не сломала работу, и единственный токен, который нельзя оставить пустым. Поставьте на неё самую дешёвую настоящую проверку из тех, что есть сегодня, и улучшайте потом.",
-      "ua": "Перший ярус, доказ: `<CHECK_CMD>` - команда, яка доводить, що правка не зламала роботу, і єдиний токен, який не можна лишати порожнім. Поставте на неї найдешевшу справжню перевірку з тих, що є сьогодні, і покращуйте потім."
+      "en": "Tier 1, the proof: `<CHECK_CMD>` is the fast check for a change, 5 seconds or less, and the one placeholder nobody may leave empty; a structural, grep, link or schema check will do to start. `<RELEASE_CMD>` is the release command: the full build and every test tier, slow checks included.",
+      "ru": "Первый ярус, доказательство: `<CHECK_CMD>` - быстрая проверка правки, не дольше 5 секунд, и единственный токен, который нельзя оставить пустым; для начала хватит проверки структуры, grep, ссылок или схемы. `<RELEASE_CMD>` - команда релиза: полная сборка и все уровни тестов, включая медленные.",
+      "ua": "Перший ярус, доказ: `<CHECK_CMD>` - швидка перевірка правки, не довше 5 секунд, і єдиний токен, який не можна лишати порожнім; для початку досить перевірки структури, grep, посилань чи схеми. `<RELEASE_CMD>` - команда релізу: повна збірка й усі рівні тестів, зокрема повільні."
     },
     {
       "en": "Tier 1, working files: `<PLAN_DIR>` holds spec and plan files (default `PLAN/`). `<SCRATCH_DIR>` holds throwaway artifacts and backups, ignored by version control (default `tmp/`). `<READONLY_ZONES>` lists paths the agent never modifies, or `none`.",
@@ -84,14 +84,14 @@
       "ua": "`<INDEX_DOC>` - це не лише те, що читають, а й те, що підтримують: з нього починається порядок дослідження агента, і застаріла мапа коштує хибного повороту в кожній задачі. `<SIZE_BUDGET>` - евристика «файл робить забагато», а не закон. Ставте її там, де починає буркотіти ваше власне рев'ю."
     },
     {
-      "en": "The four command tokens refine `<CHECK_CMD>`, they do not replace it. The kit's rules reach for the narrowest check that proves the change, so having all five filled is what lets an agent pick a compile over a full build.",
-      "ru": "Четыре командных токена уточняют `<CHECK_CMD>`, а не заменяют его. Правила kit берут самую узкую проверку, доказывающую именно эту правку, и заполненные пять токенов позволяют агенту выбрать компиляцию вместо полной сборки.",
-      "ua": "Чотири командні токени уточнюють `<CHECK_CMD>`, а не замінюють його. Правила kit беруть найвужчу перевірку, що доводить саме цю правку, і заповнені п'ять токенів дають агенту змогу обрати компіляцію замість повного складання."
+      "en": "The four code-layer command tokens name individual commands. Between releases use one only when the check takes 5 seconds or less; the full build and slower checks belong in `<RELEASE_CMD>`.",
+      "ru": "Четыре командных токена слоя кода называют отдельные команды. Между релизами запускайте такую команду, только если проверка занимает не более 5 секунд; полная сборка и долгие проверки входят в `<RELEASE_CMD>`.",
+      "ua": "Чотири командні токени шару коду називають окремі команди. Між релізами запускайте таку команду, лише якщо перевірка триває не більше 5 секунд; повна збірка й довгі перевірки входять до `<RELEASE_CMD>`."
     },
     {
-      "en": "Coming from an earlier copy: `<SRC_ROOT>` is now `<WORK_ROOT>` and `<MAX_LOC>` is now `<SIZE_BUDGET>`, and a find-and-replace over your filled copy covers both. `<CHECK_CMD>` has no old value: write down the cheapest check you already run by hand. `<ARTIFACT_LANGUAGE>` is new too: `English` keeps the old behaviour.",
-      "ru": "Если у вас более ранняя копия: `<SRC_ROOT>` теперь `<WORK_ROOT>`, а `<MAX_LOC>` теперь `<SIZE_BUDGET>`; автозамена по заполненной копии закрывает оба. У `<CHECK_CMD>` старого значения нет: запишите самую дешёвую проверку, которую вы и так делаете руками. `<ARTIFACT_LANGUAGE>` тоже новый: значение `English` сохраняет прежнее поведение.",
-      "ua": "Якщо у вас ранніша копія: `<SRC_ROOT>` тепер `<WORK_ROOT>`, а `<MAX_LOC>` тепер `<SIZE_BUDGET>`; автозаміна по заповненій копії закриває обидва. У `<CHECK_CMD>` старого значення немає: запишіть найдешевшу перевірку, яку ви й так робите руками. `<ARTIFACT_LANGUAGE>` теж новий: значення `English` зберігає колишню поведінку."
+      "en": "Coming from an earlier copy: `<SRC_ROOT>` is now `<WORK_ROOT>` and `<MAX_LOC>` is now `<SIZE_BUDGET>`, and a find-and-replace over your filled copy covers both. `<CHECK_CMD>` has no old value: write down the cheapest check you already run by hand. `<ARTIFACT_LANGUAGE>` is new too: `English` keeps the old behaviour. `<RELEASE_CMD>` is new as well.",
+      "ru": "Если у вас более ранняя копия: `<SRC_ROOT>` теперь `<WORK_ROOT>`, а `<MAX_LOC>` теперь `<SIZE_BUDGET>`; автозамена по заполненной копии закрывает оба. У `<CHECK_CMD>` старого значения нет: запишите самую дешёвую проверку, которую вы и так делаете руками. `<ARTIFACT_LANGUAGE>` тоже новый: значение `English` сохраняет прежнее поведение. `<RELEASE_CMD>` тоже новый.",
+      "ua": "Якщо у вас ранніша копія: `<SRC_ROOT>` тепер `<WORK_ROOT>`, а `<MAX_LOC>` тепер `<SIZE_BUDGET>`; автозаміна по заповненій копії закриває обидва. У `<CHECK_CMD>` старого значення немає: запишіть найдешевшу перевірку, яку ви й так робите руками. `<ARTIFACT_LANGUAGE>` теж новий: значення `English` зберігає колишню поведінку. `<RELEASE_CMD>` теж новий."
     },
     {
       "en": "The setting `<ID>` became `<ID_SCHEME>`. Rename it only where it names the setting, never globally, since the skills use `<ID>` per ticket. If an earlier merge wrote a fixed id such as `T0042` into the skills, put `<ID>` back.",

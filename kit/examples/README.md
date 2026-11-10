@@ -4,8 +4,9 @@ Reference only - **do not copy this folder into a project.** It holds an imagina
 files, every value in it is that project's and not yours, and nothing in the kit reads it.
 
 The imaginary project is `user-service`, set up with the "Software" column of `docs/REPLACES.md`:
-tickets live in `PLAN/`, ids look like `T0042`, and the check that proves a change is `npm test`.
-The ticket, T0042, lets an admin download the user list as a CSV file.
+tickets live in `PLAN/`, ids look like `T0042`, the fast check is `npm run check:fast` (5 seconds
+or less) and the release command is `npm run release:check`. The ticket, T0042, lets an admin
+download the user list as a CSV file.
 
 | File | Written by | Look at |
 | --- | --- | --- |

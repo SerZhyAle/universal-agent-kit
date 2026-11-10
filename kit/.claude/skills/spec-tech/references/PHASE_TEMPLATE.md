@@ -54,8 +54,8 @@
 ## Phase done criteria
 - [ ] Every `Step NN.*` is `[x] done`.
 - [ ] Narrowest meaningful check for this phase passes - pick the lowest sufficient rung from
-      `docs/VALIDATION.md` (`<CHECK_CMD>`, a compile / type-check, a targeted test, or `<BUILD_CMD>` only when
-      this phase touches packaging, resources, or wiring). Name the actual command here.
+      `docs/VALIDATION.md` (`<CHECK_CMD>` or another check taking 5 seconds or less). Name the
+      command here; `<BUILD_CMD>` and slower tests wait for the release, each as a `RELEASE` item.
 - [ ] Grep for `TODO(phase-<NN>)` returns zero hits.
 - [ ] The ticket's one changelog entry lists every file in "Files touched" (skip where the project keeps no change log).
 

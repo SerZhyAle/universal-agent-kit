@@ -59,6 +59,10 @@ by `<ID>`. State the choice in one line: `<ID> (Priority <P>, <status>) - <why n
 right stage per the gate table in `docs/SPEC_LIFECYCLE.md`. The per-ticket stop conditions still
 hold - an unresolved UI decision, an open required question, an unchecked blocker, an ambiguity.
 When such a stop fires, do **not** prompt: record the resulting `Block*` state and move on.
+Nobody is here to name a slow run, so the loop stays inside the 5-second line: no stage starts a
+full build, a run-and-observe or a check over 5 seconds, and each rung that defers is recorded as
+`NOT APPLICABLE - release tier` with its command as a `RELEASE` item in that ticket's audit
+(`docs/VALIDATION.md`, "The ladder").
 
 **Step 4 - Update the skip-cache.** If the ticket reached a human-gated `Block*` state, or could
 not be advanced at all this run, add its `<ID>` to the run's skip-cache so Step 2 never re-selects

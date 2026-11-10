@@ -59,11 +59,12 @@ Then study THIS project and import what fits it:
    subject here.
 2. Draft an AGENTS.md (or merge into my existing rules file) that adopts the method, with every
    tier-1 placeholder filled from this project: project name, chat language, artifact language,
-   map document, work root, THE CHECK COMMAND that proves a change is sound, plan directory,
-   scratch directory, size budget, read-only zones, ticket-id scheme. Fill the code-layer ones (architecture layers, build
-   / test / lint / run, logger) only if this project builds or runs.
-3. For the check command, do not shrug: name the cheapest mechanical check this project already
-   has or could have this week, and the command that runs it.
+   map document, work root, THE FAST CHECK COMMAND (5 seconds or less), the release command for
+   the full build and every test tier, plan directory, scratch directory, size budget, read-only
+   zones, ticket-id scheme. Fill the code-layer ones (architecture layers, build / test / lint /
+   run, logger) only if this project builds or runs.
+3. For the fast check, do not shrug: name the cheapest mechanical check this project already
+   has or could have this week that finishes in 5 seconds or less, and the command that runs it.
 4. Recommend which skills (/research, /spec, /spec-tech, /spec-dev, /spec-check, /spec-fix,
    /quick, /fix, /prove, /git, /critique) and which role agents are worth adding here, and say
    why for each.
@@ -123,7 +124,7 @@ kit/                        the kit source, browsable here
 2. Hand the folder and `merge-prompt.txt` to your agent: *"Merge the Universal Agent Kit into this
    project."* It inventories your setup, proposes a merge, and stops for your approval - your files
    always win, nothing is overwritten silently.
-3. Fill the eleven tier-1 `<PLACEHOLDER>` tokens; fill the six code-layer ones only if your project
+3. Fill the twelve tier-1 `<PLACEHOLDER>` tokens; fill the six code-layer ones only if your project
    builds or runs, and delete the rules that use them if it does not.
 
 Minimal start: take just `AGENTS.md` + `docs/` + `/quick` + `/fix` - add the rest when a task
@@ -186,7 +187,7 @@ kit/                        исходник kit, можно листать пр
 2. Отдай папку и `merge-prompt.txt` своему агенту: *«Влей Universal Agent Kit в этот проект»*. Он
    сделает инвентарь твоего сетапа, предложит план слияния и остановится для подтверждения - твои
    файлы всегда главнее, ничего не перезаписывается молча.
-3. Заполни одиннадцать плейсхолдеров первого яруса; шесть кодовых - только если проект собирается
+3. Заполни двенадцать плейсхолдеров первого яруса; шесть кодовых - только если проект собирается
    или запускается, а если нет - удали правила, которые на них ссылаются.
 
 Минимальный старт: возьми только `AGENTS.md` + `docs/` + `/quick` + `/fix` - остальное добавишь,
@@ -233,7 +234,7 @@ Kit - **MIT** (см. [LICENSE](LICENSE)). Текст статьи - **CC BY 4.0*
 2. Віддай теку й `merge-prompt.txt` своєму агенту: *«Влий Universal Agent Kit у цей проєкт»*. Він
    зробить інвентар твого сетапу, запропонує план злиття й зупиниться для підтвердження - твої
    файли завжди головніші, нічого не перезаписується мовчки.
-3. Заповни одинадцять плейсхолдерів першого ярусу; шість кодових - лише якщо проєкт збирається
+3. Заповни дванадцять плейсхолдерів першого ярусу; шість кодових - лише якщо проєкт збирається
    або запускається, а якщо ні - видали правила, що на них посилаються.
 
 Мінімальний старт: візьми лише `AGENTS.md` + `docs/` + `/quick` + `/fix` - решту додаси, коли

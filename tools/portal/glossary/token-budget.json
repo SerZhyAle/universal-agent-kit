@@ -1,0 +1,10 @@
+{
+  "id": "token-budget",
+  "term": { "en": "Token budget", "ru": "Бюджет токенов", "ua": "Бюджет токенів" },
+  "def": {
+    "en": "What a run spends: the kit counts two budgets, tokens and wall-clock. `docs/COST.md` is not a cap but a policy for when the spend pays: estimate the agent count and rough token cost before a fan-out, and keep a small ceiling of about 6-8 agents.",
+    "ru": "То, что тратит прогон: kit считает два бюджета, токены и время по часам. `docs/COST.md` - не лимит, а политика о том, когда расход окупается: перед веером оцените число агентов и примерную цену в токенах и держите небольшой потолок около 6-8 агентов.",
+    "ua": "Те, що витрачає прогін: kit рахує два бюджети, токени та час за годинником. `docs/COST.md` - не ліміт, а політика про те, коли витрата окуповується: перед віялом оцініть кількість агентів і приблизну ціну в токенах та тримайте невелику стелю близько 6-8 агентів."
+  },
+  "see": ["fan-out", "context", "tier"]
+}

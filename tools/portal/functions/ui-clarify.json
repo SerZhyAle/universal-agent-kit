@@ -16,9 +16,9 @@
     "ua": "Запускайте `/ui-clarify` перед роботою над усім, що сприймає користувач: екраном, прапорцем CLI та його довідкою, формою відповіді API, повідомленням про помилку, шаблоном листа. Агент читає запит і код, проходить п'ять кіл пошуку непевностей, ставить лише потрібні запитання й завершує роботу блоком Clarification Status: `BLOCKED` із відкритими питаннями або `READY` зі схваленими рішеннями."
   },
   "situation": {
-    "en": "A user-visible change whose placement, wording, visibility or fallback is still open, or a request that leaves a choice between two or more options. If your product has no user-facing surface, the kit says this command rarely fires.",
-    "ru": "Изменение, видимое пользователю, где место, формулировка, видимость или запасное поведение ещё не решены, либо запрос, оставляющий выбор между двумя и более вариантами. Если у вашего продукта нет пользовательской поверхности, по словам kit, эта команда срабатывает редко.",
-    "ua": "Зміна, видима користувачеві, де місце, формулювання, видимість або запасна поведінка ще не вирішені, або запит, що лишає вибір між двома й більше варіантами. Якщо у вашого продукту немає користувацької поверхні, за словами kit, ця команда спрацьовує рідко."
+    "en": "A user-visible change whose placement, wording, visibility or fallback is still open, or a request that leaves a choice between two or more options. A new or changed window or screen of an application always comes here: its help is decided in the same table, asked for or not. If your product has no user-facing surface, the kit says this command rarely fires.",
+    "ru": "Изменение, видимое пользователю, где место, формулировка, видимость или запасное поведение ещё не решены, либо запрос, оставляющий выбор между двумя и более вариантами. Новое или изменённое окно приложения приходит сюда всегда: его справка решается в той же таблице, просили о ней или нет. Если у продукта нет пользовательской поверхности, по словам kit, команда срабатывает редко.",
+    "ua": "Зміна, видима користувачеві, де місце, формулювання, видимість або запасна поведінка ще не вирішені, або запит, що лишає вибір між двома й більше варіантами. Нове чи змінене вікно застосунку приходить сюди завжди: його довідка вирішується в тій самій таблиці, просили про неї чи ні. Якщо у продукту немає користувацької поверхні, за словами kit, команда спрацьовує рідко."
   },
   "warning": {
     "en": "Nothing is implemented while an important item is unresolved. Non-committal wording about two or more options counts as unresolved unless you approve one option or explicitly delegate the choice, and the agent does not assume freedom when the choice changes discoverability, placement or behaviour under a different form factor.",
@@ -79,6 +79,11 @@
       "ua": "Кажіть прямо, який варіант ви схвалюєте або що вибір за агентом. Делеговане записується в Delegated Assumptions, усе розмитіше лишається невирішеним."
     },
     {
+      "en": "If the change adds or alters a window or screen of an application, the table also settles its help: one row per window with its form (layer, page, both, inherit or none, the last two with a reason), where F1 and the `?` button stand, and the map file that records it. A request that never says \"help\" does not leave it out. The convention is in `references/WINDOW_HELP.md` beside the skill.",
+      "ru": "Если изменение добавляет или меняет окно либо экран приложения, таблица решает и его справку: по строке на каждое окно - форма (layer, page, both, inherit или none, последние две с причиной), места F1 и кнопки `?`, файл карты, где это записано. Запрос, в котором нет слова «справка», справку не отменяет. Соглашение лежит в `references/WINDOW_HELP.md` рядом с навыком.",
+      "ua": "Якщо зміна додає або змінює вікно чи екран застосунку, таблиця вирішує й його довідку: по рядку на кожне вікно - форма (layer, page, both, inherit або none, останні дві з причиною), місця F1 і кнопки `?`, файл карти, де це записано. Запит, у якому немає слова «довідка», довідку не скасовує. Угода лежить у `references/WINDOW_HELP.md` поруч із навичкою."
+    },
+    {
       "en": "One name per concept: a thing keeps the name it already has on every screen, help page and doc. A new synonym is a decision to ask about, not a wording detail. After the build, [/surfaces](fn:surfaces) checks the same rule across every surface that mentions the thing.",
       "ru": "Одно имя на понятие: вещь сохраняет то имя, которое уже есть у неё на каждом экране, в справке и документации. Новый синоним - вопрос, который нужно задать, а не мелочь формулировки. После сборки [/surfaces](fn:surfaces) проверяет то же правило по всем поверхностям, где эта вещь упоминается.",
       "ua": "Одне ім'я на поняття: річ зберігає те ім'я, яке вже має на кожному екрані, у довідці й документації. Новий синонім - питання, яке треба поставити, а не дрібниця формулювання. Після збірки [/surfaces](fn:surfaces) перевіряє те саме правило по всіх поверхнях, де ця річ згадується."
@@ -97,8 +102,8 @@
   "related": ["spec", "spec-all", "backlog", "quick", "surfaces"],
   "terms": ["user-facing-decision", "ticket", "block-status"],
   "keywords": {
-    "en": ["ui clarify", "user-facing decision", "clarification gate", "placement and wording", "ambiguity", "persona pass", "error message wording", "BlockQuestions"],
-    "ru": ["уточнение интерфейса", "решение для пользователя", "ворота уточнения", "место и формулировки", "неясность", "persona pass", "текст ошибки", "BlockQuestions"],
-    "ua": ["уточнення інтерфейсу", "рішення для користувача", "ворота уточнення", "місце й формулювання", "непевність", "persona pass", "текст помилки", "BlockQuestions"]
+    "en": ["ui clarify", "user-facing decision", "clarification gate", "placement and wording", "window help", "persona pass", "error message wording", "BlockQuestions"],
+    "ru": ["уточнение интерфейса", "решение для пользователя", "ворота уточнения", "место и формулировки", "справка к окну", "persona pass", "текст ошибки", "BlockQuestions"],
+    "ua": ["уточнення інтерфейсу", "рішення для користувача", "ворота уточнення", "місце й формулювання", "довідка до вікна", "persona pass", "текст помилки", "BlockQuestions"]
   }
 }

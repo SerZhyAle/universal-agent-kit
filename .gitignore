@@ -15,6 +15,9 @@ desktop.ini
 .env
 *token*
 *secret*
+# The glossary term about token budgets is a portal source, not a credential: without it a clone
+# cannot rebuild the portal (the pages link to it).
+!tools/portal/glossary/token-budget.json
 
 # local zip build staging (the published universal-agent-kit.zip is tracked on purpose)
 _uak_build/
@@ -27,5 +30,6 @@ temp/
 
 # docs/ is local working material, not a published surface (owner decision 2026-10-09):
 # the repo ships kit/, the site and the render targets. Files already tracked stay
-# tracked until removed by hand.
-docs/
+# tracked until removed by hand. Anchored to the root: kit/docs/ is payload, and an unanchored
+# pattern would keep a new kit document out of every clone while the local zip carried it.
+/docs/

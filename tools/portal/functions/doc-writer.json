@@ -47,9 +47,9 @@
       "ua": "Він переписує так: спершу ясність, потім тон, гумор в останню чергу. Інструкції лишаються придатними до дії: що сталося, чому це важливо, що робити далі. Кожен технічний факт, справді потрібний тексту, наприклад версії, прапорці та імена, зберігається."
     },
     {
-      "en": "It follows the project's copy and tone policy for user-visible strings, matches the language of the target file unless you ask otherwise, keeps humour light and never at the user's expense, and does not invent product behaviour, architecture or implementation details.",
-      "ru": "Для строк, которые видит пользователь, он следует политике текстов и тона вашего проекта, пишет на языке целевого файла, если вы не попросили иначе, держит юмор лёгким и никогда не за счёт пользователя и не выдумывает поведение продукта, архитектуру или детали реализации.",
-      "ua": "Для рядків, які бачить користувач, він дотримується політики текстів і тону вашого проєкту, пише мовою цільового файлу, якщо ви не попросили інакше, тримає гумор легким і ніколи не коштом користувача та не вигадує поведінку продукту, архітектуру чи деталі реалізації."
+      "en": "It follows the project's copy and tone policy for user-visible strings, matches the language of the target file unless you ask otherwise, keeps humour light and never at the user's expense, and does not invent product behaviour, architecture or implementation details. In a window's help it says what an element does and why you would want it, never its label restated.",
+      "ru": "Для строк, которые видит пользователь, он следует политике текстов и тона вашего проекта, пишет на языке целевого файла, если вы не попросили иначе, держит юмор лёгким и никогда не за счёт пользователя и не выдумывает поведение продукта, архитектуру или детали реализации. В справке к окну он пишет, что делает элемент и зачем он вам, а не пересказывает его подпись.",
+      "ua": "Для рядків, які бачить користувач, він дотримується політики текстів і тону вашого проєкту, пише мовою цільового файлу, якщо ви не попросили інакше, тримає гумор легким і ніколи не коштом користувача та не вигадує поведінку продукту, архітектуру чи деталі реалізації. У довідці до вікна він пише, що робить елемент і навіщо він вам, а не переказує його підпис."
     },
     {
       "en": "For mirrored docs, such as several locales, it keeps the variants aligned. For user-facing strings it keeps the copy compact enough for the target surface.",

@@ -1,6 +1,6 @@
 ---
 name: ui-clarify
-description: "Use to resolve user-facing ambiguity - placement, wording, visibility, fallback - before building. Triggers: 'ui-clarify', any user-visible change with an unresolved presentation decision."
+description: "Use to resolve user-facing ambiguity - placement, wording, visibility, fallback - before building. Triggers: 'ui-clarify', any user-visible change with an unresolved presentation decision, any new or changed window or screen of an application (its help is decided here, whether or not the request mentions help)."
 argument-hint: "<short task description>"
 ---
 
@@ -65,6 +65,16 @@ text in the decision table; a message off its shape stays unresolved.
 | Error | what happened + **one** next step; never a raw code as the headline | "Couldn't save the report - the disk is full. Free some space and try again." |
 | Empty state | the reason + an invitation to act | "No invoices yet. Import a statement to create the first one." |
 | Destructive confirmation | what will happen + whether it can be undone | "This deletes 12 drafts for good - there is no undo." |
+
+## Windows and screens - help comes with the window
+
+When the change adds or alters a **window or screen** of an application (a main window, a settings
+window and each of its pages, a dialog, a wizard step, a viewer, a phone screen), its help is a
+decision of this table. A request that lists the controls and does not mention help does not leave
+help out: it is part of the window, like its labels. Read `references/WINDOW_HELP.md` first, then
+add one row per window - its form (layer, page, both, inherit or none; the last two with a written
+reason), where F1 and the `?` button stand, and the map file that records it. A window with no row
+is unresolved. READY lists these rows under Approved Decisions.
 
 ## Process
 

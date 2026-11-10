@@ -42,9 +42,9 @@
       "ua": "Він знаходить файл пошуком за символом або за прямим шляхом, читає його й вносить правку в стилі, що вже є у файлі."
     },
     {
-      "en": "It runs the narrowest meaningful check for that file type, such as a compile for code or a lint for config, and none for a pure-text typo. The result is recorded as `expected | actual`.",
-      "ru": "Он запускает самую узкую осмысленную проверку для этого типа файла, например компиляцию для кода или линтер для конфигурации, а для опечатки в тексте не запускает ничего. Результат записывается как `expected | actual`.",
-      "ua": "Він запускає найвужчу змістовну перевірку для цього типу файлу, наприклад компіляцію для коду чи лінтер для конфігурації, а для одруківки в тексті не запускає нічого. Результат записується як `expected | actual`."
+      "en": "It runs the narrowest meaningful check for that file type that takes 5 seconds or less, such as a compile for code or a lint for config, and none for a pure-text typo. A slower check is deferred as a `RELEASE` item. The result is recorded as `expected | actual`.",
+      "ru": "Он запускает самую узкую осмысленную проверку для этого типа файла, которая укладывается в 5 секунд, например компиляцию для кода или линтер для конфигурации, а для опечатки в тексте не запускает ничего. Более долгая проверка откладывается пунктом `RELEASE`. Результат записывается как `expected | actual`.",
+      "ua": "Він запускає найвужчу змістовну перевірку для цього типу файлу, що вкладається в 5 секунд, наприклад компіляцію для коду чи лінтер для конфігурації, а для одруківки в тексті не запускає нічого. Довша перевірка відкладається пунктом `RELEASE`. Результат записується як `expected | actual`."
     },
     {
       "en": "It reports in one sentence what changed and in which file.",

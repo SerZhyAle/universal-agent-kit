@@ -97,6 +97,11 @@
       "en": "The skill is marked `disable-model-invocation: true` in its frontmatter, so the agent does not start `/backlog` by itself: an unattended run begins only when you type the command.",
       "ru": "В заголовке навыка стоит `disable-model-invocation: true`, поэтому агент не запускает `/backlog` сам: прогон без присмотра начинается, только когда вы набираете команду.",
       "ua": "У заголовку навички стоїть `disable-model-invocation: true`, тому агент не запускає `/backlog` сам: прогін без нагляду починається, лише коли ви набираєте команду."
+    },
+    {
+      "en": "Nobody is there to name a slow run, so the loop stays inside the 5-second line: no stage starts a full build, a run-and-observe or a check over 5 seconds. Each rung that defers is recorded as `NOT APPLICABLE - release tier`, with its command as a `RELEASE` item in that ticket's audit.",
+      "ru": "Назвать медленный прогон некому, поэтому цикл остаётся в пределах черты в 5 секунд: ни одна стадия не начинает полную сборку, запуск с наблюдением или проверку дольше 5 секунд. Каждая отложенная ступень записывается как `NOT APPLICABLE - release tier`, а её команда - пунктом `RELEASE` в аудите этого тикета.",
+      "ua": "Назвати повільний прогін нікому, тож цикл лишається в межах 5 секунд: жодна стадія не починає повну збірку, запуск зі спостереженням чи перевірку довше 5 секунд. Кожен відкладений щабель записується як `NOT APPLICABLE - release tier`, а його команда - пунктом `RELEASE` в аудиті цього тікета."
     }
   ],
   "related": ["spec-all", "spec-lifecycle", "unattended-loop", "spec-check", "spec"],

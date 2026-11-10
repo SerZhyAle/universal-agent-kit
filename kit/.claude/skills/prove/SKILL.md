@@ -17,11 +17,11 @@ argument-hint: "[what to check | ticket-id | --build | --dry-run]"
 
 Lightweight check that a change **actually works when exercised**, not just that the cheap check
 passed. Produce (optional), run, walk a minimal scenario, capture output, then report one of the four
-verdicts with
-evidence. Read-only on specs and plans. Artifacts go to `<SCRATCH_DIR>/`.
+verdicts with evidence. Read-only on specs and plans. Artifacts go to `<SCRATCH_DIR>/`.
 
-This is the in-between tool: heavier than reading the diff, lighter than a full QA pass.
-Use it after `/quick`, `/fix`, or `/spec-dev` to catch a trivial breakage early.
+Run-and-observe and `--build` are release tier (`docs/VALIDATION.md`, "The ladder"). Between
+releases use `--dry-run` only unless the owner names the run; report `NOT APPLICABLE - release tier`
+and list the deferred command as a `RELEASE` item in the closing audit.
 
 ## Usage
 
@@ -44,14 +44,11 @@ have someone follow it from the text alone. The kit defines the *method*, not th
 **1 - Parse arguments.** A ticket-id-shaped token → read its acceptance criteria as hints
 (read-only). Otherwise treat the text as the scenario. Empty → default smoke.
 
-**2 - Pre-flight.** Confirm the run target is reachable (server up, device online, binary
-present). If not, report `COULD NOT VERIFY` with the blocker and stop - do not fake a pass.
+**2 - Tier gate.** Unless this is release or an owner-named run, stop before building or executing;
+report `NOT APPLICABLE - release tier` and record the deferred command. `--dry-run` may author the
+scenario without executing it.
 
-**3 - Produce the thing (only when `--build`).** Run `<BUILD_CMD>` - or whatever your project's
-produce step is: a render, an export, a pipeline run. On failure: capture the tail of the output to
-`<SCRATCH_DIR>/prove_<TS>.md`, report `DEFECT`, and abort. Do not proceed.
-
-**4 - Author the scenario.** Write `<SCRATCH_DIR>/prove_<TS>.md` with a header (target,
+**3 - Author the scenario.** Write `<SCRATCH_DIR>/prove_<TS>.md` with a header (target,
 version, environment) and an ordered 1-5 step scenario. Each step: `goal`, `action`,
 `expected observable result`, optional `expected log line`. Sources, in priority order:
 user free-text → ticket acceptance criteria → default smoke (start, exercise the main
@@ -60,18 +57,25 @@ path, assert no error/crash).
 If `--dry-run`, stop here and report `NOT APPLICABLE - dry run requested; no scenario was executed`, plus
 the path.
 
-**5 - Capture output.** Start log/stdout capture before the run; record the start time.
+**4 - Produce the thing (only when `--build`).** Run `<BUILD_CMD>` - or whatever your project's
+produce step is: a render, an export, a pipeline run. On failure: capture the tail of the output to
+`<SCRATCH_DIR>/prove_<TS>.md`, report `DEFECT`, and abort. Do not proceed.
 
-**6 - Execute the scenario.** For each step: perform the action, capture evidence
+**5 - Pre-flight.** Confirm the run target is reachable (server up, device online, binary
+present). If not, report `COULD NOT VERIFY` with the blocker and stop - do not fake a pass.
+
+**6 - Capture output.** Start log/stdout capture before the run; record the start time.
+
+**7 - Execute the scenario.** For each step: perform the action, capture evidence
 (screenshot/response/stdout), verify the expected result, append a row to the run-log
 table. On a crash/fatal error: capture the stack, record `DEFECT`, stop the run.
 
-**7 - Analyse output.** Scan captured logs for error-level lines and exceptions. For a
+**8 - Analyse output.** Scan captured logs for error-level lines and exceptions. For a
 ticket awaiting manual test, additionally grep for its verification tag (`<ID>:`) - each
 hit means that code path was exercised. Append a findings section: counts per level, top
 errors with references.
 
-**8 - Report.** End with one line naming the target and exactly one verdict:
+**9 - Report.** End with one line naming the target and exactly one verdict:
 
 ```text
 prove: <target>, PASS N/N, log errors N, crashes K. Scenario: <SCRATCH_DIR>/prove_<TS>.md
@@ -82,8 +86,9 @@ prove: <target>, NOT APPLICABLE - <configuration reason>. Scenario: <SCRATCH_DIR
 
 Use `DEFECT` only after inspecting the target and finding a failed expectation. Use `COULD NOT VERIFY`
 when the target or instrument was out of reach. Use `NOT APPLICABLE` only when the requested configuration
-deliberately has no executable scenario; it is not a pass. Optional next step: PASS → "OK to commit." Any
-DEFECT → one-sentence root-cause guess + route to `/fix` or `/spec-fix`. How a caller reads each
+deliberately has no executable scenario or the rung is deferred to release; it is not a pass. Optional
+next step: PASS → "OK to commit." Any DEFECT → one-sentence root-cause guess + route to `/fix` or
+`/spec-fix`. How a caller reads each
 verdict, and what each maps to in `/spec-check`, is one table in `docs/VALIDATION.md` ("One
 vocabulary"). For a ticket waiting on a human, a PASS here is evidence for the human to tick a
 `## Manual checks` line - this skill still never ticks it.

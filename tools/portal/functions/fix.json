@@ -47,9 +47,9 @@
       "ua": "Він вносить найменшу правку, що усуває першопричину, а не симптом: без рефакторингу поруч, без чищення сторонніх імпортів, без розсипу коментарів. Наявні коментарі та інваріанти в цьому місці враховуються, [правила проти сміття](term:anti-slop) діють. Оброблений крайній випадок чи неочевидна причина заслуговують на один коментар «чому» мовою `<ARTIFACT_LANGUAGE>` і не більше."
     },
     {
-      "en": "It runs the narrowest meaningful check that proves the fix: a targeted test if one exists (adding or adjusting one if that is cheap and the project has tests), otherwise a compile and a manual run of the path. The result is recorded as `expected | actual`.",
-      "ru": "Он запускает самую узкую осмысленную проверку, которая доказывает исправление: целевой тест, если он есть (добавляет или правит тест, когда это дёшево и в проекте есть тесты), иначе компиляцию и ручной прогон этого пути. Результат записывается как `expected | actual`.",
-      "ua": "Він запускає найвужчу змістовну перевірку, що доводить виправлення: цільовий тест, якщо він є (додає чи правит тест, коли це дешево й у проєкті є тести), інакше компіляцію та ручний прогін цього шляху. Результат записується як `expected | actual`."
+      "en": "It runs the narrowest meaningful check that proves the fix: a targeted test or a compile taking 5 seconds or less, otherwise `<CHECK_CMD>`. A slow test or a manual run waits for the release or for a run you name: it is recorded as `NOT APPLICABLE - release tier` and its command is listed as a `RELEASE` item. The result is recorded as `expected | actual`.",
+      "ru": "Он запускает самую узкую осмысленную проверку, которая доказывает исправление: целевой тест или компиляцию не дольше 5 секунд, иначе `<CHECK_CMD>`. Медленный тест и ручной прогон ждут релиза или прогона, который вы назовёте сами: они записываются как `NOT APPLICABLE - release tier`, а их команда попадает в пункты `RELEASE`. Результат записывается как `expected | actual`.",
+      "ua": "Він запускає найвужчу змістовну перевірку, що доводить виправлення: цільовий тест або компіляцію не довше 5 секунд, інакше `<CHECK_CMD>`. Повільний тест і ручний прогін чекають релізу або прогону, який ви назвете самі: вони записуються як `NOT APPLICABLE - release tier`, а їхня команда потрапляє до пунктів `RELEASE`. Результат записується як `expected | actual`."
     },
     {
       "en": "It reports in three lines: root cause, fix, validation. Adjacent bugs it found are listed as follow-ups and are not fixed in this pass.",
@@ -69,9 +69,9 @@
       "ua": "Сусідні баги йдуть у список подальших задач, а не в цей прохід. Якщо такий баг справжній і потребує окремого розслідування, [відкладіть його](fn:park) у вигляді заготовки й працюйте далі."
     },
     {
-      "en": "After the fix, a [run-and-observe check](fn:prove) shows whether it holds when exercised, not only that the cheap check passed.",
-      "ru": "После правки [проверка запуском](fn:prove) покажет, держится ли она в работе, а не только прошла ли дешёвая проверка.",
-      "ua": "Після правки [перевірка запуском](fn:prove) покаже, чи вона тримається в роботі, а не лише чи пройшла дешева перевірка."
+      "en": "At a release, or when you name the run, a [run-and-observe check](fn:prove) shows whether the fix holds when exercised, not only that the cheap check passed.",
+      "ru": "На релизе или когда вы сами называете прогон, [проверка запуском](fn:prove) покажет, держится ли правка в работе, а не только прошла ли дешёвая проверка.",
+      "ua": "На релізі або коли ви самі називаєте прогін, [перевірка запуском](fn:prove) покаже, чи правка тримається в роботі, а не лише чи пройшла дешева перевірка."
     }
   ],
   "related": ["quick", "spec", "research", "park", "prove"],

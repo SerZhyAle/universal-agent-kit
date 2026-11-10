@@ -6,6 +6,10 @@
 <title>Universal Agent Kit - portable AI coding agent rules</title>
 <meta name="description" content="AI coding agent rules, skills, roles, a spec lifecycle, and persistent memory - a portable, free MIT kit for any project made of files. Not only code.">
 <link rel="canonical" href="https://serzhyale.github.io/universal-agent-kit/">
+<link rel="alternate" hreflang="en" href="https://serzhyale.github.io/universal-agent-kit/?lang=en">
+<link rel="alternate" hreflang="ru" href="https://serzhyale.github.io/universal-agent-kit/?lang=ru">
+<link rel="alternate" hreflang="uk" href="https://serzhyale.github.io/universal-agent-kit/?lang=uk">
+<link rel="alternate" hreflang="x-default" href="https://serzhyale.github.io/universal-agent-kit/">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%233fb950'/%3E%3Cpath d='M20 18h24M20 30h24M20 42h16' stroke='%2304130c' stroke-width='5' stroke-linecap='round' fill='none'/%3E%3C/svg%3E">
 <meta name="theme-color" content="#0a0f0a">
 <meta property="og:type" content="website">
@@ -31,7 +35,7 @@
   "codeRepository": "https://github.com/SerZhyAle/universal-agent-kit",
   "license": "https://opensource.org/license/mit/",
   "author": { "@type": "Person", "name": "Serhii Zhyhunenko", "url": "https://github.com/SerZhyAle" },
-  "dateModified": "2026-10-09",
+  "dateModified": "2026-11-10",
   "inLanguage": ["en", "ru", "uk"]
 }
 </script>
@@ -150,9 +154,9 @@
       <span data-l="ua">Це не встановлення: віддай kit своєму агенту, і він додасть до проєкту лише те, що справді стане у пригоді.</span>
     </p>
     <p class="kit-updated muted">
-      <span data-l="ru">Kit обновлён: <time class="kit-date" datetime="2026-10-09">2026-10-09</time></span>
-      <span data-l="en">Kit updated: <time class="kit-date" datetime="2026-10-09">2026-10-09</time></span>
-      <span data-l="ua">Kit оновлено: <time class="kit-date" datetime="2026-10-09">2026-10-09</time></span>
+      <span data-l="ru">Kit обновлён: <time class="kit-date" datetime="2026-11-10">2026-11-10</time></span>
+      <span data-l="en">Kit updated: <time class="kit-date" datetime="2026-11-10">2026-11-10</time></span>
+      <span data-l="ua">Kit оновлено: <time class="kit-date" datetime="2026-11-10">2026-11-10</time></span>
     </p>
   </section>
 
@@ -265,7 +269,7 @@
         <div class="secbody">
           <p>Это один короткий файл, который агент читает в начале работы. В нём: как с тобой общаться, где искать код, как проверять результат и когда спрашивать, а не угадывать. Остальные материалы могут ссылаться на него.</p>
           <p>Главное - <strong>держать его коротким</strong>. Это не энциклопедия: подробности лежат в <code>docs/</code>, а здесь только нужные ориентиры и подсказка, какой готовый промпт выбрать для задачи. В kit'е это <code>AGENTS.md</code>: его читает большинство инструментов, а <code>CLAUDE.md</code> у Claude Code лишь подключает его. Где нужно своё имя - правило Cursor, <code>GEMINI.md</code> - суть та же.</p>
-          <p>Плейсхолдеров в нём два яруса: <strong>десять</strong> нужны любому проекту (включая тот самый <code>&lt;CHECK_CMD&gt;</code> - команду, которая доказывает, что правка не сломана), и <strong>шесть</strong> - только тем, что собираются или запускаются. Если ваш не собирается, правила с этими шестью удаляются, а не заполняются наугад.</p>
+          <p>Плейсхолдеров в нём два яруса: <strong>двенадцать</strong> нужны любому проекту (включая <code>&lt;CHECK_CMD&gt;</code> для проверки до 5 секунд и <code>&lt;RELEASE_CMD&gt;</code> для полной сборки и всех тестов на релизе), и <strong>шесть</strong> - только тем, что собираются или запускаются. Если ваш не собирается, правила с этими шестью удаляются, а не заполняются наугад.</p>
           <div class="note"><div class="tag">Кейс</div><p>В исходном проекте <code>CLAUDE.md</code> - это ~12 разделов, включая матрицу флейворов и ритуалы PowerShell. Kit оставляет переносимый каркас и выкидывает проектную машинерию: ты заполняешь <code>&lt;PLACEHOLDER&gt;</code> под свой стек.</p></div>
           <p class="portal-link"><span class="muted">В портале:</span> <a href="portal/#section-rules">Правила, по которым работает агент</a></p>
         </div>
@@ -298,7 +302,7 @@ verdict: BlockNeedUserTest     (PASS 6 / WARN 1 / FAIL 0)
   behaviour is unproven until a human runs the export once.
   next -> /spec-fix drops the orphaned ExportHelper binding, then re-audits.</pre>
           </div>
-          <p>Под пайплайном - дешёвые пути: <code>/quick</code> (опечатка), <code>/fix</code> (узкий баг). Перед всем пользовательским - <code>/ui-clarify</code>. Для краткости - <code>/caveman</code>. Плюс <code>/git</code>, <code>/prove</code>, <code>/critique</code>.</p>
+          <p>Под пайплайном - дешёвые пути: <code>/quick</code> (опечатка), <code>/fix</code> (узкий баг). Перед всем пользовательским - <code>/ui-clarify</code>; там же решается справка каждого окна приложения: F1, кнопка <code>?</code> и объяснение, даже если о справке не просили. Для краткости - <code>/caveman</code>. Плюс <code>/git</code>, <code>/prove</code>, <code>/critique</code>.</p>
           <p>Рядом с пайплайном, но не внутри него, живут две дисциплины:</p>
           <ul>
             <li><strong>Паркуй, не гоняйся</strong> (<code>/park</code>). Наткнулся посреди задачи на реальную проблему вне рамок задачи - крупнее правки в одну строку, требует отдельного взгляда? Запиши её заглушкой, отсей дубликаты против уже заведённого, отчитайся одной строкой и вернись к задаче. Никогда не переключай активную задачу, чтобы гоняться за припаркованной находкой; тривиальное чини на месте, косметические придирки выбрасывай.</li>
@@ -386,6 +390,7 @@ reference  указатель во внешнюю систему и зачем  
           <p>Шаг не сделан, когда ты <em>хотел</em>, чтобы он работал. Он сделан, когда проверка прошла <strong>в этом прогоне</strong>. Уровень доказательства подбирается под тип изменения:</p>
           <pre class="diagram">греп  &lt;  запуск скрипта  &lt;  компиляция  &lt;  точечный тест  &lt;  полная сборка  &lt;  запуск-и-наблюдение
 док        скрипт            правка типов     логика           конфиг/ресурсы      пользовательское поведение</pre>
+          <p>Между релизами запускай только проверки до 5 секунд. Полную сборку, запуск с наблюдением и более долгие тесты выполняй на релизе или по указанию владельца; отложенное записывай как RELEASE, а не как пройденное.</p>
           <p>Бери самую нижнюю ступень, которая реально доказывает <em>это</em> изменение, и не выше. Для каждой проверки записывай <code>ожидал: X | получил: Y</code> - предсказание <em>до</em> чтения результата ловит проверку, которая вернула 0, но напечатала не то. «Работает на моей машине» - не ступень этой лестницы, а суеверие.</p>
           <p>Два режима отказа, которые одна лестница не ловит. <strong>«Готово» лучше всего как одна fail-closed команда</strong>, которая собирает проверки под тип изменения, - любой провалившийся гейт обрывает весь прогон с ненулевым кодом, так что «закончено» означает «все применимые гейты прошли», а не «я их все вспомнил». И <strong>зелёное может врать:</strong> когда команды сцеплены, в пайпе или ушли в фон, агрегатный код выхода часто отражает хвостовую обёртку, а не ту сборку или тест, что тебе важны. Читай конкретную строку вердикта - проверка, прошедшая по неверной причине, хуже отсутствия проверки.</p>
           <p><strong>У проверки четыре ответа, а не два.</strong> «Прошло» и «нашла дефект» очевидны; третий - <em>не смогла проверить</em>, четвёртый - <em>неприменимо в этой конфигурации</em>. Проверка, которая не умеет сказать последние два, скажет один из первых двух, и с этого момента она врёт. Отсюда два следствия. Первое: сначала проверяй прибор, а потом предмет - физически невозможное показание означает, что сломан измеритель, а не подопытный (на одном прогоне так родились 5 «дефектов» из 5 и 18 «недостижимых» пунктов из 28, все ложные). Второе: ложная находка стоит столько же, сколько пропущенная, но громче - когда ложных восемнадцать, настоящая становится одной строкой среди них, и отчёт перестают читать.</p>
@@ -455,9 +460,9 @@ archive in the workspace. Set this project up on the method from those files:
    project of this kind.
 3. Set up the plan directory, the scratch directory, and the memory folder with
    its index.
-4. Name THE CHECK COMMAND that proves a change is sound here. If this project is code,
-   also pick the build / test / lint / run commands for the stack I name - or propose
-   a stack if none exists yet.
+4. Name a fast check command taking at most 5 seconds and a release command that runs
+   the full build and every test tier. If this project is code, also pick the build /
+   test / lint / run commands for the stack I name - or propose a stack if none exists yet.
 
 Show me the plan first; create nothing until I approve.</pre>
             </details>
@@ -490,8 +495,9 @@ project without Git; do not require Git or create a repository:
 
 1. Draft an AGENTS.md (or merge into my existing rules file) that adopts the method, with every
    tier-1 placeholder filled from this project: project name, chat language, artifact language,
-   map document, work root, THE CHECK COMMAND that proves a change is sound, plan directory,
-   scratch directory, size budget, read-only zones, and a simple way to name tasks (the ticket-id
+   map document, work root, a fast check command taking at most 5 seconds, a release command
+   for the full build and every test tier, plan directory, scratch directory, size budget,
+   read-only zones, and a simple way to name tasks (the ticket-id
    scheme). Fill the code-layer ones
    (architecture layers, build / test / lint / run, logger) only if this project builds or runs.
 2. Recommend which skills (/research, /spec, /spec-tech, /spec-dev, /spec-check, /spec-fix,
@@ -654,7 +660,7 @@ Do not change anything yet. Show me the plan first; on any conflict, my existing
         <div class="secbody">
           <p>This is one short file the agent reads at the start of work. It says how to communicate with you, where to look for code, how to check results, and when to ask rather than guess. Other materials can point to it.</p>
           <p>The important part is to <strong>keep it short</strong>. It is not an encyclopedia: details live in <code>docs/</code>, while this file has only the essentials and a hint about which ready-made prompt to use. In the kit it is <code>AGENTS.md</code>, which most tools read; Claude Code's <code>CLAUDE.md</code> only imports it. Where a tool wants its own name - a Cursor rule, <code>GEMINI.md</code> - the purpose is the same.</p>
-          <p>Its placeholders come in two tiers: <strong>ten</strong> that any project needs (including <code>&lt;CHECK_CMD&gt;</code> - the command that proves a change is sound), and <strong>six</strong> only for projects that build or run. If yours does not, the rules using those six get deleted rather than filled with guesses.</p>
+          <p>Its placeholders come in two tiers: <strong>twelve</strong> that any project needs (including <code>&lt;CHECK_CMD&gt;</code> for a check taking at most 5 seconds and <code>&lt;RELEASE_CMD&gt;</code> for the full build and every test tier at release), and <strong>six</strong> only for projects that build or run. If yours does not, the rules using those six get deleted rather than filled with guesses.</p>
           <div class="note"><div class="tag">Case study</div><p>In the source project <code>CLAUDE.md</code> is ~12 sections, including a build-flavor matrix and PowerShell rituals. The kit keeps the transferable skeleton and drops the project machinery: you fill the <code>&lt;PLACEHOLDER&gt;</code> tokens for your stack.</p></div>
           <p class="portal-link"><span class="muted">In the portal:</span> <a href="portal/#section-rules">Rules the agent follows</a></p>
         </div>
@@ -687,7 +693,7 @@ verdict: BlockNeedUserTest     (PASS 6 / WARN 1 / FAIL 0)
   behaviour is unproven until a human runs the export once.
   next -> /spec-fix drops the orphaned ExportHelper binding, then re-audits.</pre>
           </div>
-          <p>Below the pipeline sit the cheap paths: <code>/quick</code> (typo), <code>/fix</code> (narrow bug). Before anything user-facing, <code>/ui-clarify</code>. For brevity, <code>/caveman</code>. Plus <code>/git</code>, <code>/prove</code>, <code>/critique</code>.</p>
+          <p>Below the pipeline sit the cheap paths: <code>/quick</code> (typo), <code>/fix</code> (narrow bug). Before anything user-facing, <code>/ui-clarify</code>; the help of every window an application draws is decided there too - F1, a <code>?</code> button and an explanation, asked for or not. For brevity, <code>/caveman</code>. Plus <code>/git</code>, <code>/prove</code>, <code>/critique</code>.</p>
           <p>Two disciplines live beside the pipeline, not inside it:</p>
           <ul>
             <li><strong>Park, don't chase</strong> (<code>/park</code>). Hit a real but out-of-scope problem mid-task - bigger than a one-line fix, needs its own look? Record it as a stub, dedup against what's already filed, report it in one line, and return to the task. Never switch the active task to chase a parked finding; fix trivial things inline, drop cosmetic nitpicks.</li>
@@ -775,6 +781,7 @@ reference  a pointer to an external system + purpose  → where to look</pre>
           <p>A step is not done when you <em>intended</em> it to work. It is done when a check passed <strong>in this run</strong>. The evidence is matched to the kind of change:</p>
           <pre class="diagram">grep  &lt;  run script  &lt;  compile  &lt;  targeted test  &lt;  full build  &lt;  run-and-observe
 doc       script         type change  logic           config/resources  user-visible behaviour</pre>
+          <p>Between releases run only checks taking 5 seconds or less. Run the full build, run-and-observe and slower tests at release or on an owner-named run; record deferred checks as RELEASE, not as passes.</p>
           <p>Take the lowest rung that actually proves <em>this</em> change, and no higher. For every check, record <code>expected: X | actual: Y</code> - predicting the result <em>before</em> reading it catches the check that exited 0 while printing the wrong thing. "Works on my machine" is not a rung on this ladder - it's a superstition.</p>
           <p>Two failure modes the ladder alone won't catch. <strong>"Done" is best as one fail-closed command</strong> that bundles the checks for the change kind - any one gate failing aborts the whole run non-zero, so "finished" means "all applicable gates passed", not "I remembered them all". And <strong>a green can lie:</strong> when commands are chained, piped, or backgrounded, the aggregate exit code often reflects a trailing wrapper, not the build or test you care about. Read the specific verdict line - a check that passes for the wrong reason is worse than no check.</p>
           <p><strong>A check has four answers, not two.</strong> Pass and found-a-defect are obvious; the third is <em>could not verify</em>, the fourth is <em>not applicable in this configuration</em>. A check with no way to say the last two will report one of the first two instead, and from then on it is lying. Two consequences. Validate the instrument before the subject: a physically impossible reading means the meter is broken, not that the subject failed - on one sweep that produced 5 "defects" out of 5 and 18 "unreachable" rows out of 28, every one of them false. And a false finding costs as much as a miss but is louder: once eighteen of them ship, a real defect is one row among them and nobody reads the report any more.</p>
@@ -844,9 +851,9 @@ archive in the workspace. Set this project up on the method from those files:
    project of this kind.
 3. Set up the plan directory, the scratch directory, and the memory folder with
    its index.
-4. Name THE CHECK COMMAND that proves a change is sound here. If this project is code,
-   also pick the build / test / lint / run commands for the stack I name - or propose
-   a stack if none exists yet.
+4. Name a fast check command taking at most 5 seconds and a release command that runs
+   the full build and every test tier. If this project is code, also pick the build /
+   test / lint / run commands for the stack I name - or propose a stack if none exists yet.
 
 Show me the plan first; create nothing until I approve.</pre>
             </details>
@@ -879,8 +886,9 @@ project without Git; do not require Git or create a repository:
 
 1. Draft an AGENTS.md (or merge into my existing rules file) that adopts the method, with every
    tier-1 placeholder filled from this project: project name, chat language, artifact language,
-   map document, work root, THE CHECK COMMAND that proves a change is sound, plan directory,
-   scratch directory, size budget, read-only zones, and a simple way to name tasks (the ticket-id
+   map document, work root, a fast check command taking at most 5 seconds, a release command
+   for the full build and every test tier, plan directory, scratch directory, size budget,
+   read-only zones, and a simple way to name tasks (the ticket-id
    scheme). Fill the code-layer ones
    (architecture layers, build / test / lint / run, logger) only if this project builds or runs.
 2. Recommend which skills (/research, /spec, /spec-tech, /spec-dev, /spec-check, /spec-fix,
@@ -1043,7 +1051,7 @@ Do not change anything yet. Show me the plan first; on any conflict, my existing
         <div class="secbody">
           <p>Це один короткий файл, який агент читає на початку роботи. У ньому: як із тобою спілкуватися, де шукати код, як перевіряти результат і коли питати, а не вгадувати. Інші матеріали можуть на нього посилатися.</p>
           <p>Головне - <strong>тримати його коротким</strong>. Це не енциклопедія: подробиці лежать у <code>docs/</code>, а тут лише потрібні орієнтири й підказка, який готовий промпт вибрати для задачі. У kit'і це <code>AGENTS.md</code>: його читає більшість інструментів, а <code>CLAUDE.md</code> у Claude Code лише підключає його. Де потрібне власне ім'я - правило Cursor, <code>GEMINI.md</code> - суть та сама.</p>
-          <p>Плейсхолдерів у ньому два яруси: <strong>десять</strong> потрібні будь-якому проєкту (разом із тим самим <code>&lt;CHECK_CMD&gt;</code> - командою, яка доводить, що правка не зламана), і <strong>шість</strong> - лише тим, що збираються або запускаються. Якщо ваш не збирається, правила з цими шістьма видаляються, а не заповнюються навмання.</p>
+          <p>Плейсхолдерів у ньому два яруси: <strong>дванадцять</strong> потрібні будь-якому проєкту (зокрема <code>&lt;CHECK_CMD&gt;</code> для перевірки до 5 секунд і <code>&lt;RELEASE_CMD&gt;</code> для повної збірки та всіх тестів на релізі), і <strong>шість</strong> - лише тим, що збираються або запускаються. Якщо ваш не збирається, правила з цими шістьма видаляються, а не заповнюються навмання.</p>
           <div class="note"><div class="tag">Кейс</div><p>У вихідному проєкті <code>CLAUDE.md</code> - це ~12 розділів, включно з матрицею флейворів і ритуалами PowerShell. Kit лишає переносний каркас і викидає проєктну машинерію: ти заповнюєш <code>&lt;PLACEHOLDER&gt;</code> під свій стек.</p></div>
           <p class="portal-link"><span class="muted">У порталі:</span> <a href="portal/#section-rules">Правила, за якими працює агент</a></p>
         </div>
@@ -1076,7 +1084,7 @@ verdict: BlockNeedUserTest     (PASS 6 / WARN 1 / FAIL 0)
   behaviour is unproven until a human runs the export once.
   next -> /spec-fix drops the orphaned ExportHelper binding, then re-audits.</pre>
           </div>
-          <p>Під пайплайном - дешеві шляхи: <code>/quick</code> (одрук), <code>/fix</code> (вузький баг). Перед усім користувацьким - <code>/ui-clarify</code>. Для стислості - <code>/caveman</code>. Плюс <code>/git</code>, <code>/prove</code>, <code>/critique</code>.</p>
+          <p>Під пайплайном - дешеві шляхи: <code>/quick</code> (одрук), <code>/fix</code> (вузький баг). Перед усім користувацьким - <code>/ui-clarify</code>; там само вирішується довідка кожного вікна застосунку: F1, кнопка <code>?</code> і пояснення, навіть якщо про довідку не просили. Для стислості - <code>/caveman</code>. Плюс <code>/git</code>, <code>/prove</code>, <code>/critique</code>.</p>
           <p>Поряд із пайплайном - а не всередині нього - живуть дві дисципліни:</p>
           <ul>
             <li><strong>Паркуй, а не женися</strong> (<code>/park</code>). Натрапив посеред задачі на реальну, але поза-обсягову проблему - більшу за однорядкову правку, що потребує окремого погляду? Запиши її заглушкою, відсій дублі проти вже заведеного, відзвітуй одним рядком і повернися до задачі. Ніколи не перемикай активну задачу, щоб гнатися за запаркованою знахідкою; дрібниці лагодь на місці, косметичні причіпки відкидай.</li>
@@ -1164,6 +1172,7 @@ reference  вказівник у зовнішню систему та навіщ
           <p>Крок не зроблено, коли ти <em>хотів</em>, щоб він працював. Він зроблений, коли перевірка пройшла <strong>в цьому прогоні</strong>. Рівень доказу підбирається під тип зміни:</p>
           <pre class="diagram">греп  &lt;  запуск скрипту  &lt;  компіляція  &lt;  точковий тест  &lt;  повна збірка  &lt;  запуск-і-спостереження
 док        скрипт            правка типів     логіка          конфіг/ресурси      користувацька поведінка</pre>
+          <p>Між релізами запускай лише перевірки до 5 секунд. Повну збірку, запуск зі спостереженням і довші тести виконуй на релізі або за вказівкою власника; відкладене записуй як RELEASE, а не як пройдене.</p>
           <p>Бери найнижчий щабель, що реально доводить <em>цю</em> зміну, і не вище. Для кожної перевірки записуй <code>очікував: X | отримав: Y</code> - передбачення <em>до</em> читання результату ловить перевірку, що повернула 0, але надрукувала не те. «Працює на моїй машині» - не щабель цієї драбини, а забобон.</p>
           <p>Два режими провалу, яких сама драбина не зловить. <strong>«Готово» найкраще оформити як одну fail-closed команду</strong>, що збирає перевірки під тип зміни - провал будь-якого гейта валить увесь прогін ненульовим кодом, тож «завершено» означає «всі застосовні гейти пройдено», а не «я всі їх пам'ятав». І <strong>зелене може брехати:</strong> коли команди зчеплено, спайплайнено чи виведено у фон, сукупний код виходу часто відображає кінцеву обгортку, а не ту збірку чи тест, що тобі важливі. Читай конкретний рядок вироку - перевірка, що проходить з хибної причини, гірша за відсутність перевірки.</p>
           <p><strong>У перевірки чотири відповіді, а не дві.</strong> «Пройшло» і «знайшла дефект» очевидні; третя - <em>не змогла перевірити</em>, четверта - <em>незастосовно в цій конфігурації</em>. Перевірка, яка не вміє сказати останні дві, скаже одну з перших двох, і відтоді вона бреше. Звідси два наслідки. Спершу перевіряй прилад, а не предмет: фізично неможливе показання означає, що зламаний вимірювач, а не піддослідний - на одному прогоні так народилися 5 «дефектів» із 5 і 18 «недосяжних» пунктів із 28, усі хибні. І хибна знахідка коштує стільки ж, скільки пропущена, але гучніше: коли хибних вісімнадцять, справжня стає одним рядком серед них, і звіт перестають читати.</p>
@@ -1233,9 +1242,9 @@ archive in the workspace. Set this project up on the method from those files:
    project of this kind.
 3. Set up the plan directory, the scratch directory, and the memory folder with
    its index.
-4. Name THE CHECK COMMAND that proves a change is sound here. If this project is code,
-   also pick the build / test / lint / run commands for the stack I name - or propose
-   a stack if none exists yet.
+4. Name a fast check command taking at most 5 seconds and a release command that runs
+   the full build and every test tier. If this project is code, also pick the build /
+   test / lint / run commands for the stack I name - or propose a stack if none exists yet.
 
 Show me the plan first; create nothing until I approve.</pre>
             </details>
@@ -1268,8 +1277,9 @@ project without Git; do not require Git or create a repository:
 
 1. Draft an AGENTS.md (or merge into my existing rules file) that adopts the method, with every
    tier-1 placeholder filled from this project: project name, chat language, artifact language,
-   map document, work root, THE CHECK COMMAND that proves a change is sound, plan directory,
-   scratch directory, size budget, read-only zones, and a simple way to name tasks (the ticket-id
+   map document, work root, a fast check command taking at most 5 seconds, a release command
+   for the full build and every test tier, plan directory, scratch directory, size budget,
+   read-only zones, and a simple way to name tasks (the ticket-id
    scheme). Fill the code-layer ones
    (architecture layers, build / test / lint / run, logger) only if this project builds or runs.
 2. Recommend which skills (/research, /spec, /spec-tech, /spec-dev, /spec-check, /spec-fix,
@@ -1417,7 +1427,7 @@ Do not change anything yet. Show me the plan first; on any conflict, my existing
     <span data-l="ua">Зібрано за досвідом розробки з <a href="https://serzhyale.github.io/FastMediaSorter_mob_v2/" target="_blank" rel="noopener">FastMediaSorter</a> - Android-застосунку, що живе на цьому методі щодня понад рік.</span>
   </p>
 </div></footer>
-<button class="to-top" id="toTop" type="button" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top" title="Back to top"><span class="gi gi-top" aria-hidden="true"></span><span class="to-top-label" aria-hidden="true"><span data-l="ru">Наверх</span><span data-l="en">Back to top</span><span data-l="ua">Нагору</span></span></button>
+<button class="to-top" id="toTop" type="button" onclick="window.scrollTo({top:0,behavior:'auto'})" aria-label="Back to top" title="Back to top"><span class="gi gi-top" aria-hidden="true"></span><span class="to-top-label" aria-hidden="true"><span data-l="ru">Наверх</span><span data-l="en">Back to top</span><span data-l="ua">Нагору</span></span></button>
 
 <script src="assets/ui-prefs.js" defer></script>
 <script>

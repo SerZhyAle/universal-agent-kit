@@ -105,9 +105,10 @@ about what it is made of:
 ## What needs a local equivalent
 
 - **The check commands.** `<CHECK_CMD>` is the one placeholder that every project must fill, and
-  filling it is the single most valuable hour you will spend on adoption. The code-layer
-  placeholders (`<BUILD_CMD>`, `<TEST_CMD>`, `<LINT_CMD>`, `<RUN_CMD>`) are refinements of it, for
-  projects that have those four distinct things.
+  it must take 5 seconds or less. Use a structural, grep, link or schema check if needed.
+  `<RELEASE_CMD>` runs the full build and all test tiers at release; code-layer placeholders
+  (`<BUILD_CMD>`, `<TEST_CMD>`, `<LINT_CMD>`, `<RUN_CMD>`) name individual commands whose tier
+  depends on duration; a full build remains release tier.
 - **The quality list.** `CODE_QUALITY.md` names seven patterns an agent emits that look fine and
   rot a codebase. Non-code artifacts have their own seven, and yours will be specific enough to be
   worth writing down. The generic ones, seen in every column: text that restates its heading
@@ -121,6 +122,11 @@ about what it is made of:
   dictionary, a clause library, a document register, a table of sources. Same three rules -
   query it before searching, regenerate it after you change things, and measure how often it
   answers.
+- **The help of a window.** A project that draws windows or screens for people - a tool with a settings
+  dialog, a desktop or phone application - gives each one F1, a `?` button and an explanation in the user's
+  language, records them in one map, and counts windows against it in its own check. The convention is
+  `.claude/skills/ui-clarify/references/WINDOW_HELP.md`. A project with no windows, which is most of the
+  non-code columns above, skips it.
 
 ## What to delete outright
 

@@ -57,9 +57,9 @@
       "ua": "`/spec-dev` виконує по одному кроку, запускає перевірку кроку до того, як позначити його готовим, і жорстко зупиняється на першій неоднозначності чи збої. Він веде статус від `Tactical` через `In Progress` до `Implemented` або до `BlockNeedUserTest`, якщо ручна перевірка входить до приймання, і тоді додає розділ `## Manual checks` із пунктом `[ ]` на все, що має побачити людина."
     },
     {
-      "en": "`/spec-check` audits the build against reality and sets the final status: `Verified`, `Partial` or `Broken` (chaining to `/spec-fix`), or `BlockNeedUserTest` while a manual signal is open. For a hands-on check, do the manual test (or `/prove` it where the agent can reach the target), tick each `## Manual checks` line with what you saw, then run `/spec-check` again to reach `Verified`.",
-      "ru": "`/spec-check` сверяет сборку с реальностью и ставит итоговый статус: `Verified`, `Partial` или `Broken` (с передачей хода `/spec-fix`), либо `BlockNeedUserTest`, пока открыт ручной сигнал. Для проверки руками выполните ручной тест (или `/prove`, если агент может добраться до цели), отметьте каждый пункт `## Manual checks` с тем, что вы увидели, и снова запустите `/spec-check`, чтобы дойти до `Verified`.",
-      "ua": "`/spec-check` звіряє збірку з реальністю й ставить підсумковий статус: `Verified`, `Partial` або `Broken` (з передачею ходу `/spec-fix`), чи `BlockNeedUserTest`, поки відкритий ручний сигнал. Для перевірки руками виконайте ручний тест (або `/prove`, якщо агент може дістатися цілі), позначте кожен пункт `## Manual checks` із тим, що ви побачили, і знову запустіть `/spec-check`, щоб дійти до `Verified`."
+      "en": "`/spec-check` audits the build against reality and sets the final status: `Verified`, `Partial` or `Broken` (chaining to `/spec-fix`), or `BlockNeedUserTest` while a manual signal is open. For a hands-on check, at a release or on a run you name, do the manual test (or `/prove` it where the agent can reach the target), tick each `## Manual checks` line with what you saw, then run `/spec-check` again to reach `Verified`.",
+      "ru": "`/spec-check` сверяет сборку с реальностью и ставит итоговый статус: `Verified`, `Partial` или `Broken` (с передачей хода `/spec-fix`), либо `BlockNeedUserTest`, пока открыт ручной сигнал. Для проверки руками, на релизе или в прогоне, который вы назвали, выполните ручной тест (или `/prove`, если агент может добраться до цели), отметьте каждый пункт `## Manual checks` с тем, что вы увидели, и снова запустите `/spec-check`, чтобы дойти до `Verified`.",
+      "ua": "`/spec-check` звіряє збірку з реальністю й ставить підсумковий статус: `Verified`, `Partial` або `Broken` (з передачею ходу `/spec-fix`), чи `BlockNeedUserTest`, поки відкритий ручний сигнал. Для перевірки руками, на релізі або в прогоні, який ви назвали, виконайте ручний тест (або `/prove`, якщо агент може дістатися цілі), позначте кожен пункт `## Manual checks` із тим, що ви побачили, і знову запустіть `/spec-check`, щоб дійти до `Verified`."
     }
   ],
   "outcome": {
@@ -82,6 +82,11 @@
       "en": "For a whole queue of tickets rather than one, [/backlog](fn:backlog) selects tickets and hands each one to `/spec-all`.",
       "ru": "Для целой очереди тикетов, а не одного, [/backlog](fn:backlog) выбирает тикеты и передаёт каждый в `/spec-all`.",
       "ua": "Для цілої черги тікетів, а не одного, [/backlog](fn:backlog) обирає тікети й передає кожен до `/spec-all`."
+    },
+    {
+      "en": "The 5-second line holds through every stage: between releases no stage starts a full build, a run-and-observe or a check over 5 seconds on its own. Each rung that defers is recorded as `NOT APPLICABLE - release tier`, and its command is a `RELEASE` item in the closing audit. See [the validation ladder](fn:validation-ladder).",
+      "ru": "Черта в 5 секунд действует на каждой стадии: между релизами ни одна стадия сама не начинает полную сборку, запуск с наблюдением или проверку дольше 5 секунд. Каждая отложенная ступень записывается как `NOT APPLICABLE - release tier`, а её команда становится пунктом `RELEASE` в итоговом аудите. См. [лестницу проверок](fn:validation-ladder).",
+      "ua": "Межа у 5 секунд діє на кожній стадії: між релізами жодна стадія сама не починає повну збірку, запуск зі спостереженням чи перевірку довше 5 секунд. Кожен відкладений щабель записується як `NOT APPLICABLE - release tier`, а його команда стає пунктом `RELEASE` у підсумковому аудиті. Див. [драбину перевірок](fn:validation-ladder)."
     }
   ],
   "related": ["spec-lifecycle", "spec", "spec-dev", "spec-check", "backlog"],

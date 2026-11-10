@@ -57,9 +57,10 @@ stage.
    `Partial` / `Broken` (auto-chaining to `/spec-fix`), or `BlockNeedUserTest` when a manual signal
    is still open.
 
-If acceptance includes a hands-on check, status lands at `BlockNeedUserTest` after step 5. Do the
-manual test (or `/prove` it where the agent can reach the target), tick each line of the ticket's
-`## Manual checks` section with what you saw, then run `/spec-check` to reach `Verified`.
+If acceptance includes a hands-on check, status lands at `BlockNeedUserTest` after step 5. At
+release or on an owner-named run, do the manual test (or `/prove` it where the agent can reach the
+target), tick each line of the ticket's `## Manual checks` section with what you saw, then run
+`/spec-check` to reach `Verified`.
 
 ## Rules
 
@@ -73,6 +74,10 @@ manual test (or `/prove` it where the agent can reach the target), tick each lin
   `/park` stub) re-enters at `/spec <ID>`, which expands it in place.
 - **Stay cheap when the task is small.** The size gate above exists so a small change does not
   drag a five-stage pipeline behind it.
+- **The 5-second line holds through every stage.** Between releases no stage starts a full build,
+  a run-and-observe or a check over 5 seconds on its own; each rung that defers is recorded as
+  `NOT APPLICABLE - release tier`, and its command is a `RELEASE` item in the closing audit
+  (`docs/VALIDATION.md`, "The ladder").
 - **One ticket, one file.** All stages read and write the same `<PLAN_DIR>/<ID>_<slug>.md` (and
   its tactical folder); status is the first `**Status:**` line and is always true because the
   code makes it so.

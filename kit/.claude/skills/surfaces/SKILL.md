@@ -31,9 +31,11 @@ refactor, a test, a build tweak → report `surfaces: not user-visible - <reason
 
 **2 - List the surfaces, then print the table - before editing anything.** Every place a user
 meets the capability, found in the project, never assumed: UI strings (one row per authored
-locale), help and tooltips, the README and its translations, user docs, the site, the change
-log, store or package listings, screenshots, examples and samples, templates. Start from the
-project's surface manifest if it keeps one and extend it - never write a second one.
+locale), help and tooltips, the help page or layer of each window or screen of an application
+(its map is the manifest for those rows - `.claude/skills/ui-clarify/references/WINDOW_HELP.md`), the README
+and its translations, user docs, the site, the change log, store or package listings, screenshots,
+examples and samples, templates. Start from the project's surface manifest if it keeps one and
+extend it - never write a second one.
 
 | Surface | Touched / not applicable | Reason |
 | --- | --- | --- |

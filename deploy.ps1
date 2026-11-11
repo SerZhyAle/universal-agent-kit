@@ -6,8 +6,8 @@
   The push of `main` publishes this rolling repository (GitHub Pages serves the root), so the script
   runs the fast whitespace check first and shows what it is about to commit.
 
-  Left out of "everything" on purpose: `.claude/` and `.sza-profile.json` (local agent state, untracked
-  by decision). Pass -IncludeLocal to stage them too.
+  The first step is `git add .`. Taken back out of the index right after it, on purpose: `.claude/` and
+  `.sza-profile.json` (local agent state, untracked by decision). Pass -IncludeLocal to keep them staged.
 
 .PARAMETER Message
   Commit message. Default: "Update <UTC timestamp>".
@@ -65,18 +65,27 @@ $branch = (& git rev-parse --abbrev-ref HEAD).Trim()
 if ($branch -eq 'HEAD') { Fail 'detached HEAD: check out a branch first' }
 Write-Host "deploy: branch $branch, remote $((& git remote get-url origin).Trim())"
 
-# Pathspec that stages everything except local agent state.
-$spec = @('.')
-if (-not $IncludeLocal) { $spec += @(':(exclude).claude', ':(exclude).sza-profile.json') }
+# "git add ." stages everything; the local agent state is then taken back out of the index.
+function Stage-All {
+    Invoke-Git add .
+    if (-not $IncludeLocal) {
+        foreach ($local in @('.claude', '.sza-profile.json')) {
+            if (Test-Path -LiteralPath $local) { Invoke-Git reset --quiet -- $local }
+        }
+    }
+}
+
+# First step: stage everything.
+Stage-All
 
 if ($Preflight) {
     if (-not $Catalog) { Fail '-Preflight needs -Catalog <catalog root>' 2 }
     Write-Host 'deploy: release pre-flight (slow, several minutes)..'
     & pwsh -NoProfile -File (Join-Path $tools 'check-release.ps1') -Catalog $Catalog
     if ($LASTEXITCODE -ne 0) { Fail "pre-flight failed (exit $LASTEXITCODE); nothing was committed" }
+    # The pre-flight rebuilds the render targets; stage what it regenerated.
+    Stage-All
 }
-
-Invoke-Git add -A -- @spec
 
 & git diff --cached --quiet
 $hasStaged = ($LASTEXITCODE -ne 0)

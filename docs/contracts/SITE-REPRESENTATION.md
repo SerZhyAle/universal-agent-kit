@@ -1,6 +1,9 @@
 # `SITE-REPRESENTATION` pointer
 
-- Version: 0.1 (draft; opted in 2026-10-09)
+- Version: 0.2 (draft; opted in 2026-10-09); 0.1 read on 2026-10-09, the 0.2 amendments read on 2026-11-16
+  (S0016): A binds the guide tier (no portal-tier change), B and C name a gated part and a second-rules channel
+  this one-edition, no-channel product does not have, and D's roadmap and `planned` ban was re-checked - a static
+  search of the corpus returns no readiness marker
 - Role: consumer; every rule binds at the declared portal tier
 - Home: `product-site/SITE-REPRESENTATION.md` in the shared contracts catalog; its conformance artifact is the
   run-list `SITE-CHECKLIST.md`, read off the rendered site

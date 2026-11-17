@@ -1,6 +1,8 @@
 # `ICON-SET` pointer
 
-- Version: 0.37 (draft); read on 2026-10-21 from 0.29 through 0.36, the 0.37 amendment read on 2026-11-10
+- Version: 0.41 (draft); read on 2026-10-21 from 0.29 through 0.36, the 0.37 amendment read on 2026-11-10,
+  the 0.38 to 0.41 amendments read on 2026-11-16 (S0016): the meanings they add are other products' glyphs -
+  a static search of the landing, the pages and the generator finds none drawn here
 - Role: consumer, opted in
 - Home: `iconography/README.md` in the shared contracts catalog
 

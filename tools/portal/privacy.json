@@ -2,14 +2,14 @@
   "$comment": "The copy of privacy.html (SITE-EXPERIENCE 14, SITE-REPRESENTATION 12). The origin table must equal the third-party origins the pages contact, both ways: tools/check-site.ps1 -Dimension origins compares them. Nothing on any other page may claim more or less about data than this page does.",
   "title": { "en": "Privacy", "ru": "Конфиденциальность", "ua": "Конфіденційність" },
   "desc": {
-    "en": "What the Universal Agent Kit site does with a visit: it collects nothing itself, keeps two preferences in your browser and loads fonts from two Google origins.",
-    "ru": "Что сайт Universal Agent Kit делает с вашим визитом: сам ничего не собирает, хранит в браузере две настройки и загружает шрифты с двух серверов Google.",
-    "ua": "Що сайт Universal Agent Kit робить із вашим візитом: сам нічого не збирає, зберігає в браузері два налаштування і завантажує шрифти з двох серверів Google."
+    "en": "What the Universal Agent Kit site does with a visit: it collects nothing itself, keeps up to four preferences in your browser and loads fonts from two Google origins.",
+    "ru": "Что сайт Universal Agent Kit делает с вашим визитом: сам ничего не собирает, хранит в браузере до четырёх настроек и загружает шрифты с двух серверов Google.",
+    "ua": "Що сайт Universal Agent Kit робить із вашим візитом: сам нічого не збирає, зберігає в браузері до чотирьох налаштувань і завантажує шрифти з двох серверів Google."
   },
   "lead": {
-    "en": "This site collects nothing about you. It keeps two preferences in your own browser and asks two font servers for fonts. This page says exactly which, in three languages.",
-    "ru": "Этот сайт ничего о вас не собирает. Он хранит две настройки в вашем собственном браузере и запрашивает шрифты у двух серверов шрифтов. Эта страница говорит точно, у каких, на трёх языках.",
-    "ua": "Цей сайт нічого про вас не збирає. Він зберігає два налаштування у вашому власному браузері й запитує шрифти у двох серверів шрифтів. Ця сторінка каже точно, у яких, трьома мовами."
+    "en": "This site collects nothing about you. It keeps up to four preferences in your own browser and asks two font servers for fonts. This page says exactly which, in three languages.",
+    "ru": "Этот сайт ничего о вас не собирает. Он хранит до четырёх настроек в вашем собственном браузере и запрашивает шрифты у двух серверов шрифтов. Эта страница говорит точно, у каких, на трёх языках.",
+    "ua": "Цей сайт нічого про вас не збирає. Він зберігає до чотирьох налаштувань у вашому власному браузері й запитує шрифти у двох серверів шрифтів. Ця сторінка каже точно, у яких, трьома мовами."
   },
   "cols": {
     "origin":   { "en": "Origin", "ru": "Источник", "ua": "Джерело" },
@@ -89,9 +89,9 @@
       "title": { "en": "The download", "ru": "Скачиваемый файл", "ua": "Файл для завантаження" },
       "body": [
         {
-          "en": "`universal-agent-kit.zip` holds plain Markdown files, one JSON settings template and one text file. Nothing in it installs or runs by itself, and it has no telemetry. What your own agent does with the files you give it is governed by that agent's vendor, not by this site.",
-          "ru": "В `universal-agent-kit.zip` лежат обычные Markdown-файлы, один JSON-шаблон настроек и один текстовый файл. Ничто в нём не устанавливается и не запускается само, телеметрии в нём нет. Что ваш агент делает с отданными ему файлами, определяет вендор этого агента, а не этот сайт.",
-          "ua": "У `universal-agent-kit.zip` лежать звичайні Markdown-файли, один JSON-шаблон налаштувань і один текстовий файл. Ніщо в ньому не встановлюється й не запускається саме, телеметрії в ньому немає. Що ваш агент робить із файлами, які йому дали, визначає вендор цього агента, а не цей сайт."
+          "en": "`universal-agent-kit.zip` holds plain Markdown files, one JSON settings template and two text files (`merge-prompt.txt` and `VERSION`). Nothing in it installs or runs by itself, and it has no telemetry. What your own agent does with the files you give it is governed by that agent's vendor, not by this site.",
+          "ru": "В `universal-agent-kit.zip` лежат обычные Markdown-файлы, один JSON-шаблон настроек и два текстовых файла (`merge-prompt.txt` и `VERSION`). Ничто в нём не устанавливается и не запускается само, телеметрии в нём нет. Что ваш агент делает с отданными ему файлами, определяет вендор этого агента, а не этот сайт.",
+          "ua": "У `universal-agent-kit.zip` лежать звичайні Markdown-файли, один JSON-шаблон налаштувань і два текстові файли (`merge-prompt.txt` і `VERSION`). Ніщо в ньому не встановлюється й не запускається саме, телеметрії в ньому немає. Що ваш агент робить із файлами, які йому дали, визначає вендор цього агента, а не цей сайт."
         }
       ]
     },
@@ -122,9 +122,9 @@
     {
       "origin": "fonts.googleapis.com",
       "purpose": {
-        "en": "Serves the stylesheet that names the two typefaces of the site, Outfit and Plus Jakarta Sans.",
-        "ru": "Отдаёт таблицу стилей с названиями двух шрифтов сайта, Outfit и Plus Jakarta Sans.",
-        "ua": "Віддає таблицю стилів із назвами двох шрифтів сайту, Outfit і Plus Jakarta Sans."
+        "en": "Serves the stylesheet that names the two typefaces of the site, Manrope and Golos Text.",
+        "ru": "Отдаёт таблицу стилей с названиями двух шрифтов сайта, Manrope и Golos Text.",
+        "ua": "Віддає таблицю стилів із назвами двох шрифтів сайту, Manrope і Golos Text."
       },
       "receives": {
         "en": "Your IP address and the usual request headers your browser sends. Nothing else is sent to it.",

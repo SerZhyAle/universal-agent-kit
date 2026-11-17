@@ -11,10 +11,12 @@ Exit 0 / PASS means no check failed; 1 / FAIL means a finding or an abort after 
 means an instrument or required input could not be prepared before the first check. An unreachable control mid-run
 remains a finding. Invalid command-line arguments also exit 2 with argparse's usage message, not a check verdict.
 
-Beyond the geometry matrix it measures the shared page edge of header, heading and footer (PAGE-STYLE 3.6; the right-to-left
-mirror is an emulation), the real web fonts and the origins a visit contacts, the skip link and the header Tab order, and
-reduced motion as the engine's own media feature, and scroll versus tap through the engine's touch pipeline (a synthetic
-finger, not a physical one). --offline records the font checks as skipped instead of passed.
+Beyond the geometry matrix it measures the shared page edge of header, heading and footer (PAGE-STYLE 3.6 with the 3.12
+header box: the brand text keeps the header's border and padding inside the box, and may stand a few pixels inside the
+edge where the box's 4 px viewport floor binds; the right-to-left mirror is an emulation), the real web fonts and the
+origins a visit contacts, the skip link and the header Tab order, and reduced motion as the engine's own media feature,
+and scroll versus tap through the engine's touch pipeline (a synthetic finger, not a physical one). --offline records the
+font checks as skipped instead of passed.
 
 The geometry rule it enforces is the contract's, not a snapshot: a control is at least the token target of its profile
 and size, is as wide as its content (never wider), shares its row's height, overlaps no other control, and never
@@ -660,10 +662,13 @@ with contextlib.ExitStack() as stack:
     check(ring[0] != 'none' and ring[1] >= 2, 'focus: a focused control has a visible ring independent of its fill', ring)
     page.close()
 
-    # ------------------------------------------------------------------ 9. page edges and the header (PAGE-STYLE 3.6, SITE-EXPERIENCE rule 20)
+    # ------------------------------------------------------------------ 9. page edges and the header (PAGE-STYLE 3.6 and 3.12, SITE-EXPERIENCE rule 20)
     # The header brand text, the heading and the footer content start on one inline-start edge (the gutter), at every
-    # interface size and width, and the mirror holds under dir=rtl. No right-to-left locale ships, so the mirror is an
-    # emulation (the dir attribute is set after load): it proves the kit's logical properties, not a translated page.
+    # interface size and width, and the mirror holds under dir=rtl (an emulation: no right-to-left locale ships).
+    # PAGE-STYLE 3.12 item 1: the header box reaches past the content edge by its border and inline padding, and where
+    # the box's 4 px viewport floor binds (the largest UI sizes on a narrow screen) the brand text may stand a few
+    # pixels inside the shared edge rather than the box leaving the screen - so the inside-box relationship is checked
+    # at every size, and the shared edge wherever the scale, not the floor, drives the margin.
     EDGES_JS = """(dir) => {
       const root = document.documentElement;
       if (dir) root.setAttribute('dir', dir);
@@ -675,10 +680,15 @@ with contextlib.ExitStack() as stack:
       const fc = document.querySelector('.site-footer .container');
       if (!brand || !h1 || !fc) return {missing: [!brand && 'brand', !h1 && 'h1', !fc && 'footer'].filter(Boolean)};
       const cs = getComputedStyle(fc), fr = fc.getBoundingClientRect();
+      const hd = document.querySelector('.site-header'), hs = getComputedStyle(hd);
+      const range = document.createRange(); range.selectNodeContents(brand);
       const prim = document.querySelector('.site-header .btn-primary');
       const pr = prim ? prim.getBoundingClientRect() : null;
       return {mainW: document.querySelector('main').getBoundingClientRect().width, vw,
               brand: edge(brand.getBoundingClientRect()), h1: edge(h1.getBoundingClientRect()),
+              text: edge(range.getBoundingClientRect()), box: edge(hd.getBoundingClientRect()),
+              inset: parseFloat(hs.borderInlineStartWidth) + parseFloat(hs.paddingInlineStart),
+              margin: parseFloat(hs.marginInlineStart),
               footer: rtl ? vw - (fr.right - parseFloat(cs.paddingRight)) : fr.left + parseFloat(cs.paddingLeft),
               overflow: root.scrollWidth - vw,
               primary: pr ? {in: pr.left >= -.5 && pr.right <= vw + .5, w: pr.width, h: pr.height} : null};
@@ -709,8 +719,22 @@ with contextlib.ExitStack() as stack:
                 for d in (None, 'rtl'):
                     page = open_page(ctx, pg, profile=prof, size=size)
                     r = page.evaluate(EDGES_JS, d)
-                    check(not r.get('missing') and abs(r['brand'] - r['h1']) <= 1 and abs(r['brand'] - r['footer']) <= 1,
-                          f'edges[{pg}/{prof}/{size}/{d or "ltr"}]: the shared edge holds at this interface size', r)
+                    tag = f'edges[{pg}/{prof}/{size}/{d or "ltr"}]'
+                    if r.get('missing'):
+                        check(False, f'{tag}: header brand, heading and footer all exist', r['missing'])
+                    else:
+                        detail = (f"brand text {r['text']:.1f}, box {r['box']:.1f}, h1 {r['h1']:.1f}, "
+                                  f"footer {r['footer']:.1f}, margin {r['margin']:.1f}")
+                        check(abs((r['text'] - r['box']) - r['inset']) <= 1,
+                              f'{tag}: the brand text keeps the border and padding inside the header box (PAGE-STYLE 3.12)', detail)
+                        check(r['margin'] >= 4 - .5,
+                              f'{tag}: the header box stands no closer than 4 px to the viewport (PAGE-STYLE 3.12)', detail)
+                        if r['margin'] > 4.5:                      # the ui scale drives the margin: the shared edge holds
+                            check(abs(r['text'] - r['h1']) <= 1 and abs(r['text'] - r['footer']) <= 1,
+                                  f'{tag}: the shared edge holds at this interface size', detail)
+                        else:                                       # the 4 px floor binds: a few px inside, never past the edge
+                            check(0 <= r['text'] - r['h1'] <= 8 and abs(r['h1'] - r['footer']) <= 1,
+                                  f'{tag}: with the viewport floor binding, the brand text stands a few pixels inside the shared edge', detail)
                     page.close()
 
     # ------------------------------------------------------------------ 10. the real web fonts and the origins a visit contacts
@@ -728,7 +752,7 @@ with contextlib.ExitStack() as stack:
             results.append({'name': f'fonts[{pg}]: skipped (--offline), not passed', 'ok': True, 'detail': 'skipped'})
         else:
             check(not [u for u in failed if 'fonts.g' in u], f'network[{pg}]: the font requests did not fail', [u for u in failed if 'fonts.g' in u][:3])
-            check('Outfit' in loaded and 'Plus Jakarta Sans' in loaded, f'fonts[{pg}]: Outfit and Plus Jakarta Sans are loaded (the measurements are not on a fallback face)', sorted(set(loaded)))
+            check('Manrope' in loaded and 'Golos Text' in loaded, f'fonts[{pg}]: Manrope and Golos Text are loaded (the measurements are not on a fallback face)', sorted(set(loaded)))
         page.close()
     for lang in ('ru', 'en', 'ua'):                                  # the privacy page names every origin in each language
         page = open_page(desktop, 'privacy', lang=lang)

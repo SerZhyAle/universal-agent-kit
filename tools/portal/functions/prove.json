@@ -92,6 +92,11 @@
       "en": "The command is named `/prove` and not verify on purpose: Claude Code ships its own verify command, and a project skill with the same name would replace it. This one is the stack-neutral check with four verdicts; use both.",
       "ru": "Команда названа `/prove`, а не verify, намеренно: в Claude Code есть собственная команда verify, и навык проекта с тем же именем её заменил бы. Эта - независимая от стека проверка с четырьмя вердиктами; пользуйтесь обеими.",
       "ua": "Команду названо `/prove`, а не verify, навмисно: у Claude Code є власна команда verify, і навичка проєкту з тією самою назвою її замінила б. Ця - незалежна від стеку перевірка з чотирма вердиктами; користуйтеся обома."
+    },
+    {
+      "en": "The header's environment line says where the result is observed: the machine or device with its software version, and whether the target is the real thing or a simulator or an emulator. Filling it is advice, not a gate - but a simulated pass is a lower rung than a pass on the real device, and a silent record cannot say which one a claim reached.",
+      "ru": "Строка environment в заголовке говорит, где наблюдали результат: машина или устройство с версией ПО и вопрос, настоящий ли это предмет или симулятор либо эмулятор. Заполнить её - совет, не гейт: симулированный проход всё равно ниже прохода на настоящем устройстве, а молчаливая запись не скажет, которой ступени достигла заявка.",
+      "ua": "Рядок environment у заголовку каже, де спостерігали результат: машина чи пристрій із версією ПЗ і питання, чи справжній це предмет, чи симулятор або емулятор. Заповнити його - порада, не гейт: змодельований прохід усе одно нижчий за проходження на справжньому пристрої, а мовчазний запис не скаже, якого щаблю сягнула заява."
     }
   ],
   "related": ["quick", "fix", "spec-dev", "spec-fix", "validation-ladder"],

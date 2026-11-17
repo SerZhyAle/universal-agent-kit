@@ -1,6 +1,9 @@
 # `HARNESS-PROFILE` pointer
 
-- Version: 0.14 (draft); read on 2026-10-21 at 0.12, the 0.13 and 0.14 amendments read on 2026-11-10
+- Version: 0.17 (draft); read on 2026-10-21 at 0.12, the 0.13 and 0.14 amendments read on 2026-11-10, the 0.15
+  to 0.17 amendments read on 2026-11-16 (S0016): rule 11 `commands.compileCheck` - this repo's task-flow profile
+  carries none, the deliberate absence; rule 12 `runner.effortByModel`; rule 13 the `extraction` block of a
+  derived product. All additive, wire unchanged: no profile has to change, and this one stays not bound (rule 7)
 - Role: not bound
 - Home: `rule-adoption/README.md` in the shared contracts catalog, section 3
 

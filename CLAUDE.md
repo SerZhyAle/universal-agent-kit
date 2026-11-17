@@ -22,16 +22,16 @@ have that drive. A pointer would go in `docs/contracts/`; the contract text itse
 What this repository touches, each with a pointer in [docs/contracts/](docs/contracts/README.md) and a
 specification in [docs/specifications/](docs/specifications/DONE/SPECIFICATION_CONTRACTS_SYNC.md):
 
-- **The site consumes** `PAGE-CONTENT` 1.5 (documentation / method page), `PAGE-STYLE` 3.8 (Informational /
-  Docs; the shared stylesheet byte-identical in `assets/` at the kit revision of 3.8, the locale query `?lang=`
+- **The site consumes** `PAGE-CONTENT` 1.5 (documentation / method page), `PAGE-STYLE` 3.13 (Informational /
+  Docs; the shared stylesheet byte-identical in `assets/` at the kit revision of 3.13, the locale query `?lang=`
   with the legacy `?l=` read as well; the resolver is the contract's own section 7 text since 3.5, item 8),
-  `SITE-FAMILY-MAP` 1.11 (footer family grid), the unified UI contracts `BUTTONS` 2.0, `UI-SIZING` 1.1 and
-  `COLLAPSIBLE-GROUP` 1.1 (partial: measured in Chromium only, plan and deadline in
+  `SITE-FAMILY-MAP` 1.17 (footer family grid), the unified UI contracts `BUTTONS` 2.3, `UI-SIZING` 1.2 and
+  `COLLAPSIBLE-GROUP` 1.3 (partial: measured in Chromium only, plan and deadline in
   [S0003_unified-ui-contracts.md](docs/specifications/S0003_unified-ui-contracts.md); the browser
   check is `python -I tools/ui-check/run.py --catalog <catalog root>`), and
-  the opted-in iconography drafts `ICON-SET` 0.37, `ICON-RENDER` 0.24 (partial, as `UI-SIZING` is), `ICON-EXTERNAL`
+  the opted-in iconography drafts `ICON-SET` 0.41, `ICON-RENDER` 0.26 (partial, as `UI-SIZING` is), `ICON-EXTERNAL`
   0.12. It also opted in (2026-10-09, owner decision) to the product-site drafts `SITE-STRUCTURE` 0.4,
-  `SITE-EXPERIENCE` 0.5 and `SITE-REPRESENTATION` 0.1 at the declared **portal** tier: the page set is published
+  `SITE-EXPERIENCE` 0.6 and `SITE-REPRESENTATION` 0.2 at the declared **portal** tier: the page set is published
   (`portal/**`, `privacy.html`, `404.html`), the positioning source is [POSITIONING.md](POSITIONING.md), and the
   one dated registry exception it carried (`SITE-EXPERIENCE` rule 17) closed on 2026-11-10 with the owner's
   answer of 2026-10-29. It creates no vocabulary, style or map of its own. The child-page
@@ -39,25 +39,32 @@ specification in [docs/specifications/](docs/specifications/DONE/SPECIFICATION_C
   a child page needs the contact line and the hub link and may drop the grid. Every page here keeps all three on
   purpose, so a visitor on a function page can leave for a sibling.
 - **The repository produces** `REPO-STAMP` 0.13 (`.sza-canon.json`, written only by the adoption skill) and
-  **consumes** `REPO-LAYOUT` 0.11 and `RULE-DELIVERY` 0.12. `HARNESS-PROFILE` 0.14 is **not bound**: this
+  **consumes** `REPO-LAYOUT` 0.11 and `RULE-DELIVERY` 0.12. `HARNESS-PROFILE` 0.17 is **not bound**: this
   repository never runs the packaged harness - its pointer says so, and the rule-7 reading rests on that fact
   (the untracked `.sza-profile.json` at the root is the portfolio runner's task-flow index, owner order of
   2026-10-29, not a harness run).
-- **The kit carries guidance for** `CONTEXT-HELP` 0.2 (F1, a `?` button and a help page or layer for each
+- **The kit carries guidance for** `CONTEXT-HELP` 0.5 (F1, a `?` button and a help page or layer for each
   window of an application): the contract names this repository in its consumers line for what the kit carries,
   not for surfaces, because no application window is drawn here - and its section 7 item H (2026-10-29) says a
   page of a product's site, and a dialog opened on it such as this site's search box, is not a surface either;
   the dialog is `SITE-EXPERIENCE` rule 12's. `kit/` restates the convention in plain words since 2026-11-10
-  (slice B of [S0004_in-app-help.md](docs/specifications/S0004_in-app-help.md)); the pointer lists the seven
+  (slice B of [S0004_in-app-help.md](docs/specifications/DONE/S0004_in-app-help.md)); the pointer lists the seven
   `kit/` files that carry it, so a later change of the contract finds them.
-- **Read, not adopted:** `DOC-EXTERNAL-QUALITY` 0.13 and `DOC-INTERNAL-QUALITY` 0.11 (drafts; no owner decision
+- **Read, not adopted:** `DOC-EXTERNAL-QUALITY` 0.14 and `DOC-INTERNAL-QUALITY` 0.13 (drafts; no owner decision
   has opted this repository in, and each pointer says what an opt-in would meet; item R binds the rules the site
-  contracts cite, and the `hreflang` alternates its item S restored - on 2026-11-10 in the landing head and the
-  generator - load with the next portal build).
+  contracts cite, and the `?lang=` alternates its item S restored on 2026-11-10 were dropped on 2026-11-16 -
+  S0018, assumed unattended, owner may overrule: a one-DOM page canonical to the bare URL lists no query view as
+  an alternate, the languages are declared by `inLanguage`, and the generated pages and the sitemap carry the
+  removal at the next portal build).
 - **Declared not applicable:** `INSTALL-TRUST` (the zip installs and executes nothing), `WAVE-PARTICLES`,
   `BOOLEAN-OPTION` and `SETTINGS-NAVIGATION` (no boolean option and no settings surface is drawn; each pointer says
   why), the desktop-app contracts, and every format this repository neither reads nor writes. The automated-checks
   drafts are not bound; the build check aligns with them voluntarily.
+
+Every version token in this section is owned by the write that bumps that contract's record here: the change
+that updates a pointer in [docs/contracts/](docs/contracts/README.md) and its index row also updates the matching token in this
+section, in the same edit - the token is the pointer's companion in these rules, never the pointer itself,
+and a pointer write that skips it leaves these rules naming a version the repository no longer consumes (S0020).
 
 `kit/` is method - how we develop - which the catalog keeps out by name, and the canon owns instead.
 
@@ -96,8 +103,10 @@ follows from that one distinction:
 - `portal/**`, `privacy.html`, `404.html`, `assets/search-index.json` and the page list of `sitemap.xml` - the
   documentation portal and its trust pages, RU/EN/UK in each file, **generated** by
   `pwsh -NoProfile -File tools/build-portal.ps1` from [tools/portal/](tools/portal/README.md) (the capability
-  inventory, the page content, the glossary) and [POSITIONING.md](POSITIONING.md). A page is changed in its
-  source and rebuilt; a retired page leaves a forwarder, never a gap. `-Check` fails on drift.
+  inventory, the page content, the glossary, the support page), [POSITIONING.md](POSITIONING.md) and
+  [CHANGELOG.md](CHANGELOG.md) (`portal/whats-new.html`), and the other-tools table of `kit/README.md` (the
+`#other-tools` section of `portal/functions/adopt-existing.html`). A page is changed in its source and rebuilt; a retired
+  page leaves a forwarder, never a gap. `-Check` fails on drift.
 - `README.md` and `kit/README.md` - the listing surfaces.
 
 The product layer (`assets/site.css`) and the portal layer (`assets/portal.css`, `assets/portal.js`) are
@@ -113,9 +122,14 @@ every entry against `kit/` and stamps the build date into the page's "Kit update
 
 ## Release shape
 
-Rolling: no tags, no changelog, no version anchor - the site and the zip are regenerated in place. That is
-a recorded DIVERGE from the canon's version-shape rule, legitimate for a living reference kit, and it is
-why the stamp carries `tagRegex: null` and `ledgerShape: "none"`.
+Rolling: no tags, no tag-bound changelog, no version anchor - the site and the zip are regenerated in place.
+That is a recorded DIVERGE from the canon's version-shape rule, legitimate for a living reference kit, and it is
+why the stamp carries `tagRegex: null`. A build is named by its date: [CHANGELOG.md](CHANGELOG.md) holds one
+dated section per kit build, newest first, rendered to the What's new page (owner decision of 2026-11-14, S0006).
+`tools/build-portal.ps1` refuses to render when its newest section is not the date in `kit/VERSION`, so a kit
+build that changes the date needs its section written before the portal is rebuilt. The stamp declares
+`ledgerShape: 1` with `ledgerFile: "CHANGELOG.md"` (re-sync of 2026-11-15) and carries an `SZA-LAY02` exemption with its reason:
+the file is dated per build and trilingual, not Keep-a-Changelog with an `[Unreleased]` block - a recorded DIVERGE.
 
 ## Gate
 

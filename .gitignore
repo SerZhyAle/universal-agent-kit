@@ -33,3 +33,8 @@ temp/
 # tracked until removed by hand. Anchored to the root: kit/docs/ is payload, and an unanchored
 # pattern would keep a new kit document out of every clone while the local zip carried it.
 /docs/
+
+# The local task index is working material too: GitHub Pages serves every tracked file of this
+# tree, so a tracked PLAN/ answers 200 on the live site. Anchored to the root: kit/examples/PLAN/
+# is payload and stays tracked.
+/PLAN/

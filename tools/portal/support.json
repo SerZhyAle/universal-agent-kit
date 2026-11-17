@@ -1,0 +1,60 @@
+{
+  "$comment": "The copy of portal/support.html (DOCUMENTATION_CONCEPT section 4 support row; SUPPORT_AND_FEEDBACK section 1). The reply expectation is the owner's answer of 2026-11-14 (S0006, quiz decisions): no promised time. Contact address per S0006 D7.",
+  "title": { "en": "Support", "ru": "Поддержка", "ua": "Підтримка" },
+  "desc": {
+    "en": "How to report a problem with the Universal Agent Kit or write to its author privately, what reply to expect, and what to include so the report can be acted on.",
+    "ru": "Как сообщить о проблеме с Universal Agent Kit или написать автору лично, какого ответа ждать и что приложить, чтобы по сообщению можно было что-то сделать.",
+    "ua": "Як повідомити про проблему з Universal Agent Kit або написати автору особисто, на яку відповідь чекати і що додати, щоб за повідомленням можна було щось зробити."
+  },
+  "lead": {
+    "en": "The kit is maintained by one person. A public issue helps the next reader too; a private message is for what should not be public.",
+    "ru": "Kit поддерживает один человек. Публичный issue помогает и следующему читателю; личное письмо - для того, что не должно быть публичным.",
+    "ua": "Kit підтримує одна людина. Публічний issue допомагає і наступному читачеві; особистий лист - для того, що не має бути публічним."
+  },
+  "sections": [
+    {
+      "id": "report",
+      "title": { "en": "Report a problem", "ru": "Сообщить о проблеме", "ua": "Повідомити про проблему" },
+      "body": [
+        {
+          "en": "Open an issue in the [issue tracker](https://github.com/SerZhyAle/universal-agent-kit/issues): a wrong instruction, a command that does not do what its page says, a broken link, a page that reads wrong in one of the three languages. It needs a GitHub account.",
+          "ru": "Откройте issue в [трекере задач](https://github.com/SerZhyAle/universal-agent-kit/issues): неверная инструкция, команда, которая делает не то, что написано на её странице, битая ссылка, страница, которая плохо читается на одном из трёх языков. Нужна учётная запись GitHub.",
+          "ua": "Відкрийте issue у [трекері задач](https://github.com/SerZhyAle/universal-agent-kit/issues): хибна інструкція, команда, яка робить не те, що написано на її сторінці, бите посилання, сторінка, що погано читається однією з трьох мов. Потрібен обліковий запис GitHub."
+        }
+      ]
+    },
+    {
+      "id": "private",
+      "title": { "en": "Write privately", "ru": "Написать лично", "ua": "Написати особисто" },
+      "body": [
+        {
+          "en": "Without a GitHub account, or for something that should not be public, write to [sza@ukr.net](mailto:sza@ukr.net?subject=Universal%20Agent%20Kit). Put \"Universal Agent Kit\" in the subject; the link does that for you.",
+          "ru": "Без учётной записи GitHub или если вопрос не для публики, напишите на [sza@ukr.net](mailto:sza@ukr.net?subject=Universal%20Agent%20Kit). Укажите в теме \"Universal Agent Kit\" - ссылка сделает это за вас.",
+          "ua": "Без облікового запису GitHub або якщо питання не для публіки, напишіть на [sza@ukr.net](mailto:sza@ukr.net?subject=Universal%20Agent%20Kit). Вкажіть у темі \"Universal Agent Kit\" - посилання зробить це за вас."
+        }
+      ]
+    },
+    {
+      "id": "reply",
+      "title": { "en": "What reply to expect", "ru": "Какого ответа ждать", "ua": "На яку відповідь чекати" },
+      "body": [
+        {
+          "en": "Every report is read. There is no promised reply time: the author answers as time allows, and a fix lands in the next build of the kit, whose date is on the [What's new](page:portal/whats-new.html) page.",
+          "ru": "Каждое сообщение прочитывается. Срок ответа не обещан: автор отвечает, когда есть время, а исправление попадает в следующую сборку kit, дата которой есть на странице [Что нового](page:portal/whats-new.html).",
+          "ua": "Кожне повідомлення прочитується. Строк відповіді не обіцяно: автор відповідає, коли має час, а виправлення потрапляє в наступну збірку kit, дата якої є на сторінці [Що нового](page:portal/whats-new.html)."
+        }
+      ]
+    },
+    {
+      "id": "before",
+      "title": { "en": "Before you write", "ru": "Прежде чем писать", "ua": "Перш ніж писати" },
+      "body": [
+        {
+          "en": "Include the kit date (the line `Kit updated` on the landing page, or the file `VERSION` in the zip), the agent tool you use, the command or page involved, what you expected and what happened. Leave out secrets, tokens and private file contents.",
+          "ru": "Укажите дату kit (строка `Kit обновлён` на главной странице или файл `VERSION` в zip), инструмент агента, которым вы пользуетесь, команду или страницу, о которой речь, что вы ожидали и что произошло. Не прикладывайте секреты, токены и содержимое личных файлов.",
+          "ua": "Вкажіть дату kit (рядок `Kit оновлено` на головній сторінці або файл `VERSION` у zip), інструмент агента, яким ви користуєтеся, команду або сторінку, про яку йдеться, що ви очікували і що сталося. Не додавайте секрети, токени та вміст особистих файлів."
+        }
+      ]
+    }
+  ]
+}

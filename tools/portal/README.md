@@ -35,6 +35,9 @@ a source of a capability or be listed in `excluded` in `inventory.json` with a r
 | `guides/<id>.json` | a guide by task |
 | `glossary/<id>.json` | a glossary term, one file each |
 | `privacy.json` | the copy of `privacy.html` |
+| `support.json` | the copy of `portal/support.html`: where to report, how to write privately, what reply to expect, what to include |
+| `../../CHANGELOG.md` | the source of `portal/whats-new.html`: one `## yyyy-MM-dd` section per kit build, newest first, each item three lines `- EN:`, `- RU:`, `- UA:`. The newest section must carry the date in `kit/VERSION`, or validation fails |
+| `../../kit/README.md` | the table under "For other agents (adaptation, not drop-in)", parsed on every run and rendered as `#other-tools` of `portal/functions/adopt-existing.html`, its cells as written (column headings from `ui.json` `ot.*`). A renamed heading, a changed column or a row without four cells fails validation, so the two change together |
 
 ## Rules for every text
 

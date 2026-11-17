@@ -49,7 +49,10 @@ report `NOT APPLICABLE - release tier` and record the deferred command. `--dry-r
 scenario without executing it.
 
 **3 - Author the scenario.** Write `<SCRATCH_DIR>/prove_<TS>.md` with a header (target,
-version, environment) and an ordered 1-5 step scenario. Each step: `goal`, `action`,
+version, environment) and an ordered 1-5 step scenario. The environment line says where
+the result is observed: the machine or device with its software version, and whether the
+target is the real thing or a simulator or an emulator. Filling it is advice, not a gate
+(`docs/VALIDATION.md`, "A result says where it was observed"). Each step: `goal`, `action`,
 `expected observable result`, optional `expected log line`. Sources, in priority order:
 user free-text → ticket acceptance criteria → default smoke (start, exercise the main
 path, assert no error/crash).
@@ -63,6 +66,8 @@ produce step is: a render, an export, a pipeline run. On failure: capture the ta
 
 **5 - Pre-flight.** Confirm the run target is reachable (server up, device online, binary
 present). If not, report `COULD NOT VERIFY` with the blocker and stop - do not fake a pass.
+A reachable simulator or emulator does not raise the rung: its pass stays lower than a
+pass on the real device (`docs/VALIDATION.md`, "A result says where it was observed").
 
 **6 - Capture output.** Start log/stdout capture before the run; record the start time.
 

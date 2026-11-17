@@ -1,25 +1,34 @@
 # `PAGE-STYLE` pointer
 
-- Version: 3.4, read in full on 2026-10-21 (the controls, the kit bytes, and the rest of the document; 3.4 adds the
-  exchange-server mark, which no page here carries, and changes no kit byte); the adoption row is `partial 3.4`
-  for the reasons the `BUTTONS`, `UI-SIZING` and `COLLAPSIBLE-GROUP` pointers give. The kit bytes alone follow the
-  revision 3.8 of 2026-11-10 (the 3.6 header-edge and 3.8 pill-contrast amendments were read in full; 3.7 is the
-  hub's per-locale option and owes nothing here); the rest of 3.5 and 3.6 is not audited here and stays with the
-  contract-synchronization ticket, so the row is not advanced
+- Version: 3.13 (active); read in full at 3.4 on 2026-10-21, then the amendments that reach this product: 3.5
+  (the locale-query table and the resolver line), the kit re-vendors of 3.6 and 3.8 read on 2026-11-10 and
+  2026-11-11, the 3.9 to 3.11 amendments read on 2026-11-16 (S0016), and the 3.12 and 3.13 amendments read on
+  2026-11-17 with this re-vendor: 3.9's per-locale option stays an option -
+  this landing keeps one DOM, which conforms; 3.10's release facts bind a release flow, and the rolling kit keeps
+  the durable download link and shows no version, the shape its item 3 allows; 3.11's no-forward rule names the
+  one-DOM pre-paint resolution as not a forward; 3.12's header box moves the brand text off the header's border and
+  into the box, and the edges check below reads it the new way; 3.13's Cyrillic font pair is followed into every
+  font link the pages load. The adoption row is `partial 3.13` for the reasons the `BUTTONS`,
+  `UI-SIZING` and `COLLAPSIBLE-GROUP` pointers give. The kit bytes follow the
+  revision 3.13 of 2026-11-17 (read with the 3.12 header-box and 3.13 font-pair amendments; 3.7 is the
+  hub's per-locale option and owes nothing here)
 - Role: consumer, page type Informational / Docs
 - Home: `product-web-pages/PAGE-STYLE.md` in the shared contracts catalog; its conformance artifact is
   `product-web-pages/reference/sza-kit.css`
 
-`assets/sza-kit.css` is a byte-identical copy of that reference stylesheet (the revision of 2026-11-10, PAGE-STYLE
-3.8, 30698 bytes, SHA-256 `d490abf3bf55455f2cffb92b9ba6305f58c2f1160f3f1ddf70c2d125dd22fa5d`, vendored 2026-11-11;
-before it 3.6, `425dacf803b8e3035f3a66a3b6fa72698efa6bd477ecf088ac39aa30e1c322a0`, and
-`4aba1dee10cb902ee21ca4d86e4fbeed3bf7931c64b69fe15619727fd038c141` of 2026-10-21; the 3.8 correction draws `.pill`
-text in `--acc-strong` for 4.5:1 body-text contrast, and the site draws pills on every page; it implements BUTTONS, UI-SIZING and
+`assets/sza-kit.css` is a byte-identical copy of that reference stylesheet (the revision of 2026-11-17, PAGE-STYLE
+3.13, 31950 bytes, SHA-256 `8d49a8f0a36369da62faf56a4dd9f026097f5aeba43b6d8f4f8c0edc56417e42`, vendored 2026-11-17;
+before it 3.8, 30698 bytes, `d490abf3bf55455f2cffb92b9ba6305f58c2f1160f3f1ddf70c2d125dd22fa5d`, vendored 2026-11-11;
+the 3.12 amendment keeps the brand text off the header's border by holding the border and padding inside the box,
+and 3.13 replaces the latin-only Outfit / Plus Jakarta Sans pair with Manrope / Golos Text, which draw the Cyrillic
+of the ru and uk pages; it implements BUTTONS, UI-SIZING and
 COLLAPSIBLE-GROUP itself, so no button or group adapter is kept) - compare the SHA-256 of the two
-files, never edit this one; `.gitattributes` keeps its line endings untouched. The 3.6 correction (the brand text
-starts on the content edge, with logical start and end spacing) is measured by `tools/ui-check/run.py`: header
-brand, heading and footer content share one inline-start edge on every page kind at 360 to 2560 px and at every
-interface size, and the mirror under `dir=rtl` holds as an emulation, because no right-to-left locale ships. The controls and the groups are
+files, never edit this one; `.gitattributes` keeps its line endings untouched. The 3.12 header box is measured by
+`tools/ui-check/run.py`: the brand text keeps the header's border and inline-start padding inside the box at every
+interface size, and the header brand, the heading and the footer content share one inline-start edge on every page
+kind at 360 to 2560 px and at every interface size wherever the box's 4 px viewport floor does not bind; where the
+floor binds (the largest UI sizes on a narrow screen) the text may stand a few pixels inside the shared edge, never
+past it - and the mirror under `dir=rtl` holds as an emulation, because no right-to-left locale ships. The controls and thegroups are
 recorded in the `BUTTONS`, `UI-SIZING` and `COLLAPSIBLE-GROUP` pointers. `index.html` loads, in
 order: the pre-paint resolver on the shared `sza-lang` / `sza-theme` keys, the kit fonts, the kit
 stylesheet, then a page layer that uses only kit tokens (section 5 "Extending the kit"). The page fills the

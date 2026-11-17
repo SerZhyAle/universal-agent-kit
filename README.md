@@ -11,21 +11,21 @@ persistent memory, and the discipline for running several agents at once. Distil
 from a real project and stripped of its language and stack. It assumes five things and a compiler is
 not one of them: **a workspace with history, artifacts, work items, checks, and an agent that can
 read and write your files.** If your project is code, the sharpest examples are yours. If it is
-data, documents, contracts or procedures, `kit/docs/PROJECT_SHAPES.md` is the translation table.
+data, documents, contracts, procedures, audit or bookkeeping, `kit/docs/PROJECT_SHAPES.md` is the translation table.
 
 Переносимый набор правил для ИИ-агентов, пишущих код: правила, навыки (slash-команды), роли,
 жизненный цикл спецификаций, постоянная память и дисциплина параллельной работы нескольких агентов.
 Выжимка из реального проекта, очищенная от языка и стека. Методу нужны пять вещей, и компилятор в
 них не входит: **рабочая папка с историей, артефакты, единицы работы, проверки и агент, который
 умеет читать и писать ваши файлы.** Если проект - код, примеры кита ваши. Если это данные, тексты,
-договоры или процедуры - таблица перевода лежит в `kit/docs/PROJECT_SHAPES.md`.
+договоры, процедуры, аудит или бухгалтерия - таблица перевода лежит в `kit/docs/PROJECT_SHAPES.md`.
 
 Переносний набір правил для ШІ-агентів, що пишуть код: правила, навички (slash-команди), ролі,
 життєвий цикл специфікацій, постійна пам'ять і дисципліна паралельної роботи кількох агентів.
 Дистильовано з реального проєкту, очищено від мови та стека. Методу потрібні п'ять речей, і
 компілятора серед них немає: **робоча тека з історією, артефакти, одиниці роботи, перевірки і
-агент, який уміє читати й писати ваші файли.** Таблиця перекладу для некодових проєктів -
-`kit/docs/PROJECT_SHAPES.md`.
+агент, який уміє читати й писати ваші файли.** Для даних, текстів, договорів, процедур та
+аудиту чи обліку таблиця перекладу - `kit/docs/PROJECT_SHAPES.md`.
 
 ---
 

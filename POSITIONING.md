@@ -21,7 +21,9 @@ installed. The agent reads the files and adds only the parts that fit.
 - People who want the agent to check, not guess, and to say plainly where it is not sure.
 - Solo developers, small teams and owners of a personal project in a local folder.
 - Not only programmers: the method rests on files, not on a compiler, so analysis, documentation, contracts
-  and procedures fit it, minus the code layer.
+  and procedures fit it, minus the code layer. An auditor and an accountant are the same case: working papers,
+  reconciliations, filings and close procedures are artifacts whose checks either hold or fail, and the
+  translation table for each kind of work ships in the kit.
 
 ## What it promises, and what it does not
 

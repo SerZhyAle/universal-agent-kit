@@ -23,6 +23,13 @@
   .hero{padding:1.2rem 0 14px; border-bottom:1px solid var(--border); margin-bottom:4px}
   .hero .kicker b{font-weight:800; color:var(--text)}
   .hero .lead{color:var(--text-2)}
+  .hero .hero-tagline{font-family:var(--font-heading); font-size:1.125rem; font-weight:600; color:var(--text); margin:0 0 .6rem}
+  .site-header .header-date{font-size:0.8125rem; white-space:nowrap}
+  /* the phone header is already the tallest band (S0006 F19): there the date is the hero's line under the buttons */
+  @media (max-width:480px){ .site-header .header-date{display:none} }
+  /* F19: on the phone the header wraps to three rows; the block padding and the row gap drop from 8 px to 4 px there,
+     16 px in all, so it takes less of the first screen (the inline padding stays: the brand's offset is set against it) */
+  @media (max-width:480px){ .site-header{padding-block:calc(4px*var(--ui-scale)); row-gap:calc(4px*var(--ui-scale))} }
   .hero .hero-note{font-size:0.875rem; margin:12px 0 0}
   .hero .kit-updated{font-size:0.8125rem; margin:6px 0 0}
   .minimum-start{margin:16px 0 4px; padding:14px 16px; border:1px solid var(--border); border-left:3px solid var(--acc); border-radius:0 var(--radius-sm) var(--radius-sm) 0; background:var(--card); scroll-margin-top:90px}
@@ -55,7 +62,14 @@
   details.sec>summary:hover .sectitle{color:var(--acc-strong)}
   details.sec>.secbody{margin:0}
   .secnum{font-size:0.8125rem; line-height:1.6; flex:none}
-  .sechead{display:flex; flex-direction:column; gap:2px; min-width:0}
+  /* the section title is a real h2 inside the summary (S0006 F4); summary admits phrasing and heading content only, so
+     the title and its teaser are direct children laid out on a grid: state glyph, number, then title over teaser */
+  details.sec>summary{display:grid; grid-template-columns:var(--ui-glyph) auto minmax(0,1fr); column-gap:var(--ui-gap); row-gap:2px; align-items:start}
+  details.sec[open]>summary{row-gap:0}
+  details.sec>summary::before{grid-column:1; grid-row:1}
+  details.sec>summary>.secnum{grid-column:2; grid-row:1 / span 2}
+  details.sec>summary>.sectitle{grid-column:3; grid-row:1; min-width:0}
+  details.sec>summary>.secteaser{grid-column:3; grid-row:2; min-width:0}
   .sectitle{margin:0; font-family:var(--font-heading); font-size:1rem; font-weight:700; letter-spacing:-.01em; line-height:1.35}
   .sectitle code{font-size:.9em; padding:.05em .35em}
   .secteaser{color:var(--muted); font-weight:400; font-size:0.8125rem; line-height:1.42}

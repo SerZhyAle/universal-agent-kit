@@ -1,11 +1,12 @@
 {
-  "$comment": "Adoption stamp for universal-agent-kit. This repo is two things at once: it CONSUMES the canon for its own development (this stamp, the root CLAUDE.md), and it PUBLISHES kit/ as a scrubbed, stack-neutral sibling distillation of the shared method for an outside audience. role portfolio: no product build and no platform overlay to declare, which is the only thing the gate reads role for. No tags, no changelog - rolling release, the site and the zip are regenerated in place.",
+  "schemaVersion": "1.0",
+  "$comment": "Adoption stamp for universal-agent-kit. This repo is two things at once: it CONSUMES the canon for its own development (this stamp, the root CLAUDE.md), and it PUBLISHES kit/ as a scrubbed, stack-neutral sibling distillation of the shared method for an outside audience. role portfolio: no product build and no platform overlay to declare, which is the only thing the gate reads role for. No tags and no version anchor - rolling release, the site and the zip are regenerated in place; CHANGELOG.md holds one dated section per kit build, rendered to portal/whats-new.html (S0006, owner decision of 2026-11-14).",
 
   "canon": {
-    "version": "2026.11.10.1",
-    "coreDigest": "sha256:9abe1d231e865abf4d6cb3bdf5cb6806a4c4ef4a6430efefa9813c3ee41af680",
+    "version": "2026.11.13.8",
+    "coreDigest": "sha256:75bd013b178458975621d0e8bed87ad098185ce50d510a0fa8bdf022f680aafb",
     "adoptedOn": "2026-09-23",
-    "reconciledOn": "2026-11-11",
+    "reconciledOn": "2026-11-15",
     "model": "reference",
     "contribRecord": "contrib/universal_agent_kit.md"
   },
@@ -21,24 +22,26 @@
     "editionTagPrefixes": []
   },
 
-  "ledgerShape": "none",
-  "ledgerFile": null,
+  "ledgerShape": 1,
+  "ledgerFile": "CHANGELOG.md",
 
   "channels": [],
 
   "site": {
-    "kind": "portfolio",
+    "kind": "product",
     "root": ".",
-    "pages": ["index.html", "privacy.html", "portal/index.html", "portal/overview.html", "portal/showcase.html", "portal/subjects.html", "portal/glossary.html"]
+    "pages": ["index.html", "privacy.html", "portal/index.html", "portal/overview.html", "portal/showcase.html", "portal/subjects.html", "portal/glossary.html", "portal/whats-new.html", "portal/support.html"]
   },
 
   "privacy": {
     "page": "privacy.html",
-    "carveOut": "zero-data",
+    "carveOut": null,
     "sensitiveAccess": false
   },
 
   "byteIdenticalPairs": [],
   "vendorAllow": [],
-  "exemptions": []
+  "exemptions": [
+    { "id": "SZA-LAY02", "path": "CHANGELOG.md", "reason": "Rolling release: CHANGELOG.md is the public ledger (shape 1) but holds one dated section per kit build, each item in EN, RU and UA, with no [Unreleased] block and no version numbers; tools/build-portal.ps1 validates it against kit/VERSION. Recorded DIVERGE from DOCUMENTATION_CONCEPT section 2 (Keep-a-Changelog, English only), S0006 2026-11-15." }
+  ]
 }

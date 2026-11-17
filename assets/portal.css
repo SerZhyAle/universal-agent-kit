@@ -12,6 +12,7 @@
 
 /* ---------- chrome ---------- */
 .portal-header{gap:8px 12px}
+@media(max-width:480px){.portal-header{row-gap:calc(4px*var(--ui-scale))}}   /* F19, with the block padding in site.css */
 .portal-nav{display:flex; flex-wrap:wrap; align-items:center; gap:0 14px; font-size:0.875rem}
 .portal-nav a{display:inline-flex; align-items:center; min-height:44px; padding:0 2px; color:var(--text-2)}
 .portal-nav a:hover{color:var(--text)}

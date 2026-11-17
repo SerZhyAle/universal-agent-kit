@@ -127,6 +127,11 @@
       "en": "Surfaces must move together; the other declared locales need not. With a release boundary, the locales nobody on the team authors by hand fan out in one bulk pass there: refuse in the pre-release gate, and let the change itself only name what is missing. A site has no boundary, so its fan-out stays in the one edit. See [ship every surface together](fn:surfaces).",
       "ru": "Поверхности должны двигаться вместе, остальные объявленные локали - нет. При границе релиза локали, которые команда вручную не пишет, расходятся одним пакетным проходом на ней: отказ ставят в предрелизный гейт, а само изменение лишь называет, чего не хватает. У сайта границы нет, и его раздача остаётся в одной правке. См. [как выпустить все поверхности вместе](fn:surfaces).",
       "ua": "Поверхні мають рухатися разом, решта оголошених локалей - не зобов'язана. Якщо в проєкту є межа релізу, локалі, які команда вручну не пише, розходяться одним пакетним проходом на ній: відмову ставлять у передрелізний гейт, а сама зміна лише називає, чого бракує. У сайту межі немає, тому його роздача лишається в одній правці. Див. [як випустити всі поверхні разом](fn:surfaces)."
+    },
+    {
+      "en": "A result says where it was observed, and a simulated pass is a lower rung. A recorded check names the machine or device it ran on with its software version; a pass on a simulator or an emulator, a program imitating the real thing, is a lower rung than a pass on the device - say which of the two the claim reached.",
+      "ru": "Результат называет, где его наблюдали, а симулированный проход - ступень пониже. Записанная проверка называет машину или устройство, на котором прошла, вместе с версией его ПО; проход на симуляторе или эмуляторе (программе, подражающей настоящему) ниже прохода на самом устройстве - скажите, которой из двух достигла заявка.",
+      "ua": "Результат називає, де його спостерігали, а змодельований прохід - щабель пониже. Записана перевірка називає машину чи пристрій, на якому пройшла, разом із версією його ПЗ; проходження на симуляторі чи емуляторі (програмі, що наслідує справжнє) нижче за проходження на самому пристрої - скажіть, якої з двох сягнула заява."
     }
   ],
   "related": ["prove", "spec-check", "spec-lifecycle", "hooks", "surfaces"],

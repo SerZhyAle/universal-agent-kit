@@ -35,8 +35,10 @@ Four runs built the same small windowed tool for a non-programmer. None added he
    bar, before the overflow menu; in a dialog it is the trailing end of the title row; an application that
    lives in the tray has a "Help" menu item, and every window it opens carries the button.
 3. **Key and button give the same answer.** Both resolve to the same help. F1 pressed on a control that has
-   its own entry goes to that entry; otherwise to the top of the window's help. A button never opens
-   something the key does not.
+   its own entry goes to that entry; otherwise to the top of the window's help. The `?` button is the one
+   exception: activating it, and F1 pressed while it has the focus, both open the window's help from its
+   beginning - for help organised page by page, the page the person is on at that moment - and never the
+   entry that explains the button itself. A button never opens something the key does not.
 4. **Every window has help unless the map says why not.** Allowed without one, with the reason written
    down: a message box or confirmation whose text is the whole explanation, an operating-system dialog such
    as a file picker, a splash or progress-only window, a toast, a menu, a tooltip. A dialog opened from a

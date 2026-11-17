@@ -102,6 +102,16 @@ conversion the whole exercise exists to prevent. Observed: a smoke check returne
 waiver was signed - so a **tooling fault and a genuinely absent subject produced the same bucket**.
 Separate them at the source; an infrastructure fault is not a known limitation.
 
+### A result says where it was observed, and a simulated pass is a lower rung
+
+A recorded check names the machine or device it ran on, with that machine's software
+version. A pass observed on a simulator or an emulator - a program that imitates the real
+thing - is a lower rung than a pass on the device itself: say which of the two the claim
+reached, and never report the lower rung as the higher. The command and its exit code
+identify *what* passed, not *where it was observed* - a record that cannot say where
+cannot say which rung the claim reached, and a simulated pass reads exactly like a
+device pass in one that stays silent.
+
 **Force every answer once, and prove the red with a positive control.** A gate's failure branches are
 the code that runs least and matters most: a typo in a could-not-verify branch survives until the day
 that branch is needed. Give each gate a fixture that drives every answer it can give against a

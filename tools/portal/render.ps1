@@ -36,7 +36,7 @@ function Rel([string]$from, [string]$to) {
     return $r + $frag
 }
 
-# Inline markup: `code`, **bold**, [text](fn:id | guide:id | term:id | https://..).
+# Inline markup: `code`, **bold**, [text](fn:id | guide:id | term:id | page:path | mailto:.. | https://..).
 function Inl([string]$s) {
     $e = Esc $s
     # code spans are protected first: nothing inside a code span is bold or a link
@@ -49,6 +49,8 @@ function Inl([string]$s) {
         if ($t -match '^fn:(.+)$')      { return '<a href="' + (Rel $script:CurPage ('portal/functions/' + $Matches[1] + '.html')) + '">' + $text + '</a>' }
         if ($t -match '^guide:(.+)$')   { return '<a href="' + (Rel $script:CurPage ('portal/guides/' + $Matches[1] + '.html')) + '">' + $text + '</a>' }
         if ($t -match '^term:(.+)$')    { return '<a href="' + (Rel $script:CurPage ('portal/glossary.html#term-' + $Matches[1])) + '">' + $text + '</a>' }
+        if ($t -match '^page:(.+)$')    { return '<a href="' + (Rel $script:CurPage $Matches[1]) + '">' + $text + '</a>' }
+        if ($t -match '^mailto:')       { return '<a href="' + $t + '">' + $text + '</a>' }
         return '<a href="' + $t + '" target="_blank" rel="noopener">' + $text + '</a>'
     })
     $e = [regex]::Replace($e, ([string][char]1) + '(\d+)' + ([string][char]2), [System.Text.RegularExpressions.MatchEvaluator]{ param($m) return $codes[[int]$m.Groups[1].Value] })
@@ -106,13 +108,6 @@ function Frame([hashtable]$p) {
     $i18n = [ordered]@{ t = $titles; d = $descs; ui = $ui } | ConvertTo-Json -Depth 6 -Compress
     $url = $Base + $p.Path
     $noIndex = $p.ContainsKey('NoIndex') -and $p.NoIndex
-    $alt = ''
-    if (-not $noIndex) {
-        $alt = '<link rel="alternate" hreflang="en" href="' + $url + '?lang=en">' + "`n" +
-               '<link rel="alternate" hreflang="ru" href="' + $url + '?lang=ru">' + "`n" +
-               '<link rel="alternate" hreflang="uk" href="' + $url + '?lang=uk">' + "`n" +
-               '<link rel="alternate" hreflang="x-default" href="' + $url + '">' + "`n"
-    }
     $robots = ''
     if ($noIndex) { $robots = '<meta name="robots" content="noindex">' + "`n" }
     $ld = [ordered]@{ '@context' = 'https://schema.org'; '@type' = 'WebPage'; name = $titles.en; description = $descs.en; url = $url; inLanguage = @('en', 'ru', 'uk'); isPartOf = [ordered]@{ '@type' = 'WebSite'; name = $site; url = $Base } } | ConvertTo-Json -Depth 4 -Compress
@@ -126,10 +121,11 @@ function Frame([hashtable]$p) {
 <title>$te</title>
 <meta name="description" content="$de">
 $robots<link rel="canonical" href="$url">
-$alt<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%233fb950'/%3E%3Cpath d='M20 18h24M20 30h24M20 42h16' stroke='%2304130c' stroke-width='5' stroke-linecap='round' fill='none'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%233fb950'/%3E%3Cpath d='M20 18h24M20 30h24M20 42h16' stroke='%2304130c' stroke-width='5' stroke-linecap='round' fill='none'/%3E%3C/svg%3E">
 <meta name="theme-color" content="#0a0f0a">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="$site">
+<meta property="og:locale" content="en_US">
 <meta property="og:url" content="$url">
 <meta property="og:title" content="$te">
 <meta property="og:description" content="$de">
@@ -143,7 +139,7 @@ $alt<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/20
 $($script:PrePaint)
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Golos+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="${r}assets/sza-kit.css">
 <link rel="stylesheet" href="${r}assets/site.css">
 <link rel="stylesheet" href="${r}assets/portal.css">
@@ -221,11 +217,14 @@ function Footer([hashtable]$p) {
     $tools = @(
         @('Fast Media Sorter &amp; Organizer', 'https://serzhyale.github.io/FastMediaSorter_mob_v2/'),
         @('Fast Media Sorter &amp; Sharing for Windows', 'https://serzhyale.github.io/FastMediaSorter_Lite/'),
+        @('FastMediaSorter for Web', 'https://serzhyale.github.io/FastMediaSorter_WEB/'),
         @('CyrFlip', 'https://serzhyale.github.io/CyrFlip/'),
         @('doc-html-translate', 'https://serzhyale.github.io/doc-html-translate/'),
         @('FileDO', 'https://serzhyale.github.io/FileDO/'),
         @('STREAMS Player', 'https://serzhyale.github.io/StreamsPlayer/'),
         @('OneClickRunner', 'https://serzhyale.github.io/OneClickRunner/'),
+        @('DeviceInfo', 'https://serzhyale.github.io/DeviceInfo_Android/'),
+        @('Tourist', 'https://serzhyale.github.io/Tourist_Android/'),
         @('SZA (hub)', 'https://sza.od.ua')
     )
     $grid = ($tools | ForEach-Object { '<a href="' + $_[1] + '" target="_blank" rel="noopener">' + $_[0] + '</a>' }) -join "`n        "
@@ -272,7 +271,7 @@ $blocks
   </section>
   <div class="footer-bottom">
     <span>&copy; 2026 <a href="https://sza.od.ua" target="_blank" rel="noopener">Serhii Zhyhunenko</a></span>
-    <nav aria-label="Author links" data-aria="navAuthor"><a href="$(Rel $f 'privacy.html')">$(UT 'privacy')</a> &middot; <a href="https://sza.od.ua" target="_blank" rel="noopener">sza.od.ua</a> &middot; <a href="https://github.com/SerZhyAle" target="_blank" rel="noopener">GitHub</a> &middot; <a href="mailto:sza@ukr.net">sza@ukr.net</a></nav>
+    <nav aria-label="Author links" data-aria="navAuthor"><a href="$(Rel $f 'privacy.html')">$(UT 'privacy')</a> &middot; <a href="$(Rel $f 'portal/support.html')">$(UT 'support')</a> &middot; <a href="$(Rel $f 'portal/whats-new.html')">$(UT 'whatsNew')</a> &middot; <a href="https://github.com/SerZhyAle/universal-agent-kit/issues" target="_blank" rel="noopener">$(UT 'reportIssue')</a> &middot; <a href="https://sza.od.ua" target="_blank" rel="noopener">sza.od.ua</a> &middot; <a href="https://github.com/SerZhyAle" target="_blank" rel="noopener">GitHub</a> &middot; <a href="mailto:sza@ukr.net">sza@ukr.net</a></nav>
   </div>
   <p class="provenance muted">$(UT 'provenance')</p>
 </div></footer>
@@ -360,6 +359,13 @@ function Build-FunctionPage($c, $pos) {
         $b.Add('<section class="panel" aria-labelledby="h-tips"><h2 id="h-tips">' + (UT 'lbl.tips') + '</h2><ul class="tips">')
         foreach ($s in @($f.tips)) { $b.Add('<li class="prose">' + (T $s) + '</li>') }
         $b.Add('</ul></section>')
+    }
+    if ($id -eq $OtherToolsPage -and @($script:M.OtherTools).Count -gt 0) {
+        # kit/README.md's table as it stands (Read-OtherTools); its cells are folder names and the source's English words
+        $b.Add('<section class="panel wide" id="other-tools" aria-labelledby="h-other-tools"><h2 id="h-other-tools">' + (UT 'ot.title') + '</h2><p class="prose">' + (UT 'ot.lead') + '</p>')
+        $b.Add('<div class="table-wrap"><table class="data"><thead><tr><th scope="col">' + (UT 'ot.tool') + '</th><th scope="col">' + (UT 'ot.rules') + '</th><th scope="col">' + (UT 'ot.skills') + '</th><th scope="col">' + (UT 'ot.agents') + '</th></tr></thead><tbody lang="en">')
+        foreach ($o in @($script:M.OtherTools)) { $b.Add('<tr><th scope="row">' + (Inl $o.tool) + '</th><td>' + (Inl $o.rules) + '</td><td>' + (Inl $o.skills) + '</td><td>' + (Inl $o.agents) + '</td></tr>') }
+        $b.Add('</tbody></table></div></section>')
     }
     $b.Add('<section class="panel" aria-labelledby="h-related"><h2 id="h-related">' + (UT 'lbl.related') + '</h2><ul class="fn-list">')
     foreach ($r in @($f.related)) {
@@ -536,7 +542,7 @@ function Build-SubjectsPage {
             $gid = 'idx-' + $l + '-' + [uri]::EscapeDataString($ch).Replace('%', '')
             $b.Add('<section class="idx-group" aria-labelledby="' + $gid + '"><h2 id="' + $gid + '">' + (Esc $ch) + '</h2><ul class="idx-list">')
             foreach ($e in $groups[$ch]) {
-                $links = ($e.Links | ForEach-Object { '<a href="' + $_.Href + '">' + (Esc $_.Text) + '</a>' }) -join ', '
+                $links = ($e.Links | ForEach-Object { '<a href="' + $_.Href + '">' + (Esc $_.Text) + $(if ($_.Text -ne $e.Label) { '<span class="sr"> - ' + (Esc $e.Label) + '</span>' } else { '' }) + '</a>' }) -join ', '
                 $b.Add('<li><span class="idx-label">' + (Esc $e.Label) + '</span> <span class="idx-links">' + $links + '</span></li>')
             }
             $b.Add('</ul></section>')
@@ -605,6 +611,39 @@ function Build-PrivacyPage {
     return @{ Path = $path; Title = $P.title; Desc = $P.desc; Main = ($b -join "`n") }
 }
 
+function Build-SupportPage {
+    $P = $script:M.Support
+    $path = 'portal/support.html'
+    $script:CurPage = $path
+    $b = New-Object System.Collections.Generic.List[string]
+    $b.Add((PageHead (Crumbs $path @(@{ Label = (U 'crumbKit'); To = '' }, @{ Label = (U 'portal'); To = 'portal/' }, @{ Label = $P.title; To = $null })) '' $P.title $P.lead))
+    $b.Add('<div class="panels">')
+    foreach ($s in @($P.sections)) {
+        $b.Add('<section class="panel" id="' + $s.id + '" aria-labelledby="h-' + $s.id + '"><h2 id="h-' + $s.id + '">' + (T $s.title) + '</h2>')
+        foreach ($para in @($s.body)) { $b.Add('<p class="prose">' + (T $para) + '</p>') }
+        $b.Add('</section>')
+    }
+    $b.Add('</div>')
+    return @{ Path = $path; Title = $P.title; Desc = $P.desc; Main = ($b -join "`n") }
+}
+
+# What's new: one section per kit build from CHANGELOG.md, newest first (DOCUMENTATION_CONCEPT section 4).
+function Build-WhatsNewPage {
+    $path = 'portal/whats-new.html'
+    $script:CurPage = $path
+    $b = New-Object System.Collections.Generic.List[string]
+    $b.Add((PageHead (Crumbs $path @(@{ Label = (U 'crumbKit'); To = '' }, @{ Label = (U 'portal'); To = 'portal/' }, @{ Label = (U 'whatsNew'); To = $null })) '' (U 'whatsNew') (U 'wn.lead')))
+    $b.Add('<div class="panels">')
+    foreach ($bd in [object[]]$script:M.Changelog) {
+        $b.Add('<section class="panel wide" id="build-' + $bd.date + '" aria-labelledby="h-build-' + $bd.date + '"><h2 id="h-build-' + $bd.date + '">' + (T (U 'wn.build')) + ' <time datetime="' + $bd.date + '">' + $bd.date + '</time></h2>')
+        $b.Add('<ul class="prose">')
+        foreach ($it in $bd.items) { $b.Add('<li>' + (T $it) + '</li>') }
+        $b.Add('</ul></section>')
+    }
+    $b.Add('</div>')
+    return @{ Path = $path; Title = (U 'whatsNew'); Desc = (U 'wn.desc'); Main = ($b -join "`n") }
+}
+
 function Build-NotFoundPage {
     $path = '404.html'
     $script:CurPage = $path
@@ -648,19 +687,17 @@ function Build-SearchIndex {
         $items.Add([ordered]@{ u = $pg[0]; k = $pg[3]; t = (L3obj (U $pg[1])); d = (L3obj (U $pg[2])); w = $w })
     }
     $items.Add([ordered]@{ u = 'privacy.html'; k = 'page'; t = (L3obj $script:M.Privacy.title); d = (L3obj $script:M.Privacy.desc); w = (L3obj $script:M.Privacy.desc) })
+    $items.Add([ordered]@{ u = 'portal/support.html'; k = 'page'; t = (L3obj $script:M.Support.title); d = (L3obj $script:M.Support.desc); w = (L3obj $script:M.Support.desc) })
+    $items.Add([ordered]@{ u = 'portal/whats-new.html'; k = 'page'; t = (L3obj (U 'whatsNew')); d = (L3obj (U 'wn.desc')); w = (L3obj (U 'wn.desc')) })
     return ($items | ConvertTo-Json -Depth 6 -Compress)
 }
 
 function Build-Sitemap([string]$lastmod, [string[]]$paths) {
     $sb = [System.Text.StringBuilder]::new()
-    [void]$sb.Append("<?xml version=`"1.0`" encoding=`"UTF-8`"?>`n<urlset xmlns=`"http://www.sitemaps.org/schemas/sitemap/0.9`"`n        xmlns:xhtml=`"http://www.w3.org/1999/xhtml`">`n")
+    [void]$sb.Append("<?xml version=`"1.0`" encoding=`"UTF-8`"?>`n<urlset xmlns=`"http://www.sitemaps.org/schemas/sitemap/0.9`">`n")
     foreach ($p in $paths) {
         $u = $Base + $p
-        [void]$sb.Append("  <url>`n    <loc>$u</loc>`n    <lastmod>$lastmod</lastmod>`n")
-        [void]$sb.Append("    <xhtml:link rel=`"alternate`" hreflang=`"en`" href=`"${u}?lang=en`"/>`n")
-        [void]$sb.Append("    <xhtml:link rel=`"alternate`" hreflang=`"ru`" href=`"${u}?lang=ru`"/>`n")
-        [void]$sb.Append("    <xhtml:link rel=`"alternate`" hreflang=`"uk`" href=`"${u}?lang=uk`"/>`n")
-        [void]$sb.Append("    <xhtml:link rel=`"alternate`" hreflang=`"x-default`" href=`"$u`"/>`n  </url>`n")
+        [void]$sb.Append("  <url>`n    <loc>$u</loc>`n    <lastmod>$lastmod</lastmod>`n  </url>`n")
     }
     [void]$sb.Append("</urlset>`n")
     return $sb.ToString()
@@ -682,6 +719,8 @@ function Build-Site($Model, [string]$lastmod) {
     foreach ($id in $script:M.Guides.Keys) { $pages.Add((Build-GuidePage $id)) }
     foreach ($c in $script:M.Inventory.capabilities) { if ($script:M.Functions.Contains($c.id)) { $pages.Add((Build-FunctionPage $c 0)) } }
     $pages.Add((Build-PrivacyPage))
+    $pages.Add((Build-SupportPage))
+    $pages.Add((Build-WhatsNewPage))
     $out = [ordered]@{}
     foreach ($pg in $pages) {
         $script:AbsMode = $false

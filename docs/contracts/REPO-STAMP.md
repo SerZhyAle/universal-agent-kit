@@ -1,6 +1,7 @@
 # `REPO-STAMP` pointer
 
-- Version: 0.13 (draft); 0.12 read on 2026-10-21, the 0.13 amendment read on 2026-11-10
+- Version: 0.13 (draft); 0.12 read on 2026-10-21, the 0.13 amendment read on 2026-11-10, and the adoption row
+  advanced to 0.13 on 2026-11-16 (S0016)
 - Role: producer
 - Home: `rule-adoption/README.md` in the shared contracts catalog, section 2
 

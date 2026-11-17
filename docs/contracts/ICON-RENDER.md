@@ -1,7 +1,9 @@
 # `ICON-RENDER` pointer
 
-- Version: 0.24 (draft); read on 2026-10-21 from 0.18 through the amendments to 0.24; the adoption row is
-  `partial 0.24`
+- Version: 0.26 (draft); read on 2026-10-21 from 0.18 through the amendments to 0.24, sections 25 and 28
+  read on 2026-11-16 (S0016): every sibling set of the site is uniform - the nav, the footer grids and the
+  language blocks draw text only, the section headings draw no topic glyph, every external-link row carries
+  the same mask - so no staged migration is owed; the adoption row is `partial 0.26`
 - Role: consumer, opted in
 - Home: `iconography/README.md` in the shared contracts catalog
 

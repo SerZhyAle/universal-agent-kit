@@ -36,9 +36,8 @@
   function applyLang(l) {
     doc.setAttribute('data-lang', l); doc.setAttribute('lang', iso(l));
     if (D.t[l]) document.title = D.t[l];
-    var d = D.d[l], t = D.t[l];
-    metaSet('meta[name="description"]', d); metaSet('meta[property="og:description"]', d); metaSet('meta[name="twitter:description"]', d);
-    metaSet('meta[property="og:title"]', t); metaSet('meta[name="twitter:title"]', t);
+    var d = D.d[l];
+    metaSet('meta[name="description"]', d);
     ['ru', 'en', 'ua'].forEach(function (c) { var b = document.getElementById('lng-' + c); if (b) b.setAttribute('aria-pressed', String(l === c)); });
     applyAria(); applyThemeLabel(); sortGlossary();
     if (results.length || input && input.value) renderResults();

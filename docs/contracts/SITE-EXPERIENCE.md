@@ -1,6 +1,9 @@
 # `SITE-EXPERIENCE` pointer
 
-- Version: 0.5 (draft; opted in 2026-10-09); 0.4 read in full on 2026-10-21, the 0.5 amendment read on 2026-11-10
+- Version: 0.6 (draft; opted in 2026-10-09); 0.4 read in full on 2026-10-21, the 0.5 amendment read on 2026-11-10,
+  the 0.6 amendment (item E: rule 13 and the release-manifest chain) read on 2026-11-16 (S0016) - this site
+  renders no release link and no version and keeps its one durable download address, the shape the amendment's
+  own compatibility sentence says conforms
 - Role: consumer; every rule binds at the declared portal tier
 - Home: `product-site/SITE-EXPERIENCE.md` in the shared contracts catalog; its conformance artifact is the
   run-list `SITE-CHECKLIST.md`, read off the rendered site

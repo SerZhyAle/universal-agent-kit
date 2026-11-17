@@ -14,7 +14,7 @@
 
     The text is the P1 worksheet's derived fields: the category ("AI coding agent rules", picked by
     the owner 2026-10-10) and the pillar order of POSITIONING.md. The fonts are the locally
-    installed Segoe UI family; the webfonts the site loads (Outfit) are not assumed present.
+    installed Segoe UI family; the webfonts the site loads (Manrope) are not assumed present.
 
     Not under kit/, not in the zip (tools/build-kit.ps1 stages kit/* and merge-prompt.txt only).
 
